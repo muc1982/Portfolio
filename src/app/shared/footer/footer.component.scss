@@ -1,14 +1,14 @@
-@use 'app/style/apple-variables' as *;
+@use '../../../style/apple-variables' as *;
 
 .footer-wrapper {
     width: 100%;
-    background-color: $base-blue;
+    background-color: #1C1C1E;
     height: 204px;
 }
 
 footer {
     height: 100%;
-    background-color: $base-blue;
+    background-color: #1C1C1E;
     margin: 0 auto;
     @include dFlex();
     @include standardPadding();

@@ -1,4 +1,5 @@
-@use 'app/style/apple-variables' as *;
+@use '../../../style/apple-variables' as *;
+@use 'sass:color';
 
 .contact-container {
     position: relative;
