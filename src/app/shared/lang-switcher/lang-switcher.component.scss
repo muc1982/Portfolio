@@ -1,4 +1,4 @@
-@use "./../../../style/variables" as *;
+@use 'app/style/apple-variables' as *;
 .langs {
     @include dFlex($gap:5px);
     color: $base-black;

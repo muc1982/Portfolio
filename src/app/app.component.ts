@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   currentLang: string = "";
 
   constructor(private translate: TranslateService, private router: Router,  @Inject(DOCUMENT) private document: Document) {
-    this.translate.addLangs(['de', 'en', 'zh']);
+    this.translate.addLangs(['de', 'en']);
 
     let storedLang = localStorage.getItem('currentLange');
     if (storedLang) {

@@ -1,4 +1,4 @@
-@use "./../../../../style/variables" as *;
+@use "./../../../../style/apple-variables" as *;
 
 .contact-container {
     position: relative;
@@ -26,9 +26,6 @@
                     a {
 
                         @include dFlex($gap: 10px);
-                        span {
-
-                        }
                         &:hover {
                             span {
                                 color: $base-blue;
@@ -62,9 +59,7 @@
 
                 }
             }
-            .header-middle {
 
-            }
             .header-bottom {
                 padding: 10px 0;
                 font-size: 20px;

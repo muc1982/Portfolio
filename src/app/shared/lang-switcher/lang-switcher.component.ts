@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
+import { AppStateService } from '../../../services/app-state.service';
 
 @Component({
   selector: 'app-lang-switcher',
@@ -12,19 +12,22 @@ import {TranslateModule} from "@ngx-translate/core";
 })
 export class LangSwitcherComponent implements OnInit {
   langs: string[] = ['DE', 'EN'];
-  currentLange: string = "DE";
-
-  constructor(private translate: TranslateService) {
-    this.currentLange = this.translate.currentLang.toUpperCase();
+  
+  private translate = inject(TranslateService);
+  private appState = inject(AppStateService);
+  
+  // Reactive getter für aktuelle Sprache
+  get currentLange(): string {
+    return this.appState.getCurrentLanguage().toUpperCase();
   }
 
   ngOnInit(): void {
-
+    this.appState.initializeFromStorage();
   }
 
   changeLange(lang: string) {
-    this.currentLange = lang;
-    this.translate.use(lang.toLowerCase());
-    localStorage.setItem('currentLange', this.currentLange.toLowerCase());
+    const lowerLang = lang.toLowerCase();
+    this.translate.use(lowerLang);
+    this.appState.setLanguage(lowerLang);
   }
 }

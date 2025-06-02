@@ -1,114 +1,181 @@
-
-@use "./../../../style/variables" as *;
+@use 'app/style/apple-variables' as *;
 
 .landing-page-extra {
- 
     height: 50px;
 }
 
 .content {
     box-sizing: border-box;
-    background-color: $base-black;
-    padding-top: 100px;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    padding-top: 120px; 
     padding-bottom: 0;
-    height: calc(100vh - 114px);
+    height: calc(100vh - 88px); 
     @include standardPadding();
     @include dFlex($jc: space-between);
+    position: relative;
+    overflow: hidden;
     
+    &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 100%;
+        height: 150%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.05) 0%, transparent 70%);
+        animation: elegant-float 8s ease-in-out infinite;
+    }
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 80%;
+        height: 100%;
+        background: radial-gradient(circle, rgba($apple-secondary, 0.03) 0%, transparent 60%);
+        animation: elegant-float 10s ease-in-out infinite reverse;
+    }
 }
 
 .content-left {
-    height: calc(100vh - 114px - 100px);
+    height: calc(100vh - 88px - 120px);
     width: 50%;
     @include dFlex();
+    z-index: 2;
     
     .img-wrapper {
         align-self: flex-end;
         @include dFlex($ai: flex-end);
-        background: {
-            image: url('./../../../assets/img/shape.png');
-            repeat: no-repeat;
-            position: center 90%;
-            size: contain;
-        };
-
+        position: relative;
+        transition: $apple-transition-slow;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 0;
+            background: $apple-blue-gradient;
+            opacity: 0.1;
+            border-radius: 50% 50% 40% 60% / 60% 40% 60% 50%;
+            filter: blur(20px);
+            transition: $apple-transition-slow;
+        }
+        
         &:hover {
-            background: {
-                image: url('./../../../assets/img/shape-hover.png');
-            };
+            transform: scale(1.02);
+            
+            &::before {
+                opacity: 0.15;
+                filter: blur(25px);
+                transform: rotate(5deg) scale(1.1);
+            }
+            
+            img {
+                filter: brightness(1.1) contrast(1.1);
+            }
         }
 
         img {
-            width:86%;
+            width: 86%;
             max-height: calc(100vh);
             object-fit: contain;
+            transition: $apple-transition-slow;
+            filter: brightness(1.05) contrast(1.05);
+            position: relative;
+            z-index: 1;
 
             @media screen and (max-height: 900px) {
-                width:80%;
+                width: 80%;
             }
             @media screen and (max-height: 800px) {
-                width:75%;
+                width: 75%;
             }
             @media screen and (max-height: 700px) {
-                width:70%;
+                width: 70%;
             }
         }
     }
-
-    
-
-
 }
 
 .content-right {
-    min-height: calc(100vh - 114px - 100px);
+    min-height: calc(100vh - 88px - 120px);
     width: 50%;
     position: relative;
     @include dFlex($fd: column, $jc: space-around);
+    z-index: 2;
 
     .img-wrapper-small {
-        border-bottom-left-radius: 50%;
-       border-bottom-right-radius: 50%;
+        border-radius: $apple-radius-xl $apple-radius-xl 50% 50%;
         overflow: hidden;
         @include dFlex();
         display: none;
-        background: {
-            image: url('./../../../assets/img/shape.png');
-            repeat: no-repeat;
-            position: center 10%;
-            size: contain;
-        };
+        position: relative;
         
-
-        &:hover {
-            background: {
-                image: url('./../../../assets/img/shape-hover.png');
-            };
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: $apple-blue-gradient;
+            opacity: 0.1;
+            transition: $apple-transition-medium;
+        }
+        
+        &:hover::before {
+            opacity: 0.15;
         }
 
         img {
-            height:40vh;
+            height: 40vh;
             object-fit: cover;
+            transition: $apple-transition-medium;
+            filter: brightness(1.05);
         }
     }
 
-
     .links-wrapper {
-        height: 100px;
+        height: 120px; 
         position: absolute;
         right: 0;
         top: 20px;
-        @include dFlex($jc: space-between, $fd: column, $gap: 10px);
+        @include dFlex($jc: space-between, $fd: column, $gap: 16px);
+        
         > div {
-            width: 30px;
-            height: 30px;
+            width: 44px; 
+            height: 44px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            > a{
+            border-radius: $apple-radius-medium;
+            transition: $apple-transition-fast;
+            position: relative;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                inset: -8px;
+                background: $apple-blue-gradient;
+                border-radius: $apple-radius-large;
+                opacity: 0;
+                transition: $apple-transition-fast;
+            }
+            
+            &:hover {
+                transform: scale(1.1);
+                
+                &::before {
+                    opacity: 0.1;
+                }
+            }
+            
+            > a {
                 display: inline-block;
                 width: 100%;
                 height: 100%;
+                position: relative;
+                z-index: 1;
             }
         }
 
@@ -131,85 +198,113 @@
             }
         }
     }
-    
 
     .title-logo-wrapper {
-        @include dFlex($fd: column, $jc: space-around);
+        @include dFlex($fd: column, $jc: space-around, $gap: 32px);
+        
         .logo {
             @include dFlex($fd: column, $jc: center);
+            transition: $apple-transition-medium;
+            
+            &:hover {
+                transform: scale(1.05);
+            }
+            
             .logo-img {
-                width: 60px;
-                height: 38px;
+                width: 56px;
+                height: 35px;
                 background: {
                     image: url('./../../../assets/img/logo.png');
                     repeat: no-repeat;
                     position: center;
+                    size: contain;
                 };
-
-                &:hover {
-                    background: {
-                        size: cover;
-                        image: url('./../../../assets/img/logo.png');
-                        repeat: no-repeat;
-                        position: center;
-                    };
-                }
+                filter: brightness(1.2);
+                transition: $apple-transition-fast;
             }
+            
             .logo-name {
                 font-size: 18px;
-                color: $base-white;
+                font-weight: $apple-font-weight-semibold;
+                color: $apple-text-primary;
+                margin-top: 4px;
+                letter-spacing: 0.5px;
             }
+            
             .logo-position {
                 font-size: 12px;
-                color: $base-blue;
+                font-weight: $apple-font-weight-regular;
+                color: $apple-text-secondary;
+                letter-spacing: 0.3px;
             }
-
         }
 
         .title {
             padding: 40px 0;
-            color: $base-white;
+            text-align: center;
 
             .name {
-                text-align: center;
-                font-size: 64px;
-            }
-            .position {
-                font-size: 32px;
-            }
-            @media screen and (max-width: 1200px) {
+                font-size: 56px; 
+                font-weight: $apple-font-weight-bold;
+                background: $apple-blue-gradient;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                letter-spacing: -0.02em;
+                line-height: 1.1;
+                margin-bottom: 8px;
+                transition: $apple-transition-medium;
                 
+                &:hover {
+                    transform: scale(1.02);
+                }
+            }
+            
+            .position {
+                font-size: 28px; 
+                font-weight: $apple-font-weight-medium;
+                color: $apple-text-secondary;
+                letter-spacing: -0.01em;
+                transition: $apple-transition-medium;
+                
+                &:hover {
+                    color: $apple-text-primary;
+                }
+            }
+            
+            @media screen and (max-width: 1200px) {
                 .name {
-                    font-size: 50px;
+                    font-size: 44px;
                 }
                 .position {
-                    font-size: 25px;
+                    font-size: 22px;
                 }
-
-            }
-         }
-    }
-
-    .arrow-wrapper{
-
-        .arrow-down {
-            width: 38px;
-            height: 89px;
-            background: {
-                image: url('./../../../assets/img/arrow-down.png');
-            };
-            &:hover {
-                background: {
-                    image: url('./../../../assets/img/arrow-down-hover.png');
-                };
             }
         }
     }
 
-    
+    .arrow-wrapper {
+        .arrow-down {
+            width: 40px; 
+            height: 80px;
+            background: {
+                image: url('./../../../assets/img/arrow-down.png');
+                size: contain;
+                repeat: no-repeat;
+            };
+            transition: $apple-transition-fast;
+            filter: brightness(1.2);
+            
+            &:hover {
+                background-image: url('./../../../assets/img/arrow-down-hover.png');
+                transform: scale(1.1);
+                filter: brightness(1.4);
+            }
+        }
+    }
 }
 
-@media screen and (max-width: 1200px), screen and (min-height: 1000px)  {
+@media screen and (max-width: 1200px), screen and (min-height: 1000px) {
     .content-left {
         display: none !important;
     }
@@ -222,14 +317,14 @@
         .logo {
             position: absolute;
             left: 0;
-            top: 20px
+            top: 20px;
         }
     }
 }
 
-@media screen and (max-width: 1200px) and (max-height: 900px)  {
+@media screen and (max-width: 1200px) and (max-height: 900px) {
     .content {
-        padding-top: 20px !important;
+        padding-top: 60px !important;
     }
     .content-right .title-logo-wrapper .title {
         padding: 20px 0 !important;

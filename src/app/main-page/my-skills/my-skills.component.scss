@@ -1,4 +1,4 @@
-@use "./../../../style/variables" as *;
+@use "./../../../style/apple-variables" as *;
 
 .my-skills-container {
     margin-top: 50px;
@@ -116,9 +116,7 @@
                 perspective: 600px;
                 -webkit-perspective: 600px;
                 @include dFlex($gap:10px);
-                p {
 
-                }
                 .current-learning {
                     width: 119px;
                     height: 96px;

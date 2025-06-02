@@ -1,9 +1,12 @@
-@use 'style/variables' as *;
+// Korrigierter Import-Pfad
+@use 'app/style/apple-variables' as *;
 
+// CSS Reset
 * {
     margin: 0;
     padding: 0;
     list-style: none;
+    box-sizing: border-box;
 }
 
 body::-webkit-scrollbar {
@@ -11,204 +14,265 @@ body::-webkit-scrollbar {
 }
 
 body {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE/Edge */
-      
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
+    scroll-behavior: smooth;
 }
 
 button {
-    border: unset;
-    font-family: "Anta", "Noto Sans Sc", sans-serif;
+    border: none;
+    font-family: "Anta", "Noto Sans SC", sans-serif;
     background-color: transparent;
+    cursor: pointer;
+    transition: $apple-transition-fast;
+    
+    &:focus {
+        outline: 2px solid $apple-primary;
+        outline-offset: 2px;
+    }
+    
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
 }
 
 textarea, input { 
     outline: none;
-    font-family: "Anta", "Noto Sans Sc", sans-serif;
+    font-family: "Anta", "Noto Sans SC", sans-serif;
     font-size: 18px;
+    transition: $apple-transition-fast;
+    
     @media screen and (max-width: 1200px) {
         font-size: 16px;
     }
- }
-
- 
+    
+    &:focus {
+        transform: translateY(-1px);
+    }
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px $base-gray inset !important;
     -webkit-text-fill-color: $base-white !important;
     caret-color: $base-white;
+    transition: background-color 5000s ease-in-out 0s;
 }
-
 
 @font-face {
     font-family: "Anta";
-    src: url("./assets/fonts/Anta-Regular.ttf");
+    src: url("./assets/fonts/Anta-Regular.ttf") format("truetype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Josefin Sans";
-    src: url("./assets/fonts/Anta-Regular.ttf");
+    src: url("./assets/fonts/Anta-Regular.ttf") format("truetype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Noto Sans SC";
-    src: url("./assets/fonts/NotoSansSC-VariableFont_wght.ttf");
+    src: url("./assets/fonts/NotoSansSC-VariableFont_wght.ttf") format("truetype");
+    font-display: swap;
 }
-
 
 body {
-    font-family: "Anta", "Noto Sans Sc", sans-serif;
-    background-color: $base-black;
+    font-family: "Anta", "Noto Sans SC", sans-serif;
+    background: linear-gradient(135deg, $base-black 0%, $apple-bg-secondary 100%);
+    color: $base-white;
     max-width: 100%;
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-
 
 .wide-screen {
     max-width: 1440px;
     margin: 0 auto;
+    position: relative;
 }
 
 .pointer {
     cursor: pointer;
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        transform: translateY(-1px);
+    }
+    
+    &:active {
+        transform: translateY(0);
+    }
 }
 
 a, a:hover, a:visited {
     text-decoration: none;
     color: inherit;
+    transition: $apple-transition-fast;
+}
+
+a:hover {
+    color: $base-blue;
 }
 
 .img-preloader {
     width: 0;
     height: 0;
+    opacity: 0;
 }
 
 .normal-container {
-    background-color: $base-black;
+    background: linear-gradient(135deg, $base-black 0%, $apple-bg-secondary 100%);
 }
 
 @media screen and (max-width: 899px) {
     .hide-on-mobile {
-        display: none;
+        display: none !important;
     }
 }
 
 @media screen and (min-width: 900px) {
     .hide-on-desktop {
-        display: none;
+        display: none !important;
     }
 }
 
-/*Animation*/
-@keyframes opcity-effect {
+@keyframes opacity-effect {
     0% {
         opacity: 0;
+        transform: translateY(10px);
     }
     100% {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
 .opacity-0-1 {
-    animation: opcity-effect 0.5s ease-in-out;
+    animation: opacity-effect 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 
 @keyframes bubble-effect {
     0% {
-        opacity:0.5;
+        opacity: 0.5;
+        transform: scale(0.95);
     }
     100% {
-        opacity:1;
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
 .bubble-out-005 {
-    animation: bubble-effect 0.5s ease-in-out;
+    animation: bubble-effect 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .bubble-out-075 {
-    animation: bubble-effect .5s ease-in-out forwards;
+    animation: bubble-effect 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 .bubble-out-010 {
-    animation: bubble-effect 1s ease-in-out ;
+    animation: bubble-effect 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @keyframes move-down {
-    0% {
+    0%, 100% {
         transform: translateY(0px);
     }
     25% {
-        transform: translateY(15px);
+        transform: translateY(12px);
     }
     50% {
         transform: translateY(0px);
     }
     75% {
-        transform: translateY(-15px);
-    }
-    100% {
-        transform: translateY(0px);
+        transform: translateY(-12px);
     }
 }
+
 .move-down {
-    animation: move-down .75s ease-in-out;
+    animation: move-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @keyframes move-up {
-    0% {
+    0%, 100% {
         transform: translateY(0px);
     }
     25% {
-        transform: translateY(-15px);
+        transform: translateY(-12px);
     }
     50% {
         transform: translateY(0px);
     }
     75% {
-        transform: translateY(-15px);
+        transform: translateY(-12px);
     }
-    100% {
-        transform: translateY(0px);
-    }
-}
-.move-up {
-    animation: move-up .75s ease-in-out;
 }
 
+.move-up {
+    animation: move-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
 .rotate {
-    -webkit-animation: elegant-rotate 0.75s ease-in-out;
-    animation: elegant-rotate 0.75s ease-in-out;
-    -webkit-transform-style: preserve-3d;
+    animation: elegant-rotate 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform-style: preserve-3d;
-    -webkit-backface-visibility: visible;
     backface-visibility: visible;
     transform-origin: center center;
-    -webkit-transform-origin: center center;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-  
-  @-webkit-keyframes elegant-rotate {
+}
+
+@keyframes elegant-rotate {
     0% {
-      -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg) scale(1);
+    }
+    50% {
+        transform: rotateY(180deg) scale(1.05);
     }
     100% {
-      -webkit-transform: rotateY(360deg);
+        transform: rotateY(360deg) scale(1);
     }
-  }
-  
-  @keyframes elegant-rotate {
+}
+
+@keyframes elegant-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(2deg);
+    }
+}
+
+.elegant-float {
+    animation: elegant-float 3s ease-in-out infinite;
+}
+
+.glass-effect {
+    @include apple-glass-effect;
+}
+
+@keyframes apple-loading {
     0% {
-      transform: rotateY(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
     }
     100% {
-      transform: rotateY(360deg);
+        opacity: 0.3;
     }
-  }
+}
 
+.loading {
+    animation: apple-loading 1.5s ease-in-out infinite;
+}
 
+::selection {
+    background: rgba($base-blue, 0.3);
+    color: $base-white;
+}
 
+::-moz-selection {
+    background: rgba($base-blue, 0.3);
+    color: $base-white;
+}
