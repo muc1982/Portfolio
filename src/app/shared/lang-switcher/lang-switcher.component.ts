@@ -11,7 +11,7 @@ import {TranslateModule} from "@ngx-translate/core";
   styleUrl: './lang-switcher.component.scss'
 })
 export class LangSwitcherComponent implements OnInit {
-  langs: string[] = ['DE', 'EN', 'ZH'];
+  langs: string[] = ['DE', 'EN'];
   currentLange: string = "DE";
 
   constructor(private translate: TranslateService) {
