@@ -1,136 +1,175 @@
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import {TranslateModule} from "@ngx-translate/core";
-import { Subscription } from 'rxjs';
+import { TranslateModule } from "@ngx-translate/core";
+import { Subscription, interval } from 'rxjs';
+
+interface LocationSlide {
+  icon: string;
+  titleKey: string;
+  subtitleKey: string;
+  title: string;
+  subtitle: string;
+}
 
 @Component({
   selector: 'app-why-me',
   standalone: true,
-  imports: [ScrollBounceDirective, TranslateModule],
+  imports: [CommonModule, ScrollBounceDirective, TranslateModule],
   templateUrl: './why-me.component.html',
   styleUrl: './why-me.component.scss'
 })
-export class WhyMeComponent implements OnDestroy {
+export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('carouselContainer', { static: false }) carouselContainer!: ElementRef;
 
-
-  typedPart1 = '';
-  typedPart2 = '';
-
-  part1 = '';
-  part2 = '';
-  
-  typingTimeoutId :number | null = null;
-  showImage = false;
-  currentSpan = 1;
-  currentIndex = 0;
-  currentText = 0;
-  isTyping = true;
-
-  typingSpeed = 100;
+  currentSlideIndex = 0;
+  private slideInterval?: Subscription;
   private langChangeSub?: Subscription;
+  private autoSlideTimer = 4000; // 4 seconds
 
-  langsArr = [
-    ['intro.iam', 'intro.city'],
-    ['intro.iamremote', 'intro.remote'],
-    ['intro.iamrelocate', 'intro.relocate'],
+  locationSlides: LocationSlide[] = [
+    {
+      icon: 'location.png',
+      titleKey: 'intro.munich',
+      subtitleKey: 'intro.munich.subtitle',
+      title: 'Ich bin aus München verfügbar',
+      subtitle: 'Vor Ort oder hybrid - flexibel für Ihr Projekt'
+    },
+    {
+      icon: 'computer.png', 
+      titleKey: 'intro.remote',
+      subtitleKey: 'intro.remote.subtitle',
+      title: 'Ich arbeite remote bundesweit',
+      subtitle: 'Moderne Zusammenarbeit ohne geografische Grenzen'
+    },
+    {
+      icon: 'suitcase.png',
+      titleKey: 'intro.relocate', 
+      subtitleKey: 'intro.relocate.subtitle',
+      title: 'Ich bin bereit umzuziehen',
+      subtitle: 'Für das richtige Projekt auch deutschlandweit'
+    }
   ];
 
   constructor(private translate: TranslateService) {
-    this.initTyping();
     this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.initTyping();
-    });
-    
-  }
-
-  initTyping() {
-    this.clearTypingTimeout();
-    const [p1, p2] = this.langsArr[this.currentText]
-    this.translate.get(this.langsArr[this.currentText]).subscribe(translations => {
-      this.part1 = translations[p1];
-      this.part2 = translations[p2];
-
-      this.resetTypingState();
-      this.typeNextChar();
+      this.updateTranslations();
     });
   }
 
-  private resetTypingState(): void {
-    this.typedPart1 = '';
-    this.typedPart2 = '';
-    this.currentSpan = 1;
-    this.currentIndex = 0;
-    this.isTyping = true;
+  ngOnInit(): void {
+    this.updateTranslations();
+    this.startAutoSlide();
   }
 
-  typeNextChar() {
-    if (this.currentSpan === 1) {
-      this.handleImage();
-    } else if (this.currentSpan === 2) {
-      this.handleFirstSpan();
-    } else if (this.currentSpan === 3) {
-      this.handleSecondSpan();
-    }
-    this.typingTimeoutId = window.setTimeout(() => this.typeNextChar(), this.typingSpeed);
-  }
- 
-  handleImage() {
-    if (this.isTyping) {
-      this.showImage = true;
-      this.currentSpan = 2;
-    } else {
-      this.showImage = false;
-      setTimeout(() => {
-        this.currentText++;
-        if (this.currentText == 3) this.currentText = 0;
-        this.initTyping();
-      }, this.typingSpeed);
-    }
+  ngAfterViewInit(): void {
+    // Initialize intersection observer for entrance animations
+    this.initializeAnimations();
   }
 
-  handleFirstSpan() {
-    if(this.isTyping) {
-      if (this.currentIndex < this.part1.length) {
-        this.typedPart1 += this.part1[this.currentIndex++];
-      } else {
-        this.currentSpan = 3;
-        this.currentIndex = 0;
-      }
-    } else {
-      if (this.currentIndex > -1) {
-        this.typedPart1 = this.part1.substring(0, this.currentIndex--);
-      } else {
-        this.currentSpan = 1;
-      }
-    }
-  }
-
-  handleSecondSpan() {
-    if (this.isTyping) {
-      if (this.currentIndex < this.part2.length) {
-        this.typedPart2 += this.part2[this.currentIndex++];
-      } else {
-        this.isTyping = false;
-      }
-    } else {
-      if (this.currentIndex > -1) {
-        this.typedPart2 = this.part2.substring(0, this.currentIndex--);
-      } else {
-        this.currentSpan = 2;
-        this.currentIndex = this.part1.length;
-      }
-    }
-  }
-
-  clearTypingTimeout() {
-    if (this.typingTimeoutId !== null) {
-      clearTimeout(this.typingTimeoutId);
-      this.typingTimeoutId = null;
-    }
-  }
-
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+    this.stopAutoSlide();
     this.langChangeSub?.unsubscribe();
+  }
+
+  private updateTranslations(): void {
+    const keys = this.locationSlides.flatMap(slide => [slide.titleKey, slide.subtitleKey]);
+    
+    this.translate.get(keys).subscribe(translations => {
+      this.locationSlides.forEach(slide => {
+        slide.title = translations[slide.titleKey] || slide.title;
+        slide.subtitle = translations[slide.subtitleKey] || slide.subtitle;
+      });
+    });
+  }
+
+  private startAutoSlide(): void {
+    this.slideInterval = interval(this.autoSlideTimer).subscribe(() => {
+      this.nextSlide();
+    });
+  }
+
+  private stopAutoSlide(): void {
+    this.slideInterval?.unsubscribe();
+  }
+
+  nextSlide(): void {
+    this.currentSlideIndex = (this.currentSlideIndex + 1) % this.locationSlides.length;
+    this.triggerSlideAnimation();
+  }
+
+  goToSlide(index: number): void {
+    if (index !== this.currentSlideIndex) {
+      this.currentSlideIndex = index;
+      this.triggerSlideAnimation();
+      
+      // Restart auto-slide timer
+      this.stopAutoSlide();
+      this.startAutoSlide();
+    }
+  }
+
+  private triggerSlideAnimation(): void {
+    // Add any additional slide transition logic here
+    this.playSlideSound();
+  }
+
+  private playSlideSound(): void {
+    // Optional: Add subtle sound effect for slide transitions
+    // This would require Web Audio API implementation
+  }
+
+  private initializeAnimations(): void {
+    if (!this.carouselContainer) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    // Observe elements for scroll-triggered animations
+    const animatedElements = this.carouselContainer.nativeElement.querySelectorAll(
+      '.location-carousel, .introduction-card, .talk-button'
+    );
+    
+    animatedElements.forEach((el: Element) => observer.observe(el));
+  }
+
+  // Getter for template use
+  get currentSlide(): LocationSlide {
+    return this.locationSlides[this.currentSlideIndex];
+  }
+
+  // Method to get slide state for template
+  isSlideActive(index: number): boolean {
+    return index === this.currentSlideIndex;
+  }
+
+  // Method for dot indicator state
+  getDotClass(index: number): string {
+    return this.isSlideActive(index) ? 'dot active' : 'dot';
+  }
+
+  // Enhanced typing effect methods
+  getHighlightText(): string {
+    const slide = this.currentSlide;
+    const words = slide.title.split(' ');
+    return words.slice(0, Math.ceil(words.length / 2)).join(' ');
+  }
+
+  getRegularText(): string {
+    const slide = this.currentSlide;
+    const words = slide.title.split(' ');
+    return words.slice(Math.ceil(words.length / 2)).join(' ');
   }
 }

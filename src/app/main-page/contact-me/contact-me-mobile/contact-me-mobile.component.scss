@@ -1,4 +1,5 @@
 @use "./../../../../style/apple-variables" as *;
+@use 'sass:color';
 
 .contact-container {
     position: relative;
@@ -6,191 +7,250 @@
     @include standardPaddingMobile();
     @include dFlex($fd: column);
     margin-top: 50px;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-large;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
-   
     h2 {
         @include h2TitleMobile();
         margin-bottom: 20px;
     }
+    
     .contact-content {
         width: 100%;
         @include dFlex($fd: column, $gap:20px);
+        
         .contact-header {
-            color: $base-white;
+            color: $apple-text-primary;
             @include dFlex($gap: 20px, $ai: flex-start, $fd: column);
             width: 100%;
+            
             .header-top{
                 @include dFlex($gap: 10px, $fd: column, $ai: flex-start);
                 width: 100%;
+                
                 .header-top-email, .header-top-phone { 
                     a {
-
                         @include dFlex($gap: 10px);
+                        padding: 12px 16px;
+                        border-radius: $apple-radius-medium;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        transition: $apple-transition-fast;
+                        
                         &:hover {
+                            border-color: rgba($apple-primary, 0.3);
+                            background: rgba($apple-primary, 0.05);
+                            transform: translateY(-1px);
+                            
                             span {
-                                color: $base-blue;
+                                color: $apple-primary;
                             }
+                            
                             .mail.img {
-                                background-image: url('./../../../../assets/img/contact-email-hover.png');
+                                background-image: url('./../../../../assets/img/mail-hover.svg');
+                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                             .tel.img {
-                                background-image: url('./../../../../assets/img/contact-phone-hover.png');
+                                background-image: url('./../../../../assets/img/github-hover.png');
+                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                         }
+                        
                         &:active {
-                            filter: brightness(0.8);
+                            filter: brightness(0.9);
+                            transform: translateY(0);
                         }
+                        
                         .img {
                             width: 26px;
                             height: 30px;
                             flex-shrink: 0;
                         }
+                        
                         .mail {
                             background: {
-                                image: url('./../../../../assets/img/contact-email.png');
+                                image: url('./../../../../assets/img/mail.png');
                             }
                         }
                         .tel {
                             background: {
-                                image: url('./../../../../assets/img/contact-phone.png');
+                                image: url('./../../../../assets/img/github.png');
                             }   
                         }
+                        
+                        span {
+                            font-family: $apple-font-family;
+                            font-weight: $apple-font-weight-regular;
+                            color: $apple-text-secondary;
+                            transition: $apple-transition-fast;
+                        }
                     }
-
                 }
             }
 
             .header-bottom {
                 padding: 10px 0;
                 font-size: 20px;
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-medium;
                 width: 100%;
-                color: $base-blue;
+                color: $apple-primary;
                 text-align: center;
             }
         }
+        
         .contact-form {
             width: 100%;
             
             form {
                 width: 100%;
                 @include dFlex($fd: column, $gap:20px);
+                
                 .form-name-mail {
                     @include dFlex($gap: 20px);
                     width: 100%;
+                    
                     @media screen and (max-width:1200px) {
                         flex-direction: column;
                     }
-
                 }
+
                 .form-field {
                     width: 100%;
-                    
                     @include dFlex($fd: column, $ai: flex-start);
-                    .form-label {
-                        color: $base-blue;
-                        margin-left: 30px;
-                        font-size: 14px;
-                        &-error {
-                            @extend .form-label;
-                            color: $base-red;
-                        }
-                    }
-                    .form-input{
-                        color: $base-white;
-                        box-sizing: border-box;
-                        padding: 0 30px;
-                        width: 100%;
-                        border: 1px solid $base-blue;
-                        height: 60px;
-                        border-radius: 30px;
-                        background-color: transparent;
-                        &:focus {
-                            background-color: $base-gray;
-                        }
-                    }
-                    .form-input::placeholder {
-                        color: $base-white-050;
-                    }
-                    .form-input-error {
-                        border: 1px solid $base-red;
-                    }
-                    .form-input-error::placeholder {
-                        color: $base-red;
-                    }
                     
+                    .form-input{
+                        @include apple-input;
+                        height: 60px;
+                        font-family: $apple-font-family;
+                        
+                        &::placeholder {
+                            color: $apple-text-tertiary;
+                            font-family: $apple-font-family;
+                        }
+                        
+                        &-error {
+                            border: 1px solid $apple-error;
+                            background: rgba($apple-error, 0.05);
+                            
+                            &::placeholder {
+                                color: $apple-error;
+                            }
+                        }
+                    }
                 }
     
                 .form-message {
                     textarea {
+                        @include apple-input;
                         width: 100%;
                         height: 147px !important;
                         padding: 20px 30px !important;
-                    
-                        resize:none;
+                        resize: none;
+                        font-family: $apple-font-family;
                     }
-                   
                 }
+                
                 .privacy-policy {
                     width: 100%;
-                    color: $base-white;
+                    color: $apple-text-secondary;
                     @include dFlex($jc: flex-start, $gap: 10px);
+                    
                     .cb {
                         width: 24px;
                         height: 24px;
                         flex-shrink: 0;
-                        background: {
-                            image: url('./../../../../assets/img/cb.png');
-                            size: contain;
-                            repeat: no-repeat;
-                        }
+                        border: 2px solid $apple-text-tertiary;
+                        border-radius: $apple-radius-small;
+                        transition: $apple-transition-fast;
+                        position: relative;
+                        background: transparent;
+                        cursor: pointer;
 
                         &:hover {
-                            background-image: url('./../../../../assets/img/cb-hover.png');
+                            border-color: $apple-primary;
+                            transform: scale(1.05);
+                            box-shadow: 0 0 8px rgba($apple-primary, 0.3);
                         }
+                        
                         &.checked {
-                            background-image: url('./../../../../assets/img/cb-checked.png');
-                        }
-
-                    }
-                    span {
-                        font-size: 14px;
-                        a {
-                            color: $base-blue;
+                            background: $apple-primary;
+                            border-color: $apple-primary;
+                            box-shadow: $apple-shadow-glow;
+                            
+                            &::after {
+                                content: '✓';
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                color: white;
+                                font-size: 12px;
+                                font-weight: $apple-font-weight-bold;
+                                font-family: $apple-font-family;
+                            }
                         }
                     }
                     
-
+                    span {
+                        font-size: 14px;
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-regular;
+                        line-height: 1.4;
+                        
+                        a {
+                            color: $apple-primary;
+                            font-weight: $apple-font-weight-medium;
+                            transition: $apple-transition-fast;
+                            
+                            &:hover {
+                                color: color.adjust($apple-primary, $lightness: 10%);
+                                text-decoration: underline;
+                            }
+                        }
+                    }
                 }
+                
                 .success-msg {
-                    color: $base-green;
+                    color: $apple-success;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-medium;
+                    padding: 12px 16px;
+                    background: rgba($apple-success, 0.1);
+                    border: 1px solid rgba($apple-success, 0.3);
+                    border-radius: $apple-radius-medium;
+                    text-align: center;
                 }
+                
                 .send-btn {
                     @include dFlex($jc: flex-end);
                     width: 100%;
-                    button.deaktive{
-                        color: $base-white-050;
-                        border: 1px solid $base-white-050;
-                        height: 48px;
-                        padding: 0 40px;
-                        border-radius: 30px;
-                    }
-                    button:disabled{
-                        color: $base-white-050;
-                        border: 1px solid $base-white-050;
-                        height: 48px;
-                        padding: 0 40px;
-                        border-radius: 30px;
-                    }
+                    
                     button {
-                        color: $base-blue;
-                        border: 1px solid $base-blue;
-                        height: 48px;
-                        padding: 0 40px;
-                        border-radius: 30px;
+                        @include apple-button-primary;
+                        font-family: $apple-font-family;
+                        
+                        &:disabled {
+                            background: $apple-bg-quaternary;
+                            color: $apple-text-tertiary;
+                            cursor: not-allowed;
+                            transform: none;
+                            box-shadow: none;
+                            
+                            &:hover {
+                                background: $apple-bg-quaternary;
+                                color: $apple-text-tertiary;
+                                transform: none;
+                                box-shadow: none;
+                            }
+                            
+                            &::before {
+                                display: none;
+                            }
+                        }
                     }
                 }
             }
-            
         }
 
         .goup-arrow {
@@ -198,16 +258,22 @@
             width: 30px;
             height: 60px;
             background: {
-                image: url('./../../../../assets/img/arrow-up.png');
+                image: url('./../../../../assets/img/arrow-down.png');
                 size: contain;
                 repeat: no-repeat;
             };
+            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+            transition: $apple-transition-fast;
+            border-radius: $apple-radius-small;
+            
             &:hover {
                 background: {
-                    image: url('./../../../../assets/img/arrow-up-hover.png');
+                    image: url('./../../../../assets/img/arrow-down-hover.png');
                 };
+                transform: translateY(-2px) scale(1.1);
+                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+                box-shadow: $apple-shadow-glow;
             }
         }
-        
     }
 }

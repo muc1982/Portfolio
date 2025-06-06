@@ -1,158 +1,295 @@
 @use '../../../style/apple-variables' as *;
+@use 'sass:color';
 
 .my-projects-container {
     margin-top: 50px;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-xl;
+    margin: 40px auto;
+    max-width: 1200px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-large;
+    overflow: hidden;
    
     h2 {
         @include h2Title();
         text-align: center;
         margin-bottom: 20px;
+        padding-top: 40px;
     }
+    
     .my-projects-content {
         
         nav {
             @include standardPadding();
             @include dFlex($jc:flex-start);
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            
             >div {
-                border-top-left-radius: 30px;
-                border-top-right-radius: 30px;
-                padding: 30px;
+                border-top-left-radius: $apple-radius-large;
+                border-top-right-radius: $apple-radius-large;
+                padding: 24px 30px;
                 height: 104px;
                 box-sizing: border-box;
                 @include dFlex();
+                transition: $apple-transition-medium;
+                position: relative;
+                overflow: hidden;
+                
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 0;
+                    background: $apple-teal-gradient;
+                    transition: $apple-transition-medium;
+                }
+                
                 @media screen and (max-width: 1200px) {
-                    padding: 20px;
+                    padding: 16px 20px;
                 }
+                
                 &.active {
-                    background-color: $base-gray;
+                    background: $apple-bg-tertiary;
+                    border: 1px solid rgba($apple-primary, 0.3);
+                    border-bottom: none;
+                    box-shadow: $apple-shadow-medium;
+                    
+                    &::before {
+                        height: 3px;
+                        box-shadow: 0 0 10px rgba($apple-primary, 0.6);
+                    }
+                    
                     >span {
-                        color: $base-white;
+                        color: $apple-text-primary;
+                        text-shadow: 0 0 10px rgba($apple-primary, 0.3);
                     }
                 }
-                &:hover {
+                
+                &:hover:not(.active) {
+                    background: rgba(255, 255, 255, 0.05);
+                    transform: translateY(-2px);
+                    
                     >span {
-                        color: $base-white;
+                        color: $apple-text-primary;
+                    }
+                    
+                    &::before {
+                        height: 1px;
                     }
                 }
+                
                 >span {
-                    font-size: 30px;
-                    font-weight: 500;
-                    color: $base-blue;
+                    font-size: 28px;
+                    font-weight: $apple-font-weight-semibold;
+                    font-family: $apple-font-family;
+                    color: $apple-primary;
+                    transition: $apple-transition-medium;
+                    position: relative;
+                    z-index: 1;
+                    
                     @media screen and (max-width: 1200px) {
-                        font-size: 27px;
+                        font-size: 24px;
                     }
                 }
             }
+            
             @media screen and (max-width:1200px) {
                 justify-content: center;
             }
         }
+        
         .project {
-          
             @include standardPadding();
             @include dFlex($ai: flex-start);
             padding-top: 50px;
             padding-bottom: 50px;
-            color: $base-white;
-            background-color: $base-gray;
+            color: $apple-text-primary;
+            background: $apple-bg-tertiary;
+            position: relative;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                height: 1px;
+                background: $apple-teal-gradient;
+                opacity: 0.3;
+            }
+            
             .project-left {
                 width: 50%;
-                @include dFlex($fd:column, $gap:30px);
+                @include dFlex($fd:column, $gap:32px);
+                
                 .tab-li {
                     @include dFlex($ai: flex-start, $gap:20px);
+                    padding: 20px;
+                    border-radius: $apple-radius-medium;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    transition: $apple-transition-medium;
+                    
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                        border-color: rgba($apple-primary, 0.2);
+                        transform: translateX(4px);
+                        box-shadow: $apple-shadow-small;
+                    }
                     
                     >img {
                         position: relative;
-                        top:5px;
+                        top: 5px;
+                        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                     }
+                    
                     .right-of-logo {
                         >div {
-                            @include dFlex($gap: 10px, $jc: flex-start);
+                            @include dFlex($gap: 12px, $jc: flex-start, $ai: center);
+                            margin-bottom: 12px;
+                            
                             >h4{
-                                font-size: 28px;
-                                font-weight: 400;
+                                font-size: 24px;
+                                font-weight: $apple-font-weight-semibold;
+                                font-family: $apple-font-family;
+                                color: $apple-primary;
                             }
+                            
                             >span {
-                                font-size: 18px;
+                                font-size: 16px;
+                                font-family: $apple-font-family;
+                                font-weight: $apple-font-weight-regular;
+                                color: $apple-text-tertiary;
                             }
                         }
+                        
                         >p {
-                            font-size: 18px;
-                            margin-top: 10px;
+                            font-size: 16px;
+                            font-family: $apple-font-family;
+                            font-weight: $apple-font-weight-regular;
+                            line-height: 1.6;
+                            color: $apple-text-secondary;
                         }
                     }
                 }
             }
+            
             .project-right {
                 width: 50%;
-                @include dFlex($gap: 10px, $fd: column);
+                @include dFlex($gap: 20px, $fd: column);
+                
                 >h5 {
                     font-size: 18px;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-medium;
+                    color: $apple-text-secondary;
                     text-align: center;
-                    padding: 10px 0;
+                    padding: 16px 0;
                 }
+                
                 .technologies {
                     position: relative;
-            
-                    @include dFlex($gap: 20px);
+                    @include dFlex($gap: 20px, $jc: center);
+                    padding: 20px;
+                    border-radius: $apple-radius-medium;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    
                     .tech-logo{
+                        padding: 8px;
+                        border-radius: $apple-radius-small;
+                        background: rgba(255, 255, 255, 0.05);
+                        transition: $apple-transition-fast;
+                        
+                        &:hover {
+                            background: rgba($apple-primary, 0.1);
+                            transform: translateY(-2px);
+                            box-shadow: $apple-shadow-small;
+                        }
+                        
                         img {
                             height: 36px;
+                            filter: brightness(1.1);
+                            transition: $apple-transition-fast;
                         }
                     }
                 }
+                
                 .project-img {
                     position: relative;
-                    width: 100%;
+                    width: 84%;
                     height: 225px;
                     text-align: center;
+                    border-radius: $apple-radius-large;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    box-shadow: $apple-shadow-medium;
+                    
                     >img {
                         position: relative;
-                        border-radius: 30px;
+                        border-radius: $apple-radius-large;
                         width: 100%;
-                        z-index: 1;
                         height: 225px;
-                       
+                        object-fit: cover;
+                        z-index: 1;
+                        transition: $apple-transition-medium;
+                        
+                        &:hover {
+                            transform: scale(1.02);
+                            filter: brightness(1.05) contrast(1.05);
+                        }
                     }
+                    
                     >p {
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        color: $base-blue;
-                        font-size: 30px;
+                        color: $apple-primary;
+                        font-size: 28px;
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-bold;
                         z-index: 2;
+                        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
                     }
                 }
+                
                 .project-right-footer {
                     position: relative;
-                    @include dFlex($gap:20px);
+                    @include dFlex($gap:20px, $jc: center);
+                    padding-top: 32px;
+                    
                     button {
                         background-color: transparent;
-                        height: 48px;
+                        border: none;
+                        border-radius: $apple-radius-large;
+                        transition: $apple-transition-fast;
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-semibold;
+                        position: relative;
+                        overflow: hidden;
                         
-                        border-radius: 30px;
                         a {
                             display: block;
                             width: 100%;
                             height: 100%;
-                            line-height: 48px;
-                            padding: 0 30px;
+                            padding: 0px 32px;
                             box-sizing: border-box;
+                            color: inherit;
+                            text-decoration: none;
                         }
+                        
                         &:nth-child(1) {
-                            color: $base-black;
-                            background-color: $base-blue;
-                            &:hover {
-                                background-color: $base-white;
-                            }
+                            @include apple-button-primary;
                         }
+                        
                         &:nth-child(2) {
-                            color: $base-blue;
-                            border: 1px solid $base-blue;
-                            &:hover {
-                                background-color: $base-white-012;
-                            }
+                            @include apple-button-secondary;
                         }
                     }
                 }
@@ -160,121 +297,187 @@
 
             @media screen and (max-width:1200px) {
                 flex-direction: column-reverse;
-                gap: 50px;
+                gap: 40px;
                 align-items: center;
+                
                 .project-left {
-
                     align-items: flex-start;
                     width: 100%;
                 }
+                
                 .project-right {
                     width: 100%;
                 }
             }
         }
+        
         .team-player {
+            padding: 60px 50px;
+            background: $apple-bg-secondary;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            
             >h4 {
-                font-size: 30px;
-                font-weight: 500;
-                color: $base-blue;
-                padding: 50px;
+                font-size: 32px;
+                font-weight: $apple-font-weight-bold;
+                font-family: $apple-font-family;
+                color: $apple-primary;
                 text-align: center;
-
+                margin-bottom: 40px;
+                background: $apple-teal-gradient;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
+            
             .team-player-content {
                 margin: 0 auto;
                 width: calc(100% - 113px - 113px);
                 
                 .team-player-content-wrapper {
                     width: 100%;
-                    @include dFlex($gap: 20px, $jc: center);
+                    @include dFlex($gap: 32px, $jc: center);
                     flex-wrap: wrap;
 
                     .player {
-                        opacity: .5;
+                        opacity: 0.8;
                         width: 380px;
                         height: 380px;
                         flex-shrink: 0;
                         @include dFlex();
-                        background: {
-                            image: url('./../../../assets/img/ref-shape.png');
-                            repeat: no-repeat;
-                            size: contain;
-                            position: center;
-                        };
-                        &:hover {
-                            background-image: url('./../../../assets/img/ref-shape-hover.png');
+                        background: $apple-bg-tertiary;
+                        border-radius: 50%;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        box-shadow: $apple-shadow-medium;
+                        transition: $apple-transition-medium;
+                        position: relative;
+                        overflow: hidden;
+                        
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            inset: -2px;
+                            background: $apple-teal-gradient;
+                            border-radius: 50%;
+                            opacity: 0;
+                            transition: $apple-transition-medium;
+                            z-index: -1;
                         }
-                        .player-content {
+                        
+                        &:hover {
+                            opacity: 1;
+                            transform: translateY(-8px) scale(1.02);
+                            box-shadow: $apple-shadow-large, $apple-shadow-glow;
                             
-                            width: 80%;
-                            @include dFlex($fd: column);
-                            .player-name {
-                                font-size: 26px;
-                                font-weight: 500;
-                                color: $base-white;
+                            &::before {
+                                opacity: 0.1;
                             }
+                        }
+                        
+                        .player-content {
+                            width: 80%;
+                            @include dFlex($fd: column, $gap: 12px);
+                            text-align: center;
+                            position: relative;
+                            z-index: 1;
+                            
+                            .player-name {
+                                font-size: 22px;
+                                font-weight: $apple-font-weight-semibold;
+                                font-family: $apple-font-family;
+                                color: $apple-text-primary;
+                                margin-bottom: 8px;
+                            }
+                            
                             .player-project {
-                                font-size: 18px;
-                                font-weight: 400;
+                                font-size: 16px;
+                                font-weight: $apple-font-weight-regular;
+                                font-family: $apple-font-family;
+                                margin-bottom: 12px;
+                                
                                 span{
                                     &:nth-child(1) {
-                                        color: $base-white;
+                                        color: $apple-text-secondary;
                                     }
                                     &:nth-child(2) {
-                                        color: $base-blue;
+                                        color: $apple-primary;
+                                        font-weight: $apple-font-weight-medium;
+                                        cursor: pointer;
+                                        
+                                        &:hover {
+                                            text-decoration: underline;
+                                        }
                                     }
                                 }
                             }
+                            
                             .player-reference {
-                                color: $base-white;
-                                padding: 20px 0;
+                                color: $apple-text-secondary;
+                                font-family: $apple-font-family;
+                                font-weight: $apple-font-weight-regular;
+                                line-height: 1.5;
+                                font-size: 14px;
+                                margin: 16px 0;
                             }
+                            
                             .player-linkedIn {
-                                font-size: 18px;
-                                font-weight: 400;
-                                color: $base-blue;
+                                font-size: 16px;
+                                font-weight: $apple-font-weight-medium;
+                                font-family: $apple-font-family;
+                                
+                                a {
+                                    color: $apple-primary;
+                                    text-decoration: none;
+                                    transition: $apple-transition-fast;
+                                    
+                                    &:hover {
+                                        text-decoration: underline;
+                                        color: color.adjust($apple-primary, $lightness: 10%);
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                
             }
-            
         }
     }
 }
 
-@keyframes from-right{
+// Animationen für Project Wechsel
+@keyframes apple-project-slide-in {
     from {
-        transform: translateX(10vw);
         opacity: 0;
+        transform: translateX(20px);
     }
     to {
-        transform: translateX(0);
         opacity: 1;
+        transform: translateX(0);
     }
 }
-@keyframes from-left{
+
+@keyframes apple-tech-bounce {
     from {
-        transform: translateX(-5vw);
         opacity: 0;
+        transform: translateY(10px) scale(0.9);
     }
     to {
-        transform: translateX(0);
         opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
 .animate-img-005 {
-    animation: from-right .5s ease-in-out;
+    animation: apple-tech-bounce 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
+
 .animate-img-075 {
-    animation: from-right .75s ease-in-out;
+    animation: apple-project-slide-in 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
+
 .animate-img-010 {
-    animation: from-right 1s ease-in-out;
+    animation: apple-project-slide-in 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
+
 .animate-img-005-from-left {
-    animation: from-left .5s ease-in-out;
+    animation: apple-project-slide-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }

@@ -1,21 +1,67 @@
 @use '../../../style/apple-variables' as *;
+@use 'sass:color';
+
 .langs {
-    @include dFlex($gap:5px);
-    color: $base-black;
+    @include dFlex($gap: 8px);
+    color: $apple-text-primary;
+    font-family: $apple-font-family;
+    
     span {
-        padding: 5px;
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: $apple-font-weight-medium;
+        border-radius: $apple-radius-small;
+        transition: $apple-transition-fast;
+        cursor: pointer;
+        position: relative;
+        border: 1px solid transparent;
+        
         &:hover {
-            color: $base-white;
+            color: $apple-text-primary;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+            border-color: rgba(255, 255, 255, 0.1);
         }
-        &.active{
-            color: $base-white;
-            background: {
-                image: url('./../../../assets/img/ellipse-small.png');
-                size: contain;
-                repeat: no-repeat;
-                position: center;
-            };
+        
+        &:active {
+            transform: translateY(0);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        &.active {
+            color: $apple-text-primary;
+            background: $apple-primary;
+            border-color: $apple-primary;
+            box-shadow: $apple-shadow-glow;
+            transform: translateY(-1px);
+            
+            &::before {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                background: $apple-teal-gradient;
+                border-radius: $apple-radius-medium;
+                opacity: 0.2;
+                z-index: -1;
+                animation: apple-lang-pulse 3s ease-in-out infinite;
+            }
+            
+            &:hover {
+                background: color.adjust($apple-primary, $lightness: 5%);
+                transform: translateY(-2px);
+                box-shadow: $apple-shadow-medium, $apple-shadow-glow;
+            }
         }
     }
-    
+}
+
+@keyframes apple-lang-pulse {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(1.05);
+    }
 }

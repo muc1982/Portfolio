@@ -8,6 +8,9 @@
     @include dFlex($fd: column);
     margin-top: 80px;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 50%, $apple-bg-primary 100%);
+    border-radius: $apple-radius-xl;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-large;
 
     .goup-arrow {
         position: absolute;
@@ -21,12 +24,18 @@
             repeat: no-repeat;
         };
         transition: $apple-transition-fast;
-        filter: brightness(1.2);
+        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+        border-radius: $apple-radius-small;
         
         &:hover {
             background-image: url('./../../../assets/img/arrow-up-hover.png');
-            transform: scale(1.1) translateY(-2px);
-            filter: brightness(1.4);
+            transform: translateY(-4px) scale(1.1);
+            filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+            box-shadow: $apple-shadow-glow;
+        }
+        
+        &:active {
+            transform: translateY(-2px) scale(1.05);
         }
     }
    
@@ -48,9 +57,10 @@
                 text-wrap: pretty;
                 width: 50%;
                 font-size: 18px;
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-regular;
                 line-height: 1.6;
                 color: $apple-text-secondary;
-                font-weight: $apple-font-weight-regular;
             }
             
             .header-right {
@@ -64,32 +74,58 @@
                 .header-right-email, .header-right-phone { 
                     a {
                         @include dFlex($gap: 16px, $ai: center);
-                        padding: 12px 16px;
+                        padding: 16px 20px;
                         border-radius: $apple-radius-medium;
                         transition: $apple-transition-fast;
                         background: transparent;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        position: relative;
+                        overflow: hidden;
+                        
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: $apple-teal-gradient;
+                            opacity: 0;
+                            transition: $apple-transition-fast;
+                            z-index: -1;
+                        }
                         
                         &:hover {
-                            background: rgba($apple-primary, 0.1);
-                            transform: translateX(4px);
+                            background: rgba($apple-primary, 0.05);
+                            border-color: rgba($apple-primary, 0.3);
+                            transform: translateY(-2px);
+                            box-shadow: $apple-shadow-medium;
+                            
+                            &::before {
+                                opacity: 0.1;
+                            }
                             
                             span {
                                 color: $apple-primary;
                             }
                             
                             .mail.img {
-                                background-image: url('./../../../assets/img/contact-email-hover.png');
-                                filter: brightness(1.2);
+                                background-image: url('./../../../assets/img/mail-hover.svg');
+                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                             .tel.img {
-                                background-image: url('./../../../assets/img/contact-phone-hover.png');
-                                filter: brightness(1.2);
+                                background-image: url('./../../../assets/img/github-hover.png');
+                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                         }
                         
                         &:active {
-                            transform: translateX(2px);
-                            background: rgba($apple-primary, 0.2);
+                            transform: translateY(0);
+                            background: rgba($apple-primary, 0.1);
+                            
+                            &::before {
+                                opacity: 0.2;
+                            }
                         }
                         
                         .img {
@@ -105,17 +141,20 @@
                                 size: contain;
                                 repeat: no-repeat;
                             }
+                            filter: brightness(1.1);
                         }
                         .tel {
                             background: {
                                 image: url('./../../../assets/img/contact-phone.png');
                                 size: contain;
                                 repeat: no-repeat;
-                            }   
+                            }
+                            filter: brightness(1.1);
                         }
                         
                         span {
                             color: $apple-text-secondary;
+                            font-family: $apple-font-family;
                             font-weight: $apple-font-weight-medium;
                             transition: $apple-transition-fast;
                         }
@@ -146,9 +185,10 @@
                     
                     .form-label {
                         color: $apple-text-secondary;
-                        margin-left: 20px;
-                        font-size: 14px;
+                        font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
+                        font-size: 14px;
+                        margin-left: 20px;
                         transition: $apple-transition-fast;
                         
                         &-error {
@@ -159,21 +199,25 @@
                     
                     .form-input {
                         @include apple-input;
-                        width: 100%;
-                        height: 56px; // Standard Apple input height
+                        height: 56px;
                         font-size: 16px;
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-regular;
                         
                         &::placeholder {
                             color: $apple-text-tertiary;
                             font-weight: $apple-font-weight-regular;
+                            font-family: $apple-font-family;
                         }
                         
                         &-error {
                             border-color: $apple-error;
+                            background: rgba($apple-error, 0.05);
                             
                             &:focus {
                                 border-color: $apple-error;
                                 box-shadow: 0 0 0 3px rgba($apple-error, 0.2);
+                                background: rgba($apple-error, 0.1);
                             }
                             
                             &::placeholder {
@@ -185,12 +229,24 @@
     
                 .form-message {
                     textarea {
+                        @include apple-input;
                         width: 100%;
                         height: 120px !important;
                         padding: 16px 20px !important;
                         resize: none;
-                        font-family: inherit;
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-regular;
                         line-height: 1.5;
+                        
+                        &.form-input-error {
+                            border-color: $apple-error;
+                            background: rgba($apple-error, 0.05);
+                            
+                            &:focus {
+                                border-color: $apple-error;
+                                box-shadow: 0 0 0 3px rgba($apple-error, 0.2);
+                            }
+                        }
                     }
                 }
                 
@@ -201,11 +257,11 @@
                     padding: 16px 0;
                     
                     .cb {
-                        width: 20px;
-                        height: 20px;
+                        width: 22px;
+                        height: 22px;
                         flex-shrink: 0;
                         border: 2px solid $apple-text-tertiary;
-                        border-radius: 4px;
+                        border-radius: $apple-radius-small;
                         transition: $apple-transition-fast;
                         position: relative;
                         background: transparent;
@@ -214,11 +270,13 @@
                         &:hover {
                             border-color: $apple-primary;
                             transform: scale(1.05);
+                            box-shadow: 0 0 8px rgba($apple-primary, 0.3);
                         }
                         
                         &.checked {
                             background: $apple-primary;
                             border-color: $apple-primary;
+                            box-shadow: $apple-shadow-glow;
                             
                             &::after {
                                 content: '✓';
@@ -228,23 +286,26 @@
                                 transform: translate(-50%, -50%);
                                 color: white;
                                 font-size: 12px;
-                                font-weight: bold;
+                                font-weight: $apple-font-weight-bold;
+                                font-family: $apple-font-family;
                             }
                         }
                     }
                     
                     span {
                         font-size: 14px;
-                        line-height: 1.4;
+                        font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
+                        line-height: 1.4;
                         
                         a {
                             color: $apple-primary;
                             font-weight: $apple-font-weight-medium;
                             transition: $apple-transition-fast;
+                            position: relative;
                             
                             &:hover {
-                                color: lighten($apple-primary, 10%);
+                                color: color.adjust($apple-primary, $lightness: 10%);
                                 text-decoration: underline;
                             }
                         }
@@ -253,12 +314,14 @@
                 
                 .success-msg {
                     color: $apple-success;
+                    font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
-                    padding: 16px;
+                    padding: 16px 20px;
                     background: rgba($apple-success, 0.1);
                     border: 1px solid rgba($apple-success, 0.3);
                     border-radius: $apple-radius-medium;
                     text-align: center;
+                    box-shadow: $apple-shadow-small;
                 }
                 
                 .send-btn {
@@ -267,8 +330,8 @@
                     
                     button {
                         @include apple-button-primary;
-                        min-width: 120px;
-                        font-size: 16px;
+                        min-width: 140px;
+                        font-family: $apple-font-family;
                         
                         &:disabled {
                             background: $apple-bg-quaternary;
@@ -282,6 +345,10 @@
                                 color: $apple-text-tertiary;
                                 transform: none;
                                 box-shadow: none;
+                            }
+                            
+                            &::before {
+                                display: none;
                             }
                         }
                     }

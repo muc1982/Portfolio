@@ -2,161 +2,333 @@
 
 .my-skills-container {
     margin-top: 50px;
-    padding-bottom: 20px;
-    @include dFlex($fd: column, $gap:20px);
+    padding: 40px 0;
+    @include dFlex($fd: column, $gap:40px);
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-xl;
+    margin: 40px auto;
+    max-width: 1200px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-large;
+    
     h2 {
         @include h2Title();
+        text-align: center;
     }
+    
     .my-skills-content {
-        @include dFlex($gap:20px, $ai: flex-start);
+        @include dFlex($gap:40px, $ai: flex-start);
         width: 80%;
+        margin: 0 auto;
+        
         .content-left {
-            color: $base-blue;
+            color: $apple-primary;
             width: 440px;
             
             .reservoir {
-                @include dFlex($gap: 40px, $jc: flex-start);
+                @include dFlex($gap: 32px, $jc: flex-start);
                 flex-wrap: wrap;
+                
                 .skill {
                     width: 78px;
-                    @include dFlex($fd: column, $jc:left, $gap:10px);
+                    @include dFlex($fd: column, $jc:left, $gap:12px);
+                    padding: 16px;
+                    border-radius: $apple-radius-medium;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    transition: $apple-transition-medium;
+                    
+                    &:hover {
+                        background: rgba($apple-primary, 0.05);
+                        border-color: rgba($apple-primary, 0.2);
+                        transform: translateY(-4px);
+                        box-shadow: $apple-shadow-medium;
+                        
+                        img {
+                            filter: brightness(1.2) saturate(1.2);
+                            transform: scale(1.05);
+                        }
+                    }
+                    
+                    img {
+                        transition: $apple-transition-fast;
+                        filter: brightness(1.1);
+                    }
+                    
+                    .skill-text {
+                        font-size: 12px;
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-medium;
+                        color: $apple-text-secondary;
+                        text-align: center;
+                    }
                 }
             }
-            
         }
+        
         .content-right {
-            color: $base-white;
-            @include dFlex($fd: column, $gap: 10px);
+            color: $apple-text-primary;
+            @include dFlex($fd: column, $gap: 24px);
 
             .current-learning {
                 width: 380px;
                 height: 370px;
-                padding: 50px;
-                padding-top: 0;
-                @include dFlex($gap: 20px, $fd: column);
-                background: {
-                    image: url('./../../../assets/img/ref-shape-hover.png');
-                    repeat: no-repeat;
-                    size: contain;
-                    position: center;
-                };
-                > span {
-                   font-size: 18px;
+                padding: 40px;
+                @include dFlex($gap: 24px, $fd: column);
+                background: $apple-bg-tertiary;
+                border-radius: $apple-radius-xl;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: $apple-shadow-medium;
+                transition: $apple-transition-medium;
+                position: relative;
+                overflow: hidden;
+                
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    right: -50%;
+                    width: 100%;
+                    height: 100%;
+                    background: radial-gradient(circle, rgba($apple-primary, 0.1) 0%, transparent 60%);
+                    animation: apple-learning-glow 8s ease-in-out infinite;
+                    filter: blur(20px);
                 }
-                p {
-                    font-size: 18px;
-                    padding:0 10px;
-                }
-                .skills {
-                    font-size: 14px;
-                    @include dFlex($gap: 20px);
-                    div {
-                        @include dFlex($fd: column);
+                
+                &:hover {
+                    transform: translateY(-4px);
+                    box-shadow: $apple-shadow-large, $apple-shadow-glow;
+                    border-color: rgba($apple-primary, 0.3);
+                    
+                    &::before {
+                        opacity: 1.5;
                     }
                 }
-                &:hover {
-                    background: {
-                        image: url('./../../../assets/img/ref-shape.png');
+                
+                > span {
+                    font-size: 20px;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-semibold;
+                    color: $apple-primary;
+                    position: relative;
+                    z-index: 1;
+                }
+                
+                p {
+                    font-size: 16px;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-regular;
+                    line-height: 1.6;
+                    color: $apple-text-secondary;
+                    padding: 0 10px;
+                    position: relative;
+                    z-index: 1;
+                }
+                
+                .skills {
+                    font-size: 14px;
+                    @include dFlex($gap: 24px);
+                    position: relative;
+                    z-index: 1;
+                    
+                    div {
+                        @include dFlex($fd: column, $gap: 8px);
+                        padding: 12px;
+                        border-radius: $apple-radius-small;
+                        background: rgba(255, 255, 255, 0.05);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        transition: $apple-transition-fast;
+                        
+                        &:hover {
+                            background: rgba($apple-primary, 0.1);
+                            border-color: rgba($apple-primary, 0.3);
+                            transform: scale(1.05);
+                        }
+                        
+                        img {
+                            filter: brightness(1.1);
+                            transition: $apple-transition-fast;
+                        }
+                        
+                        span {
+                            font-family: $apple-font-family;
+                            font-weight: $apple-font-weight-medium;
+                            color: $apple-text-primary;
+                            text-align: center;
+                        }
                     }
                 }
             }
         }
 
-    }
-    @media screen and (max-width:1200px) {
-        .my-skills-content {
+        @media screen and (max-width:1200px) {
             flex-direction: column;
             align-items: center;
+            width: 95%;
+            gap: 32px;
+            
+            .content-left,
+            .content-right {
+                width: 100%;
+            }
+            
+            .content-right .current-learning {
+                width: 100%;
+                max-width: 440px;
+                margin: 0 auto;
+            }
         }
-    } 
+    }
 }
 
+// Mobile Skills Container
 .my-skills-container-mobile {
     margin-top: 50px;
     width: 100%;
     @include standardPaddingMobile();
     box-sizing: border-box;
-    @include dFlex($fd: column, $gap:20px);
+    @include dFlex($fd: column, $gap:32px);
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-large;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-large;
+    padding: 32px 25px;
+    
     h2 {
         @include h2TitleMobile();
     }
+    
     .my-skills-content {
-        @include dFlex($gap:10px, $fd: column);
-       
+        @include dFlex($gap:24px, $fd: column);
         width: 100%;
+        
         .content-top {
-            color: $base-blue;
-            width: 440px;
-            max-width: 100%;
-            
+            color: $apple-primary;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
             
             .reservoir {
-                @include dFlex($gap: 40px);
+                @include dFlex($gap: 24px);
                 flex-wrap: wrap;
+                justify-content: center;
+                
                 .skill {
                     width: 42px;
-                    @include dFlex($fd: column, $jc:left, $gap:10px);
+                    @include dFlex($fd: column, $jc:left, $gap:8px);
+                    padding: 12px 8px;
+                    border-radius: $apple-radius-small;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    transition: $apple-transition-medium;
+                    
+                    &:hover {
+                        background: rgba($apple-primary, 0.05);
+                        border-color: rgba($apple-primary, 0.2);
+                        transform: translateY(-2px);
+                    }
+                    
                     img {
                         width: 100%;
+                        filter: brightness(1.1);
+                        transition: $apple-transition-fast;
                     }
                 }
             }
-            
         }
+        
         .content-bottom {
-            color: $base-white;
-            width: 440px;
-            max-width: 100%;
-            @include dFlex($fd: column, $gap: 10px);
+            color: $apple-text-primary;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            @include dFlex($fd: column, $gap: 24px);
+            
             .content-bottom-title {
-                color: $base-blue;
-                padding: 20px 0;
+                color: $apple-primary;
+                padding: 16px 0;
+                font-size: 18px;
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-semibold;
+                text-align: center;
             }
+            
             .content-bottom-content {
                 perspective: 600px;
                 -webkit-perspective: 600px;
-                @include dFlex($gap:10px);
+                @include dFlex($gap:16px);
 
                 .current-learning {
                     width: 119px;
                     height: 96px;
-                    padding: 20px;
-                    @include dFlex($gap: 20px, $fd: column);
-                    background: {
-                        image: url('./../../../assets/img/ref-shape-hover.png');
-                        repeat: no-repeat;
-                        size: contain;
-                        position: center;
-                    }
-                    .skills {
-                        font-size: 14px;
-                        @include dFlex($gap: 20px);
-                        div {
-                            @include dFlex($fd: column);
-                        }
-                    }
+                    padding: 16px;
+                    @include dFlex($gap: 12px, $fd: column);
+                    background: $apple-bg-tertiary;
+                    border-radius: $apple-radius-medium;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    box-shadow: $apple-shadow-small;
+                    transition: $apple-transition-medium;
+                    
                     &:hover {
-                        background: {
-                            image: url('./../../../assets/img/ref-shape.png');
+                        transform: translateY(-2px) rotateY(5deg);
+                        box-shadow: $apple-shadow-medium;
+                        border-color: rgba($apple-primary, 0.3);
+                    }
+                    
+                    .skills {
+                        font-size: 12px;
+                        @include dFlex($gap: 8px);
+                        
+                        div {
+                            @include dFlex($fd: column, $gap: 4px);
+                            
+                            img {
+                                width: 16px;
+                                height: 16px;
+                                filter: brightness(1.1);
+                            }
+                            
+                            span {
+                                font-size: 10px;
+                                font-family: $apple-font-family;
+                                font-weight: $apple-font-weight-medium;
+                                color: $apple-text-secondary;
+                                text-align: center;
+                            }
                         }
                     }
                 }
-            }
-            .talk-button {
-                padding-top: 20px;
-                button {
-                    height: 43px;
-                    background-color: $base-blue;
-                    color: $base-gray;
-                    border-radius: 30px;
-                    padding: 0 30px;
+                
+                p {
+                    flex: 1;
+                    font-size: 14px;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-regular;
+                    line-height: 1.5;
+                    color: $apple-text-secondary;
                 }
-               
             }
             
+            .talk-button {
+                padding-top: 24px;
+                text-align: center;
+                
+                button {
+                    @include apple-button-primary;
+                    font-family: $apple-font-family;
+                }
+            }
         }
-
     }
-    
 }
 
+@keyframes apple-learning-glow {
+    0%, 100% {
+        opacity: 0.1;
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        opacity: 0.2;
+        transform: translateY(-10px) rotate(180deg);
+    }
+}

@@ -9,17 +9,18 @@
 		"name": "Yasin Sun",
 		"position": "Frontend Developer"
 	},
-	"intro": {
-		"title": "Why Me?",
-		"iam": "I am",
-		"city": "available from Munich",
-		"iamremote": "I work",
-		"remote": "remotely nationwide",
-		"iamrelocate": "I am ready",
-		"relocate": "to relocate",
-		"introduction": "I am a passionate frontend developer focused on modern web technologies. My expertise lies in developing user-friendly and performant applications using Angular, TypeScript, and modern design systems.",
-		"talk": "Let's talk!"
-	},
+    "intro": {
+        "title": "Why Choose Me?",
+        "munich": "I'm available from Munich",
+        "munich.subtitle": "On-site or hybrid - flexible for your project",
+        "remote": "I work remotely nationwide",
+        "remote.subtitle": "Modern collaboration without geographical boundaries", 
+        "relocate": "I'm ready to relocate",
+        "relocate.subtitle": "For the right project across Germany",
+        "introduction": "As a passionate frontend developer, I merge technical excellence with creative vision. My expertise in modern technologies like Angular, TypeScript, and contemporary design systems enables me to craft exceptional digital experiences that both delight users and achieve business objectives.",
+        "talk": "Let's talk!"
+    },
+
 	"skills": {
 		"title": "My Skills",
 		"learning": "Continuous Learning",

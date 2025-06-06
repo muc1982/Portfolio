@@ -1,9 +1,12 @@
 @use '../../../style/apple-variables' as *;
+
 footer {
     height: 243px;
-    background-color: $base-blue;
+    background: $apple-bg-secondary;
     @include dFlex();
     @include standardPaddingMobile();
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
     .footer-content {
         width: 100%;
         height: 182px;
@@ -11,8 +14,15 @@ footer {
        
         .left {
             width: 100%;
+            
             .logo {
                 @include dFlex($fd: column, $jc: center);
+                transition: $apple-transition-medium;
+                
+                &:hover {
+                    transform: scale(1.05);
+                }
+                
                 .logo-img {
                     width: 60px;
                     height: 38px;
@@ -20,26 +30,32 @@ footer {
                         image: url('./../../../assets/img/logo.png');
                         repeat: no-repeat;
                         position: center;
+                        size: contain;
                     };
+                    @include apple-logo;
                 }
+                
                 .logo-name {
                     font-size: 16px;
-                    color: $base-white;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-semibold;
+                    color: $apple-text-primary;
                 }
+                
                 .logo-position {
                     font-size: 12px;
-                    color: $base-lightgray;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-regular;
+                    color: $apple-text-secondary;
                 }
             }
-            
-            
-
         }
+        
         .middle {
             width: 100%;
             @include dFlex($gap:20px);
-            .img {
             
+            .img {
                 width: 30px;
                 height: 30px;
                 background: {
@@ -47,61 +63,109 @@ footer {
                     size: contain;
                     position: center;
                 }
+                border-radius: $apple-radius-small;
+                transition: $apple-transition-fast;
+                position: relative;
+                
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: -4px;
+                    background: $apple-teal-gradient;
+                    border-radius: $apple-radius-medium;
+                    opacity: 0;
+                    transition: $apple-transition-fast;
+                    z-index: -1;
+                }
+                
+                &:hover {
+                    transform: translateY(-2px) scale(1.1);
+                    
+                    &::before {
+                        opacity: 0.15;
+                    }
+                }
+                
                 a {
                     display: inline-block;
                     width: 100%;
                     height: 100%;
+                    position: relative;
+                    z-index: 1;
                 }
             }
+            
             .github {
                 background-image: url('./../../../assets/img/github-mobile.png');
+                filter: brightness(1.2);
+                
                 &:hover {
-                    background-image: url('./../../../assets/img/github-white.png') 
+                    background-image: url('./../../../assets/img/github-white.png');
+                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
+            
             .email {
                 background-image: url('./../../../assets/img/mai-mobile.svg');
+                filter: brightness(1.2);
+                
                 &:hover {
-                    background-image: url('./../../../assets/img/mail-white.png') 
+                    background-image: url('./../../../assets/img/mail-white.png');
+                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
+            
             .linkedin {
                 background-image: url('./../../../assets/img/linkedin-mobile.png');
+                filter: brightness(1.2);
+                
                 &:hover {
-                    background-image: url('./../../../assets/img/linkdin-white.png') 
+                    background-image: url('./../../../assets/img/linkdin-white.png');
+                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
         }
+        
         .right {
-            @include dFlex($gap:10px, $ai: flex-start, $jc: space-between);
+            @include dFlex($gap:12px, $ai: flex-start, $jc: space-between);
             width: 100%;
+            
             .legal-notice {
                 a {
-                    color: $base-lightgray;
-                    font-weight: 400;
-                    font-size: 18px;
+                    color: $apple-text-secondary;
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-regular;
+                    font-size: 16px;
+                    padding: 4px 8px;
+                    border-radius: $apple-radius-small;
+                    transition: $apple-transition-fast;
+                    
                     &:hover {
-                        color: $base-white-050;
+                        color: $apple-text-primary;
+                        background: rgba(255, 255, 255, 0.05);
+                        transform: translateY(-1px);
                     }
+                    
                     &:active {
-                        color: $base-white;
+                        color: $apple-primary;
+                        transform: translateY(0);
                     }
                 }
             }
-            .copy-right {
+            
+            .Copy-Right {
                 flex-shrink: 0;
-                color: $base-lightgray;
-                font-weight: 400;
-                font-size: 18px;
+                color: $apple-text-tertiary;
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-regular;
+                font-size: 14px;
             }
-
         }
     }
 }
 
 @media screen and (max-width: 500px) {
     .right {
-        @include dFlex($gap:0 !important, $fd: column !important, $ai:center !important) ;
+        @include dFlex($gap:0 !important, $fd: column !important, $ai:center !important);
     }
 }
-

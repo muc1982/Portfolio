@@ -4,10 +4,19 @@
     position: sticky;
     top: 0;
     z-index: 998;
-    @include apple-glass-effect;
+    @include apple-nav-glass;
+    transition: $apple-transition-medium;
     
     @media screen and (max-width: 899px) {
         display: none;
+    }
+    
+    // Verbesserter Scroll-Effekt
+    &.scrolled {
+        background: rgba(28, 28, 30, 0.95);
+        backdrop-filter: saturate(180%) blur(25px);
+        -webkit-backdrop-filter: saturate(180%) blur(25px);
+        box-shadow: $apple-shadow-medium;
     }
 }
 
@@ -16,6 +25,7 @@
     width: 100%;
     height: 88px; 
     @include standardPadding();
+    transition: $apple-transition-medium;
 
     .content {
         width: 100%;
@@ -39,13 +49,14 @@
                     position: center;
                     size: contain;
                 };
-                filter: brightness(1.2); // Slightly brighter
+                @include apple-logo; // Logo-Anpassung für Apple-Farbpalette
                 transition: $apple-transition-fast;
             }
             
             .logo-name {
                 font-size: 15px;
                 font-weight: $apple-font-weight-semibold;
+                font-family: $apple-font-family;
                 color: $apple-text-primary;
                 margin-top: 2px;
                 letter-spacing: 0.5px;
@@ -54,14 +65,13 @@
             .logo-position {
                 font-size: 11px;
                 font-weight: $apple-font-weight-regular;
+                font-family: $apple-font-family;
                 color: $apple-text-secondary;
                 letter-spacing: 0.3px;
             }
         }
 
         .items {
-            font-size: 16px; 
-            font-weight: $apple-font-weight-medium;
             @include dFlex($jc: space-around, $gap: 8px);
             
             li {
@@ -69,7 +79,6 @@
                 
                 span {
                     @include apple-nav-item;
-                    padding: 12px 20px;
                     display: block;
                     border-radius: $apple-radius-medium;
                     position: relative;
@@ -82,51 +91,83 @@
                         left: 0;
                         right: 0;
                         bottom: 0;
-                        background: $apple-blue-gradient;
+                        background: $apple-teal-gradient;
                         opacity: 0;
                         transition: $apple-transition-fast;
                         border-radius: $apple-radius-medium;
+                        z-index: -1;
                     }
                     
                     &:hover::before {
                         opacity: 0.1;
                     }
                     
-                    position: relative;
-                    z-index: 1;
+                    &:active::before {
+                        opacity: 0.2;
+                    }
+                }
+                
+                // Aktiver Zustand
+                &.active span {
+                    color: $apple-primary;
+                    
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -4px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 6px;
+                        height: 6px;
+                        background: $apple-primary;
+                        border-radius: 50%;
+                        box-shadow: 0 0 12px rgba($apple-primary, 0.8);
+                        animation: apple-nav-pulse 2s ease-in-out infinite;
+                    }
                 }
             }
         }
 
         @media (max-width: 1300px) {
             .items {
-                font-size: 15px;
                 gap: 4px;
                 
                 li span {
                     padding: 10px 16px;
+                    font-size: 15px;
                 }
             }
         }
 
         @media (max-width: 1000px) {
             .items {
-                font-size: 14px;
-                
                 li span {
                     padding: 8px 12px;
+                    font-size: 14px;
                 }
             }
         }
     }
 }
 
-@keyframes nav-item-glow {
+// Apple-Style Navigation Animationen
+@keyframes apple-nav-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+@keyframes apple-nav-glow {
     0% {
         box-shadow: 0 0 5px rgba($apple-primary, 0);
     }
     50% {
-        box-shadow: 0 0 20px rgba($apple-primary, 0.3);
+        box-shadow: 0 0 20px rgba($apple-primary, 0.4), 0 0 30px rgba($apple-primary, 0.2);
     }
     100% {
         box-shadow: 0 0 5px rgba($apple-primary, 0);
@@ -134,5 +175,12 @@
 }
 
 .nav .content .items li span:hover {
-    animation: nav-item-glow 2s ease-in-out infinite;
+    animation: apple-nav-glow 2s ease-in-out infinite;
+}
+
+// Apple-Style Mobile-Anpassungen
+@media screen and (max-width: 899px) {
+    .nav-wrapper {
+        display: none;
+    }
 }

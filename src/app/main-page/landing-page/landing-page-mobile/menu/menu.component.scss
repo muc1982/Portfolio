@@ -31,7 +31,6 @@
             padding: 40px;
             box-sizing: border-box;
             @include dFlex($fd: column, $jc: space-around);
-            background-image: url('./../../../../../assets/img/shape.png');
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;

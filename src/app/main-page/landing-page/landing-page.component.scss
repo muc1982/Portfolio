@@ -15,26 +15,29 @@
     position: relative;
     overflow: hidden;
     
+    // Apple-Style Ambient Background Effects
     &::before {
         content: '';
         position: absolute;
-        top: -50%;
-        right: -20%;
-        width: 100%;
-        height: 150%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.05) 0%, transparent 70%);
-        animation: elegant-float 8s ease-in-out infinite;
+        top: -30%;
+        right: -15%;
+        width: 80%;
+        height: 120%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+        animation: apple-ambient-float 12s ease-in-out infinite;
+        filter: blur(40px);
     }
     
     &::after {
         content: '';
         position: absolute;
-        bottom: -30%;
+        bottom: -20%;
         left: -10%;
-        width: 80%;
-        height: 100%;
-        background: radial-gradient(circle, rgba($apple-secondary, 0.03) 0%, transparent 60%);
-        animation: elegant-float 10s ease-in-out infinite reverse;
+        width: 60%;
+        height: 80%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.05) 0%, transparent 50%);
+        animation: apple-ambient-float 15s ease-in-out infinite reverse;
+        filter: blur(60px);
     }
 }
 
@@ -50,31 +53,33 @@
         position: relative;
         transition: $apple-transition-slow;
         
+        // Apple-Style Glow Effect
         &::before {
             content: '';
             position: absolute;
-            top: 10%;
-            left: 10%;
-            right: 10%;
-            bottom: 0;
-            background: $apple-blue-gradient;
-            opacity: 0.1;
-            border-radius: 50% 50% 40% 60% / 60% 40% 60% 50%;
-            filter: blur(20px);
+            top: 15%;
+            left: 15%;
+            right: 15%;
+            bottom: 5%;
+            background: $apple-teal-gradient;
+            opacity: 0.15;
+            border-radius: 50% 50% 45% 55% / 55% 45% 55% 50%;
+            filter: blur(30px);
             transition: $apple-transition-slow;
+            animation: apple-profile-glow 8s ease-in-out infinite;
         }
         
         &:hover {
             transform: scale(1.02);
             
             &::before {
-                opacity: 0.15;
-                filter: blur(25px);
+                opacity: 0.2;
+                filter: blur(40px);
                 transform: rotate(5deg) scale(1.1);
             }
             
             img {
-                filter: brightness(1.1) contrast(1.1);
+                filter: brightness(1.1) contrast(1.05) saturate(1.1);
             }
         }
 
@@ -83,9 +88,10 @@
             max-height: calc(100vh);
             object-fit: contain;
             transition: $apple-transition-slow;
-            filter: brightness(1.05) contrast(1.05);
+            filter: brightness(1.05) contrast(1.02) saturate(1.05);
             position: relative;
             z-index: 1;
+            border-radius: 2% 2% 8% 8%;
 
             @media screen and (max-height: 900px) {
                 width: 80%;
@@ -118,7 +124,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: $apple-blue-gradient;
+            background: $apple-teal-gradient;
             opacity: 0.1;
             transition: $apple-transition-medium;
         }
@@ -131,43 +137,51 @@
             height: 40vh;
             object-fit: cover;
             transition: $apple-transition-medium;
-            filter: brightness(1.05);
+            filter: brightness(1.05) saturate(1.05);
         }
     }
 
     .links-wrapper {
-        height: 120px; 
+        height: 140px; 
         position: absolute;
         right: 0;
         top: 20px;
-        @include dFlex($jc: space-between, $fd: column, $gap: 16px);
+        @include dFlex($jc: space-between, $fd: column, $gap: 20px);
         
         > div {
-            width: 44px; 
-            height: 44px;
+            width: 48px; 
+            height: 48px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             border-radius: $apple-radius-medium;
             transition: $apple-transition-fast;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             
             &::before {
                 content: '';
                 position: absolute;
-                inset: -8px;
-                background: $apple-blue-gradient;
+                inset: -6px;
+                background: $apple-teal-gradient;
                 border-radius: $apple-radius-large;
                 opacity: 0;
                 transition: $apple-transition-fast;
+                z-index: -1;
             }
             
             &:hover {
-                transform: scale(1.1);
+                transform: translateY(-3px) scale(1.1);
+                border-color: rgba($apple-primary, 0.3);
+                box-shadow: $apple-shadow-medium, $apple-shadow-glow;
                 
                 &::before {
-                    opacity: 0.1;
+                    opacity: 0.15;
                 }
+            }
+            
+            &:active {
+                transform: translateY(-1px) scale(1.05);
             }
             
             > a {
@@ -181,26 +195,35 @@
 
         .link-email {
             background-image: url('./../../../assets/img/mail.png');
+            filter: brightness(1.1);
+            
             &:hover {
                 background-image: url('./../../../assets/img/mail-hover.svg');
+                filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
             }
         }
         .link-github {
             background-image: url('./../../../assets/img/github.png');
+            filter: brightness(1.1);
+            
             &:hover {
                 background-image: url('./../../../assets/img/github-hover.png');
+                filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
             }
         }
         .link-linkedin {
             background-image: url('./../../../assets/img/linkedin.png');
+            filter: brightness(1.1);
+            
             &:hover {
                 background-image: url('./../../../assets/img/linkedin-hover.png');
+                filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
             }
         }
     }
 
     .title-logo-wrapper {
-        @include dFlex($fd: column, $jc: space-around, $gap: 32px);
+        @include dFlex($fd: column, $jc: space-around, $gap: 40px);
         
         .logo {
             @include dFlex($fd: column, $jc: center);
@@ -219,13 +242,14 @@
                     position: center;
                     size: contain;
                 };
-                filter: brightness(1.2);
+                @include apple-logo;
                 transition: $apple-transition-fast;
             }
             
             .logo-name {
                 font-size: 18px;
                 font-weight: $apple-font-weight-semibold;
+                font-family: $apple-font-family;
                 color: $apple-text-primary;
                 margin-top: 4px;
                 letter-spacing: 0.5px;
@@ -234,6 +258,7 @@
             .logo-position {
                 font-size: 12px;
                 font-weight: $apple-font-weight-regular;
+                font-family: $apple-font-family;
                 color: $apple-text-secondary;
                 letter-spacing: 0.3px;
             }
@@ -246,7 +271,8 @@
             .name {
                 font-size: 56px; 
                 font-weight: $apple-font-weight-bold;
-                background: $apple-blue-gradient;
+                font-family: $apple-font-family;
+                background: $apple-teal-gradient;
                 -webkit-background-clip: text;
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -254,21 +280,40 @@
                 line-height: 1.1;
                 margin-bottom: 8px;
                 transition: $apple-transition-medium;
+                position: relative;
+                
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 0;
+                    height: 2px;
+                    background: $apple-teal-gradient;
+                    transition: $apple-transition-medium;
+                }
                 
                 &:hover {
                     transform: scale(1.02);
+                    
+                    &::after {
+                        width: 60%;
+                    }
                 }
             }
             
             .position {
                 font-size: 28px; 
                 font-weight: $apple-font-weight-medium;
+                font-family: $apple-font-family;
                 color: $apple-text-secondary;
                 letter-spacing: -0.01em;
                 transition: $apple-transition-medium;
                 
                 &:hover {
                     color: $apple-text-primary;
+                    transform: scale(1.01);
                 }
             }
             
@@ -293,17 +338,56 @@
                 repeat: no-repeat;
             };
             transition: $apple-transition-fast;
-            filter: brightness(1.2);
+            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+            border-radius: $apple-radius-small;
             
             &:hover {
                 background-image: url('./../../../assets/img/arrow-down-hover.png');
-                transform: scale(1.1);
-                filter: brightness(1.4);
+                transform: translateY(-3px) scale(1.1);
+                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+                box-shadow: $apple-shadow-glow;
+            }
+            
+            &:active {
+                transform: translateY(-1px) scale(1.05);
             }
         }
     }
 }
 
+// Apple-Style Animationen
+@keyframes apple-ambient-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-15px) rotate(2deg) scale(1.02);
+    }
+    66% {
+        transform: translateY(10px) rotate(-1deg) scale(0.98);
+    }
+}
+
+@keyframes apple-profile-glow {
+    0%, 100% {
+        opacity: 0.15;
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        opacity: 0.2;
+        transform: scale(1.05) rotate(1deg);
+    }
+    50% {
+        opacity: 0.18;
+        transform: scale(1.02) rotate(-0.5deg);
+    }
+    75% {
+        opacity: 0.22;
+        transform: scale(1.03) rotate(0.8deg);
+    }
+}
+
+// Mobile Responsive
 @media screen and (max-width: 1200px), screen and (min-height: 1000px) {
     .content-left {
         display: none !important;

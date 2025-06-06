@@ -1,8 +1,14 @@
 // src/style/apple-variables.scss
-// Apple-Style Design Variables mit Rückwärtskompatibilität
+// Apple-Style Design Variables mit Ihrer gewünschten Farbpalette
 
-// Apple-Primärfarben
-$apple-primary: #007AFF;
+@use 'sass:color';
+
+// Ihre gewünschte Apple-Primärfarbe
+$apple-primary: #1fcbbd;
+$apple-primary-hover: color.adjust(#1fcbbd, $lightness: -5%);
+$apple-primary-active: color.adjust(#1fcbbd, $lightness: -10%);
+
+// Apple-Sekundärfarben
 $apple-secondary: #5856D6;
 $apple-success: #34C759;
 $apple-warning: #FF9500;
@@ -20,40 +26,46 @@ $apple-text-secondary: rgba(255, 255, 255, 0.6);
 $apple-text-tertiary: rgba(255, 255, 255, 0.3);
 $apple-text-quaternary: rgba(255, 255, 255, 0.2);
 
-// WICHTIG: Ihre bestehenden Variablen (für Rückwärtskompatibilität)
+// Bestehende Variablen (für Rückwärtskompatibilität) - jetzt Apple-konform
 $base-black: #000000;
-$base-blue: #007AFF;  // Jetzt Apple Blue
+$base-blue: #1fcbbd;  // Ihre neue Primärfarbe
 $base-white: #FFFFFF;
 $base-white-012: rgba(255, 255, 255, 0.12);
 $base-white-050: rgba(255, 255, 255, 0.5);
-$base-lightgray: rgba(255, 255, 255, 0.6);  // Jetzt wie Apple Text Secondary
-$base-gray: #2C2C2E;  // Jetzt Apple BG Tertiary
-$base-red: #FF3B30;   // Jetzt Apple Error
-$base-green: #34C759; // Jetzt Apple Success
+$base-lightgray: rgba(255, 255, 255, 0.6);
+$base-gray: #2C2C2E;  // Apple BG Tertiary
+$base-red: #FF3B30;   // Apple Error
+$base-green: #34C759; // Apple Success
 
-// Apple Gradients
-$apple-blue-gradient: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
-$apple-blue-gradient-hover: linear-gradient(135deg, #0056CC 0%, #4A4AB8 100%);
+// Apple Gradients mit Ihrer Farbe
+$apple-teal-gradient: linear-gradient(135deg, #1fcbbd 0%, #19b3a6 100%);
+$apple-teal-gradient-hover: linear-gradient(135deg, #19b3a6 0%, #149b8f 100%);
+$apple-blue-gradient: $apple-teal-gradient; // Kompatibilität
+$apple-blue-gradient-hover: $apple-teal-gradient-hover; // Kompatibilität
 
 // Glass Effects
 $apple-glass-bg: rgba(255, 255, 255, 0.05);
 $apple-glass-border: rgba(255, 255, 255, 0.1);
 
-// Shadows
-$apple-shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-$apple-shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-$apple-shadow-large: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+// Shadows mit sanfteren Effekten
+$apple-shadow-small: 0 2px 8px rgba(0, 0, 0, 0.15);
+$apple-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.2);
+$apple-shadow-large: 0 8px 32px rgba(0, 0, 0, 0.25);
+$apple-shadow-glow: 0 0 20px rgba(31, 203, 189, 0.2);
 
-// Border Radius
+// Border Radius - Apple-typisch
 $apple-radius-small: 8px;
 $apple-radius-medium: 12px;
 $apple-radius-large: 16px;
 $apple-radius-xl: 24px;
 
-// Transitions
-$apple-transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+// Transitions - Apple-smooth
+$apple-transition-fast: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+$apple-transition-medium: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+$apple-transition-slow: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+// Apple-Systemschrift
+$apple-font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", sans-serif;
 
 // Font Weights
 $apple-font-weight-light: 300;
@@ -81,58 +93,80 @@ $apple-font-weight-bold: 700;
     padding-right: 25px !important;
 }
 
-// Aktualisierte Mixins mit Apple-Style
+// Aktualisierte Titel-Mixins mit Apple-Style
 @mixin h2Title() {
     padding: 40px 0;
     font-size: 48px;
     font-weight: $apple-font-weight-bold;
-    background: $apple-blue-gradient;
+    font-family: $apple-font-family;
+    background: $apple-teal-gradient;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
     line-height: 1.1;
+    text-align: center;
 }
 
 @mixin h2TitleMobile() {
     padding: 32px 0;
     font-size: 32px;
     font-weight: $apple-font-weight-bold;
-    background: $apple-blue-gradient;
+    font-family: $apple-font-family;
+    background: $apple-teal-gradient;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
     line-height: 1.1;
+    text-align: center;
 }
 
-// Neue Apple-Style Mixins
-@mixin apple-glass-effect {
-    background: $apple-glass-bg;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid $apple-glass-border;
+// Apple-Style Glasmorphism für Navigation
+@mixin apple-nav-glass {
+    background: rgba(28, 28, 30, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+// Apple-Style Button Mixins
 @mixin apple-button-primary {
-    background: $apple-blue-gradient;
+    background: $apple-teal-gradient;
     color: $apple-text-primary;
     border: none;
     border-radius: $apple-radius-medium;
     padding: 12px 24px;
+    font-family: $apple-font-family;
     font-weight: $apple-font-weight-medium;
+    font-size: 16px;
     transition: $apple-transition-fast;
     box-shadow: $apple-shadow-medium;
+    cursor: pointer;
     
     &:hover {
-        background: $apple-blue-gradient-hover;
-        transform: translateY(-1px);
-        box-shadow: $apple-shadow-large;
+        background: $apple-teal-gradient-hover;
+        transform: translateY(-2px);
+        box-shadow: $apple-shadow-large, $apple-shadow-glow;
     }
     
     &:active {
         transform: translateY(0);
         box-shadow: $apple-shadow-small;
+    }
+    
+    &:disabled {
+        background: $apple-bg-quaternary;
+        color: $apple-text-tertiary;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        
+        &:hover {
+            background: $apple-bg-quaternary;
+            transform: none;
+            box-shadow: none;
+        }
     }
 }
 
@@ -142,12 +176,16 @@ $apple-font-weight-bold: 700;
     border: 1px solid $apple-primary;
     border-radius: $apple-radius-medium;
     padding: 12px 24px;
+    font-family: $apple-font-family;
     font-weight: $apple-font-weight-medium;
+    font-size: 16px;
     transition: $apple-transition-fast;
+    cursor: pointer;
     
     &:hover {
         background: rgba($apple-primary, 0.1);
         transform: translateY(-1px);
+        box-shadow: $apple-shadow-small;
     }
     
     &:active {
@@ -156,38 +194,63 @@ $apple-font-weight-bold: 700;
     }
 }
 
+// Apple-Style Input Fields
 @mixin apple-input {
     background: $apple-bg-tertiary;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $apple-radius-medium;
     color: $apple-text-primary;
     padding: 16px 20px;
+    font-family: $apple-font-family;
     font-size: 16px;
+    font-weight: $apple-font-weight-regular;
     transition: $apple-transition-fast;
+    width: 100%;
     
     &:focus {
         outline: none;
         border-color: $apple-primary;
         box-shadow: 0 0 0 3px rgba($apple-primary, 0.2);
         background: $apple-bg-quaternary;
+        transform: translateY(-1px);
     }
     
     &::placeholder {
         color: $apple-text-tertiary;
+        font-weight: $apple-font-weight-regular;
+    }
+    
+    &:invalid {
+        border-color: $apple-error;
+        
+        &:focus {
+            border-color: $apple-error;
+            box-shadow: 0 0 0 3px rgba($apple-error, 0.2);
+        }
     }
 }
 
+// Apple-Style Navigation Items
 @mixin apple-nav-item {
     color: $apple-text-secondary;
+    font-family: $apple-font-family;
     font-weight: $apple-font-weight-medium;
+    font-size: 16px;
     transition: $apple-transition-fast;
     position: relative;
-    padding: 8px 16px;
+    padding: 12px 20px;
     border-radius: $apple-radius-small;
+    cursor: pointer;
     
     &:hover {
         color: $apple-text-primary;
         background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-1px);
+    }
+    
+    &:active {
+        transform: translateY(0);
+        background: rgba(255, 255, 255, 0.1);
     }
     
     &.active {
@@ -196,13 +259,40 @@ $apple-font-weight-bold: 700;
         &::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -2px;
             left: 50%;
             transform: translateX(-50%);
             width: 4px;
             height: 4px;
             background: $apple-primary;
             border-radius: 50%;
+            box-shadow: 0 0 8px rgba($apple-primary, 0.6);
         }
+    }
+}
+
+// Apple-Style Card/Container
+@mixin apple-card {
+    background: $apple-bg-secondary;
+    border-radius: $apple-radius-large;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-medium;
+    transition: $apple-transition-medium;
+    
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $apple-shadow-large;
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+// Apple-Style Logo Anpassung
+@mixin apple-logo {
+    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+        transform: scale(1.05);
     }
 }
