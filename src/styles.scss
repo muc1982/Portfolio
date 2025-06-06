@@ -1,5 +1,6 @@
 @use 'style/apple-variables' as *;
 
+// CSS Reset
 * {
     margin: 0;
     padding: 0;
@@ -66,17 +67,21 @@ body {
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     color: $apple-text-primary;
     max-width: 100%;
+    width: 100%; // Volle Viewport-Breite
     overflow-x: hidden;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
+    margin: 0; // Reset margin
+    padding: 0; // Reset padding
 }
 
 .wide-screen {
-    max-width: 1440px;
+    width: 100%; // Wichtig: Volle Breite nutzen
     margin: 0 auto;
     position: relative;
+    box-sizing: border-box; // Box-sizing für konsistente Größenberechnung
 }
 
 .pointer {
@@ -124,6 +129,7 @@ a:hover {
     }
 }
 
+// Apple-Style Animationen
 @keyframes apple-fade-in {
     0% {
         opacity: 0;
@@ -253,6 +259,7 @@ a:hover {
     animation: apple-pulse 2s ease-in-out infinite;
 }
 
+// Apple-Style Selection
 ::selection {
     background: rgba($apple-primary, 0.3);
     color: $apple-text-primary;
@@ -263,16 +270,19 @@ a:hover {
     color: $apple-text-primary;
 }
 
+// Apple-Style Focus Styles
 :focus-visible {
     outline: 2px solid $apple-primary;
     outline-offset: 2px;
     border-radius: $apple-radius-small;
 }
 
+// Apple-Style Smooth Scrolling
 html {
     scroll-behavior: smooth;
 }
 
+// Apple-Style Textgrößen
 h1 {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-bold;
@@ -309,6 +319,7 @@ p {
     line-height: 1.6;
 }
 
+// Apple-Style Link Hover-Effekte
 a {
     position: relative;
     

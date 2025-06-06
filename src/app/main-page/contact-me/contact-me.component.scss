@@ -31,7 +31,6 @@
             background-image: url('./../../../assets/img/arrow-up-hover.png');
             transform: translateY(-4px) scale(1.1);
             filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-            box-shadow: $apple-shadow-glow;
         }
         
         &:active {

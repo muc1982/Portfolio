@@ -14,6 +14,7 @@
     @include dFlex($jc: space-between);
     position: relative;
     overflow: hidden;
+    width: auto;
     
     // Apple-Style Ambient Background Effects
     &::before {
@@ -147,6 +148,16 @@
         right: 0;
         top: 20px;
         @include dFlex($jc: space-between, $fd: column, $gap: 20px);
+        z-index: 10; // Höherer z-index
+        
+        // Sicherstellen, dass es nicht über die Viewport-Grenzen hinausgeht
+        @media screen and (max-width: 1440px) {
+            right: 20px;
+        }
+        
+        @media screen and (max-width: 1200px) {
+            right: 40px;
+        }
         
         > div {
             width: 48px; 
@@ -234,8 +245,8 @@
             }
             
             .logo-img {
-                width: 56px;
-                height: 35px;
+                width: 80px;
+                height: 80px;
                 background: {
                     image: url('./../../../assets/img/logo.png');
                     repeat: no-repeat;
@@ -345,7 +356,7 @@
                 background-image: url('./../../../assets/img/arrow-down-hover.png');
                 transform: translateY(-3px) scale(1.1);
                 filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-                box-shadow: $apple-shadow-glow;
+
             }
             
             &:active {
@@ -384,33 +395,5 @@
     75% {
         opacity: 0.22;
         transform: scale(1.03) rotate(0.8deg);
-    }
-}
-
-// Mobile Responsive
-@media screen and (max-width: 1200px), screen and (min-height: 1000px) {
-    .content-left {
-        display: none !important;
-    }
-    .content-right {
-        width: 100%;
-        justify-content: space-around;
-        .img-wrapper-small {
-            display: flex;
-        }
-        .logo {
-            position: absolute;
-            left: 0;
-            top: 20px;
-        }
-    }
-}
-
-@media screen and (max-width: 1200px) and (max-height: 900px) {
-    .content {
-        padding-top: 60px !important;
-    }
-    .content-right .title-logo-wrapper .title {
-        padding: 20px 0 !important;
     }
 }
