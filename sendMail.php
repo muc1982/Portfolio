@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-header("Access-Control-Allow-Origin: https://portfolio.yangxin.de");
+header("Access-Control-Allow-Origin: https://portfolio.yasinsun.de");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -64,7 +64,7 @@ $body = "
 $headers = [
     'MIME-Version: 1.0',
     'Content-type: text/html; charset=UTF-8',
-    'From: Portfolio <no-reply@yangxin.de>',
+    'From: Portfolio <no-reply@dev-sun.de>',
     'Reply-To: ' . $email,
     'X-Mailer: PHP/' . phpversion()
 ];
