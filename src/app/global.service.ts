@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
   public lastTargetId: string = '';
+  
   constructor() { }
 
   getProjects() {
@@ -17,8 +18,8 @@ export class GlobalService {
         technologies: ['firebase', 'html', 'css', 'javascript'],
         technologiesName: ['FireBase', 'HTML', 'CSS', 'JavaScript'],
         url: 'join-pc-combine.png',
-        giturl: 'https://github.com/bobyang08250772/Join.git',
-        weburl: 'https://join.yangxin.de/',
+        giturl: 'https://github.com/muc1982/join',
+        weburl: 'https://join-sun.web.app', 
       },
       {
         name: 'El Pollo Loco',
@@ -28,8 +29,8 @@ export class GlobalService {
         technologies: ['html', 'css', 'javascript'],
         technologiesName: ['HTML', 'CSS', 'JavaScript'],
         url: 'pollo.png',
-        giturl: 'https://github.com/bobyang08250772/EL_POLLO_LOCO.git',
-        weburl: 'https://el-pollo-loco.yangxin.de/',
+        giturl: 'https://github.com/muc1982/El-Pocco-Loco',
+        weburl: 'https://pollo-sun.web.app', 
       }
     ];
   }

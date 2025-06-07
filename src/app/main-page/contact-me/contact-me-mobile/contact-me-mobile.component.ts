@@ -29,25 +29,27 @@ export class ContactMeMobileComponent {
   emailInvalidMsg: string =  'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
+  
   post = {
-      endPoint: 'https://portfolio.yangxin.de/sendMail.php',
+      endPoint: 'https://yasin-sun.developerakademie.net/sendMail.php',
       body: (payload: any) => JSON.stringify(payload),
       options: {
         headers: {
-          'Content-Type': 'text/plain',
-          responseType: 'text',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
       },
   }
+  
   http = inject(HttpClient);
 
   contact: Contact = {name:'', email:'', msg: ''};
+  
   constructor() {
     
   }
 
   clickCb() {
-    
     this.isChecked = !this.isChecked;
   }
 
@@ -60,15 +62,18 @@ export class ContactMeMobileComponent {
   onSumbmit(myForm: NgForm) {
     const b = this.checkFileds();
     if (b) {
-      this.http.post(this.post.endPoint, this.post.body(this.contact))
+      this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
         .subscribe({
           next: (response) => {
+            console.log('E-Mail erfolgreich versendet:', response);
             this.reset(myForm);
           },
           error: (error) => {
-            console.error('Server error:', error);
+            console.error('Fehler beim Versenden der E-Mail:', error);
           },
-          complete: () => console.info('send post complete'),
+          complete: () => {
+            console.log('E-Mail-Versand abgeschlossen');
+          },
         });
     } 
   }
@@ -80,7 +85,7 @@ export class ContactMeMobileComponent {
     this.contact.msg = '';
     this.isShowingSuccessMsg = true;
     setTimeout(() => {
-      this.isShowingSuccessMsg =false;
+      this.isShowingSuccessMsg = false;
     }, 3000);
   }
 
@@ -112,5 +117,4 @@ export class ContactMeMobileComponent {
       return true;
     }
   }
-
 }
