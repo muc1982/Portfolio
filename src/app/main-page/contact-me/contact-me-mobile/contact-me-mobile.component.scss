@@ -3,15 +3,17 @@
 
 .contact-container {
     position: relative;
-    margin-bottom: 50px;
+    margin: 32px auto 40px auto;
     @include standardPaddingMobile();
     @include dFlex($fd: column);
-    margin-top: 50px;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     border-radius: $apple-radius-large;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
     
     // Apple-Style Ambient Background für Mobile
     &::before {
@@ -28,14 +30,15 @@
 
     h2 {
         @include h2TitleMobile();
-        margin-bottom: clamp(16px, 4vw, 24px);
+        margin-bottom: clamp(20px, 4vw, 28px);
         position: relative;
         z-index: 2;
+        text-align: center;
     }
     
     .contact-content {
         width: 100%;
-        @include dFlex($fd: column, $gap: clamp(16px, 4vw, 24px));
+        @include dFlex($fd: column, $gap: clamp(20px, 4vw, 28px));
         position: relative;
         z-index: 2;
         
@@ -45,19 +48,21 @@
             width: 100%;
             
             .header-top {
-                @include dFlex($gap: clamp(8px, 2vw, 12px), $fd: column, $ai: flex-start);
+                @include dFlex($gap: clamp(12px, 2.5vw, 16px), $fd: column, $ai: stretch);
                 width: 100%;
                 
                 .header-top-email, .header-top-phone { 
                     a {
-                        @include dFlex($gap: clamp(8px, 2vw, 12px));
-                        padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3vw, 16px);
+                        @include dFlex($gap: clamp(10px, 2.5vw, 14px), $ai: center);
+                        padding: clamp(12px, 3vw, 16px) clamp(14px, 3.5vw, 18px);
                         border-radius: $apple-radius-medium;
                         border: 1px solid rgba(255, 255, 255, 0.1);
                         transition: $apple-transition-fast;
                         background: rgba(255, 255, 255, 0.02);
                         width: 100%;
                         box-sizing: border-box;
+                        text-decoration: none;
+                        color: inherit;
                         
                         &:hover {
                             border-color: rgba($apple-primary, 0.3);
@@ -85,24 +90,19 @@
                         }
                         
                         .img {
-                            width: clamp(22px, 5vw, 28px);
-                            height: clamp(26px, 6vw, 32px);
+                            width: clamp(20px, 4.5vw, 26px);
+                            height: clamp(24px, 5.5vw, 30px);
                             flex-shrink: 0;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;
                         }
                         
                         .mail {
-                            background: {
-                                image: url('./../../../../assets/img/mail.png');
-                                size: contain;
-                                repeat: no-repeat;
-                            }
+                            background-image: url('./../../../../assets/img/mail.png');
                         }
                         .tel {
-                            background: {
-                                image: url('./../../../../assets/img/github.png');
-                                size: contain;
-                                repeat: no-repeat;
-                            }   
+                            background-image: url('./../../../../assets/img/github.png');
                         }
                         
                         span {
@@ -110,16 +110,17 @@
                             font-weight: $apple-font-weight-regular;
                             color: $apple-text-secondary;
                             transition: $apple-transition-fast;
-                            font-size: clamp(13px, 3.5vw, 16px);
+                            font-size: clamp(12px, 3vw, 15px);
                             line-height: 1.3;
+                            flex: 1;
                         }
                     }
                 }
             }
 
             .header-bottom {
-                padding: clamp(8px, 2vw, 12px) 0;
-                font-size: clamp(18px, 4.5vw, 22px);
+                padding: clamp(12px, 2.5vw, 16px) 0;
+                font-size: clamp(16px, 4vw, 20px);
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
                 width: 100%;
@@ -137,9 +138,8 @@
                 @include dFlex($fd: column, $gap: clamp(16px, 3.5vw, 20px));
                 
                 .form-name-mail {
-                    @include dFlex($gap: clamp(16px, 3.5vw, 20px));
+                    @include dFlex($gap: clamp(16px, 3.5vw, 20px), $fd: column);
                     width: 100%;
-                    flex-direction: column;
                 }
 
                 .form-field {
@@ -148,9 +148,10 @@
                     
                     .form-input {
                         @include apple-input;
-                        height: clamp(50px, 12vw, 60px);
+                        height: clamp(48px, 10vw, 56px);
                         font-family: $apple-font-family;
-                        font-size: clamp(14px, 3.5vw, 16px);
+                        font-size: clamp(14px, 3vw, 16px);
+                        padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
                         
                         &::placeholder {
                             color: $apple-text-tertiary;
@@ -172,23 +173,24 @@
                     textarea {
                         @include apple-input;
                         width: 100%;
-                        height: clamp(120px, 25vw, 147px) !important;
-                        padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 30px) !important;
+                        height: clamp(100px, 20vw, 130px) !important;
+                        padding: clamp(14px, 3.5vw, 18px) clamp(16px, 4vw, 20px) !important;
                         resize: none;
                         font-family: $apple-font-family;
-                        font-size: clamp(14px, 3.5vw, 16px);
+                        font-size: clamp(14px, 3vw, 16px);
                         line-height: 1.4;
+                        box-sizing: border-box;
                     }
                 }
                 
                 .privacy-policy {
                     width: 100%;
                     color: $apple-text-secondary;
-                    @include dFlex($jc: flex-start, $gap: clamp(8px, 2vw, 12px));
+                    @include dFlex($jc: flex-start, $gap: clamp(10px, 2.5vw, 14px), $ai: flex-start);
                     
                     .cb {
-                        width: clamp(20px, 5vw, 24px);
-                        height: clamp(20px, 5vw, 24px);
+                        width: clamp(18px, 4vw, 22px);
+                        height: clamp(18px, 4vw, 22px);
                         flex-shrink: 0;
                         border: 2px solid $apple-text-tertiary;
                         border-radius: $apple-radius-small;
@@ -215,7 +217,7 @@
                                 left: 50%;
                                 transform: translate(-50%, -50%);
                                 color: white;
-                                font-size: clamp(10px, 2.5vw, 12px);
+                                font-size: clamp(8px, 2vw, 10px);
                                 font-weight: $apple-font-weight-bold;
                                 font-family: $apple-font-family;
                             }
@@ -223,15 +225,17 @@
                     }
                     
                     span {
-                        font-size: clamp(12px, 3vw, 14px);
+                        font-size: clamp(11px, 2.8vw, 13px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
                         line-height: 1.4;
+                        flex: 1;
                         
                         a {
                             color: $apple-primary;
                             font-weight: $apple-font-weight-medium;
                             transition: $apple-transition-fast;
+                            text-decoration: none;
                             
                             &:hover {
                                 color: color.adjust($apple-primary, $lightness: 10%);
@@ -245,24 +249,26 @@
                     color: $apple-success;
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
-                    padding: clamp(10px, 2.5vw, 12px) clamp(12px, 3vw, 16px);
+                    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
                     background: rgba($apple-success, 0.1);
                     border: 1px solid rgba($apple-success, 0.3);
                     border-radius: $apple-radius-medium;
                     text-align: center;
-                    font-size: clamp(13px, 3vw, 15px);
+                    font-size: clamp(12px, 3vw, 14px);
+                    box-shadow: $apple-shadow-small;
                 }
                 
                 .send-btn {
-                    @include dFlex($jc: flex-end);
+                    @include dFlex($jc: center);
                     width: 100%;
+                    padding-top: clamp(8px, 2vw, 12px);
                     
                     button {
                         @include apple-button-primary;
                         font-family: $apple-font-family;
                         font-size: clamp(14px, 3.5vw, 16px);
-                        padding: clamp(12px, 3vw, 14px) clamp(20px, 5vw, 24px);
-                        min-width: clamp(100px, 25vw, 140px);
+                        padding: clamp(12px, 3vw, 16px) clamp(24px, 6vw, 32px);
+                        min-width: clamp(120px, 30vw, 160px);
                         
                         &:disabled {
                             background: $apple-bg-quaternary;
@@ -288,23 +294,22 @@
         }
 
         .goup-arrow {
-            margin: clamp(32px, 8vw, 50px) 0;
-            width: clamp(24px, 6vw, 30px);
-            height: clamp(48px, 12vw, 60px);
+            margin: clamp(24px, 6vw, 40px) auto;
+            width: clamp(20px, 5vw, 28px);
+            height: clamp(40px, 10vw, 56px);
             background: {
-                image: url('./../../../../assets/img/arrow-down.png');
+                image: url('./../../../../assets/img/arrow-up.png');
                 size: contain;
                 repeat: no-repeat;
+                position: center;
             };
             filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
             transition: $apple-transition-fast;
             border-radius: $apple-radius-small;
-            align-self: center;
+            cursor: pointer;
             
             &:hover {
-                background: {
-                    image: url('./../../../../assets/img/arrow-down-hover.png');
-                };
+                background-image: url('./../../../../assets/img/arrow-down-hover.png');
                 transform: translateY(-2px) scale(1.1);
                 filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
                 box-shadow: $apple-shadow-glow;
@@ -323,11 +328,11 @@
     }
 }
 
-// Responsive Design für Mobile
+// Responsive Design für verschiedene Mobile-Größen
 @media screen and (max-width: 480px) {
     .contact-container {
-        margin-top: 32px;
-        margin-bottom: 32px;
+        margin: 24px auto 32px auto;
+        border-radius: $apple-radius-medium;
         
         h2 {
             margin-bottom: 16px;
@@ -337,93 +342,16 @@
             gap: 16px;
             
             .contact-header {
-                gap: 14px;
+                gap: 12px;
                 
                 .header-top {
                     gap: 10px;
                     
                     .header-top-email, .header-top-phone {
                         a {
-                            padding: 12px 14px;
-                            gap: 10px;
-                            
-                            .img {
-                                width: 20px;
-                                height: 24px;
-                            }
-                            
-                            span {
-                                font-size: 13px;
-                            }
-                        }
-                    }
-                }
-                
-                .header-bottom {
-                    font-size: 18px;
-                    padding: 8px 0;
-                }
-            }
-            
-            .contact-form form {
-                gap: 14px;
-                
-                .form-name-mail {
-                    gap: 14px;
-                }
-                
-                .form-field .form-input {
-                    height: 48px;
-                    font-size: 14px;
-                }
-                
-                .form-message textarea {
-                    height: 110px !important;
-                    padding: 14px 18px !important;
-                    font-size: 14px;
-                }
-                
-                .privacy-policy {
-                    gap: 8px;
-                    
-                    .cb {
-                        width: 20px;
-                        height: 20px;
-                        
-                        &.checked::after {
-                            font-size: 10px;
-                        }
-                    }
-                    
-                    span {
-                        font-size: 12px;
-                    }
-                }
-                
-                .send-btn button {
-                    font-size: 14px;
-                    padding: 12px 20px;
-                    min-width: 120px;
-                }
-            }
-            
-            .goup-arrow {
-                margin: 32px 0;
-                width: 24px;
-                height: 48px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .contact-container {
-        .contact-content {
-            .contact-header {
-                .header-top {
-                    .header-top-email, .header-top-phone {
-                        a {
                             padding: 10px 12px;
+                            gap: 8px;
+                            border-radius: $apple-radius-small;
                             
                             .img {
                                 width: 18px;
@@ -439,63 +367,78 @@
                 
                 .header-bottom {
                     font-size: 16px;
+                    padding: 8px 0;
                 }
             }
             
             .contact-form form {
+                gap: 14px;
+                
+                .form-name-mail {
+                    gap: 14px;
+                }
+                
                 .form-field .form-input {
                     height: 44px;
                     font-size: 13px;
+                    padding: 10px 14px;
                 }
                 
                 .form-message textarea {
-                    height: 100px !important;
-                    padding: 12px 16px !important;
+                    height: 90px !important;
+                    padding: 12px 14px !important;
                     font-size: 13px;
                 }
                 
                 .privacy-policy {
+                    gap: 8px;
+                    
                     .cb {
-                        width: 18px;
-                        height: 18px;
+                        width: 16px;
+                        height: 16px;
                         
                         &.checked::after {
-                            font-size: 9px;
+                            font-size: 8px;
                         }
                     }
                     
                     span {
-                        font-size: 11px;
+                        font-size: 10px;
                     }
                 }
                 
-                .send-btn button {
-                    font-size: 13px;
-                    padding: 10px 18px;
-                    min-width: 100px;
+                .send-btn {
+                    padding-top: 6px;
+                    
+                    button {
+                        font-size: 13px;
+                        padding: 10px 20px;
+                        min-width: 100px;
+                    }
                 }
             }
             
             .goup-arrow {
-                width: 20px;
-                height: 40px;
-                margin: 24px 0;
+                margin: 20px auto;
+                width: 18px;
+                height: 36px;
             }
         }
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
     .contact-container {
+        margin: 20px auto 28px auto;
+        
         .contact-content {
+            gap: 14px;
+            
             .contact-header {
                 .header-top {
                     .header-top-email, .header-top-phone {
                         a {
                             padding: 8px 10px;
-                            flex-direction: column;
-                            text-align: center;
-                            gap: 6px;
                             
                             .img {
                                 width: 16px;
@@ -515,9 +458,152 @@
             }
             
             .contact-form form {
+                gap: 12px;
+                
+                .form-field .form-input {
+                    height: 40px;
+                    font-size: 12px;
+                    padding: 8px 12px;
+                }
+                
+                .form-message textarea {
+                    height: 80px !important;
+                    padding: 10px 12px !important;
+                    font-size: 12px;
+                }
+                
+                .privacy-policy {
+                    gap: 6px;
+                    
+                    .cb {
+                        width: 14px;
+                        height: 14px;
+                        
+                        &.checked::after {
+                            font-size: 7px;
+                        }
+                    }
+                    
+                    span {
+                        font-size: 9px;
+                    }
+                }
+                
+                .send-btn button {
+                    font-size: 12px;
+                    padding: 8px 16px;
+                    min-width: 90px;
+                }
+            }
+            
+            .goup-arrow {
+                width: 16px;
+                height: 32px;
+                margin: 16px auto;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .contact-container {
+        margin: 16px auto 24px auto;
+        padding: 16px 12px;
+        
+        h2 {
+            margin-bottom: 12px;
+        }
+        
+        .contact-content {
+            gap: 12px;
+            
+            .contact-header {
+                .header-top {
+                    .header-top-email, .header-top-phone {
+                        a {
+                            padding: 6px 8px;
+                            flex-direction: column;
+                            text-align: center;
+                            gap: 4px;
+                            
+                            .img {
+                                width: 14px;
+                                height: 18px;
+                            }
+                            
+                            span {
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                }
+                
+                .header-bottom {
+                    font-size: 12px;
+                    padding: 6px 0;
+                }
+            }
+            
+            .contact-form form {
+                gap: 10px;
+                
+                .form-field .form-input {
+                    height: 36px;
+                    font-size: 11px;
+                    padding: 6px 10px;
+                }
+                
+                .form-message textarea {
+                    height: 70px !important;
+                    padding: 8px 10px !important;
+                    font-size: 11px;
+                }
+                
+                .privacy-policy {
+                    gap: 4px;
+                    
+                    .cb {
+                        width: 12px;
+                        height: 12px;
+                        
+                        &.checked::after {
+                            font-size: 6px;
+                        }
+                    }
+                    
+                    span {
+                        font-size: 8px;
+                    }
+                }
+                
                 .send-btn button {
                     width: 100%;
                     min-width: auto;
+                    font-size: 11px;
+                    padding: 6px 12px;
+                }
+            }
+            
+            .goup-arrow {
+                width: 14px;
+                height: 28px;
+                margin: 12px auto;
+            }
+        }
+    }
+}
+
+// Landscape mode
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .contact-container {
+        margin: 16px auto 20px auto;
+        
+        .contact-content {
+            gap: 12px;
+            
+            .contact-form form {
+                .form-message textarea {
+                    height: 60px !important;
                 }
             }
         }

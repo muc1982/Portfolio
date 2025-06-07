@@ -5,11 +5,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: $apple-bg-secondary; // Gleiche Farbe wie Navigation und Footer
+    right: 0;
+    background: $apple-bg-secondary;
     height: 104px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     @include apple-nav-glass;
     z-index: 999;
+    box-sizing: border-box;
 }
 
 header {
@@ -17,48 +19,54 @@ header {
     background: transparent;
     color: $apple-text-primary;
     @include standardPadding();
-    @include dFlex($gap: 16px);
+    @include dFlex($gap: 16px, $ai: center);
     width: 100%;
     max-width: 1440px;
     box-sizing: border-box;
     margin: 0 auto;
+    position: relative;
 
     .header-ele {
         flex: 1;
         white-space: nowrap;
+        display: flex;
+        align-items: center;
     }
     
     .title {
         text-align: center;
+        justify-content: center;
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-bold;
-        font-size: 1.8rem;
+        font-size: clamp(1.4rem, 3vw, 1.8rem);
         color: $apple-text-primary;
         background: $apple-teal-gradient;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
         letter-spacing: -0.01em;
+        line-height: 1.2;
     }
     
     .langs {
-        @include dFlex($jc: flex-end);
+        justify-content: flex-end;
     }
     
     .go-back {
-        @include dFlex($ai: center);
+        justify-content: flex-start;
         
         a {
             @include dFlex($jc: flex-start, $gap: 8px, $ai: center);
             color: $apple-text-primary;
             font-family: $apple-font-family;
             font-weight: $apple-font-weight-medium;
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 16px);
             padding: 8px 12px;
             border-radius: $apple-radius-small;
             transition: $apple-transition-fast;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
             
             &::before {
                 content: '';
@@ -93,54 +101,200 @@ header {
             }
             
             span:first-child {
-                font-size: 18px;
+                font-size: clamp(16px, 3vw, 18px);
                 font-weight: $apple-font-weight-semibold;
+                line-height: 1;
+            }
+            
+            span:last-child {
+                font-size: clamp(14px, 2.5vw, 16px);
+                line-height: 1;
             }
         }
     }
 }
 
-@media screen and (max-width: 900px) {
+// Tablet Design
+@media screen and (max-width: 1024px) {
+    .header-wrapper {
+        height: 88px;
+    }
+    
     header {
-        @include standardPaddingMobile();
+        @include standardPadding();
         
         .title {
-            font-size: 1.6rem;
+            font-size: clamp(1.3rem, 3.5vw, 1.6rem);
         }
         
-        .go-back {
-            a {
-                span:nth-child(2) {
-                    display: none;
-                }
-                
-                span:nth-child(1) {
-                    transform: scale(1.3);
-                    font-weight: $apple-font-weight-bold;
-                }
-            }
+        .go-back a {
+            padding: 6px 10px;
         }
-    }  
+    }
 }
 
-@media screen and (max-width: 500px) {
+// Mobile Design
+@media screen and (max-width: 900px) {
+    .header-wrapper {
+        height: 72px;
+    }
+    
     header {
+        @include standardPaddingMobile();
+        gap: 12px;
+        
         .title {
-            font-size: 1.4rem;
-            display: none;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
         }
-       
+        
         .go-back {
             a {
-                span:nth-child(2) {
+                padding: 6px 8px;
+                gap: 6px;
+                
+                span:last-child {
                     display: none;
                 }
                 
-                span:nth-child(1) {
-                    transform: scale(1.5);
+                span:first-child {
+                    transform: scale(1.2);
                     font-weight: $apple-font-weight-bold;
                 }
             }
         }
-    }  
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header-wrapper {
+        height: 64px;
+    }
+    
+    header {
+        gap: 8px;
+        
+        .title {
+            font-size: clamp(1.1rem, 4.5vw, 1.3rem);
+        }
+        
+        .go-back {
+            a {
+                padding: 4px 6px;
+                
+                span:first-child {
+                    transform: scale(1.3);
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header-wrapper {
+        height: 60px;
+    }
+    
+    header {
+        gap: 6px;
+        
+        .header-ele {
+            &:nth-child(2) { // Title element
+                flex: 0;
+                min-width: 0;
+                
+                .title {
+                    display: none; // Verstecke Titel auf sehr kleinen Bildschirmen
+                }
+            }
+            
+            &:first-child { // Go back element
+                flex: 0;
+            }
+            
+            &:last-child { // Language switcher
+                flex: 1;
+                justify-content: flex-end;
+            }
+        }
+        
+        .go-back {
+            a {
+                padding: 3px 4px;
+                
+                span:first-child {
+                    transform: scale(1.4);
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .header-wrapper {
+        height: 56px;
+    }
+    
+    header {
+        gap: 4px;
+        
+        .go-back {
+            a {
+                padding: 2px 3px;
+                
+                span:first-child {
+                    transform: scale(1.5);
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+// Ultra-small screens
+@media screen and (max-width: 320px) {
+    .header-wrapper {
+        height: 52px;
+    }
+    
+    header {
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 2px;
+        
+        .go-back {
+            a {
+                padding: 2px;
+                
+                span:first-child {
+                    transform: scale(1.6);
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+// Landscape mode adjustments
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .header-wrapper {
+        height: 48px;
+    }
+    
+    header {
+        .title {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+        
+        .go-back {
+            a {
+                padding: 3px 6px;
+                
+                span:first-child {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
 }

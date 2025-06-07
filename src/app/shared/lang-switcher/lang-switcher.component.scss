@@ -2,19 +2,47 @@
 @use 'sass:color';
 
 .langs {
-    @include dFlex($gap: 8px);
+    @include dFlex($gap: clamp(4px, 1vw, 8px));
     color: $apple-text-primary;
     font-family: $apple-font-family;
     
     span {
-        padding: 8px 12px;
-        font-size: 14px;
+        padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
+        font-size: clamp(12px, 2.5vw, 14px);
         font-weight: $apple-font-weight-medium;
         border-radius: $apple-radius-small;
         transition: $apple-transition-fast;
         cursor: pointer;
         position: relative;
         border: 1px solid transparent;
+        background: transparent;
+        color: $apple-text-secondary;
+        min-height: 32px;
+        min-width: 36px;
+        @include dFlex($jc: center, $ai: center);
+        box-sizing: border-box;
+        
+        // Touch-optimierte Größen für Mobile
+        @include mobile {
+            padding: clamp(5px, 1.2vw, 8px) clamp(8px, 2vw, 12px);
+            font-size: clamp(11px, 2.8vw, 13px);
+            min-height: 28px;
+            min-width: 32px;
+        }
+        
+        @include mobile-small {
+            padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 10px);
+            font-size: clamp(10px, 3vw, 12px);
+            min-height: 24px;
+            min-width: 28px;
+        }
+        
+        @include mobile-xs {
+            padding: 3px 6px;
+            font-size: 10px;
+            min-height: 20px;
+            min-width: 24px;
+        }
         
         &:hover {
             color: $apple-text-primary;
@@ -26,6 +54,11 @@
         &:active {
             transform: translateY(0);
             background: rgba(255, 255, 255, 0.1);
+        }
+        
+        &:focus {
+            outline: 2px solid rgba($apple-primary, 0.5);
+            outline-offset: 2px;
         }
         
         &.active {
@@ -51,6 +84,11 @@
                 transform: translateY(-2px);
                 box-shadow: $apple-shadow-medium, $apple-shadow-glow;
             }
+            
+            &:active {
+                transform: translateY(-1px);
+                background: color.adjust($apple-primary, $lightness: -2%);
+            }
         }
     }
 }
@@ -63,5 +101,128 @@
     50% {
         opacity: 0.3;
         transform: scale(1.05);
+    }
+}
+
+// Responsive Design für verschiedene Kontexte
+.header-wrapper .langs {
+    @include mobile {
+        gap: 3px;
+        
+        span {
+            padding: 4px 6px;
+            font-size: 10px;
+            min-height: 24px;
+            min-width: 26px;
+        }
+    }
+    
+    @include mobile-small {
+        gap: 2px;
+        
+        span {
+            padding: 3px 5px;
+            font-size: 9px;
+            min-height: 20px;
+            min-width: 22px;
+        }
+    }
+    
+    @include mobile-xs {
+        gap: 1px;
+        
+        span {
+            padding: 2px 4px;
+            font-size: 8px;
+            min-height: 18px;
+            min-width: 20px;
+        }
+    }
+}
+
+// Menu-spezifische Styles
+.menu-content .langs {
+    justify-content: center;
+    gap: clamp(4px, 1vw, 8px);
+    
+    span {
+        padding: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 12px);
+        font-size: clamp(10px, 2.5vw, 12px);
+        border-radius: $apple-radius-small;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        color: $apple-text-secondary;
+        min-height: 28px;
+        min-width: 32px;
+        
+        &.active {
+            background: $apple-primary;
+            color: $apple-text-primary;
+            border-color: $apple-primary;
+        }
+        
+        &:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    }
+}
+
+// Footer-spezifische Styles
+.footer-content .langs {
+    span {
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        &.active {
+            &:hover {
+                background: color.adjust($apple-primary, $lightness: 8%);
+            }
+        }
+    }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+    .langs span {
+        border: 2px solid currentColor;
+        
+        &.active {
+            background: $apple-text-primary;
+            color: $apple-bg-primary;
+            border-color: $apple-text-primary;
+        }
+    }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+    .langs span {
+        transition: none;
+        
+        &::before {
+            animation: none;
+        }
+        
+        &:hover,
+        &:active,
+        &.active {
+            transform: none;
+        }
+    }
+    
+    @keyframes apple-lang-pulse {
+        0%, 100% {
+            opacity: 0.2;
+            transform: none;
+        }
+    }
+}
+
+// Print styles
+@media print {
+    .langs {
+        display: none;
     }
 }

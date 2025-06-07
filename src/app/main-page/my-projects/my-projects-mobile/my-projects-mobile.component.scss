@@ -2,7 +2,9 @@
 @use 'sass:color';
 
 .my-projects-container {
-    margin-top: 50px;
+    margin: 32px auto;
+    max-width: 600px;
+    width: 100%;
     @include standardPaddingMobile();
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     border-radius: $apple-radius-large;
@@ -10,6 +12,7 @@
     box-shadow: $apple-shadow-large;
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
     
     // Apple-Style Ambient Background
     &::before {
@@ -27,7 +30,7 @@
     h2 {
         @include h2TitleMobile();
         text-align: center;
-        margin-bottom: 24px;
+        margin-bottom: clamp(20px, 4vw, 28px);
         position: relative;
         z-index: 2;
     }
@@ -38,19 +41,22 @@
         
         nav {
             @include dFlex($jc: center);
-            margin-bottom: 20px;
+            margin-bottom: clamp(16px, 3vw, 24px);
+            gap: 2px;
             
             > div {
                 flex: 1;
                 border-top-left-radius: $apple-radius-medium;
                 border-top-right-radius: $apple-radius-medium;
                 overflow: hidden;
-                padding: 12px 8px;
-                min-height: 50px;
+                padding: clamp(8px, 2vw, 12px) clamp(4px, 1vw, 8px);
+                min-height: clamp(40px, 8vw, 55px);
                 box-sizing: border-box;
-                @include dFlex();
+                @include dFlex($jc: center, $ai: center);
                 transition: $apple-transition-medium;
                 position: relative;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
                 
                 &::before {
                     content: '';
@@ -93,46 +99,50 @@
                 }
                 
                 > span {
-                    font-size: clamp(12px, 3.5vw, 16px);
+                    font-size: clamp(10px, 2.5vw, 14px);
                     font-weight: $apple-font-weight-semibold;
                     font-family: $apple-font-family;
                     color: $apple-primary;
                     transition: $apple-transition-medium;
                     text-align: center;
                     line-height: 1.2;
+                    word-break: break-word;
+                    hyphens: auto;
                 }
             }
         }
         
         .project {
             @include dFlex($fd: column);
-            padding: 24px 0;
+            padding: clamp(16px, 3vw, 24px) 0;
             color: $apple-text-primary;
             background: $apple-bg-tertiary;
             border-radius: $apple-radius-medium;
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2.5vw, 18px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             
             .project-top {
                 width: 100%;
-                @include dFlex($gap: 20px, $fd: column);
-                padding: 0 20px;
+                @include dFlex($gap: clamp(16px, 3vw, 20px), $fd: column);
+                padding: 0 clamp(12px, 2.5vw, 20px);
                 
                 .project-top-title {
                     color: $apple-primary;
-                    font-size: clamp(20px, 5vw, 24px);
+                    font-size: clamp(18px, 4vw, 22px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
                     align-self: flex-start;
-                    margin-bottom: 8px;
+                    margin-bottom: clamp(6px, 1.5vw, 10px);
+                    text-align: center;
+                    width: 100%;
                 }
                 
                 .technologies {
                     position: relative;
-                    font-size: clamp(12px, 3.5vw, 14px);
+                    font-size: clamp(11px, 2.8vw, 13px);
                     width: 100%;
-                    @include dFlex($gap: 8px, $fd: column);
-                    padding: 16px;
+                    @include dFlex($gap: clamp(6px, 1.5vw, 10px), $fd: column);
+                    padding: clamp(12px, 2.5vw, 16px);
                     border-radius: $apple-radius-small;
                     background: rgba(255, 255, 255, 0.02);
                     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -151,7 +161,7 @@
                         width: 100%;
                         align-self: flex-start;
                         color: $apple-text-tertiary;
-                        font-size: clamp(11px, 3vw, 13px);
+                        font-size: clamp(10px, 2.5vw, 12px);
                         
                         span {
                             color: $apple-primary;
@@ -191,7 +201,7 @@
                         left: 50%;
                         transform: translate(-50%, -50%);
                         color: $apple-primary;
-                        font-size: clamp(18px, 5vw, 24px);
+                        font-size: clamp(16px, 4vw, 20px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-bold;
                         z-index: 2;
@@ -201,13 +211,13 @@
             }
             
             .project-bottom {
-                padding: 20px;
-                @include dFlex($fd: column, $gap: 24px);
+                padding: clamp(12px, 2.5vw, 20px);
+                @include dFlex($fd: column, $gap: clamp(16px, 3vw, 20px));
                 
                 .tab-li {
                     width: 100%;
-                    @include dFlex($jc: flex-start, $gap: 16px);
-                    padding: 16px;
+                    @include dFlex($jc: flex-start, $gap: clamp(10px, 2vw, 14px));
+                    padding: clamp(12px, 2.5vw, 16px);
                     border-radius: $apple-radius-small;
                     background: rgba(255, 255, 255, 0.02);
                     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -220,8 +230,8 @@
                     }
                     
                     > img {
-                        width: 24px;
-                        height: 24px;
+                        width: clamp(18px, 4vw, 24px);
+                        height: clamp(18px, 4vw, 24px);
                         position: relative;
                         top: 2px;
                         filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
@@ -232,11 +242,11 @@
                         flex: 1;
                         
                         > div {
-                            @include dFlex($gap: 8px, $jc: flex-start, $ai: flex-start, $fd: column);
-                            margin-bottom: 8px;
+                            @include dFlex($gap: clamp(6px, 1.5vw, 10px), $jc: flex-start, $ai: flex-start, $fd: column);
+                            margin-bottom: clamp(6px, 1.5vw, 10px);
                             
                             > h4 {
-                                font-size: clamp(16px, 4vw, 18px);
+                                font-size: clamp(14px, 3.5vw, 16px);
                                 font-weight: $apple-font-weight-semibold;
                                 font-family: $apple-font-family;
                                 color: $apple-primary;
@@ -245,7 +255,7 @@
                         }
                         
                         > p {
-                            font-size: clamp(13px, 3.5vw, 14px);
+                            font-size: clamp(11px, 2.8vw, 13px);
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-regular;
                             line-height: 1.5;
@@ -256,7 +266,7 @@
                 
                 .project-bottom-footer {
                     position: relative;
-                    @include dFlex($gap: 16px, $jc: center);
+                    @include dFlex($gap: clamp(10px, 2.5vw, 14px), $jc: center);
                     flex-wrap: wrap;
                     
                     button {
@@ -269,17 +279,17 @@
                         position: relative;
                         overflow: hidden;
                         flex: 1;
-                        min-width: 120px;
+                        min-width: clamp(100px, 25vw, 130px);
                         
                         a {
                             display: block;
                             width: 100%;
                             height: 100%;
-                            padding: 12px 16px;
+                            padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3vw, 16px);
                             box-sizing: border-box;
                             color: inherit;
                             text-decoration: none;
-                            font-size: clamp(13px, 3.5vw, 14px);
+                            font-size: clamp(12px, 3vw, 14px);
                         }
                         
                         &:nth-child(1) {
@@ -296,16 +306,16 @@
         
         .team-player {
             @include standardPaddingMobile();
-            padding-top: 40px;
-            padding-bottom: 40px;
+            padding-top: clamp(32px, 6vw, 40px);
+            padding-bottom: clamp(32px, 6vw, 40px);
             
             > h4 {
-                font-size: clamp(24px, 6vw, 28px);
+                font-size: clamp(20px, 5vw, 26px);
                 font-weight: $apple-font-weight-bold;
                 font-family: $apple-font-family;
                 color: $apple-primary;
                 text-align: left;
-                margin-bottom: 16px;
+                margin-bottom: clamp(12px, 2.5vw, 16px);
                 background: $apple-teal-gradient;
                 -webkit-background-clip: text;
                 background-clip: text;
@@ -314,12 +324,12 @@
             }
             
             > p {
-                font-size: clamp(16px, 4vw, 18px);
+                font-size: clamp(14px, 3.5vw, 16px);
                 font-weight: $apple-font-weight-regular;
                 font-family: $apple-font-family;
                 color: $apple-text-secondary;
                 text-align: left;
-                padding-bottom: 32px;
+                padding-bottom: clamp(24px, 5vw, 32px);
                 line-height: 1.5;
             }
             
@@ -334,17 +344,17 @@
                 margin: 0 auto;
                 width: 100%;
                 overflow-x: auto;
-                padding-bottom: 16px;
+                padding-bottom: clamp(12px, 2.5vw, 16px);
                 
                 .team-player-content-wrapper {
-                    @include dFlex($gap: 16px, $jc: flex-start);
+                    @include dFlex($gap: clamp(12px, 2.5vw, 16px), $jc: flex-start);
                     width: max-content;
                     min-width: 100%;
 
                     .player {
                         opacity: 0.8;
-                        width: clamp(220px, 60vw, 280px);
-                        height: clamp(220px, 60vw, 280px);
+                        width: clamp(180px, 45vw, 250px);
+                        height: clamp(180px, 45vw, 250px);
                         flex-shrink: 0;
                         @include dFlex();
                         background: $apple-bg-tertiary;
@@ -378,25 +388,25 @@
                         
                         .player-content {
                             width: 85%;
-                            @include dFlex($fd: column, $gap: 8px);
+                            @include dFlex($fd: column, $gap: clamp(6px, 1.5vw, 10px));
                             text-align: center;
                             position: relative;
                             z-index: 1;
                             
                             .player-name {
-                                font-size: clamp(16px, 4vw, 18px);
+                                font-size: clamp(13px, 3.5vw, 16px);
                                 font-weight: $apple-font-weight-semibold;
                                 font-family: $apple-font-family;
                                 color: $apple-text-primary;
-                                margin-bottom: 4px;
+                                margin-bottom: clamp(3px, 0.8vw, 5px);
                                 line-height: 1.3;
                             }
                             
                             .player-project {
-                                font-size: clamp(14px, 3.5vw, 16px);
+                                font-size: clamp(11px, 3vw, 14px);
                                 font-weight: $apple-font-weight-regular;
                                 font-family: $apple-font-family;
-                                margin-bottom: 8px;
+                                margin-bottom: clamp(6px, 1.5vw, 10px);
                                 line-height: 1.3;
                                 
                                 span {
@@ -420,9 +430,9 @@
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-regular;
                                 line-height: 1.4;
-                                font-size: clamp(12px, 3vw, 13px);
-                                margin: 8px 0;
-                                padding: 0 8px;
+                                font-size: clamp(10px, 2.5vw, 12px);
+                                margin: clamp(6px, 1.5vw, 10px) 0;
+                                padding: 0 clamp(6px, 1.5vw, 10px);
                             }
                         }
                     }
@@ -442,84 +452,49 @@
     }
 }
 
-@keyframes from-right {
-    from {
-        transform: translateX(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes from-left {
-    from {
-        transform: translateX(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.animate-img-005 {
-    animation: from-right 0.5s ease-in-out;
-}
-.animate-img-075 {
-    animation: from-right 0.75s ease-in-out;
-}
-.animate-img-010 {
-    animation: from-right 1s ease-in-out;
-}
-.animate-img-005-from-left {
-    animation: from-left 0.5s ease-in-out;
-}
-
-// Responsive Design für sehr kleine Geräte
+// Responsive Design für verschiedene Mobile-Größen
 @media screen and (max-width: 480px) {
     .my-projects-container {
-        margin-top: 32px;
+        margin: 24px auto;
         
         .my-projects-content {
             nav > div {
-                padding: 8px 4px;
-                min-height: 45px;
+                padding: 6px 3px;
+                min-height: 35px;
                 
                 > span {
-                    font-size: clamp(10px, 4vw, 14px);
+                    font-size: clamp(9px, 3vw, 12px);
                 }
             }
             
             .project {
                 .project-top {
-                    padding: 0 16px;
+                    padding: 0 12px;
                     
                     .technologies {
-                        padding: 12px;
+                        padding: 10px;
                     }
                 }
                 
                 .project-bottom {
-                    padding: 16px;
-                    gap: 16px;
+                    padding: 12px;
+                    gap: 12px;
                     
                     .tab-li {
-                        padding: 12px;
-                        gap: 12px;
+                        padding: 10px;
+                        gap: 8px;
                         
                         > img {
-                            width: 20px;
-                            height: 20px;
+                            width: 16px;
+                            height: 16px;
                         }
                     }
                     
                     .project-bottom-footer {
-                        gap: 12px;
+                        gap: 8px;
                         
                         button a {
-                            padding: 10px 12px;
+                            padding: 8px 10px;
                         }
                     }
                 }
@@ -527,18 +502,18 @@
             
             .team-player {
                 .team-player-content-wrapper {
-                    gap: 12px;
+                    gap: 10px;
                     
                     .player {
-                        width: clamp(180px, 70vw, 220px);
-                        height: clamp(180px, 70vw, 220px);
+                        width: clamp(150px, 55vw, 200px);
+                        height: clamp(150px, 55vw, 200px);
                         
                         .player-content {
                             width: 90%;
-                            gap: 6px;
+                            gap: 5px;
                             
                             .player-reference {
-                                padding: 0 4px;
+                                padding: 0 3px;
                             }
                         }
                     }
@@ -552,7 +527,7 @@
     .my-projects-container {
         .my-projects-content {
             nav > div > span {
-                font-size: clamp(9px, 4.5vw, 12px);
+                font-size: clamp(8px, 3.5vw, 10px);
                 line-height: 1.1;
             }
             
@@ -568,8 +543,150 @@
             }
             
             .team-player .team-player-content-wrapper .player {
-                width: clamp(160px, 75vw, 200px);
-                height: clamp(160px, 75vw, 200px);
+                width: clamp(130px, 60vw, 170px);
+                height: clamp(130px, 60vw, 170px);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .my-projects-container {
+        margin: 16px auto;
+        padding: 16px 10px;
+        
+        h2 {
+            margin-bottom: 16px;
+        }
+        
+        .my-projects-content {
+            nav {
+                margin-bottom: 12px;
+                
+                > div {
+                    padding: 4px 2px;
+                    min-height: 30px;
+                    
+                    > span {
+                        font-size: 8px;
+                    }
+                }
+            }
+            
+            .project {
+                padding: 12px 0;
+                margin-bottom: 10px;
+                
+                .project-top {
+                    padding: 0 8px;
+                    gap: 12px;
+                    
+                    .project-top-title {
+                        font-size: 16px;
+                        margin-bottom: 4px;
+                    }
+                    
+                    .technologies {
+                        padding: 8px;
+                        font-size: 10px;
+                        
+                        .duration {
+                            font-size: 9px;
+                        }
+                    }
+                }
+                
+                .project-bottom {
+                    padding: 8px;
+                    gap: 10px;
+                    
+                    .tab-li {
+                        padding: 8px;
+                        gap: 6px;
+                        
+                        > img {
+                            width: 14px;
+                            height: 14px;
+                        }
+                        
+                        .right-of-logo {
+                            > div > h4 {
+                                font-size: 12px;
+                            }
+                            
+                            > p {
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                    
+                    .project-bottom-footer {
+                        gap: 6px;
+                        
+                        button a {
+                            padding: 6px 8px;
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+            
+            .team-player {
+                padding: 20px 8px;
+                
+                > h4 {
+                    font-size: 18px;
+                    margin-bottom: 8px;
+                }
+                
+                > p {
+                    font-size: 12px;
+                    padding-bottom: 16px;
+                }
+                
+                .team-player-content-wrapper {
+                    gap: 8px;
+                    
+                    .player {
+                        width: clamp(110px, 65vw, 140px);
+                        height: clamp(110px, 65vw, 140px);
+                        
+                        .player-content {
+                            gap: 3px;
+                            
+                            .player-name {
+                                font-size: 11px;
+                            }
+                            
+                            .player-project {
+                                font-size: 9px;
+                            }
+                            
+                            .player-reference {
+                                font-size: 8px;
+                                padding: 0 2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Landscape mode
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .my-projects-container {
+        margin: 12px auto;
+        
+        .my-projects-content {
+            .team-player {
+                padding: 16px 20px;
+                
+                .team-player-content-wrapper .player {
+                    width: clamp(120px, 35vw, 160px);
+                    height: clamp(120px, 35vw, 160px);
+                }
             }
         }
     }

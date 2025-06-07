@@ -1,44 +1,240 @@
 @use '../../../../../style/apple-variables' as *;
+
 .menu-wrapper {
     width: 100vw;
     height: 100vh;
-    
     position: fixed;
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
     z-index: 997;
 
     .menu-overlay {
         width: 100vw;
         height: 100vh;
         position: absolute;
-        top:0;
-        left:0;
-        background-color: rgba(0, 0, 0, 0.2);
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.4);
         z-index: 998;
-        
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
     }
+    
     .menu-content {
-        width: 320px;
-        height: 320px;
         position: absolute;
-        top: calc(72px + 25px);
         z-index: 999;
+        background: $apple-bg-secondary;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: $apple-shadow-large;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        
+        // Responsive Größenbehandlung
+        @media screen and (min-width: 400px) {
+            width: 320px !important;
+            height: 320px !important;
+        }
+        
+        @media screen and (max-width: 399px) {
+            width: 280px !important;
+            height: 280px !important;
+        }
+        
+        @media screen and (max-width: 375px) {
+            width: 260px !important;
+            height: 260px !important;
+        }
+        
         ul {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            padding: 40px;
+            padding: clamp(20px, 5vw, 40px);
             box-sizing: border-box;
-            @include dFlex($fd: column, $jc: space-around);
+            @include dFlex($fd: column, $jc: space-around, $ai: center);
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
+            position: relative;
+            
+            // Ambient background effect
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 20%;
+                background: radial-gradient(circle, rgba($apple-primary, 0.1) 0%, transparent 60%);
+                border-radius: 50%;
+                animation: menu-glow 4s ease-in-out infinite;
+                filter: blur(20px);
+            }
 
             li {
-                font-size: 22px;
+                font-size: clamp(16px, 4vw, 20px);
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-medium;
+                text-align: center;
+                position: relative;
+                z-index: 1;
+                
+                a {
+                    display: block;
+                    padding: 8px 12px;
+                    border-radius: $apple-radius-small;
+                    transition: $apple-transition-fast;
+                    color: $apple-text-secondary;
+                    
+                    &:hover {
+                        color: $apple-text-primary;
+                        background: rgba(255, 255, 255, 0.1);
+                        transform: scale(1.05);
+                    }
+                    
+                    span {
+                        color: inherit;
+                        font-size: inherit;
+                        font-weight: inherit;
+                    }
+                }
+                
                 &.active {
-                    color: $base-white;
+                    a {
+                        color: $apple-primary;
+                        background: rgba($apple-primary, 0.1);
+                        border: 1px solid rgba($apple-primary, 0.3);
+                        
+                        &:hover {
+                            background: rgba($apple-primary, 0.2);
+                        }
+                    }
+                }
+                
+                // Language switcher styling
+                app-lang-switcher {
+                    display: block;
+                    
+                    .langs {
+                        justify-content: center;
+                        gap: 4px;
+                        
+                        span {
+                            padding: 6px 10px;
+                            font-size: clamp(12px, 3vw, 14px);
+                            border-radius: $apple-radius-small;
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            background: rgba(255, 255, 255, 0.05);
+                            color: $apple-text-secondary;
+                            
+                            &.active {
+                                background: $apple-primary;
+                                color: $apple-text-primary;
+                                border-color: $apple-primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes menu-glow {
+    0%, 100% {
+        opacity: 0.1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.2;
+        transform: scale(1.1);
+    }
+}
+
+// Responsive positioning
+@media screen and (min-width: 400px) {
+    .menu-wrapper .menu-content {
+        top: calc(72px + 25px) !important;
+        left: calc(50% - 160px) !important;
+    }
+}
+
+@media screen and (max-width: 399px) {
+    .menu-wrapper .menu-content {
+        top: calc(72px + 20px) !important;
+        left: calc(50% - 140px) !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .menu-wrapper .menu-content {
+        top: calc(64px + 15px) !important;
+        left: calc(50% - 130px) !important;
+        
+        ul {
+            padding: 16px;
+            
+            li {
+                font-size: clamp(14px, 4.5vw, 18px);
+                
+                a {
+                    padding: 6px 8px;
+                }
+                
+                app-lang-switcher .langs span {
+                    padding: 4px 8px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+// Ultra-small screens
+@media screen and (max-width: 320px) {
+    .menu-wrapper .menu-content {
+        width: 240px !important;
+        height: 240px !important;
+        left: calc(50% - 120px) !important;
+        
+        ul {
+            padding: 12px;
+            
+            li {
+                font-size: 14px;
+                
+                a {
+                    padding: 4px 6px;
+                }
+            }
+        }
+    }
+}
+
+// Landscape mode adjustments
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .menu-wrapper .menu-content {
+        width: 240px !important;
+        height: 240px !important;
+        top: calc(64px + 10px) !important;
+        left: calc(50% - 120px) !important;
+        
+        ul {
+            padding: 16px;
+            
+            li {
+                font-size: 14px;
+                margin: 2px 0;
+                
+                a {
+                    padding: 4px 8px;
+                }
+                
+                app-lang-switcher .langs {
+                    gap: 2px;
+                    
+                    span {
+                        padding: 3px 6px;
+                        font-size: 11px;
+                    }
                 }
             }
         }

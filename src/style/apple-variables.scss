@@ -53,21 +53,39 @@ $apple-transition-fast: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 $apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 $apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 
-// Responsive Breakpoint Mixins
+// Responsive Breakpoint Mixins - Verbessert für alle Geräte
+@mixin mobile-xs {
+    @media screen and (max-width: 320px) {
+        @content;
+    }
+}
+
+@mixin mobile-small {
+    @media screen and (max-width: 375px) {
+        @content;
+    }
+}
+
 @mixin mobile {
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 480px) {
         @content;
     }
 }
 
 @mixin mobile-large {
-    @media screen and (max-width: 899px) {
+    @media screen and (max-width: 640px) {
+        @content;
+    }
+}
+
+@mixin tablet-small {
+    @media screen and (min-width: 641px) and (max-width: 768px) {
         @content;
     }
 }
 
 @mixin tablet {
-    @media screen and (min-width: 768px) and (max-width: 1023px) {
+    @media screen and (min-width: 769px) and (max-width: 1023px) {
         @content;
     }
 }
@@ -96,6 +114,19 @@ $apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 }
 
+// Landscape Mixins
+@mixin landscape-mobile {
+    @media screen and (max-height: 600px) and (orientation: landscape) and (max-width: 900px) {
+        @content;
+    }
+}
+
+@mixin landscape-tablet {
+    @media screen and (max-height: 800px) and (orientation: landscape) and (min-width: 901px) {
+        @content;
+    }
+}
+
 // Z-Index
 $apple-z-dropdown: 1000;
 $apple-z-sticky: 1020;
@@ -117,18 +148,39 @@ $apple-z-tooltip: 1070;
     }
 }
 
+// Verbesserte Padding Mixins für bessere Responsivität
 @mixin standardPadding() {
-    padding-left: clamp(20px, 5vw, 113px);
-    padding-right: clamp(20px, 5vw, 113px);
+    padding-left: clamp(16px, 4vw, 113px);
+    padding-right: clamp(16px, 4vw, 113px);
+    
+    @include desktop-xl {
+        padding-left: clamp(80px, 8vw, 113px);
+        padding-right: clamp(80px, 8vw, 113px);
+    }
 }
 
 @mixin standardPaddingMobile() {
-    padding-left: clamp(16px, 4vw, 25px);
-    padding-right: clamp(16px, 4vw, 25px);
+    padding-left: clamp(12px, 3vw, 25px);
+    padding-right: clamp(12px, 3vw, 25px);
+    
+    @include mobile {
+        padding-left: clamp(10px, 2.5vw, 20px);
+        padding-right: clamp(10px, 2.5vw, 20px);
+    }
+    
+    @include mobile-small {
+        padding-left: clamp(8px, 2vw, 16px);
+        padding-right: clamp(8px, 2vw, 16px);
+    }
+    
+    @include mobile-xs {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 }
 
 @mixin h2Title() {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: $apple-font-weight-bold;
     font-family: $apple-font-family;
     color: $apple-text-primary;
@@ -138,10 +190,14 @@ $apple-z-tooltip: 1070;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
     line-height: 1.2;
+    
+    @include desktop-xl {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+    }
 }
 
 @mixin h2TitleMobile() {
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
     font-weight: $apple-font-weight-bold;
     font-family: $apple-font-family;
     color: $apple-text-primary;
@@ -151,6 +207,18 @@ $apple-z-tooltip: 1070;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
     line-height: 1.2;
+    
+    @include mobile {
+        font-size: clamp(1.2rem, 6vw, 1.8rem);
+    }
+    
+    @include mobile-small {
+        font-size: clamp(1.1rem, 7vw, 1.6rem);
+    }
+    
+    @include mobile-xs {
+        font-size: clamp(1rem, 8vw, 1.4rem);
+    }
 }
 
 @mixin apple-button-primary() {
@@ -158,12 +226,24 @@ $apple-z-tooltip: 1070;
     color: $apple-text-primary;
     border: none;
     border-radius: $apple-radius-large;
-    padding: 12px 24px;
+    padding: clamp(10px, 2.5vw, 14px) clamp(20px, 5vw, 28px);
     font-weight: $apple-font-weight-semibold;
     transition: $apple-transition-fast;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    min-height: 44px; // Mindesthöhe für Touch-Targets
+    
+    // Touch-optimierte Größen
+    @include mobile {
+        padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
+        min-height: 40px;
+    }
+    
+    @include mobile-small {
+        padding: clamp(6px, 1.5vw, 10px) clamp(14px, 3.5vw, 20px);
+        min-height: 36px;
+    }
 
     &::before {
         content: '';
@@ -191,6 +271,11 @@ $apple-z-tooltip: 1070;
         transform: translateY(0);
         box-shadow: $apple-shadow-small;
     }
+    
+    &:focus {
+        outline: 2px solid rgba($apple-primary, 0.5);
+        outline-offset: 2px;
+    }
 }
 
 @mixin apple-button-secondary() {
@@ -198,12 +283,23 @@ $apple-z-tooltip: 1070;
     color: $apple-primary;
     border: 1px solid $apple-primary;
     border-radius: $apple-radius-large;
-    padding: 12px 24px;
+    padding: clamp(10px, 2.5vw, 14px) clamp(20px, 5vw, 28px);
     font-weight: $apple-font-weight-semibold;
     transition: $apple-transition-fast;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    min-height: 44px;
+    
+    @include mobile {
+        padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
+        min-height: 40px;
+    }
+    
+    @include mobile-small {
+        padding: clamp(6px, 1.5vw, 10px) clamp(14px, 3.5vw, 20px);
+        min-height: 36px;
+    }
 
     &::before {
         content: '';
@@ -232,19 +328,36 @@ $apple-z-tooltip: 1070;
         transform: translateY(0);
         box-shadow: $apple-shadow-small;
     }
+    
+    &:focus {
+        outline: 2px solid rgba($apple-primary, 0.5);
+        outline-offset: 2px;
+    }
 }
 
 @mixin apple-input() {
     width: 100%;
-    padding: 12px 20px;
+    padding: clamp(10px, 2.5vw, 16px) clamp(16px, 4vw, 24px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: $apple-radius-medium;
     background: rgba(255, 255, 255, 0.05);
     color: $apple-text-primary;
-    font-size: 16px;
+    font-size: clamp(14px, 3vw, 16px);
     transition: $apple-transition-fast;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    min-height: 44px; // Touch-Target Minimum
+    
+    @include mobile {
+        padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 18px);
+        min-height: 40px;
+    }
+    
+    @include mobile-small {
+        padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
+        min-height: 36px;
+    }
 
     &:focus {
         outline: none;
@@ -270,11 +383,18 @@ $apple-z-tooltip: 1070;
     color: $apple-text-secondary;
     font-weight: $apple-font-weight-medium;
     font-family: $apple-font-family;
-    font-size: 16px;
+    font-size: clamp(14px, 2.5vw, 16px);
     transition: $apple-transition-fast;
-    padding: 12px 20px;
+    padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 20px);
     text-decoration: none;
     cursor: pointer;
+    min-height: 44px; // Touch-Target
+    
+    @include mobile {
+        font-size: clamp(12px, 3vw, 14px);
+        padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 16px);
+        min-height: 40px;
+    }
 
     &:hover {
         color: $apple-text-primary;
@@ -286,6 +406,11 @@ $apple-z-tooltip: 1070;
         color: $apple-primary;
         transform: translateY(0);
     }
+    
+    &:focus {
+        outline: 2px solid rgba($apple-primary, 0.5);
+        outline-offset: 2px;
+    }
 }
 
 @mixin apple-logo() {
@@ -295,5 +420,70 @@ $apple-z-tooltip: 1070;
     &:hover {
         filter: brightness(1.4) saturate(1.3);
         transform: scale(1.05);
+    }
+}
+
+// Container Mixins für konsistente Layouts
+@mixin container-mobile() {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 clamp(12px, 3vw, 25px);
+    box-sizing: border-box;
+    
+    @include mobile {
+        padding: 0 clamp(10px, 2.5vw, 20px);
+    }
+    
+    @include mobile-small {
+        padding: 0 clamp(8px, 2vw, 16px);
+    }
+    
+    @include mobile-xs {
+        padding: 0 8px;
+    }
+}
+
+@mixin container-desktop() {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 113px);
+    box-sizing: border-box;
+    
+    @include desktop-xl {
+        max-width: 1600px;
+        padding: 0 clamp(80px, 8vw, 140px);
+    }
+    
+    @include desktop-xxl {
+        max-width: 1800px;
+    }
+}
+
+// Animation Mixins
+@mixin apple-hover-lift() {
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $apple-shadow-medium;
+    }
+    
+    &:active {
+        transform: translateY(0);
+        box-shadow: $apple-shadow-small;
+    }
+}
+
+@mixin apple-scale-hover() {
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        transform: scale(1.05);
+    }
+    
+    &:active {
+        transform: scale(1.02);
     }
 }

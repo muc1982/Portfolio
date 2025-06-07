@@ -1,49 +1,70 @@
 @use "./../../../style/apple-variables" as *;
 
+// Desktop Skills Container
 .my-skills-container {
-    margin-top: 50px;
-    padding: 40px 0;
-    @include dFlex($fd: column, $gap: 40px);
+    margin: 50px auto;
+    padding: clamp(40px, 6vw, 60px) 0;
+    @include dFlex($fd: column, $gap: clamp(40px, 6vw, 60px));
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     border-radius: $apple-radius-xl;
-    margin: 40px auto;
-    max-width: 1200px;
+    max-width: 1400px;
+    width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
+    position: relative;
+    overflow: hidden;
+    
+    // Apple-Style Ambient Background
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -30%;
+        width: 80%;
+        height: 100%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+        animation: apple-skills-ambient 12s ease-in-out infinite;
+        filter: blur(40px);
+    }
     
     @include desktop-xl {
-        max-width: 1400px;
-        padding: 50px 0;
-        gap: 50px;
-        margin: 50px auto;
+        max-width: 1600px;
+        padding: clamp(50px, 7vw, 80px) 0;
+        gap: clamp(50px, 7vw, 80px);
+        margin: clamp(60px, 8vw, 100px) auto;
     }
     
     h2 {
         @include h2Title();
         text-align: center;
+        position: relative;
+        z-index: 2;
     }
     
     .my-skills-content {
-        @include dFlex($gap: 40px, $ai: flex-start);
-        width: 80%;
+        @include dFlex($gap: clamp(40px, 6vw, 60px), $ai: flex-start);
+        width: 85%;
         margin: 0 auto;
+        position: relative;
+        z-index: 2;
         
         .content-left {
             color: $apple-primary;
-            width: 440px;
+            width: 50%;
             
             .reservoir {
-                @include dFlex($gap: 32px, $jc: flex-start);
+                @include dFlex($gap: clamp(24px, 4vw, 40px), $jc: flex-start);
                 flex-wrap: wrap;
                 
                 .skill {
-                    width: 78px;
-                    @include dFlex($fd: column, $jc: left, $gap: 12px);
-                    padding: 16px;
+                    width: clamp(70px, 8vw, 90px);
+                    @include dFlex($fd: column, $jc: center, $ai: center, $gap: clamp(10px, 2vw, 16px));
+                    padding: clamp(12px, 2vw, 20px);
                     border-radius: $apple-radius-medium;
                     background: rgba(255, 255, 255, 0.02);
                     border: 1px solid rgba(255, 255, 255, 0.05);
                     transition: $apple-transition-medium;
+                    min-height: 44px; // Touch-optimiert
                     
                     &:hover {
                         background: rgba($apple-primary, 0.05);
@@ -57,17 +78,26 @@
                         }
                     }
                     
+                    &:focus-within {
+                        outline: 2px solid rgba($apple-primary, 0.5);
+                        outline-offset: 2px;
+                    }
+                    
                     img {
+                        width: clamp(32px, 4vw, 48px);
+                        height: clamp(32px, 4vw, 48px);
+                        object-fit: contain;
                         transition: $apple-transition-fast;
                         filter: brightness(1.1);
                     }
                     
                     .skill-text {
-                        font-size: 12px;
+                        font-size: clamp(10px, 1.5vw, 14px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
                         color: $apple-text-secondary;
                         text-align: center;
+                        line-height: 1.2;
                     }
                 }
             }
@@ -75,13 +105,15 @@
         
         .content-right {
             color: $apple-text-primary;
-            @include dFlex($fd: column, $gap: 24px);
+            width: 50%;
+            @include dFlex($fd: column, $gap: clamp(20px, 3vw, 32px));
 
             .current-learning {
-                width: 380px;
-                height: 370px;
-                padding: 40px;
-                @include dFlex($gap: 24px, $fd: column);
+                width: 100%;
+                max-width: 450px;
+                min-height: clamp(300px, 40vw, 400px);
+                padding: clamp(32px, 5vw, 48px);
+                @include dFlex($gap: clamp(20px, 3vw, 32px), $fd: column);
                 background: $apple-bg-tertiary;
                 border-radius: $apple-radius-xl;
                 border: 1px solid rgba(255, 255, 255, 0.1);
@@ -113,7 +145,7 @@
                 }
                 
                 > span {
-                    font-size: 20px;
+                    font-size: clamp(18px, 3vw, 24px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
                     color: $apple-primary;
@@ -122,29 +154,30 @@
                 }
                 
                 p {
-                    font-size: 16px;
+                    font-size: clamp(14px, 2vw, 18px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
                     line-height: 1.6;
                     color: $apple-text-secondary;
-                    padding: 0 10px;
+                    padding: 0 clamp(8px, 2vw, 16px);
                     position: relative;
                     z-index: 1;
                 }
                 
                 .skills {
-                    font-size: 14px;
-                    @include dFlex($gap: 24px);
+                    @include dFlex($gap: clamp(16px, 3vw, 32px), $jc: center);
                     position: relative;
                     z-index: 1;
                     
                     div {
-                        @include dFlex($fd: column, $gap: 8px);
-                        padding: 12px;
+                        @include dFlex($fd: column, $gap: clamp(6px, 1vw, 12px), $ai: center);
+                        padding: clamp(10px, 2vw, 16px);
                         border-radius: $apple-radius-small;
                         background: rgba(255, 255, 255, 0.05);
                         border: 1px solid rgba(255, 255, 255, 0.1);
                         transition: $apple-transition-fast;
+                        min-height: 44px; // Touch-optimiert
+                        min-width: 44px;
                         
                         &:hover {
                             background: rgba($apple-primary, 0.1);
@@ -152,7 +185,15 @@
                             transform: scale(1.05);
                         }
                         
+                        &:focus-within {
+                            outline: 2px solid rgba($apple-primary, 0.5);
+                            outline-offset: 2px;
+                        }
+                        
                         img {
+                            width: clamp(20px, 3vw, 32px);
+                            height: clamp(20px, 3vw, 32px);
+                            object-fit: contain;
                             filter: brightness(1.1);
                             transition: $apple-transition-fast;
                         }
@@ -162,26 +203,32 @@
                             font-weight: $apple-font-weight-medium;
                             color: $apple-text-primary;
                             text-align: center;
+                            font-size: clamp(11px, 1.8vw, 14px);
+                            line-height: 1.2;
                         }
                     }
                 }
             }
         }
 
+        // Responsive Layout Umbruch
         @media screen and (max-width: 1200px) {
             flex-direction: column;
             align-items: center;
             width: 95%;
-            gap: 32px;
+            gap: clamp(32px, 5vw, 48px);
             
             .content-left,
             .content-right {
                 width: 100%;
             }
             
+            .content-left .reservoir {
+                justify-content: center;
+            }
+            
             .content-right .current-learning {
-                width: 100%;
-                max-width: 440px;
+                max-width: 100%;
                 margin: 0 auto;
             }
         }
@@ -190,53 +237,87 @@
 
 // Mobile Skills Container
 .my-skills-container-mobile {
-    margin-top: 50px;
+    margin: clamp(24px, 5vw, 40px) auto;
     width: 100%;
+    max-width: 600px;
     @include standardPaddingMobile();
     box-sizing: border-box;
-    @include dFlex($fd: column, $gap: 32px);
+    @include dFlex($fd: column, $gap: clamp(20px, 4vw, 32px));
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     border-radius: $apple-radius-large;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
-    padding: 32px 25px;
+    padding: clamp(20px, 4vw, 32px) clamp(12px, 3vw, 25px);
+    position: relative;
+    overflow: hidden;
+    
+    // Apple-Style Ambient Background
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -30%;
+        width: 80%;
+        height: 100%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+        animation: apple-skills-ambient 10s ease-in-out infinite;
+        filter: blur(30px);
+    }
     
     h2 {
         @include h2TitleMobile();
+        text-align: center;
+        position: relative;
+        z-index: 2;
     }
     
     .my-skills-content {
-        @include dFlex($gap: 24px, $fd: column);
+        @include dFlex($gap: clamp(16px, 3vw, 24px), $fd: column);
         width: 100%;
+        position: relative;
+        z-index: 2;
         
         .content-top {
             color: $apple-primary;
             width: 100%;
-            max-width: 440px;
-            margin: 0 auto;
             
             .reservoir {
-                @include dFlex($gap: 24px);
+                @include dFlex($gap: clamp(12px, 2.5vw, 20px));
                 flex-wrap: wrap;
                 justify-content: center;
                 
                 .skill {
-                    width: 42px;
-                    @include dFlex($fd: column, $jc: left, $gap: 8px);
-                    padding: 12px 8px;
+                    width: clamp(50px, 12vw, 80px);
+                    @include dFlex($fd: column, $jc: center, $ai: center, $gap: clamp(4px, 1vw, 8px));
+                    padding: clamp(6px, 1.5vw, 12px);
                     border-radius: $apple-radius-small;
                     background: rgba(255, 255, 255, 0.02);
                     border: 1px solid rgba(255, 255, 255, 0.05);
                     transition: $apple-transition-medium;
+                    box-sizing: border-box;
+                    min-height: 44px; // Touch-optimiert
                     
                     &:hover {
                         background: rgba($apple-primary, 0.05);
                         border-color: rgba($apple-primary, 0.2);
                         transform: translateY(-2px);
+                        box-shadow: $apple-shadow-small;
+                        
+                        img {
+                            filter: brightness(1.2) saturate(1.2);
+                            transform: scale(1.05);
+                        }
+                    }
+                    
+                    &:focus-within {
+                        outline: 2px solid rgba($apple-primary, 0.5);
+                        outline-offset: 2px;
                     }
                     
                     img {
-                        width: 100%;
+                        width: clamp(24px, 6vw, 48px);
+                        height: clamp(24px, 6vw, 48px);
+                        object-fit: contain;
                         filter: brightness(1.1);
                         transition: $apple-transition-fast;
                     }
@@ -247,34 +328,36 @@
         .content-bottom {
             color: $apple-text-primary;
             width: 100%;
-            max-width: 440px;
-            margin: 0 auto;
-            @include dFlex($fd: column, $gap: 24px);
+            @include dFlex($fd: column, $gap: clamp(12px, 2.5vw, 20px), $ai: center);
             
             .content-bottom-title {
                 color: $apple-primary;
-                padding: 16px 0;
-                font-size: 18px;
+                padding: clamp(8px, 2vw, 16px) 0;
+                font-size: clamp(16px, 3.5vw, 22px);
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-semibold;
                 text-align: center;
+                width: 100%;
             }
             
             .content-bottom-content {
+                @include dFlex($gap: clamp(8px, 2vw, 16px), $ai: flex-start);
+                width: 100%;
                 perspective: 600px;
                 -webkit-perspective: 600px;
-                @include dFlex($gap: 16px);
 
                 .current-learning {
-                    width: 119px;
-                    height: 96px;
-                    padding: 16px;
-                    @include dFlex($gap: 12px, $fd: column);
+                    width: clamp(80px, 20vw, 140px);
+                    min-height: clamp(60px, 15vw, 110px);
+                    padding: clamp(8px, 2vw, 16px);
+                    @include dFlex($gap: clamp(4px, 1vw, 10px), $fd: column, $jc: center, $ai: center);
                     background: $apple-bg-tertiary;
                     border-radius: $apple-radius-medium;
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     box-shadow: $apple-shadow-small;
                     transition: $apple-transition-medium;
+                    box-sizing: border-box;
+                    flex-shrink: 0;
                     
                     &:hover {
                         transform: translateY(-2px) rotateY(5deg);
@@ -282,25 +365,34 @@
                         border-color: rgba($apple-primary, 0.3);
                     }
                     
+                    &:focus-within {
+                        outline: 2px solid rgba($apple-primary, 0.5);
+                        outline-offset: 2px;
+                    }
+                    
                     .skills {
-                        font-size: 12px;
-                        @include dFlex($gap: 8px);
+                        @include dFlex($gap: clamp(4px, 1vw, 8px), $jc: center, $ai: center);
+                        width: 100%;
                         
                         div {
-                            @include dFlex($fd: column, $gap: 4px);
+                            @include dFlex($fd: column, $gap: clamp(1px, 0.5vw, 3px), $ai: center);
+                            flex: 1;
+                            min-height: 32px; // Touch-optimiert für kleine Screens
                             
                             img {
-                                width: 16px;
-                                height: 16px;
+                                width: clamp(12px, 3vw, 20px);
+                                height: clamp(12px, 3vw, 20px);
+                                object-fit: contain;
                                 filter: brightness(1.1);
                             }
                             
                             span {
-                                font-size: 10px;
+                                font-size: clamp(7px, 1.8vw, 11px);
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-medium;
                                 color: $apple-text-secondary;
                                 text-align: center;
+                                line-height: 1.1;
                             }
                         }
                     }
@@ -308,24 +400,41 @@
                 
                 p {
                     flex: 1;
-                    font-size: 14px;
+                    font-size: clamp(11px, 2.5vw, 15px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
                     line-height: 1.5;
                     color: $apple-text-secondary;
+                    text-align: left;
+                    margin: 0;
                 }
             }
             
             .talk-button {
-                padding-top: 24px;
+                padding-top: clamp(12px, 3vw, 24px);
                 text-align: center;
+                width: 100%;
                 
                 button {
                     @include apple-button-primary;
                     font-family: $apple-font-family;
+                    font-size: clamp(12px, 3vw, 16px);
+                    padding: clamp(8px, 2vw, 14px) clamp(16px, 4vw, 28px);
+                    min-width: clamp(100px, 25vw, 160px);
+                    min-height: 44px; // Touch-optimiert
                 }
             }
         }
+    }
+}
+
+// Animationen
+@keyframes apple-skills-ambient {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) rotate(180deg) scale(1.1);
     }
 }
 
@@ -337,5 +446,314 @@
     50% {
         opacity: 0.2;
         transform: translateY(-10px) rotate(180deg);
+    }
+}
+
+// Responsive Design - 640px: Große Smartphones
+@media screen and (max-width: 640px) {
+    .my-skills-container-mobile {
+        margin: 20px auto;
+        padding: 16px 12px;
+        gap: 16px;
+        
+        .my-skills-content {
+            gap: 14px;
+            
+            .content-top .reservoir {
+                gap: 10px;
+                
+                .skill {
+                    width: clamp(45px, 14vw, 70px);
+                    padding: 5px;
+                    
+                    img {
+                        width: clamp(20px, 8vw, 40px);
+                        height: clamp(20px, 8vw, 40px);
+                    }
+                }
+            }
+            
+            .content-bottom {
+                gap: 12px;
+                
+                .content-bottom-title {
+                    font-size: clamp(14px, 4vw, 18px);
+                    padding: 6px 0;
+                }
+                
+                .content-bottom-content {
+                    gap: 8px;
+                    
+                    .current-learning {
+                        width: clamp(70px, 22vw, 110px);
+                        min-height: clamp(55px, 18vw, 85px);
+                        padding: 6px;
+                        
+                        .skills div {
+                            img {
+                                width: clamp(10px, 4vw, 16px);
+                                height: clamp(10px, 4vw, 16px);
+                            }
+                            
+                            span {
+                                font-size: clamp(6px, 2vw, 9px);
+                            }
+                        }
+                    }
+                    
+                    p {
+                        font-size: clamp(10px, 3vw, 13px);
+                    }
+                }
+                
+                .talk-button {
+                    padding-top: 10px;
+                    
+                    button {
+                        font-size: clamp(11px, 3.5vw, 14px);
+                        padding: 6px 12px;
+                        min-width: 90px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 480px: Kleine Smartphones
+@media screen and (max-width: 480px) {
+    .my-skills-container-mobile {
+        margin: 16px auto;
+        padding: 12px 8px;
+        gap: 12px;
+        border-radius: $apple-radius-medium;
+        
+        .my-skills-content {
+            gap: 10px;
+            
+            .content-top .reservoir {
+                gap: 8px;
+                
+                .skill {
+                    width: clamp(40px, 16vw, 60px);
+                    padding: 4px;
+                    
+                    img {
+                        width: clamp(18px, 10vw, 32px);
+                        height: clamp(18px, 10vw, 32px);
+                    }
+                }
+            }
+            
+            .content-bottom {
+                gap: 10px;
+                
+                .content-bottom-title {
+                    font-size: clamp(12px, 5vw, 16px);
+                    padding: 4px 0;
+                }
+                
+                .content-bottom-content {
+                    gap: 6px;
+                    
+                    .current-learning {
+                        width: clamp(60px, 25vw, 90px);
+                        min-height: clamp(45px, 20vw, 70px);
+                        padding: 4px;
+                        
+                        .skills div {
+                            img {
+                                width: clamp(8px, 5vw, 14px);
+                                height: clamp(8px, 5vw, 14px);
+                            }
+                            
+                            span {
+                                font-size: clamp(5px, 2.5vw, 8px);
+                            }
+                        }
+                    }
+                    
+                    p {
+                        font-size: clamp(9px, 3.5vw, 12px);
+                    }
+                }
+                
+                .talk-button {
+                    padding-top: 8px;
+                    
+                    button {
+                        font-size: clamp(10px, 4vw, 12px);
+                        padding: 5px 10px;
+                        min-width: 80px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 375px: Ultra-kleine Smartphones (iPhone SE, etc.)
+@media screen and (max-width: 375px) {
+    .my-skills-container-mobile {
+        margin: 12px auto;
+        padding: 8px 6px;
+        gap: 8px;
+        
+        .my-skills-content {
+            gap: 8px;
+            
+            .content-top .reservoir {
+                gap: 6px;
+                
+                .skill {
+                    width: clamp(35px, 18vw, 50px);
+                    padding: 3px;
+                    
+                    img {
+                        width: clamp(16px, 12vw, 28px);
+                        height: clamp(16px, 12vw, 28px);
+                    }
+                }
+            }
+            
+            .content-bottom {
+                gap: 8px;
+                
+                .content-bottom-title {
+                    font-size: clamp(11px, 6vw, 14px);
+                    padding: 3px 0;
+                }
+                
+                .content-bottom-content {
+                    gap: 4px;
+                    flex-direction: column;
+                    
+                    .current-learning {
+                        width: 100%;
+                        min-height: 40px;
+                        padding: 3px;
+                        
+                        .skills {
+                            gap: 6px;
+                            
+                            div {
+                                gap: 1px;
+                                
+                                img {
+                                    width: clamp(10px, 6vw, 16px);
+                                    height: clamp(10px, 6vw, 16px);
+                                }
+                                
+                                span {
+                                    font-size: clamp(6px, 3vw, 9px);
+                                }
+                            }
+                        }
+                    }
+                    
+                    p {
+                        font-size: clamp(8px, 4vw, 11px);
+                        text-align: center;
+                    }
+                }
+                
+                .talk-button {
+                    padding-top: 6px;
+                    
+                    button {
+                        width: 100%;
+                        min-width: auto;
+                        font-size: clamp(9px, 5vw, 11px);
+                        padding: 4px 8px;
+                        min-height: 36px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Landscape mode support
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .my-skills-container-mobile {
+        margin: 8px auto;
+        padding: 12px 16px;
+        gap: 12px;
+        
+        .my-skills-content {
+            gap: 8px;
+            
+            .content-bottom {
+                .content-bottom-content {
+                    .current-learning {
+                        min-height: 50px;
+                    }
+                }
+                
+                .talk-button {
+                    padding-top: 4px;
+                }
+            }
+        }
+    }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+    .my-skills-container,
+    .my-skills-container-mobile {
+        border: 2px solid $apple-text-primary;
+        
+        .skill {
+            border: 2px solid currentColor;
+        }
+        
+        .current-learning {
+            border: 2px solid currentColor;
+        }
+    }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+    .my-skills-container,
+    .my-skills-container-mobile {
+        &::before {
+            animation: none;
+        }
+        
+        .skill,
+        .current-learning {
+            &:hover {
+                transform: none;
+            }
+        }
+    }
+    
+    @keyframes apple-skills-ambient{}
+    @keyframes apple-learning-glow {
+        0%, 100% {
+            transform: none;
+        }
+    }
+}
+
+// Print styles
+@media print {
+    .my-skills-container,
+    .my-skills-container-mobile {
+        background: white;
+        color: black;
+        box-shadow: none;
+        
+        &::before {
+            display: none;
+        }
+        
+        .skill,
+        .current-learning {
+            background: white;
+            border: 1px solid black;
+        }
     }
 }
