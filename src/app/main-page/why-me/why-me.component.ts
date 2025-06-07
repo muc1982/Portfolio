@@ -26,8 +26,7 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSlideIndex = 0;
   private slideInterval?: Subscription;
   private langChangeSub?: Subscription;
-  private intersectionObserver?: IntersectionObserver;
-  private autoSlideTimer = 4000;
+  private autoSlideTimer = 4000; // 4 seconds
 
   locationSlides: LocationSlide[] = [
     {
@@ -65,18 +64,13 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // Initialize intersection observer for entrance animations
     this.initializeAnimations();
   }
 
   ngOnDestroy(): void {
-    // ✅ Bestehende Cleanups (bleiben)
     this.stopAutoSlide();
     this.langChangeSub?.unsubscribe();
-
-        if (this.intersectionObserver) {
-      this.intersectionObserver.disconnect();
-      this.intersectionObserver = undefined;
-    }
   }
 
   private updateTranslations(): void {
@@ -126,11 +120,10 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
     // This would require Web Audio API implementation
   }
 
- private initializeAnimations(): void {
+  private initializeAnimations(): void {
     if (!this.carouselContainer) return;
 
-    // ✅ NEU: Observer in this.intersectionObserver speichern
-    this.intersectionObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -149,7 +142,7 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
       '.location-carousel, .introduction-card, .talk-button'
     );
     
-    animatedElements.forEach((el: Element) => this.intersectionObserver!.observe(el));
+    animatedElements.forEach((el: Element) => observer.observe(el));
   }
 
   // Getter for template use
