@@ -1,5 +1,5 @@
 // src/style/apple-variables.scss
-// Apple-Style Design Variables mit Ihrer gewünschten Farbpalette
+// Apple-Style Design Variables mit erweiterter Responsive-Unterstützung
 
 @use 'sass:color';
 
@@ -37,6 +37,20 @@ $base-gray: #2C2C2E;  // Apple BG Tertiary
 $base-red: #FF3B30;   // Apple Error
 $base-green: #34C759; // Apple Success
 
+// ========================
+// RESPONSIVE BREAKPOINTS
+// ========================
+$breakpoint-mobile-small: 375px;   // iPhone SE und ähnliche
+$breakpoint-mobile: 480px;         // Standard Mobile
+$breakpoint-mobile-large: 580px;   // Große Phones
+$breakpoint-tablet-small: 768px;   // iPad Mini
+$breakpoint-tablet: 900px;         // Standard Tablet
+$breakpoint-tablet-large: 1024px;  // iPad Pro
+$breakpoint-desktop-small: 1200px; // Kleine Laptops
+$breakpoint-desktop: 1440px;       // Standard Desktop
+$breakpoint-desktop-large: 1600px; // Große Bildschirme
+$breakpoint-desktop-xl: 1920px;    // 4K und ultrawide
+
 // Apple Gradients mit Ihrer Farbe
 $apple-teal-gradient: linear-gradient(135deg, #1fcbbd 0%, #19b3a6 100%);
 $apple-teal-gradient-hover: linear-gradient(135deg, #19b3a6 0%, #149b8f 100%);
@@ -53,11 +67,17 @@ $apple-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.2);
 $apple-shadow-large: 0 8px 32px rgba(0, 0, 0, 0.25);
 $apple-shadow-glow: 0 0 20px rgba(31, 203, 189, 0.2);
 
-// Border Radius - Apple-typisch
+// Border Radius - Apple-typisch mit responsive Varianten
 $apple-radius-small: 8px;
 $apple-radius-medium: 12px;
 $apple-radius-large: 16px;
 $apple-radius-xl: 24px;
+
+// Mobile Radius (etwas kleiner)
+$apple-radius-small-mobile: 6px;
+$apple-radius-medium-mobile: 10px;
+$apple-radius-large-mobile: 14px;
+$apple-radius-xl-mobile: 20px;
 
 // Transitions - Apple-smooth
 $apple-transition-fast: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -74,7 +94,89 @@ $apple-font-weight-medium: 500;
 $apple-font-weight-semibold: 600;
 $apple-font-weight-bold: 700;
 
-// Ihre bestehenden Mixins (behalten)
+// ========================
+// RESPONSIVE MIXINS
+// ========================
+
+// Breakpoint Mixins
+@mixin mobile-small {
+    @media screen and (max-width: #{$breakpoint-mobile-small - 1px}) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media screen and (max-width: #{$breakpoint-mobile - 1px}) {
+        @content;
+    }
+}
+
+@mixin mobile-large {
+    @media screen and (max-width: #{$breakpoint-mobile-large - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet-small {
+    @media screen and (min-width: $breakpoint-mobile) and (max-width: #{$breakpoint-tablet-small - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: $breakpoint-tablet-small) and (max-width: #{$breakpoint-tablet - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet-large {
+    @media screen and (min-width: $breakpoint-tablet) and (max-width: #{$breakpoint-tablet-large - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop-small {
+    @media screen and (min-width: $breakpoint-tablet-large) and (max-width: #{$breakpoint-desktop-small - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: $breakpoint-desktop-small) and (max-width: #{$breakpoint-desktop - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop-large {
+    @media screen and (min-width: $breakpoint-desktop) and (max-width: #{$breakpoint-desktop-large - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop-xl {
+    @media screen and (min-width: $breakpoint-desktop-xl) {
+        @content;
+    }
+}
+
+// Touch-Device Mixin
+@mixin touch-device {
+    @media (hover: none) and (pointer: coarse) {
+        @content;
+    }
+}
+
+// Hover-fähige Geräte
+@mixin hover-device {
+    @media (hover: hover) and (pointer: fine) {
+        @content;
+    }
+}
+
+// ========================
+// BESTEHENDE MIXINS (aktualisiert)
+// ========================
+
 @mixin dFlex($fd: row, $jc: center, $ai: center, $gap: 0) {
     display: flex;
     flex-direction: $fd;
@@ -83,17 +185,43 @@ $apple-font-weight-bold: 700;
     gap: $gap;
 }
 
+// Responsive Padding Mixins
 @mixin standardPadding() {
     padding-left: 113px;
     padding-right: 133px;
+    
+    @include desktop-small {
+        padding-left: 80px;
+        padding-right: 100px;
+    }
+    
+    @include tablet-large {
+        padding-left: 60px;
+        padding-right: 80px;
+    }
+    
+    @include tablet {
+        padding-left: 40px;
+        padding-right: 60px;
+    }
+    
+    @include tablet-small {
+        padding-left: 30px;
+        padding-right: 40px;
+    }
 }
 
 @mixin standardPaddingMobile() {
     padding-left: 25px !important;
     padding-right: 25px !important;
+    
+    @include mobile-small {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
 }
 
-// Aktualisierte Titel-Mixins mit Apple-Style
+// Responsive Titel-Mixins
 @mixin h2Title() {
     padding: 40px 0;
     font-size: 48px;
@@ -106,6 +234,26 @@ $apple-font-weight-bold: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
     text-align: center;
+    
+    @include desktop-xl {
+        font-size: 56px;
+        padding: 48px 0;
+    }
+    
+    @include desktop-large {
+        font-size: 52px;
+        padding: 44px 0;
+    }
+    
+    @include desktop-small {
+        font-size: 44px;
+        padding: 36px 0;
+    }
+    
+    @include tablet-large {
+        font-size: 40px;
+        padding: 32px 0;
+    }
 }
 
 @mixin h2TitleMobile() {
@@ -120,6 +268,21 @@ $apple-font-weight-bold: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
     text-align: center;
+    
+    @include mobile-large {
+        font-size: 28px;
+        padding: 28px 0;
+    }
+    
+    @include mobile {
+        font-size: 24px;
+        padding: 24px 0;
+    }
+    
+    @include mobile-small {
+        font-size: 22px;
+        padding: 20px 0;
+    }
 }
 
 // Apple-Style Glasmorphism für Navigation
@@ -130,7 +293,7 @@ $apple-font-weight-bold: 700;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-// Apple-Style Button Mixins
+// Responsive Apple-Style Button Mixins
 @mixin apple-button-primary {
     background: $apple-teal-gradient;
     color: $apple-text-primary;
@@ -143,11 +306,34 @@ $apple-font-weight-bold: 700;
     transition: $apple-transition-fast;
     box-shadow: $apple-shadow-medium;
     cursor: pointer;
+    min-height: 44px; // Touch-friendly
     
-    &:hover {
-        background: $apple-teal-gradient-hover;
-        transform: translateY(-2px);
-        box-shadow: $apple-shadow-large, $apple-shadow-glow;
+    @include mobile {
+        padding: 14px 28px;
+        font-size: 16px;
+        border-radius: $apple-radius-medium-mobile;
+        min-height: 48px; // Größer für Touch
+    }
+    
+    @include mobile-small {
+        padding: 12px 24px;
+        font-size: 15px;
+        min-height: 44px;
+    }
+    
+    @include hover-device {
+        &:hover {
+            background: $apple-teal-gradient-hover;
+            transform: translateY(-2px);
+            box-shadow: $apple-shadow-large, $apple-shadow-glow;
+        }
+    }
+    
+    @include touch-device {
+        &:active {
+            transform: scale(0.98);
+            background: $apple-teal-gradient-hover;
+        }
     }
     
     &:active {
@@ -181,11 +367,27 @@ $apple-font-weight-bold: 700;
     font-size: 16px;
     transition: $apple-transition-fast;
     cursor: pointer;
+    min-height: 44px; // Touch-friendly
     
-    &:hover {
-        background: rgba($apple-primary, 0.1);
-        transform: translateY(-1px);
-        box-shadow: $apple-shadow-small;
+    @include mobile {
+        padding: 14px 28px;
+        border-radius: $apple-radius-medium-mobile;
+        min-height: 48px;
+    }
+    
+    @include hover-device {
+        &:hover {
+            background: rgba($apple-primary, 0.1);
+            transform: translateY(-1px);
+            box-shadow: $apple-shadow-small;
+        }
+    }
+    
+    @include touch-device {
+        &:active {
+            background: rgba($apple-primary, 0.2);
+            transform: scale(0.98);
+        }
     }
     
     &:active {
@@ -194,7 +396,7 @@ $apple-font-weight-bold: 700;
     }
 }
 
-// Apple-Style Input Fields
+// Responsive Apple-Style Input Fields
 @mixin apple-input {
     background: $apple-bg-tertiary;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -206,6 +408,19 @@ $apple-font-weight-bold: 700;
     font-weight: $apple-font-weight-regular;
     transition: $apple-transition-fast;
     width: 100%;
+    min-height: 44px; // Touch-friendly
+    
+    @include mobile {
+        padding: 18px 22px;
+        font-size: 16px; // Verhindert Zoom auf iOS
+        border-radius: $apple-radius-medium-mobile;
+        min-height: 48px;
+    }
+    
+    @include mobile-small {
+        padding: 16px 20px;
+        min-height: 44px;
+    }
     
     &:focus {
         outline: none;
@@ -213,6 +428,10 @@ $apple-font-weight-bold: 700;
         box-shadow: 0 0 0 3px rgba($apple-primary, 0.2);
         background: $apple-bg-quaternary;
         transform: translateY(-1px);
+        
+        @include touch-device {
+            transform: none; // Keine Y-Bewegung auf Touch
+        }
     }
     
     &::placeholder {
@@ -230,7 +449,7 @@ $apple-font-weight-bold: 700;
     }
 }
 
-// Apple-Style Navigation Items
+// Apple-Style Navigation Items (responsive)
 @mixin apple-nav-item {
     color: $apple-text-secondary;
     font-family: $apple-font-family;
@@ -241,11 +460,26 @@ $apple-font-weight-bold: 700;
     padding: 12px 20px;
     border-radius: $apple-radius-small;
     cursor: pointer;
+    min-height: 44px; // Touch-friendly
     
-    &:hover {
-        color: $apple-text-primary;
-        background: rgba(255, 255, 255, 0.05);
-        transform: translateY(-1px);
+    @include touch-device {
+        padding: 16px 24px; // Größere Touch-Targets
+        min-height: 48px;
+    }
+    
+    @include hover-device {
+        &:hover {
+            color: $apple-text-primary;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+    }
+    
+    @include touch-device {
+        &:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.98);
+        }
     }
     
     &:active {
@@ -271,7 +505,7 @@ $apple-font-weight-bold: 700;
     }
 }
 
-// Apple-Style Card/Container
+// Apple-Style Card/Container (responsive)
 @mixin apple-card {
     background: $apple-bg-secondary;
     border-radius: $apple-radius-large;
@@ -279,20 +513,28 @@ $apple-font-weight-bold: 700;
     box-shadow: $apple-shadow-medium;
     transition: $apple-transition-medium;
     
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: $apple-shadow-large;
-        border-color: rgba(255, 255, 255, 0.2);
+    @include mobile {
+        border-radius: $apple-radius-large-mobile;
+    }
+    
+    @include hover-device {
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: $apple-shadow-large;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
     }
 }
 
-// Apple-Style Logo Anpassung
+// Apple-Style Logo Anpassung (responsive)
 @mixin apple-logo {
     filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
     transition: $apple-transition-fast;
     
-    &:hover {
-        filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-        transform: scale(1.05);
+    @include hover-device {
+        &:hover {
+            filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+            transform: scale(1.05);
+        }
     }
 }
