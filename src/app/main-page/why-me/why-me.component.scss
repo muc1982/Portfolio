@@ -83,6 +83,7 @@
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
                 overflow: hidden;
+                height: 120px;
                 
                 .location-slide {
                     position: absolute;
@@ -183,11 +184,12 @@
                     }
                 }
                 
-                // Progress Indicators
+                // Progress Indicators - Korrigiert
                 .progress-dots {
                     position: absolute;
-                    bottom: clamp(6px, 1.5vw, 10px);
+                    bottom: clamp(12px, 3vw, 18px);
                     left: 50%;
+                    top:134px;
                     transform: translateX(-50%);
                     @include dFlex($gap: clamp(4px, 1vw, 6px));
                     
@@ -380,7 +382,7 @@
                     }
                     
                     .progress-dots {
-                        bottom: 4px;
+                        bottom: 8px;
                         gap: 3px;
                         
                         .dot {
@@ -473,7 +475,7 @@
                     }
                     
                     .progress-dots {
-                        bottom: 3px;
+                        bottom: 8px;
                         gap: 2px;
                         
                         .dot {
@@ -565,7 +567,7 @@
                     }
                     
                     .progress-dots {
-                        bottom: 2px;
+                        bottom: 6px;
                         gap: 1px;
                         
                         .dot {
