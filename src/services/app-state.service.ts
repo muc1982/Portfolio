@@ -16,7 +16,7 @@ export class AppStateService {
     localStorage.setItem('currentLang', lang);
   }
   
-  setTheme(theme: string) {
+  setTheme(theme: string) {       
     this.currentTheme.set(theme);
     localStorage.setItem('theme', theme);
   }
