@@ -32,7 +32,7 @@ export class ContactMeComponent {
   isShowingSuccessMsg = false;
   
   post = {
-      endPoint: 'https://yasin-sun.developerakademie.net/sendMail.php',
+      endPoint: 'https://yasin-sun.developerakademie.net/portfolio/sendMail.php',
       body: (payload: any) => JSON.stringify(payload),
       options: {
         headers: {
