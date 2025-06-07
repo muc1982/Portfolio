@@ -1,263 +1,450 @@
 @use '../../../../style/apple-variables' as *;
+@use 'sass:color';
 
 .my-projects-container {
     margin-top: 50px;
+    @include standardPaddingMobile();
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-large;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-large;
+    position: relative;
+    overflow: hidden;
+    
+    // Apple-Style Ambient Background
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -30%;
+        width: 80%;
+        height: 100%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+        animation: apple-mobile-ambient 10s ease-in-out infinite;
+        filter: blur(30px);
+    }
    
     h2 {
         @include h2TitleMobile();
         text-align: center;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 2;
     }
+    
     .my-projects-content {
+        position: relative;
+        z-index: 2;
         
         nav {
-            @include dFlex($jc:flex-start);
-            >div {
+            @include dFlex($jc: center);
+            margin-bottom: 20px;
+            
+            > div {
                 flex: 1;
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
+                border-top-left-radius: $apple-radius-medium;
+                border-top-right-radius: $apple-radius-medium;
                 overflow: hidden;
-                padding: 10px;
+                padding: 12px 8px;
+                min-height: 50px;
                 box-sizing: border-box;
                 @include dFlex();
+                transition: $apple-transition-medium;
+                position: relative;
+                
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 0;
+                    background: $apple-teal-gradient;
+                    transition: $apple-transition-medium;
+                }
+                
                 &.active {
-                    background-color: $base-gray;
-                    >span {
-                        color: $base-blue;
+                    background: $apple-bg-tertiary;
+                    border: 1px solid rgba($apple-primary, 0.3);
+                    border-bottom: none;
+                    box-shadow: $apple-shadow-small;
+                    
+                    &::before {
+                        height: 2px;
+                        box-shadow: 0 0 8px rgba($apple-primary, 0.6);
+                    }
+                    
+                    > span {
+                        color: $apple-text-primary;
+                        text-shadow: 0 0 8px rgba($apple-primary, 0.3);
                     }
                 }
-                &:hover {
-                    >span {
-                        color: $base-blue;
+                
+                &:hover:not(.active) {
+                    background: rgba(255, 255, 255, 0.05);
+                    
+                    > span {
+                        color: $apple-text-primary;
+                    }
+                    
+                    &::before {
+                        height: 1px;
                     }
                 }
-                >span {
-                    font-size: 18px;
-                    font-weight: 400;
-                    color: $base-white;
-                   
+                
+                > span {
+                    font-size: clamp(12px, 3.5vw, 16px);
+                    font-weight: $apple-font-weight-semibold;
+                    font-family: $apple-font-family;
+                    color: $apple-primary;
+                    transition: $apple-transition-medium;
+                    text-align: center;
+                    line-height: 1.2;
                 }
-            }
-            @media screen and (max-width:1200px) {
-                justify-content: center;
             }
         }
+        
         .project {
-          
-            @include standardPaddingMobile();
-            @include dFlex($fd:column);
-            padding-top: 30px;
-            padding-bottom: 50px;
-            color: $base-white;
-            background-color: $base-gray;
+            @include dFlex($fd: column);
+            padding: 24px 0;
+            color: $apple-text-primary;
+            background: $apple-bg-tertiary;
+            border-radius: $apple-radius-medium;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            
             .project-top {
                 width: 100%;
                 @include dFlex($gap: 20px, $fd: column);
+                padding: 0 20px;
+                
                 .project-top-title {
-                    color: $base-blue;
-                    font-size: 24px;
+                    color: $apple-primary;
+                    font-size: clamp(20px, 5vw, 24px);
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-semibold;
                     align-self: flex-start;
-                    
+                    margin-bottom: 8px;
                 }
-                >h5 {
-                    font-size: 18px;
-                    text-align: center;
-                    padding: 10px 0;
-                }
+                
                 .technologies {
                     position: relative;
-                    font-size: 14px;
+                    font-size: clamp(12px, 3.5vw, 14px);
                     width: 100%;
-            
-                    @include dFlex($gap: 5px, $fd:column);
+                    @include dFlex($gap: 8px, $fd: column);
+                    padding: 16px;
+                    border-radius: $apple-radius-small;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    
                     .technologies-top {
                         width: 100%;
                         align-self: flex-start;
+                        
+                        .technologies-arr {
+                            color: $apple-text-secondary;
+                            font-weight: $apple-font-weight-regular;
+                        }
                     }
+                    
                     .duration {
                         width: 100%;
                         align-self: flex-start;
+                        color: $apple-text-tertiary;
+                        font-size: clamp(11px, 3vw, 13px);
+                        
+                        span {
+                            color: $apple-primary;
+                            font-weight: $apple-font-weight-medium;
+                        }
                     }
                 }
+                
                 .project-img {
                     position: relative;
                     width: 100%;
                     text-align: center;
-                    >img {
+                    border-radius: $apple-radius-medium;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    box-shadow: $apple-shadow-small;
+                    aspect-ratio: 16/9;
+                    
+                    > img {
                         position: relative;
-                        border-radius: 30px;
-                        max-width: 100%;
+                        border-radius: $apple-radius-medium;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
                         z-index: 1;
-                       
+                        transition: $apple-transition-medium;
+                        
+                        &:hover {
+                            transform: scale(1.02);
+                            filter: brightness(1.05);
+                        }
                     }
-                    >p {
+                    
+                    > p {
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        color: $base-blue;
-                        font-size: 30px;
+                        color: $apple-primary;
+                        font-size: clamp(18px, 5vw, 24px);
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-bold;
                         z-index: 2;
+                        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                    }
+                }
+            }
+            
+            .project-bottom {
+                padding: 20px;
+                @include dFlex($fd: column, $gap: 24px);
+                
+                .tab-li {
+                    width: 100%;
+                    @include dFlex($jc: flex-start, $gap: 16px);
+                    padding: 16px;
+                    border-radius: $apple-radius-small;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    transition: $apple-transition-medium;
+                    
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                        border-color: rgba($apple-primary, 0.2);
+                        transform: translateX(2px);
+                    }
+                    
+                    > img {
+                        width: 24px;
+                        height: 24px;
+                        position: relative;
+                        top: 2px;
+                        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                        flex-shrink: 0;
+                    }
+                    
+                    .right-of-logo {
+                        flex: 1;
+                        
+                        > div {
+                            @include dFlex($gap: 8px, $jc: flex-start, $ai: flex-start, $fd: column);
+                            margin-bottom: 8px;
+                            
+                            > h4 {
+                                font-size: clamp(16px, 4vw, 18px);
+                                font-weight: $apple-font-weight-semibold;
+                                font-family: $apple-font-family;
+                                color: $apple-primary;
+                                line-height: 1.3;
+                            }
+                        }
+                        
+                        > p {
+                            font-size: clamp(13px, 3.5vw, 14px);
+                            font-family: $apple-font-family;
+                            font-weight: $apple-font-weight-regular;
+                            line-height: 1.5;
+                            color: $apple-text-secondary;
+                        }
                     }
                 }
                 
-            }
-            .project-bottom {
-                padding-top: 30px;
-                @include dFlex($fd:column, $gap:30px);
-                .tab-li {
-                    width: 100%;
-                    @include dFlex($jc: flex-start, $gap:20px);
-                    
-                    >img {
-                        width: 29px;
-                        position: relative;
-                        top:5px;
-                    }
-                    .right-of-logo {
-                       
-                        >div {
-                            @include dFlex($gap: 10px, $jc: flex-start);
-                            >h4{
-                                font-size: 18px;
-                                font-weight: 400;
-                                color: $base-blue;
-                            }
-                        }
-                        >p {
-                            font-size: 14px;
-                            margin-top: 10px;
-                        }
-                    }
-                }
                 .project-bottom-footer {
                     position: relative;
-                    @include dFlex($gap:20px);
+                    @include dFlex($gap: 16px, $jc: center);
+                    flex-wrap: wrap;
+                    
                     button {
                         background-color: transparent;
-                        height: 43px;
+                        border: none;
+                        border-radius: $apple-radius-large;
+                        transition: $apple-transition-fast;
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-semibold;
+                        position: relative;
+                        overflow: hidden;
+                        flex: 1;
+                        min-width: 120px;
                         
-                        border-radius: 30px;
                         a {
                             display: block;
                             width: 100%;
                             height: 100%;
-                            line-height: 43px;
-                            padding: 0 30px;
+                            padding: 12px 16px;
                             box-sizing: border-box;
+                            color: inherit;
+                            text-decoration: none;
+                            font-size: clamp(13px, 3.5vw, 14px);
                         }
+                        
                         &:nth-child(1) {
-                            color: $base-black;
-                            background-color: $base-blue;
-                            &:hover {
-                                background-color: $base-white;
-                            }
+                            @include apple-button-primary;
                         }
+                        
                         &:nth-child(2) {
-                            color: $base-blue;
-                            border: 1px solid $base-blue;
-                            &:hover {
-                                background-color: $base-white-012;
-                            }
+                            @include apple-button-secondary;
                         }
                     }
                 }
             }
-            
-
-            
         }
+        
         .team-player {
             @include standardPaddingMobile();
-            >h4 {
-                padding-top: 80px;
-                font-size: 32px;
-                font-weight: 400;
-                color: $base-blue;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            
+            > h4 {
+                font-size: clamp(24px, 6vw, 28px);
+                font-weight: $apple-font-weight-bold;
+                font-family: $apple-font-family;
+                color: $apple-primary;
                 text-align: left;
-
+                margin-bottom: 16px;
+                background: $apple-teal-gradient;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                line-height: 1.2;
             }
-            >p {
-                font-size: 18px;
-                font-weight: 400;
-                color: $base-white;
+            
+            > p {
+                font-size: clamp(16px, 4vw, 18px);
+                font-weight: $apple-font-weight-regular;
+                font-family: $apple-font-family;
+                color: $apple-text-secondary;
                 text-align: left;
-                padding-bottom: 50px;
+                padding-bottom: 32px;
+                line-height: 1.5;
             }
+            
             .team-player-content {
                 scrollbar-width: none;
                 -ms-overflow-style: none;
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
+                
+                &::-webkit-scrollbar {
+                    display: none;
+                }
 
                 margin: 0 auto;
                 width: 100%;
-                overflow-x: scroll;
-
+                overflow-x: auto;
+                padding-bottom: 16px;
                 
                 .team-player-content-wrapper {
-                    @include dFlex($gap: 20px, $jc: center);
-                    width: fit-content;
+                    @include dFlex($gap: 16px, $jc: flex-start);
+                    width: max-content;
+                    min-width: 100%;
 
                     .player {
-                        opacity: .5;
-                        width: 290px;
-                        height: 290px;
+                        opacity: 0.8;
+                        width: clamp(220px, 60vw, 280px);
+                        height: clamp(220px, 60vw, 280px);
                         flex-shrink: 0;
                         @include dFlex();
-                        background: {
-                            image: url('./../../../../assets/img/ref-shape.png');
-                            repeat: no-repeat;
-                            size: contain;
-                            position: center;
-                        };
-                        &:hover {
-                            background-image: url('./../../../../assets/img/ref-shape-hover.png');
+                        background: $apple-bg-tertiary;
+                        border-radius: 50%;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        box-shadow: $apple-shadow-small;
+                        transition: $apple-transition-medium;
+                        position: relative;
+                        overflow: hidden;
+                        
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            inset: -2px;
+                            background: $apple-teal-gradient;
+                            border-radius: 50%;
+                            opacity: 0;
+                            transition: $apple-transition-medium;
+                            z-index: -1;
                         }
-                        .player-content {
+                        
+                        &:hover {
+                            opacity: 1;
+                            transform: translateY(-4px) scale(1.02);
+                            box-shadow: $apple-shadow-medium;
                             
-                            width: 80%;
-                            @include dFlex($fd: column);
-                            .player-name {
-                                font-size: 18px;
-                                font-weight: 500;
-                                color: $base-white;
+                            &::before {
+                                opacity: 0.1;
                             }
+                        }
+                        
+                        .player-content {
+                            width: 85%;
+                            @include dFlex($fd: column, $gap: 8px);
+                            text-align: center;
+                            position: relative;
+                            z-index: 1;
+                            
+                            .player-name {
+                                font-size: clamp(16px, 4vw, 18px);
+                                font-weight: $apple-font-weight-semibold;
+                                font-family: $apple-font-family;
+                                color: $apple-text-primary;
+                                margin-bottom: 4px;
+                                line-height: 1.3;
+                            }
+                            
                             .player-project {
-                                font-size: 18px;
-                                font-weight: 400;
-                                span{
+                                font-size: clamp(14px, 3.5vw, 16px);
+                                font-weight: $apple-font-weight-regular;
+                                font-family: $apple-font-family;
+                                margin-bottom: 8px;
+                                line-height: 1.3;
+                                
+                                span {
                                     &:nth-child(1) {
-                                        color: $base-white;
+                                        color: $apple-text-secondary;
                                     }
                                     &:nth-child(2) {
-                                        color: $base-blue;
+                                        color: $apple-primary;
+                                        font-weight: $apple-font-weight-medium;
+                                        cursor: pointer;
+                                        
+                                        &:hover {
+                                            text-decoration: underline;
+                                        }
                                     }
                                 }
                             }
+                            
                             .player-reference {
-                                color: $base-white;
-                                padding: 10px 0;
-                            }
-                            .player-linkedIn {
-                                text-decoration: underline;
-                                font-size: 16px;
-                                font-weight: 400;
-                                color: $base-blue;
+                                color: $apple-text-secondary;
+                                font-family: $apple-font-family;
+                                font-weight: $apple-font-weight-regular;
+                                line-height: 1.4;
+                                font-size: clamp(12px, 3vw, 13px);
+                                margin: 8px 0;
+                                padding: 0 8px;
                             }
                         }
                     }
                 }
-                
             }
-            
         }
     }
 }
 
-@keyframes from-right{
+// Mobile Animationen
+@keyframes apple-mobile-ambient {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) rotate(180deg) scale(1.1);
+    }
+}
+
+@keyframes from-right {
     from {
-        transform: translateX(10vw);
+        transform: translateX(20px);
         opacity: 0;
     }
     to {
@@ -265,9 +452,10 @@
         opacity: 1;
     }
 }
-@keyframes from-left{
+
+@keyframes from-left {
     from {
-        transform: translateX(-5vw);
+        transform: translateX(-20px);
         opacity: 0;
     }
     to {
@@ -277,14 +465,112 @@
 }
 
 .animate-img-005 {
-    animation: from-right .5s ease-in-out;
+    animation: from-right 0.5s ease-in-out;
 }
 .animate-img-075 {
-    animation: from-right .75s ease-in-out;
+    animation: from-right 0.75s ease-in-out;
 }
 .animate-img-010 {
     animation: from-right 1s ease-in-out;
 }
 .animate-img-005-from-left {
-    animation: from-left .5s ease-in-out;
+    animation: from-left 0.5s ease-in-out;
+}
+
+// Responsive Design für sehr kleine Geräte
+@media screen and (max-width: 480px) {
+    .my-projects-container {
+        margin-top: 32px;
+        
+        .my-projects-content {
+            nav > div {
+                padding: 8px 4px;
+                min-height: 45px;
+                
+                > span {
+                    font-size: clamp(10px, 4vw, 14px);
+                }
+            }
+            
+            .project {
+                .project-top {
+                    padding: 0 16px;
+                    
+                    .technologies {
+                        padding: 12px;
+                    }
+                }
+                
+                .project-bottom {
+                    padding: 16px;
+                    gap: 16px;
+                    
+                    .tab-li {
+                        padding: 12px;
+                        gap: 12px;
+                        
+                        > img {
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+                    
+                    .project-bottom-footer {
+                        gap: 12px;
+                        
+                        button a {
+                            padding: 10px 12px;
+                        }
+                    }
+                }
+            }
+            
+            .team-player {
+                .team-player-content-wrapper {
+                    gap: 12px;
+                    
+                    .player {
+                        width: clamp(180px, 70vw, 220px);
+                        height: clamp(180px, 70vw, 220px);
+                        
+                        .player-content {
+                            width: 90%;
+                            gap: 6px;
+                            
+                            .player-reference {
+                                padding: 0 4px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .my-projects-container {
+        .my-projects-content {
+            nav > div > span {
+                font-size: clamp(9px, 4.5vw, 12px);
+                line-height: 1.1;
+            }
+            
+            .project {
+                .project-bottom .project-bottom-footer {
+                    flex-direction: column;
+                    
+                    button {
+                        width: 100%;
+                        min-width: auto;
+                    }
+                }
+            }
+            
+            .team-player .team-player-content-wrapper .player {
+                width: clamp(160px, 75vw, 200px);
+                height: clamp(160px, 75vw, 200px);
+            }
+        }
+    }
 }

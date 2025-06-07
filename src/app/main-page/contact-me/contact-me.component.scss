@@ -3,21 +3,35 @@
 
 .contact-container {
     position: relative;
-    margin-bottom: 80px; 
+    margin: 80px auto;
     @include standardPadding();
     @include dFlex($fd: column);
-    margin-top: 80px;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 50%, $apple-bg-primary 100%);
     border-radius: $apple-radius-xl;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
+    max-width: 1400px;
+    overflow: hidden;
+    
+    // Apple-Style Ambient Background
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        left: -20%;
+        width: 80%;
+        height: 120%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
+        animation: apple-contact-ambient 15s ease-in-out infinite;
+        filter: blur(50px);
+    }
 
     .goup-arrow {
         position: absolute;
-        right: 132px;
-        top: 40px;
-        width: 40px;
-        height: 80px;
+        right: clamp(80px, 8vw, 132px);
+        top: clamp(30px, 4vw, 40px);
+        width: clamp(32px, 4vw, 40px);
+        height: clamp(64px, 8vw, 80px);
         background: {
             image: url('./../../../assets/img/arrow-up.png');
             size: contain;
@@ -26,11 +40,13 @@
         transition: $apple-transition-fast;
         filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
         border-radius: $apple-radius-small;
+        z-index: 10;
         
         &:hover {
             background-image: url('./../../../assets/img/arrow-up-hover.png');
             transform: translateY(-4px) scale(1.1);
             filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+            box-shadow: $apple-shadow-glow;
         }
         
         &:active {
@@ -40,46 +56,49 @@
    
     h2 {
         @include h2Title();
-        margin-bottom: 40px;
+        margin-bottom: clamp(32px, 4vw, 48px);
         text-align: center;
+        position: relative;
+        z-index: 2;
     }
     
     .contact-content {
-        width: 85%; 
-        @include dFlex($fd: column, $gap: 40px);
+        width: clamp(80%, 85%, 90%);
+        @include dFlex($fd: column, $gap: clamp(32px, 4vw, 48px));
+        position: relative;
+        z-index: 2;
         
         .contact-header {
             color: $apple-text-primary;
-            @include dFlex($gap: 40px, $ai: flex-start);
+            @include dFlex($gap: clamp(24px, 4vw, 40px), $ai: flex-start);
             
             .header-left {
                 text-wrap: pretty;
                 width: 50%;
-                font-size: 18px;
+                font-size: clamp(16px, 1.8vw, 18px);
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-regular;
                 line-height: 1.6;
                 color: $apple-text-secondary;
+                padding-right: clamp(16px, 2vw, 24px);
             }
             
             .header-right {
                 @include dFlex($gap: 20px, $fd: column, $ai: flex-start, $jc: flex-start);
                 width: 50%;
                 
-                @media screen and (max-width: 1000px) {
-                    flex-shrink: 0;
-                }
-                
                 .header-right-email, .header-right-phone { 
                     a {
                         @include dFlex($gap: 16px, $ai: center);
-                        padding: 16px 20px;
+                        padding: clamp(12px, 1.5vw, 16px) clamp(16px, 2vw, 20px);
                         border-radius: $apple-radius-medium;
                         transition: $apple-transition-fast;
                         background: transparent;
                         border: 1px solid rgba(255, 255, 255, 0.1);
                         position: relative;
                         overflow: hidden;
+                        width: 100%;
+                        box-sizing: border-box;
                         
                         &::before {
                             content: '';
@@ -129,8 +148,8 @@
                         
                         .img {
                             flex-shrink: 0;
-                            width: 28px;
-                            height: 32px;
+                            width: clamp(24px, 3vw, 28px);
+                            height: clamp(28px, 3.5vw, 32px);
                             transition: $apple-transition-fast;
                         }
                         
@@ -155,7 +174,9 @@
                             color: $apple-text-secondary;
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-medium;
+                            font-size: clamp(14px, 1.6vw, 16px);
                             transition: $apple-transition-fast;
+                            flex: 1;
                         }
                     }
                 }
@@ -167,15 +188,11 @@
             
             form {
                 width: 100%;
-                @include dFlex($fd: column, $gap: 24px);
+                @include dFlex($fd: column, $gap: clamp(20px, 2.5vw, 28px));
                 
                 .form-name-mail {
-                    @include dFlex($gap: 24px);
+                    @include dFlex($gap: clamp(20px, 2.5vw, 28px));
                     width: 100%;
-                    
-                    @media screen and (max-width: 1200px) {
-                        flex-direction: column;
-                    }
                 }
                 
                 .form-field {
@@ -186,7 +203,7 @@
                         color: $apple-text-secondary;
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
-                        font-size: 14px;
+                        font-size: clamp(13px, 1.5vw, 14px);
                         margin-left: 20px;
                         transition: $apple-transition-fast;
                         
@@ -198,8 +215,8 @@
                     
                     .form-input {
                         @include apple-input;
-                        height: 56px;
-                        font-size: 16px;
+                        height: clamp(48px, 6vw, 56px);
+                        font-size: clamp(14px, 1.6vw, 16px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
                         
@@ -230,12 +247,13 @@
                     textarea {
                         @include apple-input;
                         width: 100%;
-                        height: 120px !important;
-                        padding: 16px 20px !important;
+                        height: clamp(100px, 12vw, 120px) !important;
+                        padding: clamp(14px, 1.8vw, 16px) clamp(18px, 2.2vw, 20px) !important;
                         resize: none;
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
                         line-height: 1.5;
+                        font-size: clamp(14px, 1.6vw, 16px);
                         
                         &.form-input-error {
                             border-color: $apple-error;
@@ -292,7 +310,7 @@
                     }
                     
                     span {
-                        font-size: 14px;
+                        font-size: clamp(13px, 1.5vw, 14px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
                         line-height: 1.4;
@@ -321,6 +339,7 @@
                     border-radius: $apple-radius-medium;
                     text-align: center;
                     box-shadow: $apple-shadow-small;
+                    font-size: clamp(14px, 1.6vw, 16px);
                 }
                 
                 .send-btn {
@@ -329,8 +348,10 @@
                     
                     button {
                         @include apple-button-primary;
-                        min-width: 140px;
+                        min-width: clamp(120px, 15vw, 140px);
                         font-family: $apple-font-family;
+                        font-size: clamp(14px, 1.6vw, 16px);
+                        padding: clamp(12px, 1.5vw, 14px) clamp(20px, 2.5vw, 24px);
                         
                         &:disabled {
                             background: $apple-bg-quaternary;
@@ -354,17 +375,147 @@
                 }
             }
         }
+    }
+}
 
-        @media screen and (max-width: 1200px) {
-            width: 95% !important;
+// Animationen
+@keyframes apple-contact-ambient {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-20px) rotate(120deg) scale(1.1);
+    }
+    66% {
+        transform: translateY(10px) rotate(240deg) scale(0.9);
+    }
+}
+
+// Responsive Design für Desktop
+@media screen and (max-width: 1400px) {
+    .contact-container {
+        margin: 60px 20px;
+        
+        .goup-arrow {
+            right: clamp(30px, 6vw, 80px);
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .contact-container {
+        .contact-content {
+            width: 95%;
             
             .contact-header {
-                flex-direction: column;
-                gap: 20px;
+                @include dFlex($fd: column, $gap: 24px);
                 
                 .header-left,
                 .header-right {
                     width: 100%;
+                }
+                
+                .header-left {
+                    padding-right: 0;
+                    text-align: center;
+                }
+                
+                .header-right {
+                    max-width: 400px;
+                    margin: 0 auto;
+                    
+                    .header-right-email, .header-right-phone {
+                        a {
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+            
+            .contact-form form .form-name-mail {
+                @include dFlex($fd: column, $gap: 20px);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .contact-container {
+        margin: 50px 16px;
+        padding: 40px 24px;
+        border-radius: $apple-radius-large;
+        
+        .goup-arrow {
+            right: 24px;
+            top: 24px;
+            width: 30px;
+            height: 60px;
+        }
+        
+        h2 {
+            margin-bottom: 32px;
+        }
+        
+        .contact-content {
+            width: 100%;
+            gap: 28px;
+            
+            .contact-header {
+                gap: 20px;
+                
+                .header-left {
+                    font-size: 16px;
+                }
+                
+                .header-right {
+                    .header-right-email, .header-right-phone {
+                        a {
+                            padding: 14px 18px;
+                            
+                            .img {
+                                width: 24px;
+                                height: 28px;
+                            }
+                            
+                            span {
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            .contact-form form {
+                gap: 22px;
+                
+                .form-field {
+                    .form-label {
+                        font-size: 13px;
+                        margin-left: 18px;
+                    }
+                    
+                    .form-input {
+                        height: 50px;
+                        font-size: 15px;
+                    }
+                }
+                
+                .form-message textarea {
+                    height: 110px !important;
+                    padding: 15px 18px !important;
+                    font-size: 15px;
+                }
+                
+                .privacy-policy {
+                    span {
+                        font-size: 13px;
+                    }
+                }
+                
+                .send-btn button {
+                    min-width: 130px;
+                    font-size: 15px;
+                    padding: 13px 22px;
                 }
             }
         }

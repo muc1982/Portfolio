@@ -2,40 +2,58 @@
 @use 'sass:color';
 
 .my-projects-container {
-    margin-top: 50px;
+    margin: 40px auto;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     border-radius: $apple-radius-xl;
-    margin: 40px auto;
-    max-width: 1200px;
+    max-width: 1400px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
+    position: relative;
+    
+    // Apple-Style Ambient Background
+    &::before {
+        content: '';
+        position: absolute;
+        top: -20%;
+        right: -20%;
+        width: 60%;
+        height: 80%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
+        animation: apple-projects-ambient 12s ease-in-out infinite;
+        filter: blur(40px);
+    }
    
     h2 {
         @include h2Title();
         text-align: center;
         margin-bottom: 20px;
-        padding-top: 40px;
+        padding-top: 48px;
+        position: relative;
+        z-index: 2;
     }
     
     .my-projects-content {
+        position: relative;
+        z-index: 2;
         
         nav {
             @include standardPadding();
-            @include dFlex($jc:flex-start);
+            @include dFlex($jc: flex-start);
             background: rgba(255, 255, 255, 0.02);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             
-            >div {
+            > div {
                 border-top-left-radius: $apple-radius-large;
                 border-top-right-radius: $apple-radius-large;
-                padding: 24px 30px;
-                height: 104px;
+                padding: 24px 32px;
+                min-height: 104px;
                 box-sizing: border-box;
                 @include dFlex();
                 transition: $apple-transition-medium;
                 position: relative;
                 overflow: hidden;
+                flex: 1;
                 
                 &::before {
                     content: '';
@@ -48,22 +66,19 @@
                     transition: $apple-transition-medium;
                 }
                 
-                @media screen and (max-width: 1200px) {
-                    padding: 16px 20px;
-                }
-                
                 &.active {
                     background: $apple-bg-tertiary;
                     border: 1px solid rgba($apple-primary, 0.3);
                     border-bottom: none;
                     box-shadow: $apple-shadow-medium;
+                    transform: translateY(-2px);
                     
                     &::before {
                         height: 3px;
                         box-shadow: 0 0 10px rgba($apple-primary, 0.6);
                     }
                     
-                    >span {
+                    > span {
                         color: $apple-text-primary;
                         text-shadow: 0 0 10px rgba($apple-primary, 0.3);
                     }
@@ -73,7 +88,7 @@
                     background: rgba(255, 255, 255, 0.05);
                     transform: translateY(-2px);
                     
-                    >span {
+                    > span {
                         color: $apple-text-primary;
                     }
                     
@@ -82,23 +97,16 @@
                     }
                 }
                 
-                >span {
-                    font-size: 28px;
+                > span {
+                    font-size: clamp(18px, 2.5vw, 28px);
                     font-weight: $apple-font-weight-semibold;
                     font-family: $apple-font-family;
                     color: $apple-primary;
                     transition: $apple-transition-medium;
                     position: relative;
                     z-index: 1;
-                    
-                    @media screen and (max-width: 1200px) {
-                        font-size: 24px;
-                    }
+                    text-align: center;
                 }
-            }
-            
-            @media screen and (max-width:1200px) {
-                justify-content: center;
             }
         }
         
@@ -125,11 +133,11 @@
             
             .project-left {
                 width: 50%;
-                @include dFlex($fd:column, $gap:32px);
+                @include dFlex($fd: column, $gap: 32px);
                 
                 .tab-li {
-                    @include dFlex($ai: flex-start, $gap:20px);
-                    padding: 20px;
+                    @include dFlex($ai: flex-start, $gap: 20px);
+                    padding: 24px;
                     border-radius: $apple-radius-medium;
                     background: rgba(255, 255, 255, 0.02);
                     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -142,34 +150,38 @@
                         box-shadow: $apple-shadow-small;
                     }
                     
-                    >img {
+                    > img {
                         position: relative;
                         top: 5px;
                         filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                        flex-shrink: 0;
                     }
                     
                     .right-of-logo {
-                        >div {
+                        flex: 1;
+                        
+                        > div {
                             @include dFlex($gap: 12px, $jc: flex-start, $ai: center);
                             margin-bottom: 12px;
+                            flex-wrap: wrap;
                             
-                            >h4{
-                                font-size: 24px;
+                            > h4 {
+                                font-size: clamp(18px, 2vw, 24px);
                                 font-weight: $apple-font-weight-semibold;
                                 font-family: $apple-font-family;
                                 color: $apple-primary;
                             }
                             
-                            >span {
-                                font-size: 16px;
+                            > span {
+                                font-size: clamp(14px, 1.5vw, 16px);
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-regular;
                                 color: $apple-text-tertiary;
                             }
                         }
                         
-                        >p {
-                            font-size: 16px;
+                        > p {
+                            font-size: clamp(14px, 1.5vw, 16px);
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-regular;
                             line-height: 1.6;
@@ -181,10 +193,10 @@
             
             .project-right {
                 width: 50%;
-                @include dFlex($gap: 20px, $fd: column);
+                @include dFlex($gap: 24px, $fd: column);
                 
-                >h5 {
-                    font-size: 18px;
+                > h5 {
+                    font-size: clamp(16px, 1.8vw, 18px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
                     color: $apple-text-secondary;
@@ -194,14 +206,15 @@
                 
                 .technologies {
                     position: relative;
-                    @include dFlex($gap: 20px, $jc: center);
+                    @include dFlex($gap: 16px, $jc: center);
                     padding: 20px;
                     border-radius: $apple-radius-medium;
                     background: rgba(255, 255, 255, 0.02);
                     border: 1px solid rgba(255, 255, 255, 0.05);
+                    flex-wrap: wrap;
                     
-                    .tech-logo{
-                        padding: 8px;
+                    .tech-logo {
+                        padding: 12px;
                         border-radius: $apple-radius-small;
                         background: rgba(255, 255, 255, 0.05);
                         transition: $apple-transition-fast;
@@ -213,7 +226,8 @@
                         }
                         
                         img {
-                            height: 36px;
+                            height: clamp(28px, 3vw, 36px);
+                            width: auto;
                             filter: brightness(1.1);
                             transition: $apple-transition-fast;
                         }
@@ -222,19 +236,22 @@
                 
                 .project-img {
                     position: relative;
-                    width: 84%;
-                    height: 225px;
+                    width: 100%;
+                    max-width: 500px;
+                    height: auto;
+                    aspect-ratio: 16/9;
                     text-align: center;
                     border-radius: $apple-radius-large;
                     overflow: hidden;
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     box-shadow: $apple-shadow-medium;
+                    margin: 0 auto;
                     
-                    >img {
+                    > img {
                         position: relative;
                         border-radius: $apple-radius-large;
                         width: 100%;
-                        height: 225px;
+                        height: 100%;
                         object-fit: cover;
                         z-index: 1;
                         transition: $apple-transition-medium;
@@ -245,13 +262,13 @@
                         }
                     }
                     
-                    >p {
+                    > p {
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
                         color: $apple-primary;
-                        font-size: 28px;
+                        font-size: clamp(20px, 3vw, 28px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-bold;
                         z-index: 2;
@@ -261,8 +278,9 @@
                 
                 .project-right-footer {
                     position: relative;
-                    @include dFlex($gap:20px, $jc: center);
+                    @include dFlex($gap: 20px, $jc: center);
                     padding-top: 32px;
+                    flex-wrap: wrap;
                     
                     button {
                         background-color: transparent;
@@ -273,12 +291,13 @@
                         font-weight: $apple-font-weight-semibold;
                         position: relative;
                         overflow: hidden;
+                        min-width: 120px;
                         
                         a {
                             display: block;
                             width: 100%;
                             height: 100%;
-                            padding: 0px 32px;
+                            padding: 12px 24px;
                             box-sizing: border-box;
                             color: inherit;
                             text-decoration: none;
@@ -294,21 +313,6 @@
                     }
                 }
             }
-
-            @media screen and (max-width:1200px) {
-                flex-direction: column-reverse;
-                gap: 40px;
-                align-items: center;
-                
-                .project-left {
-                    align-items: flex-start;
-                    width: 100%;
-                }
-                
-                .project-right {
-                    width: 100%;
-                }
-            }
         }
         
         .team-player {
@@ -316,8 +320,8 @@
             background: $apple-bg-secondary;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             
-            >h4 {
-                font-size: 32px;
+            > h4 {
+                font-size: clamp(24px, 3.5vw, 32px);
                 font-weight: $apple-font-weight-bold;
                 font-family: $apple-font-family;
                 color: $apple-primary;
@@ -331,7 +335,8 @@
             
             .team-player-content {
                 margin: 0 auto;
-                width: calc(100% - 113px - 113px);
+                width: 100%;
+                max-width: 1200px;
                 
                 .team-player-content-wrapper {
                     width: 100%;
@@ -340,8 +345,8 @@
 
                     .player {
                         opacity: 0.8;
-                        width: 380px;
-                        height: 380px;
+                        width: clamp(280px, 30vw, 380px);
+                        height: clamp(280px, 30vw, 380px);
                         flex-shrink: 0;
                         @include dFlex();
                         background: $apple-bg-tertiary;
@@ -381,7 +386,7 @@
                             z-index: 1;
                             
                             .player-name {
-                                font-size: 22px;
+                                font-size: clamp(18px, 2.5vw, 22px);
                                 font-weight: $apple-font-weight-semibold;
                                 font-family: $apple-font-family;
                                 color: $apple-text-primary;
@@ -389,12 +394,12 @@
                             }
                             
                             .player-project {
-                                font-size: 16px;
+                                font-size: clamp(14px, 1.8vw, 16px);
                                 font-weight: $apple-font-weight-regular;
                                 font-family: $apple-font-family;
                                 margin-bottom: 12px;
                                 
-                                span{
+                                span {
                                     &:nth-child(1) {
                                         color: $apple-text-secondary;
                                     }
@@ -415,25 +420,8 @@
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-regular;
                                 line-height: 1.5;
-                                font-size: 14px;
+                                font-size: clamp(12px, 1.5vw, 14px);
                                 margin: 16px 0;
-                            }
-                            
-                            .player-linkedIn {
-                                font-size: 16px;
-                                font-weight: $apple-font-weight-medium;
-                                font-family: $apple-font-family;
-                                
-                                a {
-                                    color: $apple-primary;
-                                    text-decoration: none;
-                                    transition: $apple-transition-fast;
-                                    
-                                    &:hover {
-                                        text-decoration: underline;
-                                        color: color.adjust($apple-primary, $lightness: 10%);
-                                    }
-                                }
                             }
                         }
                     }
@@ -444,6 +432,18 @@
 }
 
 // Animationen für Project Wechsel
+@keyframes apple-projects-ambient {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-15px) rotate(2deg) scale(1.02);
+    }
+    66% {
+        transform: translateY(10px) rotate(-1deg) scale(0.98);
+    }
+}
+
 @keyframes apple-project-slide-in {
     from {
         opacity: 0;
@@ -480,4 +480,178 @@
 
 .animate-img-005-from-left {
     animation: apple-project-slide-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+// Responsive Design
+@media screen and (max-width: 1400px) {
+    .my-projects-container {
+        margin: 32px 20px;
+        
+        .my-projects-content nav > div {
+            padding: 20px 24px;
+            min-height: 90px;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .my-projects-container {
+        .my-projects-content {
+            nav {
+                @include dFlex($fd: column, $gap: 8px);
+                
+                > div {
+                    border-radius: $apple-radius-medium;
+                    min-height: 60px;
+                    padding: 16px 20px;
+                    
+                    > span {
+                        font-size: clamp(16px, 3vw, 20px);
+                    }
+                }
+            }
+            
+            .project {
+                @include dFlex($fd: column-reverse, $gap: 40px, $ai: center);
+                
+                .project-left,
+                .project-right {
+                    width: 100%;
+                }
+                
+                .project-left {
+                    .tab-li {
+                        padding: 20px;
+                    }
+                }
+                
+                .project-right {
+                    .technologies {
+                        padding: 16px;
+                        gap: 12px;
+                        
+                        .tech-logo {
+                            padding: 8px;
+                            
+                            img {
+                                height: clamp(24px, 4vw, 32px);
+                            }
+                        }
+                    }
+                    
+                    .project-img {
+                        max-width: 100%;
+                    }
+                }
+            }
+            
+            .team-player {
+                padding: 40px 30px;
+                
+                .team-player-content-wrapper {
+                    gap: 24px;
+                    
+                    .player {
+                        width: clamp(250px, 40vw, 320px);
+                        height: clamp(250px, 40vw, 320px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .my-projects-container {
+        margin: 20px 10px;
+        border-radius: $apple-radius-large;
+        
+        h2 {
+            padding-top: 32px;
+        }
+        
+        .my-projects-content {
+            nav > div {
+                min-height: 50px;
+                padding: 12px 16px;
+            }
+            
+            .project {
+                padding: 32px 20px;
+                
+                .project-left .tab-li {
+                    padding: 16px;
+                    gap: 16px;
+                    
+                    .right-of-logo > div {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 8px;
+                    }
+                }
+                
+                .project-right {
+                    .technologies {
+                        padding: 12px;
+                        gap: 8px;
+                        
+                        .tech-logo {
+                            padding: 6px;
+                        }
+                    }
+                    
+                    .project-right-footer {
+                        gap: 12px;
+                        
+                        button {
+                            min-width: 100px;
+                            
+                            a {
+                                padding: 10px 20px;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            .team-player {
+                padding: 32px 20px;
+                
+                .team-player-content-wrapper {
+                    gap: 20px;
+                    
+                    .player {
+                        width: clamp(220px, 60vw, 280px);
+                        height: clamp(220px, 60vw, 280px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .my-projects-container {
+        .my-projects-content {
+            .project {
+                .project-right .project-right-footer {
+                    flex-direction: column;
+                    align-items: center;
+                    
+                    button {
+                        width: 100%;
+                        max-width: 200px;
+                    }
+                }
+            }
+            
+            .team-player .team-player-content-wrapper {
+                .player {
+                    width: clamp(200px, 80vw, 250px);
+                    height: clamp(200px, 80vw, 250px);
+                }
+            }
+        }
+    }
 }

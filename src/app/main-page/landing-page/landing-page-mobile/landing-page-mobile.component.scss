@@ -36,6 +36,10 @@
     background: $apple-bg-secondary;
     @include apple-nav-glass;
     z-index: 996;
+    
+    @include mobile-large {
+        height: 40px;
+    }
 
     .logo {
         @include dFlex($fd: column, $jc: center);
@@ -46,28 +50,24 @@
         }
 
         .logo-img {
-            width: 60px;
-            height: 38px;
+            width: clamp(50px, 12vw, 60px);
+            height: clamp(32px, 8vw, 38px);
             @include apple-logo;
-
-            background: {
-                image: url('./../../../../assets/img/logo.png');
-                repeat: no-repeat;
-                position: center;
-            }
-
-            ;
+            background-image: url('./../../../../assets/img/logo.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
         }
 
         .logo-name {
-            font-size: 16px;
+            font-size: clamp(14px, 3.5vw, 16px);
             font-family: $apple-font-family;
             font-weight: $apple-font-weight-semibold;
             color: $apple-text-primary;
         }
 
         .logo-position {
-            font-size: 12px;
+            font-size: clamp(10px, 2.5vw, 12px);
             font-family: $apple-font-family;
             font-weight: $apple-font-weight-regular;
             color: $apple-text-secondary;
@@ -76,14 +76,9 @@
 
     .burger {
         .burger-img {
-            width: 30px;
-            height: 30px;
-
-            background: {
-                image: url('./../../../../assets/img/burger-menu.png');
-            }
-
-            ;
+            width: clamp(26px, 6vw, 30px);
+            height: clamp(26px, 6vw, 30px);
+            background-image: url('./../../../../assets/img/burger-menu.png');
             filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
             transition: $apple-transition-fast;
             border-radius: $apple-radius-small;
@@ -94,11 +89,7 @@
             }
 
             &.close {
-                background: {
-                    image: url('./../../../../assets/img/burger-menu-close.png') !important;
-                }
-
-                ;
+                background-image: url('./../../../../assets/img/burger-menu-close.png') !important;
                 filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
             }
         }
@@ -117,7 +108,6 @@
         border-bottom-right-radius: 55%;
         overflow: hidden;
         @include dFlex();
-        background-image: url('./../../../../assets/img/shape.png');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -135,7 +125,7 @@
         }
 
         img {
-            width: 400px;
+            width: clamp(300px, 80vw, 400px);
             max-width: 100%;
             object-fit: contain;
             position: relative;
@@ -144,7 +134,7 @@
             transition: $apple-transition-medium;
         }
 
-        @media screen and (max-height: 750px) {
+        @include mobile {
             img {
                 height: 40vh;
                 object-fit: contain;
@@ -157,14 +147,14 @@
         width: 100%;
 
         .title {
-            padding: 40px 0;
+            padding: clamp(32px, 8vw, 40px) 0;
             color: $apple-text-primary;
             width: 100%;
 
             .name {
                 width: 100%;
                 text-align: center;
-                font-size: 64px;
+                font-size: clamp(36px, 12vw, 64px);
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-bold;
                 background: $apple-teal-gradient;
@@ -172,51 +162,34 @@
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
                 letter-spacing: -0.02em;
+                line-height: 1.1;
             }
 
             .position {
                 width: 100%;
-                font-size: 32px;
+                font-size: clamp(20px, 6vw, 32px);
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
                 color: $apple-text-secondary;
                 text-align: center;
-            }
-
-            @media screen and (max-width: 900px) {
-                .name {
-                    font-size: 40px;
-                }
-
-                .position {
-                    font-size: 24px;
-                }
+                margin-top: 8px;
             }
         }
     }
 
     .arrow-wrapper {
         .arrow-down {
-            width: 30px;
-            height: 60px;
-
-            background: {
-                image: url('./../../../../assets/img/arrow-down.png');
-                size: contain;
-                repeat: no-repeat;
-            }
-
-            ;
+            width: clamp(24px, 6vw, 30px);
+            height: clamp(48px, 12vw, 60px);
+            background-image: url('./../../../../assets/img/arrow-down.png');
+            background-size: contain;
+            background-repeat: no-repeat;
             filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
             transition: $apple-transition-fast;
             border-radius: $apple-radius-small;
 
             &:hover {
-                background: {
-                    image: url('./../../../../assets/img/arrow-down-hover.png');
-                }
-
-                ;
+                background-image: url('./../../../../assets/img/arrow-down-hover.png');
                 transform: translateY(-2px) scale(1.1);
                 filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
                 box-shadow: $apple-shadow-glow;
@@ -226,47 +199,55 @@
 }
 
 @keyframes apple-ambient-float {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
-
     33% {
         transform: translateY(-15px) rotate(2deg) scale(1.02);
     }
-
     66% {
         transform: translateY(10px) rotate(-1deg) scale(0.98);
     }
 }
 
 @keyframes apple-profile-glow {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: 0.1;
         transform: scale(1) rotate(0deg);
     }
-
     25% {
         opacity: 0.15;
         transform: scale(1.05) rotate(1deg);
     }
-
     50% {
         opacity: 0.12;
         transform: scale(1.02) rotate(-0.5deg);
     }
-
     75% {
         opacity: 0.18;
         transform: scale(1.03) rotate(0.8deg);
     }
 }
 
-@media screen and (max-width: 1200px),
-screen and (min-height: 1000px) {
+// Responsive Design
+@include mobile {
+    .content-middle {
+        .title-logo-wrapper .title {
+            padding: 24px 0;
+        }
+    }
+}
+
+@include tablet {
+    .content-middle {
+        .img-wrapper img {
+            width: clamp(350px, 70vw, 400px);
+        }
+    }
+}
+
+// Fallback für sehr große Bildschirme oder Landscape-Tablets
+@media screen and (max-width: 1200px), screen and (min-height: 1000px) {
     .content-left {
         display: none !important;
     }
@@ -282,7 +263,7 @@ screen and (min-height: 1000px) {
         .logo {
             position: absolute;
             left: 0;
-            top: 20px
+            top: 20px;
         }
     }
 }

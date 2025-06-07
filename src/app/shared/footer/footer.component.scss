@@ -1,51 +1,86 @@
-@use '../../../style/apple-variables' as *;
 
+@use '../../../style/apple-variables' as *;
+@use 'sass:color';
+
+// Desktop Footer Styles
 .footer-wrapper {
     width: 100%;
-    background: $apple-bg-secondary; // Gleiche Farbe wie Navigation
-    height: 204px;
+    background: $apple-bg-secondary;
+    min-height: 204px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    
+    // Apple-Style Subtle Background Effect
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: $apple-teal-gradient;
+        opacity: 0.3;
+    }
 }
 
 footer {
     height: 100%;
+    min-height: 204px;
     background: $apple-bg-secondary;
     margin: 0 auto;
     @include dFlex();
     @include standardPadding();
     max-width: 1440px;
     box-sizing: border-box;
+    position: relative;
     
     .footer-content {
         width: 100%;
-        height: 72px;
-        @include dFlex($jc: space-between);
+        min-height: clamp(60px, 8vw, 80px);
+        @include dFlex($jc: space-between, $ai: center);
         
         .left {
             flex: 1;
-            align-self: flex-end;
-            @include dFlex($gap:12px, $fd: column, $ai: flex-start);
+            @include dFlex($gap: clamp(8px, 1.5vw, 16px), $fd: column, $ai: flex-start);
             
             .legal-notice {
                 a {
                     color: $apple-text-secondary;
                     font-weight: $apple-font-weight-regular;
                     font-family: $apple-font-family;
-                    font-size: 16px;
+                    font-size: clamp(14px, 1.6vw, 16px);
                     transition: $apple-transition-fast;
-                    padding: 4px 8px;
+                    padding: clamp(4px, 0.8vw, 8px) clamp(6px, 1.2vw, 12px);
                     border-radius: $apple-radius-small;
+                    position: relative;
+                    
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: inherit;
+                        opacity: 0;
+                        transition: $apple-transition-fast;
+                    }
                     
                     &:hover {
                         color: $apple-text-primary;
-                        background: rgba(255, 255, 255, 0.05);
-                        transform: translateY(-1px);
+                        transform: translateY(-2px);
+                        
+                        &::before {
+                            opacity: 1;
+                        }
                     }
                     
                     &:active {
                         color: $apple-primary;
-                        background: rgba(255, 255, 255, 0.1);
                         transform: translateY(0);
+                        
+                        &::before {
+                            opacity: 0.7;
+                            background: rgba($apple-primary, 0.1);
+                        }
                     }
                 }
             }
@@ -54,60 +89,81 @@ footer {
                 color: $apple-text-tertiary;
                 font-weight: $apple-font-weight-regular;
                 font-family: $apple-font-family;
-                font-size: 14px;
-                padding-left: 8px;
+                font-size: clamp(12px, 1.4vw, 14px);
+                padding-left: clamp(6px, 1.2vw, 12px);
+                opacity: 0.8;
             }
         }
         
         .middle {
             flex: 1;
+            @include dFlex($jc: center);
             
             .logo {
-                @include dFlex($fd: column, $jc: center);
+                @include dFlex($fd: column, $jc: center, $ai: center);
                 transition: $apple-transition-medium;
+                padding: clamp(8px, 1.5vw, 12px);
+                border-radius: $apple-radius-medium;
+                position: relative;
+                
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: -4px;
+                    background: $apple-teal-gradient;
+                    border-radius: $apple-radius-large;
+                    opacity: 0;
+                    transition: $apple-transition-medium;
+                    z-index: -1;
+                }
                 
                 &:hover {
                     transform: scale(1.05);
+                    
+                    &::before {
+                        opacity: 0.1;
+                    }
                 }
                 
                 .logo-img {
-                    width: 60px;
-                    height: 38px;
+                    width: clamp(50px, 6vw, 70px);
+                    height: clamp(32px, 4vw, 44px);
                     background: {
                         image: url('./../../../assets/img/logo.png');
                         repeat: no-repeat;
                         position: center;
                         size: contain;
                     };
-                    @include apple-logo; // Logo-Anpassung für Apple-Farbpalette
+                    @include apple-logo;
                     transition: $apple-transition-fast;
                 }
                 
                 .logo-name {
-                    font-size: 16px;
+                    font-size: clamp(14px, 1.8vw, 18px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
                     color: $apple-text-primary;
-                    margin-top: 2px;
+                    margin-top: 4px;
+                    letter-spacing: 0.5px;
                 }
                 
                 .logo-position {
-                    font-size: 12px;
+                    font-size: clamp(10px, 1.3vw, 13px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
                     color: $apple-text-secondary;
+                    letter-spacing: 0.3px;
                 }
             }
         }
         
         .right {
             flex: 1;
-            align-self: flex-end;
-            @include dFlex($gap:16px, $jc: flex-end);
+            @include dFlex($gap: clamp(12px, 2vw, 20px), $jc: flex-end, $ai: center);
             
             .img {
-                width: 32px;
-                height: 32px;
+                width: clamp(28px, 3.5vw, 36px);
+                height: clamp(28px, 3.5vw, 36px);
                 background: {
                     repeat: no-repeat;
                     size: contain;
@@ -116,11 +172,12 @@ footer {
                 border-radius: $apple-radius-small;
                 transition: $apple-transition-fast;
                 position: relative;
+                cursor: pointer;
                 
                 &::before {
                     content: '';
                     position: absolute;
-                    inset: -4px;
+                    inset: -6px;
                     background: $apple-teal-gradient;
                     border-radius: $apple-radius-medium;
                     opacity: 0;
@@ -129,7 +186,7 @@ footer {
                 }
                 
                 &:hover {
-                    transform: translateY(-2px) scale(1.1);
+                    transform: translateY(-3px) scale(1.1);
                     
                     &::before {
                         opacity: 0.15;
@@ -137,7 +194,7 @@ footer {
                 }
                 
                 &:active {
-                    transform: translateY(0) scale(1);
+                    transform: translateY(-1px) scale(1.05);
                 }
                 
                 a {
