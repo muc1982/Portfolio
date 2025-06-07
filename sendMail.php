@@ -1,7 +1,5 @@
 <?php
-header('Content-Type: application/json');
-
-// CORS Headers für yasin-sun.developerakademie.net
+header('Content-Type: application/json; charset=utf-8');
 header("Access-Control-Allow-Origin: https://yasin-sun.developerakademie.net");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -35,20 +33,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-// Rate Limiting
-$ip = $_SERVER['REMOTE_ADDR'];
-$rate_limit_file = 'rate_limit_' . md5($ip) . '.txt';
-if (file_exists($rate_limit_file)) {
-    $last_request = (int)file_get_contents($rate_limit_file);
-    if (time() - $last_request < 60) { 
-        http_response_code(429);
-        echo json_encode(['error' => 'Too many requests']);
-        exit();
-    }
-}
-file_put_contents($rate_limit_file, time());
-
-// Mail-Konfiguration für info@sun-dev.de
 $to = 'info@sun-dev.de';
 $subject = "Portfolio Kontakt von $name";
 $body = "
@@ -62,22 +46,18 @@ $body = "
     <p>$message</p>
     <hr>
     <p><small>Gesendet über: yasin-sun.developerakademie.net</small></p>
-    <p><small>IP-Adresse: " . $_SERVER['REMOTE_ADDR'] . "</small></p>
 </body>
 </html>
 ";
 
-// Headers für sun-dev.de
 $headers = [
     'MIME-Version: 1.0',
     'Content-type: text/html; charset=UTF-8',
     'From: Portfolio <noreply@yasin-sun.developerakademie.net>',
     'Reply-To: ' . $email,
-    'X-Mailer: PHP/' . phpversion(),
     'Return-Path: info@sun-dev.de'
 ];
 
-// Mail versenden
 if (mail($to, $subject, $body, implode("\r\n", $headers))) {
     echo json_encode(['success' => true, 'message' => 'E-Mail erfolgreich versendet']);
 } else {
