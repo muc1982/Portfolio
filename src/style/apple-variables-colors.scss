@@ -1,0 +1,41 @@
+// Apple Design System Colors
+@use 'sass:color';
+
+// Primary Colors
+$apple-primary: #007AFF !default;
+$apple-secondary: #34C759 !default;
+$apple-success: #34C759 !default;
+$apple-error: #FF3B30 !default;
+$apple-warning: #FF9500 !default;
+
+// Background Colors
+$apple-bg-primary: #1C1C1E !default;
+$apple-bg-secondary: #2C2C2E !default;
+$apple-bg-tertiary: #3A3A3C !default;
+$apple-bg-quaternary: #48484A !default;
+
+// Text Colors
+$apple-text-primary: #FFFFFF !default;
+$apple-text-secondary: #EBEBF5 !default;
+$apple-text-tertiary: #EBEBF599 !default;
+
+// Base Colors
+$base-white: #FFFFFF !default;
+$base-black: #000000 !default;
+$base-gray: #8E8E93 !default;
+$base-blue: #007AFF !default;
+$base-white-012: rgba(255, 255, 255, 0.12) !default;
+
+// Gradients
+$apple-teal-gradient: linear-gradient(135deg, #007AFF 0%, #34C759 100%) !default;
+
+// Shadows
+$apple-shadow-small: 0 2px 8px rgba(0, 0, 0, 0.12) !default;
+$apple-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.16) !default;
+$apple-shadow-large: 0 8px 32px rgba(0, 0, 0, 0.24) !default;
+$apple-shadow-glow: 0 0 20px rgba(0, 122, 255, 0.4) !default;
+
+// Transitions
+$apple-transition-fast: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
+$apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
+$apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) !default;

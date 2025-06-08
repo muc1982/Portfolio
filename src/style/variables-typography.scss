@@ -1,0 +1,25 @@
+// Apple Design System Typography
+
+// Font Family
+$apple-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
+
+// Font Weights
+$apple-font-weight-regular: 400 !default;
+$apple-font-weight-medium: 500 !default;
+$apple-font-weight-semibold: 600 !default;
+$apple-font-weight-bold: 700 !default;
+
+// Border Radius
+$apple-radius-small: 6px !default;
+$apple-radius-medium: 8px !default;
+$apple-radius-large: 12px !default;
+$apple-radius-xl: 16px !default;
+
+// Z-Index
+$apple-z-dropdown: 1000 !default;
+$apple-z-sticky: 1020 !default;
+$apple-z-fixed: 1030 !default;
+$apple-z-modal-backdrop: 1040 !default;
+$apple-z-modal: 1050 !default;
+$apple-z-popover: 1060 !default;
+$apple-z-tooltip: 1070 !default;

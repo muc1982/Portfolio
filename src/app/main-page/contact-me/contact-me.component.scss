@@ -1,184 +1,134 @@
-@use '../../../style/apple-variables' as *;
+@use "./../../../../style/apple-variables" as *;
 @use 'sass:color';
+@use './contact-mobile-styles';
+@use './contact-mobile-responsive';
 
 .contact-container {
     position: relative;
-    margin: 80px auto;
-    @include standardPadding();
+    margin: 32px auto 40px auto;
+    @include standardPaddingMobile();
     @include dFlex($fd: column);
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 50%, $apple-bg-primary 100%);
-    border-radius: $apple-radius-xl;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-large;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
-    max-width: 1400px;
     overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
     
-    // Apple-Style Ambient Background
+    // Apple-Style Ambient Background für Mobile
     &::before {
         content: '';
         position: absolute;
-        top: -30%;
-        left: -20%;
+        top: -40%;
+        right: -40%;
         width: 80%;
-        height: 120%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
-        animation: apple-contact-ambient 15s ease-in-out infinite;
-        filter: blur(50px);
+        height: 100%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+        animation: apple-mobile-contact-ambient 12s ease-in-out infinite;
+        filter: blur(40px);
     }
 
-    .goup-arrow {
-        position: absolute;
-        right: clamp(80px, 8vw, 132px);
-        top: clamp(30px, 4vw, 40px);
-        width: clamp(32px, 4vw, 40px);
-        height: clamp(64px, 8vw, 80px);
-        background: {
-            image: url('./../../../assets/img/arrow-up.png');
-            size: contain;
-            repeat: no-repeat;
-        };
-        transition: $apple-transition-fast;
-        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-        border-radius: $apple-radius-small;
-        z-index: 10;
-        
-        &:hover {
-            background-image: url('./../../../assets/img/arrow-up-hover.png');
-            transform: translateY(-4px) scale(1.1);
-            filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-        }
-        
-        &:active {
-            transform: translateY(-2px) scale(1.05);
-        }
-    }
-   
     h2 {
-        @include h2Title();
-        margin-bottom: clamp(32px, 4vw, 48px);
-        text-align: center;
+        @include h2TitleMobile();
+        margin-bottom: clamp(20px, 4vw, 28px);
         position: relative;
         z-index: 2;
+        text-align: center;
     }
     
     .contact-content {
-        width: clamp(80%, 85%, 90%);
-        @include dFlex($fd: column, $gap: clamp(32px, 4vw, 48px));
+        width: 100%;
+        @include dFlex($fd: column, $gap: clamp(20px, 4vw, 28px));
         position: relative;
         z-index: 2;
         
         .contact-header {
             color: $apple-text-primary;
-            @include dFlex($gap: clamp(24px, 4vw, 40px), $ai: flex-start);
+            @include dFlex($gap: clamp(16px, 3vw, 20px), $ai: flex-start, $fd: column);
+            width: 100%;
             
-            .header-left {
-                text-wrap: pretty;
-                width: 50%;
-                font-size: clamp(16px, 1.8vw, 18px);
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-regular;
-                line-height: 1.6;
-                color: $apple-text-secondary;
-                padding-right: clamp(16px, 2vw, 24px);
-            }
-            
-            .header-right {
-                @include dFlex($gap: 20px, $fd: column, $ai: flex-start, $jc: flex-start);
-                width: 50%;
+            .header-top {
+                @include dFlex($gap: clamp(12px, 2.5vw, 16px), $fd: column, $ai: stretch);
+                width: 100%;
                 
-                .header-right-email, .header-right-phone { 
+                .header-top-email, .header-top-phone { 
                     a {
-                        @include dFlex($gap: 16px, $ai: center);
-                        padding: clamp(12px, 1.5vw, 16px) clamp(16px, 2vw, 20px);
+                        @include dFlex($gap: clamp(10px, 2.5vw, 14px), $ai: center);
+                        padding: clamp(12px, 3vw, 16px) clamp(14px, 3.5vw, 18px);
                         border-radius: $apple-radius-medium;
-                        transition: $apple-transition-fast;
-                        background: transparent;
                         border: 1px solid rgba(255, 255, 255, 0.1);
-                        position: relative;
-                        overflow: hidden;
+                        transition: $apple-transition-fast;
+                        background: rgba(255, 255, 255, 0.02);
                         width: 100%;
                         box-sizing: border-box;
-                        
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            background: $apple-teal-gradient;
-                            opacity: 0;
-                            transition: $apple-transition-fast;
-                            z-index: -1;
-                        }
+                        text-decoration: none;
+                        color: inherit;
                         
                         &:hover {
-                            background: rgba($apple-primary, 0.05);
                             border-color: rgba($apple-primary, 0.3);
-                            transform: translateY(-2px);
-                            box-shadow: $apple-shadow-medium;
-                            
-                            &::before {
-                                opacity: 0.1;
-                            }
+                            background: rgba($apple-primary, 0.05);
+                            transform: translateY(-1px);
+                            box-shadow: $apple-shadow-small;
                             
                             span {
                                 color: $apple-primary;
                             }
                             
                             .mail.img {
-                                background-image: url('./../../../assets/img/mail-hover.svg');
+                                background-image: url('./../../../../assets/img/mail-hover.svg');
                                 filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                             .tel.img {
-                                background-image: url('./../../../assets/img/github-hover.png');
+                                background-image: url('./../../../../assets/img/github-hover.png');
                                 filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                         }
                         
                         &:active {
+                            filter: brightness(0.9);
                             transform: translateY(0);
-                            background: rgba($apple-primary, 0.1);
-                            
-                            &::before {
-                                opacity: 0.2;
-                            }
                         }
                         
                         .img {
+                            width: clamp(20px, 4.5vw, 26px);
+                            height: clamp(24px, 5.5vw, 30px);
                             flex-shrink: 0;
-                            width: clamp(24px, 3vw, 28px);
-                            height: clamp(28px, 3.5vw, 32px);
-                            transition: $apple-transition-fast;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;
                         }
                         
                         .mail {
-                            background: {
-                                image: url('./../../../assets/img/contact-email.png');
-                                size: contain;
-                                repeat: no-repeat;
-                            }
-                            filter: brightness(1.1);
+                            background-image: url('./../../../../assets/img/mail.png');
                         }
                         .tel {
-                            background: {
-                                image: url('./../../../assets/img/contact-phone.png');
-                                size: contain;
-                                repeat: no-repeat;
-                            }
-                            filter: brightness(1.1);
+                            background-image: url('./../../../../assets/img/github.png');
                         }
                         
                         span {
-                            color: $apple-text-secondary;
                             font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-medium;
-                            font-size: clamp(14px, 1.6vw, 16px);
+                            font-weight: $apple-font-weight-regular;
+                            color: $apple-text-secondary;
                             transition: $apple-transition-fast;
+                            font-size: clamp(12px, 3vw, 15px);
+                            line-height: 1.3;
                             flex: 1;
                         }
                     }
                 }
+            }
+
+            .header-bottom {
+                padding: clamp(12px, 2.5vw, 16px) 0;
+                font-size: clamp(16px, 4vw, 20px);
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-medium;
+                width: 100%;
+                color: $apple-primary;
+                text-align: center;
+                line-height: 1.3;
             }
         }
         
@@ -187,56 +137,35 @@
             
             form {
                 width: 100%;
-                @include dFlex($fd: column, $gap: clamp(20px, 2.5vw, 28px));
+                @include dFlex($fd: column, $gap: clamp(16px, 3.5vw, 20px));
                 
                 .form-name-mail {
-                    @include dFlex($gap: clamp(20px, 2.5vw, 28px));
+                    @include dFlex($gap: clamp(16px, 3.5vw, 20px), $fd: column);
                     width: 100%;
                 }
-                
+
                 .form-field {
                     width: 100%;
-                    @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
-                    
-                    .form-label {
-                        color: $apple-text-secondary;
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-medium;
-                        font-size: clamp(13px, 1.5vw, 14px);
-                        margin-left: 20px;
-                        transition: $apple-transition-fast;
-                        
-                        &-error {
-                            @extend .form-label;
-                            color: $apple-error;
-                        }
-                    }
+                    @include dFlex($fd: column, $ai: flex-start);
                     
                     .form-input {
                         @include apple-input;
-                        height: clamp(48px, 6vw, 56px);
-                        font-size: clamp(14px, 1.6vw, 16px);
+                        height: clamp(48px, 10vw, 56px);
                         font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-regular;
+                        font-size: clamp(14px, 3vw, 16px);
+                        padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
                         
                         &::placeholder {
                             color: $apple-text-tertiary;
-                            font-weight: $apple-font-weight-regular;
                             font-family: $apple-font-family;
                         }
                         
                         &-error {
-                            border-color: $apple-error;
+                            border: 1px solid $apple-error;
                             background: rgba($apple-error, 0.05);
                             
-                            &:focus {
-                                border-color: $apple-error;
-                                box-shadow: 0 0 0 3px rgba($apple-error, 0.2);
-                                background: rgba($apple-error, 0.1);
-                            }
-                            
                             &::placeholder {
-                                color: rgba($apple-error, 0.7);
+                                color: $apple-error;
                             }
                         }
                     }
@@ -246,35 +175,24 @@
                     textarea {
                         @include apple-input;
                         width: 100%;
-                        height: clamp(100px, 12vw, 120px) !important;
-                        padding: clamp(14px, 1.8vw, 16px) clamp(18px, 2.2vw, 20px) !important;
+                        height: clamp(100px, 20vw, 130px) !important;
+                        padding: clamp(14px, 3.5vw, 18px) clamp(16px, 4vw, 20px) !important;
                         resize: none;
                         font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-regular;
-                        line-height: 1.5;
-                        font-size: clamp(14px, 1.6vw, 16px);
-                        
-                        &.form-input-error {
-                            border-color: $apple-error;
-                            background: rgba($apple-error, 0.05);
-                            
-                            &:focus {
-                                border-color: $apple-error;
-                                box-shadow: 0 0 0 3px rgba($apple-error, 0.2);
-                            }
-                        }
+                        font-size: clamp(14px, 3vw, 16px);
+                        line-height: 1.4;
+                        box-sizing: border-box;
                     }
                 }
                 
                 .privacy-policy {
                     width: 100%;
                     color: $apple-text-secondary;
-                    @include dFlex($jc: flex-start, $gap: 12px, $ai: flex-start);
-                    padding: 16px 0;
+                    @include dFlex($jc: flex-start, $gap: clamp(10px, 2.5vw, 14px), $ai: flex-start);
                     
                     .cb {
-                        width: 22px;
-                        height: 22px;
+                        width: clamp(18px, 4vw, 22px);
+                        height: clamp(18px, 4vw, 22px);
                         flex-shrink: 0;
                         border: 2px solid $apple-text-tertiary;
                         border-radius: $apple-radius-small;
@@ -282,7 +200,7 @@
                         position: relative;
                         background: transparent;
                         cursor: pointer;
-                        
+
                         &:hover {
                             border-color: $apple-primary;
                             transform: scale(1.05);
@@ -301,7 +219,7 @@
                                 left: 50%;
                                 transform: translate(-50%, -50%);
                                 color: white;
-                                font-size: 12px;
+                                font-size: clamp(8px, 2vw, 10px);
                                 font-weight: $apple-font-weight-bold;
                                 font-family: $apple-font-family;
                             }
@@ -309,16 +227,17 @@
                     }
                     
                     span {
-                        font-size: clamp(13px, 1.5vw, 14px);
+                        font-size: clamp(11px, 2.8vw, 13px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
                         line-height: 1.4;
+                        flex: 1;
                         
                         a {
                             color: $apple-primary;
                             font-weight: $apple-font-weight-medium;
                             transition: $apple-transition-fast;
-                            position: relative;
+                            text-decoration: none;
                             
                             &:hover {
                                 color: color.adjust($apple-primary, $lightness: 10%);
@@ -332,25 +251,26 @@
                     color: $apple-success;
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
-                    padding: 16px 20px;
+                    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
                     background: rgba($apple-success, 0.1);
                     border: 1px solid rgba($apple-success, 0.3);
                     border-radius: $apple-radius-medium;
                     text-align: center;
+                    font-size: clamp(12px, 3vw, 14px);
                     box-shadow: $apple-shadow-small;
-                    font-size: clamp(14px, 1.6vw, 16px);
                 }
                 
                 .send-btn {
-                    @include dFlex($jc: flex-end);
+                    @include dFlex($jc: center);
                     width: 100%;
+                    padding-top: clamp(8px, 2vw, 12px);
                     
                     button {
                         @include apple-button-primary;
-                        min-width: clamp(120px, 15vw, 140px);
                         font-family: $apple-font-family;
-                        font-size: clamp(14px, 1.6vw, 16px);
-                        padding: clamp(12px, 1.5vw, 14px) clamp(20px, 2.5vw, 24px);
+                        font-size: clamp(14px, 3.5vw, 16px);
+                        padding: clamp(12px, 3vw, 16px) clamp(24px, 6vw, 32px);
+                        min-width: clamp(120px, 30vw, 160px);
                         
                         &:disabled {
                             background: $apple-bg-quaternary;
@@ -374,149 +294,38 @@
                 }
             }
         }
+
+        .goup-arrow {
+            margin: clamp(24px, 6vw, 40px) auto;
+            width: clamp(20px, 5vw, 28px);
+            height: clamp(40px, 10vw, 56px);
+            background: {
+                image: url('./../../../../assets/img/arrow-up.png');
+                size: contain;
+                repeat: no-repeat;
+                position: center;
+            };
+            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+            transition: $apple-transition-fast;
+            border-radius: $apple-radius-small;
+            cursor: pointer;
+            
+            &:hover {
+                background-image: url('./../../../../assets/img/arrow-down-hover.png');
+                transform: translateY(-2px) scale(1.1);
+                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+                box-shadow: $apple-shadow-glow;
+            }
+        }
     }
 }
 
-// Animationen
-@keyframes apple-contact-ambient {
+// Mobile-spezifische Animationen
+@keyframes apple-mobile-contact-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
-    33% {
-        transform: translateY(-20px) rotate(120deg) scale(1.1);
-    }
-    66% {
-        transform: translateY(10px) rotate(240deg) scale(0.9);
-    }
-}
-
-// Responsive Design für Desktop
-@media screen and (max-width: 1400px) {
-    .contact-container {
-        margin: 60px 20px;
-        
-        .goup-arrow {
-            right: clamp(30px, 6vw, 80px);
-        }
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .contact-container {
-        .contact-content {
-            width: 95%;
-            
-            .contact-header {
-                @include dFlex($fd: column, $gap: 24px);
-                
-                .header-left,
-                .header-right {
-                    width: 100%;
-                }
-                
-                .header-left {
-                    padding-right: 0;
-                    text-align: center;
-                }
-                
-                .header-right {
-                    max-width: 400px;
-                    margin: 0 auto;
-                    
-                    .header-right-email, .header-right-phone {
-                        a {
-                            justify-content: center;
-                        }
-                    }
-                }
-            }
-            
-            .contact-form form .form-name-mail {
-                @include dFlex($fd: column, $gap: 20px);
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .contact-container {
-        margin: 50px 16px;
-        padding: 40px 24px;
-        border-radius: $apple-radius-large;
-        
-        .goup-arrow {
-            right: 24px;
-            top: 24px;
-            width: 30px;
-            height: 60px;
-        }
-        
-        h2 {
-            margin-bottom: 32px;
-        }
-        
-        .contact-content {
-            width: 100%;
-            gap: 28px;
-            
-            .contact-header {
-                gap: 20px;
-                
-                .header-left {
-                    font-size: 16px;
-                }
-                
-                .header-right {
-                    .header-right-email, .header-right-phone {
-                        a {
-                            padding: 14px 18px;
-                            
-                            .img {
-                                width: 24px;
-                                height: 28px;
-                            }
-                            
-                            span {
-                                font-size: 15px;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            .contact-form form {
-                gap: 22px;
-                
-                .form-field {
-                    .form-label {
-                        font-size: 13px;
-                        margin-left: 18px;
-                    }
-                    
-                    .form-input {
-                        height: 50px;
-                        font-size: 15px;
-                    }
-                }
-                
-                .form-message textarea {
-                    height: 110px !important;
-                    padding: 15px 18px !important;
-                    font-size: 15px;
-                }
-                
-                .privacy-policy {
-                    span {
-                        font-size: 13px;
-                    }
-                }
-                
-                .send-btn button {
-                    min-width: 130px;
-                    font-size: 15px;
-                    padding: 13px 22px;
-                }
-            }
-        }
+    50% {
+        transform: translateY(-15px) rotate(180deg) scale(1.1);
     }
 }
