@@ -40,7 +40,7 @@ Glassmorphism: Moderne Backdrop-Filter Effekte
 📦 Installation & Entwicklung
 bash
 # Repository klonen
-git clone https://github.com/muc1982/portfolio
+git clone https://github.com/muc1982/Portfolio.git
 
 # Dependencies installieren
 npm install
