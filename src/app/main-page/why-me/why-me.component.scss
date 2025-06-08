@@ -1,4 +1,10 @@
+// why-me.component.scss - HAUPTDATEI (unter 400 LOC)
 @use '../../../style/apple-variables' as *;
+
+// Importiere Partials
+@use './partials/why-me-layout';
+@use './partials/why-me-animations';
+@use './partials/why-me-responsive';
 
 .why-me-extra {
     height: clamp(200px, 40vw, 280px);
@@ -284,101 +290,5 @@
                 }
             }
         }
-    }
-}
-
-@keyframes ambient-float-mobile {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-    25% {
-        transform: translateY(-15px) rotate(1deg) scale(1.02);
-    }
-    50% {
-        transform: translateY(-8px) rotate(-0.5deg) scale(0.98);
-    }
-    75% {
-        transform: translateY(-12px) rotate(0.8deg) scale(1.01);
-    }
-}
-
-@keyframes cursor-blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
-}
-
-@keyframes subtitle-appear {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes card-entrance-mobile {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.introduction-card {
-    animation: card-entrance-mobile 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s both;
-}
-
-// Responsive kompakt - nur die wichtigsten Breakpoints
-@media screen and (max-width: 480px) {
-    .why-me-container {
-        margin: 24px auto;
-        border-radius: $apple-radius-large;
-        h2 { margin-bottom: 20px; margin-top: 20px; }
-        .content { gap: 24px; padding-bottom: 24px; }
-        .hero-section { gap: 18px; }
-        .location-carousel { height: 70px; }
-        .introduction-card { padding: 18px; border-radius: $apple-radius-large; }
-        .cta-section { padding-top: 12px; }
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .why-me-container {
-        margin: 20px auto;
-        h2 { margin-bottom: 16px; margin-top: 16px; }
-        .content { gap: 20px; padding-bottom: 20px; }
-        .hero-section { gap: 14px; }
-        .location-carousel { height: 60px; border-radius: $apple-radius-large; }
-        .introduction-card { padding: 14px; }
-        .cta-section { padding-top: 10px; }
-    }
-}
-
-@media screen and (max-width: 320px) {
-    .why-me-container {
-        margin: 16px auto;
-        padding: 16px 10px;
-        h2 { margin-bottom: 12px; margin-top: 12px; }
-        .content { gap: 16px; padding-bottom: 16px; }
-        .hero-section { gap: 10px; }
-        .location-carousel { height: 50px; }
-        .introduction-card { padding: 10px; border-radius: $apple-radius-medium; }
-        .cta-section { padding-top: 8px; }
-    }
-}
-
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    .why-me-container {
-        margin: 12px auto;
-        .content { gap: 16px; padding-bottom: 16px; }
-        .hero-section { gap: 12px; }
-        .location-carousel { height: 50px; }
-        .introduction-card { padding: 16px; }
-        .cta-section { padding-top: 8px; }
     }
 }

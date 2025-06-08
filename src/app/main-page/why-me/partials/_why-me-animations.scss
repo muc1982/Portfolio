@@ -1,0 +1,136 @@
+@use '../../../../style/apple-variables' as *;
+
+@keyframes ambient-float-mobile {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translateY(-15px) rotate(1deg) scale(1.02);
+    }
+    50% {
+        transform: translateY(-8px) rotate(-0.5deg) scale(0.98);
+    }
+    75% {
+        transform: translateY(-12px) rotate(0.8deg) scale(1.01);
+    }
+}
+
+@keyframes cursor-blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes subtitle-appear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes card-entrance-mobile {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.introduction-card {
+    animation: card-entrance-mobile 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s both;
+}
+
+// Accessibility - Reduced Motion
+@media (prefers-reduced-motion: reduce) {
+    .why-me-container {
+        &::before {
+            animation: none;
+        }
+    }
+    
+    .location-slide {
+        transition: opacity 0.3s ease !important;
+    }
+    
+    .introduction-card {
+        animation: none;
+        
+        &:hover {
+            transform: none;
+        }
+    }
+    
+    .location-icon,
+    .progress-dots .dot {
+        &:hover {
+            transform: none;
+        }
+    }
+    
+    @keyframes ambient-float-mobile {
+        0%, 100% {
+            transform: none;
+        }
+    }
+    
+    @keyframes cursor-blink {
+        0%, 100% {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes subtitle-appear {
+        0% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes card-entrance-mobile {
+        0%, 100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+}
+
+// High Contrast Mode
+@media (prefers-contrast: high) {
+    .why-me-container {
+        background: #000;
+        border: 2px solid #fff;
+        
+        .location-carousel {
+            background: #111;
+            border: 2px solid #333;
+        }
+        
+        .introduction-card {
+            background: #111;
+            border: 2px solid #333;
+        }
+        
+        .location-text {
+            .highlight,
+            .regular {
+                color: #fff !important;
+                background: none !important;
+                -webkit-text-fill-color: #fff !important;
+            }
+        }
+        
+        .progress-dots .dot {
+            background: #666;
+            
+            &.active {
+                background: #fff;
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+@use '../../../style/apple-variables' as *;
+
+// Tablet
+@media screen and (max-width: 1200px) {
+    .legal-notice-content .content {
+        max-width: 800px;
+        
+        .legal-notice-subcontainer {
+            padding: clamp(20px, 4vw, 40px);
+        }
+    }
+}
+
+// Mobile
+@media screen and (max-width: 900px) {
+    .legal-notice-container .legal-notice-content {
+        min-height: calc(100vh - 104px - 280px);
+        
+        .content {
+            @include standardPaddingMobile();
+            padding-top: clamp(32px, 6vw, 56px);
+            padding-bottom: clamp(32px, 6vw, 56px);
+            max-width: 100%;
+            
+            .legal-notice-subcontainer {
+                padding: clamp(16px, 4vw, 32px);
+                border-radius: $apple-radius-large;
+            }
+            
+            h1 {
+                margin-bottom: clamp(20px, 3vw, 32px);
+            }
+            
+            h2::before {
+                left: -16px;
+                width: 4px;
+            }
+            
+            h3::before {
+                left: -16px;
+                font-size: 0.7em;
+            }
+            
+            p {
+                text-align: left;
+                hyphens: none;
+            }
+        }
+    }
+}
+
+// Small Mobile
+@media screen and (max-width: 600px) {
+    .legal-notice-container .legal-notice-content {
+        margin-top: 88px;
+        
+        .content {
+            padding-top: clamp(24px, 5vw, 40px);
+            padding-bottom: clamp(24px, 5vw, 40px);
+            
+            .legal-notice-subcontainer {
+                padding: clamp(12px, 3vw, 24px);
+                border-radius: $apple-radius-medium;
+            }
+            
+            h1::after {
+                width: clamp(40px, 12vw, 80px);
+                height: 2px;
+                bottom: -6px;
+            }
+            
+            h2::before {
+                left: -12px;
+                width: 3px;
+            }
+            
+            h3::before {
+                left: -12px;
+                font-size: 0.6em;
+            }
+        }
+    }
+}
+
+// Very Small Mobile
+@media screen and (max-width: 480px) {
+    .legal-notice-container .legal-notice-content .content {
+        .legal-notice-subcontainer {
+            padding: clamp(10px, 2.5vw, 18px);
+        }
+        
+        h1 {
+            margin-bottom: clamp(16px, 2.5vw, 24px);
+        }
+        
+        h2::before {
+            left: -8px;
+            width: 2px;
+        }
+        
+        h3::before {
+            left: -8px;
+        }
+        
+        br {
+            line-height: 1.5;
+        }
+    }
+}

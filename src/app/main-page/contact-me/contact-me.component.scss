@@ -1,4 +1,4 @@
-@use "./../../../../style/apple-variables" as *;
+@use "./../../../style/apple-variables.scss" as *;
 @use 'sass:color';
 
 .contact-container {
@@ -70,8 +70,8 @@
                             box-shadow: $apple-shadow-small;
                             
                             span { color: $apple-primary; }
-                            .mail.img { background-image: url('./../../../../assets/img/mail-hover.svg'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
-                            .tel.img { background-image: url('./../../../../assets/img/github-hover.png'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
+                            .mail.img { background-image: url('./../../../assets/img/mail-hover.svg'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
+                            .tel.img { background-image: url('./../../../assets/img/github-hover.png'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
                         }
                         
                         &:active {
@@ -88,8 +88,8 @@
                             background-position: center;
                         }
                         
-                        .mail { background-image: url('./../../../../assets/img/mail.png'); }
-                        .tel { background-image: url('./../../../../assets/img/github.png'); }
+                        .mail { background-image: url('./../../../assets/img/mail.png'); }
+                        .tel { background-image: url('./../../../assets/img/github.png'); }
                         
                         span {
                             font-family: $apple-font-family;
@@ -284,7 +284,7 @@
             width: clamp(20px, 5vw, 28px);
             height: clamp(40px, 10vw, 56px);
             background: {
-                image: url('./../../../../assets/img/arrow-up.png');
+                image: url('./../../../assets/img/arrow-up.png');
                 size: contain;
                 repeat: no-repeat;
                 position: center;
@@ -295,7 +295,7 @@
             cursor: pointer;
             
             &:hover {
-                background-image: url('./../../../../assets/img/arrow-down-hover.png');
+                background-image: url('./../../../assets/img/arrow-down.png');
                 transform: translateY(-2px) scale(1.1);
                 filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
                 box-shadow: $apple-shadow-glow;

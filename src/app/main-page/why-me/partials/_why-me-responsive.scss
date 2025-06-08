@@ -1,0 +1,223 @@
+@use '../../../../style/apple-variables' as *;
+
+// 480px: Small Mobile
+@media screen and (max-width: 480px) {
+    .why-me-container {
+        margin: 24px auto;
+        border-radius: $apple-radius-large;
+        
+        h2 { 
+            margin-bottom: 20px; 
+            margin-top: 20px; 
+        }
+        
+        .content { 
+            gap: 24px; 
+            padding-bottom: 24px; 
+        }
+        
+        .hero-section { 
+            gap: 18px; 
+        }
+        
+        .location-carousel { 
+            height: 70px; 
+        }
+        
+        .introduction-card { 
+            padding: 18px; 
+            border-radius: $apple-radius-large; 
+        }
+        
+        .cta-section { 
+            padding-top: 12px; 
+        }
+    }
+}
+
+// 375px: Very Small Mobile
+@media screen and (max-width: 375px) {
+    .why-me-container {
+        margin: 20px auto;
+        
+        h2 { 
+            margin-bottom: 16px; 
+            margin-top: 16px; 
+        }
+        
+        .content { 
+            gap: 20px; 
+            padding-bottom: 20px; 
+        }
+        
+        .hero-section { 
+            gap: 14px; 
+        }
+        
+        .location-carousel { 
+            height: 60px; 
+            border-radius: $apple-radius-large; 
+        }
+        
+        .introduction-card { 
+            padding: 14px; 
+        }
+        
+        .cta-section { 
+            padding-top: 10px; 
+        }
+    }
+}
+
+// 320px: Ultra Small Mobile
+@media screen and (max-width: 320px) {
+    .why-me-container {
+        margin: 16px auto;
+        padding: 16px 10px;
+        
+        h2 { 
+            margin-bottom: 12px; 
+            margin-top: 12px; 
+        }
+        
+        .content { 
+            gap: 16px; 
+            padding-bottom: 16px; 
+        }
+        
+        .hero-section { 
+            gap: 10px; 
+        }
+        
+        .location-carousel { 
+            height: 50px; 
+        }
+        
+        .introduction-card { 
+            padding: 10px; 
+            border-radius: $apple-radius-medium; 
+        }
+        
+        .cta-section { 
+            padding-top: 8px; 
+        }
+        
+        .location-slide {
+            .location-icon {
+                width: clamp(24px, 8vw, 32px);
+                height: clamp(24px, 8vw, 32px);
+                
+                img {
+                    width: clamp(12px, 4vw, 16px);
+                    height: clamp(12px, 4vw, 16px);
+                }
+            }
+            
+            .location-content {
+                .location-text {
+                    font-size: clamp(12px, 4vw, 16px);
+                }
+                
+                .location-subtitle {
+                    font-size: clamp(8px, 2.5vw, 10px);
+                }
+            }
+        }
+        
+        .introduction-card .introduction-text {
+            font-size: clamp(12px, 4vw, 14px);
+            
+            &::before,
+            &::after {
+                font-size: clamp(24px, 8vw, 32px);
+            }
+        }
+        
+        .talk-button button {
+            font-size: clamp(12px, 4vw, 14px);
+            padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 20px);
+            min-width: clamp(100px, 28vw, 140px);
+        }
+    }
+}
+
+// Landscape Mode (for small devices)
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .why-me-container {
+        margin: 12px auto;
+        
+        .content { 
+            gap: 16px; 
+            padding-bottom: 16px; 
+        }
+        
+        .hero-section { 
+            gap: 12px; 
+        }
+        
+        .location-carousel { 
+            height: 50px; 
+        }
+        
+        .introduction-card { 
+            padding: 16px; 
+        }
+        
+        .cta-section { 
+            padding-top: 8px; 
+        }
+        
+        h2 {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+    }
+}
+
+// Ultra-wide screens optimization
+@media screen and (min-width: 1200px) {
+    .why-me-container {
+        max-width: 800px;
+    }
+}
+
+// Print Styles
+@media print {
+    .why-me-container {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        border: 1px solid black !important;
+        
+        &::before,
+        &::after {
+            display: none !important;
+        }
+        
+        .location-carousel,
+        .introduction-card {
+            background: white !important;
+            border: 1px solid black !important;
+            box-shadow: none !important;
+        }
+        
+        .location-text {
+            .highlight,
+            .regular {
+                color: black !important;
+                background: none !important;
+                -webkit-text-fill-color: black !important;
+            }
+        }
+        
+        .progress-dots {
+            display: none;
+        }
+        
+        .talk-button button {
+            background: white !important;
+            color: black !important;
+            border: 2px solid black !important;
+        }
+    }
+}
