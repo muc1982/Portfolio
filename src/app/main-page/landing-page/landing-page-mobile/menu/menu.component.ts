@@ -15,8 +15,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     TranslateModule, 
     NgIf, 
     NgStyle, 
-    RouterLink,           // HINZUGEFÜGT
-    RouterLinkActive      // HINZUGEFÜGT
+    RouterLink,           
+    RouterLinkActive      
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
