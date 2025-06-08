@@ -19,19 +19,33 @@ export class ScrollBounceDirective {
   @HostListener('click')
   onClick() {
     const target = document.getElementById(this.targetId);
-    const landingExtra = document.getElementById('landing-page-extra');
-    const whyMeExtra = document.getElementById('why-me-extra');
-    
     if (!target) return;
-    if (target?.getBoundingClientRect().top == this.offsetY && this.gs.lastTargetId == this.targetId) return;
+    if (this.isAlreadyAtTarget(target)) return;
+    
     this.gs.lastTargetId = this.targetId;
+    const { landingExtra, whyMeExtra } = this.getExtraElements();
+    
+    this.handleExtraVisibility(landingExtra, whyMeExtra);
+    this.startAnimation(target, landingExtra, whyMeExtra);
+  }
 
+  private isAlreadyAtTarget(target: HTMLElement): boolean {
+    return target?.getBoundingClientRect().top == this.offsetY && 
+           this.gs.lastTargetId == this.targetId;
+  }
+
+  private getExtraElements() {
+    return {
+      landingExtra: document.getElementById('landing-page-extra'),
+      whyMeExtra: document.getElementById('why-me-extra')
+    };
+  }
+
+  private handleExtraVisibility(landingExtra: HTMLElement | null, whyMeExtra: HTMLElement | null) {
     if (this.targetId != 'why-me' && whyMeExtra != null) {
       whyMeExtra.style.display = 'none';
     }
-   
     this.showExtras(landingExtra, whyMeExtra);
-    this.startAnimation(target, landingExtra, whyMeExtra);
   }
 
   showExtras (landingExtra: HTMLElement | null, whyMeExtra: HTMLElement | null) {
@@ -54,7 +68,6 @@ export class ScrollBounceDirective {
 
   startAnimation(target: HTMLElement | null, landingExtra: HTMLElement | null, whyMeExtra: HTMLElement | null) {
     if (target != null) {
-
       gsap.to(window, {
         duration: 1.2,
         scrollTo: { y: target, offsetY: this.offsetY },
@@ -64,6 +77,5 @@ export class ScrollBounceDirective {
         }
       });
     }
-
   }
 }

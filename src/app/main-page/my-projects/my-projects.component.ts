@@ -79,19 +79,22 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
 
   changeText() {
     this.translate.get(this.langsArr).subscribe(translations => {
-      for (let i = 0; i < this.projects.length; i++) {
-        const project = this.projects[i];
-        if (translations[project.introductionKey]) {
-          project.introduction = translations[project.introductionKey];
-        }
-        if (translations[project.workExperienceKey]) {
-          project.workExperience = translations[project.workExperienceKey];
-        }
-        if (translations[project.workProcessKey]) {
-          project.workProcess = translations[project.workProcessKey];
-        }
-      }
+      this.projects.forEach(project => {
+        this.updateProjectTranslations(project, translations);
+      });
     });
+  }
+
+  private updateProjectTranslations(project: Project, translations: any) {
+    if (translations[project.introductionKey]) {
+      project.introduction = translations[project.introductionKey];
+    }
+    if (translations[project.workExperienceKey]) {
+      project.workExperience = translations[project.workExperienceKey];
+    }
+    if (translations[project.workProcessKey]) {
+      project.workProcess = translations[project.workProcessKey];
+    }
   }
 
   switchProject(index: number) {

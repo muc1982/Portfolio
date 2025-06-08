@@ -11,7 +11,6 @@
     overflow: hidden;
     position: relative;
     
-    // Apple-Style Ambient Background
     &::before {
         content: '';
         position: absolute;
@@ -431,7 +430,6 @@
     }
 }
 
-// Animationen für Project Wechsel
 @keyframes apple-projects-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
@@ -482,11 +480,10 @@
     animation: apple-project-slide-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-// Responsive Design
+// Responsive für kleinere Breakpoints - kompakter
 @media screen and (max-width: 1400px) {
     .my-projects-container {
         margin: 32px 20px;
-        
         .my-projects-content nav > div {
             padding: 20px 24px;
             min-height: 90px;
@@ -495,163 +492,19 @@
 }
 
 @media screen and (max-width: 1200px) {
-    .my-projects-container {
-        .my-projects-content {
-            nav {
-                @include dFlex($fd: column, $gap: 8px);
-                
-                > div {
-                    border-radius: $apple-radius-medium;
-                    min-height: 60px;
-                    padding: 16px 20px;
-                    
-                    > span {
-                        font-size: clamp(16px, 3vw, 20px);
-                    }
-                }
-            }
-            
-            .project {
-                @include dFlex($fd: column-reverse, $gap: 40px, $ai: center);
-                
-                .project-left,
-                .project-right {
-                    width: 100%;
-                }
-                
-                .project-left {
-                    .tab-li {
-                        padding: 20px;
-                    }
-                }
-                
-                .project-right {
-                    .technologies {
-                        padding: 16px;
-                        gap: 12px;
-                        
-                        .tech-logo {
-                            padding: 8px;
-                            
-                            img {
-                                height: clamp(24px, 4vw, 32px);
-                            }
-                        }
-                    }
-                    
-                    .project-img {
-                        max-width: 100%;
-                    }
-                }
-            }
-            
-            .team-player {
-                padding: 40px 30px;
-                
-                .team-player-content-wrapper {
-                    gap: 24px;
-                    
-                    .player {
-                        width: clamp(250px, 40vw, 320px);
-                        height: clamp(250px, 40vw, 320px);
-                    }
-                }
+    .my-projects-container .my-projects-content {
+        nav {
+            @include dFlex($fd: column, $gap: 8px);
+            > div {
+                border-radius: $apple-radius-medium;
+                min-height: 60px;
+                padding: 16px 20px;
+                > span { font-size: clamp(16px, 3vw, 20px); }
             }
         }
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .my-projects-container {
-        margin: 20px 10px;
-        border-radius: $apple-radius-large;
-        
-        h2 {
-            padding-top: 32px;
-        }
-        
-        .my-projects-content {
-            nav > div {
-                min-height: 50px;
-                padding: 12px 16px;
-            }
-            
-            .project {
-                padding: 32px 20px;
-                
-                .project-left .tab-li {
-                    padding: 16px;
-                    gap: 16px;
-                    
-                    .right-of-logo > div {
-                        flex-direction: column;
-                        align-items: flex-start;
-                        gap: 8px;
-                    }
-                }
-                
-                .project-right {
-                    .technologies {
-                        padding: 12px;
-                        gap: 8px;
-                        
-                        .tech-logo {
-                            padding: 6px;
-                        }
-                    }
-                    
-                    .project-right-footer {
-                        gap: 12px;
-                        
-                        button {
-                            min-width: 100px;
-                            
-                            a {
-                                padding: 10px 20px;
-                                font-size: 14px;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            .team-player {
-                padding: 32px 20px;
-                
-                .team-player-content-wrapper {
-                    gap: 20px;
-                    
-                    .player {
-                        width: clamp(220px, 60vw, 280px);
-                        height: clamp(220px, 60vw, 280px);
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .my-projects-container {
-        .my-projects-content {
-            .project {
-                .project-right .project-right-footer {
-                    flex-direction: column;
-                    align-items: center;
-                    
-                    button {
-                        width: 100%;
-                        max-width: 200px;
-                    }
-                }
-            }
-            
-            .team-player .team-player-content-wrapper {
-                .player {
-                    width: clamp(200px, 80vw, 250px);
-                    height: clamp(200px, 80vw, 250px);
-                }
-            }
+        .project {
+            @include dFlex($fd: column-reverse, $gap: 40px, $ai: center);
+            .project-left, .project-right { width: 100%; }
         }
     }
 }

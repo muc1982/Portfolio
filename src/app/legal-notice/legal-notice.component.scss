@@ -23,7 +23,6 @@
             margin: 0 auto;
             position: relative;
             
-            // Apple-Style Ambient Background
             &::before {
                 content: '';
                 position: absolute;
@@ -72,7 +71,6 @@
                     pointer-events: none;
                 }
                 
-                // Enhanced glasmorphism
                 backdrop-filter: blur(25px);
                 -webkit-backdrop-filter: blur(25px);
             }
@@ -251,7 +249,6 @@
     }
 }
 
-// Animationen
 @keyframes apple-legal-ambient {
     0%, 100% {
         opacity: 0.05;
@@ -297,289 +294,71 @@
     }
 }
 
-// Responsive Design
+// Responsive kompakt
 @media screen and (max-width: 1200px) {
-    .legal-notice-content {
-        .content {
-            max-width: 800px;
-            
-            .legal-notice-subcontainer {
-                padding: clamp(20px, 4vw, 40px);
-            }
-        }
+    .legal-notice-content .content {
+        max-width: 800px;
+        .legal-notice-subcontainer { padding: clamp(20px, 4vw, 40px); }
     }
 }
 
 @media screen and (max-width: 900px) {
-    .legal-notice-container {
-        .legal-notice-content {
-            min-height: calc(100vh - 104px - 280px);
-            
-            .content {
-                @include standardPaddingMobile();
-                padding-top: clamp(32px, 6vw, 56px);
-                padding-bottom: clamp(32px, 6vw, 56px);
-                max-width: 100%;
-                
-                .legal-notice-subcontainer {
-                    padding: clamp(16px, 4vw, 32px);
-                    border-radius: $apple-radius-large;
-                }
-                
-                h1 {
-                    margin-bottom: clamp(20px, 3vw, 32px);
-                    
-                    &::after {
-                        width: clamp(60px, 15vw, 100px);
-                        height: 3px;
-                        bottom: -8px;
-                    }
-                }
-                
-                h2::before {
-                    left: -16px;
-                    width: 4px;
-                }
-                
-                h3::before {
-                    left: -16px;
-                    font-size: 0.7em;
-                }
-                
-                p {
-                    text-align: left;
-                    hyphens: none;
-                }
-            }
+    .legal-notice-container .legal-notice-content {
+        min-height: calc(100vh - 104px - 280px);
+        .content {
+            @include standardPaddingMobile();
+            padding-top: clamp(32px, 6vw, 56px);
+            padding-bottom: clamp(32px, 6vw, 56px);
+            max-width: 100%;
+            .legal-notice-subcontainer { padding: clamp(16px, 4vw, 32px); border-radius: $apple-radius-large; }
+            h1 { margin-bottom: clamp(20px, 3vw, 32px); }
+            h2::before { left: -16px; width: 4px; }
+            h3::before { left: -16px; font-size: 0.7em; }
+            p { text-align: left; hyphens: none; }
         }
     }
 }
 
 @media screen and (max-width: 600px) {
-    .legal-notice-container {
-        .legal-notice-content {
-            margin-top: 88px;
-            
-            .content {
-                padding-top: clamp(24px, 5vw, 40px);
-                padding-bottom: clamp(24px, 5vw, 40px);
-                
-                .legal-notice-subcontainer {
-                    padding: clamp(12px, 3vw, 24px);
-                    border-radius: $apple-radius-medium;
-                }
-                
-                h1 {
-                    &::after {
-                        width: clamp(40px, 12vw, 80px);
-                        height: 2px;
-                        bottom: -6px;
-                    }
-                }
-                
-                h2 {
-                    &::before {
-                        left: -12px;
-                        width: 3px;
-                    }
-                }
-                
-                h3 {
-                    &::before {
-                        left: -12px;
-                        font-size: 0.6em;
-                    }
-                }
-            }
+    .legal-notice-container .legal-notice-content {
+        margin-top: 88px;
+        .content {
+            padding-top: clamp(24px, 5vw, 40px);
+            padding-bottom: clamp(24px, 5vw, 40px);
+            .legal-notice-subcontainer { padding: clamp(12px, 3vw, 24px); border-radius: $apple-radius-medium; }
+            h1::after { width: clamp(40px, 12vw, 80px); height: 2px; bottom: -6px; }
+            h2::before { left: -12px; width: 3px; }
+            h3::before { left: -12px; font-size: 0.6em; }
         }
     }
 }
 
 @media screen and (max-width: 480px) {
-    .legal-notice-container {
-        .legal-notice-content {
-            .content {
-                .legal-notice-subcontainer {
-                    padding: clamp(10px, 2.5vw, 18px);
-                    
-                    &::before {
-                        filter: blur(35px);
-                    }
-                }
-                
-                h1 {
-                    margin-bottom: clamp(16px, 2.5vw, 24px);
-                    
-                    &::after {
-                        width: clamp(30px, 10vw, 60px);
-                        height: 1.5px;
-                        bottom: -4px;
-                    }
-                }
-                
-                h2::before {
-                    left: -8px;
-                    width: 2px;
-                }
-                
-                h3::before {
-                    left: -8px;
-                }
-                
-                br {
-                    line-height: 1.5;
-                }
-            }
-        }
+    .legal-notice-container .legal-notice-content .content {
+        .legal-notice-subcontainer { padding: clamp(10px, 2.5vw, 18px); }
+        h1 { margin-bottom: clamp(16px, 2.5vw, 24px); }
+        h2::before { left: -8px; width: 2px; }
+        h3::before { left: -8px; }
+        br { line-height: 1.5; }
     }
 }
 
-@media screen and (max-width: 375px) {
-    .legal-notice-container {
-        .legal-notice-content {
-            .content {
-                .legal-notice-subcontainer {
-                    padding: 12px;
-                    border-radius: $apple-radius-small;
-                }
-                
-                h1 {
-                    margin-bottom: 16px;
-                    
-                    &::after {
-                        width: 40px;
-                        height: 1px;
-                        bottom: -3px;
-                    }
-                }
-                
-                h2 {
-                    margin-top: 24px;
-                    margin-bottom: 12px;
-                    
-                    &::before {
-                        display: none;
-                    }
-                }
-                
-                h3 {
-                    margin-top: 16px;
-                    margin-bottom: 8px;
-                    
-                    &::before {
-                        display: none;
-                    }
-                }
-                
-                h4 {
-                    margin-top: 12px;
-                    margin-bottom: 6px;
-                }
-                
-                p {
-                    margin-top: 8px;
-                    margin-bottom: 8px;
-                }
-                
-                .developer-akademie::before {
-                    display: none;
-                }
-            }
-        }
-    }
-}
-
-// Accessibility Improvements
 @media (prefers-reduced-motion: reduce) {
-    .legal-notice-container {
-        .legal-notice-content .content {
-            &::before {
-                animation: none;
-            }
-            
-            .legal-notice-subcontainer::before {
-                animation: none;
-            }
-            
-            h1::after {
-                animation: none;
-            }
-        }
+    .legal-notice-container .legal-notice-content .content {
+        &::before { animation: none; }
+        .legal-notice-subcontainer::before { animation: none; }
+        h1::after { animation: none; }
     }
 }
 
-// High Contrast Mode
 @media (prefers-contrast: high) {
     .legal-notice-container {
         background: #000;
-        
         .legal-notice-content .content {
-            .legal-notice-subcontainer {
-                background: #111;
-                border-color: #333;
-            }
-            
-            h1, h2 {
-                color: #fff;
-                background: none;
-                -webkit-text-fill-color: initial;
-            }
-            
-            p {
-                color: #ccc;
-            }
-            
-            a {
-                color: #0ff;
-            }
-        }
-    }
-}
-
-// Print Styles
-@media print {
-    .legal-notice-container {
-        background: white;
-        
-        .legal-notice-content .content {
-            color: black;
-            background: white;
-            max-width: 100%;
-            
-            .legal-notice-subcontainer {
-                background: white;
-                border: 1px solid #000;
-                box-shadow: none;
-                
-                &::before,
-                &::after {
-                    display: none;
-                }
-            }
-            
-            h1, h2, h3, h4 {
-                color: black;
-                background: none;
-                -webkit-text-fill-color: initial;
-                
-                &::before,
-                &::after {
-                    display: none;
-                }
-            }
-            
-            a {
-                color: black;
-                text-decoration: underline;
-                
-                &::after {
-                    display: none;
-                }
-            }
-            
-            .developer-akademie::before {
-                display: none;
-            }
+            .legal-notice-subcontainer { background: #111; border-color: #333; }
+            h1, h2 { color: #fff; background: none; -webkit-text-fill-color: initial; }
+            p { color: #ccc; }
+            a { color: #0ff; }
         }
     }
 }

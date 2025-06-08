@@ -23,7 +23,6 @@
     -webkit-backdrop-filter: blur(20px);
     box-sizing: border-box;
 
-    // Ambient Background Animation für Mobile
     &::before {
         content: '';
         position: absolute;
@@ -38,7 +37,6 @@
         opacity: 0.7;
     }
 
-    // Glasmorphism Overlay
     &::after {
         content: '';
         position: absolute;
@@ -184,7 +182,6 @@
                     }
                 }
                 
-                // Progress Indicators - Korrigiert
                 .progress-dots {
                     position: absolute;
                     bottom: clamp(12px, 3vw, 18px);
@@ -290,7 +287,6 @@
     }
 }
 
-// Keyframe Animations
 @keyframes ambient-float-mobile {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
@@ -337,189 +333,29 @@
     animation: card-entrance-mobile 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s both;
 }
 
-// Responsive Design für verschiedene Mobile-Größen
+// Responsive kompakt - nur die wichtigsten Breakpoints
 @media screen and (max-width: 480px) {
     .why-me-container {
         margin: 24px auto;
         border-radius: $apple-radius-large;
-        
-        h2 {
-            margin-bottom: 20px;
-            margin-top: 20px;
-        }
-        
-        .content {
-            gap: 24px;
-            padding-bottom: 24px;
-            
-            .hero-section {
-                gap: 18px;
-                
-                .location-carousel {
-                    height: 70px;
-                    
-                    .location-slide {
-                        padding: 8px;
-                        gap: 6px;
-                        
-                        .location-icon {
-                            width: 28px;
-                            height: 28px;
-                            
-                            img {
-                                width: 14px;
-                                height: 14px;
-                            }
-                        }
-                        
-                        .location-content .location-text {
-                            font-size: 12px;
-                        }
-                        
-                        .location-subtitle {
-                            font-size: 9px;
-                        }
-                    }
-                    
-                    .progress-dots {
-                        bottom: 8px;
-                        gap: 3px;
-                        
-                        .dot {
-                            width: 3px;
-                            height: 3px;
-                        }
-                    }
-                }
-                
-                .introduction-card {
-                    padding: 18px;
-                    border-radius: $apple-radius-large;
-                    
-                    .introduction-text {
-                        font-size: 13px;
-                        line-height: 1.5;
-                        
-                        &::before,
-                        &::after {
-                            font-size: 28px;
-                        }
-                        
-                        &::before {
-                            top: -10px;
-                            left: -4px;
-                        }
-                        
-                        &::after {
-                            bottom: -18px;
-                            right: -4px;
-                        }
-                    }
-                }
-            }
-            
-            .cta-section {
-                padding-top: 12px;
-                
-                .talk-button button {
-                    font-size: 13px;
-                    padding: 8px 16px;
-                    min-width: 100px;
-                }
-            }
-        }
+        h2 { margin-bottom: 20px; margin-top: 20px; }
+        .content { gap: 24px; padding-bottom: 24px; }
+        .hero-section { gap: 18px; }
+        .location-carousel { height: 70px; }
+        .introduction-card { padding: 18px; border-radius: $apple-radius-large; }
+        .cta-section { padding-top: 12px; }
     }
 }
 
 @media screen and (max-width: 375px) {
     .why-me-container {
         margin: 20px auto;
-        
-        h2 {
-            margin-bottom: 16px;
-            margin-top: 16px;
-        }
-        
-        .content {
-            gap: 20px;
-            padding-bottom: 20px;
-            
-            .hero-section {
-                gap: 14px;
-                
-                .location-carousel {
-                    height: 60px;
-                    border-radius: $apple-radius-large;
-                    
-                    .location-slide {
-                        padding: 6px;
-                        gap: 4px;
-                        
-                        .location-icon {
-                            width: 24px;
-                            height: 24px;
-                            
-                            img {
-                                width: 12px;
-                                height: 12px;
-                            }
-                        }
-                        
-                        .location-content .location-text {
-                            font-size: 11px;
-                        }
-                        
-                        .location-subtitle {
-                            font-size: 8px;
-                        }
-                    }
-                    
-                    .progress-dots {
-                        bottom: 8px;
-                        gap: 2px;
-                        
-                        .dot {
-                            width: 2px;
-                            height: 2px;
-                        }
-                    }
-                }
-                
-                .introduction-card {
-                    padding: 14px;
-                    
-                    .introduction-text {
-                        font-size: 12px;
-                        line-height: 1.4;
-                        
-                        &::before,
-                        &::after {
-                            font-size: 24px;
-                        }
-                        
-                        &::before {
-                            top: -8px;
-                            left: -3px;
-                        }
-                        
-                        &::after {
-                            bottom: -15px;
-                            right: -3px;
-                        }
-                    }
-                }
-            }
-            
-            .cta-section {
-                padding-top: 10px;
-                
-                .talk-button button {
-                    font-size: 12px;
-                    padding: 6px 14px;
-                    min-width: 90px;
-                }
-            }
-        }
+        h2 { margin-bottom: 16px; margin-top: 16px; }
+        .content { gap: 20px; padding-bottom: 20px; }
+        .hero-section { gap: 14px; }
+        .location-carousel { height: 60px; border-radius: $apple-radius-large; }
+        .introduction-card { padding: 14px; }
+        .cta-section { padding-top: 10px; }
     }
 }
 
@@ -527,129 +363,22 @@
     .why-me-container {
         margin: 16px auto;
         padding: 16px 10px;
-        
-        h2 {
-            margin-bottom: 12px;
-            margin-top: 12px;
-        }
-        
-        .content {
-            gap: 16px;
-            padding-bottom: 16px;
-            
-            .hero-section {
-                gap: 10px;
-                
-                .location-carousel {
-                    height: 50px;
-                    
-                    .location-slide {
-                        padding: 4px;
-                        gap: 3px;
-                        
-                        .location-icon {
-                            width: 20px;
-                            height: 20px;
-                            
-                            img {
-                                width: 10px;
-                                height: 10px;
-                            }
-                        }
-                        
-                        .location-content .location-text {
-                            font-size: 10px;
-                        }
-                        
-                        .location-subtitle {
-                            font-size: 7px;
-                        }
-                    }
-                    
-                    .progress-dots {
-                        bottom: 6px;
-                        gap: 1px;
-                        
-                        .dot {
-                            width: 2px;
-                            height: 2px;
-                        }
-                    }
-                }
-                
-                .introduction-card {
-                    padding: 10px;
-                    border-radius: $apple-radius-medium;
-                    
-                    .introduction-text {
-                        font-size: 11px;
-                        line-height: 1.3;
-                        
-                        &::before,
-                        &::after {
-                            font-size: 20px;
-                        }
-                        
-                        &::before {
-                            top: -6px;
-                            left: -2px;
-                        }
-                        
-                        &::after {
-                            bottom: -12px;
-                            right: -2px;
-                        }
-                    }
-                }
-            }
-            
-            .cta-section {
-                padding-top: 8px;
-                
-                .talk-button button {
-                    width: 100%;
-                    min-width: auto;
-                    font-size: 11px;
-                    padding: 5px 12px;
-                }
-            }
-        }
+        h2 { margin-bottom: 12px; margin-top: 12px; }
+        .content { gap: 16px; padding-bottom: 16px; }
+        .hero-section { gap: 10px; }
+        .location-carousel { height: 50px; }
+        .introduction-card { padding: 10px; border-radius: $apple-radius-medium; }
+        .cta-section { padding-top: 8px; }
     }
 }
 
-// Landscape mode
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .why-me-container {
         margin: 12px auto;
-        
-        .content {
-            gap: 16px;
-            padding-bottom: 16px;
-            
-            .hero-section {
-                gap: 12px;
-                
-                .location-carousel {
-                    height: 50px;
-                }
-                
-                .introduction-card {
-                    padding: 16px;
-                    
-                    .introduction-text {
-                        font-size: 12px;
-                        
-                        &::before,
-                        &::after {
-                            font-size: 20px;
-                        }
-                    }
-                }
-            }
-            
-            .cta-section {
-                padding-top: 8px;
-            }
-        }
+        .content { gap: 16px; padding-bottom: 16px; }
+        .hero-section { gap: 12px; }
+        .location-carousel { height: 50px; }
+        .introduction-card { padding: 16px; }
+        .cta-section { padding-top: 8px; }
     }
 }

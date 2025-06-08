@@ -34,7 +34,6 @@ export class ContactMeComponent {
   post = {
     endPoint: 'https://formspree.io/f/mldngvlb',
     body: (payload: any) => {
-      // Formspree erwartet FormData oder JSON mit spezifischen Feldern
       const formData = new FormData();
       formData.append('name', payload.name);
       formData.append('email', payload.email);
@@ -43,7 +42,6 @@ export class ContactMeComponent {
       return formData;
     },
     options: {
-      // Für FormData keine Content-Type Header setzen
       headers: {
         'Accept': 'application/json'
       },
@@ -69,24 +67,23 @@ export class ContactMeComponent {
 
   // Formspree-basierter E-Mail-Versand
   onSumbmit(myForm: NgForm) {
-    const b = this.checkFileds();
-    if (b) {
-      this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
-        .subscribe({
-          next: (response: any) => {
-            console.log('E-Mail erfolgreich versendet via Formspree:', response);
-            this.reset(myForm);
-          },
-          error: (error) => {
-            console.error('Fehler beim Versenden der E-Mail:', error);
-            // Fallback: mailto-Link als Alternative
-            this.sendEmailFallback();
-          },
-          complete: () => {
-            console.log('E-Mail-Versand abgeschlossen');
-          },
-        });
-    } 
+    const isValid = this.checkFileds();
+    if (!isValid) return;
+    
+    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
+      .subscribe({
+        next: (response: any) => {
+          console.log('E-Mail erfolgreich versendet via Formspree:', response);
+          this.reset(myForm);
+        },
+        error: (error) => this.handleEmailError(error),
+        complete: () => console.log('E-Mail-Versand abgeschlossen')
+      });
+  }
+
+  private handleEmailError(error: any) {
+    console.error('Fehler beim Versenden der E-Mail:', error);
+    this.sendEmailFallback();
   }
 
   // Fallback mailto-Link wenn Server nicht erreichbar

@@ -17,7 +17,6 @@
     width: 100%;
     box-sizing: border-box;
     
-    // Apple-Style Ambient Background für Mobile
     &::before {
         content: '';
         position: absolute;
@@ -72,18 +71,9 @@
                             transform: translateY(-1px);
                             box-shadow: $apple-shadow-small;
                             
-                            span {
-                                color: $apple-primary;
-                            }
-                            
-                            .mail.img {
-                                background-image: url('./../../../../assets/img/mail-hover.svg');
-                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                            }
-                            .tel.img {
-                                background-image: url('./../../../../assets/img/github-hover.png');
-                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                            }
+                            span { color: $apple-primary; }
+                            .mail.img { background-image: url('./../../../../assets/img/mail-hover.svg'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
+                            .tel.img { background-image: url('./../../../../assets/img/github-hover.png'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
                         }
                         
                         &:active {
@@ -100,12 +90,8 @@
                             background-position: center;
                         }
                         
-                        .mail {
-                            background-image: url('./../../../../assets/img/mail.png');
-                        }
-                        .tel {
-                            background-image: url('./../../../../assets/img/github.png');
-                        }
+                        .mail { background-image: url('./../../../../assets/img/mail.png'); }
+                        .tel { background-image: url('./../../../../assets/img/github.png'); }
                         
                         span {
                             font-family: $apple-font-family;
@@ -320,7 +306,6 @@
     }
 }
 
-// Mobile-spezifische Animationen
 @keyframes apple-mobile-contact-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
