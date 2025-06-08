@@ -1,9 +1,5 @@
 @use "./../../../style/apple-variables" as *;
 
-// Import der aufgeteilten Partials
-@use './skills-desktop';
-@use './skills-mobile';
-@use './skills-responsive';
 
 // Animationen
 @keyframes apple-skills-ambient {

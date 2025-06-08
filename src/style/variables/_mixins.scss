@@ -1,0 +1,173 @@
+// Apple Design System Mixins
+@use '../apple-variables-colors' as *;
+@use '../variables-typography' as *;
+
+// Flexbox Mixin
+@mixin dFlex($fd: row, $jc: center, $ai: center, $gap: 0) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+    @if $gap != 0 {
+        gap: $gap;
+    }
+}
+
+// Apple Navigation Glass Effect
+@mixin apple-nav-glass() {
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(28, 28, 30, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+// Apple Logo Effect
+@mixin apple-logo() {
+    filter: brightness(1.2) contrast(1.1) saturate(1.2);
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        filter: brightness(1.4) contrast(1.2) saturate(1.4);
+        transform: scale(1.05);
+    }
+}
+
+// Apple Navigation Item
+@mixin apple-nav-item() {
+    color: $apple-text-secondary;
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-medium;
+    transition: $apple-transition-fast;
+    text-decoration: none;
+    
+    &:hover {
+        color: $apple-text-primary;
+        transform: translateY(-1px);
+    }
+    
+    &:active {
+        color: $apple-primary;
+    }
+}
+
+// Apple Input Style
+@mixin apple-input() {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $apple-radius-medium;
+    color: $apple-text-primary;
+    transition: $apple-transition-medium;
+    outline: none;
+    
+    &:focus {
+        border-color: $apple-primary;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba($apple-primary, 0.2);
+    }
+    
+    &::placeholder {
+        color: $apple-text-tertiary;
+    }
+}
+
+// Apple Button Primary
+@mixin apple-button-primary() {
+    background: $apple-primary;
+    color: $apple-text-primary;
+    border: none;
+    border-radius: $apple-radius-medium;
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-semibold;
+    transition: $apple-transition-fast;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+        opacity: 0;
+        transition: $apple-transition-fast;
+    }
+    
+    &:hover {
+        background: lighten($apple-primary, 5%);
+        transform: translateY(-2px);
+        box-shadow: $apple-shadow-medium;
+        
+        &::before {
+            opacity: 1;
+        }
+    }
+    
+    &:active {
+        transform: translateY(0);
+        background: darken($apple-primary, 2%);
+    }
+}
+
+// Apple Button Secondary
+@mixin apple-button-secondary() {
+    background: transparent;
+    color: $apple-primary;
+    border: 1px solid $apple-primary;
+    border-radius: $apple-radius-medium;
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-semibold;
+    transition: $apple-transition-fast;
+    cursor: pointer;
+    position: relative;
+    
+    &:hover {
+        background: rgba($apple-primary, 0.1);
+        transform: translateY(-2px);
+        box-shadow: $apple-shadow-small;
+    }
+    
+    &:active {
+        transform: translateY(0);
+        background: rgba($apple-primary, 0.2);
+    }
+}
+
+// Typography Mixins
+@mixin h1Title() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin h2Title() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin h2TitleMobile() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
