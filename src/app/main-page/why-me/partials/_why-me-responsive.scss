@@ -1,6 +1,5 @@
 @use '../../../../style/apple-variables' as *;
 
-// 480px: Small Mobile
 @media screen and (max-width: 480px) {
     .why-me-container {
         margin: 24px auto;
@@ -35,7 +34,6 @@
     }
 }
 
-// 375px: Very Small Mobile
 @media screen and (max-width: 375px) {
     .why-me-container {
         margin: 20px auto;
@@ -69,7 +67,6 @@
     }
 }
 
-// 320px: Ultra Small Mobile
 @media screen and (max-width: 320px) {
     .why-me-container {
         margin: 16px auto;
@@ -141,7 +138,6 @@
     }
 }
 
-// Landscape Mode (for small devices)
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .why-me-container {
         margin: 12px auto;
@@ -174,14 +170,12 @@
     }
 }
 
-// Ultra-wide screens optimization
 @media screen and (min-width: 1200px) {
     .why-me-container {
         max-width: 800px;
     }
 }
 
-// Print Styles
 @media print {
     .why-me-container {
         background: white !important;

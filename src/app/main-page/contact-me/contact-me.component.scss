@@ -1,17 +1,22 @@
+// contact-me.component.scss - VERGRÖSSERTE VERSION (unter 400 LOC)
 @use "./../../../style/apple-variables.scss" as *;
 @use 'sass:color';
 
 .contact-container {
     position: relative;
-    margin: 32px auto 40px auto;
-    @include standardPaddingMobile();
+    
+    // VERGRÖSSERT: Gleiche Größe wie Projects
+    margin: 40px auto;
+    max-width: 1400px; // Statt 600px
+    min-height: 80vh; // Neue Mindesthöhe
+    
+    @include standardPadding(); // Desktop Padding statt Mobile
     @include dFlex($fd: column);
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    border-radius: $apple-radius-large;
+    border-radius: $apple-radius-xl; // Größerer Radius
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
-    max-width: 600px;
     width: 100%;
     box-sizing: border-box;
     
@@ -23,13 +28,14 @@
         width: 80%;
         height: 100%;
         background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-        animation: apple-mobile-contact-ambient 12s ease-in-out infinite;
+        animation: apple-contact-ambient 12s ease-in-out infinite;
         filter: blur(40px);
     }
 
     h2 {
-        @include h2TitleMobile();
-        margin-bottom: clamp(20px, 4vw, 28px);
+        @include h2Title(); // Desktop-Größe für Konsistenz
+        margin-bottom: clamp(32px, 6vw, 48px); // Vergrößert
+        padding-top: clamp(48px, 8vw, 64px); // Vergrößert
         position: relative;
         z-index: 2;
         text-align: center;
@@ -37,24 +43,52 @@
     
     .contact-content {
         width: 100%;
-        @include dFlex($fd: column, $gap: clamp(20px, 4vw, 28px));
+        @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px)); // Vergrößert
         position: relative;
         z-index: 2;
+        padding: clamp(32px, 6vw, 80px); // Standard Desktop Padding
+        max-width: 1200px; // Breitere Inhalte
+        margin: 0 auto;
         
         .contact-header {
             color: $apple-text-primary;
-            @include dFlex($gap: clamp(16px, 3vw, 20px), $ai: flex-start, $fd: column);
+            @include dFlex($gap: clamp(24px, 5vw, 32px), $ai: flex-start);
             width: 100%;
             
+            // Desktop: Side-by-side Layout
+            @media screen and (min-width: 900px) {
+                @include dFlex($fd: row, $jc: space-between, $ai: center);
+                
+                .header-left {
+                    flex: 1;
+                    font-size: clamp(24px, 4vw, 32px); // Vergrößert
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-semibold;
+                    color: $apple-primary;
+                    text-align: left;
+                }
+                
+                .header-right {
+                    flex: 1;
+                    @include dFlex($fd: column, $gap: 20px);
+                }
+            }
+            
             .header-top {
-                @include dFlex($gap: clamp(12px, 2.5vw, 16px), $fd: column, $ai: stretch);
+                @include dFlex($gap: clamp(16px, 3.5vw, 24px), $fd: column, $ai: stretch);
                 width: 100%;
                 
-                .header-top-email, .header-top-phone { 
+                // Desktop: Horizontal Layout
+                @media screen and (min-width: 900px) {
+                    @include dFlex($fd: row, $gap: 32px);
+                }
+                
+                .header-top-email, .header-top-phone,
+                .header-right-email, .header-right-phone { 
                     a {
-                        @include dFlex($gap: clamp(10px, 2.5vw, 14px), $ai: center);
-                        padding: clamp(12px, 3vw, 16px) clamp(14px, 3.5vw, 18px);
-                        border-radius: $apple-radius-medium;
+                        @include dFlex($gap: clamp(14px, 3.5vw, 20px), $ai: center); // Vergrößert
+                        padding: clamp(16px, 4vw, 24px) clamp(20px, 5vw, 28px); // Vergrößert
+                        border-radius: $apple-radius-large; // Größerer Radius
                         border: 1px solid rgba(255, 255, 255, 0.1);
                         transition: $apple-transition-fast;
                         background: rgba(255, 255, 255, 0.02);
@@ -66,12 +100,18 @@
                         &:hover {
                             border-color: rgba($apple-primary, 0.3);
                             background: rgba($apple-primary, 0.05);
-                            transform: translateY(-1px);
-                            box-shadow: $apple-shadow-small;
+                            transform: translateY(-2px); // Vergrößert
+                            box-shadow: $apple-shadow-medium; // Größerer Schatten
                             
                             span { color: $apple-primary; }
-                            .mail.img { background-image: url('./../../../assets/img/mail-hover.svg'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
-                            .tel.img { background-image: url('./../../../assets/img/github-hover.png'); filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); }
+                            .mail.img { 
+                                background-image: url('./../../../assets/img/mail-hover.svg'); 
+                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); 
+                            }
+                            .tel.img { 
+                                background-image: url('./../../../assets/img/github-hover.png'); 
+                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2); 
+                            }
                         }
                         
                         &:active {
@@ -80,8 +120,8 @@
                         }
                         
                         .img {
-                            width: clamp(20px, 4.5vw, 26px);
-                            height: clamp(24px, 5.5vw, 30px);
+                            width: clamp(28px, 6vw, 36px); // Vergrößert
+                            height: clamp(32px, 7vw, 40px); // Vergrößert
                             flex-shrink: 0;
                             background-size: contain;
                             background-repeat: no-repeat;
@@ -96,7 +136,7 @@
                             font-weight: $apple-font-weight-regular;
                             color: $apple-text-secondary;
                             transition: $apple-transition-fast;
-                            font-size: clamp(12px, 3vw, 15px);
+                            font-size: clamp(14px, 3.5vw, 18px); // Vergrößert
                             line-height: 1.3;
                             flex: 1;
                         }
@@ -104,9 +144,9 @@
                 }
             }
 
-            .header-bottom {
-                padding: clamp(12px, 2.5vw, 16px) 0;
-                font-size: clamp(16px, 4vw, 20px);
+            .header-bottom, .header-middle {
+                padding: clamp(16px, 4vw, 24px) 0; // Vergrößert
+                font-size: clamp(20px, 5vw, 28px); // Vergrößert
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
                 width: 100%;
@@ -118,26 +158,54 @@
         
         .contact-form {
             width: 100%;
+            max-width: 800px; // Breitere Form
+            margin: 0 auto;
             
             form {
                 width: 100%;
-                @include dFlex($fd: column, $gap: clamp(16px, 3.5vw, 20px));
+                @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px)); // Vergrößert
                 
                 .form-name-mail {
-                    @include dFlex($gap: clamp(16px, 3.5vw, 20px), $fd: column);
+                    @include dFlex($gap: clamp(24px, 5vw, 32px)); // Vergrößert
                     width: 100%;
+                    
+                    // Desktop: Side-by-side
+                    @media screen and (min-width: 900px) {
+                        @include dFlex($fd: row);
+                        
+                        .form-name, .form-email {
+                            flex: 1;
+                        }
+                    }
+                    
+                    // Mobile: Stacked
+                    @media screen and (max-width: 899px) {
+                        @include dFlex($fd: column);
+                    }
                 }
 
                 .form-field {
                     width: 100%;
-                    @include dFlex($fd: column, $ai: flex-start);
+                    @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
+                    
+                    .form-label {
+                        font-family: $apple-font-family;
+                        font-size: clamp(14px, 3.5vw, 16px);
+                        font-weight: $apple-font-weight-medium;
+                        color: $apple-text-secondary;
+                        transition: $apple-transition-fast;
+                        
+                        &-error {
+                            color: $apple-error;
+                        }
+                    }
                     
                     .form-input {
                         @include apple-input;
-                        height: clamp(48px, 10vw, 56px);
+                        height: clamp(56px, 12vw, 64px); // Vergrößert
                         font-family: $apple-font-family;
-                        font-size: clamp(14px, 3vw, 16px);
-                        padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
+                        font-size: clamp(16px, 4vw, 18px); // Vergrößert
+                        padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px); // Vergrößert
                         
                         &::placeholder {
                             color: $apple-text-tertiary;
@@ -159,11 +227,11 @@
                     textarea {
                         @include apple-input;
                         width: 100%;
-                        height: clamp(100px, 20vw, 130px) !important;
-                        padding: clamp(14px, 3.5vw, 18px) clamp(16px, 4vw, 20px) !important;
+                        height: clamp(140px, 25vw, 180px) !important; // Vergrößert
+                        padding: clamp(20px, 5vw, 24px) clamp(20px, 5vw, 24px) !important; // Vergrößert
                         resize: none;
                         font-family: $apple-font-family;
-                        font-size: clamp(14px, 3vw, 16px);
+                        font-size: clamp(16px, 4vw, 18px); // Vergrößert
                         line-height: 1.4;
                         box-sizing: border-box;
                     }
@@ -172,11 +240,11 @@
                 .privacy-policy {
                     width: 100%;
                     color: $apple-text-secondary;
-                    @include dFlex($jc: flex-start, $gap: clamp(10px, 2.5vw, 14px), $ai: flex-start);
+                    @include dFlex($jc: flex-start, $gap: clamp(12px, 3vw, 16px), $ai: flex-start); // Vergrößert
                     
                     .cb {
-                        width: clamp(18px, 4vw, 22px);
-                        height: clamp(18px, 4vw, 22px);
+                        width: clamp(22px, 5vw, 26px); // Vergrößert
+                        height: clamp(22px, 5vw, 26px); // Vergrößert
                         flex-shrink: 0;
                         border: 2px solid $apple-text-tertiary;
                         border-radius: $apple-radius-small;
@@ -203,7 +271,7 @@
                                 left: 50%;
                                 transform: translate(-50%, -50%);
                                 color: white;
-                                font-size: clamp(8px, 2vw, 10px);
+                                font-size: clamp(12px, 3vw, 14px); // Vergrößert
                                 font-weight: $apple-font-weight-bold;
                                 font-family: $apple-font-family;
                             }
@@ -211,7 +279,7 @@
                     }
                     
                     span {
-                        font-size: clamp(11px, 2.8vw, 13px);
+                        font-size: clamp(13px, 3.5vw, 16px); // Vergrößert
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
                         line-height: 1.4;
@@ -235,26 +303,26 @@
                     color: $apple-success;
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
-                    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
+                    padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px); // Vergrößert
                     background: rgba($apple-success, 0.1);
                     border: 1px solid rgba($apple-success, 0.3);
                     border-radius: $apple-radius-medium;
                     text-align: center;
-                    font-size: clamp(12px, 3vw, 14px);
+                    font-size: clamp(14px, 3.5vw, 16px);
                     box-shadow: $apple-shadow-small;
                 }
                 
                 .send-btn {
                     @include dFlex($jc: center);
                     width: 100%;
-                    padding-top: clamp(8px, 2vw, 12px);
+                    padding-top: clamp(16px, 4vw, 24px); // Vergrößert
                     
                     button {
                         @include apple-button-primary;
                         font-family: $apple-font-family;
-                        font-size: clamp(14px, 3.5vw, 16px);
-                        padding: clamp(12px, 3vw, 16px) clamp(24px, 6vw, 32px);
-                        min-width: clamp(120px, 30vw, 160px);
+                        font-size: clamp(16px, 4vw, 20px); // Vergrößert
+                        padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px); // Vergrößert
+                        min-width: clamp(160px, 40vw, 240px); // Vergrößert
                         
                         &:disabled {
                             background: $apple-bg-quaternary;
@@ -280,9 +348,9 @@
         }
 
         .goup-arrow {
-            margin: clamp(24px, 6vw, 40px) auto;
-            width: clamp(20px, 5vw, 28px);
-            height: clamp(40px, 10vw, 56px);
+            margin: clamp(40px, 8vw, 64px) auto; // Vergrößert
+            width: clamp(28px, 6vw, 36px); // Vergrößert
+            height: clamp(56px, 12vw, 72px); // Vergrößert
             background: {
                 image: url('./../../../assets/img/arrow-up.png');
                 size: contain;
@@ -296,7 +364,7 @@
             
             &:hover {
                 background-image: url('./../../../assets/img/arrow-down.png');
-                transform: translateY(-2px) scale(1.1);
+                transform: translateY(-3px) scale(1.1); // Vergrößert
                 filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
                 box-shadow: $apple-shadow-glow;
             }
@@ -304,11 +372,32 @@
     }
 }
 
-@keyframes apple-mobile-contact-ambient {
+@keyframes apple-contact-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
-    50% {
-        transform: translateY(-15px) rotate(180deg) scale(1.1);
+    33% {
+        transform: translateY(-15px) rotate(2deg) scale(1.02);
+    }
+    66% {
+        transform: translateY(10px) rotate(-1deg) scale(0.98);
+    }
+}
+
+// Mobile Override für kleine Bildschirme
+@media screen and (max-width: 899px) {
+    .contact-container {
+        margin: 24px auto;
+        max-width: 600px;
+        @include standardPaddingMobile();
+        
+        h2 {
+            @include h2TitleMobile();
+        }
+        
+        .contact-content {
+            padding: clamp(20px, 4vw, 32px);
+            gap: clamp(20px, 4vw, 28px);
+        }
     }
 }

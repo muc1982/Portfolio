@@ -46,7 +46,6 @@
     animation: card-entrance-mobile 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s both;
 }
 
-// Accessibility - Reduced Motion
 @media (prefers-reduced-motion: reduce) {
     .why-me-container {
         &::before {
@@ -100,7 +99,6 @@
     }
 }
 
-// High Contrast Mode
 @media (prefers-contrast: high) {
     .why-me-container {
         background: #000;
