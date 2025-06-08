@@ -71,7 +71,7 @@
         }
 
         .items {
-            @include dFlex($jc: space-around, $gap: 8px);
+            @include dFlex($jc: space-around, $gap: 2px);
             
             li {
                 position: relative;
@@ -82,6 +82,8 @@
                     border-radius: $apple-radius-medium;
                     position: relative;
                     overflow: hidden;
+                    padding: 12px 14px;
+                    font-size: clamp(13px, 2vw, 15px);
                     
                     &::before {
                         content: '';
@@ -127,13 +129,42 @@
             }
         }
 
-        @media (max-width: 1300px) {
+        @media (max-width: 1400px) {
             .items {
-                gap: 4px;
+                gap: 1px;
                 
                 li span {
-                    padding: 10px 16px;
-                    font-size: 15px;
+                    padding: 10px 12px;
+                    font-size: clamp(12px, 1.8vw, 14px);
+                }
+            }
+        }
+
+        @media (max-width: 1300px) {
+            .items {
+                gap: 0px;
+                
+                li span {
+                    padding: 10px 10px;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .items {
+                li span {
+                    padding: 8px 8px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .items {
+                li span {
+                    padding: 8px 6px;
+                    font-size: 11px;
                 }
             }
         }
@@ -141,8 +172,8 @@
         @media (max-width: 1000px) {
             .items {
                 li span {
-                    padding: 8px 12px;
-                    font-size: 14px;
+                    padding: 6px 4px;
+                    font-size: 10px;
                 }
             }
         }

@@ -3,24 +3,25 @@
 		"whyme": "Why Me",
 		"myskills": "My Skills",
 		"myprojects": "My Projects",
-		"contact": "Contact"
+		"contact": "Contact",
+		"legalnotice": "Legal Notice"
 	},
+	
 	"landingPage": {
 		"name": "Yasin Sun",
 		"position": "Frontend Developer"
 	},
-    "intro": {
-        "title": "Why Choose Me?",
-        "munich": "I'm available from Munich",
-        "munich.subtitle": "On-site or hybrid - flexible for your project",
-        "remote": "I work remotely nationwide",
-        "remote.subtitle": "Modern collaboration without geographical boundaries", 
-        "relocate": "I'm ready to relocate",
-        "relocate.subtitle": "For the right project across Germany",
-        "introduction": "As a passionate front-end developer, I combine technical expertise with creative vision. My deep understanding of modern technologies like Angular, TypeScript, and contemporary design systems enables me to craft digital experiences that captivate users and drive business success.",
-        "talk": "Let's talk!"
-    },
-
+	"intro": {
+		"title": "Why Choose Me?",
+		"munich": "I'm available from Munich",
+		"munich.subtitle": "On-site or hybrid - flexible for your project",
+		"remote": "I work remotely nationwide",
+		"remote.subtitle": "Modern collaboration without geographical boundaries",
+		"relocate": "I'm ready to relocate",
+		"relocate.subtitle": "For the right project across Germany",
+		"introduction": "As a passionate front-end developer, I combine technical expertise with creative vision. My deep understanding of modern technologies like Angular, TypeScript, and contemporary design systems enables me to craft digital experiences that captivate users and drive business success.",
+		"talk": "Let's talk!"
+	},
 	"skills": {
 		"title": "My Skills",
 		"learning": "Continuous Learning",

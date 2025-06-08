@@ -1,3 +1,4 @@
+// menu.component.scss
 @use '../../../../../style/apple-variables' as *;
 
 .menu-wrapper {
@@ -32,18 +33,18 @@
         
         // Responsive Größenbehandlung
         @media screen and (min-width: 400px) {
-            width: 320px !important;
-            height: 320px !important;
+            width: 340px !important;  // Vergrößert für zusätzlichen Link
+            height: 340px !important;
         }
         
         @media screen and (max-width: 399px) {
-            width: 280px !important;
-            height: 280px !important;
+            width: 300px !important;  // Vergrößert für zusätzlichen Link
+            height: 300px !important;
         }
         
         @media screen and (max-width: 375px) {
-            width: 260px !important;
-            height: 260px !important;
+            width: 280px !important;  // Vergrößert für zusätzlichen Link
+            height: 280px !important;
         }
         
         ul {
@@ -70,7 +71,7 @@
             }
 
             li {
-                font-size: clamp(16px, 4vw, 20px);
+                font-size: clamp(14px, 3.5vw, 18px); // Kleinere Font-Size für mehr Items
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
                 text-align: center;
@@ -79,7 +80,7 @@
                 
                 a {
                     display: block;
-                    padding: 8px 12px;
+                    padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 12px); // Reduziertes Padding
                     border-radius: $apple-radius-small;
                     transition: $apple-transition-fast;
                     color: $apple-text-secondary;
@@ -118,8 +119,8 @@
                         gap: 4px;
                         
                         span {
-                            padding: 6px 10px;
-                            font-size: clamp(12px, 3vw, 14px);
+                            padding: 4px 8px; // Kleineres Padding
+                            font-size: clamp(10px, 2.5vw, 12px);
                             border-radius: $apple-radius-small;
                             border: 1px solid rgba(255, 255, 255, 0.2);
                             background: rgba(255, 255, 255, 0.05);
@@ -149,39 +150,39 @@
     }
 }
 
-// Responsive positioning
+// Responsive positioning - angepasst für größere Menüs
 @media screen and (min-width: 400px) {
     .menu-wrapper .menu-content {
         top: calc(72px + 25px) !important;
-        left: calc(50% - 160px) !important;
+        left: calc(50% - 170px) !important; // Angepasst für 340px Breite
     }
 }
 
 @media screen and (max-width: 399px) {
     .menu-wrapper .menu-content {
         top: calc(72px + 20px) !important;
-        left: calc(50% - 140px) !important;
+        left: calc(50% - 150px) !important; // Angepasst für 300px Breite
     }
 }
 
 @media screen and (max-width: 375px) {
     .menu-wrapper .menu-content {
         top: calc(64px + 15px) !important;
-        left: calc(50% - 130px) !important;
+        left: calc(50% - 140px) !important; // Angepasst für 280px Breite
         
         ul {
             padding: 16px;
             
             li {
-                font-size: clamp(14px, 4.5vw, 18px);
+                font-size: clamp(12px, 4vw, 16px);
                 
                 a {
-                    padding: 6px 8px;
+                    padding: 5px 6px;
                 }
                 
                 app-lang-switcher .langs span {
-                    padding: 4px 8px;
-                    font-size: 12px;
+                    padding: 3px 6px;
+                    font-size: 10px;
                 }
             }
         }
@@ -191,18 +192,18 @@
 // Ultra-small screens
 @media screen and (max-width: 320px) {
     .menu-wrapper .menu-content {
-        width: 240px !important;
-        height: 240px !important;
-        left: calc(50% - 120px) !important;
+        width: 260px !important;
+        height: 260px !important;
+        left: calc(50% - 130px) !important;
         
         ul {
             padding: 12px;
             
             li {
-                font-size: 14px;
+                font-size: 12px;
                 
                 a {
-                    padding: 4px 6px;
+                    padding: 4px 5px;
                 }
             }
         }
@@ -212,28 +213,28 @@
 // Landscape mode adjustments
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .menu-wrapper .menu-content {
-        width: 240px !important;
-        height: 240px !important;
+        width: 280px !important;
+        height: 280px !important;
         top: calc(64px + 10px) !important;
-        left: calc(50% - 120px) !important;
+        left: calc(50% - 140px) !important;
         
         ul {
-            padding: 16px;
+            padding: 12px;
             
             li {
-                font-size: 14px;
-                margin: 2px 0;
+                font-size: 12px;
+                margin: 1px 0;
                 
                 a {
-                    padding: 4px 8px;
+                    padding: 3px 6px;
                 }
                 
                 app-lang-switcher .langs {
                     gap: 2px;
                     
                     span {
-                        padding: 3px 6px;
-                        font-size: 11px;
+                        padding: 2px 4px;
+                        font-size: 9px;
                     }
                 }
             }
