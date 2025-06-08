@@ -5,6 +5,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { RouterOutlet } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -23,11 +24,20 @@ export class AppComponent implements OnInit {
   ) {
     this.translate.addLangs(['de', 'en']);
     this.initializeLanguage();
+    this.setupRouterEvents();
+  }
+
+  private setupRouterEvents(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        // Scroll to top on route change
+        window.scrollTo(0, 0);
+      });
   }
 
   private initializeLanguage(): void {
     try {
-
       if (typeof Storage !== 'undefined' && localStorage) {
         const storedLang = localStorage.getItem('currentLang');
         if (storedLang && (storedLang === 'de' || storedLang === 'en')) {
@@ -36,7 +46,6 @@ export class AppComponent implements OnInit {
           this.setLang('de');
         }
       } else {
-
         this.setLang('de');
       }
     } catch (error) {
