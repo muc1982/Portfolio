@@ -1,7 +1,7 @@
 # Portfolio
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12. It has
-also been deployed under [https://portfolio.yangxin.de/](https://portfolio.yangxin.de/). Feel free to check it out.
+also been deployed under It has also been deployed under [https://sun-dev.de/] (https://sun-dev.de/). Feel free to check it out.
 
 ## Development server
 

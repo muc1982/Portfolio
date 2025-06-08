@@ -1,6 +1,7 @@
 // Apple Design System Mixins
 @use '../apple-variables-colors' as *;
 @use '../variables-typography' as *;
+@use 'sass:color';
 
 // Flexbox Mixin
 @mixin dFlex($fd: row, $jc: center, $ai: center, $gap: 0) {
@@ -96,7 +97,7 @@
     }
     
     &:hover {
-        background: lighten($apple-primary, 5%);
+        background: color.adjust($apple-primary, $lightness: 5%);
         transform: translateY(-2px);
         box-shadow: $apple-shadow-medium;
         
@@ -107,7 +108,7 @@
     
     &:active {
         transform: translateY(0);
-        background: darken($apple-primary, 2%);
+        background: color.adjust($apple-primary, $lightness: -2%);
     }
 }
 
