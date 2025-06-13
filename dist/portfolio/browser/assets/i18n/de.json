@@ -1,0 +1,90 @@
+{
+	"nav": {
+		"whyme": "Warum Ich",
+		"myskills": "Meine Skills",
+		"myprojects": "Meine Projekte",
+		"contact": "Kontakt",
+		"legalnotice": "Impressum"
+	},
+	"landingPage": {
+		"name": "Yasin Sun",
+		"position": "Frontend Developer"
+	},
+	"intro": {
+		"title": "Warum mich wählen?",
+		"munich": "Ich bin aus München verfügbar",
+		"munich.subtitle": "Vor Ort oder hybrid - flexibel für Ihr Projekt",
+		"remote": "Ich arbeite remote bundesweit",
+		"remote.subtitle": "Moderne Zusammenarbeit ohne geografische Grenzen",
+		"relocate": "Ich bin bereit umzuziehen",
+		"relocate.subtitle": "Für das richtige Projekt auch deutschlandweit",
+		"introduction": "Als leidenschaftlicher Frontend-Entwickler vereine ich technisches Können mit kreativer Vision. Dank meiner fundierten Kenntnisse in modernen Technologien wie Angular, TypeScript und aktuellen Design-Systemen schaffe ich digitale Erlebnisse, die Benutzer begeistern und gleichzeitig Geschäftsergebnisse fördern.",
+		"talk": "Lassen Sie uns sprechen!"
+	},
+	"skills": {
+		"title": "Meine Skills",
+		"learning": "Kontinuierliches Lernen",
+		"text": "Ich bleibe stets auf dem neuesten Stand der Technologie und erweitere kontinuierlich mein Wissen. Aktuell vertiefe ich meine Kenntnisse in React und Vue.js, um noch vielseitiger zu werden."
+	},
+	"project": {
+		"title": "Meine Projekte",
+		"project": "Projekt",
+		"ongoingproject": "Laufendes Projekt",
+		"technologies": "Technologien",
+		"duration": "Dauer",
+		"weeks": "Wochen",
+		"about": "Über das Projekt",
+		"workprocess": "Arbeitsprozess",
+		"workexperience": "Erfahrungen",
+		"comingproject": {
+			"comingsoon": "Bald verfügbar"
+		},
+		"join": {
+			"about": "Join ist eine umfassende Projektmanagement-Anwendung, die Teams dabei hilft, ihre Aufgaben effizient zu organisieren und zu verwalten. Mit einer intuitiven Benutzeroberfläche und leistungsstarken Features.",
+			"workprocess": "Das Projekt wurde mit agilen Methoden entwickelt, wobei ich mich auf die Frontend-Entwicklung mit Angular und die Integration mit Firebase konzentrierte. Besonderer Fokus lag auf Responsive Design und Benutzerfreundlichkeit.",
+			"workexperience": "Durch dieses Projekt konnte ich meine Fähigkeiten in Angular vertiefen und wertvolle Erfahrungen in der Teamarbeit sammeln. Die Herausforderung lag besonders in der Implementierung komplexer Drag-and-Drop-Funktionalitäten."
+		},
+		"pollo": {
+			"about": "El Pollo Loco ist ein spannendes Jump-and-Run-Spiel, das mit reinem JavaScript entwickelt wurde. Das Spiel bietet eine unterhaltsame Spielerfahrung mit verschiedenen Leveln und Herausforderungen.",
+			"workprocess": "Die Entwicklung erfolgte vollständig mit Vanilla JavaScript, HTML5 Canvas und CSS. Besondere Aufmerksamkeit galt der Spielmechanik, den Animationen und der Performance-Optimierung.",
+			"workexperience": "Dieses Projekt half mir, meine JavaScript-Grundlagen zu festigen und ein tieferes Verständnis für Spielentwicklung und Canvas-Programmierung zu entwickeln."
+		},
+		"dababble": {
+			"about": "DA Bubble ist eine moderne Kommunikationsplattform, die Teams ermöglicht, effektiv zusammenzuarbeiten. Mit Echtzeit-Messaging, Kanälen und Dateifreigabe bietet es alle notwendigen Tools für die moderne Teamkommunikation."
+		}
+	},
+	"player": {
+		"needateamplayer": "Benötigen Sie einen ",
+		"needateamplayer2": "Teamplayer?",
+		"project": "Projekt:",
+		"reference1": "Yasin hat eine beeindruckende Fähigkeit, komplexe Probleme zu lösen und innovative Lösungen zu entwickeln. Seine Kommunikation ist immer klar und professionell.",
+		"reference2": "Die Zusammenarbeit mit Yasin war hervorragend. Er bringt nicht nur technische Expertise mit, sondern auch eine positive Einstellung und Teamgeist.",
+		"reference3": "Yasin zeigt außergewöhnliche Aufmerksamkeit für Details und hat stets pünktlich qualitativ hochwertige Arbeit geliefert. Ein wertvoller Teampartner.",
+		"linkedinprofile": "LinkedIn Profil"
+	},
+	"contact": {
+		"title": "Kontaktieren Sie mich",
+		"feelfree": "Haben Sie ein Problem zu lösen?",
+		"worktogether": "Lassen Sie uns zusammenarbeiten!",
+		"myemail": "E-Mail",
+		"myphone": "Telefon",
+		"name": "Ihr Name",
+		"message": "Ihre Nachricht",
+		"namerequired": "Name ist erforderlich",
+		"emailrequired": "E-Mail ist erforderlich",
+		"emailinvalid": "Ungültige E-Mail-Adresse",
+		"messagerequired": "Nachricht ist erforderlich",
+		"read": "Ich habe die",
+		"privacypolicy": "Datenschutzerklärung",
+		"agree": "gelesen und stimme zu",
+		"send": "Senden",
+		"successmsg": "Nachricht erfolgreich gesendet!"
+	},
+	"footer": {
+		"legalnotice": "Impressum"
+	},
+	"header": {
+		"goback": "Zurück"
+	},
+	"privatepolicy": "Datenschutzerklärung"
+}
