@@ -2,12 +2,11 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, OnInit, 
 import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive'
 import { LangSwitcherComponent } from '../../shared/lang-switcher/lang-switcher.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { RouterLink, RouterLinkActive } from '@angular/router'; // HINZUGEFÜGT
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [ScrollBounceDirective, LangSwitcherComponent, TranslateModule, RouterLink, RouterLinkActive], // ERWEITERT
+  imports: [ScrollBounceDirective, LangSwitcherComponent, TranslateModule], 
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
@@ -24,7 +23,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Cleanup if needed
   }
 
   @HostListener('window:scroll', ['$event'])

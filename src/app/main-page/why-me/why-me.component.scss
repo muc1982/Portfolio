@@ -56,7 +56,7 @@
 
     h2 {
         @include h2Title();
-        margin-bottom: clamp(32px, 6vw, 48px);
+        margin-bottom: 48px;
         margin-top: clamp(48px, 8vw, 64px);
         position: relative;
         z-index: 2;
@@ -291,6 +291,9 @@
     @media screen and (min-width: 900px) {
         .why-me-container {
             @include standardPadding(); 
+            h2 {
+                margin-bottom: 48px;
+            }
 
             .content {
                 max-width: 1200px; 

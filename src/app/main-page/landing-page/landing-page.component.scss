@@ -15,10 +15,9 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    max-width: 1920px; // 4K Support
+    max-width: 1920px;
     margin: 0 auto;
 
-    // Apple-Style Ambient Background Effects
     &::before {
         content: '';
         position: absolute;
@@ -56,7 +55,6 @@
         position: relative;
         transition: $apple-transition-slow;
 
-        // Apple-Style Glow Effect
         &::before {
             content: '';
             position: absolute;
@@ -96,7 +94,6 @@
             z-index: 1;
             border-radius: 2% 2% 8% 8%;
 
-            // Responsive Image Sizes für verschiedene Desktop-Größen
             @media screen and (min-width: 1920px) {
                 width: 90%;
             }
@@ -167,7 +164,6 @@
         @include dFlex($jc: space-between, $fd: column, $gap: 20px);
         z-index: 10;
 
-        // Verbesserte Responsive Positionierung
         @media screen and (min-width: 1920px) {
             right: 20px;
             height: 160px;
@@ -196,7 +192,6 @@
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
 
-            // Erweiterte Icon-Größen für größere Bildschirme
             @media screen and (min-width: 1920px) {
                 width: 56px;
                 height: 56px;
@@ -298,7 +293,6 @@
                 @include apple-logo;
                 transition: $apple-transition-fast;
 
-                // Responsive Logo-Größen
                 @media screen and (min-width: 1920px) {
                     width: 100px;
                     height: 100px;
@@ -354,7 +348,6 @@
                 transition: $apple-transition-medium;
                 position: relative;
 
-                // Responsive Titel-Größen
                 @media screen and (min-width: 1920px) {
                     font-size: 72px;
                 }
@@ -400,7 +393,6 @@
                 letter-spacing: -0.01em;
                 transition: $apple-transition-medium;
 
-                // Responsive Position-Größen
                 @media screen and (min-width: 1920px) {
                     font-size: 36px;
                 }
@@ -426,6 +418,9 @@
     }
 
     .arrow-wrapper {
+        width: 100%;
+        @include dFlex($jc: center, $ai: center); 
+        
         .arrow-down {
             width: 40px;
             height: 80px;
@@ -434,14 +429,12 @@
                 image: url('./../../../assets/img/arrow-down.png');
                 size: contain;
                 repeat: no-repeat;
+                position: center;
             }
-
-            ;
             transition: $apple-transition-fast;
             filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
             border-radius: $apple-radius-small;
 
-            // Responsive Arrow-Größen
             @media screen and (min-width: 1920px) {
                 width: 48px;
                 height: 96px;
@@ -452,6 +445,31 @@
                 height: 72px;
                 position: relative;
                 top: -14px;
+            }
+
+            @media screen and (max-width: 900px) {
+                width: 32px;
+                height: 64px;
+                margin: 0 auto; 
+            }
+
+            @media screen and (max-width: 600px) {
+                width: 28px;
+                height: 56px;
+                margin: 0 auto;
+            }
+
+            @media screen and (max-width: 480px) {
+                width: 24px;
+                height: 48px;
+                margin: 0 auto;
+            }
+
+            @media screen and (max-width: 375px) {
+                width: 20px;
+                height: 40px;
+                margin: 0 auto;
+                top: 0; 
             }
 
             &:hover {
@@ -466,8 +484,6 @@
         }
     }
 }
-
-// Apple-Style Animationen
 @keyframes apple-ambient-float {
 
     0%,
@@ -508,7 +524,6 @@
     }
 }
 
-// Responsive Anpassungen für sehr kleine Desktop-Bildschirme
 @media screen and (max-width: 1200px),
 screen and (min-height: 1000px) {
     .content-left {
@@ -527,6 +542,16 @@ screen and (min-height: 1000px) {
             position: absolute;
             left: 0;
             top: 20px;
+        }
+        
+        .arrow-wrapper {
+            width: 100%;
+            @include dFlex($jc: center, $ai: center);
+            margin: 0 auto;
+            
+            .arrow-down {
+                margin: 0 auto;
+            }
         }
     }
 }

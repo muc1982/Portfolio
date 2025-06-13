@@ -124,31 +124,28 @@ footer {
             }
             
             .github {
-                background-image: url('./../../../assets/img/github-mobile.png');
+                background-image: url('./../../../assets/img/github.png');
                 filter: brightness(1.2);
                 
                 &:hover {
-                    background-image: url('./../../../assets/img/github-white.png');
                     filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
             
             .email {
-                background-image: url('./../../../assets/img/mai-mobile.svg');
+                background-image: url('./../../../assets/img/mail.png');
                 filter: brightness(1.2);
                 
                 &:hover {
-                    background-image: url('./../../../assets/img/mail-white.png');
                     filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
             
             .linkedin {
-                background-image: url('./../../../assets/img/linkedin-mobile.png');
+                background-image: url('./../../../assets/img/linkedin.png');
                 filter: brightness(1.2);
                 
                 &:hover {
-                    background-image: url('./../../../assets/img/linkdin-white.png');
                     filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
@@ -192,7 +189,6 @@ footer {
     }
 }
 
-// Responsive Design für sehr kleine Geräte
 @media screen and (max-width: 480px) {
     footer {
         min-height: 180px;
@@ -293,7 +289,6 @@ footer {
     }
 }
 
-// Ultra-small screens
 @media screen and (max-width: 320px) {
     footer {
         min-height: 140px;
@@ -344,7 +339,6 @@ footer {
     }
 }
 
-// Landscape mode
 @media screen and (max-height: 600px) and (orientation: landscape) {
     footer {
         min-height: 120px;

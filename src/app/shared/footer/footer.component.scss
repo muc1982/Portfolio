@@ -1,8 +1,6 @@
-
 @use '../../../style/apple-variables' as *;
 @use 'sass:color';
 
-// Desktop Footer Styles
 .footer-wrapper {
     width: 100%;
     background: $apple-bg-secondary;
@@ -10,7 +8,6 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     
-    // Apple-Style Subtle Background Effect
     &::before {
         content: '';
         position: absolute;
@@ -207,31 +204,28 @@ footer {
             }
             
             .github {
-                background-image: url('./../../../assets/img/github-dark.png');
+                background-image: url('./../../../assets/img/github.png');
                 filter: brightness(1.2);
                 
                 &:hover {
-                    background-image: url('./../../../assets/img/github-white.png');
                     filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
             
             .email {
-                background-image: url('./../../../assets/img/mail-dark.png');
+                background-image: url('./../../../assets/img/mail.png');
                 filter: brightness(1.2);
                 
                 &:hover {
-                    background-image: url('./../../../assets/img/mail-white.png');
                     filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }
             
             .linkedin {
-                background-image: url('./../../../assets/img/linkdin-dark.png');
+                background-image: url('./../../../assets/img/linkedin.png');
                 filter: brightness(1.2);
                 
                 &:hover {
-                    background-image: url('./../../../assets/img/linkdin-white.png');
                     filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
                 }
             }

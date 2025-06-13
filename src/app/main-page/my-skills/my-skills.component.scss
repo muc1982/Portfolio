@@ -2,7 +2,7 @@
 
 @media screen and (min-width: 900px) {
     .hide-on-mobile {
-        display: none !important;
+        display: block !important;
     }
     
     .my-skills-container {
@@ -182,13 +182,9 @@
     }
 }
 
-// ==============================================
-// MOBILE STYLES (max-width: 899px)
-// ==============================================
-
 @media screen and (max-width: 899px) {
     .hide-on-desktop { 
-        display: none !important; 
+        display: block !important; 
     }
     
     .my-skills-container-mobile {
@@ -383,10 +379,6 @@
     }
 }
 
-// ==============================================
-// SMALL MOBILE RESPONSIVE (max-width: 640px)
-// ==============================================
-
 @media screen and (max-width: 640px) {
     .my-skills-container-mobile {
         margin: 20px auto;
@@ -457,9 +449,6 @@
     }
 }
 
-// ==============================================
-// VERY SMALL MOBILE (max-width: 480px)
-// ==============================================
 
 @media screen and (max-width: 480px) {
     .my-skills-container-mobile {
@@ -532,9 +521,6 @@
     }
 }
 
-// ==============================================
-// ULTRA SMALL MOBILE (max-width: 375px)
-// ==============================================
 
 @media screen and (max-width: 375px) {
     .my-skills-container-mobile {
@@ -616,9 +602,6 @@
     }
 }
 
-// ==============================================
-// LANDSCAPE MODE
-// ==============================================
 
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .my-skills-container-mobile {
@@ -644,9 +627,6 @@
     }
 }
 
-// ==============================================
-// ANIMATIONS
-// ==============================================
 
 @keyframes apple-skills-ambient {
     0%, 100% {
@@ -668,11 +648,6 @@
     }
 }
 
-// ==============================================
-// ACCESSIBILITY & PREFERENCES
-// ==============================================
-
-// High contrast mode
 @media (prefers-contrast: high) {
     .my-skills-container,
     .my-skills-container-mobile {
@@ -688,7 +663,6 @@
     }
 }
 
-// Reduced motion
 @media (prefers-reduced-motion: reduce) {
     .my-skills-container,
     .my-skills-container-mobile {
@@ -712,7 +686,6 @@
     }
 }
 
-// Print styles
 @media print {
     .my-skills-container,
     .my-skills-container-mobile {

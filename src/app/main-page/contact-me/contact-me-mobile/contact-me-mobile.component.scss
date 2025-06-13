@@ -15,7 +15,6 @@
     width: 100%;
     box-sizing: border-box;
     
-    // Apple-Style Ambient Background für Mobile
     &::before {
         content: '';
         position: absolute;
@@ -30,7 +29,7 @@
 
     h2 {
         @include h2TitleMobile();
-        margin-bottom: clamp(20px, 4vw, 28px);
+        margin-bottom: clamp(24px, 5vw, 32px);
         position: relative;
         z-index: 2;
         text-align: center;
@@ -75,11 +74,9 @@
                             }
                             
                             .mail.img {
-                                background-image: url('./../../../../assets/img/mail-hover.svg');
                                 filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                             .tel.img {
-                                background-image: url('./../../../../assets/img/github-hover.png');
                                 filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                             }
                         }
@@ -318,7 +315,6 @@
     }
 }
 
-// Mobile-spezifische Animationen
 @keyframes apple-mobile-contact-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
@@ -328,14 +324,13 @@
     }
 }
 
-// Responsive Design für verschiedene Mobile-Größen
 @media screen and (max-width: 480px) {
     .contact-container {
         margin: 24px auto 32px auto;
         border-radius: $apple-radius-medium;
         
         h2 {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         
         .contact-content {
@@ -430,6 +425,10 @@
 @media screen and (max-width: 375px) {
     .contact-container {
         margin: 20px auto 28px auto;
+        
+        h2 {
+            margin-bottom: 16px;
+        }
         
         .contact-content {
             gap: 14px;
@@ -593,7 +592,6 @@
     }
 }
 
-// Landscape mode
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .contact-container {
         margin: 16px auto 20px auto;

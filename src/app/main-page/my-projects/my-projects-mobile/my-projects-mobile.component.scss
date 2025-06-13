@@ -14,7 +14,6 @@
     overflow: hidden;
     box-sizing: border-box;
     
-    // Apple-Style Ambient Background
     &::before {
         content: '';
         position: absolute;
@@ -30,7 +29,7 @@
     h2 {
         @include h2TitleMobile();
         text-align: center;
-        margin-bottom: clamp(20px, 4vw, 28px);
+        margin-bottom: clamp(24px, 5vw, 32px);
         position: relative;
         z-index: 2;
     }
@@ -442,7 +441,6 @@
     }
 }
 
-// Mobile Animationen
 @keyframes apple-mobile-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
@@ -452,10 +450,13 @@
     }
 }
 
-// Responsive Design für verschiedene Mobile-Größen
 @media screen and (max-width: 480px) {
     .my-projects-container {
         margin: 24px auto;
+        
+        h2 {
+            margin-bottom: 20px;
+        }
         
         .my-projects-content {
             nav > div {
@@ -525,6 +526,10 @@
 
 @media screen and (max-width: 375px) {
     .my-projects-container {
+        h2 {
+            margin-bottom: 16px;
+        }
+        
         .my-projects-content {
             nav > div > span {
                 font-size: clamp(8px, 3.5vw, 10px);
@@ -556,7 +561,7 @@
         padding: 16px 10px;
         
         h2 {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         
         .my-projects-content {
@@ -674,7 +679,6 @@
     }
 }
 
-// Landscape mode
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .my-projects-container {
         margin: 12px auto;
