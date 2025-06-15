@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
-import { ScrollBounceDirective } from '../../../Instructions/scroll-bounce.directive';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ScrollAnimateDirective } from '../../../Instructions/scroll-animation.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 
 interface Contact {
   name: string,
@@ -17,14 +17,12 @@ interface Contact {
   selector: 'app-contact-me-mobile',
   standalone: true,
   imports: [
-    TranslateModule, 
-    CommonModule, 
-    ScrollBounceDirective,  // HINZUFÜGEN!
-    RouterLink, 
-    RouterLinkActive, 
-    ScrollAnimateDirective, 
+    TranslateModule,
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
     FormsModule
-  ],
+],
   templateUrl: './contact-me-mobile.component.html',
   styleUrl: './contact-me-mobile.component.scss'
 })
