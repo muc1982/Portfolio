@@ -1,60 +1,99 @@
-<form (ngSubmit)="onSumbmit(myForm)" #myForm="ngForm" novalidate>
-    <div class="form-name-mail">
-        <div class="form-name form-field">
-            <label class="form-label" [class.form-label-error]="!nameValid && myForm.submitted" for="name">
-                {{ !nameValid && myForm.submitted ? ('contact.namerequired' | translate) : ('contact.name' |
-                translate)}}
-            </label>
-            <input [class.form-input-error]="!nameValid && myForm.submitted" [(ngModel)]="contact.name" name="name"
-                id="name" class="form-input" type="text" required minlength="2" maxlength="50"
-                pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}" (blur)="onNameChange()" (focus)="nameValid = true"
-                placeholder="{{ 'contact.name' | translate }}" autocomplete="name">
+<!-- Desktop Contact Form -->
+<div id="contact-me" class="contact-container normal-container wide-screen">
+    <h2>{{ 'contact.title' | translate}}</h2>
+    
+    <div class="contact-content">
+        <!-- Desktop Header Section -->
+        <div class="contact-header">
+            <div class="header-left">
+                <h3>{{ 'contact.feelfree' | translate}}</h3>
+                <p>{{ 'contact.worktogether' | translate}}</p>
+            </div>
+            
+            <div class="header-right">
+                <div class="header-top">
+                    <!-- Phone Contact -->
+                    <div class="header-right-phone">
+                        <a href="tel:01747620110">
+                            <div class="tel img"></div>
+                            <span>{{ 'contact.myphone' | translate}}: 0174 762 0110</span>
+                        </a>
+                    </div>
+                    <!-- Email Contact -->
+                    <div class="header-right-email">
+                        <a href="mailto:info@sun-dev.de">
+                            <div class="mail img"></div>
+                            <span>{{ 'contact.myemail' | translate}}: info&#64;sun-dev.de</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="header-bottom">{{ 'contact.worktogether' | translate}}</div>
+            </div>
         </div>
-        <div class="form-email form-field">
-            <label class="form-label" [class.form-label-error]="!emailValid && myForm.submitted" for="email">
-                {{ !emailValid && myForm.submitted ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}
-            </label>
-            <input [class.form-input-error]="!emailValid && myForm.submitted" [(ngModel)]="contact.email" name="email"
-                id="email" class="form-input" type="email" required
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (blur)="onEmailChange()"
-                (focus)="emailValid = true" placeholder="{{ 'contact.myemail' | translate }}" autocomplete="email">
+
+        <!-- Desktop Contact Form -->
+        <div class="contact-form">
+            <form (ngSubmit)="onSumbmit(myForm)" #myForm="ngForm" novalidate>
+                <div class="form-name-mail">
+                    <div class="form-name form-field">
+                        <label class="form-label" [class.form-label-error]="!nameValid && myForm.submitted" for="name">
+                            {{ !nameValid && myForm.submitted ? ('contact.namerequired' | translate) : ('contact.name' |
+                            translate)}}
+                        </label>
+                        <input [class.form-input-error]="!nameValid && myForm.submitted" [(ngModel)]="contact.name" name="name"
+                            id="name" class="form-input" type="text" required minlength="2" maxlength="50"
+                            pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}" (blur)="onNameChange()" (focus)="nameValid = true"
+                            placeholder="{{ 'contact.name' | translate }}" autocomplete="name">
+                    </div>
+                    <div class="form-email form-field">
+                        <label class="form-label" [class.form-label-error]="!emailValid && myForm.submitted" for="email">
+                            {{ !emailValid && myForm.submitted ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}
+                        </label>
+                        <input [class.form-input-error]="!emailValid && myForm.submitted" [(ngModel)]="contact.email" name="email"
+                            id="email" class="form-input" type="email" required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (blur)="onEmailChange()"
+                            (focus)="emailValid = true" placeholder="{{ 'contact.myemail' | translate }}" autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-message form-field">
+                    <label class="form-label" for="message" [class.form-label-error]="!msgValid && myForm.submitted">
+                        {{ !msgValid && myForm.submitted ? ('contact.messagerequired' | translate) : ('contact.message' |
+                        translate)}}
+                    </label>
+                    <textarea [class.form-input-error]="!msgValid && myForm.submitted" [(ngModel)]="contact.msg" name="message"
+                        id="message" class="form-input" required minlength="10" maxlength="500" (blur)="onMessageChange()"
+                        (focus)="msgValid = true" placeholder="{{ 'contact.message' | translate }}" rows="5"></textarea>
+                    <div class="character-count" *ngIf="contact.msg.length > 0">
+                        {{ contact.msg.length }} / 500
+                    </div>
+                </div>
+                <div class="privacy-policy">
+                    <div class="cb pointer" (click)="clickCb()" [ngClass]="{'checked': isChecked}">
+                        <input type="checkbox" id="privacy-check" [(ngModel)]="isChecked" name="privacy" required
+                            style="display: none;">
+                    </div>
+                    <label for="privacy-check" class="privacy-label">
+                        {{ 'contact.read' | translate}}
+                        <a routerLink="/private-policy" routerLinkActive="active" target="_blank">
+                            {{ 'contact.privacypolicy' | translate}}
+                        </a>
+                        {{ 'contact.agree' | translate}}
+                    </label>
+                </div>
+                <div class="send-btn">
+                    @if (isShowingSuccessMsg) {
+                    <div class="success-msg">
+                        {{'contact.successmsg' | translate}}
+                    </div>
+                    } @else {
+                    <button [disabled]="!isFormValid() || myForm.invalid" type="submit" class="pointer"
+                        [attr.aria-label]="'contact.send' | translate">
+                        {{ 'contact.send' | translate}}
+                    </button>
+                    }
+                </div>
+            </form>
         </div>
     </div>
-    <div class="form-message form-field">
-        <label class="form-label" for="message" [class.form-label-error]="!msgValid && myForm.submitted">
-            {{ !msgValid && myForm.submitted ? ('contact.messagerequired' | translate) : ('contact.message' |
-            translate)}}
-        </label>
-        <textarea [class.form-input-error]="!msgValid && myForm.submitted" [(ngModel)]="contact.msg" name="message"
-            id="message" class="form-input" required minlength="10" maxlength="500" (blur)="onMessageChange()"
-            (focus)="msgValid = true" placeholder="{{ 'contact.message' | translate }}" rows="5"></textarea>
-        <div class="character-count" *ngIf="contact.msg.length > 0">
-            {{ contact.msg.length }} / 500
-        </div>
-    </div>
-    <div class="privacy-policy">
-        <div class="cb pointer" (click)="clickCb()" [ngClass]="{'checked': isChecked}">
-            <input type="checkbox" id="privacy-check" [(ngModel)]="isChecked" name="privacy" required
-                style="display: none;">
-        </div>
-        <label for="privacy-check" class="privacy-label">
-            {{ 'contact.read' | translate}}
-            <a routerLink="/private-policy" routerLinkActive="active" target="_blank">
-                {{ 'contact.privacypolicy' | translate}}
-            </a>
-            {{ 'contact.agree' | translate}}
-        </label>
-    </div>
-    <div class="send-btn">
-        @if (isShowingSuccessMsg) {
-        <div class="success-msg">
-            {{'contact.successmsg' | translate}}
-        </div>
-        } @else {
-        <button [disabled]="!isFormValid() || myForm.invalid" type="submit" class="pointer"
-            [attr.aria-label]="'contact.send' | translate">
-            {{ 'contact.send' | translate}}
-        </button>
-        }
-    </div>
-</form>
+</div>

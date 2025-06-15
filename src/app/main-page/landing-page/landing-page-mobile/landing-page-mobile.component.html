@@ -1,43 +1,41 @@
-<div class="landing-page-extra wide-screen" id="landing-page-extra" style="display: none;">
-</div>
+<!-- Mobile Landing Page -->
+<div class="landing-page-extra wide-screen" id="landing-page-extra-mobile" style="display: none;"></div>
+
 <div class="content wide-screen" id="landing-page-mobile">
+    <!-- Mobile Menu Component -->
     <app-menu [(isShowable)]="showMenu" [wh]="wh" [top]="top" [left]="left"></app-menu>
 
+    <!-- Mobile Header with Logo and Burger Menu -->
     <div class="content-top">
-        
         <div class="logo">
             <div class="logo-img"></div>
             <div class="logo-name">Yasin Sun</div>
             <div class="logo-position">Developer</div>
         </div>
-        <div class="burger">
-            <div class="burger-img pointer" (click)="showMenu = true;" [class.close]="showMenu">
-
-            </div>
-        </div>
         
+        <div class="burger">
+            <div class="burger-img pointer" (click)="showMenu = true;" [class.close]="showMenu"></div>
+        </div>
     </div>
     
+    <!-- Mobile Main Content -->
     <div class="content-middle">
+        <!-- Profile Image -->
         <div class="img-wrapper" [ngStyle]="{ opacity: !showMenu ? 1 : 0 }">
-           
-            <img #logoImg src="assets/img/profile-pic.png" alt="">
-           
+            <img #logoImg src="assets/img/profile-pic.png" alt="Yasin Sun Profile Picture">
         </div>
         
+        <!-- Title Section -->
         <div class="title-logo-wrapper">
-            
             <div class="title">
                 <div class="name">{{ 'landingPage.name' | translate}}</div>
                 <div class="position">{{ 'landingPage.position' | translate}}</div>
-        </div>
-        </div>
-        <div class="arrow-wrapper" [appScrollAnimate]="{animateCss:'move-down'}">
-            <div [appScrollBounce]="'why-me'"  [offsetY]="100" class="arrow-down pointer">
-
             </div>
-            
+        </div>
+        
+        <!-- Scroll Down Arrow -->
+        <div class="arrow-wrapper" [appScrollAnimate]="{animateCss:'move-down'}">
+            <div [appScrollBounce]="'why-me'" [offsetY]="100" class="arrow-down pointer"></div>
         </div>
     </div>
 </div>
-

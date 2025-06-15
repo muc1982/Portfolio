@@ -1,7 +1,7 @@
-<!-- contact-me-mobile.component.html - KORRIGIERT -->
-<div id="contact-me-mobile" class="contact-container wide-screen">
+<!-- Mobile Contact Form -->
+<div id="contact-me-mobile" class="contact-container-mobile wide-screen">
     <h2>{{ 'contact.title' | translate}}</h2>
-    
+
     <div class="contact-content">
         <!-- Mobile Header Section -->
         <div class="contact-header">
@@ -33,53 +33,27 @@
                 <!-- Name and Email (Stacked on Mobile) -->
                 <div class="form-name-mail">
                     <div class="form-name form-field">
-                        <input 
-                            [class.form-input-error]="!nameValid" 
-                            placeholder="{{ !nameValid ? ('contact.namerequired' | translate) : ('contact.name' | translate)}}" 
-                            [(ngModel)]="contact.name" 
-                            name="name" 
-                            id="mobile-name" 
-                            class="form-input" 
-                            type="text" 
-                            required
-                            minlength="2" 
-                            maxlength="50"
-                            pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}"
-                            (focus)="nameValid = true"
-                            (blur)="validateName()"
-                            autocomplete="name">
+                        <input [class.form-input-error]="!nameValid"
+                            placeholder="{{ !nameValid ? ('contact.namerequired' | translate) : ('contact.name' | translate)}}"
+                            [(ngModel)]="contact.name" name="name" id="mobile-name" class="form-input" type="text"
+                            required minlength="2" maxlength="50" pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}"
+                            (focus)="nameValid = true" (blur)="validateName()" autocomplete="name">
                     </div>
                     <div class="form-email form-field">
-                        <input 
-                            [class.form-input-error]="!emailValid" 
-                            placeholder="{{ !emailValid ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}" 
-                            [(ngModel)]="contact.email" 
-                            name="email" 
-                            id="mobile-email" 
-                            class="form-input" 
-                            type="email" 
-                            required
-                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                            (focus)="emailValid = true"
-                            (blur)="validateEmail()"
-                            autocomplete="email">
+                        <input [class.form-input-error]="!emailValid"
+                            placeholder="{{ !emailValid ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}"
+                            [(ngModel)]="contact.email" name="email" id="mobile-email" class="form-input" type="email"
+                            required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                            (focus)="emailValid = true" (blur)="validateEmail()" autocomplete="email">
                     </div>
                 </div>
 
                 <!-- Message Field -->
                 <div class="form-message form-field">
-                    <textarea 
-                        [class.form-input-error]="!msgValid" 
-                        placeholder="{{ !msgValid ? ('contact.messagerequired' | translate) : ('contact.message' | translate)}}" 
-                        [(ngModel)]="contact.msg" 
-                        name="message"  
-                        id="mobile-message" 
-                        class="form-input" 
-                        required
-                        minlength="10" 
-                        maxlength="500"
-                        (focus)="msgValid = true"
-                        (blur)="validateMessage()"
+                    <textarea [class.form-input-error]="!msgValid"
+                        placeholder="{{ !msgValid ? ('contact.messagerequired' | translate) : ('contact.message' | translate)}}"
+                        [(ngModel)]="contact.msg" name="message" id="mobile-message" class="form-input" required
+                        minlength="10" maxlength="500" (focus)="msgValid = true" (blur)="validateMessage()"
                         rows="4"></textarea>
                     <div class="character-count" *ngIf="contact.msg.length > 0">
                         {{ contact.msg.length }} / 500
@@ -89,13 +63,14 @@
                 <!-- Privacy Policy Checkbox -->
                 <div class="privacy-policy">
                     <div class="cb pointer" (click)="clickCb()" [ngClass]="{'checked': isChecked}">
-                        <input type="checkbox" id="mobile-privacy-check" [(ngModel)]="isChecked" name="privacy" required style="display: none;">
+                        <input type="checkbox" id="mobile-privacy-check" [(ngModel)]="isChecked" name="privacy" required
+                            style="display: none;">
                     </div>
                     <span>
-                        {{ 'contact.read' | translate}} 
+                        {{ 'contact.read' | translate}}
                         <a routerLink="/private-policy" routerLinkActive="active" target="_blank">
                             {{ 'contact.privacypolicy' | translate}}
-                        </a> 
+                        </a>
                         {{ 'contact.agree' | translate}}
                     </span>
                 </div>
@@ -103,24 +78,17 @@
                 <!-- Submit Button -->
                 <div class="send-btn">
                     @if (isShowingSuccessMsg) {
-                        <div class="success-msg">
-                            {{'contact.successmsg' | translate}}
-                        </div>
+                    <div class="success-msg">
+                        {{'contact.successmsg' | translate}}
+                    </div>
                     } @else {
-                        <button 
-                            [disabled]="!isChecked || !isFormValid()" 
-                            type="submit" 
-                            class="pointer"
-                            [attr.aria-label]="'contact.send' | translate">
-                            {{ 'contact.send' | translate}}
-                        </button>
+                    <button [disabled]="!isChecked || !isFormValid()" type="submit" class="pointer"
+                        [attr.aria-label]="'contact.send' | translate">
+                        {{ 'contact.send' | translate}}
+                    </button>
                     }
                 </div>
             </form>
-        </div>
-
-        <!-- Scroll to Top Arrow - KORRIGIERT -->
-        <div [appScrollAnimate]="{animateCss:'move-up'}">
         </div>
     </div>
 </div>

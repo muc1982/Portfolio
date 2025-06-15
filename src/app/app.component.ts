@@ -6,16 +6,14 @@ import { RouterOutlet } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { filter } from 'rxjs/operators';
-import { ScrollToTopComponent } from './Instructions/scroll-to-top.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, TranslateModule, RouterOutlet, ScrollToTopComponent],
+  imports: [FormsModule, TranslateModule, RouterOutlet], // ScrollToTopComponent entfernt
   template: `
     <router-outlet></router-outlet>
-    <app-scroll-to-top></app-scroll-to-top>
-  `,
+  `, // ScrollToTopComponent aus Template entfernt
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {

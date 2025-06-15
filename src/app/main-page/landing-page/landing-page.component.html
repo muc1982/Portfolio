@@ -1,43 +1,54 @@
-<div class="landing-page-extra wide-screen" id="landing-page-extra" style="display: none;">
-</div>
+<!-- Landing Page Container mit Desktop/Mobile Trennung -->
+<div class="landing-page-extra wide-screen" id="landing-page-extra" style="display: none;"></div>
+
+<!-- Mobile Landing Page -->
 <div class="hide-on-desktop">
     <app-landing-page-mobile></app-landing-page-mobile>
 </div>
+
+<!-- Desktop Landing Page -->
 <div class="hide-on-mobile">
-    <div class="content wide-screen" id="landing-page">
+    <div id="landing-page" class="content wide-screen">
         <div class="content-left">
             <div class="img-wrapper">
-                <img src="assets/img/profile-pic.png" alt="">
+                <img src="assets/img/profile-pic.png" alt="Yasin Sun Profile Picture">
             </div>
         </div>
+        
         <div class="content-right">
+            <!-- Social Links -->
             <div class="links-wrapper">
                 <div class="link-email pointer">
-                    <a href="mailto:info@sun-dev.de"></a>
+                    <a href="mailto:info@sun-dev.de" aria-label="Send Email"></a>
                 </div>
                 <div class="link-github pointer">
-                    <a href="https://github.com/muc1982" target="_blank"></a>
+                    <a href="https://github.com/muc1982" target="_blank" aria-label="GitHub Profile"></a>
                 </div>
                 <div class="link-linkedin pointer">
-                    <a href="https://www.linkedin.com/" target="_blank"></a>
+                    <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn Profile"></a>
                 </div>
             </div>
 
+            <!-- Small Image for smaller screens -->
             <div class="img-wrapper-small">
-                <img src="assets/img/profile-pic.png" alt="">
+                <img src="assets/img/profile-pic.png" alt="Yasin Sun Profile Picture">
             </div>
 
+            <!-- Logo and Title Section -->
             <div class="title-logo-wrapper">
-                <div class="logo">
+                <div class="logo" [appScrollBounce]="'landing-page'" [offsetY]="0">
                     <div class="logo-img"></div>
                     <div class="logo-name">Yasin Sun</div>
                     <div class="logo-position">Developer</div>
                 </div>
+                
                 <div class="title">
                     <div class="name">{{ 'landingPage.name' | translate}}</div>
                     <div class="position">{{ 'landingPage.position' | translate}}</div>
                 </div>
             </div>
+            
+            <!-- Scroll Down Arrow -->
             <div class="arrow-wrapper" [appScrollAnimate]="{animateCss:'move-down'}">
                 <div [appScrollBounce]="'why-me'" [offsetY]="180" class="arrow-down pointer">
                 </div>
