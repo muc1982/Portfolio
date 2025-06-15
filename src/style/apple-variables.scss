@@ -1,15 +1,209 @@
-// Apple Design System Variables
 @use 'sass:color';
-@use './apple-variables-colors.scss';
-@use './variables-typography.scss';
-@use './variables/spacing';
-@use './variables/mixins';
-@use './variables/responsive';
 
-// Re-export all variables and mixins for easy access
-@forward './apple-variables-colors.scss';
-@forward './variables-typography.scss';
-@forward './variables/spacing';
-@forward './variables/mixins';
-@forward './variables/responsive';
+$apple-transition-fast: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
+$apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
+$apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 
+$apple-primary: #0A84FF !default; 
+$apple-secondary: #32D74B !default; 
+$apple-success: #32D74B !default;
+$apple-error: #FF453A !default; 
+$apple-warning: #FF9F0A !default; 
+
+$apple-bg-primary: #000000 !default; 
+$apple-bg-secondary: #1C1C1E !default;
+$apple-bg-tertiary: #2C2C2E !default;
+$apple-bg-quaternary: #3A3A3C !default;
+
+$apple-text-primary: #FFFFFF !default;
+$apple-text-secondary: #F2F2F7 !default; 
+$apple-text-tertiary: #AEAEB2 !default; 
+
+$apple-teal-gradient: linear-gradient(135deg, #0A84FF 0%, #32D74B 100%) !default;
+$apple-shadow-small: 0 2px 8px rgba(0, 0, 0, 0.2) !default;
+$apple-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.25) !default;
+$apple-shadow-large: 0 8px 32px rgba(0, 0, 0, 0.35) !default;
+$apple-shadow-glow: 0 0 20px rgba(10, 132, 255, 0.6) !default;
+
+$apple-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
+$apple-font-weight-regular: 400 !default;
+$apple-font-weight-medium: 500 !default;
+$apple-font-weight-semibold: 600 !default;
+$apple-font-weight-bold: 700 !default;
+
+$apple-radius-small: 6px !default;
+$apple-radius-medium: 8px !default;
+$apple-radius-large: 12px !default;
+$apple-radius-xl: 16px !default;
+
+@mixin dFlex($fd: row, $jc: center, $ai: center, $gap: 0) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+    @if $gap != 0 {
+        gap: $gap;
+    }
+}
+
+@mixin standardPadding() {
+    @media screen and (min-width: 900px) {
+        padding-left: clamp(40px, 8vw, 120px);
+        padding-right: clamp(40px, 8vw, 120px);
+    }
+    @media screen and (max-width: 899px) {
+        padding-left: clamp(16px, 4vw, 24px);
+        padding-right: clamp(16px, 4vw, 24px);
+    }
+}
+
+@mixin standardPaddingMobile() {
+    padding-left: clamp(16px, 4vw, 24px);
+    padding-right: clamp(16px, 4vw, 24px);
+}
+
+@mixin apple-nav-glass() {
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(28, 28, 30, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin apple-logo() {
+    filter: brightness(1.2) contrast(1.1) saturate(1.2);
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        filter: brightness(1.4) contrast(1.2) saturate(1.4);
+        transform: scale(1.05);
+    }
+}
+
+@mixin apple-input() {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $apple-radius-medium;
+    color: $apple-text-primary;
+    transition: $apple-transition-medium;
+    outline: none;
+    
+    @media screen and (min-width: 900px) {
+        font-size: 18px;
+        padding: 16px 20px;
+    }
+    @media screen and (max-width: 899px) {
+        font-size: 16px !important;
+        padding: 16px 18px;
+        min-height: 48px;
+    }
+    
+    &:focus {
+        border-color: $apple-primary;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba($apple-primary, 0.2);
+    }
+    
+    &::placeholder {
+        color: $apple-text-tertiary;
+        font-size: inherit;
+    }
+}
+
+@mixin apple-button-primary() {
+    background: $apple-primary;
+    color: $apple-text-primary;
+    border: none;
+    border-radius: $apple-radius-medium;
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-semibold;
+    transition: $apple-transition-fast;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+    @media screen and (min-width: 900px) {
+        font-size: 18px;
+        padding: 16px 32px;
+    }
+    @media screen and (max-width: 899px) {
+        font-size: 16px !important;
+        padding: 16px 24px;
+        min-height: 48px;
+        min-width: 120px;
+    }
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+        opacity: 0;
+        transition: $apple-transition-fast;
+    }
+    
+    &:hover {
+        background: color.adjust($apple-primary, $lightness: 5%);
+        transform: translateY(-2px);
+        box-shadow: $apple-shadow-medium;
+        
+        &::before {
+            opacity: 1;
+        }
+    }
+    
+    &:active {
+        transform: translateY(0);
+        background: color.adjust($apple-primary, $lightness: -2%);
+    }
+}
+
+@mixin h1Title() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    @media screen and (min-width: 900px) {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+    }
+    @media screen and (max-width: 899px) {
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+}
+
+@mixin h2Title() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    @media screen and (min-width: 900px) {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+    @media screen and (max-width: 899px) {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+}
+
+@mixin h2TitleMobile() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

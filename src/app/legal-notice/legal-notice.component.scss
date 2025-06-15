@@ -1,9 +1,10 @@
-@use '../../../style/apple-variables' as *;
+@use '../../style/apple-variables' as *;
 @use 'sass:color';
 @use './partials/legal-notice-layout';
 @use './partials/legal-notice-typography';
 @use './partials/legal-notice-animations';
 @use './partials/legal-notice-responsive';
+
 
 .legal-notice-container {
     position: relative;
