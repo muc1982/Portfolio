@@ -7,37 +7,39 @@
         text-align: center;
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-bold;
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-size: clamp(1.8rem, 4.5vw, 2.8rem);
         background: $apple-teal-gradient;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: clamp(24px, 4vw, 40px);
+        margin-bottom: clamp(24px, 4vw, 48px);
         position: relative;
         z-index: 1;
-        line-height: 1.2;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
         
         &::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: clamp(60px, 15vw, 120px);
-            height: 3px;
+            width: clamp(80px, 20vw, 150px);
+            height: 4px;
             background: $apple-teal-gradient;
             border-radius: 2px;
-            opacity: 0.6;
+            opacity: 0.7;
+            animation: apple-policy-line 3s ease-in-out infinite;
         }
     }
     
     h2 {
-        margin-top: clamp(24px, 4vw, 40px);
-        margin-bottom: clamp(12px, 2vw, 20px);
+        margin-top: clamp(28px, 5vw, 48px);
+        margin-bottom: clamp(14px, 2.5vw, 24px);
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-semibold;
         color: $apple-primary;
-        font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+        font-size: clamp(1.25rem, 3.2vw, 1.8rem);
         position: relative;
         z-index: 1;
         line-height: 1.3;
@@ -49,54 +51,70 @@
         &::before {
             content: '';
             position: absolute;
-            left: -16px;
+            left: -20px;
             top: 50%;
             transform: translateY(-50%);
-            width: 4px;
-            height: 70%;
+            width: 5px;
+            height: 75%;
             background: $apple-teal-gradient;
-            border-radius: 2px;
-            opacity: 0.7;
+            border-radius: 3px;
+            opacity: 0.8;
+            box-shadow: 0 0 8px rgba($apple-primary, 0.3);
         }
     }
     
     h3 {
-        margin-top: clamp(16px, 3vw, 28px);
-        margin-bottom: clamp(8px, 1.5vw, 16px);
+        margin-top: clamp(20px, 3.5vw, 32px);
+        margin-bottom: clamp(10px, 2vw, 18px);
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-medium;
         color: $apple-text-primary;
-        font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+        font-size: clamp(1.15rem, 2.5vw, 1.45rem);
         position: relative;
         z-index: 1;
         line-height: 1.4;
+        
+        &::before {
+            content: '▶';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $apple-primary;
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
     }
     
     h4 {
-        margin-top: clamp(12px, 2vw, 20px);
-        margin-bottom: clamp(6px, 1vw, 12px);
+        margin-top: clamp(16px, 2.5vw, 24px);
+        margin-bottom: clamp(8px, 1.5vw, 14px);
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-medium;
         color: $apple-text-secondary;
-        font-size: clamp(1rem, 2vw, 1.2rem);
+        font-size: clamp(1.05rem, 2.2vw, 1.25rem);
         position: relative;
         z-index: 1;
         line-height: 1.4;
     }
     
-    p, li {
-        margin-top: clamp(8px, 1.5vw, 16px);
-        margin-bottom: clamp(8px, 1.5vw, 16px);
+    p {
+        margin-top: clamp(10px, 2vw, 18px);
+        margin-bottom: clamp(10px, 2vw, 18px);
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-regular;
         line-height: 1.7;
         color: $apple-text-secondary;
-        font-size: clamp(14px, 1.8vw, 17px);
+        font-size: clamp(14px, 1.9vw, 18px);
         position: relative;
         z-index: 1;
         text-align: justify;
         hyphens: auto;
         word-wrap: break-word;
+        
+        &:first-of-type {
+            margin-top: 0;
+        }
     }
     
     ul {
@@ -109,6 +127,14 @@
             margin: clamp(6px, 1vw, 12px) 0;
             position: relative;
             padding-left: 8px;
+            font-family: $apple-font-family;
+            font-weight: $apple-font-weight-regular;
+            line-height: 1.7;
+            color: $apple-text-secondary;
+            font-size: clamp(14px, 1.9vw, 18px);
+            text-align: justify;
+            hyphens: auto;
+            word-wrap: break-word;
             
             &::marker {
                 color: $apple-primary;
@@ -140,17 +166,18 @@
         &::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -3px;
             left: 0;
             width: 0;
             height: 2px;
-            background: $apple-primary;
+            background: linear-gradient(90deg, $apple-primary, color.adjust($apple-primary, $lightness: 20%));
             transition: $apple-transition-fast;
             border-radius: 1px;
         }
         
         &:hover {
-            color: color.adjust($apple-primary, $lightness: 15%);
+            color: color.adjust($apple-primary, $lightness: 18%);
+            text-shadow: 0 0 8px rgba($apple-primary, 0.3);
             
             &::after {
                 width: 100%;
@@ -158,7 +185,8 @@
         }
         
         &:active {
-            color: color.adjust($apple-primary, $lightness: -5%);
+            color: color.adjust($apple-primary, $lightness: -8%);
+            transform: translateY(1px);
         }
     }
     
@@ -180,5 +208,20 @@
                 color: $apple-primary;
             }
         }
+    }
+    
+    br {
+        line-height: 2;
+    }
+}
+
+@keyframes apple-policy-line {
+    0%, 100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scaleX(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1.1);
     }
 }

@@ -1,56 +1,118 @@
 <div class="why-me-extra wide-screen" id="why-me-extra" style="display: none;"></div>
 
-<div id="why-me" class="why-me-container normal-container wide-screen" #carouselContainer>
-    <h2>{{ 'intro.title' | translate }}</h2>
+<!-- Desktop Version -->
+<div class="hide-on-mobile">
+    <div id="why-me" class="why-me-container normal-container wide-screen" #carouselContainer>
+        <h2>{{ 'intro.title' | translate }}</h2>
 
-    <div class="content">
-        <!-- Hero Section with Location Carousel -->
-        <div class="hero-section">
-            <div class="location-carousel">
-                <!-- Location Slides -->
-                @for (slide of locationSlides; track slide.titleKey; let i = $index) {
-                <div class="location-slide" [class.active]="isSlideActive(i)">
-                    <div class="location-icon">
-                        <img [src]="'assets/img/' + slide.icon" [alt]="slide.title">
-                    </div>
-
-                    <div class="location-content">
-                        <div class="location-text">
-                            <span class="highlight">{{ getHighlightText() }}</span>
-                            <span class="regular"> {{ getRegularText() }}</span>
-                            <span class="cursor">|</span>
-                        </div>
-                        <div class="location-subtitle">
-                            {{ slide.subtitle }}
-                        </div>
-                    </div>
-                </div>
-                }
-
-                <!-- Progress Dots -->
-                <div class="progress-dots">
+        <div class="content">
+            <!-- Hero Section with Location Carousel -->
+            <div class="hero-section">
+                <div class="location-carousel">
+                    <!-- Location Slides -->
                     @for (slide of locationSlides; track slide.titleKey; let i = $index) {
-                    <div [class]="getDotClass(i)" (click)="goToSlide(i)" [attr.aria-label]="'Slide ' + (i + 1)">
+                    <div class="location-slide" [class.active]="isSlideActive(i)">
+                        <div class="location-icon">
+                            <img [src]="'assets/img/' + slide.icon" [alt]="slide.title">
+                        </div>
+
+                        <div class="location-content">
+                            <div class="location-text">
+                                <span class="highlight">{{ getHighlightText() }}</span>
+                                <span class="regular"> {{ getRegularText() }}</span>
+                                <span class="cursor">|</span>
+                            </div>
+                            <div class="location-subtitle">
+                                {{ slide.subtitle }}
+                            </div>
+                        </div>
                     </div>
                     }
+
+                    <!-- Progress Dots -->
+                    <div class="progress-dots">
+                        @for (slide of locationSlides; track slide.titleKey; let i = $index) {
+                        <div [class]="getDotClass(i)" (click)="goToSlide(i)" [attr.aria-label]="'Slide ' + (i + 1)">
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Introduction Card -->
+                <div class="introduction-card">
+                    <div class="introduction-text">
+                        {{ 'intro.introduction' | translate }}
+                    </div>
                 </div>
             </div>
 
-            <!-- Introduction Card -->
-            <div class="introduction-card">
-                <div class="introduction-text">
-                    {{ 'intro.introduction' | translate }}
+            <!-- Call-to-Action Section -->
+            <div class="cta-section">
+                <div class="talk-button">
+                    <button class="pointer" [appScrollBounce]="'contact-me'" [offsetY]="104"
+                        [attr.aria-label]="'intro.talk' | translate">
+                        {{ 'intro.talk' | translate }}
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Call-to-Action Section -->
-        <div class="cta-section">
-            <div class="talk-button">
-                <button class="pointer" [appScrollBounce]="'contact-me'" [offsetY]="104"
-                    [attr.aria-label]="'intro.talk' | translate">
-                    {{ 'intro.talk' | translate }}
-                </button>
+<!-- Mobile Version -->
+<div class="hide-on-desktop">
+    <div id="why-me-mobile" class="why-me-container-mobile normal-container wide-screen" #carouselContainerMobile>
+        <h2>{{ 'intro.title' | translate }}</h2>
+
+        <div class="content">
+            <!-- Hero Section with Location Carousel -->
+            <div class="hero-section">
+                <div class="location-carousel">
+                    <!-- Location Slides -->
+                    @for (slide of locationSlides; track slide.titleKey; let i = $index) {
+                    <div class="location-slide" [class.active]="isSlideActive(i)">
+                        <div class="location-icon">
+                            <img [src]="'assets/img/' + slide.icon" [alt]="slide.title">
+                        </div>
+
+                        <div class="location-content">
+                            <div class="location-text">
+                                <span class="highlight">{{ getHighlightText() }}</span>
+                                <span class="regular"> {{ getRegularText() }}</span>
+                                <span class="cursor">|</span>
+                            </div>
+                            <div class="location-subtitle">
+                                {{ slide.subtitle }}
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Progress Dots -->
+                    <div class="progress-dots">
+                        @for (slide of locationSlides; track slide.titleKey; let i = $index) {
+                        <div [class]="getDotClass(i)" (click)="goToSlide(i)" [attr.aria-label]="'Slide ' + (i + 1)">
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Introduction Card -->
+                <div class="introduction-card">
+                    <div class="introduction-text">
+                        {{ 'intro.introduction' | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call-to-Action Section -->
+            <div class="cta-section">
+                <div class="talk-button">
+                    <button class="pointer" [appScrollBounce]="'contact-me-mobile'" [offsetY]="104"
+                        [attr.aria-label]="'intro.talk' | translate">
+                        {{ 'intro.talk' | translate }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>

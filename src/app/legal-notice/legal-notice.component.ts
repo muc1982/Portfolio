@@ -1,16 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FooterComponent } from '../shared/footer/footer.component';
-import { HeaderComponent } from "../shared/header/header.component";
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateModule } from "@ngx-translate/core";
 import { Router, NavigationEnd } from '@angular/router';
+import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.component';
 
 @Component({
   selector: 'app-legal-notice',
   standalone: true,
-  imports: [FooterComponent, HeaderComponent, TranslateModule],
+  imports: [FooterComponent, TranslateModule, LangSwitcherComponent],
   templateUrl: './legal-notice.component.html',
   styleUrl: './legal-notice.component.scss'
 })
@@ -21,7 +22,8 @@ export class LegalNoticeComponent implements OnInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.currentLang = this.translate.currentLang;
     
@@ -46,5 +48,9 @@ export class LegalNoticeComponent implements OnInit, OnDestroy {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
