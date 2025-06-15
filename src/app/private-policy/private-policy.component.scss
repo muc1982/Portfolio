@@ -1,9 +1,5 @@
 @use '../../style/apple-variables' as *;
 @use 'sass:color';
-@use './partials/private-policy-layout';
-@use './partials/private-policy-typography';
-@use './partials/private-policy-animations';
-@use './partials/private-policy-responsive';
 
 .private-policy-container {
     position: relative;
