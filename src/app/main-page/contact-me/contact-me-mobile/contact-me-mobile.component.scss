@@ -1,213 +1,247 @@
-@use '../../../style/apple-variables' as *;
+@use '../../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-#contact-me-mobile.contact-container {
+// MOBILE VERSION - NUR für Bildschirme <= 899px
+.contact-container-mobile {
     position: relative;
-    margin: 24px auto;
-    max-width: 600px;
-    min-height: 70vh;
-    @include standardPaddingMobile();
+    margin: 20px auto;
+    max-width: 100%;
+    min-height: auto;
+    @include standardPadding();
     @include dFlex($fd: column);
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    border-radius: $apple-radius-xl;
+    border-radius: $apple-radius-large;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
-    
+    padding: clamp(16px, 4vw, 24px);
+
+
+    @media screen and (max-width: 899px) {
+        display: flex !important;
+    }
+
+    // Desktop verstecken
+    @media screen and (min-width: 900px) {
+        display: none !important;
+    }
+
     &::before {
         content: '';
         position: absolute;
-        top: -30%;
-        left: -30%;
-        width: 70%;
-        height: 90%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
-        animation: apple-contact-mobile-ambient 15s ease-in-out infinite;
-        filter: blur(35px);
+        top: -20%;
+        right: -20%;
+        width: 60%;
+        height: 80%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+        animation: apple-contact-ambient-mobile 10s ease-in-out infinite;
+        filter: blur(30px);
     }
-    
+
     h2 {
-        @include h2TitleMobile();
+        @include h2Title();
         margin-bottom: 32px;
-        padding-top: clamp(32px, 6vw, 48px);
+        padding-top: clamp(24px, 6vw, 32px);
         position: relative;
         z-index: 2;
         text-align: center;
+        font-size: clamp(28px, 7vw, 36px);
     }
-    
+
     .contact-content {
         width: 100%;
-        @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
+        @include dFlex($fd: column, $gap: clamp(24px, 6vw, 32px));
         position: relative;
         z-index: 2;
-        padding: clamp(20px, 4vw, 32px);
-        
+        padding: clamp(16px, 4vw, 24px);
+
         .contact-header {
             color: $apple-text-primary;
-            @include dFlex($fd: column, $gap: clamp(16px, 4vw, 24px));
-            
-            .header-top {
-                @include dFlex($fd: column, $gap: clamp(12px, 3vw, 16px));
+            @include dFlex($fd: column, $gap: 24px);
+            width: 100%;
+            text-align: center;
+
+            .header-left {
                 width: 100%;
-                
-                .header-top-email,
-                .header-top-phone {
-                    a {
-                        @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
-                        padding: clamp(16px, 4vw, 20px) clamp(16px, 4vw, 20px);
-                        border-radius: $apple-radius-medium;
-                        border: 1px solid rgba(255, 255, 255, 0.1);
-                        background: rgba(255, 255, 255, 0.02);
-                        transition: $apple-transition-fast;
-                        text-decoration: none;
-                        color: inherit;
+
+                h3 {
+                    font-size: clamp(20px, 5vw, 24px);
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-semibold;
+                    color: $apple-primary;
+                    text-align: center;
+                    margin: 0 0 8px 0;
+                }
+
+                p {
+                    font-size: clamp(14px, 3.5vw, 16px);
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-regular;
+                    color: $apple-text-secondary;
+                    margin: 0;
+                    line-height: 1.4;
+                    text-align: center;
+                }
+            }
+
+            .header-right {
+                width: 100%;
+                @include dFlex($fd: column, $gap: 16px);
+
+                .header-top {
+                    @include dFlex($fd: column, $gap: 12px);
+                    width: 100%;
+
+                    .header-right-email,
+                    .header-right-phone {
                         width: 100%;
-                        box-sizing: border-box;
-                        
-                        &:hover {
-                            border-color: rgba($apple-primary, 0.3);
-                            background: rgba($apple-primary, 0.05);
-                            transform: translateY(-1px);
-                            box-shadow: $apple-shadow-small;
-                            
-                            span {
-                                color: $apple-primary;
-                            }
-                            
-                            .mail.img {
-                                background-image: url('./../../../assets/img/mail-hover.svg');
-                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                            }
-                            
-                            .tel.img {
-                                background-image: url('./../../../assets/img/github-hover.png');
-                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                            }
-                        }
-                        
-                        &:active {
-                            transform: translateY(0);
-                            filter: brightness(0.9);
-                        }
-                        
-                        .img {
-                            width: clamp(24px, 6vw, 28px);
-                            height: clamp(28px, 7vw, 32px);
-                            flex-shrink: 0;
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-position: center;
-                        }
-                        
-                        .mail {
-                            background-image: url('./../../../assets/img/mail.png');
-                        }
-                        
-                        .tel {
-                            background-image: url('./../../../assets/img/github.png');
-                        }
-                        
-                        span {
-                            font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-regular;
-                            color: $apple-text-secondary;
+                        max-width: 300px; // Begrenzt die maximale Breite
+
+                        a {
+                            @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
+                            height: clamp(48px, 12vw, 56px);
+                            padding: 0 clamp(16px, 4vw, 20px);
+                            border-radius: $apple-radius-large;
+                            border: 1px solid rgba(255, 255, 255, 0.1);
                             transition: $apple-transition-fast;
-                            font-size: clamp(16px, 3vw, 18px);
-                            line-height: 1.3;
-                            flex: 1;
+                            background: rgba(255, 255, 255, 0.02);
+                            width: 100%;
+                            box-sizing: border-box;
+                            text-decoration: none;
+                            color: inherit;
+                            display: flex;
+
+
+                            &:hover {
+                                border-color: rgba($apple-primary, 0.3);
+                                background: rgba($apple-primary, 0.05);
+                                transform: translateY(-1px);
+                                box-shadow: $apple-shadow-small;
+
+                                span {
+                                    color: $apple-primary;
+                                }
+
+                                .mail.img {
+                                    background-image: url('./../../../../assets/img/mail-hover.svg');
+                                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                                }
+
+                                .tel.img {
+                                    background-image: url('./../../../../assets/img/contact-phone-hover.png');
+                                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                                }
+                            }
+
+                            .img {
+                                width: clamp(24px, 6vw, 28px);
+                                height: clamp(24px, 6vw, 28px);
+                                flex-shrink: 0;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                background-position: center;
+                            }
+
+                            .mail {
+                                background-image: url('./../../../../assets/img/mail.png');
+                            }
+
+                            .tel {
+                                background-image: url('./../../../../assets/img/contact-phone-hover.png');
+                            }
+
+                            span {
+                                font-family: $apple-font-family;
+                                font-weight: $apple-font-weight-regular;
+                                color: $apple-text-secondary;
+                                transition: $apple-transition-fast;
+                                font-size: clamp(14px, 3.5vw, 16px);
+                                line-height: 1.3;
+                                flex: 1;
+                            }
                         }
                     }
                 }
-            }
-            
-            .header-middle {
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-medium;
-                font-size: clamp(18px, 4vw, 22px);
-                color: $apple-primary;
-                text-align: center;
-                padding: clamp(8px, 2vw, 12px) 0;
-                line-height: 1.3;
-            }
-            
-            .header-bottom {
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-medium;
-                font-size: clamp(18px, 4vw, 22px);
-                color: $apple-primary;
-                text-align: center;
-                padding: clamp(8px, 2vw, 12px) 0;
-                line-height: 1.3;
+
+                .header-bottom {
+                    padding: clamp(12px, 3vw, 16px) 0;
+                    font-size: clamp(18px, 4.5vw, 22px);
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-medium;
+                    width: 100%;
+                    color: $apple-primary;
+                    text-align: center;
+                    line-height: 1.3;
+                }
             }
         }
-        
+
         .contact-form {
             width: 100%;
-            
+
             form {
-                @include dFlex($fd: column, $gap: clamp(16px, 4vw, 20px));
-                
+                width: 100%;
+                @include dFlex($fd: column, $gap: clamp(20px, 5vw, 24px));
+
                 .form-name-mail {
-                    @include dFlex($fd: column, $gap: clamp(12px, 3vw, 16px));
+                    @include dFlex($fd: column, $gap: clamp(16px, 4vw, 20px));
+                    width: 100%;
                 }
-                
+
                 .form-field {
-                    @include dFlex($fd: column, $gap: 6px);
-                    
+                    width: 100%;
+                    @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
+
                     .form-label {
                         font-family: $apple-font-family;
-                        font-size: clamp(14px, 3vw, 16px);
+                        font-size: clamp(13px, 3.5vw, 15px);
                         font-weight: $apple-font-weight-medium;
                         color: $apple-text-secondary;
                         transition: $apple-transition-fast;
-                        
+
                         &-error {
                             color: $apple-error;
                         }
                     }
-                    
+
                     .form-input {
                         @include apple-input;
-                        height: clamp(44px, 10vw, 48px);
+                        height: clamp(48px, 12vw, 56px);
                         font-family: $apple-font-family;
-                        font-size: 16px !important;
-                        padding: clamp(12px, 3vw, 16px) clamp(14px, 3.5vw, 18px);
-                        
+                        font-size: clamp(14px, 4vw, 16px);
+                        padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
+
                         &::placeholder {
-                            font-size: 16px !important;
                             color: $apple-text-tertiary;
+                            font-family: $apple-font-family;
                         }
-                        
+
                         &-error {
                             border: 1px solid $apple-error;
                             background: rgba($apple-error, 0.05);
-                            
+
                             &::placeholder {
                                 color: $apple-error;
                             }
                         }
                     }
                 }
-                
+
                 .form-message {
                     textarea {
                         @include apple-input;
                         width: 100%;
-                        height: clamp(100px, 20vw, 120px) !important;
-                        padding: clamp(12px, 3vw, 16px) !important;
+                        height: clamp(120px, 30vw, 150px) !important;
+                        padding: clamp(16px, 4vw, 20px) clamp(16px, 4vw, 20px) !important;
                         resize: none;
                         font-family: $apple-font-family;
-                        font-size: 16px !important;
+                        font-size: clamp(14px, 4vw, 16px);
                         line-height: 1.4;
                         box-sizing: border-box;
-                        
-                        &::placeholder {
-                            font-size: 16px !important;
-                        }
                     }
-                    
+
                     .character-count {
                         font-family: $apple-font-family;
                         font-size: 11px;
@@ -217,33 +251,34 @@
                         opacity: 0.8;
                     }
                 }
-                
+
                 .privacy-policy {
-                    @include dFlex($gap: clamp(10px, 2.5vw, 12px), $ai: flex-start);
                     width: 100%;
-                    
+                    color: $apple-text-secondary;
+                    @include dFlex($jc: flex-start, $gap: clamp(10px, 3vw, 12px), $ai: flex-start);
+
                     .cb {
-                        width: clamp(18px, 4.5vw, 22px);
-                        height: clamp(18px, 4.5vw, 22px);
+                        width: clamp(20px, 5vw, 24px);
+                        height: clamp(20px, 5vw, 24px);
                         flex-shrink: 0;
                         border: 2px solid $apple-text-tertiary;
                         border-radius: $apple-radius-small;
-                        background: transparent;
-                        cursor: pointer;
                         transition: $apple-transition-fast;
                         position: relative;
-                        
+                        background: transparent;
+                        cursor: pointer;
+
                         &:hover {
                             border-color: $apple-primary;
                             transform: scale(1.05);
                             box-shadow: 0 0 6px rgba($apple-primary, 0.3);
                         }
-                        
+
                         &.checked {
                             background: $apple-primary;
                             border-color: $apple-primary;
                             box-shadow: $apple-shadow-glow;
-                            
+
                             &::after {
                                 content: '✓';
                                 position: absolute;
@@ -251,27 +286,27 @@
                                 left: 50%;
                                 transform: translate(-50%, -50%);
                                 color: white;
-                                font-size: clamp(10px, 2.5vw, 12px);
+                                font-size: clamp(10px, 3vw, 12px);
                                 font-weight: $apple-font-weight-bold;
                                 font-family: $apple-font-family;
                             }
                         }
                     }
-                    
-                    span {
+
+                    .privacy-label {
+                        font-size: clamp(12px, 3.5vw, 14px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
-                        font-size: clamp(16px, 2.8vw, 16px);
                         line-height: 1.4;
-                        color: $apple-text-secondary;
                         flex: 1;
-                        
+                        cursor: pointer;
+
                         a {
                             color: $apple-primary;
                             font-weight: $apple-font-weight-medium;
-                            text-decoration: none;
                             transition: $apple-transition-fast;
-                            
+                            text-decoration: none;
+
                             &:hover {
                                 color: color.adjust($apple-primary, $lightness: 10%);
                                 text-decoration: underline;
@@ -279,47 +314,46 @@
                         }
                     }
                 }
-                
+
                 .success-msg {
                     color: $apple-success;
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
-                    padding: clamp(14px, 3.5vw, 18px) clamp(16px, 4vw, 20px);
+                    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
                     background: rgba($apple-success, 0.1);
                     border: 1px solid rgba($apple-success, 0.3);
                     border-radius: $apple-radius-medium;
                     text-align: center;
-                    font-size: clamp(16px, 3vw, 16px);
+                    font-size: clamp(13px, 3.5vw, 15px);
                     box-shadow: $apple-shadow-small;
                 }
-                
+
                 .send-btn {
                     @include dFlex($jc: center);
                     width: 100%;
                     padding-top: clamp(12px, 3vw, 16px);
-                    
+
                     button {
                         @include apple-button-primary;
                         font-family: $apple-font-family;
-                        font-size: clamp(16px, 3.5vw, 18px) !important;
-                        padding: clamp(14px, 3.5vw, 18px) clamp(24px, 6vw, 32px);
-                        min-width: clamp(140px, 35vw, 180px);
-                        border-radius: $apple-radius-medium;
-                        
+                        font-size: clamp(14px, 4vw, 18px);
+                        padding: clamp(12px, 3vw, 16px) clamp(24px, 6vw, 32px);
+                        min-width: clamp(140px, 50vw, 200px);
+
                         &:disabled {
                             background: $apple-bg-quaternary;
                             color: $apple-text-tertiary;
                             cursor: not-allowed;
                             transform: none;
                             box-shadow: none;
-                            
+
                             &:hover {
                                 background: $apple-bg-quaternary;
                                 color: $apple-text-tertiary;
                                 transform: none;
                                 box-shadow: none;
                             }
-                            
+
                             &::before {
                                 display: none;
                             }
@@ -328,790 +362,47 @@
                 }
             }
         }
-        
+
+        // Mobile Scroll to Top Arrow
         .goup-arrow {
-            margin: clamp(24px, 6vw, 32px) auto;
-            width: clamp(24px, 6vw, 28px);
-            height: clamp(48px, 12vw, 56px);
-            background: {
-                image: url('./../../../assets/img/arrow-up.png');
-                size: contain;
-                repeat: no-repeat;
-                position: center;
-            };
-            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+            position: absolute;
+            bottom: clamp(16px, 4vw, 24px);
+            right: clamp(16px, 4vw, 24px);
+            width: clamp(40px, 10vw, 48px);
+            height: clamp(40px, 10vw, 48px);
+            background: rgba($apple-primary, 0.1);
+            border: 1px solid rgba($apple-primary, 0.3);
+            border-radius: 50%;
+            @include dFlex($jc: center, $ai: center);
             transition: $apple-transition-fast;
-            border-radius: $apple-radius-small;
             cursor: pointer;
-            
-            &:hover {
-                background-image: url('./../../../assets/img/arrow-down.png');
-                transform: translateY(-2px) scale(1.1);
-                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-                box-shadow: $apple-shadow-glow;
+            z-index: 3;
+
+            &::before {
+                content: '↑';
+                font-size: clamp(16px, 4vw, 20px);
+                color: $apple-primary;
+                font-weight: $apple-font-weight-bold;
             }
-            
-            &:active {
-                transform: translateY(0) scale(1.05);
+
+            &:hover {
+                background: rgba($apple-primary, 0.2);
+                border-color: rgba($apple-primary, 0.5);
+                transform: translateY(-2px);
+                box-shadow: $apple-shadow-small;
             }
         }
     }
 }
 
-// Animation für Mobile
-@keyframes apple-contact-mobile-ambient {
-    0%, 100% {
+@keyframes apple-contact-ambient-mobile {
+
+    0%,
+    100% {
         transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.06;
     }
-    33% {
-        transform: translateY(-12px) rotate(1deg) scale(1.01);
-        opacity: 0.09;
-    }
-    66% {
-        transform: translateY(8px) rotate(-0.5deg) scale(0.99);
-        opacity: 0.04;
-    }
-}
 
-// Mobile Responsive (unter 900px)
-@media screen and (max-width: 899px) and (min-width: 600px) {
-    #contact-me-mobile.contact-container {
-        margin: 20px auto;
-        max-width: 500px;
-        
-        .contact-content {
-            padding: 20px;
-            gap: 24px;
-            
-            .contact-header {
-                gap: 16px;
-                
-                .header-top {
-                    gap: 12px;
-                    
-                    .header-top-email,
-                    .header-top-phone {
-                        a {
-                            padding: 16px 18px;
-                            
-                            .img {
-                                width: 22px;
-                                height: 26px;
-                            }
-                            
-                            span {
-                                font-size: 16px;
-                            }
-                        }
-                    }
-                }
-                
-                .header-middle,
-                .header-bottom {
-                    font-size: 20px;
-                    padding: 8px 0;
-                }
-            }
-            
-            .contact-form {
-                form {
-                    gap: 16px;
-                    
-                    .form-name-mail {
-                        gap: 14px;
-                    }
-                    
-                    .form-field {
-                        .form-input {
-                            height: 46px;
-                            padding: 14px 16px;
-                        }
-                    }
-                    
-                    .form-message {
-                        textarea {
-                            height: 110px !important;
-                            padding: 14px !important;
-                        }
-                    }
-                    
-                    .privacy-policy {
-                        gap: 10px;
-                        
-                        .cb {
-                            width: 20px;
-                            height: 20px;
-                            
-                            &.checked::after {
-                                font-size: 11px;
-                            }
-                        }
-                        
-                        span {
-                            font-size: 15px;
-                        }
-                    }
-                    
-                    .send-btn {
-                        button {
-                            font-size: 16px !important;
-                            padding: 16px 28px;
-                            min-width: 160px;
-                        }
-                    }
-                }
-            }
-            
-            .goup-arrow {
-                margin: 28px auto;
-                width: 26px;
-                height: 52px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 600px) {
-    #contact-me-mobile.contact-container {
-        margin: 16px auto;
-        max-width: 100%;
-        border-radius: $apple-radius-large;
-        
-        h2 {
-            margin-bottom: 24px;
-            padding-top: 24px;
-        }
-        
-        .contact-content {
-            padding: 16px;
-            gap: 20px;
-            
-            .contact-header {
-                gap: 14px;
-                
-                .header-top {
-                    gap: 10px;
-                    
-                    .header-top-email,
-                    .header-top-phone {
-                        a {
-                            padding: 14px 16px;
-                            border-radius: $apple-radius-small;
-                            
-                            .img {
-                                width: 20px;
-                                height: 24px;
-                            }
-                            
-                            span {
-                                font-size: 16px;
-                            }
-                        }
-                    }
-                }
-                
-                .header-middle,
-                .header-bottom {
-                    font-size: 18px;
-                    padding: 6px 0;
-                }
-            }
-            
-            .contact-form {
-                form {
-                    gap: 14px;
-                    
-                    .form-name-mail {
-                        gap: 12px;
-                    }
-                    
-                    .form-field {
-                        gap: 5px;
-                        
-                        .form-label {
-                            font-size: 14px;
-                        }
-                        
-                        .form-input {
-                            height: 44px;
-                            font-size: 16px !important;
-                            padding: 12px 14px;
-                            
-                            &::placeholder {
-                                font-size: 16px !important;
-                            }
-                        }
-                    }
-                    
-                    .form-message {
-                        textarea {
-                            height: 100px !important;
-                            padding: 12px !important;
-                            font-size: 16px !important;
-                            
-                            &::placeholder {
-                                font-size: 16px !important;
-                            }
-                        }
-                        
-                        .character-count {
-                            font-size: 10px;
-                        }
-                    }
-                    
-                    .privacy-policy {
-                        gap: 8px;
-                        
-                        .cb {
-                            width: 18px;
-                            height: 18px;
-                            
-                            &.checked::after {
-                                font-size: 10px;
-                            }
-                        }
-                        
-                        span {
-                            font-size: 16px;
-                        }
-                    }
-                    
-                    .success-msg {
-                        padding: 12px 16px;
-                        font-size: 16px;
-                        border-radius: $apple-radius-small;
-                    }
-                    
-                    .send-btn {
-                        padding-top: 12px;
-                        
-                        button {
-                            font-size: 16px !important;
-                            padding: 14px 24px;
-                            min-width: 140px;
-                            border-radius: $apple-radius-small;
-                        }
-                    }
-                }
-            }
-            
-            .goup-arrow {
-                margin: 24px auto;
-                width: 24px;
-                height: 48px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #contact-me-mobile.contact-container {
-        margin: 12px auto;
-        
-        h2 {
-            margin-bottom: 20px;
-            padding-top: 20px;
-        }
-        
-        .contact-content {
-            padding: 12px;
-            gap: 16px;
-            
-            .contact-header {
-                gap: 12px;
-                
-                .header-top {
-                    gap: 8px;
-                    
-                    .header-top-email,
-                    .header-top-phone {
-                        a {
-                            padding: 12px 14px;
-                            
-                            .img {
-                                width: 18px;
-                                height: 22px;
-                            }
-                            
-                            span {
-                                font-size: 16px;
-                            }
-                        }
-                    }
-                }
-                
-                .header-middle,
-                .header-bottom {
-                    font-size: 18px;
-                    padding: 4px 0;
-                }
-            }
-            
-            .contact-form {
-                form {
-                    gap: 12px;
-                    
-                    .form-name-mail {
-                        gap: 10px;
-                    }
-                    
-                    .form-field {
-                        gap: 4px;
-                        
-                        .form-label {
-                            font-size: 13px;
-                        }
-                        
-                        .form-input {
-                            height: 42px;
-                            font-size: 16px !important;
-                            padding: 10px 12px;
-                        }
-                    }
-                    
-                    .form-message {
-                        textarea {
-                            height: 90px !important;
-                            padding: 10px !important;
-                            font-size: 16px !important;
-                        }
-                    }
-                    
-                    .privacy-policy {
-                        gap: 6px;
-                        
-                        .cb {
-                            width: 16px;
-                            height: 16px;
-                            border-radius: 3px;
-                            
-                            &.checked::after {
-                                font-size: 9px;
-                            }
-                        }
-                        
-                        span {
-                            font-size: 16px;
-                            line-height: 1.3;
-                        }
-                    }
-                    
-                    .send-btn {
-                        button {
-                            font-size: 16px !important;
-                            padding: 12px 20px;
-                            min-width: 120px;
-                        }
-                    }
-                }
-            }
-            
-            .goup-arrow {
-                margin: 20px auto;
-                width: 22px;
-                height: 44px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 375px) {
-    #contact-me-mobile.contact-container {
-        margin: 8px auto;
-        
-        .contact-content {
-            padding: 8px;
-            gap: 12px;
-            
-            .contact-header {
-                .header-top {
-                    gap: 6px;
-                    
-                    .header-top-email,
-                    .header-top-phone {
-                        a {
-                            padding: 10px 12px;
-                            
-                            .img {
-                                width: 16px;
-                                height: 20px;
-                            }
-                            
-                            span {
-                                font-size: 16px;
-                            }
-                        }
-                    }
-                }
-                
-                .header-middle,
-                .header-bottom {
-                    font-size: 16px;
-                    padding: 3px 0;
-                }
-            }
-            
-            .contact-form {
-                form {
-                    gap: 10px;
-                    
-                    .form-field {
-                        .form-input {
-                            height: 40px;
-                            padding: 8px 10px;
-                        }
-                    }
-                    
-                    .form-message {
-                        textarea {
-                            height: 80px !important;
-                            padding: 8px !important;
-                        }
-                    }
-                    
-                    .privacy-policy {
-                        gap: 4px;
-                        
-                        .cb {
-                            width: 14px;
-                            height: 14px;
-                        }
-                        
-                        span {
-                            font-size: 16px;
-                        }
-                    }
-                    
-                    .send-btn {
-                        button {
-                            font-size: 16px !important;
-                            padding: 10px 16px;
-                            min-width: 100px;
-                        }
-                    }
-                }
-            }
-            
-            .goup-arrow {
-                margin: 16px auto;
-                width: 20px;
-                height: 40px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 320px) {
-    #contact-me-mobile.contact-container {
-        margin: 4px auto;
-        padding: 6px 4px;
-        
-        h2 {
-            margin-bottom: 16px;
-            padding-top: 16px;
-        }
-        
-        .contact-content {
-            padding: 6px;
-            gap: 8px;
-            
-            .contact-header {
-                gap: 8px;
-                
-                .header-top {
-                    gap: 4px;
-                    
-                    .header-top-email,
-                    .header-top-phone {
-                        a {
-                            padding: 8px 10px;
-                            
-                            .img {
-                                width: 14px;
-                                height: 18px;
-                            }
-                            
-                            span {
-                                font-size: 16px;
-                            }
-                        }
-                    }
-                }
-                
-                .header-middle,
-                .header-bottom {
-                    font-size: 16px;
-                    padding: 2px 0;
-                }
-            }
-            
-            .contact-form {
-                form {
-                    gap: 8px;
-                    
-                    .form-name-mail {
-                        gap: 6px;
-                    }
-                    
-                    .form-field {
-                        gap: 3px;
-                        
-                        .form-label {
-                            font-size: 12px;
-                        }
-                        
-                        .form-input {
-                            height: 38px;
-                            font-size: 16px !important;
-                            padding: 6px 8px;
-                        }
-                    }
-                    
-                    .form-message {
-                        textarea {
-                            height: 70px !important;
-                            padding: 6px !important;
-                            font-size: 16px !important;
-                        }
-                        
-                        .character-count {
-                            font-size: 9px;
-                        }
-                    }
-                    
-                    .privacy-policy {
-                        gap: 3px;
-                        
-                        .cb {
-                            width: 12px;
-                            height: 12px;
-                            border-radius: 2px;
-                            
-                            &.checked::after {
-                                font-size: 7px;
-                            }
-                        }
-                        
-                        span {
-                            font-size: 16px;
-                            line-height: 1.2;
-                        }
-                    }
-                    
-                    .success-msg {
-                        padding: 8px 10px;
-                        font-size: 16px;
-                    }
-                    
-                    .send-btn {
-                        padding-top: 6px;
-                        
-                        button {
-                            font-size: 16px !important;
-                            padding: 8px 12px;
-                            min-width: 80px;
-                        }
-                    }
-                }
-            }
-            
-            .goup-arrow {
-                margin: 12px auto;
-                width: 18px;
-                height: 36px;
-            }
-        }
-    }
-}
-
-// Mobile wird nur unter 900px angezeigt
-@media screen and (min-width: 900px) {
-    #contact-me-mobile.contact-container {
-        display: none !important;
-    }
-}
-
-// Accessibility für Mobile
-@media (prefers-reduced-motion: reduce) {
-    #contact-me-mobile.contact-container {
-        &::before {
-            animation: none;
-        }
-        
-        .header-top-email a,
-        .header-top-phone a,
-        .form-input,
-        .cb,
-        .send-btn button,
-        .goup-arrow {
-            &:hover {
-                transform: none;
-            }
-        }
-    }
-    
-    @keyframes apple-contact-mobile-ambient {
-        0%, 100% {
-            transform: none;
-            opacity: 0.06;
-        }
-    }
-}
-
-// High contrast mode für Mobile
-@media (prefers-contrast: high) {
-    #contact-me-mobile.contact-container {
-        background: #000;
-        border: 2px solid #fff;
-        
-        .contact-header {
-            .header-top-email a,
-            .header-top-phone a {
-                background: #111;
-                border: 2px solid #333;
-                
-                &:hover {
-                    background: #333;
-                    border-color: #666;
-                }
-                
-                span {
-                    color: #fff;
-                }
-            }
-            
-            .header-middle,
-            .header-bottom {
-                color: #fff;
-            }
-        }
-        
-        .form-input {
-            background: #111;
-            border: 2px solid #333;
-            color: #fff;
-            
-            &::placeholder {
-                color: #666;
-            }
-            
-            &:focus {
-                border-color: #fff;
-            }
-            
-            &-error {
-                border-color: #ff0000;
-                background: #330000;
-            }
-        }
-        
-        .form-label {
-            color: #fff;
-            
-            &-error {
-                color: #ff0000;
-            }
-        }
-        
-        .cb {
-            border: 2px solid #666;
-            
-            &:hover {
-                border-color: #fff;
-            }
-            
-            &.checked {
-                background: #fff;
-                border-color: #fff;
-                
-                &::after {
-                    color: #000;
-                }
-            }
-        }
-        
-        span {
-            color: #fff;
-            
-            a {
-                color: #00ffff;
-                
-                &:hover {
-                    color: #ffffff;
-                }
-            }
-        }
-        
-        .send-btn button {
-            background: #fff;
-            color: #000;
-            border: 2px solid #fff;
-            
-            &:hover {
-                background: #ccc;
-            }
-            
-            &:disabled {
-                background: #333;
-                color: #666;
-                border-color: #333;
-            }
-        }
-        
-        .success-msg {
-            background: #003300;
-            border-color: #00ff00;
-            color: #00ff00;
-        }
-    }
-}
-
-// Touch device optimizations für Mobile
-@media (hover: none) and (pointer: coarse) {
-    #contact-me-mobile.contact-container {
-        .header-top-email a,
-        .header-top-phone a {
-            padding: 16px 18px;
-            min-height: 48px;
-            
-            &:hover {
-                transform: none;
-                background: rgba($apple-primary, 0.1);
-            }
-        }
-        
-        .form-input {
-            min-height: 48px;
-            font-size: 16px !important;
-            padding: 16px;
-        }
-        
-        .cb {
-            min-width: 20px;
-            min-height: 20px;
-            
-            &:hover {
-                transform: none;
-            }
-        }
-        
-        .send-btn button {
-            min-height: 48px;
-            padding: 16px 20px;
-            
-            &:hover {
-                transform: none;
-            }
-        }
-        
-        .goup-arrow {
-            min-width: 28px;
-            min-height: 48px;
-            
-            &:hover {
-                transform: none;
-            }
-        }
+    50% {
+        transform: translateY(-10px) rotate(1deg) scale(1.01);
     }
 }

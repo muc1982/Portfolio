@@ -196,8 +196,8 @@
                     &::before {
                         content: '"';
                         position: absolute;
-                        top: -16px;
-                        left: -12px;
+                        top: -32px;
+                        left: -24px;
                         font-size: clamp(40px, 8vw, 60px);
                         color: $apple-primary;
                         opacity: 0.5;
@@ -207,8 +207,8 @@
                     &::after {
                         content: '"';
                         position: absolute;
-                        bottom: -32px;
-                        right: -12px;
+                        bottom: -42px;
+                        right: -24px;
                         font-size: clamp(40px, 8vw, 60px);
                         color: $apple-primary;
                         opacity: 0.5;

@@ -15,16 +15,17 @@
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
-    
+
+    // NUR Desktop anzeigen
     @media screen and (min-width: 900px) {
         display: flex !important;
     }
-    
-    // Auf Mobile verstecken
+
+    // Mobile verstecken
     @media screen and (max-width: 899px) {
         display: none !important;
     }
-    
+
     &::before {
         content: '';
         position: absolute;
@@ -45,7 +46,7 @@
         z-index: 2;
         text-align: center;
     }
-    
+
     .contact-content {
         width: 100%;
         @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px));
@@ -54,35 +55,52 @@
         padding: clamp(32px, 6vw, 80px);
         max-width: 1200px;
         margin: 0 auto;
-        
+
         .contact-header {
             color: $apple-text-primary;
             @include dFlex($fd: row, $jc: space-between, $ai: center);
             width: 100%;
             gap: clamp(24px, 5vw, 32px);
-            
+
             .header-left {
                 flex: 1;
-                font-size: clamp(24px, 4vw, 32px);
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-semibold;
-                color: $apple-primary;
-                text-align: left;
+
+                h3 {
+                    font-size: clamp(24px, 4vw, 32px);
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-semibold;
+                    color: $apple-primary;
+                    text-align: left;
+                    margin: 0 0 8px 0;
+                }
+
+                p {
+                    font-size: clamp(16px, 3.5vw, 18px);
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-regular;
+                    color: $apple-text-secondary;
+                    margin: 0;
+                    line-height: 1.4;
+                }
             }
-            
+
             .header-right {
                 flex: 1;
                 @include dFlex($fd: column, $gap: 20px);
-                
+
                 .header-top {
                     @include dFlex($fd: column, $gap: 16px);
                     width: 100%;
-                    
-                    .header-right-email, 
+
+                    .header-right-email,
                     .header-right-phone {
+                        width: 100%;
+                        max-width: 300px; // Begrenzt die maximale Breite
+
                         a {
-                            @include dFlex($gap: clamp(14px, 3.5vw, 20px), $ai: center);
-                            padding: clamp(16px, 4vw, 24px) clamp(20px, 5vw, 28px);
+                            @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
+                            height: clamp(48px, 12vw, 56px);
+                            padding: 0 clamp(16px, 4vw, 20px);
                             border-radius: $apple-radius-large;
                             border: 1px solid rgba(255, 255, 255, 0.1);
                             transition: $apple-transition-fast;
@@ -91,58 +109,59 @@
                             box-sizing: border-box;
                             text-decoration: none;
                             color: inherit;
-                            
+                            display: flex;
+
                             &:hover {
                                 border-color: rgba($apple-primary, 0.3);
                                 background: rgba($apple-primary, 0.05);
                                 transform: translateY(-2px);
                                 box-shadow: $apple-shadow-medium;
-                                
-                                span { 
-                                    color: $apple-primary; 
+
+                                span {
+                                    color: $apple-primary;
                                 }
-                                
+
                                 .mail.img {
                                     background-image: url('./../../../assets/img/mail-hover.svg');
                                     filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                                 }
-                                
+
                                 .tel.img {
                                     background-image: url('./../../../assets/img/contact-phone-hover.png');
                                     filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
                                 }
                             }
-                            
+
                             .img {
                                 width: clamp(28px, 6vw, 36px);
-                                height: clamp(32px, 7vw, 40px);
+                                height: clamp(28px, 6vw, 36px); // Quadratische Icons
                                 flex-shrink: 0;
                                 background-size: contain;
                                 background-repeat: no-repeat;
                                 background-position: center;
                             }
-                            
-                            .mail { 
-                                background-image: url('./../../../assets/img/mail.png'); 
+
+                            .mail {
+                                background-image: url('./../../../assets/img/mail.png');
                             }
-                            
-                            .tel { 
-                                background-image: url('./../../../assets/img/contact-phone-hover.png'); 
+
+                            .tel {
+                                background-image: url('./../../../assets/img/contact-phone-hover.png');
                             }
-                            
+
                             span {
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-regular;
                                 color: $apple-text-secondary;
                                 transition: $apple-transition-fast;
-                                font-size: clamp(14px, 3.5vw, 18px);
+                                font-size: clamp(16px, 4vw, 18px); // Gleiche Schriftgröße wie Form-Inputs
                                 line-height: 1.3;
                                 flex: 1;
                             }
                         }
                     }
                 }
-                
+
                 .header-bottom {
                     padding: clamp(16px, 4vw, 24px) 0;
                     font-size: clamp(20px, 5vw, 28px);
@@ -155,68 +174,65 @@
                 }
             }
         }
-        
+
         .contact-form {
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            
+
             form {
                 width: 100%;
                 @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
-                
+
                 .form-name-mail {
-                    @include dFlex($gap: clamp(24px, 5vw, 32px));
+                    @include dFlex($fd: row, $gap: clamp(24px, 5vw, 32px));
                     width: 100%;
-                    
-                    @media screen and (min-width: 900px) {
-                        @include dFlex($fd: row);
-                        
-                        .form-name, .form-email {
-                            flex: 1;
-                        }
+
+                    .form-name,
+                    .form-email {
+                        flex: 1;
                     }
                 }
 
                 .form-field {
                     width: 100%;
                     @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
-                    
+
                     .form-label {
                         font-family: $apple-font-family;
                         font-size: clamp(14px, 3.5vw, 16px);
                         font-weight: $apple-font-weight-medium;
                         color: $apple-text-secondary;
                         transition: $apple-transition-fast;
-                        
+
                         &-error {
                             color: $apple-error;
                         }
                     }
-                    
+
                     .form-input {
                         @include apple-input;
                         height: clamp(56px, 12vw, 64px);
                         font-family: $apple-font-family;
                         font-size: clamp(16px, 4vw, 18px);
                         padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px);
-                        
+
                         &::placeholder {
                             color: $apple-text-tertiary;
                             font-family: $apple-font-family;
                         }
-                        
+
                         &-error {
                             border: 1px solid $apple-error;
                             background: rgba($apple-error, 0.05);
-                            
+
                             &::placeholder {
                                 color: $apple-error;
                             }
                         }
                     }
                 }
-    
+
                 .form-message {
                     textarea {
                         @include apple-input;
@@ -229,7 +245,7 @@
                         line-height: 1.4;
                         box-sizing: border-box;
                     }
-                    
+
                     .character-count {
                         font-family: $apple-font-family;
                         font-size: 12px;
@@ -239,12 +255,12 @@
                         opacity: 0.8;
                     }
                 }
-                
+
                 .privacy-policy {
                     width: 100%;
                     color: $apple-text-secondary;
                     @include dFlex($jc: flex-start, $gap: clamp(12px, 3vw, 16px), $ai: flex-start);
-                    
+
                     .cb {
                         width: clamp(22px, 5vw, 26px);
                         height: clamp(22px, 5vw, 26px);
@@ -261,12 +277,12 @@
                             transform: scale(1.05);
                             box-shadow: 0 0 8px rgba($apple-primary, 0.3);
                         }
-                        
+
                         &.checked {
                             background: $apple-primary;
                             border-color: $apple-primary;
                             box-shadow: $apple-shadow-glow;
-                            
+
                             &::after {
                                 content: '✓';
                                 position: absolute;
@@ -280,7 +296,7 @@
                             }
                         }
                     }
-                    
+
                     .privacy-label {
                         font-size: clamp(13px, 3.5vw, 16px);
                         font-family: $apple-font-family;
@@ -288,13 +304,13 @@
                         line-height: 1.4;
                         flex: 1;
                         cursor: pointer;
-                        
+
                         a {
                             color: $apple-primary;
                             font-weight: $apple-font-weight-medium;
                             transition: $apple-transition-fast;
                             text-decoration: none;
-                            
+
                             &:hover {
                                 color: color.adjust($apple-primary, $lightness: 10%);
                                 text-decoration: underline;
@@ -302,7 +318,7 @@
                         }
                     }
                 }
-                
+
                 .success-msg {
                     color: $apple-success;
                     font-family: $apple-font-family;
@@ -315,33 +331,33 @@
                     font-size: clamp(14px, 3.5vw, 16px);
                     box-shadow: $apple-shadow-small;
                 }
-                
+
                 .send-btn {
                     @include dFlex($jc: center);
                     width: 100%;
                     padding-top: clamp(16px, 4vw, 24px);
-                    
+
                     button {
                         @include apple-button-primary;
                         font-family: $apple-font-family;
                         font-size: clamp(16px, 4vw, 20px);
                         padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
                         min-width: clamp(160px, 40vw, 240px);
-                        
+
                         &:disabled {
                             background: $apple-bg-quaternary;
                             color: $apple-text-tertiary;
                             cursor: not-allowed;
                             transform: none;
                             box-shadow: none;
-                            
+
                             &:hover {
                                 background: $apple-bg-quaternary;
                                 color: $apple-text-tertiary;
                                 transform: none;
                                 box-shadow: none;
                             }
-                            
+
                             &::before {
                                 display: none;
                             }
@@ -350,16 +366,50 @@
                 }
             }
         }
+
+        // Scroll to Top Arrow
+        .goup-arrow {
+            position: absolute;
+            bottom: clamp(20px, 4vw, 32px);
+            right: clamp(20px, 4vw, 32px);
+            width: clamp(48px, 10vw, 56px);
+            height: clamp(48px, 10vw, 56px);
+            background: rgba($apple-primary, 0.1);
+            border: 1px solid rgba($apple-primary, 0.3);
+            border-radius: 50%;
+            @include dFlex($jc: center, $ai: center);
+            transition: $apple-transition-fast;
+            cursor: pointer;
+            z-index: 3;
+
+            &::before {
+                content: '↑';
+                font-size: clamp(20px, 4vw, 24px);
+                color: $apple-primary;
+                font-weight: $apple-font-weight-bold;
+            }
+
+            &:hover {
+                background: rgba($apple-primary, 0.2);
+                border-color: rgba($apple-primary, 0.5);
+                transform: translateY(-4px);
+                box-shadow: $apple-shadow-medium;
+            }
+        }
     }
 }
 
 @keyframes apple-contact-ambient {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
+
     33% {
         transform: translateY(-15px) rotate(2deg) scale(1.02);
     }
+
     66% {
         transform: translateY(10px) rotate(-1deg) scale(0.98);
     }
