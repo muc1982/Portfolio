@@ -8,7 +8,7 @@
     
     span {
         padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
-        font-size: clamp(16px, 2.5vw, 16px); // Min 16px
+        font-size: clamp(16px, 2.5vw, 16px); 
         font-weight: $apple-font-weight-medium;
         border-radius: $apple-radius-small;
         transition: $apple-transition-fast;
@@ -17,12 +17,11 @@
         border: 1px solid transparent;
         background: transparent;
         color: $apple-text-secondary;
-        min-height: 36px; // Larger touch target
+        min-height: 36px; 
         min-width: 40px;
         @include dFlex($jc: center, $ai: center);
         box-sizing: border-box;
         
-        // Touch-optimierte Größen für Mobile
         @media screen and (max-width: 900px) {
             padding: clamp(5px, 1.2vw, 8px) clamp(8px, 2vw, 12px);
             font-size: 16px;
@@ -104,7 +103,6 @@
     }
 }
 
-// Responsive Design für verschiedene Kontexte
 .header-wrapper .langs {
     @media screen and (max-width: 900px) {
         gap: 3px;
@@ -140,7 +138,6 @@
     }
 }
 
-// Menu-spezifische Styles
 .menu-content .langs {
     justify-content: center;
     gap: clamp(4px, 1vw, 8px);
@@ -168,7 +165,6 @@
     }
 }
 
-// Footer-spezifische Styles
 .footer-content .langs {
     span {
         &:hover {
@@ -183,7 +179,6 @@
     }
 }
 
-// High contrast mode
 @media (prefers-contrast: high) {
     .langs span {
         border: 2px solid currentColor;
@@ -196,7 +191,6 @@
     }
 }
 
-// Reduced motion
 @media (prefers-reduced-motion: reduce) {
     .langs span {
         transition: none;

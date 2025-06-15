@@ -1,4 +1,5 @@
-@use '../../../style/apple-variables' as *;
+@use '../../../style/apple-variables.scss' as *;
+@use 'sass:color';
 
 .landing-page-extra {
     height: 50px;
@@ -419,7 +420,7 @@
 
     .arrow-wrapper {
         width: 100%;
-        @include dFlex($jc: center, $ai: center); 
+        @include dFlex($jc: center, $ai: center);
         
         .arrow-down {
             width: 40px;
@@ -450,7 +451,7 @@
             @media screen and (max-width: 900px) {
                 width: 32px;
                 height: 64px;
-                margin: 0 auto; 
+                margin: 0 auto;
             }
 
             @media screen and (max-width: 600px) {
@@ -469,7 +470,7 @@
                 width: 20px;
                 height: 40px;
                 margin: 0 auto;
-                top: 0; 
+                top: 0;
             }
 
             &:hover {
@@ -480,77 +481,6 @@
 
             &:active {
                 transform: translateY(-1px) scale(1.05);
-            }
-        }
-    }
-}
-@keyframes apple-ambient-float {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    33% {
-        transform: translateY(-15px) rotate(2deg) scale(1.02);
-    }
-
-    66% {
-        transform: translateY(10px) rotate(-1deg) scale(0.98);
-    }
-}
-
-@keyframes apple-profile-glow {
-
-    0%,
-    100% {
-        opacity: 0.15;
-        transform: scale(1) rotate(0deg);
-    }
-
-    25% {
-        opacity: 0.2;
-        transform: scale(1.05) rotate(1deg);
-    }
-
-    50% {
-        opacity: 0.18;
-        transform: scale(1.02) rotate(-0.5deg);
-    }
-
-    75% {
-        opacity: 0.22;
-        transform: scale(1.03) rotate(0.8deg);
-    }
-}
-
-@media screen and (max-width: 1200px),
-screen and (min-height: 1000px) {
-    .content-left {
-        display: none !important;
-    }
-
-    .content-right {
-        width: 100%;
-        justify-content: space-around;
-
-        .img-wrapper-small {
-            display: flex;
-        }
-
-        .logo {
-            position: absolute;
-            left: 0;
-            top: 20px;
-        }
-        
-        .arrow-wrapper {
-            width: 100%;
-            @include dFlex($jc: center, $ai: center);
-            margin: 0 auto;
-            
-            .arrow-down {
-                margin: 0 auto;
             }
         }
     }

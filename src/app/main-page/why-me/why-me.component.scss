@@ -1,33 +1,360 @@
 @use '../../../style/apple-variables' as *;
+@use 'sass:color';
+
+.why-me-extra {
+    height: 50px;
+}
 
 .why-me-container {
+    position: relative;
+    margin: 40px auto;
+    max-width: 800px;
+    min-height: 600px;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-xl;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-large;
+    overflow: hidden;
+    @include standardPadding();
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        left: -30%;
+        width: 70%;
+        height: 100%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
+        animation: ambient-float-mobile 20s ease-in-out infinite;
+        filter: blur(50px);
+    }
+    
+    h2 {
+        @include h2Title();
+        margin-bottom: 48px;
+        padding-top: clamp(48px, 8vw, 64px);
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+    
     .content {
+        @include dFlex($fd: column, $gap: clamp(32px, 6vw, 48px));
+        padding-bottom: clamp(48px, 8vw, 64px);
+        position: relative;
+        z-index: 2;
+        
         .hero-section {
+            @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
+            
             .location-carousel {
+                position: relative;
+                height: clamp(80px, 16vw, 120px);
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: $apple-radius-large;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                overflow: hidden;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                
                 .location-slide {
-                    .location-content {
-                        .location-text {
-                            font-size: clamp(20px, 4vw, 32px);
+                    position: absolute;
+                    inset: 0;
+                    @include dFlex($ai: center, $gap: clamp(16px, 3vw, 24px));
+                    padding: clamp(16px, 4vw, 24px);
+                    opacity: 0;
+                    transition: $apple-transition-medium;
+                    
+                    &.active {
+                        opacity: 1;
+                    }
+                    
+                    .location-icon {
+                        width: clamp(40px, 8vw, 56px);
+                        height: clamp(40px, 8vw, 56px);
+                        @include dFlex();
+                        background: rgba($apple-primary, 0.1);
+                        border-radius: 50%;
+                        border: 1px solid rgba($apple-primary, 0.3);
+                        transition: $apple-transition-fast;
+                        flex-shrink: 0;
+                        
+                        &:hover {
+                            transform: scale(1.1);
+                            background: rgba($apple-primary, 0.2);
+                            box-shadow: $apple-shadow-glow;
                         }
-
+                        
+                        img {
+                            width: clamp(20px, 4vw, 28px);
+                            height: clamp(20px, 4vw, 28px);
+                            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                        }
+                    }
+                    
+                    .location-content {
+                        flex: 1;
+                        
+                        .location-text {
+                            font-family: $apple-font-family;
+                            font-weight: $apple-font-weight-semibold;
+                            font-size: clamp(20px, 4vw, 32px);
+                            line-height: 1.2;
+                            margin-bottom: 8px;
+                            
+                            .highlight {
+                                background: $apple-teal-gradient;
+                                -webkit-background-clip: text;
+                                background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                            }
+                            
+                            .regular {
+                                color: $apple-text-primary;
+                            }
+                            
+                            .cursor {
+                                color: $apple-primary;
+                                animation: cursor-blink 1s infinite;
+                            }
+                        }
+                        
                         .location-subtitle {
-                            font-size: clamp(16px, 3vw, 18px);
+                            font-family: $apple-font-family;
+                            font-weight: $apple-font-weight-regular;
+                            font-size: clamp(14px, 3vw, 18px);
+                            color: $apple-text-secondary;
+                            line-height: 1.4;
+                        }
+                    }
+                }
+                
+                .progress-dots {
+                    position: absolute;
+                    bottom: 12px;
+                    right: 20px;
+                    @include dFlex($gap: 8px);
+                    
+                    .dot {
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.3);
+                        transition: $apple-transition-fast;
+                        cursor: pointer;
+                        
+                        &:hover {
+                            transform: scale(1.2);
+                            background: rgba($apple-primary, 0.6);
+                        }
+                        
+                        &.active {
+                            background: $apple-primary;
+                            box-shadow: $apple-shadow-glow;
                         }
                     }
                 }
             }
-
+            
             .introduction-card {
+                background: rgba(255, 255, 255, 0.04);
+                border-radius: $apple-radius-large;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: clamp(24px, 5vw, 32px);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                transition: $apple-transition-medium;
+                position: relative;
+                
+                &:hover {
+                    background: rgba(255, 255, 255, 0.06);
+                    transform: translateY(-2px);
+                    box-shadow: $apple-shadow-medium;
+                }
+                
                 .introduction-text {
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-regular;
                     font-size: clamp(16px, 4vw, 20px);
+                    line-height: 1.6;
+                    color: $apple-text-secondary;
+                    text-align: justify;
+                    position: relative;
+                    
+                    &::before {
+                        content: '"';
+                        position: absolute;
+                        top: -10px;
+                        left: -8px;
+                        font-size: clamp(32px, 8vw, 48px);
+                        color: $apple-primary;
+                        opacity: 0.5;
+                        font-family: Georgia, serif;
+                    }
+                    
+                    &::after {
+                        content: '"';
+                        position: absolute;
+                        bottom: -20px;
+                        right: -8px;
+                        font-size: clamp(32px, 8vw, 48px);
+                        color: $apple-primary;
+                        opacity: 0.5;
+                        font-family: Georgia, serif;
+                    }
                 }
             }
         }
-
+        
         .cta-section {
+            @include dFlex($jc: center);
+            padding-top: clamp(16px, 4vw, 24px);
+            
             .talk-button {
                 button {
-                    font-size: clamp(16px, 4vw, 20px) !important;
+                    @include apple-button-primary();
+                    font-size: clamp(16px, 4vw, 20px);
+                    padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
+                    min-width: clamp(160px, 40vw, 240px);
+                }
+            }
+        }
+    }
+}
+
+// Animations
+@keyframes ambient-float-mobile {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.06;
+    }
+    25% {
+        transform: translateY(-15px) rotate(1deg) scale(1.02);
+        opacity: 0.09;
+    }
+    50% {
+        transform: translateY(-8px) rotate(-0.5deg) scale(0.98);
+        opacity: 0.04;
+    }
+    75% {
+        transform: translateY(-12px) rotate(0.8deg) scale(1.01);
+        opacity: 0.07;
+    }
+}
+
+@keyframes cursor-blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+// Responsive Design
+@media screen and (max-width: 900px) {
+    .why-me-container {
+        margin: 24px auto;
+        max-width: 600px;
+        @include standardPaddingMobile();
+        
+        h2 {
+            @include h2TitleMobile();
+            margin-bottom: 32px;
+            padding-top: 40px;
+        }
+        
+        .content {
+            gap: 24px;
+            padding-bottom: 40px;
+            
+            .hero-section {
+                gap: 20px;
+                
+                .location-carousel {
+                    height: 80px;
+                }
+                
+                .introduction-card {
+                    padding: 20px;
+                }
+            }
+            
+            .cta-section {
+                padding-top: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .why-me-container {
+        margin: 20px auto;
+        
+        .content {
+            .hero-section {
+                .location-carousel {
+                    height: 70px;
+                    
+                    .location-slide {
+                        .location-content {
+                            .location-text {
+                                font-size: clamp(16px, 4vw, 20px);
+                            }
+                            
+                            .location-subtitle {
+                                font-size: clamp(12px, 3vw, 16px);
+                            }
+                        }
+                    }
+                }
+                
+                .introduction-card {
+                    .introduction-text {
+                        font-size: clamp(14px, 4vw, 18px);
+                        
+                        &::before,
+                        &::after {
+                            font-size: clamp(24px, 6vw, 32px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .why-me-container {
+        margin: 16px auto;
+        border-radius: $apple-radius-large;
+        
+        h2 {
+            margin-bottom: 24px;
+            padding-top: 32px;
+        }
+        
+        .content {
+            gap: 20px;
+            padding-bottom: 32px;
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .why-me-container {
+        margin: 12px auto;
+        
+        .content {
+            .hero-section {
+                .location-carousel {
+                    height: 60px;
+                    border-radius: $apple-radius-medium;
+                }
+                
+                .introduction-card {
+                    padding: 16px;
+                    border-radius: $apple-radius-medium;
                 }
             }
         }
@@ -36,33 +363,101 @@
 
 @media screen and (max-width: 320px) {
     .why-me-container {
+        margin: 8px auto;
+        padding: 12px 8px;
+        
+        h2 {
+            margin-bottom: 20px;
+            padding-top: 24px;
+        }
+        
         .content {
+            gap: 16px;
+            padding-bottom: 24px;
+            
             .hero-section {
+                gap: 16px;
+                
                 .location-carousel {
-                    .location-slide {
-                        .location-content {
-                            .location-text {
-                                font-size: 16px;
-                            }
-
-                            .location-subtitle {
-                                font-size: 16px;
-                            }
-                        }
-                    }
+                    height: 50px;
                 }
-
+                
                 .introduction-card {
-                    .introduction-text {
-                        font-size: 16px; // Fixed 16px
-                    }
+                    padding: 12px;
                 }
             }
+        }
+    }
+}
 
-            .cta-section {
-                .talk-button button {
-                    font-size: 16px !important;
-                }
+// Accessibility
+@media (prefers-reduced-motion: reduce) {
+    .why-me-container {
+        &::before {
+            animation: none;
+        }
+    }
+    
+    .location-slide {
+        transition: opacity 0.3s ease !important;
+    }
+    
+    .introduction-card {
+        &:hover {
+            transform: none;
+        }
+    }
+    
+    .location-icon,
+    .progress-dots .dot {
+        &:hover {
+            transform: none;
+        }
+    }
+    
+    @keyframes ambient-float-mobile {
+        0%, 100% {
+            transform: none;
+        }
+    }
+    
+    @keyframes cursor-blink {
+        0%, 100% {
+            opacity: 1;
+        }
+    }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+    .why-me-container {
+        background: #000;
+        border: 2px solid #fff;
+        
+        .location-carousel {
+            background: #111;
+            border: 2px solid #333;
+        }
+        
+        .introduction-card {
+            background: #111;
+            border: 2px solid #333;
+        }
+        
+        .location-text {
+            .highlight,
+            .regular {
+                color: #fff !important;
+                background: none !important;
+                -webkit-text-fill-color: #fff !important;
+            }
+        }
+        
+        .progress-dots .dot {
+            background: #666;
+            
+            &.active {
+                background: #fff;
             }
         }
     }
