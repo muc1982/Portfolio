@@ -8,13 +8,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CommonModule } from '@angular/common';
 import { GlobalService } from '../../global.service';
 import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
+import { MyProjectsMobileComponent } from "./my-projects-mobile/my-projects-mobile.component";
 
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-my-projects',
   standalone: true,
-  imports: [TranslateModule, CommonModule], 
+  imports: [TranslateModule, CommonModule, MyProjectsMobileComponent], 
   templateUrl: './my-projects.component.html',
   styleUrl: './my-projects.component.scss'
 })

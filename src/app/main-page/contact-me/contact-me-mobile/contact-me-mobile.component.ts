@@ -1,8 +1,9 @@
+// contact-me-mobile.component.ts - KORRIGIERT
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ScrollAnimateDirective } from '../../../Instructions/scroll-animation.directive';
+import { ScrollAnimateDirective } from '../../../Instructions/scroll-animation.directive'; // HINZUGEFÜGT
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,7 +22,8 @@ interface Contact {
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    FormsModule
+    FormsModule,
+    ScrollAnimateDirective  // HINZUGEFÜGT
 ],
   templateUrl: './contact-me-mobile.component.html',
   styleUrl: './contact-me-mobile.component.scss'
