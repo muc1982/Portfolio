@@ -9,14 +9,24 @@ RewriteEngine On
     Header unset X-Powered-By
 </IfModule>
 
-# HTTPS Redirect für yasin-sun.developerakademie.net
 <IfModule mod_rewrite.c>
     RewriteCond %{HTTPS} off
-    RewriteCond %{HTTP_HOST} ^yasin-sun\.developerakademie\.net$ [NC]
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    RewriteCond %{HTTP_HOST} ^(www\.)?sun-dev\.de$ [NC]
+    RewriteRule ^(.*)$ https://sun-dev.de/$1 [R=301,L]
+    
+    RewriteCond %{HTTP_HOST} ^www\.sun-dev\.de$ [NC]
+    RewriteRule ^(.*)$ https://sun-dev.de/$1 [R=301,L]
 </IfModule>
 
-# Komprimierung
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/api/
+    RewriteCond %{REQUEST_URI} !^/assets/
+    RewriteCond %{REQUEST_URI} !^/sendMail\.php$
+    RewriteRule ^(.*)$ /index.html [L]
+</IfModule>
+
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -29,14 +39,8 @@ RewriteEngine On
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
     AddOutputFilterByType DEFLATE application/json
-    AddOutputFilterByType DEFLATE application/ld+json
-    AddOutputFilterByType DEFLATE image/svg+xml
-    AddOutputFilterByType DEFLATE font/truetype
-    AddOutputFilterByType DEFLATE font/opentype
-    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
 </IfModule>
 
-# Browser Caching
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType image/jpg "access plus 1 year"
@@ -45,57 +49,9 @@ RewriteEngine On
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/x-icon "access plus 1 year"
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType text/javascript "access plus 1 year"
-    ExpiresByType font/truetype "access plus 1 year"
-    ExpiresByType font/opentype "access plus 1 year"
-    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
-    ExpiresByType font/woff "access plus 1 year"
-    ExpiresByType font/woff2 "access plus 1 year"
-    
-    ExpiresByType text/html "access plus 1 week"
-    ExpiresByType application/json "access plus 1 week"
-    ExpiresByType application/manifest+json "access plus 1 week"
-</IfModule>
-
-<IfModule mod_headers.c>
-    <FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$">
-        Header set Cache-Control "public, max-age=31536000, immutable"
-    </FilesMatch>
-
-    <FilesMatch "\.html$">
-        Header set Cache-Control "public, max-age=604800"
-    </FilesMatch>
-</IfModule>
-
-# MIME Types
-<IfModule mod_mime.c>
-    AddType font/woff .woff
-    AddType font/woff2 .woff2
-    AddType application/vnd.ms-fontobject .eot
-    AddType font/truetype .ttf
-    AddType font/opentype .otf
-    AddType application/manifest+json .webmanifest
-    AddType application/json .json
-    AddType image/webp .webp
-    AddType image/avif .avif
-</IfModule>
-
-# Angular Routing
-<IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_FILENAME} -s [OR]
-    RewriteCond %{REQUEST_FILENAME} -l [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^.*$ - [NC,L]
-    
-    # Ausnahmen für PHP Scripts und API
-    RewriteCond %{REQUEST_URI} !^/sendMail\.php$
-    RewriteCond %{REQUEST_URI} !^/api/
-    RewriteCond %{REQUEST_URI} !^/assets/
-
-    RewriteRule ^(.*)$ /index.html [NC,L]
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 1 hour"
 </IfModule>
 
 # Sicherheit
@@ -108,12 +64,3 @@ RewriteEngine On
     Order allow,deny
     Deny from all
 </FilesMatch>
-
-# PHP Konfiguration für alllink.com
-<IfModule mod_php.c>
-    php_value upload_max_filesize 2M
-    php_value post_max_size 8M
-    php_value max_execution_time 30
-    php_value max_input_time 60
-    php_value mail.add_x_header Off
-</IfModule>

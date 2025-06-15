@@ -1,697 +1,115 @@
-@use '../../../../style/apple-variables' as *;
-@use 'sass:color';
-
-.my-projects-container {
-    margin: 32px auto;
-    max-width: 600px;
-    width: 100%;
-    @include standardPaddingMobile();
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    border-radius: $apple-radius-large;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: $apple-shadow-large;
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    
-    &::before {
-        content: '';
-        position: absolute;
-        top: -30%;
-        right: -30%;
-        width: 80%;
-        height: 100%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-        animation: apple-mobile-ambient 10s ease-in-out infinite;
-        filter: blur(30px);
-    }
-   
-    h2 {
-        @include h2TitleMobile();
-        text-align: center;
-        margin-bottom: clamp(24px, 5vw, 32px);
-        position: relative;
-        z-index: 2;
+.my-projects-content {
+    nav {
+        > div {
+            > span {
+                font-size: clamp(16px, 2.5vw, 18px); 
+            }
+        }
     }
     
-    .my-projects-content {
-        position: relative;
-        z-index: 2;
-        
-        nav {
-            @include dFlex($jc: center);
-            margin-bottom: clamp(16px, 3vw, 24px);
-            gap: 2px;
-            
-            > div {
-                flex: 1;
-                border-top-left-radius: $apple-radius-medium;
-                border-top-right-radius: $apple-radius-medium;
-                overflow: hidden;
-                padding: clamp(8px, 2vw, 12px) clamp(4px, 1vw, 8px);
-                min-height: clamp(40px, 8vw, 55px);
-                box-sizing: border-box;
-                @include dFlex($jc: center, $ai: center);
-                transition: $apple-transition-medium;
-                position: relative;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid rgba(255, 255, 255, 0.05);
+    .project {
+        .project-top {
+            .technologies {
+                font-size: clamp(16px, 2.8vw, 16px); 
                 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    height: 0;
-                    background: $apple-teal-gradient;
-                    transition: $apple-transition-medium;
-                }
-                
-                &.active {
-                    background: $apple-bg-tertiary;
-                    border: 1px solid rgba($apple-primary, 0.3);
-                    border-bottom: none;
-                    box-shadow: $apple-shadow-small;
-                    
-                    &::before {
-                        height: 2px;
-                        box-shadow: 0 0 8px rgba($apple-primary, 0.6);
-                    }
-                    
-                    > span {
-                        color: $apple-text-primary;
-                        text-shadow: 0 0 8px rgba($apple-primary, 0.3);
-                    }
-                }
-                
-                &:hover:not(.active) {
-                    background: rgba(255, 255, 255, 0.05);
-                    
-                    > span {
-                        color: $apple-text-primary;
-                    }
-                    
-                    &::before {
-                        height: 1px;
-                    }
-                }
-                
-                > span {
-                    font-size: clamp(10px, 2.5vw, 14px);
-                    font-weight: $apple-font-weight-semibold;
-                    font-family: $apple-font-family;
-                    color: $apple-primary;
-                    transition: $apple-transition-medium;
-                    text-align: center;
-                    line-height: 1.2;
-                    word-break: break-word;
-                    hyphens: auto;
+                .duration {
+                    font-size: clamp(16px, 2.5vw, 16px); 
                 }
             }
         }
         
-        .project {
-            @include dFlex($fd: column);
-            padding: clamp(16px, 3vw, 24px) 0;
-            color: $apple-text-primary;
-            background: $apple-bg-tertiary;
-            border-radius: $apple-radius-medium;
-            margin-bottom: clamp(12px, 2.5vw, 18px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            
-            .project-top {
-                width: 100%;
-                @include dFlex($gap: clamp(16px, 3vw, 20px), $fd: column);
-                padding: 0 clamp(12px, 2.5vw, 20px);
-                
-                .project-top-title {
-                    color: $apple-primary;
-                    font-size: clamp(18px, 4vw, 22px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-semibold;
-                    align-self: flex-start;
-                    margin-bottom: clamp(6px, 1.5vw, 10px);
-                    text-align: center;
-                    width: 100%;
-                }
-                
-                .technologies {
-                    position: relative;
-                    font-size: clamp(11px, 2.8vw, 13px);
-                    width: 100%;
-                    @include dFlex($gap: clamp(6px, 1.5vw, 10px), $fd: column);
-                    padding: clamp(12px, 2.5vw, 16px);
-                    border-radius: $apple-radius-small;
-                    background: rgba(255, 255, 255, 0.02);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    
-                    .technologies-top {
-                        width: 100%;
-                        align-self: flex-start;
-                        
-                        .technologies-arr {
-                            color: $apple-text-secondary;
-                            font-weight: $apple-font-weight-regular;
-                        }
-                    }
-                    
-                    .duration {
-                        width: 100%;
-                        align-self: flex-start;
-                        color: $apple-text-tertiary;
-                        font-size: clamp(10px, 2.5vw, 12px);
-                        
-                        span {
-                            color: $apple-primary;
-                            font-weight: $apple-font-weight-medium;
-                        }
-                    }
-                }
-                
-                .project-img {
-                    position: relative;
-                    width: 79%;
-                    text-align: center;
-                    border-radius: $apple-radius-medium;
-                    overflow: hidden;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    box-shadow: $apple-shadow-small;
-                    aspect-ratio: 16/9;
-                    
-                    > img {
-                        position: relative;
-                        border-radius: $apple-radius-medium;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        z-index: 1;
-                        transition: $apple-transition-medium;
-                        
-                        &:hover {
-                            transform: scale(1.02);
-                            filter: brightness(1.05);
-                        }
+        .project-bottom {
+            .tab-li {
+                .right-of-logo {
+                    > div > h4 {
+                        font-size: clamp(16px, 3.5vw, 18px); 
                     }
                     
                     > p {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        color: $apple-primary;
-                        font-size: clamp(16px, 4vw, 20px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-bold;
-                        z-index: 2;
-                        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                        font-size: clamp(16px, 2.8vw, 16px); 
                     }
                 }
             }
             
-            .project-bottom {
-                padding: clamp(12px, 2.5vw, 20px);
-                @include dFlex($fd: column, $gap: clamp(16px, 3vw, 20px));
-                
-                .tab-li {
-                    width: 100%;
-                    @include dFlex($jc: flex-start, $gap: clamp(10px, 2vw, 14px));
-                    padding: clamp(12px, 2.5vw, 16px);
-                    border-radius: $apple-radius-small;
-                    background: rgba(255, 255, 255, 0.02);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    transition: $apple-transition-medium;
-                    
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.05);
-                        border-color: rgba($apple-primary, 0.2);
-                        transform: translateX(2px);
-                    }
-                    
-                    > img {
-                        width: clamp(18px, 4vw, 24px);
-                        height: clamp(18px, 4vw, 24px);
-                        position: relative;
-                        top: 2px;
-                        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                        flex-shrink: 0;
-                    }
-                    
-                    .right-of-logo {
-                        flex: 1;
-                        
-                        > div {
-                            @include dFlex($gap: clamp(6px, 1.5vw, 10px), $jc: flex-start, $ai: flex-start, $fd: column);
-                            margin-bottom: clamp(6px, 1.5vw, 10px);
-                            
-                            > h4 {
-                                font-size: clamp(14px, 3.5vw, 16px);
-                                font-weight: $apple-font-weight-semibold;
-                                font-family: $apple-font-family;
-                                color: $apple-primary;
-                                line-height: 1.3;
-                            }
-                        }
-                        
-                        > p {
-                            font-size: clamp(11px, 2.8vw, 13px);
-                            font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-regular;
-                            line-height: 1.5;
-                            color: $apple-text-secondary;
-                        }
-                    }
-                }
-                
-                .project-bottom-footer {
-                    position: relative;
-                    @include dFlex($gap: clamp(10px, 2.5vw, 14px), $jc: center);
-                    flex-wrap: wrap;
-                    
-                    button {
-                        background-color: transparent;
-                        border: none;
-                        border-radius: $apple-radius-large;
-                        transition: $apple-transition-fast;
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-semibold;
-                        position: relative;
-                        overflow: hidden;
-                        flex: 1;
-                        min-width: clamp(100px, 25vw, 130px);
-                        
-                        a {
-                            display: block;
-                            width: 100%;
-                            height: 100%;
-                            padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3vw, 16px);
-                            box-sizing: border-box;
-                            color: inherit;
-                            text-decoration: none;
-                            font-size: clamp(12px, 3vw, 14px);
-                        }
-                        
-                        &:nth-child(1) {
-                            @include apple-button-primary;
-                        }
-                        
-                        &:nth-child(2) {
-                            @include apple-button-secondary;
-                        }
-                    }
-                }
-            }
-        }
-        
-        .team-player {
-            @include standardPaddingMobile();
-            padding-top: clamp(32px, 6vw, 40px);
-            padding-bottom: clamp(32px, 6vw, 40px);
-            
-            > h4 {
-                font-size: clamp(20px, 5vw, 26px);
-                font-weight: $apple-font-weight-bold;
-                font-family: $apple-font-family;
-                color: $apple-primary;
-                text-align: left;
-                margin-bottom: clamp(12px, 2.5vw, 16px);
-                background: $apple-teal-gradient;
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-                line-height: 1.2;
-            }
-            
-            > p {
-                font-size: clamp(14px, 3.5vw, 16px);
-                font-weight: $apple-font-weight-regular;
-                font-family: $apple-font-family;
-                color: $apple-text-secondary;
-                text-align: left;
-                padding-bottom: clamp(24px, 5vw, 32px);
-                line-height: 1.5;
-            }
-            
-            .team-player-content {
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-                
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-
-                margin: 0 auto;
-                width: 100%;
-                overflow-x: auto;
-                padding-bottom: clamp(12px, 2.5vw, 16px);
-                
-                .team-player-content-wrapper {
-                    @include dFlex($gap: clamp(12px, 2.5vw, 16px), $jc: flex-start);
-                    width: max-content;
-                    min-width: 100%;
-
-                    .player {
-                        opacity: 0.8;
-                        width: clamp(180px, 45vw, 250px);
-                        height: clamp(180px, 45vw, 250px);
-                        flex-shrink: 0;
-                        @include dFlex();
-                        background: $apple-bg-tertiary;
-                        border-radius: 50%;
-                        border: 1px solid rgba(255, 255, 255, 0.1);
-                        box-shadow: $apple-shadow-small;
-                        transition: $apple-transition-medium;
-                        position: relative;
-                        overflow: hidden;
-                        
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            inset: -2px;
-                            background: $apple-teal-gradient;
-                            border-radius: 50%;
-                            opacity: 0;
-                            transition: $apple-transition-medium;
-                            z-index: -1;
-                        }
-                        
-                        &:hover {
-                            opacity: 1;
-                            transform: translateY(-4px) scale(1.02);
-                            box-shadow: $apple-shadow-medium;
-                            
-                            &::before {
-                                opacity: 0.1;
-                            }
-                        }
-                        
-                        .player-content {
-                            width: 85%;
-                            @include dFlex($fd: column, $gap: clamp(6px, 1.5vw, 10px));
-                            text-align: center;
-                            position: relative;
-                            z-index: 1;
-                            
-                            .player-name {
-                                font-size: clamp(13px, 3.5vw, 16px);
-                                font-weight: $apple-font-weight-semibold;
-                                font-family: $apple-font-family;
-                                color: $apple-text-primary;
-                                margin-bottom: clamp(3px, 0.8vw, 5px);
-                                line-height: 1.3;
-                            }
-                            
-                            .player-project {
-                                font-size: clamp(11px, 3vw, 14px);
-                                font-weight: $apple-font-weight-regular;
-                                font-family: $apple-font-family;
-                                margin-bottom: clamp(6px, 1.5vw, 10px);
-                                line-height: 1.3;
-                                
-                                span {
-                                    &:nth-child(1) {
-                                        color: $apple-text-secondary;
-                                    }
-                                    &:nth-child(2) {
-                                        color: $apple-primary;
-                                        font-weight: $apple-font-weight-medium;
-                                        cursor: pointer;
-                                        
-                                        &:hover {
-                                            text-decoration: underline;
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            .player-reference {
-                                color: $apple-text-secondary;
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-regular;
-                                line-height: 1.4;
-                                font-size: clamp(10px, 2.5vw, 12px);
-                                margin: clamp(6px, 1.5vw, 10px) 0;
-                                padding: 0 clamp(6px, 1.5vw, 10px);
-                            }
-                        }
-                    }
+            .project-bottom-footer {
+                button a {
+                    font-size: clamp(16px, 3vw, 16px); 
                 }
             }
         }
     }
-}
-
-@keyframes apple-mobile-ambient {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-    50% {
-        transform: translateY(-10px) rotate(180deg) scale(1.1);
+    
+    .team-player {
+        .team-player-content-wrapper {
+            .player {
+                .player-content {
+                    .player-name {
+                        font-size: clamp(16px, 3.5vw, 18px); 
+                    }
+                    
+                    .player-project {
+                        font-size: clamp(16px, 3vw, 16px); 
+                    }
+                    
+                    .player-reference {
+                        font-size: clamp(16px, 2.5vw, 16px); 
+                    }
+                }
+            }
+        }
     }
 }
 
 @media screen and (max-width: 480px) {
-    .my-projects-container {
-        margin: 24px auto;
-        
-        h2 {
-            margin-bottom: 20px;
+    .my-projects-content {
+        nav > div > span {
+            font-size: 16px;
         }
         
-        .my-projects-content {
-            nav > div {
-                padding: 6px 3px;
-                min-height: 35px;
+        .project {
+            .project-top .technologies {
+                font-size: 16px;
                 
-                > span {
-                    font-size: clamp(9px, 3vw, 12px);
+                .duration {
+                    font-size: 16px;
                 }
             }
             
-            .project {
-                .project-top {
-                    padding: 0 12px;
+            .project-bottom {
+                .tab-li .right-of-logo {
+                    > div > h4 {
+                        font-size: 16px;
+                    }
                     
-                    .technologies {
-                        padding: 10px;
+                    > p {
+                        font-size: 16px;
                     }
                 }
                 
-                .project-bottom {
-                    padding: 12px;
-                    gap: 12px;
-                    
-                    .tab-li {
-                        padding: 10px;
-                        gap: 8px;
-                        
-                        > img {
-                            width: 16px;
-                            height: 16px;
-                        }
-                    }
-                    
-                    .project-bottom-footer {
-                        gap: 8px;
-                        
-                        button a {
-                            padding: 8px 10px;
-                        }
-                    }
+                .project-bottom-footer button a {
+                    font-size: 16px;
                 }
             }
+        }
+        
+        .team-player .team-player-content-wrapper .player .player-content {
+            .player-name {
+                font-size: 16px;
+            }
             
-            .team-player {
-                .team-player-content-wrapper {
-                    gap: 10px;
-                    
-                    .player {
-                        width: clamp(150px, 55vw, 200px);
-                        height: clamp(150px, 55vw, 200px);
-                        
-                        .player-content {
-                            width: 90%;
-                            gap: 5px;
-                            
-                            .player-reference {
-                                padding: 0 3px;
-                            }
-                        }
-                    }
-                }
+            .player-project {
+                font-size: 16px;
+            }
+            
+            .player-reference {
+                font-size: 16px;
             }
         }
     }
 }
 
 @media screen and (max-width: 375px) {
-    .my-projects-container {
-        h2 {
-            margin-bottom: 16px;
-        }
-        
-        .my-projects-content {
-            nav > div > span {
-                font-size: clamp(8px, 3.5vw, 10px);
-                line-height: 1.1;
-            }
-            
-            .project {
-                .project-bottom .project-bottom-footer {
-                    flex-direction: column;
-                    
-                    button {
-                        width: 100%;
-                        min-width: auto;
-                    }
-                }
-            }
-            
-            .team-player .team-player-content-wrapper .player {
-                width: clamp(130px, 60vw, 170px);
-                height: clamp(130px, 60vw, 170px);
-            }
-        }
-    }
 }
 
 @media screen and (max-width: 320px) {
-    .my-projects-container {
-        margin: 16px auto;
-        padding: 16px 10px;
-        
-        h2 {
-            margin-bottom: 12px;
-        }
-        
-        .my-projects-content {
-            nav {
-                margin-bottom: 12px;
-                
-                > div {
-                    padding: 4px 2px;
-                    min-height: 30px;
-                    
-                    > span {
-                        font-size: 8px;
-                    }
-                }
-            }
-            
-            .project {
-                padding: 12px 0;
-                margin-bottom: 10px;
-                
-                .project-top {
-                    padding: 0 8px;
-                    gap: 12px;
-                    
-                    .project-top-title {
-                        font-size: 16px;
-                        margin-bottom: 4px;
-                    }
-                    
-                    .technologies {
-                        padding: 8px;
-                        font-size: 10px;
-                        
-                        .duration {
-                            font-size: 9px;
-                        }
-                    }
-                }
-                
-                .project-bottom {
-                    padding: 8px;
-                    gap: 10px;
-                    
-                    .tab-li {
-                        padding: 8px;
-                        gap: 6px;
-                        
-                        > img {
-                            width: 14px;
-                            height: 14px;
-                        }
-                        
-                        .right-of-logo {
-                            > div > h4 {
-                                font-size: 12px;
-                            }
-                            
-                            > p {
-                                font-size: 10px;
-                            }
-                        }
-                    }
-                    
-                    .project-bottom-footer {
-                        gap: 6px;
-                        
-                        button a {
-                            padding: 6px 8px;
-                            font-size: 10px;
-                        }
-                    }
-                }
-            }
-            
-            .team-player {
-                padding: 20px 8px;
-                
-                > h4 {
-                    font-size: 18px;
-                    margin-bottom: 8px;
-                }
-                
-                > p {
-                    font-size: 12px;
-                    padding-bottom: 16px;
-                }
-                
-                .team-player-content-wrapper {
-                    gap: 8px;
-                    
-                    .player {
-                        width: clamp(110px, 65vw, 140px);
-                        height: clamp(110px, 65vw, 140px);
-                        
-                        .player-content {
-                            gap: 3px;
-                            
-                            .player-name {
-                                font-size: 11px;
-                            }
-                            
-                            .player-project {
-                                font-size: 9px;
-                            }
-                            
-                            .player-reference {
-                                font-size: 8px;
-                                padding: 0 2px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    .my-projects-container {
-        margin: 12px auto;
-        
-        .my-projects-content {
-            .team-player {
-                padding: 16px 20px;
-                
-                .team-player-content-wrapper .player {
-                    width: clamp(120px, 35vw, 160px);
-                    height: clamp(120px, 35vw, 160px);
-                }
-            }
-        }
-    }
 }

@@ -1,533 +1,133 @@
-@use '../../../style/apple-variables' as *;
-@use 'sass:color';
-
-.my-projects-container {
-    margin: 40px auto;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    border-radius: $apple-radius-xl;
-    max-width: 1400px;
+.coming-soon-info {
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: $apple-shadow-large;
-    overflow: hidden;
+    
+    .info-text {
+        font-size: 16px !important;
+        color: #F2F2F7;
+        margin-bottom: 16px;
+    }
+    
+    .preview-options {
+        .preview-btn {
+            background: #48484A;
+            color: #AEAEB2;
+            cursor: not-allowed;
+            opacity: 0.6;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px !important;
+            
+            &:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+        
+        .availability-text {
+            margin-top: 12px;
+            font-size: 16px !important;
+            color: #AEAEB2;
+            font-style: italic;
+        }
+    }
+}
+
+.status-badge {
+    background: #FF9F0A;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.coming-soon-img {
     position: relative;
-
-    &::before {
-        content: '';
+    background: #2C2C2E;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .coming-soon-overlay {
         position: absolute;
-        top: -20%;
-        right: -20%;
-        width: 60%;
-        height: 80%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
-        animation: apple-projects-ambient 12s ease-in-out infinite;
-        filter: blur(40px);
-    }
-
-    h2 {
-        @include h2Title();
-        text-align: center;
-        margin-bottom: 48px;
-        padding-top: 48px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .my-projects-content {
-        position: relative;
-        z-index: 2;
-
-        nav {
-            @include standardPadding();
-            @include dFlex($jc: flex-start);
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-            >div {
-                border-top-left-radius: $apple-radius-large;
-                border-top-right-radius: $apple-radius-large;
-                padding: 24px 32px;
-                min-height: 104px;
-                box-sizing: border-box;
-                @include dFlex();
-                transition: $apple-transition-medium;
-                position: relative;
-                overflow: hidden;
-                flex: 1;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    height: 0;
-                    background: $apple-teal-gradient;
-                    transition: $apple-transition-medium;
-                }
-
-                &.active {
-                    background: $apple-bg-tertiary;
-                    border: 1px solid rgba($apple-primary, 0.3);
-                    border-bottom: none;
-                    box-shadow: $apple-shadow-medium;
-                    transform: translateY(-2px);
-
-                    &::before {
-                        height: 3px;
-                        box-shadow: 0 0 10px rgba($apple-primary, 0.6);
-                    }
-
-                    >span {
-                        color: $apple-text-primary;
-                        text-shadow: 0 0 10px rgba($apple-primary, 0.3);
-                    }
-                }
-
-                &:hover:not(.active) {
-                    background: rgba(255, 255, 255, 0.05);
-                    transform: translateY(-2px);
-
-                    >span {
-                        color: $apple-text-primary;
-                    }
-
-                    &::before {
-                        height: 1px;
-                    }
-                }
-
-                >span {
-                    font-size: clamp(18px, 2.5vw, 28px);
-                    font-weight: $apple-font-weight-semibold;
-                    font-family: $apple-font-family;
-                    color: $apple-primary;
-                    transition: $apple-transition-medium;
-                    position: relative;
-                    z-index: 1;
-                    text-align: center;
-                }
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 132, 255, 0.1) 0%, rgba(50, 215, 75, 0.1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        
+        .coming-soon-content {
+            text-align: center;
+            padding: 32px;
+            
+            h3 {
+                font-size: 24px !important;
+                color: #0A84FF;
+                margin-bottom: 12px;
             }
-        }
-
-        .project {
-            @include standardPadding();
-            @include dFlex($ai: flex-start);
-            padding-top: 50px;
-            padding-bottom: 50px;
-            color: $apple-text-primary;
-            background: $apple-bg-tertiary;
-            position: relative;
-
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90%;
-                height: 1px;
-                background: $apple-teal-gradient;
-                opacity: 0.3;
+            
+            p {
+                font-size: 16px !important;
+                color: #F2F2F7;
+                margin-bottom: 24px;
             }
-
-            .project-left {
-                width: 50%;
-                @include dFlex($fd: column, $gap: 32px);
-
-                .tab-li {
-                    @include dFlex($ai: flex-start, $gap: 20px);
-                    padding: 24px;
-                    border-radius: $apple-radius-medium;
-                    background: rgba(255, 255, 255, 0.02);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    transition: $apple-transition-medium;
-
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.05);
-                        border-color: rgba($apple-primary, 0.2);
-                        transform: translateX(4px);
-                        box-shadow: $apple-shadow-small;
-                    }
-
-                    >img {
-                        position: relative;
-                        top: 5px;
-                        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                        flex-shrink: 0;
-                    }
-
-                    .right-of-logo {
-                        flex: 1;
-
-                        >div {
-                            @include dFlex($gap: 12px, $jc: flex-start, $ai: center);
-                            margin-bottom: 12px;
-                            flex-wrap: wrap;
-
-                            >h4 {
-                                font-size: clamp(18px, 2vw, 24px);
-                                font-weight: $apple-font-weight-semibold;
-                                font-family: $apple-font-family;
-                                color: $apple-primary;
-                            }
-
-                            >span {
-                                font-size: clamp(14px, 1.5vw, 16px);
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-regular;
-                                color: $apple-text-tertiary;
-                            }
-                        }
-
-                        >p {
-                            font-size: clamp(14px, 1.5vw, 16px);
-                            font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-regular;
-                            line-height: 1.6;
-                            color: $apple-text-secondary;
-                        }
-                    }
-                }
-            }
-
-            .project-right {
-                width: 50%;
-                @include dFlex($gap: 24px, $fd: column);
-
-                >h5 {
-                    font-size: clamp(16px, 1.8vw, 18px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-medium;
-                    color: $apple-text-secondary;
-                    text-align: center;
-                    padding: 16px 0;
-                }
-
-                .technologies {
-                    position: relative;
-                    @include dFlex($gap: 16px, $jc: center);
-                    padding: 20px;
-                    border-radius: $apple-radius-medium;
-                    background: rgba(255, 255, 255, 0.02);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    flex-wrap: wrap;
-
-                    .tech-logo {
-                        padding: 12px;
-                        border-radius: $apple-radius-small;
-                        background: rgba(255, 255, 255, 0.05);
-                        transition: $apple-transition-fast;
-
-                        &:hover {
-                            background: rgba($apple-primary, 0.1);
-                            transform: translateY(-2px);
-                            box-shadow: $apple-shadow-small;
-                        }
-
-                        img {
-                            height: clamp(28px, 3vw, 36px);
-                            width: auto;
-                            filter: brightness(1.1);
-                            transition: $apple-transition-fast;
-                        }
-                    }
-                }
-
-                .project-img {
-                    position: relative;
-                    width: 100%;
-                    max-width: 500px;
-                    min-height: 280px; 
-                    max-height: 350px; 
-                    text-align: center;
-                    border-radius: $apple-radius-large;
+            
+            .progress-indicator {
+                .progress-bar {
+                    width: 200px;
+                    height: 8px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 4px;
                     overflow: hidden;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    box-shadow: $apple-shadow-medium;
-                    margin: 0 auto;
-                    display: flex; 
-                    align-items: center;
-                    justify-content: center;
-                    background: rgba(255, 255, 255, 0.02); 
-
-                    >img {
-                        position: relative;
-                        border-radius: $apple-radius-large;
-                        width: 100%;
-                        height: auto; 
-                        max-height: 100%; 
-                        object-fit: contain; 
-                        z-index: 1;
-                        transition: $apple-transition-medium;
-
-                        &:hover {
-                            transform: scale(1.02);
-                            filter: brightness(1.05) contrast(1.05);
-                        }
-                    }
-
-                    >p {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        color: $apple-primary;
-                        font-size: clamp(20px, 3vw, 28px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-bold;
-                        z-index: 2;
-                        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-                        text-align: center;
-                        padding: 0 20px; 
+                    margin: 0 auto 12px;
+                    
+                    .progress-fill {
+                        height: 100%;
+                        background: linear-gradient(90deg, #0A84FF, #32D74B);
+                        border-radius: 4px;
+                        transition: width 0.3s ease;
                     }
                 }
-
-                .project-right-footer {
-                    position: relative;
-                    @include dFlex($gap: 20px, $jc: center);
-                    padding-top: 32px;
-                    flex-wrap: wrap;
-
-                    button {
-                        background-color: transparent;
-                        border: none;
-                        border-radius: $apple-radius-large;
-                        transition: $apple-transition-fast;
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-semibold;
-                        position: relative;
-                        overflow: hidden;
-                        min-width: 120px;
-
-                        a {
-                            display: block;
-                            width: 100%;
-                            height: 100%;
-                            padding: 12px 24px;
-                            box-sizing: border-box;
-                            color: inherit;
-                            text-decoration: none;
-                        }
-
-                        &:nth-child(1) {
-                            @include apple-button-primary;
-                        }
-
-                        &:nth-child(2) {
-                            @include apple-button-secondary;
-                        }
-                    }
-                }
-            }
-        }
-
-        .team-player {
-            padding: 60px 50px;
-            background: $apple-bg-secondary;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-            >h4 {
-                font-size: clamp(24px, 3.5vw, 32px);
-                font-weight: $apple-font-weight-bold;
-                font-family: $apple-font-family;
-                color: $apple-primary;
-                text-align: center;
-                margin-bottom: 40px;
-                background: $apple-teal-gradient;
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-
-            .team-player-content {
-                margin: 0 auto;
-                width: 100%;
-                max-width: 1200px;
-
-                .team-player-content-wrapper {
-                    width: 100%;
-                    @include dFlex($gap: 32px, $jc: center);
-                    flex-wrap: wrap;
-
-                    .player {
-                        opacity: 0.8;
-                        width: clamp(280px, 30vw, 380px);
-                        height: clamp(280px, 30vw, 380px);
-                        flex-shrink: 0;
-                        @include dFlex();
-                        background: $apple-bg-tertiary;
-                        border-radius: 50%;
-                        border: 1px solid rgba(255, 255, 255, 0.1);
-                        box-shadow: $apple-shadow-medium;
-                        transition: $apple-transition-medium;
-                        position: relative;
-                        overflow: hidden;
-
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            inset: -2px;
-                            background: $apple-teal-gradient;
-                            border-radius: 50%;
-                            opacity: 0;
-                            transition: $apple-transition-medium;
-                            z-index: -1;
-                        }
-
-                        &:hover {
-                            opacity: 1;
-                            transform: translateY(-8px) scale(1.02);
-                            box-shadow: $apple-shadow-large, $apple-shadow-glow;
-
-                            &::before {
-                                opacity: 0.1;
-                            }
-                        }
-
-                        .player-content {
-                            width: 80%;
-                            @include dFlex($fd: column, $gap: 12px);
-                            text-align: center;
-                            position: relative;
-                            z-index: 1;
-
-                            .player-name {
-                                font-size: clamp(18px, 2.5vw, 22px);
-                                font-weight: $apple-font-weight-semibold;
-                                font-family: $apple-font-family;
-                                color: $apple-text-primary;
-                                margin-bottom: 8px;
-                            }
-
-                            .player-project {
-                                font-size: clamp(14px, 1.8vw, 16px);
-                                font-weight: $apple-font-weight-regular;
-                                font-family: $apple-font-family;
-                                margin-bottom: 12px;
-
-                                span {
-                                    &:nth-child(1) {
-                                        color: $apple-text-secondary;
-                                    }
-
-                                    &:nth-child(2) {
-                                        color: $apple-primary;
-                                        font-weight: $apple-font-weight-medium;
-                                        cursor: pointer;
-
-                                        &:hover {
-                                            text-decoration: underline;
-                                        }
-                                    }
-                                }
-                            }
-
-                            .player-reference {
-                                color: $apple-text-secondary;
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-regular;
-                                line-height: 1.5;
-                                font-size: clamp(12px, 1.5vw, 14px);
-                                margin: 16px 0;
-                            }
-                        }
-                    }
+                
+                .progress-text {
+                    font-size: 14px !important;
+                    color: #AEAEB2;
                 }
             }
         }
     }
 }
 
-@keyframes apple-projects-ambient {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    33% {
-        transform: translateY(-15px) rotate(2deg) scale(1.02);
-    }
-
-    66% {
-        transform: translateY(10px) rotate(-1deg) scale(0.98);
-    }
-}
-
-@keyframes apple-project-slide-in {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes apple-tech-bounce {
-    from {
-        opacity: 0;
-        transform: translateY(10px) scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.animate-img-005 {
-    animation: apple-tech-bounce 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.animate-img-075 {
-    animation: apple-project-slide-in 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.animate-img-010 {
-    animation: apple-project-slide-in 1s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.animate-img-005-from-left {
-    animation: apple-project-slide-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-@media screen and (max-width: 1400px) {
-    .my-projects-container {
-        margin: 32px 20px;
-
-        .my-projects-content nav>div {
-            padding: 20px 24px;
-            min-height: 90px;
+.project-right-footer {
+    button.disabled {
+        background: #48484A !important;
+        color: #AEAEB2 !important;
+        cursor: not-allowed !important;
+        opacity: 0.6;
+        
+        &:hover {
+            transform: none !important;
+            box-shadow: none !important;
         }
     }
-}
-
-@media screen and (max-width: 1200px) {
-    .my-projects-container .my-projects-content {
-        nav {
-            @include dFlex($fd: column, $gap: 8px);
-
-            >div {
-                border-radius: $apple-radius-medium;
-                min-height: 60px;
-                padding: 16px 20px;
-
-                >span {
-                    font-size: clamp(16px, 3vw, 20px);
-                }
-            }
+    
+    .notify-btn {
+        background: #0A84FF;
+        color: white;
+        
+        a {
+            color: white;
+            font-size: 16px !important;
         }
-
-        .project {
-            @include dFlex($fd: column-reverse, $gap: 40px, $ai: center);
-
-            .project-left,
-            .project-right {
-                width: 100%;
-            }
+        
+        &:hover {
+            background: #0066CC;
         }
     }
 }

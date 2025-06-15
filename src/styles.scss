@@ -1,11 +1,11 @@
 @use 'style/apple-variables' as *;
 
-// CSS Reset
 * {
     margin: 0;
     padding: 0;
     list-style: none;
     box-sizing: border-box;
+    text-decoration: none !important;
 }
 
 body::-webkit-scrollbar {
@@ -13,8 +13,8 @@ body::-webkit-scrollbar {
 }
 
 body {
-    scrollbar-width: none; 
-    -ms-overflow-style: none;  
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     scroll-behavior: smooth;
 }
 
@@ -24,36 +24,44 @@ button {
     background-color: transparent;
     cursor: pointer;
     transition: $apple-transition-fast;
-    
+    font-size: 16px !important;
+    min-height: 44px;
+    min-width: 44px;
+
     &:focus {
         outline: 2px solid $apple-primary;
         outline-offset: 2px;
     }
-    
+
     &:focus:not(:focus-visible) {
         outline: none;
     }
 }
 
-textarea, input { 
+textarea,
+input {
     outline: none;
     font-family: $apple-font-family;
-    font-size: 16px;
+    font-size: 16px !important;
     font-weight: $apple-font-weight-regular;
     transition: $apple-transition-fast;
-    
+
     @media screen and (max-width: 1200px) {
-        font-size: 16px;
+        font-size: 16px !important;
     }
-    
+
     &:focus {
         transform: translateY(-1px);
+    }
+
+    &::placeholder {
+        font-size: 16px !important;
     }
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px $apple-bg-tertiary inset !important;
     -webkit-text-fill-color: $apple-text-primary !important;
@@ -67,44 +75,141 @@ body {
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     color: $apple-text-primary;
     max-width: 100%;
-    width: 100%; // Volle Viewport-Breite
+    width: 100%;
     overflow-x: hidden;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
-    margin: 0; // Reset margin
-    padding: 0; // Reset padding
+    margin: 0;
+    padding: 0;
+    min-width: 320px;
+}
+
+.content-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
 }
 
 .wide-screen {
-    width: 100%; // Wichtig: Volle Breite nutzen
+    width: 100%;
+    max-width: 1920px;
     margin: 0 auto;
     position: relative;
-    box-sizing: border-box; // Box-sizing für konsistente Größenberechnung
+    box-sizing: border-box;
+}
+
+.page-container {
+    @include standardPadding();
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 900px) {
+        @include standardPaddingMobile();
+    }
+}
+
+.landing-page-container,
+.why-me-container,
+.my-skills-container,
+.my-projects-container,
+.contact-container {
+    @extend .content-container;
+    @include standardPadding();
+
+    @media screen and (max-width: 900px) {
+        @include standardPaddingMobile();
+    }
+}
+
+.legal-notice-container,
+.private-policy-container {
+    .content {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        @include standardPadding();
+
+        @media screen and (max-width: 900px) {
+            @include standardPaddingMobile();
+        }
+    }
 }
 
 .pointer {
     cursor: pointer;
     transition: $apple-transition-fast;
-    
+
     &:hover {
         transform: translateY(-1px);
     }
-    
+
     &:active {
         transform: translateY(0);
     }
 }
 
-a, a:hover, a:visited {
+a {
     text-decoration: none;
     color: inherit;
     transition: $apple-transition-fast;
+    position: relative;
+    font-size: inherit;
+    font-size: max(1em, 16px) !important;
 }
 
-a:hover {
-    color: $apple-primary;
+&[href]:not([href=""]):not([href="#"]) {
+    &:hover {
+        text-decoration: underline;
+        text-decoration-color: currentColor;
+        text-underline-offset: 2px;
+        color: $apple-primary;
+    }
+}
+
+.location-text .highlight,
+h1,
+h2,
+h3,
+h4 {
+    &::after {
+        display: none !important;
+    }
+}
+
+.apple-teal-gradient,
+[class*="gradient"] {
+    text-decoration: none !important;
+
+    &::after,
+    &::before {
+        display: none !important;
+    }
+}
+
+.location-text {
+    .highlight {
+        position: relative;
+
+        &::after {
+            display: none !important;
+        }
+    }
+}
+
+.developer-akademie,
+.link a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
 }
 
 .img-preloader {
@@ -129,12 +234,193 @@ a:hover {
     }
 }
 
-// Apple-Style Animationen
+.img,
+img[src*="icon"],
+img[src*="logo"],
+[class*="icon"],
+[class*="logo"] {
+    filter: brightness(1.3) contrast(1.2) !important;
+
+    &:hover {
+        filter: brightness(1.5) contrast(1.3) !important;
+    }
+}
+
+.github,
+.email,
+.mail,
+.linkedin,
+.tel,
+.phone {
+    opacity: 0.9;
+    filter: brightness(1.4) contrast(1.2) !important;
+
+    &:hover {
+        opacity: 1;
+        filter: brightness(1.6) contrast(1.3) !important;
+    }
+}
+
+.skill img {
+    filter: brightness(1.3) contrast(1.1) !important;
+    opacity: 0.95;
+
+    &:hover {
+        filter: brightness(1.5) contrast(1.2) !important;
+        opacity: 1;
+    }
+}
+
+.arrow-down,
+.arrow-up,
+.goup-arrow,
+[class*="arrow"] {
+    filter: brightness(1.5) hue-rotate(160deg) saturate(1.4) !important;
+    opacity: 0.9;
+
+    &:hover {
+        filter: brightness(1.7) hue-rotate(160deg) saturate(1.6) !important;
+        opacity: 1;
+    }
+}
+
+.burger-img,
+.menu-icon {
+    filter: brightness(1.4) contrast(1.2) !important;
+
+    &:hover {
+        filter: brightness(1.6) contrast(1.3) !important;
+    }
+}
+
+.location-icon {
+    background: linear-gradient(135deg, #0A84FF 0%, #32D74B 100%) !important;
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.4) !important;
+
+    img {
+        filter: brightness(1.5) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) !important;
+    }
+}
+
+.cb {
+    border: 2px solid #0A84FF !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+
+    &:hover {
+        border-color: #32D74B !important;
+        box-shadow: 0 0 12px rgba(50, 215, 75, 0.5) !important;
+    }
+
+    &.checked {
+        background: #0A84FF !important;
+        border-color: #0A84FF !important;
+        box-shadow: 0 0 12px rgba(10, 132, 255, 0.6) !important;
+
+        &::after {
+            color: white !important;
+            font-weight: bold !important;
+        }
+    }
+}
+
+.tech-logo img,
+.technologies img {
+    filter: brightness(1.3) contrast(1.1) !important;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 4px;
+
+    &:hover {
+        filter: brightness(1.5) contrast(1.2) !important;
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    body {
+        min-width: 320px;
+        overflow-x: hidden;
+    }
+
+    .wide-screen,
+    .content-container {
+        min-width: 320px;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        box-sizing: border-box;
+    }
+
+    * {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    img,
+    video,
+    iframe {
+        max-width: 100%;
+        height: auto;
+    }
+
+    input,
+    textarea,
+    select {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 16px !important;
+    }
+
+    button {
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-word;
+        padding: 8px 12px;
+        font-size: 16px !important;
+    }
+
+    .nav-wrapper,
+    .header-wrapper {
+        width: 100%;
+        position: fixed;
+        left: 0;
+        right: 0;
+    }
+
+    .landing-page-container,
+    .why-me-container,
+    .my-skills-container,
+    .my-projects-container,
+    .contact-container {
+        width: 100%;
+        padding: 12px !important;
+        margin: 0;
+    }
+
+    .introduction-card,
+    .project,
+    .skill,
+    .player {
+        width: calc(100% - 24px) !important;
+        margin: 0 auto;
+    }
+
+    .menu-content {
+        width: 260px !important;
+        height: 260px !important;
+        left: calc(50% - 130px) !important;
+    }
+}
+
 @keyframes apple-fade-in {
     0% {
         opacity: 0;
         transform: translateY(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -150,6 +436,7 @@ a:hover {
         opacity: 0.5;
         transform: scale(0.9);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -159,23 +446,30 @@ a:hover {
 .bubble-out-005 {
     animation: apple-scale-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
+
 .bubble-out-075 {
     animation: apple-scale-in 0.75s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
+
 .bubble-out-010 {
     animation: apple-scale-in 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @keyframes apple-bounce-down {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     25% {
         transform: translateY(8px);
     }
+
     50% {
         transform: translateY(0px);
     }
+
     75% {
         transform: translateY(-8px);
     }
@@ -186,15 +480,20 @@ a:hover {
 }
 
 @keyframes apple-bounce-up {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     25% {
         transform: translateY(-8px);
     }
+
     50% {
         transform: translateY(0px);
     }
+
     75% {
         transform: translateY(-8px);
     }
@@ -208,9 +507,11 @@ a:hover {
     0% {
         transform: rotateY(0deg) scale(1);
     }
+
     50% {
         transform: rotateY(180deg) scale(1.02);
     }
+
     100% {
         transform: rotateY(360deg) scale(1);
     }
@@ -224,9 +525,12 @@ a:hover {
 }
 
 @keyframes apple-float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) rotate(0deg);
     }
+
     50% {
         transform: translateY(-6px) rotate(1deg);
     }
@@ -245,10 +549,12 @@ a:hover {
         opacity: 0.4;
         transform: scale(0.98);
     }
+
     50% {
         opacity: 1;
         transform: scale(1);
     }
+
     100% {
         opacity: 0.4;
         transform: scale(0.98);
@@ -259,7 +565,6 @@ a:hover {
     animation: apple-pulse 2s ease-in-out infinite;
 }
 
-// Apple-Style Selection
 ::selection {
     background: rgba($apple-primary, 0.3);
     color: $apple-text-primary;
@@ -270,23 +575,20 @@ a:hover {
     color: $apple-text-primary;
 }
 
-// Apple-Style Focus Styles
 :focus-visible {
     outline: 2px solid $apple-primary;
     outline-offset: 2px;
     border-radius: $apple-radius-small;
 }
 
-// Apple-Style Smooth Scrolling
 html {
     scroll-behavior: smooth;
 }
 
-// Apple-Style Textgrößen
 h1 {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-bold;
-    font-size: 2.5rem;
+    font-size: max(28px, 1.75rem) !important;
     line-height: 1.2;
     letter-spacing: -0.02em;
 }
@@ -294,7 +596,7 @@ h1 {
 h2 {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-bold;
-    font-size: 2rem;
+    font-size: max(24px, 1.5rem) !important;
     line-height: 1.3;
     letter-spacing: -0.01em;
 }
@@ -302,44 +604,141 @@ h2 {
 h3 {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-semibold;
-    font-size: 1.5rem;
+    font-size: max(20px, 1.25rem) !important;
     line-height: 1.4;
 }
 
 h4 {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-semibold;
-    font-size: 1.25rem;
+    font-size: max(18px, 1.125rem) !important;
     line-height: 1.4;
 }
 
-p {
+h5,
+h6 {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-medium;
+    font-size: max(16px, 1rem) !important;
+    line-height: 1.4;
+}
+
+p,
+li,
+td,
+th {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-regular;
     line-height: 1.6;
+    font-size: max(16px, 1rem) !important;
 }
 
-// Apple-Style Link Hover-Effekte
-a {
-    position: relative;
-    
-    &:hover {
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: currentColor;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
+
+* {
+    font-size: max(1em, 16px) !important;
+}
+
+
+*[style*="font-size"] {
+    font-size: max(16px, var(--font-size)) !important;
+}
+
+
+small,
+.small,
+.text-small,
+.caption,
+.footnote {
+    font-size: 16px !important;
+}
+
+input,
+textarea,
+select,
+button {
+    font-size: 16px !important;
+
+    &::placeholder {
+        font-size: 16px !important;
+    }
+}
+
+label,
+.form-label,
+.helper-text,
+.error-text,
+.character-count {
+    font-size: 16px !important;
+}
+
+nav,
+.nav,
+.menu,
+.navigation {
+    * {
+        font-size: max(16px, 1em) !important;
+    }
+}
+
+footer {
+    * {
+        font-size: max(16px, 1em) !important;
+    }
+}
+
+.component,
+[class*="component"],
+[class*="section"],
+[class*="container"] {
+    * {
+        font-size: max(16px, 1em) !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .img,
+    img,
+    [class*="icon"] {
+        filter: brightness(1.4) contrast(1.3) !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+
+    .img,
+    img,
+    [class*="icon"] {
+        filter: brightness(1.6) contrast(1.5) !important;
+        opacity: 1 !important;
+    }
+
+    body {
+        background: #000000;
+        color: #FFFFFF;
+    }
+
+    a {
+        color: #0A84FF;
+
+        &:hover {
+            color: #32D74B;
         }
-        
-        &::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
+    }
+
+    button {
+        border: 2px solid currentColor;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }

@@ -6,17 +6,15 @@ import { Subscription } from 'rxjs';
 import { gsap } from 'gsap/gsap-core';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CommonModule } from '@angular/common';
-import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 import { GlobalService } from '../../global.service';
-import { ScrollAnimateDirective } from '../../Instructions/scroll-animation.directive';
-import { MyProjectsMobileComponent } from "./my-projects-mobile/my-projects-mobile.component";
+import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-my-projects',
   standalone: true,
-  imports: [TranslateModule, CommonModule, ScrollBounceDirective, ScrollAnimateDirective, MyProjectsMobileComponent],
+  imports: [TranslateModule, CommonModule], 
   templateUrl: './my-projects.component.html',
   styleUrl: './my-projects.component.scss'
 })

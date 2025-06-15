@@ -1,152 +1,38 @@
-@use '../../../style/apple-variables' as *;
-
-.nav-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 998;
-    @include apple-nav-glass;
-    transition: $apple-transition-medium;
-    
-    @include tablet-large {
-        display: none;
-    }
-    
-    // Verbesserter Scroll-Effekt
-    &.scrolled {
-        background: rgba(28, 28, 30, 0.95);
-        backdrop-filter: saturate(180%) blur(25px);
-        -webkit-backdrop-filter: saturate(180%) blur(25px);
-        box-shadow: $apple-shadow-medium;
-    }
-}
-
 .nav {
-    box-sizing: border-box;
-    width: 100%;
-    height: 88px; 
-    @include standardPadding();
-    transition: $apple-transition-medium;
-
     .content {
-        width: 100%;
-        height: 100%;
-        @include dFlex($jc: space-between);
-
         .logo {
-            @include dFlex($fd: column, $jc: center);
-            transition: $apple-transition-medium;
-            
-            &:hover {
-                transform: scale(1.05);
-            }
-            
-            .logo-img {
-                width: 100px; 
-                height: 50px;
-                background: {
-                    image: url('./../../../assets/img/logo.png');
-                    repeat: no-repeat;
-                    position: center;
-                    size: contain;
-                };
-                @include apple-logo;
-                transition: $apple-transition-fast;
-            }
-            
             .logo-name {
-                font-size: 15px;
-                font-weight: $apple-font-weight-semibold;
-                font-family: $apple-font-family;
-                color: $apple-text-primary;
-                letter-spacing: 0.5px;
+                font-size: 16px; 
             }
             
             .logo-position {
-                font-size: 11px;
-                font-weight: $apple-font-weight-regular;
-                font-family: $apple-font-family;
-                color: $apple-text-secondary;
-                letter-spacing: 0.3px;
+                font-size: 16px; 
             }
         }
 
         .items {
-            @include dFlex($jc: space-around, $gap: 2px);
-            
             li {
-                position: relative;
-                
                 span {
-                    @include apple-nav-item;
-                    display: block;
-                    border-radius: $apple-radius-medium;
-                    position: relative;
-                    overflow: hidden;
-                    padding: 12px 14px;
-                    font-size: clamp(13px, 2vw, 15px);
-                    
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background: $apple-teal-gradient;
-                        opacity: 0;
-                        transition: $apple-transition-fast;
-                        border-radius: $apple-radius-medium;
-                        z-index: -1;
-                    }
-                    
-                    &:hover::before {
-                        opacity: 0.1;
-                    }
-                    
-                    &:active::before {
-                        opacity: 0.2;
-                    }
-                }
-                
-                // Aktiver Zustand
-                &.active span {
-                    color: $apple-primary;
-                    
-                    &::after {
-                        content: '';
-                        position: absolute;
-                        bottom: -4px;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        width: 6px;
-                        height: 6px;
-                        background: $apple-primary;
-                        border-radius: 50%;
-                        box-shadow: 0 0 12px rgba($apple-primary, 0.8);
-                        animation: apple-nav-pulse 2s ease-in-out infinite;
-                    }
+                    font-size: clamp(16px, 2vw, 16px); 
+                    padding: 12px 16px;
                 }
             }
         }
 
         @media (max-width: 1400px) {
             .items {
-                gap: 1px;
-                
                 li span {
-                    padding: 10px 12px;
-                    font-size: clamp(12px, 1.8vw, 14px);
+                    font-size: 16px;
+                    padding: 10px 14px;
                 }
             }
         }
 
         @media (max-width: 1300px) {
             .items {
-                gap: 0px;
-                
                 li span {
-                    padding: 10px 10px;
-                    font-size: 13px;
+                    font-size: 16px;
+                    padding: 10px 12px;
                 }
             }
         }
@@ -154,8 +40,8 @@
         @media (max-width: 1200px) {
             .items {
                 li span {
-                    padding: 8px 8px;
-                    font-size: 12px;
+                    font-size: 16px;
+                    padding: 8px 10px;
                 }
             }
         }
@@ -163,8 +49,8 @@
         @media (max-width: 1100px) {
             .items {
                 li span {
-                    padding: 8px 6px;
-                    font-size: 11px;
+                    font-size: 16px;
+                    padding: 8px 8px;
                 }
             }
         }
@@ -172,38 +58,10 @@
         @media (max-width: 1000px) {
             .items {
                 li span {
-                    padding: 6px 4px;
-                    font-size: 10px;
+                    font-size: 16px;
+                    padding: 6px 6px;
                 }
             }
         }
     }
-}
-
-// Apple-Style Navigation Animationen
-@keyframes apple-nav-pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-    }
-    50% {
-        opacity: 0.6;
-        transform: translateX(-50%) scale(1.2);
-    }
-}
-
-@keyframes apple-nav-glow {
-    0% {
-        box-shadow: 0 0 5px rgba($apple-primary, 0);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba($apple-primary, 0.4), 0 0 30px rgba($apple-primary, 0.2);
-    }
-    100% {
-        box-shadow: 0 0 5px rgba($apple-primary, 0);
-    }
-}
-
-.nav .content .items li span:hover {
-    animation: apple-nav-glow 2s ease-in-out infinite;
 }

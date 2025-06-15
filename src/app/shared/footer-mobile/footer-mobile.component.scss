@@ -1,366 +1,94 @@
-@use '../../../style/apple-variables' as *;
-
-.footer-wrapper {
-    width: 100%;
-    background: $apple-bg-secondary;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: $apple-teal-gradient;
-        opacity: 0.3;
+.footer-content {
+    .left {
+        .logo {
+            .logo-name {
+                font-size: clamp(16px, 3.5vw, 18px); 
+            }
+            
+            .logo-position {
+                font-size: 16px; 
+            }
+        }
     }
-}
-
-footer {
-    min-height: 200px;
-    background: $apple-bg-secondary;
-    @include standardPaddingMobile();
-    padding-top: 24px;
-    padding-bottom: 24px;
     
-    @include dFlex($jc: center, $ai: center);
-    
-    .footer-content {
-        width: 100%;
-        max-width: 400px;
-        min-height: 150px;
-        @include dFlex($fd: column, $jc: space-between, $ai: center);
-        gap: 20px;
-        text-align: center;
-       
-        .left {
-            width: 100%;
-            @include dFlex($jc: center, $ai: center);
-            
-            .logo {
-                transition: $apple-transition-medium;
-                @include dFlex($fd: column, $jc: center, $ai: center);
-                
-                &:hover {
-                    transform: scale(1.05);
-                }
-                
-                .logo-img {
-                    width: clamp(50px, 12vw, 60px);
-                    height: clamp(32px, 8vw, 38px);
-                    background-image: url('./../../../assets/img/logo.png');
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: contain;
-                    @include apple-logo;
-                    margin-bottom: 4px;
-                }
-                
-                .logo-name {
-                    font-size: clamp(14px, 3.5vw, 16px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-semibold;
-                    color: $apple-text-primary;
-                    line-height: 1.2;
-                }
-                
-                .logo-position {
-                    font-size: clamp(10px, 2.5vw, 12px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-regular;
-                    color: $apple-text-secondary;
-                    line-height: 1.2;
-                }
-            }
+    .right {
+        .legal-notice a {
+            font-size: clamp(16px, 3.5vw, 18px); 
         }
         
-        .middle {
-            width: 100%;
-            @include dFlex($gap: clamp(16px, 4vw, 24px), $jc: center, $ai: center);
-            
-            .img {
-                width: clamp(28px, 6vw, 32px);
-                height: clamp(28px, 6vw, 32px);
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-                border-radius: $apple-radius-small;
-                transition: $apple-transition-fast;
-                position: relative;
-                cursor: pointer;
-                
-                &::before {
-                    content: '';
-                    position: absolute;
-                    inset: -4px;
-                    background: $apple-teal-gradient;
-                    border-radius: $apple-radius-medium;
-                    opacity: 0;
-                    transition: $apple-transition-fast;
-                    z-index: -1;
-                }
-                
-                &:hover {
-                    transform: translateY(-2px) scale(1.1);
-                    
-                    &::before {
-                        opacity: 0.15;
-                    }
-                }
-                
-                &:active {
-                    transform: translateY(0) scale(1.05);
-                }
-                
-                a {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    position: relative;
-                    z-index: 1;
-                }
-            }
-            
-            .github {
-                background-image: url('./../../../assets/img/github.png');
-                filter: brightness(1.2);
-                
-                &:hover {
-                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
-                }
-            }
-            
-            .email {
-                background-image: url('./../../../assets/img/mail.png');
-                filter: brightness(1.2);
-                
-                &:hover {
-                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
-                }
-            }
-            
-            .linkedin {
-                background-image: url('./../../../assets/img/linkedin.png');
-                filter: brightness(1.2);
-                
-                &:hover {
-                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
-                }
-            }
-        }
-        
-        .right {
-            width: 100%;
-            @include dFlex($gap: 12px, $ai: center, $jc: center, $fd: column);
-            
-            .legal-notice {
-                a {
-                    color: $apple-text-secondary;
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-regular;
-                    font-size: clamp(14px, 3.5vw, 16px);
-                    padding: 6px 12px;
-                    border-radius: $apple-radius-small;
-                    transition: $apple-transition-fast;
-                    
-                    &:hover {
-                        color: $apple-text-primary;
-                        background: rgba(255, 255, 255, 0.05);
-                        transform: translateY(-1px);
-                    }
-                    
-                    &:active {
-                        color: $apple-primary;
-                        transform: translateY(0);
-                    }
-                }
-            }
-            
-            .Copy-Right {
-                color: $apple-text-tertiary;
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-regular;
-                font-size: clamp(12px, 3vw, 14px);
-                text-align: center;
-            }
+        .Copy-Right {
+            font-size: clamp(16px, 3vw, 16px); 
         }
     }
 }
 
 @media screen and (max-width: 480px) {
-    footer {
-        min-height: 180px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+    .footer-content {
+        .left .logo {
+            .logo-name {
+                font-size: 16px;
+            }
+            
+            .logo-position {
+                font-size: 16px;
+            }
+        }
         
-        .footer-content {
-            gap: 16px;
-            min-height: 140px;
-            
-            .left .logo {
-                .logo-img {
-                    width: 45px;
-                    height: 28px;
-                }
-                
-                .logo-name {
-                    font-size: 13px;
-                }
-                
-                .logo-position {
-                    font-size: 9px;
-                }
+        .right {
+            .legal-notice a {
+                font-size: 16px;
             }
             
-            .middle {
-                gap: 14px;
-                
-                .img {
-                    width: 26px;
-                    height: 26px;
-                }
-            }
-            
-            .right {
-                gap: 8px;
-                
-                .legal-notice a {
-                    font-size: 13px;
-                    padding: 4px 8px;
-                }
-                
-                .Copy-Right {
-                    font-size: 11px;
-                }
+            .Copy-Right {
+                font-size: 16px;
             }
         }
     }
 }
 
 @media screen and (max-width: 375px) {
-    footer {
-        min-height: 160px;
-        padding-top: 16px;
-        padding-bottom: 16px;
+    .footer-content {
+        .left .logo {
+            .logo-name {
+                font-size: 16px;
+            }
+            
+            .logo-position {
+                font-size: 16px;
+            }
+        }
         
-        .footer-content {
-            gap: 12px;
-            min-height: 120px;
-            
-            .left .logo {
-                .logo-img {
-                    width: 40px;
-                    height: 25px;
-                }
-                
-                .logo-name {
-                    font-size: 12px;
-                }
-                
-                .logo-position {
-                    font-size: 8px;
-                }
+        .right {
+            .legal-notice a {
+                font-size: 16px;
             }
             
-            .middle {
-                gap: 12px;
-                
-                .img {
-                    width: 24px;
-                    height: 24px;
-                }
-            }
-            
-            .right {
-                gap: 6px;
-                
-                .legal-notice a {
-                    font-size: 12px;
-                    padding: 3px 6px;
-                }
-                
-                .Copy-Right {
-                    font-size: 10px;
-                }
+            .Copy-Right {
+                font-size: 16px;
             }
         }
     }
 }
 
 @media screen and (max-width: 320px) {
-    footer {
-        min-height: 140px;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        
-        .footer-content {
-            gap: 10px;
-            min-height: 100px;
-            
-            .left .logo {
-                .logo-img {
-                    width: 36px;
-                    height: 22px;
-                }
-                
-                .logo-name {
-                    font-size: 11px;
-                }
-                
-                .logo-position {
-                    font-size: 7px;
-                }
+    .footer-content {
+        .left .logo {
+            .logo-name {
+                font-size: 16px;
             }
             
-            .middle {
-                gap: 10px;
-                
-                .img {
-                    width: 22px;
-                    height: 22px;
-                }
-            }
-            
-            .right {
-                gap: 4px;
-                
-                .legal-notice a {
-                    font-size: 11px;
-                    padding: 2px 4px;
-                }
-                
-                .Copy-Right {
-                    font-size: 9px;
-                }
+            .logo-position {
+                font-size: 16px;
             }
         }
-    }
-}
-
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    footer {
-        min-height: 120px;
-        padding-top: 12px;
-        padding-bottom: 12px;
         
-        .footer-content {
-            @include dFlex($fd: row, $jc: space-between, $ai: center);
-            gap: 16px;
-            max-width: none;
-            width: 100%;
-            
-            .left,
-            .middle,
-            .right {
-                flex: 1;
-                width: auto;
+        .right {
+            .legal-notice a {
+                font-size: 16px;
             }
             
-            .right {
-                @include dFlex($fd: row, $jc: flex-end, $ai: center);
-                gap: 8px;
+            .Copy-Right {
+                font-size: 16px;
             }
         }
     }

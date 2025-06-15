@@ -1,12 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
-import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ScrollAnimateDirective } from '../../Instructions/scroll-animation.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ContactMeMobileComponent } from './contact-me-mobile/contact-me-mobile.component';
 
 interface Contact {
   name: string,
@@ -17,7 +14,13 @@ interface Contact {
 @Component({
   selector: 'app-contact-me',
   standalone: true,
-  imports: [TranslateModule, CommonModule, ScrollBounceDirective, RouterLink, RouterLinkActive, ScrollAnimateDirective, FormsModule, ContactMeMobileComponent],
+  imports: [
+    TranslateModule, 
+    CommonModule, 
+    RouterLink, 
+    RouterLinkActive, 
+    FormsModule
+  ],
   templateUrl: './contact-me.component.html',
   styleUrl: './contact-me.component.scss'
 })
@@ -30,6 +33,11 @@ export class ContactMeComponent {
   emailInvalidMsg: string = 'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
+  
+  readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
+  readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  readonly msgMinLength = 10;
+  readonly msgMaxLength = 500;
   
   post = {
     endPoint: 'https://formspree.io/f/mldngvlb',
@@ -51,24 +59,17 @@ export class ContactMeComponent {
   http = inject(HttpClient);
   
   contact: Contact = {name:'', email:'', msg: ''};
-  
-  constructor() {
-    
-  }
 
   clickCb() {
     this.isChecked = !this.isChecked;
   }
 
-  onSumbmitNgForm(ngForm: NgForm) {
-    if(ngForm.valid && ngForm.submitted) {
-    }
-  }
-
-  // Formspree-basierter E-Mail-Versand
   onSumbmit(myForm: NgForm) {
-    const isValid = this.checkFileds();
-    if (!isValid) return;
+    const isValid = this.validateAllFields();
+    if (!isValid) {
+      this.markFieldsAsTouched(myForm);
+      return;
+    }
     
     this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
       .subscribe({
@@ -81,12 +82,54 @@ export class ContactMeComponent {
       });
   }
 
+  private validateAllFields(): boolean {
+    this.validateName();
+    this.validateEmail();
+    this.validateMessage();
+    
+    return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
+  }
+
+  private validateName(): void {
+    const name = this.contact.name.trim();
+    this.nameValid = this.namePattern.test(name);
+    if (!this.nameValid) {
+      this.contact.name = '';
+    }
+  }
+
+  private validateEmail(): void {
+    const email = this.contact.email.trim();
+    if (email.length === 0) {
+      this.emailValid = false;
+      this.emailInvalidMsg = 'contact.emailrequired';
+    } else if (!this.emailPattern.test(email)) {
+      this.emailValid = false;
+      this.emailInvalidMsg = 'contact.emailinvalid';
+    } else {
+      this.emailValid = true;
+    }
+  }
+
+  private validateMessage(): void {
+    const msg = this.contact.msg.trim();
+    this.msgValid = msg.length >= this.msgMinLength && msg.length <= this.msgMaxLength;
+    if (!this.msgValid) {
+      this.contact.msg = '';
+    }
+  }
+
+  private markFieldsAsTouched(form: NgForm): void {
+    Object.keys(form.controls).forEach(key => {
+      form.controls[key].markAsTouched();
+    });
+  }
+
   private handleEmailError(error: any) {
     console.error('Fehler beim Versenden der E-Mail:', error);
     this.sendEmailFallback();
   }
 
-  // Fallback mailto-Link wenn Server nicht erreichbar
   sendEmailFallback() {
     const subject = encodeURIComponent('Portfolio Kontakt');
     const body = encodeURIComponent(
@@ -105,31 +148,34 @@ export class ContactMeComponent {
     this.contact.email = '';
     this.contact.msg = '';
     this.isShowingSuccessMsg = true;
+    myForm.resetForm();
     setTimeout(() => {
       this.isShowingSuccessMsg = false;
     }, 3000);
   }
 
-  checkMail() {
-    if (this.contact.email.trim().length <= 0) {
-      this.emailValid = false;
-      this.emailInvalidMsg = 'contact.emailrequired';
-    } else {
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      this.emailValid = emailRegex.test(this.contact.email.trim());
-      if(!this.emailValid) this.emailInvalidMsg = 'contact.emailinvalid';
+  onNameChange() {
+    if (this.contact.name.length > 0) {
+      this.validateName();
     }
   }
 
-  checkFileds() {
-    this.nameValid = this.contact.name.trim().length > 0;
-    this.msgValid = this.contact.msg.trim().length > 0;
-    this.checkMail();
-
-    if (!this.nameValid || !this.msgValid || !this.emailValid) {
-      return false;
-    } else {
-      return true;
+  onEmailChange() {
+    if (this.contact.email.length > 0) {
+      this.validateEmail();
     }
+  }
+
+  onMessageChange() {
+    if (this.contact.msg.length > 0) {
+      this.validateMessage();
+    }
+  }
+
+  isFormValid(): boolean {
+    return this.contact.name.length > 0 && 
+           this.contact.email.length > 0 && 
+           this.contact.msg.length > 0 && 
+           this.isChecked;
   }
 }

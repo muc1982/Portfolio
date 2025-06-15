@@ -6,12 +6,16 @@ import { RouterOutlet } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { ScrollToTopComponent } from './Instructions/scroll-to-top.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, TranslateModule, RouterOutlet],
-  templateUrl: './app.component.html',
+  imports: [FormsModule, TranslateModule, RouterOutlet, ScrollToTopComponent],
+  template: `
+    <router-outlet></router-outlet>
+    <app-scroll-to-top></app-scroll-to-top>
+  `,
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
@@ -71,5 +75,23 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Logo click to scroll to top functionality
+    this.setupLogoScrollToTop();
+  }
+
+  private setupLogoScrollToTop(): void {
+    // Add click listener to all logo elements
+    setTimeout(() => {
+      const logos = this.document.querySelectorAll('.logo, .logo-img, .logo-wrapper');
+      logos.forEach(logo => {
+        logo.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    }, 1000);
   }
 }

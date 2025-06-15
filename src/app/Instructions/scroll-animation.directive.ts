@@ -2,6 +2,8 @@ import { AfterViewInit, Directive, ElementRef, Renderer2, Input, OnDestroy } fro
 
 interface ScrollAnimateOptions {
     animateCss?: string;
+    delay?: number; 
+    threshold?: number;
 }
 
 @Directive({
@@ -14,6 +16,8 @@ export class ScrollAnimateDirective implements AfterViewInit, OnDestroy {
     private isVisible = false;  
     private observer?: IntersectionObserver;
     private animateCss = '';
+    private animationDelay = 200; 
+    private threshold = 0.3; 
     
     constructor(
         private readonly el: ElementRef<HTMLElement>, 
@@ -22,15 +26,21 @@ export class ScrollAnimateDirective implements AfterViewInit, OnDestroy {
 
     ngAfterViewInit(): void {
         this.animateCss = this.options.animateCss || '';
+        this.animationDelay = this.options.delay || 200;
+        this.threshold = this.options.threshold || 0.3;
+        
         if (!this.animateCss) return;
+        
+        this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
+        this.renderer.setStyle(this.el.nativeElement, 'transition', 'opacity 0.3s ease');
         
         this.initializeObserver();
     }
 
     private initializeObserver(): void {
         const options: IntersectionObserverInit = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -10% 0px'
+            threshold: this.threshold,
+            rootMargin: '0px 0px -50px 0px' 
         };
 
         this.observer = new IntersectionObserver((entries) => {
@@ -39,9 +49,14 @@ export class ScrollAnimateDirective implements AfterViewInit, OnDestroy {
 
             if (entry.isIntersecting && !this.isVisible) {
                 this.isVisible = true;
-                this.renderer.addClass(this.el.nativeElement, this.animateCss);
+                
+                setTimeout(() => {
+                    this.renderer.setStyle(this.el.nativeElement, 'opacity', '1');
+                    this.renderer.addClass(this.el.nativeElement, this.animateCss);
+                }, this.animationDelay);
             } else if (!entry.isIntersecting && this.isVisible) {
                 this.isVisible = false;
+                this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
                 this.renderer.removeClass(this.el.nativeElement, this.animateCss);
             }
         }, options);
