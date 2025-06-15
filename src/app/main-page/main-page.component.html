@@ -1,9 +1,17 @@
-<div class="main-page" >
+<div class="main-page">
     <app-landing-page></app-landing-page>
     <app-nav></app-nav>
     <app-why-me></app-why-me>
     <app-my-skills></app-my-skills>
     <app-my-projects></app-my-projects>
-    <app-contact-me></app-contact-me>
+    
+    <div class="hide-on-mobile">
+        <app-contact-me></app-contact-me>
+    </div>
+    
+    <div class="hide-on-desktop">
+        <app-contact-me-mobile></app-contact-me-mobile>
+    </div>
+    
     <app-footer></app-footer>
 </div>

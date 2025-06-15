@@ -6,11 +6,12 @@ import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { ContactMeComponent } from './contact-me/contact-me.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from '../shared/footer/footer.component';
+import { ContactMeMobileComponent } from "./contact-me/contact-me-mobile/contact-me-mobile.component";
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [LandingPageComponent, WhyMeComponent, MySkillsComponent, MyProjectsComponent, ContactMeComponent, NavComponent, FooterComponent],
+  imports: [LandingPageComponent, WhyMeComponent, MySkillsComponent, MyProjectsComponent, ContactMeComponent, NavComponent, FooterComponent, ContactMeMobileComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })

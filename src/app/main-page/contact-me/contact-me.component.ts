@@ -4,6 +4,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+// WICHTIG: ScrollBounceDirective importieren
+import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 
 interface Contact {
   name: string,
@@ -19,7 +21,8 @@ interface Contact {
     CommonModule, 
     RouterLink, 
     RouterLinkActive, 
-    FormsModule
+    FormsModule,
+    ScrollBounceDirective  // HINZUFÜGEN!
   ],
   templateUrl: './contact-me.component.html',
   styleUrl: './contact-me.component.scss'

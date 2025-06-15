@@ -16,7 +16,15 @@ interface Contact {
 @Component({
   selector: 'app-contact-me-mobile',
   standalone: true,
-  imports: [TranslateModule, CommonModule, ScrollBounceDirective, RouterLink, RouterLinkActive, ScrollAnimateDirective, FormsModule],
+  imports: [
+    TranslateModule, 
+    CommonModule, 
+    ScrollBounceDirective,  // HINZUFÜGEN!
+    RouterLink, 
+    RouterLinkActive, 
+    ScrollAnimateDirective, 
+    FormsModule
+  ],
   templateUrl: './contact-me-mobile.component.html',
   styleUrl: './contact-me-mobile.component.scss'
 })
@@ -29,6 +37,9 @@ export class ContactMeMobileComponent {
   emailInvalidMsg: string = 'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
+
+  readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
+  readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   post = {
     endPoint: 'https://formspree.io/f/mldngvlb',
@@ -51,18 +62,10 @@ export class ContactMeMobileComponent {
   
   contact: Contact = { name: '', email: '', msg: '' };
 
-  constructor() {
-
-  }
+  constructor() {}
 
   clickCb() {
     this.isChecked = !this.isChecked;
-  }
-
-  onSumbmitNgForm(ngForm: NgForm) {
-    if (ngForm.valid && ngForm.submitted) {
-      console.log(this.contact);
-    }
   }
 
   // Formspree-basierter E-Mail-Versand
@@ -77,7 +80,6 @@ export class ContactMeMobileComponent {
           },
           error: (error) => {
             console.error('Fehler beim Versenden der E-Mail:', error);
-            // Fallback: mailto-Link als Alternative
             this.sendEmailFallback();
           },
           complete: () => {
@@ -87,7 +89,6 @@ export class ContactMeMobileComponent {
     }
   }
 
-  // Fallback mailto-Link wenn Formspree nicht erreichbar
   sendEmailFallback() {
     const subject = encodeURIComponent('Portfolio Kontakt');
     const body = encodeURIComponent(
@@ -101,7 +102,9 @@ export class ContactMeMobileComponent {
   }
 
   reset(myForm: NgForm) {
-    this.clickCb();
+    if (this.isChecked) {
+      this.clickCb();
+    }
     this.contact.name = '';
     this.contact.email = '';
     this.contact.msg = '';
@@ -117,8 +120,7 @@ export class ContactMeMobileComponent {
       this.emailInvalidMsg = 'contact.emailrequired';
       this.contact.email = '';
     } else {
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      this.emailValid = emailRegex.test(this.contact.email.trim());
+      this.emailValid = this.emailPattern.test(this.contact.email.trim());
       if (!this.emailValid) {
         this.emailInvalidMsg = 'contact.emailinvalid';
         this.contact.email = '';
@@ -138,5 +140,35 @@ export class ContactMeMobileComponent {
     } else {
       return true;
     }
+  }
+
+  // Zusätzliche Validation-Methoden
+  validateName(): void {
+    const name = this.contact.name.trim();
+    this.nameValid = this.namePattern.test(name);
+    if (!this.nameValid) {
+      this.contact.name = '';
+    }
+  }
+
+  validateEmail(): void {
+    this.checkMail();
+  }
+
+  validateMessage(): void {
+    const msg = this.contact.msg.trim();
+    this.msgValid = msg.length >= 10 && msg.length <= 500;
+    if (!this.msgValid) {
+      this.contact.msg = '';
+    }
+  }
+
+  isFormValid(): boolean {
+    return this.contact.name.length > 0 && 
+           this.contact.email.length > 0 && 
+           this.contact.msg.length > 0 && 
+           this.nameValid && 
+           this.emailValid && 
+           this.msgValid;
   }
 }
