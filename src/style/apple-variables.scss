@@ -1,4 +1,5 @@
 @use 'sass:color';
+@import 'typography-system';
 
 $apple-transition-fast: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 $apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
@@ -177,31 +178,23 @@ $breakpoint-large: 1440px;
 }
 
 @mixin h1Title() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    @include hero-title;
     background: $apple-teal-gradient;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    @include responsive-font(clamp(1.8rem, 6vw, 2.5rem), clamp(2.5rem, 5vw, 4rem));
 }
 
 @mixin h2Title() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    @include section-title;
     background: $apple-teal-gradient;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    @include responsive-font(clamp(1.6rem, 5vw, 2.2rem), clamp(2rem, 4vw, 3rem));
 }
 
 @mixin h2TitleMobile() {
-    @include h2Title();
+    @include h2Title(); 
 }
 
 @mixin apple-logo() {
