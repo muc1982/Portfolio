@@ -86,7 +86,7 @@
                     .header-right-email,
                     .header-right-phone {
                         width: 100%;
-                        max-width: 300px; // Begrenzt die maximale Breite
+                        max-width: 300px; 
 
                         a {
                             @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
