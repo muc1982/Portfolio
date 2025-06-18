@@ -232,3 +232,365 @@ footer {
         }
     }
 }
+
+@media screen and (max-width: 900px) {
+    .footer-wrapper {
+        min-height: 180px;
+    }
+    
+    footer {
+        min-height: 180px;
+        @include standardPaddingMobile();
+        
+        .footer-content {
+            @include dFlex($fd: column, $gap: 20px, $ai: center);
+            text-align: center;
+            
+            .left {
+                order: 3;
+                @include dFlex($fd: row, $gap: 16px, $ai: center, $jc: center);
+                
+                .legal-notice a {
+                    font-size: 14px;
+                    padding: 8px 12px;
+                }
+                
+                .copy-right {
+                    font-size: 14px;
+                    padding-left: 0;
+                }
+            }
+            
+            .middle {
+                order: 1;
+                
+                .logo {
+                    .logo-img {
+                        width: 48px;
+                        height: 30px;
+                    }
+                    
+                    .logo-name {
+                        font-size: 16px;
+                    }
+                    
+                    .logo-position {
+                        font-size: 11px;
+                    }
+                }
+            }
+            
+            .right {
+                order: 2;
+                @include dFlex($gap: 16px, $jc: center);
+                
+                .img {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .footer-wrapper {
+        min-height: 160px;
+    }
+    
+    footer {
+        min-height: 160px;
+        
+        .footer-content {
+            gap: 16px;
+            
+            .left {
+                @include dFlex($fd: column, $gap: 8px, $ai: center);
+                
+                .legal-notice a {
+                    font-size: 13px;
+                    padding: 6px 10px;
+                }
+                
+                .copy-right {
+                    font-size: 12px;
+                }
+            }
+            
+            .middle .logo {
+                .logo-img {
+                    width: 42px;
+                    height: 26px;
+                }
+                
+                .logo-name {
+                    font-size: 15px;
+                }
+                
+                .logo-position {
+                    font-size: 10px;
+                }
+            }
+            
+            .right {
+                gap: 14px;
+                
+                .img {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-wrapper {
+        min-height: 140px;
+    }
+    
+    footer {
+        min-height: 140px;
+        padding: 16px 12px;
+        
+        .footer-content {
+            gap: 12px;
+            
+            .left {
+                gap: 6px;
+                
+                .legal-notice a {
+                    font-size: 12px;
+                    padding: 4px 8px;
+                }
+                
+                .copy-right {
+                    font-size: 11px;
+                }
+            }
+            
+            .middle .logo {
+                padding: 6px;
+                
+                .logo-img {
+                    width: 38px;
+                    height: 24px;
+                }
+                
+                .logo-name {
+                    font-size: 14px;
+                }
+                
+                .logo-position {
+                    font-size: 9px;
+                }
+            }
+            
+            .right {
+                gap: 12px;
+                
+                .img {
+                    width: 26px;
+                    height: 26px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    footer .footer-content {
+        gap: 10px;
+        
+        .left {
+            .legal-notice a {
+                font-size: 11px;
+                padding: 3px 6px;
+            }
+            
+            .copy-right {
+                font-size: 10px;
+            }
+        }
+        
+        .middle .logo {
+            .logo-img {
+                width: 36px;
+                height: 22px;
+            }
+            
+            .logo-name {
+                font-size: 13px;
+            }
+            
+            .logo-position {
+                font-size: 8px;
+            }
+        }
+        
+        .right {
+            gap: 10px;
+            
+            .img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .footer-wrapper {
+        min-height: 120px;
+    }
+    
+    footer {
+        min-height: 120px;
+        padding: 12px 8px;
+        
+        .footer-content {
+            gap: 8px;
+            
+            .left {
+                gap: 4px;
+                
+                .legal-notice a {
+                    font-size: 10px;
+                    padding: 2px 4px;
+                    border-radius: $apple-radius-small;
+                }
+                
+                .copy-right {
+                    font-size: 9px;
+                }
+            }
+            
+            .middle .logo {
+                padding: 4px;
+                
+                .logo-img {
+                    width: 32px;
+                    height: 20px;
+                }
+                
+                .logo-name {
+                    font-size: 12px;
+                    margin-top: 2px;
+                }
+                
+                .logo-position {
+                    font-size: 7px;
+                }
+            }
+            
+            .right {
+                gap: 8px;
+                
+                .img {
+                    width: 22px;
+                    height: 22px;
+                    
+                    &:hover {
+                        transform: translateY(-2px) scale(1.05);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    footer .footer-content {
+        .left .legal-notice a {
+            &:hover {
+                transform: none;
+            }
+        }
+        
+        .middle .logo {
+            &:hover {
+                transform: none;
+            }
+        }
+        
+        .right .img {
+            &:hover {
+                transform: none;
+            }
+        }
+    }
+}
+
+@media (prefers-contrast: high) {
+    .footer-wrapper {
+        background: #000;
+        border-top: 2px solid #fff;
+        
+        &::before {
+            background: #fff;
+        }
+    }
+    
+    footer {
+        background: #000;
+        
+        .footer-content {
+            .left .legal-notice a {
+                color: #fff;
+                border: 1px solid #333;
+                
+                &:hover {
+                    background: #333;
+                    border-color: #666;
+                }
+            }
+            
+            .left .copy-right {
+                color: #ccc;
+            }
+            
+            .middle .logo {
+                .logo-name {
+                    color: #fff;
+                }
+                
+                .logo-position {
+                    color: #ccc;
+                }
+            }
+        }
+    }
+}
+
+@media print {
+    .footer-wrapper {
+        background: white;
+        color: black;
+        border-top: 1px solid black;
+        
+        &::before {
+            display: none;
+        }
+        
+        footer .footer-content {
+            .left .legal-notice a {
+                color: black;
+            }
+            
+            .left .copy-right {
+                color: black;
+            }
+            
+            .middle .logo {
+                .logo-name,
+                .logo-position {
+                    color: black;
+                }
+            }
+            
+            .right .img {
+                display: none;
+            }
+        }
+    }
+}

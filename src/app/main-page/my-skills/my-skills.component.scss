@@ -191,7 +191,6 @@
     }
 }
 
-// Mobile Version
 .my-skills-container-mobile {
     position: relative;
     margin: 24px auto;
@@ -236,8 +235,8 @@
         .content-top {
             .reservoir {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-                gap: clamp(12px, 2.5vw, 16px);
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: clamp(10px, 2vw, 14px);
                 width: 100%;
                 
                 .skill {
@@ -249,6 +248,7 @@
                     transition: $apple-transition-fast;
                     aspect-ratio: 1;
                     position: relative;
+                    min-height: 44px; 
                     
                     &::before {
                         content: '';
@@ -276,8 +276,8 @@
                     }
                     
                     img {
-                        width: clamp(24px, 6vw, 36px);
-                        height: clamp(24px, 6vw, 36px);
+                        width: clamp(28px, 7vw, 40px);
+                        height: clamp(28px, 7vw, 40px);
                         object-fit: contain;
                         transition: $apple-transition-fast;
                         filter: brightness(1.1);
@@ -329,6 +329,7 @@
                             padding: 12px 8px;
                             transition: $apple-transition-fast;
                             min-width: 60px;
+                            min-height: 44px; 
                             
                             &:hover {
                                 transform: translateY(-2px);
@@ -368,7 +369,6 @@
     }
 }
 
-// Animations
 @keyframes apple-skills-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
@@ -384,7 +384,6 @@
     }
 }
 
-// Responsive Design
 @media screen and (max-width: 1200px) {
     .my-skills-container {
         .my-skills-content {
@@ -424,8 +423,8 @@
             
             .content-top {
                 .reservoir {
-                    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-                    gap: 10px;
+                    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                    gap: 12px;
                 }
             }
         }
@@ -445,6 +444,13 @@
         .my-skills-content {
             padding: 12px;
             gap: 16px;
+            
+            .content-top {
+                .reservoir {
+                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                    gap: 10px;
+                }
+            }
             
             .content-bottom {
                 .content-bottom-content {
@@ -489,7 +495,7 @@
         .my-skills-content {
             .content-top {
                 .reservoir {
-                    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
                     gap: 8px;
                 }
             }
@@ -513,16 +519,17 @@
             
             .content-top {
                 .reservoir {
-                    grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
-                    gap: 6px;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 8px;
                     
                     .skill {
                         padding: 8px;
                         border-radius: $apple-radius-small;
+                        min-height: 48px; 
                         
                         img {
-                            width: 20px;
-                            height: 20px;
+                            width: 24px;
+                            height: 24px;
                         }
                     }
                 }
@@ -577,7 +584,6 @@
     }
 }
 
-// Accessibility
 @media (prefers-reduced-motion: reduce) {
     .my-skills-container,
     .my-skills-container-mobile {
@@ -605,7 +611,6 @@
     }
 }
 
-// High contrast mode
 @media (prefers-contrast: high) {
     .my-skills-container,
     .my-skills-container-mobile {
