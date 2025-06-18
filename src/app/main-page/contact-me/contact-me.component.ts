@@ -25,7 +25,7 @@ interface Contact {
   styleUrl: './contact-me.component.scss'
 })
 export class ContactMeComponent {
-  @Input() scrollContainer!: HTMLElement;
+  @Input() scrollContainer?: HTMLElement;
   isChecked: boolean = false;
   
   nameValid: boolean = true;

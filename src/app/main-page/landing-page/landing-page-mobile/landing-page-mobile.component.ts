@@ -13,33 +13,40 @@ import { NgStyle } from '@angular/common';
   templateUrl: './landing-page-mobile.component.html',
   styleUrl: './landing-page-mobile.component.scss'
 })
-export class LandingPageMobileComponent {
+export class LandingPageMobileComponent implements AfterViewInit {
   @ViewChild('logoImg') logoImgRef!: ElementRef;
   showMenu = false;
   wh = 0;
   top = 0;
   left= 0;
-  constructor(private translate: TranslateService) {
-  }
+  
+  constructor(private translate: TranslateService) {}
+  
   ngAfterViewInit() {
     setTimeout(() => {
       this.calculateLayout();
-    });
+    }, 50);
   }
 
   @HostListener('window:resize')
   onResize() {
-    this.calculateLayout();
+    if (this.logoImgRef?.nativeElement) {
+      this.calculateLayout();
+    }
   }
 
   calculateLayout() {
+    if (!this.logoImgRef?.nativeElement) {
+      return;
+    }
+    
     const el = this.logoImgRef.nativeElement as HTMLElement;
-      let menuH = 72 + 25;
-      let lower = el.offsetHeight < el.offsetWidth ? el.offsetHeight : el.offsetWidth;
-      lower += 25;
-      let t = el.offsetTop  + menuH - 20;
-      this.wh = lower; // or offsetWidth
-      this.top = t;
-      this.left = (window.innerWidth - this.wh) / 2;
+    let menuH = 72 + 25;
+    let lower = el.offsetHeight < el.offsetWidth ? el.offsetHeight : el.offsetWidth;
+    lower += 25;
+    let t = el.offsetTop + menuH - 20;
+    this.wh = lower;
+    this.top = t;
+    this.left = (window.innerWidth - this.wh) / 2;
   }
 }

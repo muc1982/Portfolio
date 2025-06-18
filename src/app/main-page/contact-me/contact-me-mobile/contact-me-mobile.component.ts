@@ -25,7 +25,7 @@ interface Contact {
   styleUrl: './contact-me-mobile.component.scss'
 })
 export class ContactMeMobileComponent {
-  @Input() scrollContainer!: HTMLElement;
+  @Input() scrollContainer?: HTMLElement;
   isChecked: boolean = false;
   nameValid: boolean = true;
   emailValid: boolean = true;
@@ -181,7 +181,6 @@ export class ContactMeMobileComponent {
       }
     }
   }
-
 
   onNameFocus(): void {
     this.nameValid = true;

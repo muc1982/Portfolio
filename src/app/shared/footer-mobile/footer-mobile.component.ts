@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, HostListener } f
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 interface BreakpointResult {
   matches: boolean;
@@ -41,6 +40,33 @@ interface FooterData {
 export class FooterMobileComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   
+  private layoutConfigs: { [key: string]: FooterLayout } = {
+    extraSmall: { 
+      gridTemplate: 'auto auto auto',
+      gridAreas: ['logo', 'social', 'legal'],
+      itemSpacing: '12px',
+      contentPadding: '12px 8px'
+    },
+    small: { 
+      gridTemplate: 'auto auto auto',
+      gridAreas: ['logo', 'social', 'legal'],
+      itemSpacing: '16px',
+      contentPadding: '16px 12px'
+    },
+    medium: { 
+      gridTemplate: 'auto auto',
+      gridAreas: ['logo social', 'legal legal'],
+      itemSpacing: '20px',
+      contentPadding: '20px 16px'
+    },
+    tablet: { 
+      gridTemplate: 'auto',
+      gridAreas: ['legal logo social'],
+      itemSpacing: '24px',
+      contentPadding: '24px 20px'
+    }
+  };
+  
   currentLayout: FooterLayout = this.getDefaultLayout();
   isExtraSmall = false;
   isSmall = false;
@@ -74,33 +100,6 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     currentYear: new Date().getFullYear()
   };
 
-  private layoutConfigs: { [key: string]: FooterLayout } = {
-    extraSmall: { 
-      gridTemplate: 'auto auto auto',
-      gridAreas: ['logo', 'social', 'legal'],
-      itemSpacing: '12px',
-      contentPadding: '12px 8px'
-    },
-    small: { 
-      gridTemplate: 'auto auto auto',
-      gridAreas: ['logo', 'social', 'legal'],
-      itemSpacing: '16px',
-      contentPadding: '16px 12px'
-    },
-    medium: { 
-      gridTemplate: 'auto auto',
-      gridAreas: ['logo social', 'legal legal'],
-      itemSpacing: '20px',
-      contentPadding: '20px 16px'
-    },
-    tablet: { 
-      gridTemplate: 'auto',
-      gridAreas: ['legal logo social'],
-      itemSpacing: '24px',
-      contentPadding: '24px 20px'
-    }
-  };
-
   constructor() {}
 
   @HostListener('window:resize', ['$event'])
@@ -120,7 +119,6 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
   private setupResizeObserver(): void {
     if (typeof window !== 'undefined') {
-
       this.updateLayoutForCurrentBreakpoint();
       
       let resizeTimer: number;
@@ -178,7 +176,7 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
   }
 
   private getDefaultLayout(): FooterLayout {
-    return this.layoutConfigs['small'] || {
+    return {
       gridTemplate: 'auto auto auto',
       gridAreas: ['logo', 'social', 'legal'],
       itemSpacing: '16px',

@@ -20,11 +20,11 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrl: './my-projects.component.scss'
 })
 export class MyProjectsComponent implements OnDestroy, AfterViewInit {
-  @ViewChild('animatedEl1', { static: false }) animatedEl1!: ElementRef;
-  @ViewChild('animatedEl2', { static: false }) animatedEl2!: ElementRef;
-  @ViewChild('animatedEl3', { static: false }) animatedEl3!: ElementRef;
-  @ViewChild('animatedEl4', { static: false }) animatedEl4!: ElementRef;
-  @ViewChild('scrollRef') scrollDirective!: ScrollBounceDirective;
+  @ViewChild('animatedEl1', { static: false }) animatedEl1?: ElementRef;
+  @ViewChild('animatedEl2', { static: false }) animatedEl2?: ElementRef;
+  @ViewChild('animatedEl3', { static: false }) animatedEl3?: ElementRef;
+  @ViewChild('animatedEl4', { static: false }) animatedEl4?: ElementRef;
+  @ViewChild('scrollRef') scrollDirective?: ScrollBounceDirective;
 
   currentTab: number = 0;
   projects: Project[] = [];
@@ -33,17 +33,21 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
   private langChangeSub?: Subscription;
 
   constructor(private translate: TranslateService, private globalService: GlobalService) {
-    
+    this.initializeComponent();
+  }
+
+  private initializeComponent(): void {
     this.initData();
     this.fillLangsarr();
     this.changeText();
-    
+    this.setupLanguageChange();
+  }
+
+  private setupLanguageChange(): void {
     this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.changeText();
     });
   }
-
-  
 
   initData() {
     const projectData = this.globalService.getProjects();
@@ -108,11 +112,12 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
     }
 
     setTimeout(() => {
-      this.scrollDirective.targetId = 'my-projects';
-      this.scrollDirective.offsetY = 104;
-      this.scrollDirective?.onClick();
+      if (this.scrollDirective) {
+        this.scrollDirective.targetId = 'my-projects';
+        this.scrollDirective.offsetY = 104;
+        this.scrollDirective.onClick();
+      }
     }, 0);
-
   }
 
   registerScrollTrigger (){
@@ -129,7 +134,7 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
   }
 
   setupScrollTrigger(elRef?: ElementRef, animationClass?: string) {
-    if (!elRef) return;
+    if (!elRef?.nativeElement || !animationClass) return;
   
     ScrollTrigger.create({
       trigger: elRef.nativeElement,
@@ -139,7 +144,6 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
       },
       onLeaveBack: () => {
         elRef.nativeElement.classList.remove(animationClass);
-
       },
       onEnterBack: () => {
         elRef.nativeElement.classList.add(animationClass);
@@ -152,8 +156,6 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.registerScrollTrigger();
-
-    
   }
 
   ngOnDestroy(): void {

@@ -52,11 +52,10 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   ];
 
-  constructor(private translate: TranslateService) {
-    this.setupLanguageSubscription();
-  }
+  constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.initializeLanguage();
     this.updateTranslations();
     this.startAutoSlide();
   }
@@ -69,28 +68,28 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cleanupSubscriptions();
   }
 
-  private setupLanguageSubscription(): void {
+  private initializeLanguage(): void {
     this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.updateTranslations();
     });
   }
 
   private updateTranslations(): void {
-    const keys = this.extractTranslationKeys();
+    const keys = this.getTranslationKeys();
     this.applyTranslations(keys);
   }
 
-  private extractTranslationKeys(): string[] {
+  private getTranslationKeys(): string[] {
     return this.locationSlides.flatMap(slide => [slide.titleKey, slide.subtitleKey]);
   }
 
   private applyTranslations(keys: string[]): void {
     this.translate.get(keys).subscribe(translations => {
-      this.locationSlides.forEach(slide => this.updateSlideTranslations(slide, translations));
+      this.locationSlides.forEach(slide => this.updateSlide(slide, translations));
     });
   }
 
-  private updateSlideTranslations(slide: LocationSlide, translations: any): void {
+  private updateSlide(slide: LocationSlide, translations: any): void {
     slide.title = translations[slide.titleKey] || slide.title;
     slide.subtitle = translations[slide.subtitleKey] || slide.subtitle;
   }
@@ -131,14 +130,14 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private initializeAnimations(): void {
-    if (!this.carouselContainer) return;
+    if (!this.carouselContainer?.nativeElement) return;
 
-    const observer = this.createIntersectionObserver();
-    const animatedElements = this.getAnimatedElements();
-    this.observeElements(observer, animatedElements);
+    const observer = this.createObserver();
+    const elements = this.getElements();
+    this.observeElements(observer, elements);
   }
 
-  private createIntersectionObserver(): IntersectionObserver {
+  private createObserver(): IntersectionObserver {
     return new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -154,7 +153,7 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  private getAnimatedElements(): NodeListOf<Element> {
+  private getElements(): NodeListOf<Element> {
     return this.carouselContainer.nativeElement.querySelectorAll(
       '.location-carousel, .introduction-card, .talk-button'
     );
