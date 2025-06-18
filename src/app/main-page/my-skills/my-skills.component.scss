@@ -234,7 +234,7 @@
 
         .content-top {
             .reservoir {
-                display: grid;
+                display: ruby;
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: clamp(10px, 2vw, 14px);
 
@@ -390,7 +390,7 @@
 @media screen and (max-width: 1200px) {
     .my-skills-container {
         .my-skills-content {
-            @include dFlex($fd: column, $gap: 40px);
+            @include dFlex($fd: row, $gap: 40px);
 
             .content-left,
             .content-right {

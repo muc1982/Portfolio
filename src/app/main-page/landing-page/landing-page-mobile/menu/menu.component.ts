@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ScrollBounceDirective } from '../../../../Instructions/scroll-bounce.directive';
 import { LangSwitcherComponent } from '../../../../shared/lang-switcher/lang-switcher.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { NgIf } from '@angular/common';
+import { NgIf} from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -20,6 +20,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
+  @Input() wh = 0;
+  @Input() top = 0;
+  @Input() left = 0;
   @Input() isShowable = true;
   @Output() isShowableChange = new EventEmitter<boolean>();
   
