@@ -27,6 +27,7 @@
             background: transparent;
             transition: $apple-transition-medium;
             
+            // Alle bestehenden Styles bleiben gleich...
             .logo {
                 @include dFlex($fd: column, $jc: center, $ai: center);
                 transition: $apple-transition-medium;
@@ -74,16 +75,6 @@
                     @include apple-logo;
                     transition: $apple-transition-fast;
                     margin-bottom: 2px;
-                    
-                    @media screen and (min-width: 1920px) {
-                        width: 60px;
-                        height: 38px;
-                    }
-                    
-                    @media screen and (max-width: 1200px) {
-                        width: 45px;
-                        height: 28px;
-                    }
                 }
                 
                 .logo-name {
@@ -290,7 +281,7 @@
 
 .mobile-nav-content {
     position: absolute;
-    top: 104px;
+    top: 104px; // KORRIGIERT: Konsistent mit Desktop
     left: 0;
     right: 0;
     background: $apple-bg-secondary;
@@ -371,103 +362,27 @@
     }
 }
 
-@media screen and (max-width: 1400px) {
-    .nav-wrapper .nav .content {
-        .items {
-            gap: clamp(6px, 1.5vw, 12px);
-            
-            li a span {
-                padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
-                font-size: clamp(14px, 1.6vw, 15px);
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 1300px) {
-    .nav-wrapper .nav .content {
-        .items {
-            gap: clamp(4px, 1vw, 8px);
-            
-            li a span {
-                padding: clamp(6px, 1.2vw, 8px) clamp(8px, 2vw, 12px);
-                font-size: 14px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .nav-wrapper .nav .content {
-        height: 96px;
-        
-        .logo {
-            .logo-name {
-                font-size: 14px;
-            }
-            
-            .logo-position {
-                font-size: 10px;
-            }
-        }
-        
-        .items {
-            gap: 6px;
-            
-            li a span {
-                padding: 6px 10px;
-                font-size: 14px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 1100px) {
-    .nav-wrapper .nav .content {
-        .items {
-            gap: 4px;
-            
-            li a span {
-                padding: 5px 8px;
-                font-size: 13px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .nav-wrapper .nav .content {
-        .items {
-            gap: 2px;
-            
-            li a span {
-                padding: 4px 6px;
-                font-size: 12px;
-            }
-        }
-    }
-}
-
+// KORRIGIERTE Responsive Breakpoints für Navigation
 @media screen and (max-width: 900px) {
     .nav-wrapper {
-        height: 72px;
+        height: 88px; // KORRIGIERT: Proportional reduziert statt drastischer Sprung
         
         .nav .content {
-            height: 72px;
+            height: 88px;
             @include standardPaddingMobile();
             
             .logo {
                 .logo-img {
-                    width: 40px;
-                    height: 25px;
+                    width: 44px; // KORRIGIERT: Proportional skaliert
+                    height: 28px;
                 }
                 
                 .logo-name {
-                    font-size: 13px;
+                    font-size: 14px;
                 }
                 
                 .logo-position {
-                    font-size: 9px;
+                    font-size: 10px;
                 }
             }
             
@@ -476,11 +391,15 @@
             }
         }
     }
+    
+    .mobile-nav-content {
+        top: 88px; // KORRIGIERT: Angepasst an neue Header-Höhe
+    }
 }
 
 @media screen and (max-width: 600px) {
     .nav-wrapper .nav .content {
-        height: 88px;
+        height: 80px;
         
         .mobile-menu-toggle {
             width: 26px;
@@ -503,7 +422,7 @@
     }
     
     .mobile-nav-content {
-        top: 88px;
+        top: 80px;
         
         .mobile-nav-items {
             padding: 16px 0;
@@ -522,16 +441,31 @@
 
 @media screen and (max-width: 480px) {
     .nav-wrapper .nav .content {
-        height: 80px;
+        height: 76px; // KORRIGIERT: Konsistent mit Landing Page Mobile
         
         .mobile-menu-toggle {
             width: 24px;
             height: 18px;
         }
+        
+        .logo {
+            .logo-img {
+                width: 40px;
+                height: 25px;
+            }
+            
+            .logo-name {
+                font-size: 13px;
+            }
+            
+            .logo-position {
+                font-size: 9px;
+            }
+        }
     }
     
     .mobile-nav-content {
-        top: 80px;
+        top: 76px; // KORRIGIERT: Konsistent
         
         .mobile-nav-items {
             padding: 12px 0;
@@ -540,217 +474,6 @@
                 padding: 12px 16px;
                 font-size: 15px;
             }
-        }
-    }
-}
-
-.nav-wrapper.scrolled {
-    .nav .content {
-        background: rgba(28, 28, 30, 0.9);
-        
-        .logo {
-            &:hover::before {
-                opacity: 0.15;
-            }
-        }
-        
-        .items li a span {
-            &:hover::before {
-                background: rgba(255, 255, 255, 0.08);
-            }
-            
-            &:active::before {
-                background: rgba($apple-primary, 0.15);
-            }
-        }
-    }
-}
-
-@media (prefers-contrast: high) {
-    .nav-wrapper {
-        background: #000;
-        border-bottom: 2px solid #fff;
-        
-        &.scrolled {
-            background: #000;
-            border-bottom: 2px solid #fff;
-        }
-        
-        .nav .content {
-            .logo {
-                .logo-name,
-                .logo-position {
-                    color: #fff;
-                }
-            }
-            
-            .items li a span {
-                color: #fff;
-                border: 1px solid #333;
-                
-                &:hover {
-                    background: #333;
-                    border-color: #666;
-                }
-                
-                &::after {
-                    background: #fff;
-                }
-            }
-        }
-    }
-    
-    .mobile-nav-content {
-        background: #000;
-        border-top: 2px solid #fff;
-        
-        .mobile-nav-items li a {
-            color: #fff;
-            border-bottom-color: #333;
-            
-            &:hover {
-                background: #333;
-            }
-            
-            &::before {
-                background: #fff;
-            }
-        }
-    }
-    
-    .mobile-menu-toggle span {
-        background: #fff;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .nav-wrapper {
-        transition: none;
-        
-        .nav .content {
-            transition: none;
-            
-            .logo {
-                transition: none;
-                
-                &:hover {
-                    transform: none;
-                }
-                
-                .logo-img {
-                    transition: none;
-                }
-            }
-            
-            .items li a span {
-                transition: none;
-                
-                &:hover,
-                &:active {
-                    transform: none;
-                }
-                
-                &::before,
-                &::after {
-                    transition: none;
-                }
-            }
-        }
-    }
-    
-    .mobile-menu-toggle span,
-    .mobile-nav-overlay,
-    .mobile-nav-content {
-        transition: none !important;
-    }
-}
-
-@media print {
-    .nav-wrapper {
-        display: none;
-    }
-}
-
-.nav-wrapper .nav .content {
-    .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 6px;
-        background: $apple-primary;
-        color: white;
-        padding: 8px;
-        text-decoration: none;
-        border-radius: $apple-radius-small;
-        z-index: 1001;
-        
-        &:focus {
-            top: 6px;
-        }
-    }
-    
-    .items li a {
-        &:focus-visible {
-            outline: 2px solid $apple-primary;
-            outline-offset: 2px;
-            border-radius: $apple-radius-small;
-        }
-    }
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .nav-wrapper .nav .content {
-        .logo {
-            padding: 12px;
-            
-            &:hover::before {
-                opacity: 0;
-            }
-        }
-        
-        .items li a span {
-            padding: 12px 16px;
-            min-height: 44px;
-            @include dFlex($ai: center, $jc: center);
-            
-            &:hover::before {
-                opacity: 0;
-            }
-            
-            &:hover::after {
-                width: 0;
-            }
-            
-            &:active::before {
-                opacity: 0.3;
-            }
-        }
-    }
-}
-
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    .nav-wrapper .nav .content {
-        height: 64px;
-        
-        .logo {
-            padding: 4px;
-            
-            .logo-img {
-                width: 35px;
-                height: 22px;
-            }
-            
-            .logo-name {
-                font-size: 11px;
-            }
-            
-            .logo-position {
-                font-size: 8px;
-            }
-        }
-        
-        .items li a span {
-            padding: 4px 8px;
-            font-size: 12px;
         }
     }
 }

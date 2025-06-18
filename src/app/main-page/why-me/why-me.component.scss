@@ -234,7 +234,6 @@
     }
 }
 
-// Mobile Version
 .why-me-container-mobile {
     position: relative;
     margin: 24px auto;
@@ -250,18 +249,6 @@
     width: 100%;
     box-sizing: border-box;
     
-    &::before {
-        content: '';
-        position: absolute;
-        top: -30%;
-        left: -30%;
-        width: 70%;
-        height: 90%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
-        animation: apple-why-me-ambient 18s ease-in-out infinite;
-        filter: blur(35px);
-    }
-    
     h2 {
         @include h2TitleMobile();
         margin-bottom: 32px;
@@ -269,386 +256,112 @@
         position: relative;
         z-index: 2;
         text-align: center;
+        // KORRIGIERT: Konsistente Schriftgröße
+        font-size: clamp(28px, 6vw, 36px);
     }
     
     .content {
-        width: 100%;
-        @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
-        position: relative;
-        z-index: 2;
-        padding: clamp(20px, 4vw, 32px);
-        
         .hero-section {
-            @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
-            
             .location-carousel {
-                position: relative;
-                height: clamp(100px, 18vw, 120px);
-                background: rgba(255, 255, 255, 0.03);
-                border-radius: $apple-radius-large;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                overflow: hidden;
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                
                 .location-slide {
-                    position: absolute;
-                    inset: 0;
-                    @include dFlex($ai: center, $gap: clamp(16px, 3vw, 24px));
-                    padding: clamp(16px, 4vw, 24px);
-                    opacity: 0;
-                    transition: $apple-transition-medium;
-                    
-                    &.active {
-                        opacity: 1;
-                    }
-                    
-                    .location-icon {
-                        width: clamp(48px, 10vw, 64px);
-                        height: clamp(48px, 10vw, 64px);
-                        @include dFlex();
-                        background: rgba($apple-primary, 0.1);
-                        border-radius: 50%;
-                        border: 1px solid rgba($apple-primary, 0.3);
-                        transition: $apple-transition-fast;
-                        flex-shrink: 0;
-                        
-                        &:hover {
-                            transform: scale(1.05);
-                            background: rgba($apple-primary, 0.15);
-                        }
-                        
-                        img {
-                            width: clamp(24px, 5vw, 32px);
-                            height: clamp(24px, 5vw, 32px);
-                            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                        }
-                    }
-                    
                     .location-content {
-                        flex: 1;
-                        
                         .location-text {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-semibold;
-                            font-size: clamp(18px, 4vw, 24px);
+                            // KORRIGIERT: Konsistente Schriftgröße für 375px
+                            font-size: clamp(20px, 4.5vw, 24px);
                             line-height: 1.2;
                             margin-bottom: 8px;
-                            
-                            .highlight {
-                                background: $apple-teal-gradient;
-                                -webkit-background-clip: text;
-                                background-clip: text;
-                                -webkit-text-fill-color: transparent;
-                            }
-                            
-                            .regular {
-                                color: $apple-text-primary;
-                            }
-                            
-                            .cursor {
-                                color: $apple-primary;
-                                animation: cursor-blink 1s infinite;
-                            }
                         }
                         
                         .location-subtitle {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-regular;
-                            font-size: clamp(14px, 3vw, 16px);
+                            // KORRIGIERT: Bessere Lesbarkeit
+                            font-size: clamp(15px, 3.5vw, 18px);
                             color: $apple-text-secondary;
                             line-height: 1.4;
-                        }
-                    }
-                }
-                
-                .progress-dots {
-                    position: absolute;
-                    bottom: 12px;
-                    right: 16px;
-                    @include dFlex($gap: 8px);
-                    
-                    .dot {
-                        width: 8px;
-                        height: 8px;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.3);
-                        transition: $apple-transition-fast;
-                        cursor: pointer;
-                        
-                        &:hover {
-                            transform: scale(1.1);
-                            background: rgba($apple-primary, 0.6);
-                        }
-                        
-                        &.active {
-                            background: $apple-primary;
-                            box-shadow: $apple-shadow-glow;
                         }
                     }
                 }
             }
             
             .introduction-card {
-                background: rgba(255, 255, 255, 0.04);
-                border-radius: $apple-radius-large;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                padding: clamp(24px, 5vw, 32px);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                transition: $apple-transition-medium;
-                
-                &:hover {
-                    background: rgba(255, 255, 255, 0.06);
-                    transform: translateY(-2px);
-                    box-shadow: $apple-shadow-medium;
-                }
-                
                 .introduction-text {
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-regular;
-                    font-size: clamp(16px, 4vw, 20px);
+                    // KORRIGIERT: Konsistente Schriftgröße
+                    font-size: clamp(17px, 4vw, 20px);
                     line-height: 1.6;
-                    color: $apple-text-secondary;
-                    text-align: justify;
-                    position: relative;
-                    
-                    &::before {
-                        content: '"';
-                        position: absolute;
-                        top: -12px;
-                        left: -8px;
-                        font-size: clamp(32px, 8vw, 48px);
-                        color: $apple-primary;
-                        opacity: 0.5;
-                        font-family: Georgia, serif;
-                    }
-                    
-                    &::after {
-                        content: '"';
-                        position: absolute;
-                        bottom: -24px;
-                        right: -8px;
-                        font-size: clamp(32px, 8vw, 48px);
-                        color: $apple-primary;
-                        opacity: 0.5;
-                        font-family: Georgia, serif;
-                    }
                 }
             }
         }
         
         .cta-section {
-            @include dFlex($jc: center);
-            padding-top: clamp(20px, 4vw, 24px);
-            
             .talk-button {
                 button {
-                    @include apple-button-primary();
+                    // KORRIGIERT: Konsistente Button-Größe
                     font-size: clamp(16px, 4vw, 18px);
                     padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
-                    min-width: clamp(160px, 40vw, 240px);
+                    min-width: clamp(180px, 45vw, 240px);
                 }
             }
         }
     }
 }
 
-// Animations
-@keyframes apple-why-me-ambient {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.08;
-    }
-    33% {
-        transform: translateY(-20px) rotate(2deg) scale(1.02);
-        opacity: 0.12;
-    }
-    66% {
-        transform: translateY(15px) rotate(-1deg) scale(0.98);
-        opacity: 0.06;
-    }
-}
-
-@keyframes cursor-blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
-}
-
-// Responsive Design
-@media screen and (max-width: 900px) {
-    .why-me-container {
-        display: none !important;
-    }
-    
-    .why-me-container-mobile {
-        display: flex;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .why-me-container-mobile {
-        margin: 16px auto;
-        
-        .content {
-            padding: 16px;
-            gap: 20px;
-            
-            .hero-section {
-                gap: 16px;
-                
-                .location-carousel {
-                    height: 80px;
-                }
-                
-                .introduction-card {
-                    padding: 20px;
-                }
-            }
-        }
-    }
-}
-
+// KORRIGIERTE Responsive Breakpoints für Why-Me
 @media screen and (max-width: 480px) {
     .why-me-container-mobile {
-        margin: 12px auto;
-        border-radius: $apple-radius-large;
-        
-        h2 {
-            margin-bottom: 24px;
-            padding-top: 24px;
+        h2 { 
+            font-size: 26px; // KORRIGIERT: Feste Größe für bessere Konsistenz
         }
         
         .content {
-            padding: 12px;
-            gap: 16px;
+            .hero-section {
+                .location-carousel {
+                    .location-slide {
+                        .location-content {
+                            .location-text {
+                                font-size: 18px; // KORRIGIERT: Feste Größe
+                            }
+                            
+                            .location-subtitle {
+                                font-size: 14px; // KORRIGIERT: Feste Größe
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 @media screen and (max-width: 375px) {
     .why-me-container-mobile {
-        margin: 8px auto;
-        
-        .content {
-            .hero-section {
-                .location-carousel {
-                    height: 70px;
-                    border-radius: $apple-radius-medium;
-                }
-                
-                .introduction-card {
-                    padding: 16px;
-                    border-radius: $apple-radius-medium;
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 320px) {
-    .why-me-container-mobile {
-        margin: 4px auto;
-        padding: 8px 4px;
-        
         h2 {
-            margin-bottom: 16px;
-            padding-top: 16px;
+            font-size: 24px; // KORRIGIERT: Proportional zum Desktop
         }
         
         .content {
-            padding: 8px;
-            gap: 12px;
-            
             .hero-section {
-                gap: 12px;
-                
                 .location-carousel {
-                    height: 60px;
+                    .location-slide {
+                        .location-content {
+                            .location-text {
+                                font-size: 16px; // KORRIGIERT: Mindestgröße für Lesbarkeit
+                            }
+                            
+                            .location-subtitle {
+                                font-size: 13px; // KORRIGIERT: Proportional
+                            }
+                        }
+                    }
                 }
                 
                 .introduction-card {
-                    padding: 12px;
+                    .introduction-text {
+                        font-size: 15px; // KORRIGIERT: Bessere Lesbarkeit
+                    }
                 }
-            }
-        }
-    }
-}
-
-// Accessibility
-@media (prefers-reduced-motion: reduce) {
-    .why-me-container,
-    .why-me-container-mobile {
-        &::before {
-            animation: none;
-        }
-    }
-    
-    .location-slide {
-        transition: opacity 0.3s ease !important;
-    }
-    
-    .introduction-card {
-        &:hover {
-            transform: none;
-        }
-    }
-    
-    .location-icon,
-    .progress-dots .dot {
-        &:hover {
-            transform: none;
-        }
-    }
-    
-    @keyframes apple-why-me-ambient {
-        0%, 100% {
-            transform: none;
-        }
-    }
-    
-    @keyframes cursor-blink {
-        0%, 100% {
-            opacity: 1;
-        }
-    }
-}
-
-// High contrast mode
-@media (prefers-contrast: high) {
-    .why-me-container,
-    .why-me-container-mobile {
-        background: #000;
-        border: 2px solid #fff;
-        
-        .location-carousel {
-            background: #111;
-            border: 2px solid #333;
-        }
-        
-        .introduction-card {
-            background: #111;
-            border: 2px solid #333;
-        }
-        
-        .location-text {
-            .highlight,
-            .regular {
-                color: #fff !important;
-                background: none !important;
-                -webkit-text-fill-color: #fff !important;
-            }
-        }
-        
-        .progress-dots .dot {
-            background: #666;
-            
-            &.active {
-                background: #fff;
             }
         }
     }

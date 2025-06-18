@@ -26,8 +26,10 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 999;
-        width: clamp(280px, 85vw, 360px);
-        height: clamp(280px, 85vw, 360px);
+        
+        // KORRIGIERT: Bessere Viewport-Anpassung
+        width: clamp(280px, 75vw, 340px);
+        height: clamp(280px, 75vw, 340px);
         
         background: $apple-bg-secondary;
         border-radius: 50%;
@@ -37,8 +39,8 @@
         -webkit-backdrop-filter: blur(20px);
         min-width: 260px;
         min-height: 260px;
-        max-width: 380px;
-        max-height: 380px;
+        max-width: 340px; // KORRIGIERT: Reduziert für bessere Viewport-Passung
+        max-height: 340px;
         
         ul {
             width: 100%;
@@ -144,12 +146,16 @@
     }
 }
 
-@media screen and (max-width: 374px) {
+// KORRIGIERTE Responsive Breakpoints für Menu
+@media screen and (max-width: 450px) {
     .menu-wrapper .menu-content {
-        width: clamp(240px, 90vw, 280px);
-        height: clamp(240px, 90vw, 280px);
-        min-width: 240px;
-        min-height: 240px;
+        // KORRIGIERT: Angepasst für kleinere Viewports
+        width: clamp(260px, 85vw, 300px);
+        height: clamp(260px, 85vw, 300px);
+        min-width: 260px;
+        min-height: 260px;
+        max-width: 300px; // KORRIGIERT: Reduziert für 375px Viewport
+        max-height: 300px;
         
         ul {
             padding: clamp(12px, 3vw, 20px);
@@ -172,108 +178,33 @@
     }
 }
 
-@media screen and (min-width: 375px) and (max-width: 479px) {
+@media screen and (max-width: 375px) {
     .menu-wrapper .menu-content {
-        width: clamp(280px, 80vw, 320px);
-        height: clamp(280px, 80vw, 320px);
+        // KORRIGIERT: Optimiert für 375px Viewport
+        width: 280px; // Feste Größe für 375px
+        height: 280px;
+        min-width: 280px;
+        min-height: 280px;
+        max-width: 280px;
+        max-height: 280px;
         
         ul {
-            padding: clamp(16px, 4vw, 24px);
+            padding: 16px;
             
             li {
-                font-size: clamp(13px, 3.2vw, 15px);
-            }
-        }
-    }
-}
-
-@media screen and (min-width: 480px) {
-    .menu-wrapper .menu-content {
-        width: clamp(320px, 75vw, 360px);
-        height: clamp(320px, 75vw, 360px);
-        
-        ul {
-            padding: clamp(20px, 5vw, 32px);
-            
-            li {
-                font-size: clamp(14px, 3vw, 16px);
+                font-size: 12px;
                 
                 a {
-                    padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 10px);
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    .menu-wrapper .menu-content {
-        width: clamp(260px, 60vh, 320px);
-        height: clamp(260px, 60vh, 320px);
-        
-        ul {
-            padding: clamp(12px, 3vh, 20px);
-            
-            li {
-                font-size: clamp(11px, 2.5vh, 14px);
-                margin: clamp(1px, 0.5vh, 3px) 0;
-                
-                a {
-                    padding: clamp(2px, 0.8vh, 4px) clamp(4px, 1.2vh, 6px);
+                    padding: 3px 5px;
                 }
                 
-                app-lang-switcher .langs {
-                    gap: 1px;
-                    
-                    span {
-                        padding: 1px 3px;
-                        font-size: 9px;
-                        min-width: 20px;
-                        min-height: 16px;
-                    }
+                app-lang-switcher .langs span {
+                    padding: 2px 3px;
+                    font-size: 9px;
+                    min-width: 22px;
+                    min-height: 18px;
                 }
             }
-        }
-    }
-}
-
-@media (prefers-contrast: high) {
-    .menu-wrapper .menu-content {
-        background: #000;
-        border: 2px solid #fff;
-        
-        ul li a {
-            border: 1px solid #333;
-            
-            &:hover {
-                background: #333;
-                border-color: #666;
-            }
-            
-            &.active {
-                background: #fff;
-                color: #000;
-                border-color: #fff;
-            }
-        }
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .menu-wrapper .menu-content {
-        ul::before {
-            animation: none;
-        }
-        
-        li a:hover {
-            transform: none;
-        }
-    }
-    
-    @keyframes menu-glow {
-        0%, 100% {
-            opacity: 0.1;
-            transform: none;
         }
     }
 }

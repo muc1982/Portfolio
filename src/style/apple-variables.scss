@@ -1,6 +1,4 @@
 @use 'sass:color';
-@import 'typography-system';
-
 $apple-transition-fast: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 $apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 $apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
