@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ScrollAnimateDirective } from '../../../Instructions/scroll-animation.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,7 +20,7 @@ interface Contact {
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    FormsModule,
+    FormsModule
 ],
   templateUrl: './contact-me-mobile.component.html',
   styleUrl: './contact-me-mobile.component.scss'

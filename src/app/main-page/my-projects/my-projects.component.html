@@ -76,8 +76,8 @@
             </div>
             }
 
-            <!-- Coming Soon Project -->
-            <div class="project project-comingsoon" *ngIf="currentTab == projects.length">
+            <!-- DA Bubble Project mit neuen Inhalten -->
+            <div class="project" *ngIf="currentTab == projects.length">
                 <div class="project-left" #animatedEl4>
                     <div class="project-about tab-li">
                         <img src="assets/img/ellipse-small-blue.png" alt="">
@@ -85,26 +85,35 @@
                             <div>
                                 <h4>{{"project.about" | translate}}</h4>
                                 <span class="duration">
-                                    <span>{{"project.status" | translate}}</span>:
-                                    <span class="status-badge">{{ "project.inprogress" | translate }}</span>
+                                    <span>{{"project.duration" | translate}}</span>: 6
+                                    <span>{{"project.weeks" | translate}}</span>
                                 </span>
                             </div>
-                            <p>
-                                {{'project.dababble.about' | translate}}
-                            </p>
-                            <div class="coming-soon-info">
-                                <p class="info-text">
-                                    {{ 'project.comingsoon.description' | translate }}
-                                </p>
-                                <div class="preview-options">
-                                    <button class="preview-btn" disabled>
-                                        <span>{{ 'project.preview.unavailable' | translate }}</span>
-                                    </button>
-                                    <p class="availability-text">
-                                        {{ 'project.availability.text' | translate }}
-                                    </p>
-                                </div>
+                            <p>{{'project.dababble.about' | translate}}</p>
+                        </div>
+                    </div>
+                    <div class="project-work-process tab-li">
+                        <img src="assets/img/ellipse-small-blue.png" alt="">
+                        <div class="right-of-logo">
+                            <div>
+                                <h4><span class="process-emoji"></span> {{"project.workprocess" | translate}}</h4>
                             </div>
+                            <p>Wir arbeiteten agil in einem vierwöchigen Sprint-Modell mit klarer Rollenverteilung. Über
+                                ein gemeinsames Kanban-Board wurden Aufgaben geplant, koordiniert und regelmäßig in
+                                Dailys besprochen. Der Fokus lag auf kontinuierlicher Entwicklung, Testing und
+                                Feedback-Integration.</p>
+                        </div>
+                    </div>
+                    <div class="project-experience tab-li">
+                        <img src="assets/img/ellipse-small-blue.png" alt="">
+                        <div class="right-of-logo">
+                            <div>
+                                <h4><span class="experience-emoji"></span> {{"project.workexperience" | translate}}
+                                </h4>
+                            </div>
+                            <p>Das Projekt bot uns praxisnahe Teamarbeit mit modernen Tools wie Angular und Firebase.
+                                Wir vertieften unser technisches Verständnis, verbesserten unsere Kommunikation im
+                                Entwicklerteam und sammelten wertvolle Erfahrung in agiler Softwareentwicklung.</p>
                         </div>
                     </div>
                 </div>
@@ -112,91 +121,120 @@
                     <h5>Technologies</h5>
                     <div class="technologies" #animatedEl1>
                         <div class="tech-logo">
-                            <img src="assets/img/pro-typescript.png" alt="">
+                            <img src="assets/img/pro-typescript.png" alt="TypeScript">
                         </div>
                         <div class="tech-logo">
-                            <img src="assets/img/pro-html.png" alt="">
+                            <img src="assets/img/pro-html.png" alt="HTML">
                         </div>
                         <div class="tech-logo">
-                            <img src="assets/img/pro-css.png" alt="">
+                            <img src="assets/img/pro-css.png" alt="CSS">
                         </div>
                         <div class="tech-logo">
-                            <img src="assets/img/pro-firebase.png" alt="">
+                            <img src="assets/img/pro-firebase.png" alt="Firebase">
                         </div>
                         <div class="tech-logo">
-                            <img src="assets/img/pro-rxjs.png" alt="">
+                            <img src="assets/img/pro-rxjs.png" alt="RxJS">
                         </div>
                     </div>
-                    <div class="project-img coming-soon-img" #animatedEl2>
-                        <div class="coming-soon-overlay">
-                            <div class="coming-soon-content">
-                                <h3>{{ "project.comingproject.title" | translate}}</h3>
-                                <p>{{ "project.comingproject.subtitle" | translate}}</p>
-                                <div class="progress-indicator">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 65%"></div>
-                                    </div>
-                                    <span class="progress-text">65% {{ "project.complete" | translate }}</span>
-                                </div>
+                    <div class="project-img coming-soon-container" #animatedEl2>
+                        <div class="coming-soon-text-overlay">
+                            <div class="coming-soon-badge">
+                                <span class="coming-soon-emoji"></span>
+                                <span class="coming-soon-label">Bald verfügbar</span>
                             </div>
+                            <div class="coming-soon-subtitle"></div>
                         </div>
-                    </div>
-                    <div class="project-right-footer" #animatedEl3>
-                        <button class="disabled" disabled>
-                            <span>{{ "project.notavailable" | translate }}</span>
-                        </button>
-                        <button class="notify-btn pointer">
-                            <a href="mailto:info@sun-dev.de?subject=DA%20Bubble%20Project">
-                                {{ "project.notifyme" | translate }}
-                            </a>
-                        </button>
+                        <img src="assets/img/comingsoon.png" alt="DA Bubble">
                     </div>
                 </div>
             </div>
 
-            <!-- Team Player Section -->
+            <!-- Team Player Section mit Apple-Style Animationen -->
             <div class="team-player">
-                <h4 class="team-player-title">
-                    {{ 'player.needateamplayer' | translate}}
-                </h4>
-                <p class="team-player-subtitle">
-                    {{ 'player.needateamplayer2' | translate}}
-                </p>
+                <div class="team-player-header">
+                    <h4 class="team-player-title">
+                        <span class="title-gradient">{{ 'player.needateamplayer' | translate}}</span>
+                    </h4>
+                    <p class="team-player-subtitle">
+                        {{ 'player.needateamplayer2' | translate}}
+                    </p>
+                    <div class="team-player-decoration">
+                        <div class="floating-particle"></div>
+                        <div class="floating-particle"></div>
+                        <div class="floating-particle"></div>
+                    </div>
+                </div>
+
                 <div class="team-player-content">
                     <div class="team-player-content-wrapper">
-                        <div class="player">
+                        <div class="player premium-card">
+                            <div class="player-glow"></div>
                             <div class="player-content">
-                                <div class="player-name">Robert Greulich</div>
-                                <div class="player-project">
-                                    <span>{{ 'player.project' | translate}} </span>
-                                    <span class="pointer" (click)="toProject('join')">Join</span>
+                                <div class="player-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-text">RG</div>
                                 </div>
-                                <div class="player-reference">
-                                    {{ 'player.reference3' | translate}}
+                                <div class="player-info">
+                                    <div class="player-name">Robert Greulich</div>
+                                    <div class="player-project">
+                                        <span>{{ 'player.project' | translate}} </span>
+                                        <span class="project-link pointer" (click)="toProject('join')">
+                                            <span class="link-text">Join</span>
+                                            <span class="link-arrow">→</span>
+                                        </span>
+                                    </div>
+                                    <div class="player-reference">
+                                        <div class="quote-mark">"</div>
+                                        <span>{{ 'player.reference3' | translate}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="player">
+
+                        <div class="player premium-card">
+                            <div class="player-glow"></div>
                             <div class="player-content">
-                                <div class="player-name">Steven Rudko</div>
-                                <div class="player-project">
-                                    <span>{{ 'player.project' | translate}} </span>
-                                    <span class="pointer" (click)="toProject('join')">Join</span>
+                                <div class="player-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-text">SR</div>
                                 </div>
-                                <div class="player-reference">
-                                    {{ 'player.reference2' | translate}}
+                                <div class="player-info">
+                                    <div class="player-name">Steven Rudko</div>
+                                    <div class="player-project">
+                                        <span>{{ 'player.project' | translate}} </span>
+                                        <span class="project-link pointer" (click)="toProject('join')">
+                                            <span class="link-text">Join</span>
+                                            <span class="link-arrow">→</span>
+                                        </span>
+                                    </div>
+                                    <div class="player-reference">
+                                        <div class="quote-mark">"</div>
+                                        <span>{{ 'player.reference2' | translate}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="player">
+
+                        <div class="player premium-card">
+                            <div class="player-glow"></div>
                             <div class="player-content">
-                                <div class="player-name">Felix Naturstein</div>
-                                <div class="player-project">
-                                    <span>{{ 'player.project' | translate}} </span>
-                                    <span class="pointer" (click)="toProject('pollo')">El Pollo Loco</span>
+                                <div class="player-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-text">FN</div>
                                 </div>
-                                <div class="player-reference">
-                                    {{ 'player.reference1' | translate}}
+                                <div class="player-info">
+                                    <div class="player-name">Felix Naturstein</div>
+                                    <div class="player-project">
+                                        <span>{{ 'player.project' | translate}} </span>
+                                        <span class="project-link pointer" (click)="toProject('pollo')">
+                                            <span class="link-text">El Pollo Loco</span>
+                                            <span class="link-arrow">→</span>
+                                        </span>
+                                    </div>
+                                    <div class="player-reference">
+                                        <div class="quote-mark">"</div>
+                                        <span>{{ 'player.reference1' | translate}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -24,13 +24,11 @@
 
             <!-- Mobile Call-to-Action Text -->
             <div class="header-middle">{{ 'contact.feelfree' | translate}}</div>
-            <div class="header-bottom">{{ 'contact.worktogether' | translate}}</div>
         </div>
 
         <!-- Mobile Contact Form -->
         <div class="contact-form">
             <form (ngSubmit)="onSumbmit(myForm)" #myForm="ngForm" novalidate>
-                <!-- Name and Email (Stacked on Mobile) -->
                 <div class="form-name-mail">
                     <div class="form-name form-field">
                         <input [class.form-input-error]="!nameValid"
