@@ -13,7 +13,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
-    
+
     &::before {
         content: '';
         position: absolute;
@@ -25,7 +25,7 @@
         animation: apple-skills-ambient 15s ease-in-out infinite;
         filter: blur(40px);
     }
-    
+
     h2 {
         @include h2Title();
         margin-bottom: 48px;
@@ -34,7 +34,7 @@
         z-index: 2;
         text-align: center;
     }
-    
+
     .my-skills-content {
         width: 100%;
         @include dFlex($gap: clamp(40px, 8vw, 64px));
@@ -43,16 +43,16 @@
         padding: clamp(32px, 6vw, 80px);
         max-width: 1200px;
         margin: 0 auto;
-        
+
         .content-left {
             flex: 2;
-            
+
             .reservoir {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                 gap: clamp(16px, 3vw, 24px);
                 width: 100%;
-                
+
                 .skill {
                     @include dFlex($fd: column, $gap: 12px, $ai: center);
                     background: rgba(255, 255, 255, 0.05);
@@ -63,7 +63,7 @@
                     cursor: pointer;
                     position: relative;
                     min-height: 120px;
-                    
+
                     &::before {
                         content: '';
                         position: absolute;
@@ -74,30 +74,30 @@
                         transition: $apple-transition-fast;
                         z-index: -1;
                     }
-                    
+
                     &:hover {
                         transform: translateY(-3px) scale(1.05);
                         background: rgba(255, 255, 255, 0.08);
                         box-shadow: $apple-shadow-medium;
-                        
+
                         &::before {
                             opacity: 0.15;
                         }
-                        
+
                         img {
                             transform: scale(1.1);
                             filter: brightness(1.3) saturate(1.2);
                         }
-                        
+
                         .skill-text {
                             color: $apple-text-primary;
                         }
                     }
-                    
+
                     &:active {
                         transform: translateY(-1px) scale(1.02);
                     }
-                    
+
                     img {
                         width: clamp(40px, 8vw, 56px);
                         height: clamp(40px, 8vw, 56px);
@@ -105,7 +105,7 @@
                         transition: $apple-transition-fast;
                         filter: brightness(1.1);
                     }
-                    
+
                     .skill-text {
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
@@ -118,11 +118,11 @@
                 }
             }
         }
-        
+
         .content-right {
             flex: 1;
             @include dFlex($fd: column, $jc: center);
-            
+
             .current-learning {
                 background: rgba(255, 255, 255, 0.04);
                 border: 1px solid rgba(255, 255, 255, 0.1);
@@ -130,8 +130,8 @@
                 padding: clamp(24px, 5vw, 32px);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                
-                > span {
+
+                >span {
                     @include dFlex($jc: center);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
@@ -140,12 +140,12 @@
                     margin-bottom: 24px;
                     text-align: center;
                 }
-                
+
                 .skills {
                     @include dFlex($gap: 16px, $jc: center);
                     margin-bottom: 20px;
-                    
-                    > div {
+
+                    >div {
                         @include dFlex($fd: column, $gap: 8px, $ai: center);
                         background: rgba($apple-primary, 0.1);
                         border: 1px solid rgba($apple-primary, 0.3);
@@ -153,20 +153,20 @@
                         padding: 16px 12px;
                         transition: $apple-transition-fast;
                         min-width: 80px;
-                        
+
                         &:hover {
                             transform: translateY(-2px);
                             background: rgba($apple-primary, 0.15);
                             box-shadow: $apple-shadow-small;
                         }
-                        
+
                         img {
                             width: 32px;
                             height: 32px;
                             object-fit: contain;
                             filter: brightness(1.2);
                         }
-                        
+
                         span {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-medium;
@@ -176,7 +176,7 @@
                         }
                     }
                 }
-                
+
                 p {
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
@@ -203,7 +203,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
-    
+
     &::before {
         content: '';
         position: absolute;
@@ -215,7 +215,7 @@
         animation: apple-skills-ambient 18s ease-in-out infinite;
         filter: blur(35px);
     }
-    
+
     h2 {
         @include h2TitleMobile();
         margin-bottom: 32px;
@@ -224,21 +224,20 @@
         z-index: 2;
         text-align: center;
     }
-    
+
     .my-skills-content {
         width: 100%;
         @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
         position: relative;
         z-index: 2;
         padding: clamp(20px, 4vw, 32px);
-        
+
         .content-top {
             .reservoir {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: clamp(10px, 2vw, 14px);
-                width: 100%;
-                
+
                 .skill {
                     @include dFlex($jc: center, $ai: center);
                     background: rgba(255, 255, 255, 0.05);
@@ -248,8 +247,8 @@
                     transition: $apple-transition-fast;
                     aspect-ratio: 1;
                     position: relative;
-                    min-height: 44px; 
-                    
+                    min-height: 44px;
+
                     &::before {
                         content: '';
                         position: absolute;
@@ -260,21 +259,21 @@
                         transition: $apple-transition-fast;
                         z-index: -1;
                     }
-                    
+
                     &:hover {
                         transform: scale(1.05);
                         background: rgba(255, 255, 255, 0.08);
-                        
+
                         &::before {
                             opacity: 0.12;
                         }
-                        
+
                         img {
                             transform: scale(1.1);
                             filter: brightness(1.3) saturate(1.2);
                         }
                     }
-                    
+
                     img {
                         width: clamp(28px, 7vw, 40px);
                         height: clamp(28px, 7vw, 40px);
@@ -285,11 +284,11 @@
                 }
             }
         }
-        
+
         .content-bottom {
             .content-bottom-title {
                 margin-bottom: 16px;
-                
+
                 span {
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
@@ -299,14 +298,14 @@
                     text-align: center;
                 }
             }
-            
+
             .content-bottom-content {
                 background: rgba(255, 255, 255, 0.04);
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 border-radius: $apple-radius-large;
                 padding: clamp(16px, 4vw, 24px);
                 margin-bottom: 20px;
-                
+
                 p {
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
@@ -316,12 +315,12 @@
                     text-align: justify;
                     margin-bottom: 16px;
                 }
-                
+
                 .current-learning {
                     .skills {
                         @include dFlex($gap: 12px, $jc: center);
-                        
-                        > div {
+
+                        >div {
                             @include dFlex($fd: column, $gap: 6px, $ai: center);
                             background: rgba($apple-primary, 0.1);
                             border: 1px solid rgba($apple-primary, 0.3);
@@ -329,20 +328,20 @@
                             padding: 12px 8px;
                             transition: $apple-transition-fast;
                             min-width: 60px;
-                            min-height: 44px; 
-                            
+                            min-height: 44px;
+
                             &:hover {
                                 transform: translateY(-2px);
                                 background: rgba($apple-primary, 0.15);
                             }
-                            
+
                             img {
                                 width: 24px;
                                 height: 24px;
                                 object-fit: contain;
                                 filter: brightness(1.2);
                             }
-                            
+
                             span {
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-medium;
@@ -354,10 +353,10 @@
                     }
                 }
             }
-            
+
             .talk-button {
                 @include dFlex($jc: center);
-                
+
                 button {
                     @include apple-button-primary();
                     font-size: clamp(14px, 3.5vw, 16px);
@@ -370,14 +369,18 @@
 }
 
 @keyframes apple-skills-ambient {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) rotate(0deg) scale(1);
         opacity: 0.08;
     }
+
     33% {
         transform: translateY(-20px) rotate(2deg) scale(1.02);
         opacity: 0.12;
     }
+
     66% {
         transform: translateY(15px) rotate(-1deg) scale(0.98);
         opacity: 0.06;
@@ -388,12 +391,12 @@
     .my-skills-container {
         .my-skills-content {
             @include dFlex($fd: column, $gap: 40px);
-            
+
             .content-left,
             .content-right {
                 flex: 1;
             }
-            
+
             .content-left {
                 .reservoir {
                     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -407,7 +410,7 @@
     .my-skills-container {
         display: none !important;
     }
-    
+
     .my-skills-container-mobile {
         display: flex;
     }
@@ -416,11 +419,11 @@
 @media screen and (max-width: 600px) {
     .my-skills-container-mobile {
         margin: 16px auto;
-        
+
         .my-skills-content {
             padding: 16px;
             gap: 20px;
-            
+
             .content-top {
                 .reservoir {
                     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -435,40 +438,40 @@
     .my-skills-container-mobile {
         margin: 12px auto;
         border-radius: $apple-radius-large;
-        
+
         h2 {
             margin-bottom: 24px;
             padding-top: 24px;
         }
-        
+
         .my-skills-content {
             padding: 12px;
             gap: 16px;
-            
+
             .content-top {
                 .reservoir {
                     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                     gap: 10px;
                 }
             }
-            
+
             .content-bottom {
                 .content-bottom-content {
                     padding: 12px;
-                    
+
                     .current-learning {
                         .skills {
                             gap: 8px;
-                            
-                            > div {
+
+                            >div {
                                 padding: 8px 6px;
                                 min-width: 50px;
-                                
+
                                 img {
                                     width: 20px;
                                     height: 20px;
                                 }
-                                
+
                                 span {
                                     font-size: 10px;
                                 }
@@ -476,7 +479,7 @@
                         }
                     }
                 }
-                
+
                 .talk-button {
                     button {
                         padding: 10px 20px;
@@ -491,7 +494,7 @@
 @media screen and (max-width: 375px) {
     .my-skills-container-mobile {
         margin: 8px auto;
-        
+
         .my-skills-content {
             .content-top {
                 .reservoir {
@@ -507,26 +510,26 @@
     .my-skills-container-mobile {
         margin: 4px auto;
         padding: 8px 4px;
-        
+
         h2 {
             margin-bottom: 16px;
             padding-top: 16px;
         }
-        
+
         .my-skills-content {
             padding: 8px;
             gap: 12px;
-            
+
             .content-top {
                 .reservoir {
                     grid-template-columns: repeat(2, 1fr);
                     gap: 8px;
-                    
+
                     .skill {
                         padding: 8px;
                         border-radius: $apple-radius-small;
-                        min-height: 48px; 
-                        
+                        min-height: 48px;
+
                         img {
                             width: 24px;
                             height: 24px;
@@ -534,35 +537,35 @@
                     }
                 }
             }
-            
+
             .content-bottom {
                 .content-bottom-title span {
                     font-size: 16px;
                 }
-                
+
                 .content-bottom-content {
                     padding: 8px;
                     border-radius: $apple-radius-medium;
-                    
+
                     p {
                         font-size: 14px;
                         margin-bottom: 12px;
                     }
-                    
+
                     .current-learning {
                         .skills {
                             gap: 6px;
-                            
-                            > div {
+
+                            >div {
                                 padding: 6px 4px;
                                 min-width: 40px;
                                 border-radius: $apple-radius-small;
-                                
+
                                 img {
                                     width: 18px;
                                     height: 18px;
                                 }
-                                
+
                                 span {
                                     font-size: 9px;
                                 }
@@ -570,7 +573,7 @@
                         }
                     }
                 }
-                
+
                 .talk-button {
                     button {
                         font-size: 14px;
@@ -585,48 +588,52 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .my-skills-container,
     .my-skills-container-mobile {
         &::before {
             animation: none;
         }
-        
+
         .skill {
             &:hover {
                 transform: none;
             }
         }
-        
-        .current-learning .skills > div {
+
+        .current-learning .skills>div {
             &:hover {
                 transform: none;
             }
         }
     }
-    
+
     @keyframes apple-skills-ambient {
-        0%, 100% {
+
+        0%,
+        100% {
             transform: none;
         }
     }
 }
 
 @media (prefers-contrast: high) {
+
     .my-skills-container,
     .my-skills-container-mobile {
         background: #000;
         border: 2px solid #fff;
-        
+
         .skill {
             background: #111;
             border: 2px solid #333;
         }
-        
+
         .current-learning {
             background: #111;
             border: 2px solid #333;
         }
-        
+
         .content-bottom-content {
             background: #111;
             border: 2px solid #333;

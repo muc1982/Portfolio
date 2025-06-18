@@ -1,5 +1,15 @@
-<div class="langs">
+<div [class]="containerClasses" role="group" [attr.aria-label]="'Language switcher'">
     @for (lang of langs; track $index) {
-        <span class="pointer" (click)="changeLange(lang)" [class.active]="lang == currentLange"> {{ lang  }}</span>
+        <button 
+            type="button"
+            [class]="buttonClasses"
+            [class.active]="isActiveLanguage(lang)"
+            [attr.aria-label]="getAriaLabel(lang)"
+            [attr.aria-pressed]="isActiveLanguage(lang)"
+            (click)="changeLange(lang)"
+            (keydown.enter)="changeLange(lang)"
+            (keydown.space)="changeLange(lang)">
+            {{ lang }}
+        </button>
     }
 </div>

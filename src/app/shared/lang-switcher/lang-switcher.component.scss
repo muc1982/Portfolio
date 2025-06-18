@@ -1,47 +1,25 @@
+// src/app/shared/lang-switcher/lang-switcher.component.scss
 @use '../../../style/apple-variables' as *;
 @use 'sass:color';
 
+// Base styles für alle Kontexte
 .langs {
     @include dFlex($gap: clamp(4px, 1vw, 8px));
     color: $apple-text-primary;
     font-family: $apple-font-family;
     
-    span {
-        padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
-        font-size: clamp(16px, 2.5vw, 16px); 
+    .lang-button {
+        border: 1px solid transparent;
+        background: transparent;
+        color: $apple-text-secondary;
+        font-family: $apple-font-family;
         font-weight: $apple-font-weight-medium;
         border-radius: $apple-radius-small;
         transition: $apple-transition-fast;
         cursor: pointer;
         position: relative;
-        border: 1px solid transparent;
-        background: transparent;
-        color: $apple-text-secondary;
-        min-height: 36px; 
-        min-width: 40px;
         @include dFlex($jc: center, $ai: center);
         box-sizing: border-box;
-        
-        @media screen and (max-width: 900px) {
-            padding: clamp(5px, 1.2vw, 8px) clamp(8px, 2vw, 12px);
-            font-size: 16px;
-            min-height: 32px;
-            min-width: 36px;
-        }
-        
-        @media screen and (max-width: 600px) {
-            padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 10px);
-            font-size: 16px;
-            min-height: 28px;
-            min-width: 32px;
-        }
-        
-        @media screen and (max-width: 320px) {
-            padding: 3px 6px;
-            font-size: 16px;
-            min-height: 24px;
-            min-width: 28px;
-        }
         
         &:hover {
             color: $apple-text-primary;
@@ -55,7 +33,7 @@
             background: rgba(255, 255, 255, 0.1);
         }
         
-        &:focus {
+        &:focus-visible {
             outline: 2px solid rgba($apple-primary, 0.5);
             outline-offset: 2px;
         }
@@ -92,35 +70,55 @@
     }
 }
 
-@keyframes apple-lang-pulse {
-    0%, 100% {
-        opacity: 0.2;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.3;
-        transform: scale(1.05);
+// Size variants
+.langs--small {
+    gap: clamp(2px, 0.5vw, 4px);
+    
+    .lang-button {
+        padding: clamp(3px, 0.8vw, 6px) clamp(6px, 1.5vw, 10px);
+        font-size: 14px;
+        min-height: 28px;
+        min-width: 32px;
     }
 }
 
-.header-wrapper .langs {
-    @media screen and (max-width: 900px) {
-        gap: 3px;
-        
-        span {
-            padding: 4px 6px;
-            font-size: 16px;
-            min-height: 24px;
-            min-width: 26px;
-        }
+.langs--medium {
+    gap: clamp(4px, 1vw, 8px);
+    
+    .lang-button {
+        padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
+        font-size: 16px;
+        min-height: 36px;
+        min-width: 40px;
+    }
+}
+
+.langs--large {
+    gap: clamp(6px, 1.5vw, 12px);
+    
+    .lang-button {
+        padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+        font-size: 18px;
+        min-height: 44px;
+        min-width: 48px;
+    }
+}
+
+.langs--mobile-header {
+    gap: 3px;
+    
+    .lang-button {
+        padding: 4px 6px;
+        font-size: 16px !important;
+        min-height: 24px;
+        min-width: 26px;
     }
     
     @media screen and (max-width: 600px) {
         gap: 2px;
         
-        span {
+        .lang-button {
             padding: 3px 5px;
-            font-size: 16px;
             min-height: 20px;
             min-width: 22px;
         }
@@ -129,32 +127,28 @@
     @media screen and (max-width: 320px) {
         gap: 1px;
         
-        span {
+        .lang-button {
             padding: 2px 4px;
-            font-size: 16px;
             min-height: 18px;
             min-width: 20px;
         }
     }
 }
 
-.menu-content .langs {
+.langs--menu {
     justify-content: center;
     gap: clamp(4px, 1vw, 8px);
     
-    span {
+    .lang-button {
         padding: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 12px);
         font-size: 16px;
-        border-radius: $apple-radius-small;
         border: 1px solid rgba(255, 255, 255, 0.2);
         background: rgba(255, 255, 255, 0.05);
-        color: $apple-text-secondary;
         min-height: 32px;
         min-width: 36px;
         
         &.active {
             background: $apple-primary;
-            color: $apple-text-primary;
             border-color: $apple-primary;
         }
         
@@ -165,8 +159,8 @@
     }
 }
 
-.footer-content .langs {
-    span {
+.langs--footer {
+    .lang-button {
         &:hover {
             background: rgba(255, 255, 255, 0.08);
         }
@@ -179,8 +173,61 @@
     }
 }
 
+// Animation
+@keyframes apple-lang-pulse {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(1.05);
+    }
+}
+
+// Responsive breakpoints
+@media screen and (max-width: 900px) {
+    .langs:not(.langs--mobile-header):not(.langs--menu) {
+        gap: clamp(3px, 0.8vw, 6px);
+        
+        .lang-button {
+            padding: clamp(5px, 1.2vw, 8px) clamp(8px, 2vw, 12px);
+            font-size: 16px;
+            min-height: 32px;
+            min-width: 36px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .langs:not(.langs--mobile-header):not(.langs--menu) {
+        gap: clamp(2px, 0.5vw, 4px);
+        
+        .lang-button {
+            padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 10px);
+            font-size: 16px;
+            min-height: 28px;
+            min-width: 32px;
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .langs:not(.langs--mobile-header):not(.langs--menu) {
+        gap: 1px;
+        
+        .lang-button {
+            padding: 3px 6px;
+            font-size: 16px;
+            min-height: 24px;
+            min-width: 28px;
+        }
+    }
+}
+
+// Accessibility
 @media (prefers-contrast: high) {
-    .langs span {
+    .langs .lang-button {
         border: 2px solid currentColor;
         
         &.active {
@@ -192,7 +239,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .langs span {
+    .langs .lang-button {
         transition: none;
         
         &::before {
