@@ -1,4 +1,3 @@
-// menu.component.scss
 @use '../../../../../style/apple-variables' as *;
 
 .menu-wrapper {
@@ -22,36 +21,30 @@
     }
     
     .menu-content {
-        position: absolute;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 999;
+        width: clamp(280px, 85vw, 360px);
+        height: clamp(280px, 85vw, 360px);
+        
         background: $apple-bg-secondary;
         border-radius: 50%;
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: $apple-shadow-large;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        
-        // Responsive Größenbehandlung
-        @media screen and (min-width: 400px) {
-            width: 340px !important;  // Vergrößert für zusätzlichen Link
-            height: 340px !important;
-        }
-        
-        @media screen and (max-width: 399px) {
-            width: 300px !important;  // Vergrößert für zusätzlichen Link
-            height: 300px !important;
-        }
-        
-        @media screen and (max-width: 375px) {
-            width: 280px !important;  // Vergrößert für zusätzlichen Link
-            height: 280px !important;
-        }
+        min-width: 260px;
+        min-height: 260px;
+        max-width: 380px;
+        max-height: 380px;
         
         ul {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            padding: clamp(20px, 5vw, 40px);
+            padding: clamp(16px, 4vw, 32px);
             box-sizing: border-box;
             @include dFlex($fd: column, $jc: space-around, $ai: center);
             background-repeat: no-repeat;
@@ -59,7 +52,6 @@
             background-position: center;
             position: relative;
             
-            // Ambient background effect
             &::before {
                 content: '';
                 position: absolute;
@@ -71,7 +63,7 @@
             }
 
             li {
-                font-size: clamp(14px, 3.5vw, 18px); // Kleinere Font-Size für mehr Items
+                font-size: clamp(13px, 3.2vw, 16px);
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
                 text-align: center;
@@ -80,7 +72,7 @@
                 
                 a {
                     display: block;
-                    padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 12px); // Reduziertes Padding
+                    padding: clamp(4px, 1.2vw, 8px) clamp(6px, 1.8vw, 10px);
                     border-radius: $apple-radius-small;
                     transition: $apple-transition-fast;
                     color: $apple-text-secondary;
@@ -110,21 +102,23 @@
                     }
                 }
                 
-                // Language switcher styling
                 app-lang-switcher {
                     display: block;
                     
                     .langs {
                         justify-content: center;
-                        gap: 4px;
+                        gap: clamp(2px, 0.8vw, 4px);
                         
                         span {
-                            padding: 4px 8px; // Kleineres Padding
-                            font-size: clamp(10px, 2.5vw, 12px);
+                            padding: clamp(3px, 1vw, 6px) clamp(4px, 1.2vw, 8px);
+                            font-size: clamp(11px, 2.8vw, 14px);
                             border-radius: $apple-radius-small;
                             border: 1px solid rgba(255, 255, 255, 0.2);
                             background: rgba(255, 255, 255, 0.05);
                             color: $apple-text-secondary;
+                            min-width: 28px;
+                            min-height: 24px;
+                            @include dFlex($jc: center, $ai: center);
                             
                             &.active {
                                 background: $apple-primary;
@@ -150,94 +144,136 @@
     }
 }
 
-// Responsive positioning - angepasst für größere Menüs
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 374px) {
     .menu-wrapper .menu-content {
-        top: calc(72px + 25px) !important;
-        left: calc(50% - 170px) !important; // Angepasst für 340px Breite
-    }
-}
-
-@media screen and (max-width: 399px) {
-    .menu-wrapper .menu-content {
-        top: calc(72px + 20px) !important;
-        left: calc(50% - 150px) !important; // Angepasst für 300px Breite
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .menu-wrapper .menu-content {
-        top: calc(64px + 15px) !important;
-        left: calc(50% - 140px) !important; // Angepasst für 280px Breite
+        width: clamp(240px, 90vw, 280px);
+        height: clamp(240px, 90vw, 280px);
+        min-width: 240px;
+        min-height: 240px;
         
         ul {
-            padding: 16px;
+            padding: clamp(12px, 3vw, 20px);
             
             li {
-                font-size: clamp(12px, 4vw, 16px);
+                font-size: clamp(12px, 3.5vw, 14px);
                 
                 a {
-                    padding: 5px 6px;
+                    padding: clamp(3px, 1vw, 5px) clamp(4px, 1.5vw, 6px);
                 }
                 
                 app-lang-switcher .langs span {
-                    padding: 3px 6px;
+                    padding: 2px 4px;
                     font-size: 10px;
+                    min-width: 24px;
+                    min-height: 20px;
                 }
             }
         }
     }
 }
 
-// Ultra-small screens
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 375px) and (max-width: 479px) {
     .menu-wrapper .menu-content {
-        width: 260px !important;
-        height: 260px !important;
-        left: calc(50% - 130px) !important;
+        width: clamp(280px, 80vw, 320px);
+        height: clamp(280px, 80vw, 320px);
         
         ul {
-            padding: 12px;
+            padding: clamp(16px, 4vw, 24px);
             
             li {
-                font-size: 12px;
+                font-size: clamp(13px, 3.2vw, 15px);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .menu-wrapper .menu-content {
+        width: clamp(320px, 75vw, 360px);
+        height: clamp(320px, 75vw, 360px);
+        
+        ul {
+            padding: clamp(20px, 5vw, 32px);
+            
+            li {
+                font-size: clamp(14px, 3vw, 16px);
                 
                 a {
-                    padding: 4px 5px;
+                    padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 10px);
                 }
             }
         }
     }
 }
 
-// Landscape mode adjustments
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .menu-wrapper .menu-content {
-        width: 280px !important;
-        height: 280px !important;
-        top: calc(64px + 10px) !important;
-        left: calc(50% - 140px) !important;
+        width: clamp(260px, 60vh, 320px);
+        height: clamp(260px, 60vh, 320px);
         
         ul {
-            padding: 12px;
+            padding: clamp(12px, 3vh, 20px);
             
             li {
-                font-size: 12px;
-                margin: 1px 0;
+                font-size: clamp(11px, 2.5vh, 14px);
+                margin: clamp(1px, 0.5vh, 3px) 0;
                 
                 a {
-                    padding: 3px 6px;
+                    padding: clamp(2px, 0.8vh, 4px) clamp(4px, 1.2vh, 6px);
                 }
                 
                 app-lang-switcher .langs {
-                    gap: 2px;
+                    gap: 1px;
                     
                     span {
-                        padding: 2px 4px;
+                        padding: 1px 3px;
                         font-size: 9px;
+                        min-width: 20px;
+                        min-height: 16px;
                     }
                 }
             }
+        }
+    }
+}
+
+@media (prefers-contrast: high) {
+    .menu-wrapper .menu-content {
+        background: #000;
+        border: 2px solid #fff;
+        
+        ul li a {
+            border: 1px solid #333;
+            
+            &:hover {
+                background: #333;
+                border-color: #666;
+            }
+            
+            &.active {
+                background: #fff;
+                color: #000;
+                border-color: #fff;
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-wrapper .menu-content {
+        ul::before {
+            animation: none;
+        }
+        
+        li a:hover {
+            transform: none;
+        }
+    }
+    
+    @keyframes menu-glow {
+        0%, 100% {
+            opacity: 0.1;
+            transform: none;
         }
     }
 }
