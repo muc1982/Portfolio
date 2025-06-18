@@ -6,22 +6,24 @@ import { RouterOutlet } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { ScrollToTopComponent } from './Instructions/scroll-to-top.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, TranslateModule, RouterOutlet], // ScrollToTopComponent entfernt
+  imports: [FormsModule, TranslateModule, RouterOutlet, ScrollToTopComponent],
   template: `
-    <router-outlet></router-outlet>
-  `, // ScrollToTopComponent aus Template entfernt
+  <router-outlet></router-outlet>
+  <app-scroll-to-top></app-scroll-to-top>`,
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent implements OnInit {
   currentLang: string = "";
 
   constructor(
-    private translate: TranslateService, 
-    private router: Router,  
+    private translate: TranslateService,
+    private router: Router,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.translate.addLangs(['de', 'en']);
@@ -61,7 +63,7 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang(l);
       this.currentLang = l;
       this.translate.use(l);
-      
+
       try {
         if (typeof Storage !== 'undefined' && localStorage) {
           localStorage.setItem('currentLang', l);

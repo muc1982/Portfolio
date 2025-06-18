@@ -5,7 +5,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-
 interface Contact {
   name: string,
   email: string,
@@ -21,19 +20,21 @@ interface Contact {
     RouterLink,
     RouterLinkActive,
     FormsModule
-],
+  ],
   templateUrl: './contact-me-mobile.component.html',
   styleUrl: './contact-me-mobile.component.scss'
 })
 export class ContactMeMobileComponent {
   @Input() scrollContainer!: HTMLElement;
   isChecked: boolean = false;
-
   nameValid: boolean = true;
   emailValid: boolean = true;
   emailInvalidMsg: string = 'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
+  nameBlurred = false;
+  emailBlurred = false;
+  msgBlurred = false;
 
   readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
   readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -65,25 +66,40 @@ export class ContactMeMobileComponent {
     this.isChecked = !this.isChecked;
   }
 
-  // Formspree-basierter E-Mail-Versand
   onSumbmit(myForm: NgForm) {
-    const b = this.checkFileds();
-    if (b) {
-      this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
-        .subscribe({
-          next: (response: any) => {
-            console.log('E-Mail erfolgreich versendet via Formspree:', response);
-            this.reset(myForm);
-          },
-          error: (error) => {
-            console.error('Fehler beim Versenden der E-Mail:', error);
-            this.sendEmailFallback();
-          },
-          complete: () => {
-            console.log('E-Mail-Versand abgeschlossen');
-          },
-        });
+    const isValid = this.validateAllFieldsOnSubmit();
+    if (isValid) {
+      this.sendEmail(myForm);
     }
+  }
+
+  private validateAllFieldsOnSubmit(): boolean {
+    this.nameBlurred = true;
+    this.emailBlurred = true;
+    this.msgBlurred = true;
+    
+    this.validateName();
+    this.validateEmail();
+    this.validateMessage();
+    
+    return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
+  }
+
+  private sendEmail(myForm: NgForm): void {
+    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
+      .subscribe({
+        next: (response: any) => {
+          console.log('E-Mail erfolgreich versendet via Formspree:', response);
+          this.reset(myForm);
+        },
+        error: (error) => {
+          console.error('Fehler beim Versenden der E-Mail:', error);
+          this.sendEmailFallback();
+        },
+        complete: () => {
+          console.log('E-Mail-Versand abgeschlossen');
+        },
+      });
   }
 
   sendEmailFallback() {
@@ -102,16 +118,57 @@ export class ContactMeMobileComponent {
     if (this.isChecked) {
       this.clickCb();
     }
+    this.resetContactData();
+    this.resetValidationStates();
+    this.showSuccessMessage();
+  }
+
+  private resetContactData(): void {
     this.contact.name = '';
     this.contact.email = '';
     this.contact.msg = '';
+  }
+
+  private resetValidationStates(): void {
+    this.nameBlurred = false;
+    this.emailBlurred = false;
+    this.msgBlurred = false;
+    this.nameValid = true;
+    this.emailValid = true;
+    this.msgValid = true;
+  }
+
+  private showSuccessMessage(): void {
     this.isShowingSuccessMsg = true;
     setTimeout(() => {
       this.isShowingSuccessMsg = false;
     }, 3000);
   }
 
-  checkMail() {
+  validateName(): void {
+    this.nameBlurred = true;
+    const name = this.contact.name.trim();
+    this.nameValid = this.namePattern.test(name);
+    if (!this.nameValid) {
+      this.contact.name = '';
+    }
+  }
+
+  validateEmail(): void {
+    this.emailBlurred = true;
+    this.checkMail();
+  }
+
+  validateMessage(): void {
+    this.msgBlurred = true;
+    const msg = this.contact.msg.trim();
+    this.msgValid = msg.length >= 10 && msg.length <= 500;
+    if (!this.msgValid) {
+      this.contact.msg = '';
+    }
+  }
+
+  private checkMail(): void {
     if (this.contact.email.trim().length <= 0) {
       this.emailValid = false;
       this.emailInvalidMsg = 'contact.emailrequired';
@@ -125,39 +182,17 @@ export class ContactMeMobileComponent {
     }
   }
 
-  checkFileds() {
-    this.nameValid = this.contact.name.trim().length > 0;
-    if (!this.nameValid) this.contact.name = '';
-    this.msgValid = this.contact.msg.trim().length > 0;
-    if (!this.msgValid) this.contact.msg = '';
-    this.checkMail();
 
-    if (!this.nameValid || !this.msgValid || !this.emailValid) {
-      return false;
-    } else {
-      return true;
-    }
+  onNameFocus(): void {
+    this.nameValid = true;
   }
 
-  // Zusätzliche Validation-Methoden
-  validateName(): void {
-    const name = this.contact.name.trim();
-    this.nameValid = this.namePattern.test(name);
-    if (!this.nameValid) {
-      this.contact.name = '';
-    }
+  onEmailFocus(): void {
+    this.emailValid = true;
   }
 
-  validateEmail(): void {
-    this.checkMail();
-  }
-
-  validateMessage(): void {
-    const msg = this.contact.msg.trim();
-    this.msgValid = msg.length >= 10 && msg.length <= 500;
-    if (!this.msgValid) {
-      this.contact.msg = '';
-    }
+  onMessageFocus(): void {
+    this.msgValid = true;
   }
 
   isFormValid(): boolean {

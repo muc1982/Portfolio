@@ -31,7 +31,6 @@ $apple-font-weight-medium: 500 !default;
 $apple-font-weight-semibold: 600 !default;
 $apple-font-weight-bold: 700 !default;
 
-// === BORDER RADIUS ===
 $apple-radius-small: 6px !default;
 $apple-radius-medium: 8px !default;
 $apple-radius-large: 12px !default;
@@ -72,13 +71,17 @@ $breakpoint-large: 1440px;
 
 @mixin apple-input() {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
     border-radius: $apple-radius-medium;
     color: $apple-text-primary;
     transition: $apple-transition-medium;
     outline: none;
     @include responsive-font(16px, 18px);
     padding: 16px 20px;
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     
     &:focus {
         border-color: $apple-primary;
@@ -89,12 +92,23 @@ $breakpoint-large: 1440px;
     &::placeholder {
         color: $apple-text-tertiary;
     }
+    
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset;
+        -webkit-text-fill-color: $apple-text-primary;
+        caret-color: $apple-primary;
+        transition: background-color 5000s ease-in-out 0s;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
 }
 
 @mixin apple-button-primary() {
     background: $apple-primary;
     color: $apple-text-primary;
-    border: none;
+    border: none; 
     border-radius: $apple-radius-medium;
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-semibold;
@@ -105,6 +119,10 @@ $breakpoint-large: 1440px;
     @include responsive-font(16px, 18px);
     padding: 16px 32px;
     min-height: 48px;
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     
     &::before {
         content: '';
@@ -131,6 +149,30 @@ $breakpoint-large: 1440px;
     &:active {
         transform: translateY(0);
         background: color.adjust($apple-primary, $lightness: -2%);
+    }
+    
+    &:focus {
+        outline: 2px solid rgba($apple-primary, 0.5);
+        outline-offset: 2px;
+    }
+    
+    &:disabled {
+        background: $apple-bg-quaternary;
+        color: $apple-text-tertiary;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        
+        &:hover {
+            background: $apple-bg-quaternary;
+            color: $apple-text-tertiary;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        &::before {
+            display: none;
+        }
     }
 }
 
@@ -177,4 +219,160 @@ $breakpoint-large: 1440px;
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     background: rgba(28, 28, 30, 0.8);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin apple-card() {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $apple-radius-large;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: $apple-transition-medium;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+        box-shadow: $apple-shadow-medium;
+    }
+}
+
+@mixin apple-checkbox() {
+    width: 24px;
+    height: 24px;
+    border: 2px solid $apple-text-tertiary;
+    border-radius: $apple-radius-small;
+    background: transparent;
+    cursor: pointer;
+    transition: $apple-transition-fast;
+    position: relative;
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    &:hover {
+        border-color: $apple-primary;
+        transform: scale(1.05);
+        box-shadow: 0 0 8px rgba($apple-primary, 0.3);
+    }
+    
+    &:checked {
+        background: $apple-primary;
+        border-color: $apple-primary;
+        box-shadow: $apple-shadow-glow;
+        
+        &::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: $apple-font-weight-bold;
+            font-family: $apple-font-family;
+        }
+    }
+    
+    &:focus {
+        outline: 2px solid rgba($apple-primary, 0.5);
+        outline-offset: 2px;
+    }
+}
+
+@mixin apple-scroll-to-top() {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba($apple-primary, 0.9);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 1000;
+    box-shadow: $apple-shadow-medium;
+    
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    &:hover {
+        background: $apple-primary;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($apple-primary, 0.4);
+    }
+    
+    &:active {
+        transform: translateY(0);
+    }
+    
+    @media (max-width: 600px) {
+        bottom: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@mixin apple-glassmorphism($opacity: 0.05) {
+    background: rgba(255, 255, 255, $opacity);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin apple-focus-ring() {
+    &:focus-visible {
+        outline: 2px solid $apple-primary;
+        outline-offset: 2px;
+        border-radius: $apple-radius-small;
+    }
+}
+
+@mixin apple-text-gradient() {
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin apple-fade-in($duration: 0.3s) {
+    animation: apple-fade-in $duration ease-out;
+}
+
+@mixin apple-slide-up($duration: 0.5s) {
+    animation: apple-slide-up $duration cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@keyframes apple-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes apple-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

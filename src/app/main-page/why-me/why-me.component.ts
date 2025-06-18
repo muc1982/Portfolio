@@ -26,7 +26,7 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSlideIndex = 0;
   private slideInterval?: Subscription;
   private langChangeSub?: Subscription;
-  private autoSlideTimer = 4000; // 4 seconds
+  private autoSlideTimer = 4000; 
 
   locationSlides: LocationSlide[] = [
     {
@@ -53,9 +53,7 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
   ];
 
   constructor(private translate: TranslateService) {
-    this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.updateTranslations();
-    });
+    this.setupLanguageSubscription();
   }
 
   ngOnInit(): void {
@@ -64,24 +62,37 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Initialize intersection observer for entrance animations
     this.initializeAnimations();
   }
 
   ngOnDestroy(): void {
-    this.stopAutoSlide();
-    this.langChangeSub?.unsubscribe();
+    this.cleanupSubscriptions();
+  }
+
+  private setupLanguageSubscription(): void {
+    this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.updateTranslations();
+    });
   }
 
   private updateTranslations(): void {
-    const keys = this.locationSlides.flatMap(slide => [slide.titleKey, slide.subtitleKey]);
-    
+    const keys = this.extractTranslationKeys();
+    this.applyTranslations(keys);
+  }
+
+  private extractTranslationKeys(): string[] {
+    return this.locationSlides.flatMap(slide => [slide.titleKey, slide.subtitleKey]);
+  }
+
+  private applyTranslations(keys: string[]): void {
     this.translate.get(keys).subscribe(translations => {
-      this.locationSlides.forEach(slide => {
-        slide.title = translations[slide.titleKey] || slide.title;
-        slide.subtitle = translations[slide.subtitleKey] || slide.subtitle;
-      });
+      this.locationSlides.forEach(slide => this.updateSlideTranslations(slide, translations));
     });
+  }
+
+  private updateSlideTranslations(slide: LocationSlide, translations: any): void {
+    slide.title = translations[slide.titleKey] || slide.title;
+    slide.subtitle = translations[slide.subtitleKey] || slide.subtitle;
   }
 
   private startAutoSlide(): void {
@@ -103,27 +114,32 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (index !== this.currentSlideIndex) {
       this.currentSlideIndex = index;
       this.triggerSlideAnimation();
-      
-      // Restart auto-slide timer
-      this.stopAutoSlide();
-      this.startAutoSlide();
+      this.restartAutoSlide();
     }
   }
 
+  private restartAutoSlide(): void {
+    this.stopAutoSlide();
+    this.startAutoSlide();
+  }
+
   private triggerSlideAnimation(): void {
-    // Add any additional slide transition logic here
     this.playSlideSound();
   }
 
   private playSlideSound(): void {
-    // Optional: Add subtle sound effect for slide transitions
-    // This would require Web Audio API implementation
   }
 
   private initializeAnimations(): void {
     if (!this.carouselContainer) return;
 
-    const observer = new IntersectionObserver(
+    const observer = this.createIntersectionObserver();
+    const animatedElements = this.getAnimatedElements();
+    this.observeElements(observer, animatedElements);
+  }
+
+  private createIntersectionObserver(): IntersectionObserver {
+    return new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -136,31 +152,35 @@ export class WhyMeComponent implements OnInit, OnDestroy, AfterViewInit {
         rootMargin: '0px 0px -50px 0px'
       }
     );
-
-    // Observe elements for scroll-triggered animations
-    const animatedElements = this.carouselContainer.nativeElement.querySelectorAll(
-      '.location-carousel, .introduction-card, .talk-button'
-    );
-    
-    animatedElements.forEach((el: Element) => observer.observe(el));
   }
 
-  // Getter for template use
+  private getAnimatedElements(): NodeListOf<Element> {
+    return this.carouselContainer.nativeElement.querySelectorAll(
+      '.location-carousel, .introduction-card, .talk-button'
+    );
+  }
+
+  private observeElements(observer: IntersectionObserver, elements: NodeListOf<Element>): void {
+    elements.forEach((el: Element) => observer.observe(el));
+  }
+
+  private cleanupSubscriptions(): void {
+    this.stopAutoSlide();
+    this.langChangeSub?.unsubscribe();
+  }
+
   get currentSlide(): LocationSlide {
     return this.locationSlides[this.currentSlideIndex];
   }
 
-  // Method to get slide state for template
   isSlideActive(index: number): boolean {
     return index === this.currentSlideIndex;
   }
 
-  // Method for dot indicator state
   getDotClass(index: number): string {
     return this.isSlideActive(index) ? 'dot active' : 'dot';
   }
 
-  // Enhanced typing effect methods
   getHighlightText(): string {
     const slide = this.currentSlide;
     const words = slide.title.split(' ');

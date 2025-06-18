@@ -1,19 +1,15 @@
-<!-- Mobile Contact Form -->
 <div id="contact-me-mobile" class="contact-container-mobile wide-screen">
     <h2>{{ 'contact.title' | translate}}</h2>
 
     <div class="contact-content">
-        <!-- Mobile Header Section -->
         <div class="contact-header">
             <div class="header-top">
-                <!-- Phone Contact -->
                 <div class="header-top-phone">
                     <a href="tel:01747620110">
                         <div class="tel img"></div>
                         <span>{{ 'contact.myphone' | translate}}: 0174 762 0110</span>
                     </a>
                 </div>
-                <!-- Email Contact -->
                 <div class="header-top-email">
                     <a href="mailto:info@sun-dev.de">
                         <div class="mail img"></div>
@@ -21,44 +17,39 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Mobile Call-to-Action Text -->
             <div class="header-middle">{{ 'contact.feelfree' | translate}}</div>
         </div>
 
-        <!-- Mobile Contact Form -->
         <div class="contact-form">
             <form (ngSubmit)="onSumbmit(myForm)" #myForm="ngForm" novalidate>
                 <div class="form-name-mail">
                     <div class="form-name form-field">
-                        <input [class.form-input-error]="!nameValid"
-                            placeholder="{{ !nameValid ? ('contact.namerequired' | translate) : ('contact.name' | translate)}}"
+                        <input [class.form-input-error]="!nameValid && nameBlurred"
+                            placeholder="{{ (!nameValid && nameBlurred) ? ('contact.namerequired' | translate) : ('contact.name' | translate)}}"
                             [(ngModel)]="contact.name" name="name" id="mobile-name" class="form-input" type="text"
                             required minlength="2" maxlength="50" pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}"
-                            (focus)="nameValid = true" (blur)="validateName()" autocomplete="name">
+                            (focus)="onNameFocus()" (blur)="validateName()" autocomplete="name">
                     </div>
                     <div class="form-email form-field">
-                        <input [class.form-input-error]="!emailValid"
-                            placeholder="{{ !emailValid ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}"
+                        <input [class.form-input-error]="!emailValid && emailBlurred"
+                            placeholder="{{ (!emailValid && emailBlurred) ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}"
                             [(ngModel)]="contact.email" name="email" id="mobile-email" class="form-input" type="email"
-                            required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                            (focus)="emailValid = true" (blur)="validateEmail()" autocomplete="email">
+                            required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (focus)="onEmailFocus()"
+                            (blur)="validateEmail()" autocomplete="email">
                     </div>
                 </div>
 
-                <!-- Message Field -->
                 <div class="form-message form-field">
-                    <textarea [class.form-input-error]="!msgValid"
-                        placeholder="{{ !msgValid ? ('contact.messagerequired' | translate) : ('contact.message' | translate)}}"
+                    <textarea [class.form-input-error]="!msgValid && msgBlurred"
+                        placeholder="{{ (!msgValid && msgBlurred) ? ('contact.messagerequired' | translate) : ('contact.message' | translate)}}"
                         [(ngModel)]="contact.msg" name="message" id="mobile-message" class="form-input" required
-                        minlength="10" maxlength="500" (focus)="msgValid = true" (blur)="validateMessage()"
+                        minlength="10" maxlength="500" (focus)="onMessageFocus()" (blur)="validateMessage()"
                         rows="4"></textarea>
                     <div class="character-count" *ngIf="contact.msg.length > 0">
                         {{ contact.msg.length }} / 500
                     </div>
                 </div>
 
-                <!-- Privacy Policy Checkbox -->
                 <div class="privacy-policy">
                     <div class="cb pointer" (click)="clickCb()" [ngClass]="{'checked': isChecked}">
                         <input type="checkbox" id="mobile-privacy-check" [(ngModel)]="isChecked" name="privacy" required
@@ -73,7 +64,6 @@
                     </span>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="send-btn">
                     @if (isShowingSuccessMsg) {
                     <div class="success-msg">
