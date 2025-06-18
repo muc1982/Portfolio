@@ -6,7 +6,8 @@
                 <div class="logo-name">Yasin Sun</div>
                 <div class="logo-position">Developer</div>
             </div>
-            <div class="items">
+
+            <div class="items desktop-nav">
                 <li>
                     <a [appScrollBounce]="'why-me'" [offsetY]="104">
                         <span class="pointer">{{ "nav.whyme" | translate}}</span>
@@ -28,7 +29,46 @@
                     </a>
                 </li>
             </div>
-            <app-lang-switcher></app-lang-switcher>
+
+            <div class="desktop-lang">
+                <app-lang-switcher></app-lang-switcher>
+            </div>
+
+            <div class="mobile-menu-toggle" (click)="toggleMobileMenu()" [class.open]="mobileMenuOpen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="mobile-nav-overlay" [class.open]="mobileMenuOpen" (click)="closeMobileMenu()">
+            <nav class="mobile-nav-content" (click)="$event.stopPropagation()">
+                <ul class="mobile-nav-items">
+                    <li>
+                        <a [appScrollBounce]="'why-me'" [offsetY]="104" (click)="closeMobileMenu()">
+                            <span>{{ "nav.whyme" | translate}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [appScrollBounce]="'my-skills'" [offsetY]="104" (click)="closeMobileMenu()">
+                            <span>{{ "nav.myskills" | translate}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [appScrollBounce]="'my-projects'" [offsetY]="104" (click)="closeMobileMenu()">
+                            <span>{{ "nav.myprojects" | translate}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [appScrollBounce]="'contact-me'" [offsetY]="104" (click)="closeMobileMenu()">
+                            <span>{{ "nav.contact" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="mobile-lang-item">
+                        <app-lang-switcher context="mobile-header"></app-lang-switcher>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
