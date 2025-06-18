@@ -321,10 +321,24 @@
 }
 
 @keyframes apple-contact-ambient-mobile {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
+
     50% {
         transform: translateY(-10px) rotate(1deg) scale(1.01);
     }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset !important;
+    -webkit-text-fill-color: $apple-text-primary !important;
+    caret-color: $apple-primary !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }

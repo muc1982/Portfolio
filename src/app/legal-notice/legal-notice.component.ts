@@ -33,10 +33,8 @@ export class LegalNoticeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Scroll to top when component loads
     window.scrollTo(0, 0);
     
-    // Subscribe to router events for proper navigation handling
     this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -51,6 +49,10 @@ export class LegalNoticeComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.location.back();
+    if (window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }
