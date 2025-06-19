@@ -5,7 +5,6 @@
     height: 50px;
 }
 
-// Desktop Version
 .why-me-container {
     position: relative;
     margin: 40px auto;
@@ -20,11 +19,7 @@
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
-    
-    // Auf Mobile verstecken
-    @media screen and (max-width: 899px) {
-        display: none !important;
-    }
+    display: flex;
     
     &::before {
         content: '';
@@ -248,6 +243,15 @@
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
+    display: none;
+    
+    @media screen and (max-width: 899px) {
+        display: flex !important;
+    }
+    
+    @media screen and (min-width: 900px) {
+        display: none !important;
+    }
     
     h2 {
         @include h2TitleMobile();
@@ -256,7 +260,6 @@
         position: relative;
         z-index: 2;
         text-align: center;
-        // KORRIGIERT: Konsistente Schriftgröße
         font-size: clamp(28px, 6vw, 36px);
     }
     
@@ -268,7 +271,6 @@
                         .location-text {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-semibold;
-                            // KORRIGIERT: Konsistente Schriftgröße für 375px
                             font-size: clamp(20px, 4.5vw, 24px);
                             line-height: 1.2;
                             margin-bottom: 8px;
@@ -277,7 +279,6 @@
                         .location-subtitle {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-regular;
-                            // KORRIGIERT: Bessere Lesbarkeit
                             font-size: clamp(15px, 3.5vw, 18px);
                             color: $apple-text-secondary;
                             line-height: 1.4;
@@ -288,7 +289,6 @@
             
             .introduction-card {
                 .introduction-text {
-                    // KORRIGIERT: Konsistente Schriftgröße
                     font-size: clamp(17px, 4vw, 20px);
                     line-height: 1.6;
                 }
@@ -298,7 +298,6 @@
         .cta-section {
             .talk-button {
                 button {
-                    // KORRIGIERT: Konsistente Button-Größe
                     font-size: clamp(16px, 4vw, 18px);
                     padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
                     min-width: clamp(180px, 45vw, 240px);
@@ -308,11 +307,10 @@
     }
 }
 
-// KORRIGIERTE Responsive Breakpoints für Why-Me
 @media screen and (max-width: 480px) {
     .why-me-container-mobile {
         h2 { 
-            font-size: 26px; // KORRIGIERT: Feste Größe für bessere Konsistenz
+            font-size: 26px;
         }
         
         .content {
@@ -321,11 +319,11 @@
                     .location-slide {
                         .location-content {
                             .location-text {
-                                font-size: 18px; // KORRIGIERT: Feste Größe
+                                font-size: 18px;
                             }
                             
                             .location-subtitle {
-                                font-size: 14px; // KORRIGIERT: Feste Größe
+                                font-size: 14px;
                             }
                         }
                     }
@@ -338,7 +336,7 @@
 @media screen and (max-width: 375px) {
     .why-me-container-mobile {
         h2 {
-            font-size: 24px; // KORRIGIERT: Proportional zum Desktop
+            font-size: 24px;
         }
         
         .content {
@@ -347,11 +345,11 @@
                     .location-slide {
                         .location-content {
                             .location-text {
-                                font-size: 16px; // KORRIGIERT: Mindestgröße für Lesbarkeit
+                                font-size: 16px;
                             }
                             
                             .location-subtitle {
-                                font-size: 13px; // KORRIGIERT: Proportional
+                                font-size: 13px;
                             }
                         }
                     }
@@ -359,7 +357,7 @@
                 
                 .introduction-card {
                     .introduction-text {
-                        font-size: 15px; // KORRIGIERT: Bessere Lesbarkeit
+                        font-size: 15px;
                     }
                 }
             }
