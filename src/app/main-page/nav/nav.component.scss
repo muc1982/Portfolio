@@ -8,7 +8,7 @@
     right: 0;
     z-index: 1000;
     transition: $apple-transition-medium;
-    height: clamp(72px, 15vw, 104px);
+    @include responsive-nav-height();
     
     &.scrolled {
         @include apple-nav-glass();
@@ -29,6 +29,7 @@
             background: transparent;
             transition: $apple-transition-medium;
             
+            // Logo-Sektion mit Touch-Target Optimierung
             .logo {
                 @include dFlex($fd: column, $jc: center, $ai: center);
                 transition: $apple-transition-medium;
@@ -36,8 +37,7 @@
                 padding: $padding-mobile-sm;
                 border-radius: $apple-radius-medium;
                 position: relative;
-                min-width: 44px;
-                min-height: 44px;
+                @include touch-target();
                 
                 &::before {
                     content: '';
@@ -67,8 +67,8 @@
                 }
                 
                 .logo-img {
-                    width: clamp(40px, 8vw, 50px);
-                    height: clamp(25px, 5vw, 32px);
+                    width: clamp(40px, 8vw, 60px);
+                    height: clamp(25px, 5vw, 38px);
                     background: {
                         image: url('./../../../assets/img/logo.png');
                         repeat: no-repeat;
@@ -81,7 +81,7 @@
                 }
                 
                 .logo-name {
-                    font-size: clamp(12px, 2.8vw, 16px);
+                    font-size: clamp(12px, 2.8vw, 18px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
                     color: $apple-text-primary;
@@ -91,7 +91,7 @@
                 }
                 
                 .logo-position {
-                    font-size: clamp(8px, 2vw, 12px);
+                    font-size: clamp(8px, 2vw, 14px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
                     color: $apple-text-secondary;
@@ -101,8 +101,9 @@
                 }
             }
             
+            // Desktop Navigation
             .items {
-                @include dFlex($gap: clamp(6px, 1.5vw, 16px), $ai: center);
+                @include dFlex($gap: clamp(6px, 1.5vw, 20px), $ai: center);
                 list-style: none;
                 
                 li {
@@ -117,9 +118,9 @@
                         span {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-medium;
-                            font-size: clamp(13px, 2.8vw, 16px);
+                            font-size: clamp(13px, 2.8vw, 18px);
                             color: $apple-text-secondary;
-                            padding: clamp(6px, 1.5vw, 12px) clamp(10px, 2.5vw, 16px);
+                            padding: clamp(8px, 2vw, 14px) clamp(12px, 3vw, 18px);
                             border-radius: $apple-radius-medium;
                             transition: $apple-transition-fast;
                             cursor: pointer;
@@ -127,7 +128,7 @@
                             position: relative;
                             border: 1px solid transparent;
                             background: transparent;
-                            min-height: 32px;
+                            @include touch-target($touch-target-small);
                             @include dFlex($jc: center, $ai: center);
                             
                             &::before {
@@ -212,17 +213,18 @@
     }
 }
 
+// Mobile Menu Toggle (Hamburger)
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
-    width: clamp(24px, 6vw, 30px);
+    width: clamp(24px, 6vw, 32px);
     height: clamp(18px, 4.5vw, 24px);
     cursor: pointer;
     justify-content: space-between;
     position: relative;
     z-index: 1001;
-    min-width: 24px;
-    min-height: 18px;
+    @include touch-target($touch-target-small);
+    padding: $padding-mobile-xs;
     
     span {
         width: 100%;
@@ -252,18 +254,20 @@
         background: $apple-primary;
     }
     
-    @media screen and (max-width: $breakpoint-desktop) {
+    @include mobile-only {
         display: flex;
     }
 }
 
+// Desktop Navigation verstecken auf Mobile
 .desktop-nav,
 .desktop-lang {
-    @media screen and (max-width: $breakpoint-desktop) {
+    @include mobile-only {
         display: none !important;
     }
 }
 
+// Mobile Navigation Overlay
 .mobile-nav-overlay {
     position: fixed;
     top: 0;
@@ -283,14 +287,15 @@
         visibility: visible;
     }
     
-    @media screen and (min-width: $breakpoint-desktop) {
+    @include desktop-only {
         display: none !important;
     }
 }
 
+// Mobile Navigation Content
 .mobile-nav-content {
     position: absolute;
-    top: clamp(72px, 15vw, 104px);
+    top: $nav-height-mobile;
     left: 0;
     right: 0;
     background: $apple-bg-secondary;
@@ -322,10 +327,10 @@
                 text-decoration: none;
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
-                font-size: clamp(16px, 4vw, 18px);
+                font-size: clamp(16px, 4vw, 20px);
                 transition: $apple-transition-fast;
                 position: relative;
-                min-height: 44px;
+                @include touch-target();
                 @include dFlex($ai: center);
                 
                 &::before {
@@ -373,10 +378,10 @@
     }
 }
 
-// Enhanced responsive breakpoints
-@media screen and (max-width: $breakpoint-desktop) {
+// Responsive Anpassungen für verschiedene Breakpoints
+@include mobile-only {
     .nav-wrapper {
-        height: clamp(64px, 12vw, 88px);
+        height: $nav-height-mobile;
         
         .nav .content {
             height: inherit;
@@ -384,16 +389,16 @@
             
             .logo {
                 .logo-img {
-                    width: clamp(36px, 7vw, 44px);
-                    height: clamp(22px, 4.5vw, 28px);
+                    width: clamp(32px, 7vw, 44px);
+                    height: clamp(20px, 4.5vw, 28px);
                 }
                 
                 .logo-name {
-                    font-size: clamp(11px, 2.5vw, 14px);
+                    font-size: clamp(10px, 2.5vw, 14px);
                 }
                 
                 .logo-position {
-                    font-size: clamp(7px, 1.8vw, 10px);
+                    font-size: clamp(6px, 1.8vw, 10px);
                 }
             }
             
@@ -404,15 +409,15 @@
     }
     
     .mobile-nav-content {
-        top: clamp(64px, 12vw, 88px);
+        top: $nav-height-mobile;
     }
 }
 
-@media screen and (max-width: $breakpoint-tablet) {
+@include respond-to('tablet') {
     .nav-wrapper .nav .content {
         .mobile-menu-toggle {
-            width: clamp(22px, 5.5vw, 26px);
-            height: clamp(16px, 4vw, 20px);
+            width: clamp(24px, 5.5vw, 28px);
+            height: clamp(16px, 4vw, 22px);
             
             span {
                 height: 2px;
@@ -426,7 +431,7 @@
             
             li a {
                 padding: $space-mobile-sm $space-base;
-                font-size: clamp(15px, 3.8vw, 16px);
+                font-size: clamp(15px, 3.8vw, 18px);
             }
             
             li.mobile-lang-item {
@@ -436,90 +441,60 @@
     }
 }
 
-@media screen and (max-width: $breakpoint-mobile) {
+// Sehr kleine Screens
+@media screen and (max-width: 320px) {
     .nav-wrapper {
-        height: clamp(60px, 11vw, 76px);
+        height: clamp(56px, 11vw, 68px);
         
         .nav .content {
             .mobile-menu-toggle {
-                width: 22px;
-                height: 16px;
+                width: 20px;
+                height: 15px;
+                padding: 2px;
                 
                 &.open {
                     span:nth-child(1) {
-                        transform: translateY(7px) rotate(45deg);
+                        transform: translateY(6px) rotate(45deg);
                     }
                     
                     span:nth-child(3) {
-                        transform: translateY(-7px) rotate(-45deg);
+                        transform: translateY(-6px) rotate(-45deg);
                     }
                 }
             }
             
             .logo {
                 .logo-img {
-                    width: clamp(32px, 6.5vw, 40px);
-                    height: clamp(20px, 4vw, 25px);
+                    width: 30px;
+                    height: 19px;
                 }
                 
                 .logo-name {
-                    font-size: clamp(10px, 2.2vw, 13px);
-                }
-                
-                .logo-position {
-                    font-size: clamp(6px, 1.5vw, 9px);
-                }
-            }
-        }
-    }
-    
-    .mobile-nav-content {
-        top: clamp(60px, 11vw, 76px);
-        
-        .mobile-nav-items {
-            padding: $space-mobile-sm 0;
-            
-            li a {
-                padding: $space-mobile-xs $space-mobile-lg;
-                font-size: 15px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: $breakpoint-sm) {
-    .nav-wrapper {
-        height: 64px;
-        
-        .nav .content {
-            .logo {
-                .logo-img {
-                    width: 32px;
-                    height: 20px;
-                }
-                
-                .logo-name {
-                    font-size: 10px;
+                    font-size: 9px;
                 }
                 
                 .logo-position {
                     font-size: 6px;
                 }
             }
-            
-            .mobile-menu-toggle {
-                width: 20px;
-                height: 15px;
-            }
         }
     }
     
     .mobile-nav-content {
-        top: 64px;
+        top: clamp(56px, 11vw, 68px);
+        
+        .mobile-nav-items {
+            padding: $space-mobile-sm 0;
+            
+            li a {
+                padding: $space-mobile-xs $space-mobile-lg;
+                font-size: 14px;
+            }
+        }
     }
 }
 
-// Accessibility enhancements
+// Accessibility Verbesserungen
 @media (prefers-reduced-motion: reduce) {
     .nav-wrapper,
     .mobile-menu-toggle span,
@@ -534,7 +509,6 @@
     }
 }
 
-// High contrast mode
 @media (prefers-contrast: high) {
     .nav-wrapper {
         background: #000;
@@ -585,5 +559,17 @@
 @media print {
     .nav-wrapper {
         display: none;
+    }
+}
+
+// Safe Area für Geräte mit Notch
+@supports (padding: max(0px)) {
+    .nav-wrapper .nav .content {
+        @include safe-area-container();
+    }
+    
+    .mobile-nav-content {
+        padding-left: max(env(safe-area-inset-left), 0);
+        padding-right: max(env(safe-area-inset-right), 0);
     }
 }

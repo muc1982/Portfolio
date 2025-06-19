@@ -48,21 +48,18 @@
             flex: 2;
 
             .reservoir {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: clamp(16px, 3vw, 24px);
+                @include responsive-grid(2, 3, 4);
                 width: 100%;
 
                 .skill {
                     @include dFlex($fd: column, $gap: 12px, $ai: center);
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: $apple-radius-large;
-                    padding: clamp(16px, 3vw, 24px);
+                    @include apple-glassmorphism-medium();
+                    @include mobile-card-padding();
                     transition: $apple-transition-fast;
                     cursor: pointer;
                     position: relative;
-                    min-height: 120px;
+                    @include touch-target();
+                    aspect-ratio: 1;
 
                     &::before {
                         content: '';
@@ -99,8 +96,7 @@
                     }
 
                     img {
-                        width: clamp(40px, 8vw, 56px);
-                        height: clamp(40px, 8vw, 56px);
+                        @include responsive-icon('md');
                         object-fit: contain;
                         transition: $apple-transition-fast;
                         filter: brightness(1.1);
@@ -109,7 +105,7 @@
                     .skill-text {
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
-                        font-size: clamp(12px, 2.5vw, 16px);
+                        font-size: clamp(12px, 2.8vw, 16px);
                         color: $apple-text-secondary;
                         text-align: center;
                         transition: $apple-transition-fast;
@@ -124,12 +120,8 @@
             @include dFlex($fd: column, $jc: center);
 
             .current-learning {
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: $apple-radius-large;
-                padding: clamp(24px, 5vw, 32px);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+                @include apple-glassmorphism-light();
+                @include mobile-card-padding();
 
                 >span {
                     @include dFlex($jc: center);
@@ -144,6 +136,7 @@
                 .skills {
                     @include dFlex($gap: 16px, $jc: center);
                     margin-bottom: 20px;
+                    flex-wrap: wrap;
 
                     >div {
                         @include dFlex($fd: column, $gap: 8px, $ai: center);
@@ -152,7 +145,7 @@
                         border-radius: $apple-radius-medium;
                         padding: 16px 12px;
                         transition: $apple-transition-fast;
-                        min-width: 80px;
+                        @include touch-target($touch-target-small);
 
                         &:hover {
                             transform: translateY(-2px);
@@ -161,8 +154,7 @@
                         }
 
                         img {
-                            width: 32px;
-                            height: 32px;
+                            @include responsive-icon('sm');
                             object-fit: contain;
                             filter: brightness(1.2);
                         }
@@ -170,7 +162,7 @@
                         span {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-medium;
-                            font-size: 12px;
+                            font-size: clamp(11px, 2.5vw, 14px);
                             color: $apple-text-primary;
                             text-align: center;
                         }
@@ -191,9 +183,10 @@
     }
 }
 
+// Mobile-spezifische Optimierungen
 .my-skills-container-mobile {
     position: relative;
-    margin: 24px auto;
+    margin: clamp(16px, 4vw, 24px) auto;
     max-width: 600px;
     min-height: 70vh;
     @include standardPaddingMobile();
@@ -203,6 +196,8 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
+    width: calc(100% - #{$space-mobile-lg});
+    box-sizing: border-box;
 
     &::before {
         content: '';
@@ -218,7 +213,7 @@
 
     h2 {
         @include h2TitleMobile();
-        margin-bottom: 32px;
+        margin-bottom: $space-mobile-lg;
         padding-top: clamp(32px, 6vw, 48px);
         position: relative;
         z-index: 2;
@@ -227,27 +222,24 @@
 
     .my-skills-content {
         width: 100%;
-        @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
+        @include dFlex($fd: column, $gap: $space-mobile-lg);
         position: relative;
         z-index: 2;
-        padding: clamp(20px, 4vw, 32px);
+        padding: $padding-mobile-md;
 
         .content-top {
             .reservoir {
-                display: ruby;
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                gap: clamp(10px, 2vw, 14px);
+                @include responsive-grid(2, 3, 4);
+                gap: $grid-gap-mobile;
 
                 .skill {
                     @include dFlex($jc: center, $ai: center);
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: $apple-radius-medium;
-                    padding: clamp(12px, 2.5vw, 16px);
+                    @include apple-glassmorphism-medium();
+                    padding: $padding-mobile-sm;
                     transition: $apple-transition-fast;
                     aspect-ratio: 1;
                     position: relative;
-                    min-height: 44px;
+                    @include touch-target($touch-target-small);
 
                     &::before {
                         content: '';
@@ -275,8 +267,7 @@
                     }
 
                     img {
-                        width: clamp(28px, 7vw, 40px);
-                        height: clamp(28px, 7vw, 40px);
+                        @include responsive-icon('sm');
                         object-fit: contain;
                         transition: $apple-transition-fast;
                         filter: brightness(1.1);
@@ -287,7 +278,7 @@
 
         .content-bottom {
             .content-bottom-title {
-                margin-bottom: 16px;
+                margin-bottom: $space-mobile-base;
 
                 span {
                     font-family: $apple-font-family;
@@ -300,11 +291,9 @@
             }
 
             .content-bottom-content {
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: $apple-radius-large;
-                padding: clamp(16px, 4vw, 24px);
-                margin-bottom: 20px;
+                @include apple-glassmorphism-light();
+                @include mobile-card-padding();
+                margin-bottom: $space-mobile-md;
 
                 p {
                     font-family: $apple-font-family;
@@ -313,22 +302,22 @@
                     line-height: 1.6;
                     color: $apple-text-secondary;
                     text-align: justify;
-                    margin-bottom: 16px;
+                    margin-bottom: $space-mobile-base;
                 }
 
                 .current-learning {
                     .skills {
-                        @include dFlex($gap: 12px, $jc: center);
+                        @include dFlex($gap: $space-mobile-sm, $jc: center);
+                        flex-wrap: wrap;
 
                         >div {
                             @include dFlex($fd: column, $gap: 6px, $ai: center);
                             background: rgba($apple-primary, 0.1);
                             border: 1px solid rgba($apple-primary, 0.3);
                             border-radius: $apple-radius-medium;
-                            padding: 12px 8px;
+                            padding: $padding-mobile-sm;
                             transition: $apple-transition-fast;
-                            min-width: 60px;
-                            min-height: 44px;
+                            @include touch-target($touch-target-small);
 
                             &:hover {
                                 transform: translateY(-2px);
@@ -336,8 +325,8 @@
                             }
 
                             img {
-                                width: 24px;
-                                height: 24px;
+                                width: clamp(20px, 5vw, 28px);
+                                height: clamp(20px, 5vw, 28px);
                                 object-fit: contain;
                                 filter: brightness(1.2);
                             }
@@ -360,7 +349,7 @@
                 button {
                     @include apple-button-primary();
                     font-size: clamp(14px, 3.5vw, 16px);
-                    padding: clamp(12px, 3vw, 16px) clamp(24px, 6vw, 32px);
+                    padding: $padding-mobile-sm $padding-mobile-md;
                     min-width: clamp(140px, 35vw, 200px);
                 }
             }
@@ -369,44 +358,22 @@
 }
 
 @keyframes apple-skills-ambient {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
         opacity: 0.08;
     }
-
     33% {
         transform: translateY(-20px) rotate(2deg) scale(1.02);
         opacity: 0.12;
     }
-
     66% {
         transform: translateY(15px) rotate(-1deg) scale(0.98);
         opacity: 0.06;
     }
 }
 
-@media screen and (max-width: 1200px) {
-    .my-skills-container {
-        .my-skills-content {
-            @include dFlex($fd: row, $gap: 40px);
-
-            .content-left,
-            .content-right {
-                flex: 1;
-            }
-
-            .content-left {
-                .reservoir {
-                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 900px) {
+// Responsive Anpassungen mit den neuen Variablen
+@include mobile-only {
     .my-skills-container {
         display: none !important;
     }
@@ -416,179 +383,104 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+@include respond-to('desktop-small') {
     .my-skills-container-mobile {
-        margin: 16px auto;
+        display: none !important;
+    }
 
-        .my-skills-content {
-            padding: 16px;
-            gap: 20px;
-
-            .content-top {
-                .reservoir {
-                    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-                    gap: 12px;
-                }
-            }
-        }
+    .my-skills-container {
+        display: flex !important;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .my-skills-container-mobile {
-        margin: 12px auto;
-        border-radius: $apple-radius-large;
-
-        h2 {
-            margin-bottom: 24px;
-            padding-top: 24px;
-        }
-
-        .my-skills-content {
-            padding: 12px;
-            gap: 16px;
-
-            .content-top {
-                .reservoir {
-                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                    gap: 10px;
-                }
-            }
-
-            .content-bottom {
-                .content-bottom-content {
-                    padding: 12px;
-
-                    .current-learning {
-                        .skills {
-                            gap: 8px;
-
-                            >div {
-                                padding: 8px 6px;
-                                min-width: 50px;
-
-                                img {
-                                    width: 20px;
-                                    height: 20px;
-                                }
-
-                                span {
-                                    font-size: 10px;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .talk-button {
-                    button {
-                        padding: 10px 20px;
-                        min-width: 120px;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .my-skills-container-mobile {
-        margin: 8px auto;
-
-        .my-skills-content {
-            .content-top {
-                .reservoir {
-                    grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
-                    gap: 8px;
-                }
-            }
-        }
-    }
-}
-
+// Sehr kleine Screens (320px und kleiner)
 @media screen and (max-width: 320px) {
     .my-skills-container-mobile {
-        margin: 4px auto;
-        padding: 8px 4px;
-
-        h2 {
-            margin-bottom: 16px;
-            padding-top: 16px;
-        }
+        margin: $space-mobile-xs auto;
+        width: calc(100% - #{$space-mobile-base});
 
         .my-skills-content {
-            padding: 8px;
-            gap: 12px;
+            padding: $padding-mobile-xs;
+            gap: $space-mobile-sm;
 
-            .content-top {
-                .reservoir {
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 8px;
+            .content-top .reservoir {
+                grid-template-columns: repeat(2, 1fr);
+                gap: $space-mobile-xs;
 
-                    .skill {
-                        padding: 8px;
-                        border-radius: $apple-radius-small;
-                        min-height: 48px;
+                .skill {
+                    padding: $padding-mobile-xs;
+                    border-radius: $apple-radius-small;
 
-                        img {
-                            width: 24px;
-                            height: 24px;
-                        }
+                    img {
+                        width: clamp(18px, 5vw, 24px);
+                        height: clamp(18px, 5vw, 24px);
                     }
                 }
             }
 
             .content-bottom {
                 .content-bottom-title span {
-                    font-size: 16px;
+                    font-size: clamp(16px, 4.5vw, 20px);
                 }
 
                 .content-bottom-content {
-                    padding: 8px;
+                    padding: $padding-mobile-xs;
                     border-radius: $apple-radius-medium;
 
                     p {
-                        font-size: 14px;
-                        margin-bottom: 12px;
+                        font-size: clamp(13px, 3.2vw, 15px);
+                        margin-bottom: $space-mobile-sm;
                     }
 
-                    .current-learning {
-                        .skills {
-                            gap: 6px;
+                    .current-learning .skills {
+                        gap: $space-mobile-xs;
 
-                            >div {
-                                padding: 6px 4px;
-                                min-width: 40px;
-                                border-radius: $apple-radius-small;
+                        >div {
+                            padding: clamp(4px, 1vw, 6px);
+                            min-width: clamp(36px, 9vw, 44px);
+                            border-radius: $apple-radius-small;
 
-                                img {
-                                    width: 18px;
-                                    height: 18px;
-                                }
+                            img {
+                                width: clamp(16px, 4vw, 20px);
+                                height: clamp(16px, 4vw, 20px);
+                            }
 
-                                span {
-                                    font-size: 9px;
-                                }
+                            span {
+                                font-size: clamp(9px, 2vw, 11px);
                             }
                         }
                     }
                 }
 
-                .talk-button {
-                    button {
-                        font-size: 14px;
-                        padding: 8px 16px;
-                        min-width: 100px;
-                        border-radius: $apple-radius-small;
-                    }
+                .talk-button button {
+                    font-size: clamp(13px, 3.2vw, 15px);
+                    padding: $padding-mobile-xs $padding-mobile-sm;
+                    min-width: clamp(100px, 28vw, 140px);
+                    border-radius: $apple-radius-small;
                 }
             }
         }
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
+// Tablet-spezifische Anpassungen
+@include tablet-only {
+    .my-skills-container .my-skills-content {
+        @include dFlex($fd: row, $gap: 40px);
 
+        .content-left,
+        .content-right {
+            flex: 1;
+        }
+
+        .content-left .reservoir {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+    }
+}
+
+// Accessibility und Präferenzen
+@media (prefers-reduced-motion: reduce) {
     .my-skills-container,
     .my-skills-container-mobile {
         &::before {
@@ -609,16 +501,13 @@
     }
 
     @keyframes apple-skills-ambient {
-
-        0%,
-        100% {
+        0%, 100% {
             transform: none;
         }
     }
 }
 
 @media (prefers-contrast: high) {
-
     .my-skills-container,
     .my-skills-container-mobile {
         background: #000;
