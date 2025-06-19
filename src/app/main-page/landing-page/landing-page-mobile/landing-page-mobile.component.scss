@@ -5,6 +5,10 @@
     width: 100vw;
     overflow: hidden;
     min-height: 100vh;
+    
+    @media screen and (min-width: 768px) {
+        display: none !important;
+    }
 }
 
 #landing-page-extra {
@@ -41,12 +45,15 @@
     }
 }
 
-// Burger Menu Styling - Korrigiert
 .burger-menu-wrapper {
     position: fixed;
     top: 16px;
     right: 24px;
-    z-index: 1001; // Höher als Menu
+    z-index: 2000; 
+    
+    @media screen and (min-width: 768px) {
+        display: none !important;
+    }
 
     @media screen and (max-width: 480px) {
         top: 20px;
@@ -57,8 +64,8 @@
         background: rgba(255, 255, 255, 0.12);
         border: 1px solid rgba(255, 255, 255, 0.25);
         border-radius: $apple-radius-medium;
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -75,7 +82,6 @@
             height: 48px;
         }
 
-        // Hover Effect
         &::before {
             content: '';
             position: absolute;
@@ -103,9 +109,8 @@
             transform: scale(1.02);
         }
 
-        // Burger Lines - Verbessert
         span {
-            width: 22px;
+            width: 24px;
             height: 2.5px;
             background: rgba(255, 255, 255, 0.95);
             display: block;
@@ -115,34 +120,20 @@
             position: relative;
 
             @media screen and (max-width: 480px) {
-                width: 20px;
+                width: 22px;
                 height: 2px;
                 margin: 2.5px 0;
             }
-
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: inherit;
-                border-radius: inherit;
-                opacity: 0.3;
-                transform: scaleY(0);
-                transition: transform 0.3s ease;
-            }
         }
 
-        // Active State Animation - Korrigiert
+        // KORRIGIERT: Active State Animation
         &.active {
             background: rgba(255, 255, 255, 0.15);
 
             span {
                 background: rgba(255, 255, 255, 1);
 
-                &:nth-child(1) {
+                &:first-child {
                     transform: rotate(45deg) translate(6px, 6px);
                 }
 
@@ -151,19 +142,15 @@
                     transform: scaleX(0);
                 }
 
-                &:nth-child(3) {
+                &:last-child {
                     transform: rotate(-45deg) translate(6px, -6px);
-                }
-
-                &::before {
-                    transform: scaleY(1);
                 }
             }
         }
     }
 }
 
-// Mobile Menu Styling - Kleinere Schrift und Language Switcher
+// KORRIGIERTE Mobile Menu Styling
 .menu-wrapper {
     position: fixed;
     top: 0;
@@ -173,11 +160,16 @@
     background: rgba(0, 0, 0, 0.96);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    z-index: 1000;
+    z-index: 1999; // Unter dem Burger-Button
     display: flex;
     justify-content: center;
     align-items: center;
     animation: menuFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    // NUR bis 767px anzeigen
+    @media screen and (min-width: 768px) {
+        display: none !important;
+    }
 
     @keyframes menuFadeIn {
         from {
@@ -219,47 +211,53 @@
         }
 
         li {
-            font-size: 20px; // REDUZIERT von 32px auf 20px
+            font-size: 22px; // Etwas größer für bessere Touch-Targets
             font-weight: $apple-font-weight-medium;
             color: rgba(255, 255, 255, 0.95);
-            margin: 20px 0; // REDUZIERT von 35px auf 20px
+            margin: 24px 0; // Mehr Abstand zwischen Elementen
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            padding: 12px 30px; // REDUZIERT von 18px 40px
+            padding: 16px 36px; // Größere Touch-Bereiche
             border-radius: $apple-radius-medium;
             position: relative;
             overflow: hidden;
             letter-spacing: -0.01em;
+            min-height: 56px; // Mindesthöhe für Touch
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             @media screen and (max-width: 480px) {
-                font-size: 18px; // REDUZIERT von 26px auf 18px
-                margin: 16px 0; // REDUZIERT von 28px auf 16px
-                padding: 10px 25px; // REDUZIERT von 16px 35px
+                font-size: 20px;
+                margin: 20px 0;
+                padding: 14px 30px;
+                min-height: 52px;
             }
 
             @media screen and (max-width: 375px) {
-                font-size: 16px; // REDUZIERT von 24px auf 16px
-                margin: 14px 0; // REDUZIERT von 25px auf 14px
-                padding: 8px 20px; // REDUZIERT von 14px 30px
+                font-size: 18px;
+                margin: 18px 0;
+                padding: 12px 26px;
+                min-height: 48px;
             }
 
             // Language Switcher spezielle Styles
             &.mobile-lang-item {
-                padding: 16px 30px;
+                padding: 20px 36px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 30px;
+                margin-top: 36px;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
 
                 @media screen and (max-width: 480px) {
-                    padding: 14px 25px;
-                    margin-top: 25px;
+                    padding: 18px 30px;
+                    margin-top: 30px;
                 }
 
                 @media screen and (max-width: 375px) {
-                    padding: 12px 20px;
-                    margin-top: 20px;
+                    padding: 16px 26px;
+                    margin-top: 26px;
                 }
 
                 app-lang-switcher {
@@ -314,7 +312,7 @@
     }
 }
 
-// Mobile Content - Desktop-Style Layout - Optimiert
+// Mobile Content - Desktop-Style Layout - KORRIGIERT
 .mobile-content {
     position: relative;
     z-index: 1;
@@ -650,5 +648,29 @@
                 transform: translateY(-2px) scale(1.08);
             }
         }
+    }
+}
+
+// Animationen
+@keyframes apple-ambient-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-10px) rotate(1deg) scale(1.01);
+    }
+    66% {
+        transform: translateY(8px) rotate(-0.5deg) scale(0.99);
+    }
+}
+
+@keyframes apple-profile-glow {
+    0%, 100% {
+        opacity: 0.15;
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        opacity: 0.25;
+        transform: rotate(5deg) scale(1.05);
     }
 }

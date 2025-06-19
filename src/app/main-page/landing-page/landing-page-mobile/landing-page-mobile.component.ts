@@ -26,7 +26,6 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Sicherstellen dass Body-Scroll wiederhergestellt wird
     this.forceResetMenu();
   }
 
@@ -34,8 +33,7 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
   onResize(): void {
     this.adjustViewport();
     
-    // WICHTIG: Bei Resize immer Menu zurücksetzen und Body-Scroll wiederherstellen
-    if (this.showMenu) {
+    if (window.innerWidth > 767 && this.showMenu) {
       this.forceResetMenu();
     }
   }
@@ -47,21 +45,8 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(): void {
-    // Scroll-Event nur verarbeiten wenn Menu offen ist
-    if (!this.showMenu) return;
-    
-    // Bei starkem Scroll das Menu schließen
-    const currentScroll = window.pageYOffset;
-    if (Math.abs(currentScroll - this.scrollPosition) > 100) {
-      this.forceResetMenu();
-    }
-  }
-
-  // KORRIGIERTE toggleMenu Methode mit Reset-Logik
   toggleMenu(): void {
-    console.log('Toggle Menu - Current state:', this.showMenu);
+    console.log('Toggle Menu - Current state:', this.showMenu, 'Window width:', window.innerWidth);
     
     if (this.showMenu) {
       this.forceResetMenu();
@@ -76,20 +61,17 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
     this.lockBodyScroll();
   }
 
-  // PUBLIC - wird vom Template aufgerufen
   closeMenu(): void {
-    console.log('Closing Menu');
+    console.log('Closing Menu via closeMenu()');
     this.showMenu = false;
     this.restoreBodyScroll();
   }
 
-  // NEUE Methode: Komplettes Menu-Reset bei Problemen
   private forceResetMenu(): void {
     console.log('Force Reset Menu');
     this.showMenu = false;
     this.restoreBodyScroll();
     
-    // Zusätzlicher Reset für hartnäckige Fälle
     setTimeout(() => {
       document.body.style.overflow = '';
       document.body.style.position = '';
@@ -116,30 +98,24 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
     document.body.style.top = '';
     document.body.style.width = '';
     
-    // Scroll-Position wiederherstellen
     if (this.scrollPosition > 0) {
       window.scrollTo(0, this.scrollPosition);
     }
   }
 
-  // KORRIGIERTE scrollTo Methode - sauberes Menu-Management
   scrollTo(sectionId: string): void {
     console.log('ScrollTo called:', sectionId);
     
-    // Menu komplett zurücksetzen
-    this.forceResetMenu();
+    this.closeMenu();
     
-    // Kurze Verzögerung für sauberen Übergang
     setTimeout(() => {
       this.performScrollToSection(sectionId);
     }, 100);
   }
 
   private performScrollToSection(sectionId: string): void {
-    // Mobile-spezifische IDs verwenden falls vorhanden
-    let targetId = sectionId;
+     let targetId = sectionId;
     
-    // Prüfe ob mobile Version existiert
     if (sectionId === 'my-skills') {
       const mobileElement = document.getElementById('my-skills-mobile');
       if (mobileElement) {
@@ -159,41 +135,26 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
 
     const element = document.getElementById(targetId);
     if (element) {
-      const headerOffset = 72; // Mobile Header Höhe
+      const headerOffset = 72; 
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      // Scroll-Position für den Event-Handler aktualisieren
-      this.scrollPosition = window.pageYOffset;
 
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
-      
-      // Nach dem Scrollen die Position aktualisieren
-      setTimeout(() => {
-        this.scrollPosition = window.pageYOffset;
-      }, 1000);
     } else {
       console.warn(`Element with ID '${targetId}' not found`);
     }
   }
 
-  // Für eventuelle zukünftige Erweiterungen
-  onMenuItemClick(sectionId: string): void {
-    this.scrollTo(sectionId);
-  }
-
   private adjustViewport(): void {
-    // Viewport-Höhe für mobile Browser mit Address Bar
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
-    // Zoom-Verhinderung bei Doppel-Tap auf Burger-Button
     const target = event.target as HTMLElement;
     if (target?.closest('.burger-menu-btn')) {
       event.preventDefault();

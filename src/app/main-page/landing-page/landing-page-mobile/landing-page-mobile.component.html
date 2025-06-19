@@ -4,8 +4,12 @@
 
     <!-- Burger Menu Button -->
     <div class="burger-menu-wrapper">
-        <button class="burger-menu-btn" (click)="toggleMenu()" [class.active]="showMenu"
-            [attr.aria-label]="showMenu ? 'Menü schließen' : 'Menü öffnen'" [attr.aria-expanded]="showMenu"
+        <button 
+            class="burger-menu-btn" 
+            (click)="toggleMenu()" 
+            [class.active]="showMenu"
+            [attr.aria-label]="showMenu ? 'Menü schließen' : 'Menü öffnen'"
+            [attr.aria-expanded]="showMenu"
             type="button">
             <span></span>
             <span></span>
@@ -14,20 +18,30 @@
     </div>
 
     <!-- Mobile Navigation Menu -->
-    <div class="menu-wrapper" *ngIf="showMenu" (click)="closeMenu()">
-        <nav class="menu" role="navigation" aria-label="Hauptnavigation" (click)="$event.stopPropagation()">
+    <div class="menu-wrapper" *ngIf="showMenu">
+        <nav class="menu" role="navigation" aria-label="Hauptnavigation">
             <ul>
-                <li (click)="scrollTo('why-me')" (keydown.enter)="scrollTo('why-me')" tabindex="0" role="button">
+                <li (click)="scrollTo('why-me')" 
+                    (keydown.enter)="scrollTo('why-me')" 
+                    tabindex="0"
+                    role="button">
                     {{ 'nav.whyme' | translate }}
                 </li>
-                <li (click)="scrollTo('my-skills')" (keydown.enter)="scrollTo('my-skills')" tabindex="0" role="button">
+                <li (click)="scrollTo('my-skills')" 
+                    (keydown.enter)="scrollTo('my-skills')" 
+                    tabindex="0"
+                    role="button">
                     {{ 'nav.myskills' | translate }}
                 </li>
-                <li (click)="scrollTo('my-projects')" (keydown.enter)="scrollTo('my-projects')" tabindex="0"
+                <li (click)="scrollTo('my-projects')" 
+                    (keydown.enter)="scrollTo('my-projects')" 
+                    tabindex="0"
                     role="button">
                     {{ 'nav.myprojects' | translate }}
                 </li>
-                <li (click)="scrollTo('contact-me')" (keydown.enter)="scrollTo('contact-me')" tabindex="0"
+                <li (click)="scrollTo('contact-me')" 
+                    (keydown.enter)="scrollTo('contact-me')" 
+                    tabindex="0"
                     role="button">
                     {{ 'nav.contact' | translate }}
                 </li>
@@ -42,10 +56,13 @@
     <main class="mobile-content">
         <section class="content-left">
             <div class="img-wrapper">
-                <img src="assets/img/profile-pic.png" alt="Yasin Sun Profile Picture" loading="lazy" decoding="async" />
+                <img src="assets/img/profile-pic.png" 
+                     alt="Yasin Sun Profile Picture" 
+                     loading="lazy"
+                     decoding="async" />
             </div>
         </section>
-
+        
         <section class="content-right">
             <!-- Logo and Title Section -->
             <div class="title-logo-wrapper">
@@ -54,17 +71,19 @@
                     <div class="logo-name">Yasin Sun</div>
                     <div class="logo-position">Developer</div>
                 </div>
-
+                
                 <div class="title">
                     <h1 class="name">{{ 'landingPage.name' | translate}}</h1>
                     <h2 class="position">{{ 'landingPage.position' | translate}}</h2>
                 </div>
             </div>
-
+            
             <!-- Scroll Down Arrow -->
             <div class="arrow-wrapper">
-                <button class="arrow-down pointer" (click)="scrollTo('why-me')"
-                    aria-label="Zum nächsten Abschnitt scrollen" type="button">
+                <button class="arrow-down pointer" 
+                        (click)="scrollTo('why-me')"
+                        aria-label="Zum nächsten Abschnitt scrollen"
+                        type="button">
                 </button>
             </div>
         </section>
