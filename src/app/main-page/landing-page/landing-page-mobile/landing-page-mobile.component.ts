@@ -46,7 +46,7 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
   }
 
   // KORRIGIERT: touchstart Event hinzugefügt für mobile Geräte
-  @HostListener('touchstart', ['$event'], { passive: true })
+  @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
     // Verhindert dass der Button "sticky" wird auf iOS
     const target = event.target as HTMLElement;
