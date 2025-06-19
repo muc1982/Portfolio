@@ -7,6 +7,7 @@
     margin-bottom: clamp(24px, 5vw, 64px);
     padding: clamp(20px, 4vw, 64px) 0;
     overflow: hidden;
+    z-index: 3; // KORRIGIERT: Höherer z-index
 
     // Hintergrund-Shimmer-Effekt
     &::before {
@@ -22,25 +23,26 @@
                 transparent 100%);
         animation: hero-shimmer 8s ease-in-out infinite;
         pointer-events: none;
+        z-index: 0;
     }
 
     .hero-text-container {
         position: relative;
-        z-index: 2;
+        z-index: 4; // KORRIGIERT: Noch höherer z-index
         padding: clamp(20px, 4vw, 64px);
 
         .hero-main-text {
             font-family: $apple-font-family;
             font-weight: $apple-font-weight-regular;
             font-size: clamp(16px, 4.5vw, 32px);
-            line-height: clamp(1.4, 1.5vw, 1.6);
+            line-height: clamp(1.4, 1.5, 1.6); // KORRIGIERT: Einheitenlose Werte
             color: $apple-text-primary;
             text-align: left;
             letter-spacing: -0.01em;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: hero-text-appear 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.5s both;
+            opacity: 1; // KORRIGIERT: Direkt sichtbar machen
+            transform: translateY(0); // KORRIGIERT: Keine Animation-Blockierung
             position: relative;
+            z-index: 5; // KORRIGIERT: Höchster z-index für Text
 
             @media screen and (max-width: 768px) {
                 font-size: clamp(14px, 4vw, 20px);
@@ -48,19 +50,9 @@
                 text-align: left;
             }
 
-            @media screen and (max-width: 480px) {
-                font-size: clamp(13px, 3.8vw, 18px);
-                line-height: 1.6;
-            }
-
-            @media screen and (max-width: 375px) {
-                font-size: clamp(12px, 3.5vw, 16px);
-                line-height: 1.7;
-                letter-spacing: 0;
-            }
-
             .shimmer-text {
                 position: relative;
+                display: block; // KORRIGIERT: Sicherstellen dass es angezeigt wird
 
                 &::before {
                     content: '';
@@ -74,6 +66,7 @@
                             rgba(255, 255, 255, 0.3) 50%,
                             transparent 100%);
                     animation: text-shimmer 3s ease-in-out 1.5s infinite;
+                    z-index: 1;
                 }
             }
 
@@ -91,20 +84,15 @@
                     position: absolute;
                     bottom: -2px;
                     left: 0;
-                    width: 0;
+                    width: 100%; // KORRIGIERT: Direkt 100% für bessere Sichtbarkeit
                     height: 2px;
                     background: $apple-primary;
-                    animation: underline-expand 0.8s ease-out 2s both;
-
-                    @media screen and (max-width: 480px) {
-                        height: 1px;
-                        bottom: -1px;
-                    }
+                    border-radius: 1px;
                 }
             }
         }
 
-        // Floating Particles - Apple-Style
+        // Floating Particles
         .floating-particles {
             position: absolute;
             top: 0;
@@ -112,6 +100,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 1;
 
             .particle {
                 position: absolute;
@@ -122,20 +111,8 @@
                         rgba($apple-primary, 0.4) 50%,
                         transparent 100%);
                 border-radius: 50%;
-                opacity: 0;
+                opacity: 0.6; // KORRIGIERT: Sichtbarer machen
                 animation: particle-float 6s ease-in-out infinite;
-
-                @media screen and (max-width: 768px) {
-                    width: 3px;
-                    height: 3px;
-                    animation-duration: 5s;
-                }
-
-                @media screen and (max-width: 480px) {
-                    width: 2px;
-                    height: 2px;
-                    animation-duration: 4s;
-                }
 
                 &:nth-child(2n) {
                     animation-duration: 8s;
@@ -143,10 +120,6 @@
                             rgba($apple-secondary, 0.6) 0%,
                             rgba($apple-secondary, 0.3) 50%,
                             transparent 100%);
-
-                    @media screen and (max-width: 768px) {
-                        animation-duration: 6s;
-                    }
                 }
 
                 &:nth-child(3n) {
@@ -157,17 +130,6 @@
                             rgba(#00d4ff, 0.7) 0%,
                             rgba(#00d4ff, 0.3) 50%,
                             transparent 100%);
-
-                    @media screen and (max-width: 768px) {
-                        width: 4px;
-                        height: 4px;
-                        animation-duration: 5s;
-                    }
-
-                    @media screen and (max-width: 480px) {
-                        width: 3px;
-                        height: 3px;
-                    }
                 }
             }
         }
@@ -180,175 +142,170 @@
             width: clamp(200px, 40vw, 300px);
             height: clamp(200px, 40vw, 300px);
             background: radial-gradient(circle,
-                    rgba($apple-primary, 0.03) 0%,
-                    rgba($apple-primary, 0.01) 50%,
+                    rgba($apple-primary, 0.06) 0%, // KORRIGIERT: Sichtbarer
+                    rgba($apple-primary, 0.02) 50%,
                     transparent 100%);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             animation: glow-pulse 8s ease-in-out infinite;
             pointer-events: none;
-
-            @media screen and (max-width: 768px) {
-                width: clamp(150px, 30vw, 200px);
-                height: clamp(150px, 30vw, 200px);
-                animation-duration: 6s;
-            }
-
-            @media screen and (max-width: 480px) {
-                width: clamp(120px, 25vw, 150px);
-                height: clamp(120px, 25vw, 150px);
-                animation-duration: 5s;
-            }
+            z-index: 1;
         }
     }
 }
 
-// ===== ANIMATIONS - Apple-Style =====
-@keyframes hero-shimmer {
+// ===== LOCATION INTRODUCTION SECTION =====
+.location-introduction {
+    @include dFlex($fd: column, $gap: clamp(20px, 4vw, 48px));
+    z-index: 3;
 
-    0%,
-    20% {
-        left: -100%;
-        opacity: 0;
+    .location {
+        position: relative;
+        height: clamp(80px, 15vw, 160px);
+        @include dFlex($ai: center, $gap: clamp(12px, 3vw, 32px));
+        padding: clamp(12px, 3vw, 32px);
+        transition: $apple-transition-medium;
+        z-index: 4;
+
+        .location-icon-wrapper {
+            position: relative;
+            width: clamp(40px, 8vw, 80px);
+            height: clamp(40px, 8vw, 80px);
+            @include dFlex();
+            flex-shrink: 0;
+            z-index: 7;
+
+            .icon-glow {
+                position: absolute;
+                inset: -4px;
+                background: radial-gradient(circle,
+                        rgba($apple-primary, 0.3) 0%,
+                        transparent 70%);
+                border-radius: 50%;
+                animation: icon-glow-pulse 3s ease-in-out infinite;
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .img-wrapper {
+                position: relative;
+                @include dFlex();
+                background: rgba($apple-primary, 0.1);
+                border-radius: 50%;
+                border: 1px solid rgba($apple-primary, 0.3);
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+
+                img {
+                    width: clamp(20px, 4vw, 40px);
+                    height: clamp(20px, 4vw, 40px);
+                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                }
+
+                .hide-on-mobile {
+                    @media screen and (max-width: 768px) {
+                        display: none;
+                    }
+                }
+
+                .hide-on-desktop {
+                    @media screen and (min-width: 769px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .location-content {
+            flex: 1;
+            min-width: 0;
+            z-index: 7;
+
+            .location-text {
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-semibold;
+                font-size: clamp(16px, 4vw, 40px);
+                line-height: 1.2;
+                margin-bottom: clamp(4px, 1vw, 12px);
+
+                .highlight-text {
+                    background: $apple-teal-gradient;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+
+                .regular-text {
+                    color: $apple-text-primary;
+                }
+
+                .cursor-blink {
+                    color: $apple-primary;
+                    animation: cursor-blink 1s infinite;
+                }
+            }
+
+            .location-subtitle {
+                font-family: $apple-font-family;
+                font-weight: $apple-font-weight-regular;
+                font-size: clamp(12px, 2.5vw, 20px);
+                color: $apple-text-secondary;
+                line-height: 1.4;
+            }
+        }
     }
 
-    50% {
-        opacity: 1;
-    }
+    .introduction {
+        position: relative;
+        padding: clamp(16px, 4vw, 48px);
+        transition: $apple-transition-medium;
+        z-index: 4;
 
-    100% {
-        left: 100%;
-        opacity: 0;
-    }
-}
+        .card-background {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: inherit;
+            animation: card-morph 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-@keyframes text-shimmer {
-    0% {
-        left: -100%;
-    }
+        .introduction-text {
+            font-family: $apple-font-family;
+            font-weight: $apple-font-weight-regular;
+            font-size: clamp(14px, 3.5vw, 24px);
+            line-height: 1.6;
+            color: $apple-text-secondary;
+            text-align: justify;
+            position: relative;
+            z-index: 2;
 
-    100% {
-        left: 100%;
-    }
-}
+            &::before {
+                content: '"';
+                position: absolute;
+                top: clamp(-20px, -4vw, -32px);
+                left: clamp(-12px, -3vw, -24px);
+                font-size: clamp(24px, 6vw, 60px);
+                color: $apple-primary;
+                opacity: 0.5;
+                font-family: Georgia, serif;
+                z-index: 1;
+            }
 
-@keyframes hero-text-appear {
-    0% {
-        opacity: 0;
-        transform: translateY(40px);
-        filter: blur(4px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-    }
-}
-
-@keyframes underline-expand {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 100%;
-    }
-}
-
-@keyframes particle-float {
-
-    0%,
-    100% {
-        opacity: 0;
-        transform: translateY(0) translateX(0) scale(0.8);
-    }
-
-    25% {
-        opacity: 0.6;
-        transform: translateY(-20px) translateX(10px) scale(1);
-    }
-
-    50% {
-        opacity: 0.8;
-        transform: translateY(-10px) translateX(-5px) scale(1.2);
-    }
-
-    75% {
-        opacity: 0.4;
-        transform: translateY(-30px) translateX(8px) scale(0.9);
-    }
-}
-
-@keyframes glow-pulse {
-
-    0%,
-    100% {
-        opacity: 0.3;
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    50% {
-        opacity: 0.6;
-        transform: translate(-50%, -50%) scale(1.1);
-    }
-}
-
-@keyframes icon-glow-pulse {
-
-    0%,
-    100% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.8;
-        transform: scale(1.1);
-    }
-}
-
-@keyframes card-morph {
-    0% {
-        border-radius: $apple-radius-large;
-        transform: scale(1);
-    }
-
-    50% {
-        border-radius: $apple-radius-xl;
-        transform: scale(1.02);
-    }
-
-    100% {
-        border-radius: $apple-radius-large;
-        transform: scale(1);
-    }
-}
-
-@keyframes button-glow {
-
-    0%,
-    100% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-
-    50% {
-        opacity: 0.3;
-        transform: scale(1.2);
-    }
-}
-
-@keyframes cursor-blink {
-
-    0%,
-    50% {
-        opacity: 1;
-    }
-
-    51%,
-    100% {
-        opacity: 0;
+            &::after {
+                content: '"';
+                position: absolute;
+                bottom: clamp(-24px, -5vw, -42px);
+                right: clamp(-12px, -3vw, -24px);
+                font-size: clamp(24px, 6vw, 60px);
+                color: $apple-primary;
+                opacity: 0.5;
+                font-family: Georgia, serif;
+                z-index: 1;
+            }
+        }
     }
 }
 
@@ -371,26 +328,7 @@
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
-
-    @media screen and (max-width: 768px) {
-        margin: clamp(12px, 3vw, 24px) auto;
-        padding: clamp(16px, 4vw, 24px);
-        min-height: 60vh;
-        border-radius: $apple-radius-large;
-    }
-
-    @media screen and (max-width: 480px) {
-        margin: clamp(8px, 2vw, 16px) auto;
-        padding: clamp(12px, 3vw, 20px);
-        min-height: 50vh;
-        border-radius: $apple-radius-medium;
-    }
-
-    @media screen and (max-width: 375px) {
-        margin: 8px auto;
-        padding: 12px;
-        border-radius: $apple-radius-medium;
-    }
+    z-index: 1; // KORRIGIERT: Basis z-index
 
     &::before {
         content: '';
@@ -402,11 +340,7 @@
         background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
         animation: apple-why-me-ambient 15s ease-in-out infinite;
         filter: blur(40px);
-
-        @media screen and (max-width: 768px) {
-            filter: blur(20px);
-            opacity: 0.7;
-        }
+        z-index: 0; // KORRIGIERT: Hintergrund z-index
     }
 
     h2 {
@@ -417,24 +351,6 @@
         z-index: 2;
         text-align: center;
         font-size: clamp(24px, 5vw, 48px);
-
-        @media screen and (max-width: 768px) {
-            font-size: clamp(20px, 4.5vw, 32px);
-            margin-bottom: clamp(20px, 4vw, 32px);
-            padding-top: clamp(20px, 4vw, 40px);
-        }
-
-        @media screen and (max-width: 480px) {
-            font-size: clamp(18px, 4vw, 24px);
-            margin-bottom: 16px;
-            padding-top: 16px;
-        }
-
-        @media screen and (max-width: 375px) {
-            font-size: clamp(16px, 4vw, 20px);
-            margin-bottom: 12px;
-            padding-top: 12px;
-        }
     }
 
     .content {
@@ -446,395 +362,10 @@
         max-width: 1200px;
         margin: 0 auto;
 
-        @media screen and (max-width: 768px) {
-            gap: clamp(16px, 4vw, 32px);
-            padding: clamp(12px, 3vw, 40px);
-        }
-
-        @media screen and (max-width: 480px) {
-            gap: clamp(12px, 3vw, 20px);
-            padding: clamp(8px, 2vw, 24px);
-        }
-
-        @media screen and (max-width: 375px) {
-            gap: 12px;
-            padding: 8px;
-        }
-
-        .hero-section {
-            @include dFlex($fd: column, $gap: clamp(20px, 4vw, 48px));
-
-            @media screen and (max-width: 768px) {
-                gap: clamp(16px, 3vw, 32px);
-            }
-
-            @media screen and (max-width: 480px) {
-                gap: clamp(12px, 3vw, 20px);
-            }
-
-            // Location Carousel mit responsiven Animationen
-            .location-carousel {
-                position: relative;
-                height: clamp(80px, 15vw, 160px);
-                background: rgba(255, 255, 255, 0.03);
-                border-radius: clamp($apple-radius-medium, 2vw, $apple-radius-large);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                overflow: hidden;
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-
-                @media screen and (max-width: 768px) {
-                    height: clamp(70px, 12vw, 100px);
-                }
-
-                @media screen and (max-width: 480px) {
-                    height: clamp(60px, 10vw, 80px);
-                    border-radius: $apple-radius-medium;
-                }
-
-                @media screen and (max-width: 375px) {
-                    height: 60px;
-                    border-radius: $apple-radius-small;
-                }
-
-                .location-slide {
-                    position: absolute;
-                    inset: 0;
-                    @include dFlex($ai: center, $gap: clamp(12px, 3vw, 32px));
-                    padding: clamp(12px, 3vw, 32px);
-                    opacity: 0;
-                    transition: $apple-transition-medium;
-
-                    @media screen and (max-width: 480px) {
-                        gap: clamp(8px, 2vw, 16px);
-                        padding: clamp(8px, 2vw, 16px);
-                    }
-
-                    @media screen and (max-width: 375px) {
-                        gap: 8px;
-                        padding: 8px;
-                    }
-
-                    &.active {
-                        opacity: 1;
-                    }
-
-                    .location-icon {
-                        position: relative;
-                        width: clamp(40px, 8vw, 80px);
-                        height: clamp(40px, 8vw, 80px);
-                        @include dFlex();
-                        background: rgba($apple-primary, 0.1);
-                        border-radius: 50%;
-                        border: 1px solid rgba($apple-primary, 0.3);
-                        transition: $apple-transition-fast;
-                        flex-shrink: 0;
-
-                        @media screen and (max-width: 768px) {
-                            width: clamp(32px, 6vw, 50px);
-                            height: clamp(32px, 6vw, 50px);
-                        }
-
-                        @media screen and (max-width: 480px) {
-                            width: clamp(28px, 5vw, 40px);
-                            height: clamp(28px, 5vw, 40px);
-                        }
-
-                        @media screen and (max-width: 375px) {
-                            width: 28px;
-                            height: 28px;
-                        }
-
-                        .icon-glow {
-                            position: absolute;
-                            inset: -4px;
-                            background: radial-gradient(circle,
-                                    rgba($apple-primary, 0.3) 0%,
-                                    transparent 70%);
-                            border-radius: 50%;
-                            animation: icon-glow-pulse 3s ease-in-out infinite;
-                            pointer-events: none;
-
-                            @media screen and (max-width: 768px) {
-                                inset: -2px;
-                            }
-                        }
-
-                        &:hover {
-                            transform: scale(1.1);
-                            background: rgba($apple-primary, 0.2);
-                            box-shadow: $apple-shadow-glow;
-
-                            .icon-glow {
-                                animation-duration: 1.5s;
-                            }
-                        }
-
-                        img {
-                            width: clamp(20px, 4vw, 40px);
-                            height: clamp(20px, 4vw, 40px);
-                            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                            z-index: 1;
-
-                            @media screen and (max-width: 768px) {
-                                width: clamp(16px, 3vw, 24px);
-                                height: clamp(16px, 3vw, 24px);
-                            }
-
-                            @media screen and (max-width: 480px) {
-                                width: clamp(14px, 2.5vw, 20px);
-                                height: clamp(14px, 2.5vw, 20px);
-                            }
-
-                            @media screen and (max-width: 375px) {
-                                width: 14px;
-                                height: 14px;
-                            }
-                        }
-                    }
-
-                    .location-content {
-                        flex: 1;
-                        min-width: 0; // Prevent overflow
-
-                        .location-text {
-                            font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-semibold;
-                            font-size: clamp(16px, 4vw, 40px);
-                            line-height: 1.2;
-                            margin-bottom: clamp(4px, 1vw, 12px);
-
-                            @media screen and (max-width: 768px) {
-                                font-size: clamp(14px, 3.5vw, 24px);
-                            }
-
-                            @media screen and (max-width: 480px) {
-                                font-size: clamp(12px, 3vw, 18px);
-                                margin-bottom: 4px;
-                            }
-
-                            @media screen and (max-width: 375px) {
-                                font-size: clamp(11px, 2.8vw, 14px);
-                                margin-bottom: 2px;
-                            }
-
-                            .highlight {
-                                background: $apple-teal-gradient;
-                                -webkit-background-clip: text;
-                                background-clip: text;
-                                -webkit-text-fill-color: transparent;
-                            }
-
-                            .regular {
-                                color: $apple-text-primary;
-                            }
-
-                            .cursor {
-                                color: $apple-primary;
-                                animation: cursor-blink 1s infinite;
-                            }
-                        }
-
-                        .location-subtitle {
-                            font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-regular;
-                            font-size: clamp(12px, 2.5vw, 20px);
-                            color: $apple-text-secondary;
-                            line-height: 1.4;
-
-                            @media screen and (max-width: 768px) {
-                                font-size: clamp(10px, 2vw, 16px);
-                            }
-
-                            @media screen and (max-width: 480px) {
-                                font-size: clamp(9px, 1.8vw, 14px);
-                            }
-
-                            @media screen and (max-width: 375px) {
-                                font-size: clamp(8px, 1.5vw, 12px);
-                            }
-                        }
-                    }
-                }
-
-                .progress-dots {
-                    position: absolute;
-                    bottom: clamp(8px, 2vw, 16px);
-                    right: clamp(12px, 3vw, 24px);
-                    @include dFlex($gap: clamp(6px, 1.5vw, 12px));
-
-                    @media screen and (max-width: 480px) {
-                        bottom: 6px;
-                        right: 8px;
-                        gap: 6px;
-                    }
-
-                    @media screen and (max-width: 375px) {
-                        bottom: 4px;
-                        right: 6px;
-                        gap: 4px;
-                    }
-
-                    .dot {
-                        width: clamp(6px, 1.5vw, 10px);
-                        height: clamp(6px, 1.5vw, 10px);
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.3);
-                        transition: $apple-transition-fast;
-                        cursor: pointer;
-
-                        @media screen and (max-width: 480px) {
-                            width: 6px;
-                            height: 6px;
-                        }
-
-                        @media screen and (max-width: 375px) {
-                            width: 5px;
-                            height: 5px;
-                        }
-
-                        &:hover {
-                            transform: scale(1.2);
-                            background: rgba($apple-primary, 0.6);
-                        }
-
-                        &.active {
-                            background: $apple-primary;
-                            box-shadow: $apple-shadow-glow;
-                        }
-                    }
-                }
-            }
-
-            // Introduction Card mit responsivem Morph-Effekt
-            .introduction-card {
-                position: relative;
-                background: rgba(255, 255, 255, 0.04);
-                border-radius: clamp($apple-radius-medium, 2vw, $apple-radius-large);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                padding: clamp(16px, 4vw, 48px);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                transition: $apple-transition-medium;
-
-                @media screen and (max-width: 768px) {
-                    padding: clamp(12px, 3vw, 32px);
-                }
-
-                @media screen and (max-width: 480px) {
-                    padding: clamp(10px, 2.5vw, 20px);
-                    border-radius: $apple-radius-medium;
-                }
-
-                @media screen and (max-width: 375px) {
-                    padding: 10px;
-                    border-radius: $apple-radius-small;
-                }
-
-                .card-background {
-                    position: absolute;
-                    inset: 0;
-                    background: rgba(255, 255, 255, 0.02);
-                    border-radius: inherit;
-                    animation: card-morph 8s ease-in-out infinite;
-                    pointer-events: none;
-                }
-
-                &:hover {
-                    background: rgba(255, 255, 255, 0.06);
-                    transform: translateY(-2px);
-                    box-shadow: $apple-shadow-medium;
-
-                    .card-background {
-                        animation-duration: 4s;
-                    }
-                }
-
-                .introduction-text {
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-regular;
-                    font-size: clamp(14px, 3.5vw, 24px);
-                    line-height: 1.6;
-                    color: $apple-text-secondary;
-                    text-align: justify;
-                    position: relative;
-                    z-index: 1;
-
-                    @media screen and (max-width: 768px) {
-                        font-size: clamp(12px, 3vw, 20px);
-                        text-align: left;
-                    }
-
-                    @media screen and (max-width: 480px) {
-                        font-size: clamp(11px, 2.5vw, 16px);
-                        line-height: 1.5;
-                    }
-
-                    @media screen and (max-width: 375px) {
-                        font-size: clamp(10px, 2.2vw, 14px);
-                        line-height: 1.4;
-                    }
-
-                    &::before {
-                        content: '"';
-                        position: absolute;
-                        top: clamp(-20px, -4vw, -32px);
-                        left: clamp(-12px, -3vw, -24px);
-                        font-size: clamp(24px, 6vw, 60px);
-                        color: $apple-primary;
-                        opacity: 0.5;
-                        font-family: Georgia, serif;
-
-                        @media screen and (max-width: 480px) {
-                            top: -16px;
-                            left: -8px;
-                            font-size: clamp(20px, 4vw, 32px);
-                        }
-
-                        @media screen and (max-width: 375px) {
-                            top: -12px;
-                            left: -6px;
-                            font-size: 20px;
-                        }
-                    }
-
-                    &::after {
-                        content: '"';
-                        position: absolute;
-                        bottom: clamp(-24px, -5vw, -42px);
-                        right: clamp(-12px, -3vw, -24px);
-                        font-size: clamp(24px, 6vw, 60px);
-                        color: $apple-primary;
-                        opacity: 0.5;
-                        font-family: Georgia, serif;
-
-                        @media screen and (max-width: 480px) {
-                            bottom: -20px;
-                            right: -8px;
-                            font-size: clamp(20px, 4vw, 32px);
-                        }
-
-                        @media screen and (max-width: 375px) {
-                            bottom: -16px;
-                            right: -6px;
-                            font-size: 20px;
-                        }
-                    }
-                }
-            }
-        }
-
         .cta-section {
             @include dFlex($jc: center);
             padding-top: clamp(12px, 3vw, 32px);
-
-            @media screen and (max-width: 480px) {
-                padding-top: clamp(8px, 2vw, 16px);
-            }
-
-            @media screen and (max-width: 375px) {
-                padding-top: 8px;
-            }
+            z-index: 3;
 
             .talk-button {
                 .apple-button {
@@ -844,28 +375,11 @@
                     padding: clamp(12px, 3vw, 24px) clamp(24px, 6vw, 56px);
                     min-width: clamp(140px, 35vw, 280px);
                     overflow: hidden;
-
-                    @media screen and (max-width: 768px) {
-                        font-size: clamp(12px, 3vw, 18px);
-                        padding: clamp(10px, 2.5vw, 20px) clamp(20px, 5vw, 40px);
-                        min-width: clamp(120px, 30vw, 220px);
-                    }
-
-                    @media screen and (max-width: 480px) {
-                        font-size: clamp(11px, 2.5vw, 16px);
-                        padding: clamp(8px, 2vw, 16px) clamp(16px, 4vw, 32px);
-                        min-width: clamp(100px, 25vw, 180px);
-                    }
-
-                    @media screen and (max-width: 375px) {
-                        font-size: 11px;
-                        padding: 8px 16px;
-                        min-width: 100px;
-                    }
+                    z-index: 4;
 
                     .button-content {
                         position: relative;
-                        z-index: 1;
+                        z-index: 2;
                     }
 
                     .button-glow {
@@ -877,12 +391,7 @@
                         border-radius: inherit;
                         animation: button-glow 4s ease-in-out infinite;
                         pointer-events: none;
-                    }
-
-                    &:hover {
-                        .button-glow {
-                            animation-duration: 2s;
-                        }
+                        z-index: 1;
                     }
                 }
             }
@@ -890,7 +399,209 @@
     }
 }
 
-// Accessibility & Reduced Motion
+// ===== APPLE GLASSMORPHISM STYLE =====
+.apple-glassmorphism {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: clamp($apple-radius-medium, 2vw, $apple-radius-large);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    overflow: hidden;
+}
+
+.apple-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: clamp($apple-radius-medium, 2vw, $apple-radius-large);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+// ===== ANIMATIONS =====
+@keyframes hero-shimmer {
+    0%, 20% {
+        left: -100%;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes text-shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes particle-float {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translateY(0) translateX(0) scale(0.8);
+    }
+    25% {
+        opacity: 0.8;
+        transform: translateY(-20px) translateX(10px) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-10px) translateX(-5px) scale(1.2);
+    }
+    75% {
+        opacity: 0.7;
+        transform: translateY(-30px) translateX(8px) scale(0.9);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+@keyframes icon-glow-pulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes card-morph {
+    0% {
+        border-radius: $apple-radius-large;
+        transform: scale(1);
+    }
+    50% {
+        border-radius: $apple-radius-xl;
+        transform: scale(1.02);
+    }
+    100% {
+        border-radius: $apple-radius-large;
+        transform: scale(1);
+    }
+}
+
+@keyframes button-glow {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes cursor-blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes apple-why-me-ambient {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.08;
+    }
+    33% {
+        transform: translateY(-20px) rotate(2deg) scale(1.02);
+        opacity: 0.12;
+    }
+    66% {
+        transform: translateY(15px) rotate(-1deg) scale(0.98);
+        opacity: 0.06;
+    }
+}
+
+// ===== RESPONSIVE DESIGN =====
+@media screen and (max-width: 768px) {
+    .why-me-container {
+        margin: clamp(12px, 3vw, 24px) auto;
+        padding: clamp(16px, 4vw, 24px);
+        min-height: 60vh;
+    }
+
+    .location-introduction .location {
+        height: clamp(70px, 12vw, 120px);
+        gap: clamp(10px, 2.5vw, 24px);
+        padding: clamp(10px, 2.5vw, 24px);
+
+        .location-icon-wrapper {
+            width: clamp(35px, 7vw, 60px);
+            height: clamp(35px, 7vw, 60px);
+
+            .img-wrapper img {
+                width: clamp(18px, 3.5vw, 30px);
+                height: clamp(18px, 3.5vw, 30px);
+            }
+        }
+
+        .location-content {
+            .location-text {
+                font-size: clamp(14px, 3.5vw, 28px);
+            }
+
+            .location-subtitle {
+                font-size: clamp(10px, 2vw, 16px);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .why-me-container {
+        margin: clamp(8px, 2vw, 16px) auto;
+        padding: clamp(12px, 3vw, 20px);
+        min-height: 50vh;
+    }
+
+    .location-introduction .location {
+        height: clamp(60px, 10vw, 100px);
+        gap: clamp(8px, 2vw, 16px);
+        padding: clamp(8px, 2vw, 16px);
+
+        .location-icon-wrapper {
+            width: clamp(30px, 6vw, 50px);
+            height: clamp(30px, 6vw, 50px);
+
+            .img-wrapper img {
+                width: clamp(15px, 3vw, 25px);
+                height: clamp(15px, 3vw, 25px);
+            }
+        }
+
+        .location-content {
+            .location-text {
+                font-size: clamp(12px, 3vw, 20px);
+            }
+
+            .location-subtitle {
+                font-size: clamp(8px, 1.8vw, 12px);
+            }
+        }
+    }
+}
+
+// ===== ACCESSIBILITY =====
 @media (prefers-reduced-motion: reduce) {
     .hero-text-section {
         &::before {
@@ -898,140 +609,32 @@
         }
 
         .hero-text-container {
-            .hero-main-text {
+            .animated-glow {
                 animation: none;
-                opacity: 1;
-                transform: none;
-
-                .shimmer-text::before {
-                    animation: none;
-                }
-
-                .highlight-word::after {
-                    animation: none;
-                    width: 100%;
-                }
+                opacity: 0.2;
             }
 
             .floating-particles .particle {
                 animation: none;
                 opacity: 0.3;
             }
-
-            .animated-glow {
-                animation: none;
-                opacity: 0.2;
-            }
         }
     }
 
-    .location-icon .icon-glow {
+    .location-icon-wrapper .icon-glow {
         animation: none;
     }
 
-    .introduction-card .card-background {
+    .introduction .card-background {
         animation: none;
     }
 
     .apple-button .button-glow {
         animation: none;
     }
-}
 
-// High Contrast Support
-@media (prefers-contrast: high) {
-    .why-me-container {
-        background: #000;
-        border: 2px solid #fff;
-
-        .location-carousel {
-            background: #111;
-            border: 2px solid #333;
-        }
-
-        .introduction-card {
-            background: #111;
-            border: 2px solid #333;
-        }
-
-        .location-text {
-
-            .highlight,
-            .regular {
-                color: #fff !important;
-                background: none !important;
-                -webkit-text-fill-color: #fff !important;
-            }
-        }
-
-        .progress-dots .dot {
-            background: #666;
-
-            &.active {
-                background: #fff;
-            }
-        }
-
-        .hero-main-text {
-            color: #fff !important;
-
-            .highlight-word {
-                color: #fff !important;
-                background: none !important;
-                -webkit-text-fill-color: #fff !important;
-            }
-        }
-    }
-}
-
-// Print Styles
-@media print {
-    .why-me-container {
-        background: white !important;
-        color: black !important;
-        box-shadow: none !important;
-        border: 1px solid black !important;
-
-        &::before,
-        &::after {
-            display: none !important;
-        }
-
-        .location-carousel,
-        .introduction-card {
-            background: white !important;
-            border: 1px solid black !important;
-            box-shadow: none !important;
-        }
-
-        .location-text {
-
-            .highlight,
-            .regular {
-                color: black !important;
-                background: none !important;
-                -webkit-text-fill-color: black !important;
-            }
-        }
-
-        .progress-dots {
-            display: none;
-        }
-
-        .apple-button {
-            background: white !important;
-            color: black !important;
-            border: 2px solid black !important;
-        }
-
-        .hero-main-text {
-            color: black !important;
-
-            .highlight-word {
-                color: black !important;
-                background: none !important;
-                -webkit-text-fill-color: black !important;
-            }
-        }
+    .cursor-blink {
+        animation: none;
+        opacity: 1;
     }
 }
