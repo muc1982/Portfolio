@@ -14,8 +14,8 @@
     </div>
 
     <!-- Mobile Navigation Menu -->
-    <div class="menu-wrapper" *ngIf="showMenu">
-        <nav class="menu" role="navigation" aria-label="Hauptnavigation">
+    <div class="menu-wrapper" *ngIf="showMenu" (click)="closeMenu()">
+        <nav class="menu" role="navigation" aria-label="Hauptnavigation" (click)="$event.stopPropagation()">
             <ul>
                 <li (click)="scrollTo('why-me')" (keydown.enter)="scrollTo('why-me')" tabindex="0" role="button">
                     {{ 'nav.whyme' | translate }}
