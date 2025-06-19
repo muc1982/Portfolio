@@ -1,3 +1,4 @@
+// src/app/main-page/landing-page/landing-page-mobile/landing-page-mobile.component.scss
 @use '../../../../style/apple-variables' as *;
 
 .menu-content {
@@ -100,7 +101,7 @@
         margin-top: clamp(60px, 12vw, 72px);
         @include dFlex($fd: column, $jc: center, $ai: center);
         padding: clamp(16px, 4vw, 24px);
-        gap: clamp(20px, 5vw, 32px);
+        gap: clamp(32px, 8vw, 48px); // KORRIGIERT: Größerer Gap
         
         .img-wrapper {
             order: 2;
@@ -109,9 +110,10 @@
             max-width: 100%;
             
             img {
-                width: clamp(200px, 50vw, 280px);
+                // KORRIGIERT: Kleinere Bildgröße für Mobile wie gewünscht
+                width: clamp(160px, 40vw, 220px);
                 height: auto;
-                max-height: clamp(240px, 35vh, 320px);
+                max-height: clamp(200px, 28vh, 260px);
                 object-fit: contain;
                 border-radius: $apple-radius-large;
                 box-shadow: $apple-shadow-large;
@@ -121,6 +123,22 @@
                 &:hover {
                     transform: scale(1.02);
                     box-shadow: $apple-shadow-large, $apple-shadow-glow;
+                }
+                
+                // Spezifische Größen für verschiedene Breakpoints
+                @media screen and (max-width: 480px) {
+                    width: clamp(140px, 35vw, 180px);
+                    max-height: clamp(180px, 25vh, 220px);
+                }
+                
+                @media screen and (max-width: 375px) {
+                    width: 160px;
+                    max-height: 200px;
+                }
+                
+                @media screen and (max-width: 320px) {
+                    width: 140px;
+                    max-height: 180px;
                 }
             }
         }
@@ -132,7 +150,8 @@
             
             .title {
                 .name {
-                    font-size: clamp(24px, 7vw, 36px); 
+                    // KORRIGIERT: Gradient Text wie auf Desktop
+                    font-size: clamp(28px, 8vw, 42px); 
                     line-height: 1.1;
                     margin-bottom: clamp(8px, 2vw, 12px);
                     font-family: $apple-font-family;
@@ -144,15 +163,38 @@
                     letter-spacing: -0.02em;
                     text-align: center;
                     width: 100%;
+                    position: relative;
+                    
+                    // Sicherstellen, dass der Gradient sichtbar ist
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: $apple-teal-gradient;
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        z-index: -1;
+                    }
+                    
+                    @media screen and (max-width: 480px) {
+                        font-size: clamp(26px, 7.5vw, 36px);
+                        margin-bottom: clamp(6px, 1.5vw, 10px);
+                    }
                     
                     @media screen and (max-width: 375px) {
-                        font-size: 24px;
+                        font-size: 28px;
                         margin-bottom: 8px;
+                    }
+                    
+                    @media screen and (max-width: 320px) {
+                        font-size: 24px;
+                        margin-bottom: 6px;
                     }
                 }
                 
                 .position {
-                    font-size: clamp(16px, 4.5vw, 22px); 
+                    font-size: clamp(18px, 5vw, 26px); 
                     line-height: 1.3;
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
@@ -161,7 +203,15 @@
                     text-align: center;
                     width: 100%;
                     
+                    @media screen and (max-width: 480px) {
+                        font-size: clamp(16px, 4.5vw, 22px);
+                    }
+                    
                     @media screen and (max-width: 375px) {
+                        font-size: 18px;
+                    }
+                    
+                    @media screen and (max-width: 320px) {
                         font-size: 16px;
                     }
                 }
@@ -198,103 +248,13 @@
                 &:active {
                     transform: translateY(-1px) scale(1.05);
                 }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: $breakpoint-sm) {
-    .landing-page-mobile {
-        .content-top {
-            height: clamp(56px, 11vw, 64px);
-            padding: 0 $padding-mobile-sm;
-            
-            .burger .burger-img {
-                width: clamp(22px, 5.5vw, 28px);
-                height: clamp(16px, 4vw, 20px);
-            }
-        }
-        
-        .content-middle {
-            margin-top: clamp(56px, 11vw, 64px);
-            padding: clamp(12px, 3vw, 20px);
-            gap: clamp(16px, 4vw, 24px);
-            
-            .img-wrapper {
-                img {
-                    width: clamp(180px, 45vw, 240px);
-                    max-height: clamp(220px, 30vh, 280px);
-                }
-            }
-            
-            .title-logo-wrapper {
-                .title {
-                    .name {
-                        font-size: clamp(22px, 6.5vw, 32px);
-                        margin-bottom: clamp(6px, 1.5vw, 10px);
-                    }
-                    
-                    .position {
-                        font-size: clamp(15px, 4vw, 20px);
-                    }
-                }
-            }
-            
-            .arrow-wrapper {
-                padding-bottom: clamp(12px, 3vw, 20px);
                 
-                .arrow-down {
-                    width: clamp(20px, 5vw, 28px);
-                    height: clamp(40px, 10vw, 56px);
+                @media screen and (max-width: 375px) {
+                    width: 22px;
+                    height: 44px;
                 }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: $breakpoint-xs) {
-    .landing-page-mobile {
-        .content-top {
-            height: 56px;
-            padding: 0 12px;
-            
-            .burger .burger-img {
-                width: 20px;
-                height: 15px;
-            }
-        }
-        
-        .content-middle {
-            margin-top: 56px;
-            padding: 12px;
-            gap: 16px;
-            
-            .img-wrapper {
-                img {
-                    width: 180px;
-                    max-height: 220px;
-                }
-            }
-            
-            .title-logo-wrapper {
-                .title {
-                    .name {
-                        font-size: 22px;
-                        line-height: 1.1;
-                        margin-bottom: 6px;
-                    }
-                    
-                    .position {
-                        font-size: 15px;
-                        line-height: 1.2;
-                    }
-                }
-            }
-            
-            .arrow-wrapper {
-                padding-bottom: 16px;
                 
-                .arrow-down {
+                @media screen and (max-width: 320px) {
                     width: 20px;
                     height: 40px;
                 }
@@ -303,6 +263,7 @@
     }
 }
 
+// KORRIGIERT: Landscape Modus für sehr kleine Screens
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .landing-page-mobile {
         .content-middle {
@@ -310,14 +271,17 @@
             align-items: center;
             gap: $space-mobile-base;
             padding: $padding-mobile-sm $padding-mobile-base;
+            min-height: 100vh;
             
             .img-wrapper {
                 flex: 1;
                 order: 2;
+                max-width: 45%;
                 
                 img {
-                    max-height: 55vh;
-                    max-width: 40vw;
+                    max-height: 60vh;
+                    max-width: 100%;
+                    width: auto;
                 }
             }
             
@@ -325,10 +289,11 @@
                 flex: 1;
                 text-align: left;
                 order: 1;
+                max-width: 50%;
                 
                 .title {
                     .name {
-                        font-size: clamp(24px, 5vw, 32px);
+                        font-size: clamp(22px, 5vw, 32px);
                         text-align: left;
                     }
                     
@@ -357,6 +322,7 @@
     }
 }
 
+// Ultra kleine Screens
 @media screen and (max-width: 280px) {
     .landing-page-mobile {
         .content-top {
@@ -372,12 +338,12 @@
         .content-middle {
             margin-top: 52px;
             padding: 8px;
-            gap: 12px;
+            gap: 16px;
             
             .img-wrapper {
                 img {
-                    width: 160px;
-                    max-height: 200px;
+                    width: 120px;
+                    max-height: 150px;
                 }
             }
             
@@ -406,6 +372,7 @@
     }
 }
 
+// Accessibility
 @media (prefers-reduced-motion: reduce) {
     .landing-page-mobile {
         .content-middle {
@@ -427,6 +394,7 @@
     }
 }
 
+// High Contrast Mode
 @media (prefers-contrast: high) {
     .landing-page-mobile {
         background: #000;
@@ -468,6 +436,7 @@
     }
 }
 
+// Print Styles
 @media print {
     .landing-page-mobile {
         .content-top {
