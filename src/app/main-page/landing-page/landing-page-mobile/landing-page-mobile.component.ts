@@ -45,8 +45,24 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  toggleMenu(): void {
+  // KORRIGIERT: touchstart Event hinzugefügt für mobile Geräte
+  @HostListener('touchstart', ['$event'], { passive: true })
+  onTouchStart(event: TouchEvent): void {
+    // Verhindert dass der Button "sticky" wird auf iOS
+    const target = event.target as HTMLElement;
+    if (target?.closest('.burger-menu-btn')) {
+      event.stopPropagation();
+    }
+  }
+
+  toggleMenu(event?: Event): void {
     console.log('Toggle Menu - Current state:', this.showMenu, 'Window width:', window.innerWidth);
+    
+    // KORRIGIERT: Event handling für Touch-Geräte
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     
     if (this.showMenu) {
       this.forceResetMenu();
@@ -151,13 +167,5 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
   private adjustViewport(): void {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
-
-  @HostListener('touchstart', ['$event'])
-  onTouchStart(event: TouchEvent): void {
-    const target = event.target as HTMLElement;
-    if (target?.closest('.burger-menu-btn')) {
-      event.preventDefault();
-    }
   }
 }

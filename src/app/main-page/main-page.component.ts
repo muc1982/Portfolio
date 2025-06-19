@@ -8,6 +8,7 @@ import { ContactMeComponent } from './contact-me/contact-me.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { ContactMeMobileComponent } from "./contact-me/contact-me-mobile/contact-me-mobile.component";
+import { LandingPageMobileComponent } from './landing-page/landing-page-mobile/landing-page-mobile.component';
 
 @Component({
   selector: 'app-main-page',
@@ -21,7 +22,7 @@ import { ContactMeMobileComponent } from "./contact-me/contact-me-mobile/contact
     ContactMeComponent, 
     NavComponent, 
     FooterComponent, 
-    ContactMeMobileComponent
+    ContactMeMobileComponent,
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'

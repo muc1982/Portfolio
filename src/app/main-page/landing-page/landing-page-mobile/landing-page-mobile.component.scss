@@ -674,3 +674,189 @@
         transform: rotate(5deg) scale(1.05);
     }
 }
+
+// Füge diese iOS-spezifischen Korrekturen am Ende der bestehenden SCSS-Datei hinzu:
+
+// iOS Touch-Optimierungen
+.burger-menu-wrapper {
+    .burger-menu-btn {
+        // KRITISCH für iOS: Touch-Optimierungen
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        
+        // Verhindert iOS Zoom beim Touch
+        touch-action: manipulation;
+        
+        // iOS-spezifische Optimierungen
+        @supports (-webkit-touch-callout: none) {
+            // iOS Safari spezifisch
+            outline: none;
+            border: none;
+            -webkit-appearance: none;
+            
+            &:focus {
+                outline: none;
+            }
+            
+            &:active {
+                outline: none;
+                transform: scale(0.98);
+            }
+        }
+        
+        // Verbesserte Touch-Area für kleine Finger
+        @media screen and (max-width: 480px) {
+            min-width: 48px;
+            min-height: 48px;
+            
+            // Größerer Touch-Bereich durch Pseudo-Element
+            &::before {
+                content: '';
+                position: absolute;
+                top: -8px;
+                left: -8px;
+                right: -8px;
+                bottom: -8px;
+                z-index: -1;
+            }
+        }
+        
+        span {
+            // Verhindert Text-Auswahl auf iOS
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            
+            // Touch-Optimierung
+            pointer-events: none;
+        }
+    }
+}
+
+// Menu Touch-Optimierungen
+.menu-wrapper {
+    // Verhindert Scroll-through auf iOS
+    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
+    
+    &.open {
+        // iOS-spezifisches Backdrop-Filter
+        @supports (-webkit-backdrop-filter: blur(30px)) {
+            -webkit-backdrop-filter: blur(30px);
+        }
+    }
+    
+    .menu-overlay {
+        // Touch-Optimierung für Overlay
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .menu {
+        ul {
+            li {
+                // Touch-Optimierung für Menu-Items
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                touch-action: manipulation;
+                
+                // Verbesserte Touch-Targets
+                min-height: 60px; // Größer für bessere Bedienbarkeit
+                @include dFlex($ai: center, $jc: center);
+                
+                // iOS Safari spezifische Optimierungen
+                @supports (-webkit-touch-callout: none) {
+                    &:active {
+                        background: rgba(255, 255, 255, 0.1);
+                        transform: scale(0.98);
+                    }
+                }
+                
+                &:not(.mobile-lang-item) {
+                    cursor: pointer;
+                    
+                    // Verbesserte iOS Touch-Feedback
+                    &:hover,
+                    &:active {
+                        background: rgba(255, 255, 255, 0.08);
+                        
+                        @supports (-webkit-touch-callout: none) {
+                            // Nur auf iOS
+                            background: rgba(255, 255, 255, 0.12);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Arrow Button iOS Touch Fix
+.arrow-wrapper {
+    .arrow-down {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        touch-action: manipulation;
+        
+        // Größerer Touch-Bereich für mobile Geräte
+        @media screen and (max-width: 480px) {
+            &::after {
+                content: '';
+                position: absolute;
+                top: -12px;
+                left: -12px;
+                right: -12px;
+                bottom: -12px;
+                z-index: -1;
+            }
+        }
+    }
+}
+
+// Globale iOS Body-Lock Optimierungen
+body.menu-open {
+    // Verhindert iOS Safari Bounce-Scrolling
+    position: fixed;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    
+    @supports (-webkit-touch-callout: none) {
+        // iOS Safari spezifisch
+        overflow: hidden;
+        -webkit-overflow-scrolling: auto;
+    }
+}
+
+// Spezifische iPhone/iPad Media Queries
+@media screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    // iPhone spezifisch
+    .burger-menu-btn {
+        // Verbesserte Tap-Response für iPhone
+        transition: transform 0.1s ease-out;
+        
+        &:active {
+            transform: scale(0.95) !important;
+        }
+    }
+    
+    .menu li {
+        // Größere Touch-Targets für iPhone
+        min-height: 64px;
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+    // iPad spezifisch
+    .menu li {
+        min-height: 72px;
+        font-size: 20px;
+    }
+}
