@@ -1,4 +1,5 @@
 @use 'sass:color';
+
 $apple-transition-fast: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 $apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 $apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
@@ -24,6 +25,7 @@ $apple-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.25) !default;
 $apple-shadow-large: 0 8px 32px rgba(0, 0, 0, 0.35) !default;
 $apple-shadow-glow: 0 0 20px rgba(10, 132, 255, 0.6) !default;
 
+// 3. Typography
 $apple-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
 $apple-font-weight-regular: 400 !default;
 $apple-font-weight-medium: 500 !default;
@@ -66,6 +68,58 @@ $breakpoint-large: 1440px;
     @media screen and (min-width: #{$breakpoint-tablet}) {
         font-size: $desktop-size;
     }
+}
+
+@mixin hero-title {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-align: center;
+    
+    @media screen and (min-width: #{$breakpoint-tablet}) {
+        font-size: clamp(3rem, 6vw, 5rem);
+    }
+}
+
+@mixin section-title {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-align: center;
+    
+    @media screen and (min-width: #{$breakpoint-tablet}) {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+    }
+}
+
+@mixin h1Title() {
+    @include hero-title;
+    
+    & {
+        background: $apple-teal-gradient;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+@mixin h2Title() {
+    @include section-title;
+    
+    & {
+        background: $apple-teal-gradient;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+@mixin h2TitleMobile() {
+    @include h2Title(); 
 }
 
 @mixin apple-input() {
@@ -173,26 +227,6 @@ $breakpoint-large: 1440px;
             display: none;
         }
     }
-}
-
-@mixin h1Title() {
-    @include hero-title;
-    background: $apple-teal-gradient;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-@mixin h2Title() {
-    @include section-title;
-    background: $apple-teal-gradient;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-@mixin h2TitleMobile() {
-    @include h2Title(); 
 }
 
 @mixin apple-logo() {
