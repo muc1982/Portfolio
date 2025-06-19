@@ -83,7 +83,6 @@
         </div>
         }
 
-        <!-- DA Bubble Project mit neuen Inhalten -->
         <div class="project" *ngIf="currentTab == projects.length">
             <div class="project-top">
                 <h3 class="project-top-title">DA Bubble</h3>
@@ -102,7 +101,7 @@
                 <div class="project-img coming-soon-container" #animatedEl2>
                     <div class="coming-soon-text-overlay">
                         <div class="coming-soon-badge">
-                            <span class="coming-soon-emoji">🚀</span>
+                            <span class="coming-soon-emoji"></span>
                             <span class="coming-soon-label">Bald verfügbar</span>
                         </div>
                         <div class="coming-soon-subtitle"></div>
@@ -150,9 +149,9 @@
             </div>
         </div>
 
-        <!-- Team Player Section mit Apple-Style Animationen -->
         <div class="team-player">
             <span appScrollBounce="my-projects" #scrollRef="appScrollBounce" style="display: none"></span>
+
             <div class="team-player-header">
                 <h4 class="team-player-title">
                     <span class="title-gradient">{{ 'player.needateamplayer' | translate}}</span>
@@ -172,14 +171,10 @@
                     <div class="player premium-card" [appScrollAnimate]="{animateCss:'bubble-out-075'}">
                         <div class="player-glow"></div>
                         <div class="player-content">
-                            <div class="player-avatar">
-                                <div class="avatar-ring"></div>
-                                <div class="avatar-text">RG</div>
-                            </div>
                             <div class="player-info">
                                 <div class="player-name">Robert Greulich</div>
                                 <div class="player-project">
-                                    <span> {{ 'player.project' | translate}} </span>
+                                    <span>{{ 'player.project' | translate}}</span>
                                     <span class="project-link pointer" (click)="toProject('join')">
                                         <span class="link-text">Join</span>
                                         <span class="link-arrow">→</span>
@@ -196,14 +191,10 @@
                     <div class="player premium-card" [appScrollAnimate]="{animateCss:'bubble-out-075'}">
                         <div class="player-glow"></div>
                         <div class="player-content">
-                            <div class="player-avatar">
-                                <div class="avatar-ring"></div>
-                                <div class="avatar-text">SR</div>
-                            </div>
                             <div class="player-info">
                                 <div class="player-name">Steven Rudko</div>
                                 <div class="player-project">
-                                    <span>{{ 'player.project' | translate}} </span>
+                                    <span>{{ 'player.project' | translate}}</span>
                                     <span class="project-link pointer" (click)="toProject('join')">
                                         <span class="link-text">Join</span>
                                         <span class="link-arrow">→</span>
@@ -220,14 +211,10 @@
                     <div class="player premium-card" [appScrollAnimate]="{animateCss:'bubble-out-075'}">
                         <div class="player-glow"></div>
                         <div class="player-content">
-                            <div class="player-avatar">
-                                <div class="avatar-ring"></div>
-                                <div class="avatar-text">FN</div>
-                            </div>
                             <div class="player-info">
                                 <div class="player-name">Felix Naturstein</div>
                                 <div class="player-project">
-                                    <span>{{ 'player.project' | translate}} </span>
+                                    <span>{{ 'player.project' | translate}}</span>
                                     <span class="project-link pointer" (click)="toProject('pollo')">
                                         <span class="link-text">El Pollo Loco</span>
                                         <span class="link-arrow">→</span>

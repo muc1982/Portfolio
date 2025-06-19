@@ -247,7 +247,6 @@
                         }
                     }
 
-                    // COMING SOON ANIMATION - ZENTRIERT
                     &.coming-soon-container {
                         position: relative;
 
@@ -286,354 +285,436 @@
                         }
                     }
                 }
+            }
 
-                @keyframes apple-coming-soon-pulse {
+            .project-bottom {
+                @include dFlex($fd: column, $gap: 12px);
+                position: relative;
+                z-index: 1;
+                width: 100%;
 
-                    0%,
-                    100% {
-                        transform: translate(-50%, -50%) scale(1);
-                        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba($apple-primary, 0.4);
+                .tab-li {
+                    @include dFlex($gap: 12px, $ai: flex-start);
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: $apple-radius-large;
+                    padding: 14px;
+                    transition: $apple-transition-fast;
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                        transform: translateX(2px);
+                        border-color: rgba(255, 255, 255, 0.1);
                     }
 
-                    50% {
-                        transform: translate(-50%, -50%) scale(1.08);
-                        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 6px rgba($apple-primary, 0);
+                    .right-of-logo {
+                        flex: 1;
+                        width: 100%;
+
+                        >div {
+                            @include dFlex($ai: center, $gap: 8px);
+                            margin-bottom: 8px;
+
+                            img {
+                                width: 14px;
+                                height: 14px;
+                                flex-shrink: 0;
+                                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                            }
+
+                            h4 {
+                                font-family: $apple-font-family;
+                                font-weight: $apple-font-weight-semibold;
+                                color: $apple-primary;
+                                font-size: 15px;
+                                margin: 0;
+                                flex: 1;
+                                line-height: 1.3;
+                                @include dFlex($ai: center, $gap: 6px);
+
+                                .process-emoji,
+                                .experience-emoji {
+                                    font-size: 16px;
+                                    animation: apple-emoji-float 3s ease-in-out infinite;
+                                }
+
+                                .process-emoji {
+                                    animation-delay: 0.5s;
+                                }
+
+                                .experience-emoji {
+                                    animation-delay: 1s;
+                                }
+                            }
+                        }
+
+                        >p {
+                            font-family: $apple-font-family;
+                            font-weight: $apple-font-weight-regular;
+                            color: $apple-text-secondary;
+                            font-size: 13px;
+                            line-height: 1.5;
+                            margin: 0;
+                            text-align: left;
+                            word-break: break-word;
+                        }
                     }
                 }
 
-                @keyframes apple-rocket-bounce {
+                .project-bottom-footer {
+                    @include dFlex($gap: 10px, $jc: center);
+                    margin-top: 16px;
+                    flex-wrap: wrap;
 
-                    0%,
-                    100% {
-                        transform: translateY(0) rotate(0deg);
-                    }
-
-                    50% {
-                        transform: translateY(-3px) rotate(8deg);
-                    }
-                }
-
-                .project-bottom {
-                    @include dFlex($fd: column, $gap: 12px);
-                    position: relative;
-                    z-index: 1;
-                    width: 100%;
-
-                    .tab-li {
-                        @include dFlex($gap: 12px, $ai: flex-start);
-                        background: rgba(255, 255, 255, 0.02);
-                        border-radius: $apple-radius-large;
-                        padding: 14px;
+                    button {
+                        @include apple-button-primary();
+                        font-size: 13px;
+                        padding: 10px 16px;
+                        min-width: 90px;
+                        border-radius: $apple-radius-medium;
+                        font-weight: $apple-font-weight-semibold;
                         transition: $apple-transition-fast;
-                        border: 1px solid rgba(255, 255, 255, 0.05);
+                        border: none;
+                        cursor: pointer;
+                        position: relative;
+                        overflow: hidden;
+
+                        background: linear-gradient(135deg, $apple-primary 0%, color.adjust($apple-primary, $lightness: -10%) 100%);
+                        color: white;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            inset: 0;
+                            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+                            opacity: 0;
+                            transition: $apple-transition-fast;
+                        }
 
                         &:hover {
-                            background: rgba(255, 255, 255, 0.05);
-                            transform: translateX(2px);
-                            border-color: rgba(255, 255, 255, 0.1);
-                        }
-
-                        .right-of-logo {
-                            flex: 1;
-                            width: 100%;
-
-                            >div {
-                                @include dFlex($ai: center, $gap: 8px);
-                                margin-bottom: 8px;
-
-                                img {
-                                    width: 14px;
-                                    height: 14px;
-                                    flex-shrink: 0;
-                                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                                }
-
-                                h4 {
-                                    font-family: $apple-font-family;
-                                    font-weight: $apple-font-weight-semibold;
-                                    color: $apple-primary;
-                                    font-size: 15px;
-                                    margin: 0;
-                                    flex: 1;
-                                    line-height: 1.3;
-                                    @include dFlex($ai: center, $gap: 6px);
-
-                                    .process-emoji,
-                                    .experience-emoji {
-                                        font-size: 16px;
-                                        animation: apple-emoji-float 3s ease-in-out infinite;
-                                    }
-
-                                    .process-emoji {
-                                        animation-delay: 0.5s;
-                                    }
-
-                                    .experience-emoji {
-                                        animation-delay: 1s;
-                                    }
-                                }
-                            }
-
-                            >p {
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-regular;
-                                color: $apple-text-secondary;
-                                font-size: 13px;
-                                line-height: 1.5;
-                                margin: 0;
-                                text-align: left;
-                                word-break: break-word;
-                            }
-                        }
-                    }
-
-                    .project-bottom-footer {
-                        @include dFlex($gap: 10px, $jc: center);
-                        margin-top: 16px;
-                        flex-wrap: wrap;
-
-                        button {
-                            @include apple-button-primary();
-                            font-size: 13px;
-                            padding: 10px 16px;
-                            min-width: 90px;
-                            border-radius: $apple-radius-medium;
-                            font-weight: $apple-font-weight-semibold;
-                            transition: $apple-transition-fast;
-                            border: none;
-                            cursor: pointer;
-                            position: relative;
-                            overflow: hidden;
-
-                            background: linear-gradient(135deg, $apple-primary 0%, color.adjust($apple-primary, $lightness: -10%) 100%);
-                            color: white;
+                            transform: translateY(-1px);
+                            box-shadow: $apple-shadow-medium;
+                            background: linear-gradient(135deg, color.adjust($apple-primary, $lightness: 5%) 0%, $apple-primary 100%);
 
                             &::before {
-                                content: '';
-                                position: absolute;
-                                inset: 0;
-                                background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-                                opacity: 0;
-                                transition: $apple-transition-fast;
+                                opacity: 1;
                             }
+                        }
 
-                            &:hover {
-                                transform: translateY(-1px);
-                                box-shadow: $apple-shadow-medium;
-                                background: linear-gradient(135deg, color.adjust($apple-primary, $lightness: 5%) 0%, $apple-primary 100%);
+                        a {
+                            color: inherit;
+                            text-decoration: none;
+                            font-size: inherit;
+                            font-weight: inherit;
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
 
-                                &::before {
-                                    opacity: 1;
-                                }
-                            }
+        .team-player {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.02) 0%, 
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.02) 100%);
+            border-radius: $apple-radius-xl;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: clamp(24px, 6vw, 32px);
+            margin-top: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
-                            a {
-                                color: inherit;
-                                text-decoration: none;
-                                font-size: inherit;
-                                font-weight: inherit;
-                                display: block;
-                                width: 100%;
-                                height: 100%;
-                            }
+            &::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: conic-gradient(
+                    from 0deg,
+                    transparent 0deg,
+                    rgba($apple-primary, 0.03) 90deg,
+                    rgba($apple-secondary, 0.03) 180deg,
+                    transparent 270deg,
+                    transparent 360deg
+                );
+                animation: apple-team-aurora 15s ease-in-out infinite;
+                z-index: 0;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                    circle at 30% 70%,
+                    rgba($apple-primary, 0.05) 0%,
+                    transparent 40%
+                );
+                z-index: 0;
+                animation: apple-team-pulse 8s ease-in-out infinite;
+            }
+
+            .team-player-header {
+                position: relative;
+                margin-bottom: clamp(32px, 8vw, 40px);
+                z-index: 2;
+
+                .team-player-title {
+                    margin-bottom: clamp(12px, 3vw, 16px);
+                    position: relative;
+
+                    .title-gradient {
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-bold;
+                        font-size: clamp(20px, 5.5vw, 28px);
+                        background: linear-gradient(
+                            135deg, 
+                            $apple-primary 0%,
+                            color.adjust($apple-primary, $hue: 30deg) 35%,
+                            $apple-secondary 70%,
+                            color.adjust($apple-secondary, $hue: -20deg) 100%
+                        );
+                        background-size: 200% 200%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        line-height: 1.2;
+                        animation: apple-gradient-flow 6s ease-in-out infinite;
+                        position: relative;
+                        display: inline-block;
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            bottom: -4px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 40px;
+                            height: 2px;
+                            background: linear-gradient(90deg, transparent, $apple-primary, transparent);
+                            border-radius: 2px;
+                            animation: apple-underline-glow 3s ease-in-out infinite;
+                        }
+                    }
+                }
+
+                .team-player-subtitle {
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-medium;
+                    font-size: clamp(14px, 4vw, 18px);
+                    color: $apple-text-secondary;
+                    line-height: 1.5;
+                    margin-bottom: 20px;
+                    opacity: 0.9;
+                    letter-spacing: 0.01em;
+                }
+
+                .team-player-decoration {
+                    position: absolute;
+                    inset: 0;
+                    pointer-events: none;
+                    z-index: 1;
+
+                    .floating-particle {
+                        position: absolute;
+                        width: clamp(3px, 1vw, 6px);
+                        height: clamp(3px, 1vw, 6px);
+                        border-radius: 50%;
+                        background: radial-gradient(
+                            circle,
+                            $apple-primary 0%,
+                            color.adjust($apple-primary, $alpha: -0.3) 70%,
+                            transparent 100%
+                        );
+                        box-shadow: 0 0 10px rgba($apple-primary, 0.5);
+
+                        &:nth-child(1) {
+                            top: 15%;
+                            left: 10%;
+                            animation: apple-particle-orbit 8s ease-in-out infinite;
+                        }
+
+                        &:nth-child(2) {
+                            top: 25%;
+                            right: 15%;
+                            animation: apple-particle-orbit 8s ease-in-out infinite 2.5s;
+                        }
+
+                        &:nth-child(3) {
+                            bottom: 20%;
+                            left: 20%;
+                            animation: apple-particle-orbit 8s ease-in-out infinite 5s;
                         }
                     }
                 }
             }
 
-            // TEAM PLAYER MIT APPLE-STYLE ANIMATIONEN
-            .team-player {
-                background: rgba(255, 255, 255, 0.03);
-                border-radius: $apple-radius-xl;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                padding: 20px;
-                margin-top: 24px;
-                text-align: center;
+            .team-player-content {
                 position: relative;
-                overflow: hidden;
-
-                .team-player-header {
-                    position: relative;
-                    margin-bottom: 24px;
-
-                    .team-player-title {
-                        margin-bottom: 8px;
-
-                        .title-gradient {
-                            font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-bold;
-                            font-size: clamp(18px, 5vw, 22px);
-                            background: linear-gradient(135deg, $apple-primary 0%, $apple-secondary 100%);
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text;
-                            line-height: 1.3;
-                            animation: apple-gradient-shift 3s ease-in-out infinite;
-                        }
-                    }
-
-                    .team-player-subtitle {
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-semibold;
-                        font-size: clamp(14px, 4vw, 18px);
-                        color: $apple-text-primary;
-                        line-height: 1.4;
-                        margin-bottom: 16px;
-                    }
-
-                    .team-player-decoration {
-                        position: absolute;
-                        inset: 0;
-                        pointer-events: none;
-
-                        .floating-particle {
-                            position: absolute;
-                            width: 4px;
-                            height: 4px;
-                            background: $apple-primary;
-                            border-radius: 50%;
-                            opacity: 0.6;
-
-                            &:nth-child(1) {
-                                top: 20%;
-                                left: 10%;
-                                animation: apple-particle-float 4s ease-in-out infinite;
-                            }
-
-                            &:nth-child(2) {
-                                top: 60%;
-                                right: 15%;
-                                animation: apple-particle-float 4s ease-in-out infinite 1s;
-                            }
-
-                            &:nth-child(3) {
-                                bottom: 30%;
-                                left: 20%;
-                                animation: apple-particle-float 4s ease-in-out infinite 2s;
-                            }
-                        }
-                    }
-                }
+                z-index: 2;
 
                 .team-player-content-wrapper {
                     display: grid;
                     grid-template-columns: 1fr;
-                    gap: 16px;
+                    gap: clamp(16px, 4vw, 20px);
 
                     @media screen and (min-width: 480px) {
                         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                        gap: 16px;
+                        gap: clamp(20px, 5vw, 24px);
                     }
 
                     .player.premium-card {
-                        background: rgba(255, 255, 255, 0.05);
-                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        background: linear-gradient(145deg,
+                            rgba(255, 255, 255, 0.06) 0%,
+                            rgba(255, 255, 255, 0.02) 50%,
+                            rgba(255, 255, 255, 0.08) 100%
+                        );
+                        border: 1px solid rgba(255, 255, 255, 0.12);
                         border-radius: $apple-radius-large;
-                        padding: 20px;
-                        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                        padding: clamp(20px, 5vw, 24px);
+                        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
                         position: relative;
                         overflow: hidden;
                         backdrop-filter: blur(20px);
+                        -webkit-backdrop-filter: blur(20px);
+                        cursor: pointer;
+                        transform-style: preserve-3d;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            inset: 0;
+                            background: linear-gradient(145deg,
+                                rgba(255, 255, 255, 0.1) 0%,
+                                transparent 50%,
+                                rgba($apple-primary, 0.05) 100%
+                            );
+                            opacity: 0;
+                            transition: all 0.4s ease;
+                            z-index: 0;
+                        }
 
                         .player-glow {
                             position: absolute;
                             inset: -2px;
-                            background: linear-gradient(135deg, $apple-primary, $apple-secondary, $apple-primary);
+                            background: conic-gradient(
+                                from 0deg,
+                                $apple-primary,
+                                color.adjust($apple-primary, $hue: 60deg),
+                                $apple-secondary,
+                                color.adjust($apple-secondary, $hue: 60deg),
+                                $apple-primary
+                            );
                             border-radius: inherit;
                             opacity: 0;
-                            transition: all 0.4s ease;
+                            transition: all 0.5s ease;
                             z-index: -1;
-                            animation: apple-glow-rotate 4s linear infinite;
+                            animation: apple-glow-rotate 6s linear infinite;
+                            filter: blur(8px);
                         }
 
                         &:hover {
-                            background: rgba(255, 255, 255, 0.08);
-                            transform: translateY(-8px) scale(1.02);
+                            background: linear-gradient(145deg,
+                                rgba(255, 255, 255, 0.12) 0%,
+                                rgba(255, 255, 255, 0.06) 50%,
+                                rgba(255, 255, 255, 0.15) 100%
+                            );
+                            transform: translateY(-8px) rotateY(5deg) scale(1.02);
                             box-shadow:
-                                0 20px 40px rgba(0, 0, 0, 0.3),
+                                0 25px 50px rgba(0, 0, 0, 0.25),
                                 0 0 0 1px rgba(255, 255, 255, 0.1),
                                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                            border-color: rgba(255, 255, 255, 0.2);
+
+                            &::before {
+                                opacity: 1;
+                            }
 
                             .player-glow {
                                 opacity: 0.6;
+                                filter: blur(6px);
                             }
 
-                            .player-avatar {
-                                transform: scale(1.1);
-
-                                .avatar-ring {
-                                    box-shadow: 0 0 20px rgba($apple-primary, 0.5);
-                                }
+                            .project-link .link-arrow {
+                                transform: translateX(6px) scale(1.2);
                             }
 
-                            .project-link {
-                                .link-arrow {
-                                    transform: translateX(4px);
-                                }
+                            .player-name {
+                                color: $apple-primary;
+                                text-shadow: 0 0 10px rgba($apple-primary, 0.3);
                             }
+                        }
+
+                        &:active {
+                            transform: translateY(-4px) scale(0.98);
                         }
 
                         .player-content {
                             position: relative;
                             z-index: 1;
-
-                            .player-avatar {
-                                @include dFlex($jc: center, $ai: center);
-                                width: 60px;
-                                height: 60px;
-                                margin: 0 auto 16px;
-                                position: relative;
-                                transition: all 0.3s ease;
-
-                                .avatar-ring {
-                                    position: absolute;
-                                    inset: 0;
-                                    border: 2px solid transparent;
-                                    background: linear-gradient(135deg, $apple-primary, $apple-secondary) border-box;
-                                    border-radius: 50%;
-                                    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-                                    mask-composite: xor;
-                                    -webkit-mask-composite: xor;
-                                    transition: all 0.3s ease;
-                                }
-
-                                .avatar-text {
-                                    font-family: $apple-font-family;
-                                    font-weight: $apple-font-weight-bold;
-                                    font-size: 18px;
-                                    color: $apple-primary;
-                                    z-index: 1;
-                                }
-                            }
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
 
                             .player-info {
+                                text-align: center;
+
                                 .player-name {
                                     font-family: $apple-font-family;
                                     font-weight: $apple-font-weight-bold;
                                     color: $apple-text-primary;
-                                    font-size: 16px;
-                                    margin-bottom: 8px;
+                                    font-size: clamp(16px, 4vw, 18px);
+                                    margin-bottom: clamp(8px, 2vw, 12px);
                                     line-height: 1.3;
+                                    transition: all 0.3s ease;
+                                    letter-spacing: 0.01em;
                                 }
 
                                 .player-project {
                                     font-family: $apple-font-family;
                                     font-weight: $apple-font-weight-medium;
-                                    color: $apple-text-secondary;
-                                    font-size: 14px;
-                                    margin-bottom: 12px;
+                                    color: $apple-text-tertiary;
+                                    font-size: clamp(12px, 3vw, 14px);
+                                    margin-bottom: clamp(12px, 3vw, 16px);
                                     line-height: 1.4;
 
                                     .project-link {
-                                        @include dFlex($ai: center, $gap: 4px, $jc: center);
+                                        @include dFlex($ai: center, $gap: 6px, $jc: center);
                                         color: $apple-primary;
                                         cursor: pointer;
-                                        transition: all 0.3s ease;
+                                        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
                                         font-weight: $apple-font-weight-semibold;
                                         text-decoration: none;
+                                        margin-top: 4px;
+                                        padding: 4px 8px;
+                                        border-radius: $apple-radius-small;
+                                        position: relative;
+
+                                        &::before {
+                                            content: '';
+                                            position: absolute;
+                                            inset: 0;
+                                            background: rgba($apple-primary, 0.1);
+                                            border-radius: inherit;
+                                            opacity: 0;
+                                            transition: all 0.3s ease;
+                                        }
 
                                         .link-text {
                                             position: relative;
+                                            z-index: 1;
 
                                             &::after {
                                                 content: '';
@@ -642,19 +723,29 @@
                                                 left: 0;
                                                 right: 0;
                                                 height: 1px;
-                                                background: $apple-primary;
+                                                background: linear-gradient(90deg, 
+                                                    transparent, 
+                                                    $apple-primary, 
+                                                    transparent
+                                                );
                                                 transform: scaleX(0);
                                                 transition: transform 0.3s ease;
                                             }
                                         }
 
                                         .link-arrow {
-                                            font-size: 14px;
-                                            transition: transform 0.3s ease;
+                                            font-size: clamp(12px, 3vw, 14px);
+                                            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                                            position: relative;
+                                            z-index: 1;
                                         }
 
                                         &:hover {
                                             color: color.adjust($apple-primary, $lightness: 15%);
+
+                                            &::before {
+                                                opacity: 1;
+                                            }
 
                                             .link-text::after {
                                                 transform: scaleX(1);
@@ -665,28 +756,38 @@
 
                                 .player-reference {
                                     position: relative;
-                                    padding-left: 16px;
+                                    padding: clamp(12px, 3vw, 16px);
+                                    background: rgba(255, 255, 255, 0.02);
+                                    border-radius: $apple-radius-medium;
+                                    border: 1px solid rgba(255, 255, 255, 0.05);
+                                    text-align: left;
 
                                     .quote-mark {
                                         position: absolute;
-                                        left: 0;
-                                        top: -2px;
-                                        font-size: 20px;
+                                        left: clamp(8px, 2vw, 12px);
+                                        top: clamp(8px, 2vw, 12px);
+                                        font-size: clamp(18px, 4vw, 24px);
                                         color: $apple-primary;
-                                        opacity: 0.6;
+                                        opacity: 0.7;
                                         font-family: Georgia, serif;
+                                        font-weight: bold;
+                                        line-height: 1;
+                                        text-shadow: 0 0 8px rgba($apple-primary, 0.3);
                                     }
 
                                     span {
                                         font-family: $apple-font-family;
                                         font-weight: $apple-font-weight-regular;
-                                        color: $apple-text-tertiary;
-                                        font-size: 12px;
-                                        line-height: 1.5;
+                                        color: $apple-text-secondary;
+                                        font-size: clamp(11px, 3vw, 13px);
+                                        line-height: 1.6;
                                         font-style: italic;
                                         display: block;
+                                        padding-left: clamp(20px, 5vw, 28px);
+                                        padding-top: clamp(4px, 1vw, 8px);
                                         text-align: left;
                                         word-break: break-word;
+                                        opacity: 0.9;
                                     }
                                 }
                             }
@@ -696,125 +797,155 @@
             }
         }
     }
+}
 
-    // APPLE-STYLE ANIMATIONEN
-    @keyframes apple-coming-soon-pulse {
-
-        0%,
-        100% {
-            transform: scale(1);
-            box-shadow: 0 0 0 0 rgba($apple-primary, 0.4);
-        }
-
-        50% {
-            transform: scale(1.05);
-            box-shadow: 0 0 0 4px rgba($apple-primary, 0);
-        }
+@keyframes apple-coming-soon-pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba($apple-primary, 0.4);
     }
-
-    @keyframes apple-rocket-bounce {
-
-        0%,
-        100% {
-            transform: translateY(0) rotate(0deg);
-        }
-
-        50% {
-            transform: translateY(-2px) rotate(5deg);
-        }
+    50% {
+        transform: translate(-50%, -50%) scale(1.08);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 6px rgba($apple-primary, 0);
     }
+}
 
-    @keyframes apple-emoji-float {
-
-        0%,
-        100% {
-            transform: translateY(0) rotate(0deg);
-        }
-
-        33% {
-            transform: translateY(-2px) rotate(2deg);
-        }
-
-        66% {
-            transform: translateY(1px) rotate(-1deg);
-        }
+@keyframes apple-rocket-bounce {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
     }
-
-    @keyframes apple-gradient-shift {
-
-        0%,
-        100% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
+    50% {
+        transform: translateY(-3px) rotate(8deg);
     }
+}
 
-    @keyframes apple-particle-float {
-
-        0%,
-        100% {
-            transform: translateY(0) scale(1);
-            opacity: 0.6;
-        }
-
-        50% {
-            transform: translateY(-10px) scale(1.2);
-            opacity: 1;
-        }
+@keyframes apple-emoji-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
     }
-
-    @keyframes apple-glow-rotate {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+    33% {
+        transform: translateY(-2px) rotate(2deg);
     }
-
-    @keyframes apple-projects-ambient {
-
-        0%,
-        100% {
-            transform: translateY(0) rotate(0deg) scale(1);
-            opacity: 0.08;
-        }
-
-        33% {
-            transform: translateY(-10px) rotate(1deg) scale(1.01);
-            opacity: 0.12;
-        }
-
-        66% {
-            transform: translateY(8px) rotate(-0.5deg) scale(0.99);
-            opacity: 0.06;
-        }
+    66% {
+        transform: translateY(1px) rotate(-1deg);
     }
+}
 
-    // Rest der Responsive Styles...
-    @media screen and (max-width: 360px) {
-        .my-projects-container {
-            margin: 8px;
-            padding: 12px;
+@keyframes apple-team-aurora {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.3;
+    }
+    33% {
+        transform: rotate(120deg) scale(1.1);
+        opacity: 0.5;
+    }
+    66% {
+        transform: rotate(240deg) scale(0.9);
+        opacity: 0.2;
+    }
+}
 
-            .my-projects-content {
-                .team-player {
-                    .team-player-content-wrapper {
-                        .player.premium-card {
-                            padding: 16px;
+@keyframes apple-team-pulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
 
-                            .player-content .player-avatar {
-                                width: 50px;
-                                height: 50px;
-                                margin-bottom: 12px;
+@keyframes apple-gradient-flow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
 
-                                .avatar-text {
-                                    font-size: 16px;
-                                }
+@keyframes apple-underline-glow {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translateX(-50%) scaleX(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1.5);
+    }
+}
+
+@keyframes apple-particle-orbit {
+    0%, 100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+    25% {
+        transform: translateY(-8px) scale(1.2) rotate(90deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(0) scale(0.8) rotate(180deg);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(8px) scale(1.1) rotate(270deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes apple-glow-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes apple-projects-ambient {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.08;
+    }
+    33% {
+        transform: translateY(-10px) rotate(1deg) scale(1.01);
+        opacity: 0.12;
+    }
+    66% {
+        transform: translateY(8px) rotate(-0.5deg) scale(0.99);
+        opacity: 0.06;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .my-projects-container {
+        margin: 8px;
+        padding: 12px;
+
+        .my-projects-content {
+            .team-player {
+                padding: 16px;
+                margin-top: 24px;
+
+                .team-player-content-wrapper {
+                    .player.premium-card {
+                        padding: 16px;
+
+                        .player-content .player-info .player-reference {
+                            padding: 10px;
+
+                            .quote-mark {
+                                left: 6px;
+                                top: 6px;
+                                font-size: 16px;
+                            }
+
+                            span {
+                                padding-left: 18px;
+                                padding-top: 4px;
                             }
                         }
                     }
@@ -822,48 +953,55 @@
             }
         }
     }
+}
 
-    // Accessibility
-    @media (prefers-reduced-motion: reduce) {
-        .my-projects-container {
-            &::before {
-                animation: none;
-            }
-        }
-
-        .coming-soon-badge,
-        .process-emoji,
-        .experience-emoji,
-        .title-gradient,
-        .floating-particle,
-        .player-glow {
-            animation: none !important;
-        }
-
-        .player.premium-card:hover {
-            transform: translateY(-2px) scale(1.01);
+@media (prefers-reduced-motion: reduce) {
+    .my-projects-container {
+        &::before {
+            animation: none;
         }
     }
 
-    @media (prefers-contrast: high) {
-        .my-projects-container {
+    .coming-soon-badge,
+    .process-emoji,
+    .experience-emoji,
+    .title-gradient,
+    .floating-particle,
+    .player-glow {
+        animation: none !important;
+    }
+
+    .player.premium-card:hover {
+        transform: translateY(-2px) scale(1.01);
+    }
+
+    .team-player {
+        &::before,
+        &::after {
+            animation: none !important;
+        }
+    }
+}
+
+@media (prefers-contrast: high) {
+    .my-projects-container {
+        background: #000;
+        border: 2px solid #fff;
+
+        .project,
+        .team-player {
+            background: #111;
+            border: 2px solid #333;
+        }
+
+        .player.premium-card {
             background: #000;
-            border: 2px solid #fff;
+            border: 2px solid #444;
 
-            .project,
-            .team-player {
-                background: #111;
-                border: 2px solid #333;
-            }
-
-            .player.premium-card {
-                background: #111;
-                border: 2px solid #333;
-
-                &:hover {
-                    background: #222;
-                    border-color: #fff;
-                }
+            &:hover {
+                background: #222;
+                border-color: #fff;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
             }
         }
     }
