@@ -99,20 +99,24 @@
         min-height: 100vh;
         margin-top: clamp(60px, 12vw, 72px);
         @include dFlex($fd: column, $jc: center, $ai: center);
-        padding: $padding-mobile-lg;
-        gap: $space-mobile-lg;
+        padding: clamp(16px, 4vw, 24px);
+        gap: clamp(20px, 5vw, 32px);
         
         .img-wrapper {
-            margin-bottom: $space-mobile-xl;
             order: 2;
+            @include dFlex($jc: center, $ai: center);
+            width: 100%;
+            max-width: 100%;
             
             img {
-                max-width: clamp(240px, 70vw, 320px);
-                max-height: clamp(280px, 40vh, 350px);
+                width: clamp(200px, 50vw, 280px);
+                height: auto;
+                max-height: clamp(240px, 35vh, 320px);
                 object-fit: contain;
                 border-radius: $apple-radius-large;
                 box-shadow: $apple-shadow-large;
                 transition: $apple-transition-medium;
+                display: block;
                 
                 &:hover {
                     transform: scale(1.02);
@@ -123,14 +127,14 @@
         
         .title-logo-wrapper {
             text-align: center;
-            margin-bottom: $space-mobile-xl;
             order: 1;
+            width: 100%;
             
             .title {
                 .name {
-                    font-size: clamp(28px, 8vw, 44px); 
+                    font-size: clamp(24px, 7vw, 36px); 
                     line-height: 1.1;
-                    margin-bottom: $space-mobile-base;
+                    margin-bottom: clamp(8px, 2vw, 12px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-bold;
                     background: $apple-teal-gradient;
@@ -138,15 +142,28 @@
                     background-clip: text;
                     -webkit-text-fill-color: transparent;
                     letter-spacing: -0.02em;
+                    text-align: center;
+                    width: 100%;
+                    
+                    @media screen and (max-width: 375px) {
+                        font-size: 24px;
+                        margin-bottom: 8px;
+                    }
                 }
                 
                 .position {
-                    font-size: clamp(18px, 5vw, 26px); 
+                    font-size: clamp(16px, 4.5vw, 22px); 
                     line-height: 1.3;
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
                     color: $apple-text-secondary;
                     letter-spacing: -0.01em;
+                    text-align: center;
+                    width: 100%;
+                    
+                    @media screen and (max-width: 375px) {
+                        font-size: 16px;
+                    }
                 }
             }
         }
@@ -154,12 +171,13 @@
         .arrow-wrapper {
             order: 3;
             margin-top: auto;
-            padding-bottom: $space-mobile-lg;
+            padding-bottom: clamp(16px, 4vw, 24px);
+            width: 100%;
+            @include dFlex($jc: center);
             
             .arrow-down {
                 width: clamp(24px, 6vw, 32px);
                 height: clamp(48px, 12vw, 64px);
-                margin: 0 auto;
                 background: {
                     image: url('./../../../../assets/img/arrow-down.png');
                     size: contain;
@@ -185,7 +203,6 @@
     }
 }
 
-// Enhanced responsive breakpoints
 @media screen and (max-width: $breakpoint-sm) {
     .landing-page-mobile {
         .content-top {
@@ -200,35 +217,31 @@
         
         .content-middle {
             margin-top: clamp(56px, 11vw, 64px);
-            padding: $padding-mobile-base;
-            gap: $space-mobile-base;
+            padding: clamp(12px, 3vw, 20px);
+            gap: clamp(16px, 4vw, 24px);
             
             .img-wrapper {
-                margin-bottom: $space-mobile-base;
-                
                 img {
-                    max-width: clamp(200px, 65vw, 280px);
-                    max-height: clamp(240px, 35vh, 300px);
+                    width: clamp(180px, 45vw, 240px);
+                    max-height: clamp(220px, 30vh, 280px);
                 }
             }
             
             .title-logo-wrapper {
-                margin-bottom: $space-mobile-base;
-                
                 .title {
                     .name {
-                        font-size: clamp(24px, 7vw, 36px);
-                        margin-bottom: $space-mobile-sm;
+                        font-size: clamp(22px, 6.5vw, 32px);
+                        margin-bottom: clamp(6px, 1.5vw, 10px);
                     }
                     
                     .position {
-                        font-size: clamp(16px, 4.5vw, 22px);
+                        font-size: clamp(15px, 4vw, 20px);
                     }
                 }
             }
             
             .arrow-wrapper {
-                padding-bottom: $space-mobile-base;
+                padding-bottom: clamp(12px, 3vw, 20px);
                 
                 .arrow-down {
                     width: clamp(20px, 5vw, 28px);
@@ -257,26 +270,22 @@
             gap: 16px;
             
             .img-wrapper {
-                margin-bottom: 12px;
-                
                 img {
-                    max-width: 200px;
-                    max-height: 240px;
+                    width: 180px;
+                    max-height: 220px;
                 }
             }
             
             .title-logo-wrapper {
-                margin-bottom: 12px;
-                
                 .title {
                     .name {
-                        font-size: 24px;
+                        font-size: 22px;
                         line-height: 1.1;
                         margin-bottom: 6px;
                     }
                     
                     .position {
-                        font-size: 16px;
+                        font-size: 15px;
                         line-height: 1.2;
                     }
                 }
@@ -294,7 +303,6 @@
     }
 }
 
-// Landscape orientation optimization
 @media screen and (max-height: 600px) and (orientation: landscape) {
     .landing-page-mobile {
         .content-middle {
@@ -305,7 +313,6 @@
             
             .img-wrapper {
                 flex: 1;
-                margin-bottom: 0;
                 order: 2;
                 
                 img {
@@ -316,7 +323,6 @@
             
             .title-logo-wrapper {
                 flex: 1;
-                margin-bottom: 0;
                 text-align: left;
                 order: 1;
                 
@@ -351,7 +357,6 @@
     }
 }
 
-// Very small devices (Galaxy Fold, etc.)
 @media screen and (max-width: 280px) {
     .landing-page-mobile {
         .content-top {
@@ -370,17 +375,13 @@
             gap: 12px;
             
             .img-wrapper {
-                margin-bottom: 8px;
-                
                 img {
-                    max-width: 180px;
+                    width: 160px;
                     max-height: 200px;
                 }
             }
             
             .title-logo-wrapper {
-                margin-bottom: 8px;
-                
                 .title {
                     .name {
                         font-size: 20px;
@@ -405,7 +406,6 @@
     }
 }
 
-// Accessibility improvements
 @media (prefers-reduced-motion: reduce) {
     .landing-page-mobile {
         .content-middle {
@@ -427,7 +427,6 @@
     }
 }
 
-// High contrast mode
 @media (prefers-contrast: high) {
     .landing-page-mobile {
         background: #000;
@@ -469,7 +468,6 @@
     }
 }
 
-// Print styles
 @media print {
     .landing-page-mobile {
         .content-top {

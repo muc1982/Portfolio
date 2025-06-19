@@ -1,7 +1,6 @@
 @use '../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-// ===== HERO TEXT SECTION - Apple-Style =====
 .hero-text-section {
     position: relative;
     margin-bottom: clamp(20px, 5vw, 64px);
@@ -9,7 +8,6 @@
     overflow: hidden;
     z-index: 3;
 
-    // Subtiler Hintergrund-Shimmer-Effekt
     &::before {
         content: '';
         position: absolute;
@@ -34,7 +32,7 @@
         .hero-main-text {
             font-family: $apple-font-family;
             font-weight: $apple-font-weight-regular;
-            font-size: clamp(18px, 4.5vw, 32px); // Mindestens 18px auf 375px
+            font-size: clamp(18px, 4.5vw, 32px);
             line-height: clamp(1.4, 1.5, 1.6);
             color: $apple-text-primary;
             text-align: center;
@@ -43,10 +41,10 @@
             z-index: 5;
 
             @media screen and (max-width: 768px) {
-                font-size: clamp(18px, 4.8vw, 24px); // Mindestens 18px
+                font-size: clamp(18px, 4.8vw, 24px);
                 line-height: 1.5;
-                text-align: left;
-                padding: 0 8px; // Zusätzlicher Innenabstand
+                text-align: center;
+                padding: 0 8px;
             }
 
             @media screen and (max-width: 480px) {
@@ -55,8 +53,9 @@
             }
 
             @media screen and (max-width: 375px) {
-                font-size: 18px; // Feste Mindestgröße
+                font-size: 18px;
                 padding: 0 16px;
+                text-align: center;
             }
 
             .highlight-word {
@@ -81,7 +80,6 @@
             }
         }
 
-        // Floating Particles
         .floating-particles {
             position: absolute;
             top: 0;
@@ -133,12 +131,11 @@
             }
         }
 
-        // Glow-Effekt
         .animated-glow {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: clamp(150px, 40vw, 300px); // Verkleinert für kleine Screens
+            width: clamp(150px, 40vw, 300px);
             height: clamp(150px, 40vw, 300px);
             background: radial-gradient(circle,
                     rgba($apple-primary, 0.03) 0%,
@@ -158,18 +155,16 @@
     }
 }
 
-// ===== LOCATION INTRODUCTION SECTION =====
 .location-introduction {
     display: flex;
     flex-direction: column;
     gap: clamp(16px, 4vw, 48px);
     z-index: 3;
 
-    // ===== SCHNELLE SLIDE ANIMATION =====
     .premium-slide-container {
         position: relative;
         margin-top: clamp(24px, 6vw, 64px);
-        height: clamp(100px, 20vw, 200px); // Mindesthöhe reduziert
+        height: clamp(100px, 20vw, 200px);
         overflow: hidden;
         border-radius: clamp($apple-radius-large, 3vw, $apple-radius-xl);
         background: linear-gradient(135deg,
@@ -197,7 +192,7 @@
         }
 
         @media screen and (max-width: 375px) {
-            height: 80px; // Feste Höhe für kleinste Screens
+            height: 80px;
             margin-top: -60px;
             margin-left: 16px;
             margin-right: 16px;
@@ -235,28 +230,38 @@
 
             .slide-text-wrapper {
                 flex: 1;
-                max-width: 65%; // Mehr Platz für Text
+                width: 100%;
+                max-width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
                 @media screen and (max-width: 768px) {
-                    max-width: 70%;
+                    max-width: 100%;
                 }
 
                 @media screen and (max-width: 480px) {
-                    max-width: 75%;
+                    max-width: 100%;
                 }
 
                 @media screen and (max-width: 375px) {
-                    max-width: 78%;
+                    max-width: 100%;
                 }
 
                 .slide-text-container {
                     position: relative;
                     overflow: hidden;
+                    width: 100%;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
 
                     .slide-main-text {
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-bold;
-                        font-size: clamp(16px, 4vw, 32px); // Mindestens 16px
+                        font-size: clamp(16px, 4vw, 32px);
                         background: $apple-teal-gradient;
                         -webkit-background-clip: text;
                         background-clip: text;
@@ -265,6 +270,7 @@
                         line-height: 1.2;
                         text-align: center;
                         transition: all 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+                        width: 100%;
 
                         @media screen and (max-width: 768px) {
                             font-size: clamp(16px, 4.2vw, 24px);
@@ -276,7 +282,7 @@
                         }
 
                         @media screen and (max-width: 375px) {
-                            font-size: 16px; // Feste Mindestgröße
+                            font-size: 16px;
                             margin-bottom: 1px;
                         }
                     }
@@ -284,12 +290,13 @@
                     .slide-sub-text {
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
-                        font-size: clamp(16px, 2.5vw, 18px); // Mindestens 16px
+                        font-size: clamp(16px, 2.5vw, 18px);
                         color: $apple-text-secondary;
                         line-height: 1.4;
                         opacity: 0.85;
                         text-align: center;
                         transition: all 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+                        width: 100%;
 
                         @media screen and (max-width: 768px) {
                             font-size: clamp(16px, 3vw, 16px);
@@ -301,15 +308,14 @@
                         }
 
                         @media screen and (max-width: 375px) {
-                            font-size: 16px; // Feste Mindestgröße
+                            font-size: 16px;
                             line-height: 1.2;
                         }
                     }
 
-                    // Schnelle Transition States
                     &.transitioning-out {
                         .slide-main-text {
-                            transform: translateY(-20px); // Reduziert für kleine Screens
+                            transform: translateY(-20px);
                             opacity: 0;
                             filter: blur(2px);
 
@@ -347,7 +353,7 @@
                 right: 0;
                 top: 0;
                 bottom: 0;
-                width: 35%; // Reduziert für mehr Textplatz
+                width: 35%;
                 overflow: hidden;
                 z-index: 2;
                 transition: all 0.3s ease;
@@ -364,12 +370,11 @@
                     width: 22%;
                 }
 
-                // Morphing Shape
                 .morphing-shape {
                     position: absolute;
                     top: 50%;
                     right: 20%;
-                    width: clamp(40px, 12vw, 120px); // Verkleinert
+                    width: clamp(40px, 12vw, 120px);
                     height: clamp(40px, 12vw, 120px);
                     background: radial-gradient(circle,
                             rgba($apple-primary, 0.25) 0%,
@@ -400,7 +405,6 @@
                     }
                 }
 
-                // Energy Waves
                 .energy-waves {
                     position: absolute;
                     top: 0;
@@ -421,7 +425,7 @@
                         transform: translateY(-50%);
 
                         @media screen and (max-width: 375px) {
-                            height: 0.5px; // Dünner auf kleinsten Screens
+                            height: 0.5px;
                         }
 
                         &.wave-1 {
@@ -448,14 +452,13 @@
                     }
                 }
 
-                // Floating Elements
                 .floating-elements {
                     position: absolute;
                     inset: 0;
 
                     .element {
                         position: absolute;
-                        width: clamp(2px, 0.8vw, 6px); // Verkleinert
+                        width: clamp(2px, 0.8vw, 6px);
                         height: clamp(2px, 0.8vw, 6px);
                         background: $apple-primary;
                         border-radius: 50%;
@@ -503,7 +506,6 @@
             }
         }
 
-        // Hover Effect
         &:hover {
             transform: translateY(-1px);
             box-shadow: 0 8px 32px rgba($apple-primary, 0.1);
@@ -523,7 +525,6 @@
             }
         }
 
-        // Text-Transition
         &.text-transitioning {
             .morphing-shape {
                 animation-duration: 4s;
@@ -543,9 +544,8 @@
     }
 }
 
-// ===== CONTAINER STYLES =====
 .why-me-extra {
-    height: clamp(30px, 8vw, 50px); // Responsive Höhe
+    height: clamp(30px, 8vw, 50px);
 }
 
 .why-me-container {
@@ -561,7 +561,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
-    width: calc(100% - 16px); // Verhindert Überlauf
+    width: calc(100% - 16px);
     box-sizing: border-box;
     z-index: 1;
 
@@ -607,7 +607,7 @@
         padding-top: clamp(20px, 5vw, 64px);
         position: relative;
         z-index: 2;
-        font-size: clamp(20px, 5vw, 48px); // Mindestens 20px
+        font-size: clamp(20px, 5vw, 48px);
 
         @media screen and (max-width: 480px) {
             font-size: clamp(18px, 5.5vw, 32px);
@@ -616,7 +616,7 @@
         }
 
         @media screen and (max-width: 375px) {
-            font-size: 18px; // Feste Mindestgröße
+            font-size: 18px;
             margin-bottom: 16px;
             padding-top: 16px;
         }
@@ -632,7 +632,7 @@
         padding: clamp(12px, 4vw, 80px);
         max-width: 1200px;
         margin: 0 auto;
-        margin-top: clamp(-80px, -15vw, -120px); // Responsive negative margin
+        margin-top: clamp(-80px, -15vw, -120px);
 
         @media screen and (max-width: 768px) {
             padding: clamp(8px, 3vw, 40px);
@@ -671,7 +671,7 @@
                     border-radius: $apple-radius-medium;
                     cursor: pointer;
                     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-                    font-size: clamp(16px, 3.5vw, 22px); // Mindestens 16px
+                    font-size: clamp(16px, 3.5vw, 22px);
                     padding: clamp(12px, 3vw, 24px) clamp(20px, 6vw, 56px);
                     min-width: clamp(120px, 35vw, 280px);
                     overflow: hidden;
@@ -684,7 +684,7 @@
                     }
 
                     @media screen and (max-width: 375px) {
-                        font-size: 16px; // Feste Mindestgröße
+                        font-size: 16px;
                         padding: 10px 16px;
                         min-width: 100px;
                     }
@@ -720,7 +720,6 @@
     }
 }
 
-// ===== GLASSMORPHISM STYLE =====
 .apple-glassmorphism {
     background: rgba(255, 255, 255, 0.03);
     border-radius: clamp($apple-radius-medium, 2vw, $apple-radius-large);
@@ -730,7 +729,6 @@
     overflow: hidden;
 }
 
-// ===== SLIDE INDICATORS =====
 .slide-indicators {
     position: initial;
     bottom: clamp(6px, 2vw, 16px);
@@ -792,10 +790,9 @@
     }
 }
 
-// ===== OPTIMIERTE ANIMATIONEN =====
 @keyframes slide-text-enter-elegant {
     0% {
-        transform: translateY(20px); // Reduziert für kleine Screens
+        transform: translateY(20px);
         opacity: 0;
         filter: blur(2px);
     }
@@ -995,7 +992,6 @@
     }
 }
 
-// ===== RESPONSIVE DESIGN =====
 @media screen and (max-width: 768px) {
     .why-me-container {
         margin: clamp(8px, 3vw, 24px) auto;
@@ -1011,7 +1007,7 @@
                 padding: clamp(8px, 3vw, 20px);
 
                 .slide-text-wrapper {
-                    max-width: 70%;
+                    max-width: 100%;
 
                     .slide-text-container {
                         .slide-main-text {
@@ -1046,7 +1042,6 @@
     }
 }
 
-// ===== SPEZIELLE 375PX BREAKPOINTS =====
 @media screen and (max-width: 375px) {
     .hero-text-section {
         padding: 12px 0;
@@ -1077,7 +1072,7 @@
                 padding: 8px 12px;
 
                 .slide-text-wrapper {
-                    max-width: 78%;
+                    max-width: 100%;
 
                     .slide-text-container {
                         .slide-main-text {
@@ -1150,7 +1145,6 @@
     }
 }
 
-// ===== ACCESSIBILITY =====
 @media (prefers-reduced-motion: reduce) {
 
     .hero-text-section::before,
@@ -1189,7 +1183,6 @@
     }
 }
 
-// ===== ZUSÄTZLICHE SICHERHEITSREGELN FÜR KLEINE SCREENS =====
 @media screen and (max-width: 350px) {
     .why-me-container {
         width: calc(100% - 24px);
