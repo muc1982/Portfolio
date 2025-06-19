@@ -8,6 +8,7 @@
     right: 0;
     z-index: 1000;
     transition: $apple-transition-medium;
+    height: clamp(72px, 15vw, 104px);
     
     &.scrolled {
         @include apple-nav-glass();
@@ -19,22 +20,24 @@
         max-width: 1920px;
         margin: 0 auto;
         position: relative;
+        height: inherit;
         
         .content {
-            height: 104px;
+            height: inherit;
             @include standardPadding();
             @include dFlex($jc: space-between, $ai: center);
             background: transparent;
             transition: $apple-transition-medium;
             
-            // Alle bestehenden Styles bleiben gleich...
             .logo {
                 @include dFlex($fd: column, $jc: center, $ai: center);
                 transition: $apple-transition-medium;
                 cursor: pointer;
-                padding: 8px;
+                padding: $padding-mobile-sm;
                 border-radius: $apple-radius-medium;
                 position: relative;
+                min-width: 44px;
+                min-height: 44px;
                 
                 &::before {
                     content: '';
@@ -64,8 +67,8 @@
                 }
                 
                 .logo-img {
-                    width: 50px;
-                    height: 32px;
+                    width: clamp(40px, 8vw, 50px);
+                    height: clamp(25px, 5vw, 32px);
                     background: {
                         image: url('./../../../assets/img/logo.png');
                         repeat: no-repeat;
@@ -78,26 +81,28 @@
                 }
                 
                 .logo-name {
-                    font-size: clamp(14px, 1.8vw, 16px);
+                    font-size: clamp(12px, 2.8vw, 16px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
                     color: $apple-text-primary;
                     letter-spacing: 0.5px;
                     transition: $apple-transition-fast;
+                    line-height: 1.2;
                 }
                 
                 .logo-position {
-                    font-size: clamp(10px, 1.3vw, 12px);
+                    font-size: clamp(8px, 2vw, 12px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
                     color: $apple-text-secondary;
                     letter-spacing: 0.3px;
                     transition: $apple-transition-fast;
+                    line-height: 1.2;
                 }
             }
             
             .items {
-                @include dFlex($gap: clamp(8px, 2vw, 16px), $ai: center);
+                @include dFlex($gap: clamp(6px, 1.5vw, 16px), $ai: center);
                 list-style: none;
                 
                 li {
@@ -112,9 +117,9 @@
                         span {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-medium;
-                            font-size: clamp(14px, 1.8vw, 16px);
+                            font-size: clamp(13px, 2.8vw, 16px);
                             color: $apple-text-secondary;
-                            padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+                            padding: clamp(6px, 1.5vw, 12px) clamp(10px, 2.5vw, 16px);
                             border-radius: $apple-radius-medium;
                             transition: $apple-transition-fast;
                             cursor: pointer;
@@ -122,6 +127,8 @@
                             position: relative;
                             border: 1px solid transparent;
                             background: transparent;
+                            min-height: 32px;
+                            @include dFlex($jc: center, $ai: center);
                             
                             &::before {
                                 content: '';
@@ -170,7 +177,7 @@
                                 }
                             }
                             
-                            &:focus {
+                            &:focus-visible {
                                 outline: 2px solid rgba($apple-primary, 0.5);
                                 outline-offset: 2px;
                             }
@@ -208,16 +215,18 @@
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
-    width: 30px;
-    height: 24px;
+    width: clamp(24px, 6vw, 30px);
+    height: clamp(18px, 4.5vw, 24px);
     cursor: pointer;
     justify-content: space-between;
     position: relative;
     z-index: 1001;
+    min-width: 24px;
+    min-height: 18px;
     
     span {
         width: 100%;
-        height: 3px;
+        height: clamp(2px, 0.5vw, 3px);
         background: $apple-text-primary;
         border-radius: 2px;
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -226,7 +235,7 @@
     
     &.open {
         span:nth-child(1) {
-            transform: translateY(10.5px) rotate(45deg);
+            transform: translateY(calc(clamp(18px, 4.5vw, 24px) / 2 - clamp(1px, 0.25vw, 1.5px))) rotate(45deg);
         }
         
         span:nth-child(2) {
@@ -235,7 +244,7 @@
         }
         
         span:nth-child(3) {
-            transform: translateY(-10.5px) rotate(-45deg);
+            transform: translateY(calc(-1 * (clamp(18px, 4.5vw, 24px) / 2 - clamp(1px, 0.25vw, 1.5px)))) rotate(-45deg);
         }
     }
     
@@ -243,14 +252,14 @@
         background: $apple-primary;
     }
     
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: $breakpoint-desktop) {
         display: flex;
     }
 }
 
 .desktop-nav,
 .desktop-lang {
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: $breakpoint-desktop) {
         display: none !important;
     }
 }
@@ -274,14 +283,14 @@
         visibility: visible;
     }
     
-    @media screen and (min-width: 901px) {
+    @media screen and (min-width: $breakpoint-desktop) {
         display: none !important;
     }
 }
 
 .mobile-nav-content {
     position: absolute;
-    top: 104px; // KORRIGIERT: Konsistent mit Desktop
+    top: clamp(72px, 15vw, 104px);
     left: 0;
     right: 0;
     background: $apple-bg-secondary;
@@ -296,7 +305,7 @@
     
     .mobile-nav-items {
         list-style: none;
-        padding: 20px 0;
+        padding: $space-mobile-lg 0;
         margin: 0;
         
         li {
@@ -308,14 +317,16 @@
             
             a {
                 display: block;
-                padding: 16px 24px;
+                padding: $space-mobile-base $space-md;
                 color: $apple-text-secondary;
                 text-decoration: none;
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
-                font-size: 18px;
+                font-size: clamp(16px, 4vw, 18px);
                 transition: $apple-transition-fast;
                 position: relative;
+                min-height: 44px;
+                @include dFlex($ai: center);
                 
                 &::before {
                     content: '';
@@ -350,7 +361,7 @@
             }
             
             &.mobile-lang-item {
-                padding: 16px 24px;
+                padding: $space-mobile-base $space-md;
                 @include dFlex($jc: center);
                 
                 app-lang-switcher {
@@ -362,27 +373,27 @@
     }
 }
 
-// KORRIGIERTE Responsive Breakpoints für Navigation
-@media screen and (max-width: 900px) {
+// Enhanced responsive breakpoints
+@media screen and (max-width: $breakpoint-desktop) {
     .nav-wrapper {
-        height: 88px; // KORRIGIERT: Proportional reduziert statt drastischer Sprung
+        height: clamp(64px, 12vw, 88px);
         
         .nav .content {
-            height: 88px;
+            height: inherit;
             @include standardPaddingMobile();
             
             .logo {
                 .logo-img {
-                    width: 44px; // KORRIGIERT: Proportional skaliert
-                    height: 28px;
+                    width: clamp(36px, 7vw, 44px);
+                    height: clamp(22px, 4.5vw, 28px);
                 }
                 
                 .logo-name {
-                    font-size: 14px;
+                    font-size: clamp(11px, 2.5vw, 14px);
                 }
                 
                 .logo-position {
-                    font-size: 10px;
+                    font-size: clamp(7px, 1.8vw, 10px);
                 }
             }
             
@@ -393,87 +404,186 @@
     }
     
     .mobile-nav-content {
-        top: 88px; // KORRIGIERT: Angepasst an neue Header-Höhe
+        top: clamp(64px, 12vw, 88px);
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $breakpoint-tablet) {
     .nav-wrapper .nav .content {
-        height: 80px;
-        
         .mobile-menu-toggle {
-            width: 26px;
-            height: 20px;
+            width: clamp(22px, 5.5vw, 26px);
+            height: clamp(16px, 4vw, 20px);
             
             span {
                 height: 2px;
             }
-            
-            &.open {
-                span:nth-child(1) {
-                    transform: translateY(9px) rotate(45deg);
-                }
-                
-                span:nth-child(3) {
-                    transform: translateY(-9px) rotate(-45deg);
-                }
-            }
         }
     }
     
     .mobile-nav-content {
-        top: 80px;
-        
         .mobile-nav-items {
-            padding: 16px 0;
+            padding: $space-mobile-md 0;
             
             li a {
-                padding: 14px 20px;
-                font-size: 16px;
+                padding: $space-mobile-sm $space-base;
+                font-size: clamp(15px, 3.8vw, 16px);
             }
             
             li.mobile-lang-item {
-                padding: 14px 20px;
+                padding: $space-mobile-sm $space-base;
             }
         }
     }
 }
 
-@media screen and (max-width: 480px) {
-    .nav-wrapper .nav .content {
-        height: 76px; // KORRIGIERT: Konsistent mit Landing Page Mobile
+@media screen and (max-width: $breakpoint-mobile) {
+    .nav-wrapper {
+        height: clamp(60px, 11vw, 76px);
         
-        .mobile-menu-toggle {
-            width: 24px;
-            height: 18px;
-        }
-        
-        .logo {
-            .logo-img {
-                width: 40px;
-                height: 25px;
+        .nav .content {
+            .mobile-menu-toggle {
+                width: 22px;
+                height: 16px;
+                
+                &.open {
+                    span:nth-child(1) {
+                        transform: translateY(7px) rotate(45deg);
+                    }
+                    
+                    span:nth-child(3) {
+                        transform: translateY(-7px) rotate(-45deg);
+                    }
+                }
             }
             
-            .logo-name {
-                font-size: 13px;
-            }
-            
-            .logo-position {
-                font-size: 9px;
+            .logo {
+                .logo-img {
+                    width: clamp(32px, 6.5vw, 40px);
+                    height: clamp(20px, 4vw, 25px);
+                }
+                
+                .logo-name {
+                    font-size: clamp(10px, 2.2vw, 13px);
+                }
+                
+                .logo-position {
+                    font-size: clamp(6px, 1.5vw, 9px);
+                }
             }
         }
     }
     
     .mobile-nav-content {
-        top: 76px; // KORRIGIERT: Konsistent
+        top: clamp(60px, 11vw, 76px);
         
         .mobile-nav-items {
-            padding: 12px 0;
+            padding: $space-mobile-sm 0;
             
             li a {
-                padding: 12px 16px;
+                padding: $space-mobile-xs $space-mobile-lg;
                 font-size: 15px;
             }
         }
+    }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+    .nav-wrapper {
+        height: 64px;
+        
+        .nav .content {
+            .logo {
+                .logo-img {
+                    width: 32px;
+                    height: 20px;
+                }
+                
+                .logo-name {
+                    font-size: 10px;
+                }
+                
+                .logo-position {
+                    font-size: 6px;
+                }
+            }
+            
+            .mobile-menu-toggle {
+                width: 20px;
+                height: 15px;
+            }
+        }
+    }
+    
+    .mobile-nav-content {
+        top: 64px;
+    }
+}
+
+// Accessibility enhancements
+@media (prefers-reduced-motion: reduce) {
+    .nav-wrapper,
+    .mobile-menu-toggle span,
+    .mobile-nav-content,
+    .logo {
+        transition: none !important;
+        
+        &:hover,
+        &:active {
+            transform: none !important;
+        }
+    }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+    .nav-wrapper {
+        background: #000;
+        border-bottom: 2px solid #fff;
+        
+        .nav .content {
+            .logo {
+                .logo-name,
+                .logo-position {
+                    color: #fff;
+                }
+            }
+            
+            .items li a span {
+                color: #fff;
+                border: 1px solid #333;
+                
+                &:hover {
+                    background: #333;
+                    border-color: #666;
+                }
+                
+                &.active {
+                    background: #0ff;
+                    color: #000;
+                    border-color: #0ff;
+                }
+            }
+        }
+    }
+    
+    .mobile-nav-content {
+        background: #000;
+        border-top: 2px solid #fff;
+        
+        .mobile-nav-items li a {
+            color: #fff;
+            border-bottom: 1px solid #333;
+            
+            &:hover {
+                background: #333;
+                color: #fff;
+            }
+        }
+    }
+}
+
+@media print {
+    .nav-wrapper {
+        display: none;
     }
 }
