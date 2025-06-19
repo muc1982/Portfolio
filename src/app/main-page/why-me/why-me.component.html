@@ -4,11 +4,41 @@
     <h2>{{ 'intro.title' | translate }}</h2>
 
     <div class="content">
+        <!-- Hero Text Section mit Apple-Style Animationen -->
+        <div class="hero-text-section" #heroTextSection>
+            <div class="hero-text-container">
+                <!-- Floating Particles - dezent und elegant -->
+                <div class="floating-particles">
+                    <div class="particle" *ngFor="let particle of getActiveParticles(); let i = index"
+                        [style.left]="particle.left" [style.top]="particle.top"
+                        [style.animation-delay]="particle.delay">
+                    </div>
+                </div>
+
+                <!-- Animierter Glow-Effekt -->
+                <div class="animated-glow"></div>
+
+                <!-- Hero Text mit Shimmer-Effekt -->
+                <div class="hero-main-text">
+                    <span class="shimmer-text">
+                        Als leidenschaftlicher Frontend-Entwickler vereine ich technisches Können
+                        mit kreativer Vision. Dank meiner fundierten Kenntnisse in modernen
+                        Technologien wie <span class="highlight-word">Angular</span>,
+                        <span class="highlight-word">TypeScript</span> und aktuellen Design-Systemen
+                        schaffe ich digitale Erlebnisse, die Benutzer begeistern und gleichzeitig
+                        Geschäftsergebnisse fördern.
+                    </span>
+                </div>
+            </div>
+        </div>
+
         <div class="hero-section">
+            <!-- Location Carousel mit eleganten Animationen -->
             <div class="location-carousel">
                 @for (slide of locationSlides; track slide.titleKey; let i = $index) {
                 <div class="location-slide" [class.active]="isSlideActive(i)">
                     <div class="location-icon">
+                        <div class="icon-glow"></div>
                         <img [src]="'assets/img/' + slide.icon" [alt]="slide.title">
                     </div>
 
@@ -19,7 +49,7 @@
                             <span class="cursor">|</span>
                         </div>
                         <div class="location-subtitle">
-                            {{ slide.subtitle }}
+                            {{ currentSlide.subtitle }}
                         </div>
                     </div>
                 </div>
@@ -33,7 +63,9 @@
                 </div>
             </div>
 
+            <!-- Introduction Card mit Morph-Effekt -->
             <div class="introduction-card">
+                <div class="card-background"></div>
                 <div class="introduction-text">
                     {{ 'intro.introduction' | translate }}
                 </div>
@@ -42,60 +74,10 @@
 
         <div class="cta-section">
             <div class="talk-button">
-                <button class="pointer" [appScrollBounce]="'contact-me'" [offsetY]="104"
+                <button class="pointer apple-button" [appScrollBounce]="'contact-me'" [offsetY]="104"
                     [attr.aria-label]="'intro.talk' | translate">
-                    {{ 'intro.talk' | translate }}
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="why-me-mobile" class="why-me-container-mobile normal-container wide-screen" #carouselContainerMobile>
-    <h2>{{ 'intro.title' | translate }}</h2>
-
-    <div class="content">
-        <div class="hero-section">
-            <div class="location-carousel">
-                @for (slide of locationSlides; track slide.titleKey; let i = $index) {
-                <div class="location-slide" [class.active]="isSlideActive(i)">
-                    <div class="location-icon">
-                        <img [src]="'assets/img/' + slide.icon" [alt]="slide.title">
-                    </div>
-
-                    <div class="location-content">
-                        <div class="location-text">
-                            <span class="highlight">{{ getHighlightText() }}</span>
-                            <span class="regular"> {{ getRegularText() }}</span>
-                            <span class="cursor">|</span>
-                        </div>
-                        <div class="location-subtitle">
-                            {{ slide.subtitle }}
-                        </div>
-                    </div>
-                </div>
-                }
-
-                <div class="progress-dots">
-                    @for (slide of locationSlides; track slide.titleKey; let i = $index) {
-                    <div [class]="getDotClass(i)" (click)="goToSlide(i)" [attr.aria-label]="'Slide ' + (i + 1)">
-                    </div>
-                    }
-                </div>
-            </div>
-
-            <div class="introduction-card">
-                <div class="introduction-text">
-                    {{ 'intro.introduction' | translate }}
-                </div>
-            </div>
-        </div>
-
-        <div class="cta-section">
-            <div class="talk-button">
-                <button class="pointer" [appScrollBounce]="'contact-me-mobile'" [offsetY]="104"
-                    [attr.aria-label]="'intro.talk' | translate">
-                    {{ 'intro.talk' | translate }}
+                    <span class="button-content">{{ 'intro.talk' | translate }}</span>
+                    <div class="button-glow"></div>
                 </button>
             </div>
         </div>
