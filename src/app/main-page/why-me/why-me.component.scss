@@ -7,9 +7,9 @@
     margin-bottom: clamp(24px, 5vw, 64px);
     padding: clamp(20px, 4vw, 64px) 0;
     overflow: hidden;
-    z-index: 3; // KORRIGIERT: Höherer z-index
+    z-index: 3;
 
-    // Hintergrund-Shimmer-Effekt
+    // Subtiler Hintergrund-Shimmer-Effekt
     &::before {
         content: '';
         position: absolute;
@@ -19,55 +19,35 @@
         height: 100%;
         background: linear-gradient(90deg,
                 transparent 0%,
-                rgba($apple-primary, 0.05) 50%,
+                rgba($apple-primary, 0.02) 50%,
                 transparent 100%);
-        animation: hero-shimmer 8s ease-in-out infinite;
+        animation: hero-shimmer-elegant 12s ease-in-out infinite;
         pointer-events: none;
         z-index: 0;
     }
 
     .hero-text-container {
         position: relative;
-        z-index: 4; // KORRIGIERT: Noch höherer z-index
+        z-index: 4;
         padding: clamp(20px, 4vw, 64px);
 
         .hero-main-text {
             font-family: $apple-font-family;
             font-weight: $apple-font-weight-regular;
             font-size: clamp(16px, 4.5vw, 32px);
-            line-height: clamp(1.4, 1.5, 1.6); // KORRIGIERT: Einheitenlose Werte
+            line-height: clamp(1.4, 1.5, 1.6);
             color: $apple-text-primary;
-            text-align: left;
+            text-align: center;
             letter-spacing: -0.01em;
-            opacity: 1; // KORRIGIERT: Direkt sichtbar machen
-            transform: translateY(0); // KORRIGIERT: Keine Animation-Blockierung
+            opacity: 1;
+            transform: translateY(0);
             position: relative;
-            z-index: 5; // KORRIGIERT: Höchster z-index für Text
+            z-index: 5;
 
             @media screen and (max-width: 768px) {
                 font-size: clamp(14px, 4vw, 20px);
                 line-height: 1.5;
                 text-align: left;
-            }
-
-            .shimmer-text {
-                position: relative;
-                display: block; // KORRIGIERT: Sicherstellen dass es angezeigt wird
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg,
-                            transparent 0%,
-                            rgba(255, 255, 255, 0.3) 50%,
-                            transparent 100%);
-                    animation: text-shimmer 3s ease-in-out 1.5s infinite;
-                    z-index: 1;
-                }
             }
 
             .highlight-word {
@@ -84,7 +64,7 @@
                     position: absolute;
                     bottom: -2px;
                     left: 0;
-                    width: 100%; // KORRIGIERT: Direkt 100% für bessere Sichtbarkeit
+                    width: 100%;
                     height: 2px;
                     background: $apple-primary;
                     border-radius: 1px;
@@ -92,7 +72,7 @@
             }
         }
 
-        // Floating Particles
+        // Reduzierte Floating Particles
         .floating-particles {
             position: absolute;
             top: 0;
@@ -104,37 +84,37 @@
 
             .particle {
                 position: absolute;
-                width: clamp(3px, 1vw, 4px);
-                height: clamp(3px, 1vw, 4px);
+                width: clamp(2px, 0.8vw, 3px);
+                height: clamp(2px, 0.8vw, 3px);
                 background: radial-gradient(circle,
-                        rgba($apple-primary, 0.8) 0%,
-                        rgba($apple-primary, 0.4) 50%,
+                        rgba($apple-primary, 0.4) 0%,
+                        rgba($apple-primary, 0.2) 50%,
                         transparent 100%);
                 border-radius: 50%;
-                opacity: 0.6; // KORRIGIERT: Sichtbarer machen
-                animation: particle-float 6s ease-in-out infinite;
+                opacity: 0.3;
+                animation: particle-float-elegant 8s ease-in-out infinite;
 
                 &:nth-child(2n) {
-                    animation-duration: 8s;
+                    animation-duration: 10s;
                     background: radial-gradient(circle,
-                            rgba($apple-secondary, 0.6) 0%,
-                            rgba($apple-secondary, 0.3) 50%,
+                            rgba($apple-secondary, 0.3) 0%,
+                            rgba($apple-secondary, 0.15) 50%,
                             transparent 100%);
                 }
 
                 &:nth-child(3n) {
-                    animation-duration: 7s;
-                    width: clamp(4px, 1.2vw, 6px);
-                    height: clamp(4px, 1.2vw, 6px);
+                    animation-duration: 12s;
+                    width: clamp(3px, 1vw, 4px);
+                    height: clamp(3px, 1vw, 4px);
                     background: radial-gradient(circle,
-                            rgba(#00d4ff, 0.7) 0%,
-                            rgba(#00d4ff, 0.3) 50%,
+                            rgba(#00d4ff, 0.4) 0%,
+                            rgba(#00d4ff, 0.2) 50%,
                             transparent 100%);
                 }
             }
         }
 
-        // Animierter Glow-Effekt
+        // Subtiler Glow-Effekt
         .animated-glow {
             position: absolute;
             top: 50%;
@@ -142,12 +122,12 @@
             width: clamp(200px, 40vw, 300px);
             height: clamp(200px, 40vw, 300px);
             background: radial-gradient(circle,
-                    rgba($apple-primary, 0.06) 0%, // KORRIGIERT: Sichtbarer
-                    rgba($apple-primary, 0.02) 50%,
+                    rgba($apple-primary, 0.03) 0%,
+                    rgba($apple-primary, 0.01) 50%,
                     transparent 100%);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            animation: glow-pulse 8s ease-in-out infinite;
+            animation: glow-pulse-elegant 10s ease-in-out infinite;
             pointer-events: none;
             z-index: 1;
         }
@@ -156,154 +136,273 @@
 
 // ===== LOCATION INTRODUCTION SECTION =====
 .location-introduction {
-    @include dFlex($fd: column, $gap: clamp(20px, 4vw, 48px));
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 4vw, 48px);
     z-index: 3;
 
-    .location {
+    // ===== ELEGANTE SLIDE ANIMATION =====
+    .premium-slide-container {
         position: relative;
-        height: clamp(80px, 15vw, 160px);
-        @include dFlex($ai: center, $gap: clamp(12px, 3vw, 32px));
-        padding: clamp(12px, 3vw, 32px);
-        transition: $apple-transition-medium;
-        z-index: 4;
+        margin-top: clamp(32px, 6vw, 64px);
+        height: clamp(120px, 20vw, 200px);
+        overflow: hidden;
+        border-radius: clamp($apple-radius-large, 3vw, $apple-radius-xl);
+        background: linear-gradient(135deg, 
+            rgba($apple-primary, 0.08) 0%, 
+            rgba($apple-secondary, 0.03) 50%,
+            rgba($apple-primary, 0.05) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        margin-top: -140px;
+        transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 
-        .location-icon-wrapper {
-            position: relative;
-            width: clamp(40px, 8vw, 80px);
-            height: clamp(40px, 8vw, 80px);
-            @include dFlex();
-            flex-shrink: 0;
-            z-index: 7;
-
-            .icon-glow {
-                position: absolute;
-                inset: -4px;
-                background: radial-gradient(circle,
-                        rgba($apple-primary, 0.3) 0%,
-                        transparent 70%);
-                border-radius: 50%;
-                animation: icon-glow-pulse 3s ease-in-out infinite;
-                pointer-events: none;
-                z-index: 1;
-            }
-
-            .img-wrapper {
-                position: relative;
-                @include dFlex();
-                background: rgba($apple-primary, 0.1);
-                border-radius: 50%;
-                border: 1px solid rgba($apple-primary, 0.3);
-                width: 100%;
-                height: 100%;
-                z-index: 2;
-
-                img {
-                    width: clamp(20px, 4vw, 40px);
-                    height: clamp(20px, 4vw, 40px);
-                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                }
-
-                .hide-on-mobile {
-                    @media screen and (max-width: 768px) {
-                        display: none;
-                    }
-                }
-
-                .hide-on-desktop {
-                    @media screen and (min-width: 769px) {
-                        display: none;
-                    }
-                }
-            }
-        }
-
-        .location-content {
-            flex: 1;
-            min-width: 0;
-            z-index: 7;
-
-            .location-text {
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-semibold;
-                font-size: clamp(16px, 4vw, 40px);
-                line-height: 1.2;
-                margin-bottom: clamp(4px, 1vw, 12px);
-
-                .highlight-text {
-                    background: $apple-teal-gradient;
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                }
-
-                .regular-text {
-                    color: $apple-text-primary;
-                }
-
-                .cursor-blink {
-                    color: $apple-primary;
-                    animation: cursor-blink 1s infinite;
-                }
-            }
-
-            .location-subtitle {
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-regular;
-                font-size: clamp(12px, 2.5vw, 20px);
-                color: $apple-text-secondary;
-                line-height: 1.4;
-            }
-        }
-    }
-
-    .introduction {
-        position: relative;
-        padding: clamp(16px, 4vw, 48px);
-        transition: $apple-transition-medium;
-        z-index: 4;
-
-        .card-background {
+        .slide-background {
             position: absolute;
             inset: 0;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: inherit;
-            animation: card-morph 8s ease-in-out infinite;
-            pointer-events: none;
+            background: linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba($apple-primary, 0.02) 25%,
+                rgba($apple-secondary, 0.03) 50%,
+                rgba($apple-primary, 0.02) 75%,
+                transparent 100%
+            );
+            animation: slide-background-elegant 15s ease-in-out infinite;
             z-index: 1;
         }
 
-        .introduction-text {
-            font-family: $apple-font-family;
-            font-weight: $apple-font-weight-regular;
-            font-size: clamp(14px, 3.5vw, 24px);
-            line-height: 1.6;
-            color: $apple-text-secondary;
-            text-align: justify;
+        .slide-content {
             position: relative;
-            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: clamp(16px, 4vw, 32px);
+            z-index: 3;
 
-            &::before {
-                content: '"';
-                position: absolute;
-                top: clamp(-20px, -4vw, -32px);
-                left: clamp(-12px, -3vw, -24px);
-                font-size: clamp(24px, 6vw, 60px);
-                color: $apple-primary;
-                opacity: 0.5;
-                font-family: Georgia, serif;
-                z-index: 1;
+            .slide-text-wrapper {
+                flex: 1;
+                max-width: 60%;
+
+                .slide-text-container {
+                    position: relative;
+                    overflow: hidden;
+
+                    .slide-main-text {
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-bold;
+                        font-size: clamp(18px, 4vw, 32px);
+                        background: $apple-teal-gradient;
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        margin-bottom: clamp(4px, 1vw, 8px);
+                        line-height: 1.2;
+                        transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+
+                    .slide-sub-text {
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-medium;
+                        font-size: clamp(12px, 2.5vw, 18px);
+                        color: $apple-text-secondary;
+                        line-height: 1.4;
+                        opacity: 0.85;
+                        transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+                        transform: translateY(0);
+                    }
+
+                    // Elegante Transition States
+                    &.transitioning-out {
+                        .slide-main-text {
+                            transform: translateY(-30px);
+                            opacity: 0;
+                            filter: blur(2px);
+                        }
+
+                        .slide-sub-text {
+                            transform: translateY(-20px);
+                            opacity: 0;
+                            filter: blur(1px);
+                            transition-delay: 0.1s;
+                        }
+                    }
+
+                    &.transitioning-in {
+                        .slide-main-text {
+                            transform: translateY(30px);
+                            opacity: 0;
+                            filter: blur(2px);
+                            animation: slide-text-enter-elegant 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+                        }
+
+                        .slide-sub-text {
+                            transform: translateY(20px);
+                            opacity: 0;
+                            filter: blur(1px);
+                            animation: slide-text-enter-elegant 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s forwards;
+                        }
+                    }
+                }
             }
 
-            &::after {
-                content: '"';
+            .slide-visual-effects {
                 position: absolute;
-                bottom: clamp(-24px, -5vw, -42px);
-                right: clamp(-12px, -3vw, -24px);
-                font-size: clamp(24px, 6vw, 60px);
-                color: $apple-primary;
-                opacity: 0.5;
-                font-family: Georgia, serif;
-                z-index: 1;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 40%;
+                overflow: hidden;
+                z-index: 2;
+                transition: all 0.6s ease;
+
+                // Elegante Morphing Shape
+                .morphing-shape {
+                    position: absolute;
+                    top: 50%;
+                    right: 20%;
+                    width: clamp(60px, 12vw, 120px);
+                    height: clamp(60px, 12vw, 120px);
+                    background: radial-gradient(circle,
+                        rgba($apple-primary, 0.25) 0%,
+                        rgba($apple-secondary, 0.15) 50%,
+                        transparent 100%);
+                    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                    animation: morphing-elegant 20s ease-in-out infinite;
+                    transform: translate(50%, -50%);
+                    filter: blur(0.5px);
+                    transition: all 0.6s ease;
+                }
+
+                // Sanfte Energy Waves
+                .energy-waves {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 100%;
+                    height: 100%;
+
+                    .wave {
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        width: 200%;
+                        height: 1px;
+                        background: linear-gradient(90deg,
+                            transparent 0%,
+                            rgba($apple-primary, 0.4) 50%,
+                            transparent 100%);
+                        transform: translateY(-50%);
+
+                        &.wave-1 {
+                            animation: wave-slide-elegant 6s ease-in-out infinite;
+                        }
+
+                        &.wave-2 {
+                            animation: wave-slide-elegant 6s ease-in-out infinite 2s;
+                            background: linear-gradient(90deg,
+                                transparent 0%,
+                                rgba($apple-secondary, 0.3) 50%,
+                                transparent 100%);
+                            top: 40%;
+                        }
+
+                        &.wave-3 {
+                            animation: wave-slide-elegant 6s ease-in-out infinite 4s;
+                            background: linear-gradient(90deg,
+                                transparent 0%,
+                                rgba($apple-primary, 0.2) 50%,
+                                transparent 100%);
+                            top: 60%;
+                        }
+                    }
+                }
+
+                // Reduzierte Floating Elements
+                .floating-elements {
+                    position: absolute;
+                    inset: 0;
+
+                    .element {
+                        position: absolute;
+                        width: clamp(3px, 0.8vw, 6px);
+                        height: clamp(3px, 0.8vw, 6px);
+                        background: $apple-primary;
+                        border-radius: 50%;
+                        opacity: 0.4;
+
+                        &.element-1 {
+                            top: 20%;
+                            right: 30%;
+                            animation: float-element-elegant 8s ease-in-out infinite;
+                        }
+
+                        &.element-2 {
+                            top: 70%;
+                            right: 50%;
+                            animation: float-element-elegant 8s ease-in-out infinite 2s;
+                            background: $apple-secondary;
+                        }
+
+                        &.element-3 {
+                            top: 40%;
+                            right: 20%;
+                            animation: float-element-elegant 8s ease-in-out infinite 4s;
+                            width: clamp(4px, 1vw, 8px);
+                            height: clamp(4px, 1vw, 8px);
+                        }
+
+                        &.element-4 {
+                            top: 60%;
+                            right: 70%;
+                            animation: float-element-elegant 8s ease-in-out infinite 6s;
+                            background: rgba($apple-primary, 0.3);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Sanfter Hover Effect
+        &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 32px rgba($apple-primary, 0.1);
+            border-color: rgba($apple-primary, 0.15);
+
+            .morphing-shape {
+                animation-duration: 10s;
+                filter: blur(0px);
+            }
+
+            .wave {
+                animation-duration: 4s !important;
+            }
+
+            .slide-visual-effects {
+                transform: scale(1.02);
+            }
+        }
+
+        // Während Text-Transition
+        &.text-transitioning {
+            .morphing-shape {
+                animation-duration: 8s;
+                opacity: 0.7;
+            }
+
+            .wave {
+                animation-duration: 3s !important;
+                opacity: 0.6;
+            }
+
+            .element {
+                animation-duration: 4s !important;
+                opacity: 0.3;
             }
         }
     }
@@ -319,8 +418,9 @@
     margin: clamp(16px, 4vw, 40px) auto;
     max-width: 1400px;
     min-height: clamp(60vh, 70vh, 80vh);
-    @include standardPadding();
-    @include dFlex($fd: column);
+    padding: clamp(20px, 4vw, 40px);
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     border-radius: clamp($apple-radius-large, 2vw, $apple-radius-xl);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -328,7 +428,7 @@
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
-    z-index: 1; // KORRIGIERT: Basis z-index
+    z-index: 1;
 
     &::before {
         content: '';
@@ -337,14 +437,17 @@
         right: -40%;
         width: 80%;
         height: 100%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-        animation: apple-why-me-ambient 15s ease-in-out infinite;
+        background: radial-gradient(circle, rgba($apple-primary, 0.04) 0%, transparent 60%);
+        animation: apple-ambient-elegant 20s ease-in-out infinite;
         filter: blur(40px);
-        z-index: 0; // KORRIGIERT: Hintergrund z-index
+        z-index: 0;
     }
 
     h2 {
-        @include h2Title();
+        font-family: $apple-font-family;
+        font-weight: $apple-font-weight-bold;
+        color: $apple-text-primary;
+        text-align: center;
         margin-bottom: clamp(24px, 5vw, 48px);
         padding-top: clamp(24px, 5vw, 64px);
         position: relative;
@@ -355,22 +458,31 @@
 
     .content {
         width: 100%;
-        @include dFlex($fd: column, $gap: clamp(20px, 5vw, 64px));
+        display: flex;
+        flex-direction: column;
+        gap: clamp(20px, 5vw, 64px);
         position: relative;
         z-index: 2;
         padding: clamp(16px, 4vw, 80px);
         max-width: 1200px;
         margin: 0 auto;
+        margin-top: -120px;
 
         .cta-section {
-            @include dFlex($jc: center);
+            display: flex;
+            justify-content: center;
             padding-top: clamp(12px, 3vw, 32px);
             z-index: 3;
 
             .talk-button {
                 .apple-button {
                     position: relative;
-                    @include apple-button-primary();
+                    background: $apple-primary;
+                    color: white;
+                    border: none;
+                    border-radius: $apple-radius-medium;
+                    cursor: pointer;
+                    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
                     font-size: clamp(14px, 3.5vw, 22px);
                     padding: clamp(12px, 3vw, 24px) clamp(24px, 6vw, 56px);
                     min-width: clamp(140px, 35vw, 280px);
@@ -386,12 +498,17 @@
                         position: absolute;
                         inset: -2px;
                         background: radial-gradient(circle,
-                                rgba($apple-primary, 0.4) 0%,
+                                rgba($apple-primary, 0.2) 0%,
                                 transparent 70%);
                         border-radius: inherit;
-                        animation: button-glow 4s ease-in-out infinite;
+                        animation: button-glow-elegant 6s ease-in-out infinite;
                         pointer-events: none;
                         z-index: 1;
+                    }
+
+                    &:hover {
+                        transform: translateY(-1px);
+                        box-shadow: 0 8px 24px rgba($apple-primary, 0.3);
                     }
                 }
             }
@@ -409,126 +526,222 @@
     overflow: hidden;
 }
 
-.apple-card {
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: clamp($apple-radius-medium, 2vw, $apple-radius-large);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+// ===== SLIDE INDICATORS =====
+.slide-indicators {
+    position: absolute;
+    bottom: clamp(8px, 2vw, 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: clamp(6px, 1.5vw, 12px);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    
+    .indicator {
+        width: clamp(6px, 1.5vw, 10px);
+        height: clamp(6px, 1.5vw, 10px);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: $apple-primary;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        &.active {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.15);
+            
+            &::before {
+                transform: scale(1);
+            }
+        }
+        
+        &:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        
+        &:active {
+            transform: scale(0.95);
+        }
+    }
 }
 
-// ===== ANIMATIONS =====
-@keyframes hero-shimmer {
-    0%, 20% {
+// ===== ELEGANTE ANIMATIONEN =====
+@keyframes slide-text-enter-elegant {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+        filter: blur(2px);
+    }
+    60% {
+        transform: translateY(-3px);
+        opacity: 0.8;
+        filter: blur(0.5px);
+    }
+    80% {
+        transform: translateY(1px);
+        opacity: 0.95;
+        filter: blur(0px);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+@keyframes hero-shimmer-elegant {
+    0%, 30% {
         left: -100%;
         opacity: 0;
     }
     50% {
-        opacity: 1;
+        opacity: 0.8;
     }
-    100% {
+    70%, 100% {
         left: 100%;
         opacity: 0;
     }
 }
 
-@keyframes text-shimmer {
-    0% {
-        left: -100%;
+@keyframes slide-background-elegant {
+    0%, 100% {
+        background-position: 0% 50%;
+        opacity: 0.3;
     }
-    100% {
-        left: 100%;
+    50% {
+        background-position: 100% 50%;
+        opacity: 0.6;
     }
 }
 
-@keyframes particle-float {
+@keyframes morphing-elegant {
     0%, 100% {
-        opacity: 0.6;
-        transform: translateY(0) translateX(0) scale(0.8);
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        transform: translate(50%, -50%) rotate(0deg) scale(1);
+        opacity: 0.25;
     }
     25% {
-        opacity: 0.8;
-        transform: translateY(-20px) translateX(10px) scale(1);
+        border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+        transform: translate(50%, -50%) rotate(45deg) scale(1.05);
+        opacity: 0.35;
     }
     50% {
-        opacity: 1;
-        transform: translateY(-10px) translateX(-5px) scale(1.2);
+        border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+        transform: translate(50%, -50%) rotate(90deg) scale(0.95);
+        opacity: 0.4;
     }
     75% {
-        opacity: 0.7;
-        transform: translateY(-30px) translateX(8px) scale(0.9);
+        border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+        transform: translate(50%, -50%) rotate(135deg) scale(1.02);
+        opacity: 0.3;
     }
 }
 
-@keyframes glow-pulse {
+@keyframes wave-slide-elegant {
+    0% {
+        transform: translateY(-50%) translateX(100%);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    80% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-50%) translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes float-element-elegant {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.4;
+    }
+    25% {
+        transform: translateY(-8px) scale(1.05);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-5px) scale(1.1);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translateY(-12px) scale(1.02);
+        opacity: 0.5;
+    }
+}
+
+@keyframes particle-float-elegant {
     0%, 100% {
         opacity: 0.3;
+        transform: translateY(0) translateX(0) scale(0.9);
+    }
+    25% {
+        opacity: 0.5;
+        transform: translateY(-15px) translateX(8px) scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(-8px) translateX(-4px) scale(1.1);
+    }
+    75% {
+        opacity: 0.4;
+        transform: translateY(-20px) translateX(6px) scale(0.95);
+    }
+}
+
+@keyframes glow-pulse-elegant {
+    0%, 100% {
+        opacity: 0.2;
         transform: translate(-50%, -50%) scale(1);
     }
     50% {
-        opacity: 0.6;
-        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(1.05);
     }
 }
 
-@keyframes icon-glow-pulse {
+@keyframes button-glow-elegant {
     0%, 100% {
-        opacity: 0.5;
-        transform: scale(1);
+        opacity: 0;
+        transform: scale(0.9);
     }
     50% {
-        opacity: 0.8;
+        opacity: 0.2;
         transform: scale(1.1);
     }
 }
 
-@keyframes card-morph {
-    0% {
-        border-radius: $apple-radius-large;
-        transform: scale(1);
-    }
-    50% {
-        border-radius: $apple-radius-xl;
-        transform: scale(1.02);
-    }
-    100% {
-        border-radius: $apple-radius-large;
-        transform: scale(1);
-    }
-}
-
-@keyframes button-glow {
-    0%, 100% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    50% {
-        opacity: 0.3;
-        transform: scale(1.2);
-    }
-}
-
-@keyframes cursor-blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
-}
-
-@keyframes apple-why-me-ambient {
+@keyframes apple-ambient-elegant {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.08;
+        opacity: 0.04;
     }
     33% {
-        transform: translateY(-20px) rotate(2deg) scale(1.02);
-        opacity: 0.12;
+        transform: translateY(-10px) rotate(1deg) scale(1.01);
+        opacity: 0.06;
     }
     66% {
-        transform: translateY(15px) rotate(-1deg) scale(0.98);
-        opacity: 0.06;
+        transform: translateY(8px) rotate(-0.5deg) scale(0.99);
+        opacity: 0.03;
     }
 }
 
@@ -540,63 +753,45 @@
         min-height: 60vh;
     }
 
-    .location-introduction .location {
-        height: clamp(70px, 12vw, 120px);
-        gap: clamp(10px, 2.5vw, 24px);
-        padding: clamp(10px, 2.5vw, 24px);
+    .location-introduction {
+        .premium-slide-container {
+            height: clamp(100px, 15vw, 160px);
 
-        .location-icon-wrapper {
-            width: clamp(35px, 7vw, 60px);
-            height: clamp(35px, 7vw, 60px);
+            .slide-content {
+                padding: clamp(12px, 3vw, 24px);
 
-            .img-wrapper img {
-                width: clamp(18px, 3.5vw, 30px);
-                height: clamp(18px, 3.5vw, 30px);
-            }
-        }
+                .slide-text-wrapper {
+                    max-width: 70%;
 
-        .location-content {
-            .location-text {
-                font-size: clamp(14px, 3.5vw, 28px);
-            }
+                    .slide-text-container {
+                        .slide-main-text {
+                            font-size: clamp(14px, 3.5vw, 24px);
+                        }
 
-            .location-subtitle {
-                font-size: clamp(10px, 2vw, 16px);
+                        .slide-sub-text {
+                            font-size: clamp(10px, 2vw, 14px);
+                        }
+                    }
+                }
+
+                .slide-visual-effects {
+                    width: 30%;
+
+                    .morphing-shape {
+                        width: clamp(40px, 8vw, 80px);
+                        height: clamp(40px, 8vw, 80px);
+                    }
+                }
             }
         }
     }
-}
-
-@media screen and (max-width: 480px) {
-    .why-me-container {
-        margin: clamp(8px, 2vw, 16px) auto;
-        padding: clamp(12px, 3vw, 20px);
-        min-height: 50vh;
-    }
-
-    .location-introduction .location {
-        height: clamp(60px, 10vw, 100px);
-        gap: clamp(8px, 2vw, 16px);
-        padding: clamp(8px, 2vw, 16px);
-
-        .location-icon-wrapper {
-            width: clamp(30px, 6vw, 50px);
-            height: clamp(30px, 6vw, 50px);
-
-            .img-wrapper img {
-                width: clamp(15px, 3vw, 25px);
-                height: clamp(15px, 3vw, 25px);
-            }
-        }
-
-        .location-content {
-            .location-text {
-                font-size: clamp(12px, 3vw, 20px);
-            }
-
-            .location-subtitle {
-                font-size: clamp(8px, 1.8vw, 12px);
-            }
+    
+    .slide-indicators {
+        bottom: clamp(6px, 1.5vw, 12px);
+        
+        .indicator {
+            width: clamp(5px, 1.2vw, 8px);
+            height: clamp(5px, 1.2vw, 8px);
         }
     }
 }
@@ -611,30 +806,58 @@
         .hero-text-container {
             .animated-glow {
                 animation: none;
-                opacity: 0.2;
+                opacity: 0.1;
             }
 
             .floating-particles .particle {
                 animation: none;
-                opacity: 0.3;
+                opacity: 0.2;
             }
         }
     }
 
-    .location-icon-wrapper .icon-glow {
-        animation: none;
-    }
+    .premium-slide-container {
+        .slide-background,
+        .morphing-shape,
+        .wave,
+        .element {
+            animation: none !important;
+        }
 
-    .introduction .card-background {
-        animation: none;
+        .slide-text-container {
+            .slide-main-text,
+            .slide-sub-text {
+                transition: opacity 0.3s ease !important;
+                transform: none !important;
+                filter: none !important;
+            }
+
+            &.transitioning-out {
+                .slide-main-text,
+                .slide-sub-text {
+                    transform: none !important;
+                    opacity: 0;
+                    filter: none !important;
+                }
+            }
+
+            &.transitioning-in {
+                .slide-main-text,
+                .slide-sub-text {
+                    transform: none !important;
+                    animation: none !important;
+                    opacity: 1;
+                    filter: none !important;
+                }
+            }
+        }
     }
 
     .apple-button .button-glow {
         animation: none;
     }
-
-    .cursor-blink {
-        animation: none;
-        opacity: 1;
+    
+    .slide-indicators .indicator {
+        transition: background 0.3s ease, transform 0.3s ease !important;
     }
 }

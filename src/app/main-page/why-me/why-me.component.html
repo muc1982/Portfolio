@@ -2,14 +2,13 @@
 
 <div id="why-me" class="why-me-container normal-container wide-screen">
     <h2>{{ 'intro.title' | translate }}</h2>
-    
+
     <div class="content">
         <div class="hero-text-section">
             <div class="hero-text-container">
                 <div class="floating-particles">
                     <div class="particle" *ngFor="let i of [1,2,3,4,5,6]; let idx = index"
-                        [style.left]="(10 + idx * 15) + '%'" 
-                        [style.top]="(20 + idx * 10) + '%'"
+                        [style.left]="(10 + idx * 15) + '%'" [style.top]="(20 + idx * 10) + '%'"
                         [style.animation-delay]="(idx * 0.5) + 's'">
                     </div>
                 </div>
@@ -17,83 +16,50 @@
                 <div class="animated-glow"></div>
                 <div class="hero-main-text">
                     <span class="shimmer-text">
-                        Als leidenschaftlicher Frontend-Entwickler vereine ich technisches Können
-                        mit kreativer Vision. Dank meiner fundierten Kenntnisse in modernen
-                        Technologien wie <span class="highlight-word">Angular</span>,
-                        <span class="highlight-word">TypeScript</span> und aktuellen Design-Systemen
-                        schaffe ich digitale Erlebnisse, die Benutzer begeistern und gleichzeitig
-                        Geschäftsergebnisse fördern.
+                        {{ 'intro.introduction' | translate }}
                     </span>
                 </div>
             </div>
         </div>
 
         <div class="location-introduction">
-            
-            <div class="location apple-glassmorphism" [style.display]="currentText==0? 'flex': 'none'">
-                <div class="location-icon-wrapper">
-                    <div class="icon-glow"></div>
-                    <div class="img-wrapper">
-                        <img class="hide-on-mobile" src="assets/img/location.png" alt="München">
-                        <img class="hide-on-desktop" src="assets/img/location-mobile.png" alt="München">
+            <!-- SPEKTAKULÄRE SLIDE ANIMATION MIT DYNAMISCHEM TEXT -->
+            <div class="premium-slide-container">
+                <div class="slide-background"></div>
+                <div class="slide-content">
+                    <div class="slide-text-wrapper">
+                        <!-- Text Container mit Transition -->
+                        <div class="slide-text-container" [class.transitioning]="isTransitioning"
+                            [class.show-text]="showCurrentText">
+                            <div class="slide-main-text">
+                                {{ currentMainText }}
+                            </div>
+                            <div class="slide-sub-text">
+                                {{ currentSubText }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-visual-effects">
+                        <div class="morphing-shape"></div>
+                        <div class="energy-waves">
+                            <div class="wave wave-1"></div>
+                            <div class="wave wave-2"></div>
+                            <div class="wave wave-3"></div>
+                        </div>
+                        <div class="floating-elements">
+                            <div class="element element-1"></div>
+                            <div class="element element-2"></div>
+                            <div class="element element-3"></div>
+                            <div class="element element-4"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="location-content">
-                    <div class="location-text">
-                        <span class="highlight-text">{{ typedPart1 }}</span>
-                        <span class="regular-text"> {{ typedPart2 }}</span>
-                        <span class="cursor-blink"> ..|</span>
-                    </div>
-                    <div class="location-subtitle">
-                        Vor Ort oder hybrid - flexibel für Ihr Projekt
-                    </div>
-                </div>
-            </div> 
 
-            <div class="location apple-glassmorphism" [style.display]="currentText==1? 'flex': 'none'">
-                <div class="location-icon-wrapper">
-                    <div class="icon-glow"></div>
-                    <div class="img-wrapper">
-                        <img class="hide-on-mobile" src="assets/img/computer.png" alt="Remote">
-                        <img class="hide-on-desktop" src="assets/img/remote-mobile.png" alt="Remote">
+                <!-- Optionale Slide Indicators -->
+                <div class="slide-indicators">
+                    <div class="indicator" *ngFor="let indicator of slideIndicators; let i = index"
+                        [class.active]="i === currentSlideIndex" (click)="goToSlide(i)">
                     </div>
-                </div>
-                <div class="location-content">
-                    <div class="location-text">
-                        <span class="highlight-text">{{ typedPart1 }}</span>
-                        <span class="regular-text"> {{ typedPart2 }}</span>
-                        <span class="cursor-blink"> ..|</span>
-                    </div>
-                    <div class="location-subtitle">
-                        Moderne Zusammenarbeit ohne geografische Grenzen
-                    </div>
-                </div>
-            </div> 
-
-            <div class="location apple-glassmorphism" [style.display]="currentText==2? 'flex': 'none'">
-                <div class="location-icon-wrapper">
-                    <div class="icon-glow"></div>
-                    <div class="img-wrapper">
-                        <img class="hide-on-mobile" src="assets/img/suitcase.png" alt="Umziehen">
-                        <img class="hide-on-desktop suitcase" src="assets/img/suitcase-mobile.png" alt="Umziehen">
-                    </div>
-                </div>
-                <div class="location-content">
-                    <div class="location-text">
-                        <span class="highlight-text">{{ typedPart1 }}</span>
-                        <span class="regular-text"> {{ typedPart2 }}</span>
-                        <span class="cursor-blink"> ..|</span>
-                    </div>
-                    <div class="location-subtitle">
-                        Für das richtige Projekt auch deutschlandweit
-                    </div>
-                </div>
-            </div> 
->
-            <div class="introduction apple-card">
-                <div class="card-background"></div>
-                <div class="introduction-text">
-                    {{ 'intro.introduction' | translate }}
                 </div>
             </div>
         </div>

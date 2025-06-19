@@ -1,9 +1,13 @@
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
+
+interface SlideContent {
+  mainTextKey: string;
+  subTextKey: string;
+}
 
 @Component({
   selector: 'app-why-me',
@@ -12,121 +16,124 @@ import { Subscription } from 'rxjs';
   templateUrl: './why-me.component.html',
   styleUrl: './why-me.component.scss'
 })
-export class WhyMeComponent implements OnDestroy {
-  typedPart1 = '';
-  typedPart2 = '';
-  part1 = '';
-  part2 = '';
+export class WhyMeComponent implements OnInit, OnDestroy {
+  private intervalSubscription?: Subscription;
+  private languageSubscription?: Subscription;
 
-  typingTimeoutId: number | null = null;
-  showImage = false;
-  currentSpan = 1;
-  currentIndex = 0;
-  currentText = 0;
-  isTyping = true;
-  typingSpeed = 100;
-  private langChangeSub?: Subscription;
-
-  langsArr = [
-    ['intro.iam', 'intro.city'],
-    ['intro.iamremote', 'intro.remote'],
-    ['intro.iamrelocate', 'intro.relocate'],
+  // Text-Inhalte für die Slides
+  private slideContents: SlideContent[] = [
+    {
+      mainTextKey: 'intro.munich',
+      subTextKey: 'intro.munich.subtitle'
+    },
+    {
+      mainTextKey: 'intro.remote',
+      subTextKey: 'intro.remote.subtitle'
+    },
+    {
+      mainTextKey: 'intro.relocate',
+      subTextKey: 'intro.relocate.subtitle'
+    }
   ];
 
-  constructor(private translate: TranslateService) {
-    this.initTyping();
-    this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.initTyping();
+  // Aktuelle Slide-Daten
+  currentSlideIndex = 0;
+  currentMainText = '';
+  currentSubText = '';
+  nextMainText = '';
+  nextSubText = '';
+
+  // Animation States
+  isTransitioning = false;
+  showCurrentText = true;
+
+  // Timing-Konfiguration
+  private readonly SLIDE_DURATION = 4000; // 4 Sekunden pro Slide
+  private readonly TRANSITION_DURATION = 800; // 0.8 Sekunden für den Übergang
+
+  constructor(private translateService: TranslateService) { }
+
+  ngOnInit(): void {
+    // Initiale Texte laden
+    this.loadCurrentTexts();
+
+    // Language Change Subscription
+    this.languageSubscription = this.translateService.onLangChange.subscribe(() => {
+      this.loadCurrentTexts();
+    });
+
+    // Auto-Slide Timer starten
+    this.startSlideTimer();
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
+    if (this.languageSubscription) {
+      this.languageSubscription.unsubscribe();
+    }
+  }
+
+  private startSlideTimer(): void {
+    this.intervalSubscription = interval(this.SLIDE_DURATION).subscribe(() => {
+      this.nextSlide();
     });
   }
 
-  initTyping() {
-    this.clearTypingTimeout();
-    const [p1, p2] = this.langsArr[this.currentText];
-    this.translate.get(this.langsArr[this.currentText]).subscribe(translations => {
-      this.part1 = translations[p1];
-      this.part2 = translations[p2];
-      this.resetTypingState();
-      this.typeNextChar();
-    });
+  private loadCurrentTexts(): void {
+    const currentSlide = this.slideContents[this.currentSlideIndex];
+    this.currentMainText = this.translateService.instant(currentSlide.mainTextKey);
+    this.currentSubText = this.translateService.instant(currentSlide.subTextKey);
   }
 
-  private resetTypingState(): void {
-    this.typedPart1 = '';
-    this.typedPart2 = '';
-    this.currentSpan = 1;
-    this.currentIndex = 0;
-    this.isTyping = true;
+  private loadNextTexts(): void {
+    const nextIndex = (this.currentSlideIndex + 1) % this.slideContents.length;
+    const nextSlide = this.slideContents[nextIndex];
+    this.nextMainText = this.translateService.instant(nextSlide.mainTextKey);
+    this.nextSubText = this.translateService.instant(nextSlide.subTextKey);
   }
 
-  typeNextChar() {
-    if (this.currentSpan === 1) {
-      this.handleImage();
-    } else if (this.currentSpan === 2) {
-      this.handleFirstSpan();
-    } else if (this.currentSpan === 3) {
-      this.handleSecondSpan();
+  private nextSlide(): void {
+    if (this.isTransitioning) return;
+
+    // Nächste Texte vorbereiten
+    this.loadNextTexts();
+
+    // Transition starten
+    this.isTransitioning = true;
+    this.showCurrentText = false;
+
+    // Nach halber Transition-Zeit die Texte wechseln
+    setTimeout(() => {
+      this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slideContents.length;
+      this.currentMainText = this.nextMainText;
+      this.currentSubText = this.nextSubText;
+      this.showCurrentText = true;
+    }, this.TRANSITION_DURATION / 2);
+
+    // Transition beenden
+    setTimeout(() => {
+      this.isTransitioning = false;
+    }, this.TRANSITION_DURATION);
+  }
+
+  // Public Methode für manuelle Navigation (optional)
+  public goToSlide(index: number): void {
+    if (index === this.currentSlideIndex || this.isTransitioning) return;
+
+    this.currentSlideIndex = index;
+    this.loadCurrentTexts();
+
+    // Timer zurücksetzen
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
     }
-    this.typingTimeoutId = window.setTimeout(() => this.typeNextChar(), this.typingSpeed);
+    this.startSlideTimer();
   }
 
-  handleImage() {
-    if (this.isTyping) {
-      this.showImage = true;
-      this.currentSpan = 2;
-    } else {
-      this.showImage = false;
-      setTimeout(() => {
-        this.currentText++;
-        if (this.currentText == 3) this.currentText = 0;
-        this.initTyping();
-      }, this.typingSpeed);
-    }
-  }
-
-  handleFirstSpan() {
-    if (this.isTyping) {
-      if (this.currentIndex < this.part1.length) {
-        this.typedPart1 += this.part1[this.currentIndex++];
-      } else {
-        this.currentSpan = 3;
-        this.currentIndex = 0;
-      }
-    } else {
-      if (this.currentIndex > -1) {
-        this.typedPart1 = this.part1.substring(0, this.currentIndex--);
-      } else {
-        this.currentSpan = 1;
-      }
-    }
-  }
-
-  handleSecondSpan() {
-    if (this.isTyping) {
-      if (this.currentIndex < this.part2.length) {
-        this.typedPart2 += this.part2[this.currentIndex++];
-      } else {
-        this.isTyping = false;
-      }
-    } else {
-      if (this.currentIndex > -1) {
-        this.typedPart2 = this.part2.substring(0, this.currentIndex--);
-      } else {
-        this.currentSpan = 2;
-        this.currentIndex = this.part1.length;
-      }
-    }
-  }
-
-  clearTypingTimeout() {
-    if (this.typingTimeoutId !== null) {
-      clearTimeout(this.typingTimeoutId);
-      this.typingTimeoutId = null;
-    }
-  }
-
-  ngOnDestroy() {
-    this.clearTypingTimeout();
-    this.langChangeSub?.unsubscribe();
+  // Getter für Template
+  get slideIndicators(): number[] {
+    return Array.from({ length: this.slideContents.length }, (_, i) => i);
   }
 }
