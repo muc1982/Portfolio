@@ -210,16 +210,16 @@ $grid-gap-mobile: clamp(6px, 1.5vw, 10px) !default;
 @mixin responsive-grid($mobile-cols: 1, $tablet-cols: 2, $desktop-cols: 3) {
     display: grid;
     gap: $grid-gap-mobile;
-    grid-template-columns: repeat($mobile-cols, 1fr);
+    grid-template-columns: repeat( 4, 1fr);
     
     @media screen and (min-width: $breakpoint-tablet) {
         gap: $grid-gap-normal;
-        grid-template-columns: repeat($tablet-cols, 1fr);
+        grid-template-columns: repeat( 4, 1fr);
     }
     
     @media screen and (min-width: $breakpoint-desktop) {
         gap: $grid-gap-wide;
-        grid-template-columns: repeat($desktop-cols, 1fr);
+        grid-template-columns: repeat( 4, 1fr);
     }
 }
 

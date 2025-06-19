@@ -1,463 +1,653 @@
-// src/app/main-page/landing-page/landing-page-mobile/landing-page-mobile.component.scss
-@use '../../../../style/apple-variables' as *;
+@use '../../../../style/apple-variables.scss' as *;
 
-.menu-content {
-    ul {
-        li {
-            font-size: $font-mobile-base; 
-            
-            app-lang-switcher {
-                .langs {
-                    span {
-                        font-size: $font-mobile-sm; 
-                    }
+#landing-page-mobile {
+    position: relative;
+    width: 100vw;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+#landing-page-extra {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    z-index: 0;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -15%;
+        width: 80%;
+        height: 120%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+        animation: apple-ambient-float 12s ease-in-out infinite;
+        filter: blur(40px);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -20%;
+        left: -10%;
+        width: 60%;
+        height: 80%;
+        background: radial-gradient(circle, rgba($apple-primary, 0.05) 0%, transparent 50%);
+        animation: apple-ambient-float 15s ease-in-out infinite reverse;
+        filter: blur(60px);
+    }
+}
+
+// Burger Menu Styling - Korrigiert
+.burger-menu-wrapper {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1001; // Höher als Menu
+
+    @media screen and (max-width: 480px) {
+        top: 20px;
+        right: 20px;
+    }
+
+    .burger-menu-btn {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: $apple-radius-medium;
+        width: 52px;
+        height: 52px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        position: relative;
+        overflow: hidden;
+
+        @media screen and (max-width: 480px) {
+            width: 48px;
+            height: 48px;
+        }
+
+        // Hover Effect
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.05);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: inherit;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: scale(1.08);
+            border-color: rgba(255, 255, 255, 0.35);
+
+            &::before {
+                opacity: 1;
+            }
+        }
+
+        &:active {
+            transform: scale(1.02);
+        }
+
+        // Burger Lines - Verbessert
+        span {
+            width: 22px;
+            height: 2.5px;
+            background: rgba(255, 255, 255, 0.95);
+            display: block;
+            margin: 3px 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 2px;
+            position: relative;
+
+            @media screen and (max-width: 480px) {
+                width: 20px;
+                height: 2px;
+                margin: 2.5px 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: inherit;
+                border-radius: inherit;
+                opacity: 0.3;
+                transform: scaleY(0);
+                transition: transform 0.3s ease;
+            }
+        }
+
+        // Active State Animation - Korrigiert
+        &.active {
+            background: rgba(255, 255, 255, 0.15);
+
+            span {
+                background: rgba(255, 255, 255, 1);
+
+                &:nth-child(1) {
+                    transform: rotate(45deg) translate(6px, 6px);
+                }
+
+                &:nth-child(2) {
+                    opacity: 0;
+                    transform: scaleX(0);
+                }
+
+                &:nth-child(3) {
+                    transform: rotate(-45deg) translate(6px, -6px);
+                }
+
+                &::before {
+                    transform: scaleY(1);
                 }
             }
         }
     }
 }
 
-.landing-page-mobile {
-    min-height: 100vh !important;
-    width: 100%;
-    position: relative;
-    overflow-x: hidden;
-    
-    .content-top {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 999;
-        height: clamp(60px, 12vw, 72px);
-        @include dFlex($jc: flex-end, $ai: center);
-        padding: 0 $padding-mobile-base;
-        background: rgba(28, 28, 30, 0.9);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        
-        .burger {
-            .burger-img {
-                width: clamp(24px, 6vw, 32px);
-                height: clamp(18px, 4.5vw, 24px);
-                position: relative;
-                cursor: pointer;
-                
-                &::before,
-                &::after,
-                & {
-                    background: $apple-text-primary;
-                    border-radius: 2px;
-                    height: clamp(2px, 0.5vw, 3px);
-                    transition: $apple-transition-fast;
+// Mobile Menu Styling - Kleinere Schrift und Language Switcher
+.menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.96);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: menuFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    @keyframes menuFadeIn {
+        from {
+            opacity: 0;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+        }
+
+        to {
+            opacity: 1;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+    }
+
+    .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        animation: menuSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+        @keyframes menuSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            font-size: 20px; // REDUZIERT von 32px auf 20px
+            font-weight: $apple-font-weight-medium;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 20px 0; // REDUZIERT von 35px auf 20px
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 12px 30px; // REDUZIERT von 18px 40px
+            border-radius: $apple-radius-medium;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: -0.01em;
+
+            @media screen and (max-width: 480px) {
+                font-size: 18px; // REDUZIERT von 26px auf 18px
+                margin: 16px 0; // REDUZIERT von 28px auf 16px
+                padding: 10px 25px; // REDUZIERT von 16px 35px
+            }
+
+            @media screen and (max-width: 375px) {
+                font-size: 16px; // REDUZIERT von 24px auf 16px
+                margin: 14px 0; // REDUZIERT von 25px auf 14px
+                padding: 8px 20px; // REDUZIERT von 14px 30px
+            }
+
+            // Language Switcher spezielle Styles
+            &.mobile-lang-item {
+                padding: 16px 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 30px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+                @media screen and (max-width: 480px) {
+                    padding: 14px 25px;
+                    margin-top: 25px;
                 }
-                
-                &::before,
+
+                @media screen and (max-width: 375px) {
+                    padding: 12px 20px;
+                    margin-top: 20px;
+                }
+
+                app-lang-switcher {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                // Hover effekt überschreiben für lang-switcher container
+                &:hover {
+                    background: transparent;
+                    transform: none;
+
+                    &::before {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            // Hover Background Effect (nur für normale Menüpunkte)
+            &:not(.mobile-lang-item) {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.12) 100%);
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                    border-radius: inherit;
+                    transform: scale(0.8);
+                }
+
+                &:hover {
+                    transform: scale(1.05) translateY(-2px);
+                    color: $apple-primary;
+                    text-shadow: 0 0 20px rgba($apple-primary, 0.3);
+
+                    &::before {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+
+                &:active {
+                    transform: scale(1.02) translateY(0);
+                }
+            }
+        }
+    }
+}
+
+// Mobile Content - Desktop-Style Layout - Optimiert
+.mobile-content {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    padding: 100px 24px 24px;
+    box-sizing: border-box;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 120px 24px 50px;
+    }
+
+    @media screen and (max-width: 480px) {
+        padding: 100px 20px 40px;
+    }
+
+    @media screen and (max-width: 375px) {
+        padding: 90px 16px 30px;
+    }
+}
+
+.content-left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        order: 2;
+        margin-top: 40px;
+        align-items: center;
+    }
+
+    .img-wrapper {
+        position: relative;
+        transition: $apple-transition-slow;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            right: 15%;
+            bottom: 5%;
+            background: $apple-teal-gradient;
+            opacity: 0.15;
+            border-radius: 50% 50% 45% 55% / 55% 45% 55% 50%;
+            filter: blur(30px);
+            transition: $apple-transition-slow;
+            animation: apple-profile-glow 8s ease-in-out infinite;
+        }
+
+        &:hover {
+            transform: scale(1.02);
+
+            &::before {
+                opacity: 0.2;
+                filter: blur(40px);
+                transform: rotate(5deg) scale(1.1);
+            }
+
+            img {
+                filter: brightness(1.1) contrast(1.05) saturate(1.1);
+            }
+        }
+
+        img {
+            width: 320px;
+            height: auto;
+            max-height: 55vh;
+            object-fit: contain;
+            transition: $apple-transition-slow;
+            filter: brightness(1.05) contrast(1.02) saturate(1.05);
+            position: relative;
+            z-index: 1;
+            border-radius: 2% 2% 8% 8%;
+
+            @media screen and (max-width: 768px) {
+                border-radius: 50%;
+                border: 4px solid rgba(93, 87, 87, 0.8);
+                object-fit: cover;
+                width: 260px;
+                height: 260px;
+                max-height: none;
+            }
+
+            @media screen and (max-width: 480px) {
+                width: 230px;
+                height: 230px;
+                border-width: 3px;
+            }
+
+            @media screen and (max-width: 375px) {
+                width: 210px;
+                height: 210px;
+            }
+        }
+    }
+}
+
+.content-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 65vh;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        order: 1;
+        min-height: auto;
+        justify-content: center;
+    }
+
+    .title-logo-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+
+        @media screen and (max-width: 768px) {
+            gap: 35px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: $apple-transition-medium;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+            .logo-img {
+                width: 85px;
+                height: 85px;
+
+                background: {
+                    image: url('./../../../../assets/img/logo.png');
+                    repeat: no-repeat;
+                    position: center;
+                    size: contain;
+                }
+
+                @include apple-logo;
+                transition: $apple-transition-fast;
+
+                @media screen and (max-width: 768px) {
+                    width: 65px;
+                    height: 65px;
+                }
+
+                @media screen and (max-width: 375px) {
+                    width: 55px;
+                    height: 55px;
+                }
+            }
+
+            .logo-name {
+                font-size: 19px;
+                font-weight: $apple-font-weight-semibold;
+                font-family: $apple-font-family;
+                color: $apple-text-primary;
+                margin-top: 6px;
+                letter-spacing: 0.5px;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 17px;
+                }
+
+                @media screen and (max-width: 375px) {
+                    font-size: 15px;
+                }
+            }
+
+            .logo-position {
+                font-size: 13px;
+                font-weight: $apple-font-weight-regular;
+                font-family: $apple-font-family;
+                color: $apple-text-secondary;
+                letter-spacing: 0.3px;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 12px;
+                }
+
+                @media screen and (max-width: 375px) {
+                    font-size: 11px;
+                }
+            }
+        }
+
+        .title {
+            padding: 45px 0;
+            text-align: center;
+
+            @media screen and (max-width: 768px) {
+                padding: 25px 0;
+            }
+
+            .name {
+                font-size: 60px;
+                font-weight: $apple-font-weight-bold;
+                font-family: $apple-font-family;
+                background: $apple-teal-gradient;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                letter-spacing: -0.02em;
+                line-height: 1.1;
+                margin-bottom: 12px;
+                transition: $apple-transition-medium;
+                position: relative;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 38px;
+                }
+
+                @media screen and (max-width: 480px) {
+                    font-size: 30px;
+                }
+
+                @media screen and (max-width: 375px) {
+                    font-size: 26px;
+                }
+
                 &::after {
                     content: '';
                     position: absolute;
-                    left: 0;
-                    width: 100%;
+                    bottom: -10px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 0;
+                    height: 3px;
+                    background: $apple-teal-gradient;
+                    transition: $apple-transition-medium;
+                    border-radius: 2px;
                 }
-                
-                &::before {
-                    top: 0;
-                }
-                
-                &::after {
-                    bottom: 0;
-                }
-                
-                &:hover {
-                    &,
-                    &::before,
-                    &::after {
-                        background: $apple-primary;
-                    }
-                }
-                
-                &.close {
-                    background: transparent;
-                    
-                    &::before {
-                        transform: rotate(45deg);
-                        top: 50%;
-                        margin-top: calc(-1 * clamp(1px, 0.25vw, 1.5px));
-                    }
-                    
-                    &::after {
-                        transform: rotate(-45deg);
-                        bottom: 50%;
-                        margin-bottom: calc(-1 * clamp(1px, 0.25vw, 1.5px));
-                    }
-                }
-            }
-        }
-    }
-    
-    .content-middle {
-        min-height: 100vh;
-        margin-top: clamp(60px, 12vw, 72px);
-        @include dFlex($fd: column, $jc: center, $ai: center);
-        padding: clamp(16px, 4vw, 24px);
-        gap: clamp(32px, 8vw, 48px); // KORRIGIERT: Größerer Gap
-        
-        .img-wrapper {
-            order: 2;
-            @include dFlex($jc: center, $ai: center);
-            width: 100%;
-            max-width: 100%;
-            
-            img {
-                // KORRIGIERT: Kleinere Bildgröße für Mobile wie gewünscht
-                width: clamp(160px, 40vw, 220px);
-                height: auto;
-                max-height: clamp(200px, 28vh, 260px);
-                object-fit: contain;
-                border-radius: $apple-radius-large;
-                box-shadow: $apple-shadow-large;
-                transition: $apple-transition-medium;
-                display: block;
-                
+
                 &:hover {
                     transform: scale(1.02);
-                    box-shadow: $apple-shadow-large, $apple-shadow-glow;
-                }
-                
-                // Spezifische Größen für verschiedene Breakpoints
-                @media screen and (max-width: 480px) {
-                    width: clamp(140px, 35vw, 180px);
-                    max-height: clamp(180px, 25vh, 220px);
-                }
-                
-                @media screen and (max-width: 375px) {
-                    width: 160px;
-                    max-height: 200px;
-                }
-                
-                @media screen and (max-width: 320px) {
-                    width: 140px;
-                    max-height: 180px;
-                }
-            }
-        }
-        
-        .title-logo-wrapper {
-            text-align: center;
-            order: 1;
-            width: 100%;
-            
-            .title {
-                .name {
-                    // KORRIGIERT: Gradient Text wie auf Desktop
-                    font-size: clamp(28px, 8vw, 42px); 
-                    line-height: 1.1;
-                    margin-bottom: clamp(8px, 2vw, 12px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-bold;
-                    background: $apple-teal-gradient;
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    letter-spacing: -0.02em;
-                    text-align: center;
-                    width: 100%;
-                    position: relative;
-                    
-                    // Sicherstellen, dass der Gradient sichtbar ist
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        inset: 0;
-                        background: $apple-teal-gradient;
-                        -webkit-background-clip: text;
-                        background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        z-index: -1;
-                    }
-                    
-                    @media screen and (max-width: 480px) {
-                        font-size: clamp(26px, 7.5vw, 36px);
-                        margin-bottom: clamp(6px, 1.5vw, 10px);
-                    }
-                    
-                    @media screen and (max-width: 375px) {
-                        font-size: 28px;
-                        margin-bottom: 8px;
-                    }
-                    
-                    @media screen and (max-width: 320px) {
-                        font-size: 24px;
-                        margin-bottom: 6px;
-                    }
-                }
-                
-                .position {
-                    font-size: clamp(18px, 5vw, 26px); 
-                    line-height: 1.3;
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-medium;
-                    color: $apple-text-secondary;
-                    letter-spacing: -0.01em;
-                    text-align: center;
-                    width: 100%;
-                    
-                    @media screen and (max-width: 480px) {
-                        font-size: clamp(16px, 4.5vw, 22px);
-                    }
-                    
-                    @media screen and (max-width: 375px) {
-                        font-size: 18px;
-                    }
-                    
-                    @media screen and (max-width: 320px) {
-                        font-size: 16px;
-                    }
-                }
-            }
-        }
-        
-        .arrow-wrapper {
-            order: 3;
-            margin-top: auto;
-            padding-bottom: clamp(16px, 4vw, 24px);
-            width: 100%;
-            @include dFlex($jc: center);
-            
-            .arrow-down {
-                width: clamp(24px, 6vw, 32px);
-                height: clamp(48px, 12vw, 64px);
-                background: {
-                    image: url('./../../../../assets/img/arrow-down.png');
-                    size: contain;
-                    repeat: no-repeat;
-                    position: center;
-                }
-                transition: $apple-transition-fast;
-                filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                border-radius: $apple-radius-small;
-                cursor: pointer;
-                
-                &:hover {
-                    background-image: url('./../../../../assets/img/arrow-down-hover.png');
-                    transform: translateY(-3px) scale(1.1);
-                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-                }
-                
-                &:active {
-                    transform: translateY(-1px) scale(1.05);
-                }
-                
-                @media screen and (max-width: 375px) {
-                    width: 22px;
-                    height: 44px;
-                }
-                
-                @media screen and (max-width: 320px) {
-                    width: 20px;
-                    height: 40px;
-                }
-            }
-        }
-    }
-}
 
-// KORRIGIERT: Landscape Modus für sehr kleine Screens
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    .landing-page-mobile {
-        .content-middle {
-            flex-direction: row;
-            align-items: center;
-            gap: $space-mobile-base;
-            padding: $padding-mobile-sm $padding-mobile-base;
-            min-height: 100vh;
-            
-            .img-wrapper {
-                flex: 1;
-                order: 2;
-                max-width: 45%;
-                
-                img {
-                    max-height: 60vh;
-                    max-width: 100%;
-                    width: auto;
-                }
-            }
-            
-            .title-logo-wrapper {
-                flex: 1;
-                text-align: left;
-                order: 1;
-                max-width: 50%;
-                
-                .title {
-                    .name {
-                        font-size: clamp(22px, 5vw, 32px);
-                        text-align: left;
-                    }
-                    
-                    .position {
-                        font-size: clamp(16px, 3.5vw, 20px);
-                        text-align: left;
-                    }
-                }
-            }
-            
-            .arrow-wrapper {
-                position: absolute;
-                bottom: $space-mobile-base;
-                left: 50%;
-                transform: translateX(-50%);
-                margin-top: 0;
-                padding-bottom: 0;
-                order: 3;
-                
-                .arrow-down {
-                    width: clamp(18px, 4vw, 24px);
-                    height: clamp(36px, 8vw, 48px);
-                }
-            }
-        }
-    }
-}
-
-// Ultra kleine Screens
-@media screen and (max-width: 280px) {
-    .landing-page-mobile {
-        .content-top {
-            height: 52px;
-            padding: 0 8px;
-            
-            .burger .burger-img {
-                width: 18px;
-                height: 14px;
-            }
-        }
-        
-        .content-middle {
-            margin-top: 52px;
-            padding: 8px;
-            gap: 16px;
-            
-            .img-wrapper {
-                img {
-                    width: 120px;
-                    max-height: 150px;
-                }
-            }
-            
-            .title-logo-wrapper {
-                .title {
-                    .name {
-                        font-size: 20px;
-                        margin-bottom: 4px;
-                    }
-                    
-                    .position {
-                        font-size: 14px;
-                    }
-                }
-            }
-            
-            .arrow-wrapper {
-                padding-bottom: 12px;
-                
-                .arrow-down {
-                    width: 18px;
-                    height: 36px;
-                }
-            }
-        }
-    }
-}
-
-// Accessibility
-@media (prefers-reduced-motion: reduce) {
-    .landing-page-mobile {
-        .content-middle {
-            .img-wrapper img,
-            .arrow-wrapper .arrow-down {
-                &:hover {
-                    transform: none;
-                }
-            }
-        }
-        
-        .content-top .burger .burger-img {
-            &,
-            &::before,
-            &::after {
-                transition: none;
-            }
-        }
-    }
-}
-
-// High Contrast Mode
-@media (prefers-contrast: high) {
-    .landing-page-mobile {
-        background: #000;
-        
-        .content-top {
-            background: #000;
-            border-bottom: 2px solid #fff;
-            
-            .burger .burger-img {
-                &,
-                &::before,
-                &::after {
-                    background: #fff;
-                }
-                
-                &:hover {
-                    &,
-                    &::before,
                     &::after {
-                        background: #0ff;
+                        width: 65%;
                     }
                 }
             }
-        }
-        
-        .content-middle {
-            .title-logo-wrapper .title {
-                .name {
-                    color: #fff;
-                    background: none;
-                    -webkit-text-fill-color: #fff;
+
+            .position {
+                font-size: 30px;
+                font-weight: $apple-font-weight-medium;
+                font-family: $apple-font-family;
+                color: $apple-text-secondary;
+                letter-spacing: -0.01em;
+                transition: $apple-transition-medium;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 20px;
                 }
-                
-                .position {
-                    color: #ccc;
+
+                @media screen and (max-width: 480px) {
+                    font-size: 18px;
+                }
+
+                @media screen and (max-width: 375px) {
+                    font-size: 16px;
+                }
+
+                &:hover {
+                    color: $apple-text-primary;
+                    transform: scale(1.01);
                 }
             }
         }
     }
-}
 
-// Print Styles
-@media print {
-    .landing-page-mobile {
-        .content-top {
-            display: none;
+    .arrow-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media screen and (max-width: 768px) {
+            margin-top: 30px;
         }
-        
-        .content-middle {
-            margin-top: 0;
-            padding: 20px;
-            
-            .title-logo-wrapper .title {
-                .name,
-                .position {
-                    color: #000;
-                    background: none;
-                    -webkit-text-fill-color: #000;
-                }
+
+        .arrow-down {
+            width: 44px;
+            height: 85px;
+
+            background: {
+                image: url('./../../../../assets/img/arrow-down.png');
+                size: contain;
+                repeat: no-repeat;
+                position: center;
             }
-            
-            .arrow-wrapper {
-                display: none;
+
+            transition: $apple-transition-fast;
+            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+            border-radius: $apple-radius-small;
+            cursor: pointer;
+            border: none; // Button reset
+
+            @media screen and (max-width: 768px) {
+                width: 34px;
+                height: 65px;
+            }
+
+            @media screen and (max-width: 480px) {
+                width: 30px;
+                height: 60px;
+            }
+
+            @media screen and (max-width: 375px) {
+                width: 26px;
+                height: 52px;
+            }
+
+            &:hover {
+                background-image: url('./../../../../assets/img/arrow-down-hover.png');
+                transform: translateY(-4px) scale(1.15);
+                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+            }
+
+            &:active {
+                transform: translateY(-2px) scale(1.08);
             }
         }
     }
