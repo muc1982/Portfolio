@@ -16,17 +16,17 @@
                 <nav class="social-nav" role="navigation" aria-label="Social media links">
                     <div class="social-links">
                         @for (link of socialLinks; track link.name) {
-                            <div class="social-item" [attr.data-social]="link.name">
-                                <a [href]="link.url" [target]="link.name !== 'email' ? '_blank' : undefined"
-                                    [rel]="link.name !== 'email' ? 'noopener noreferrer' : undefined"
-                                    [attr.aria-label]="getSocialLinkAriaLabel(link)" class="social-link"
-                                    (click)="onSocialLinkClick(link)">
-                                    <div class="social-icon" [attr.data-icon]="link.name"
-                                        [style.background-image]="'url(./assets/img/' + link.icon + ')'">
-                                    </div>
-                                    <span class="social-text sr-only">{{ link.name }}</span>
-                                </a>
-                            </div>
+                        <div class="social-item" [attr.data-social]="link.name">
+                            <a [href]="link.url" [target]="link.name !== 'email' ? '_blank' : undefined"
+                                [rel]="link.name !== 'email' ? 'noopener noreferrer' : undefined"
+                                [attr.aria-label]="getSocialLinkAriaLabel(link)" class="social-link"
+                                (click)="onSocialLinkClick(link)">
+                                <div class="social-icon" [attr.data-icon]="link.name"
+                                    [style.background-image]="'url(./assets/img/' + link.icon + ')'">
+                                </div>
+                                <span class="social-text sr-only">{{ link.name }}</span>
+                            </a>
+                        </div>
                         }
                     </div>
                 </nav>

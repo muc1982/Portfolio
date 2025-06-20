@@ -1,372 +1,377 @@
-@use 'style/apple-variables' as *;
+@use 'src/style/apple-variables' as *;
 
 * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    box-sizing: border-box;
-    text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body::-webkit-scrollbar {
-    display: none;
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  // Mobile-First: 16px Base
+  font-size: 16px;
+  
+  @media screen and (min-width: #{$breakpoint-tablet}) {
+    font-size: 17px;
+  }
+  
+  @media screen and (min-width: #{$breakpoint-desktop}) {
+    font-size: 18px;
+  }
 }
 
 body {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    scroll-behavior: smooth;
+  font-family: $apple-font-family;
+  background: $apple-bg-primary;
+  color: $apple-text-primary;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-body {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-regular;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    color: $apple-text-primary;
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    min-width: 320px;
+// ===================================================================
+// TYPOGRAPHY IMPROVEMENTS
+// ===================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
 }
 
-button {
-    border: none;
-    font-family: $apple-font-family;
-    background-color: transparent;
-    cursor: pointer;
-    transition: $apple-transition-fast;
-    font-size: 16px;
-    min-height: 44px;
-    min-width: 44px;
-
-    @media screen and (min-width: #{$breakpoint-tablet}) {
-        min-height: 48px;
-        min-width: 48px;
-    }
-
-    &:focus-visible {
-        outline: 2px solid $apple-primary;
-        outline-offset: 2px;
-    }
-}
-
-textarea,
-input {
-    outline: none;
-    font-family: $apple-font-family;
-    font-size: 16px;
-    font-weight: $apple-font-weight-regular;
-    transition: $apple-transition-fast;
-
-    &:focus {
-        transform: translateY(-1px);
-    }
-
-    &::placeholder {
-        font-size: 16px;
-    }
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px $apple-bg-tertiary inset;
-    -webkit-text-fill-color: $apple-text-primary;
-    caret-color: $apple-primary;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-.content-container,
-.wide-screen {
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
-    position: relative;
-    box-sizing: border-box;
-}
-
-.page-container {
-    @include standardPadding();
-    max-width: 1440px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.landing-page-container,
-.why-me-container,
-.my-skills-container,
-.my-projects-container,
-.contact-container {
-    @extend .content-container;
-    @include standardPadding();
-}
-
-.legal-notice-container,
-.private-policy-container {
-    .content {
-        max-width: 900px;
-        margin: 0 auto;
-        width: 100%;
-        @include standardPadding();
-    }
-}
-
-.pointer {
-    cursor: pointer;
-    transition: $apple-transition-fast;
-
-    &:hover {
-        transform: translateY(-1px);
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
-}
-
-.normal-container {
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-}
-
-@media screen and (max-width: #{$breakpoint-tablet - 1px}) {
-    .hide-on-mobile {
-        display: none !important;
-    }
-}
-
-@media screen and (min-width: #{$breakpoint-tablet}) {
-    .hide-on-desktop {
-        display: none !important;
-    }
+p {
+  margin-bottom: 1em;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    transition: $apple-transition-fast;
-    position: relative;
-    font-size: inherit;
-}
-
-a[href]:not([href=""]):not([href="#"]) {
-    &:hover {
-        text-decoration: underline;
-        text-decoration-color: currentColor;
-        text-underline-offset: 2px;
-        color: $apple-primary;
-    }
-}
-
-h1 {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
-    
-    @media screen and (min-width: #{$breakpoint-tablet}) {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-    }
-}
-
-h2 {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
-    
-    @media screen and (min-width: #{$breakpoint-tablet}) {
-        font-size: clamp(2rem, 4vw, 3rem);
-    }
-}
-
-h3, h4, h5, h6, p, li, td, th {
-    font-family: $apple-font-family;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-@keyframes apple-fade-in {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes apple-scale-in {
-    0% {
-        opacity: 0.5;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes apple-bounce-down {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(8px);
-    }
-}
-
-@keyframes apple-bounce-up {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-@keyframes apple-elegant-rotate {
-    0% {
-        transform: rotateY(0deg) scale(1);
-    }
-    50% {
-        transform: rotateY(180deg) scale(1.02);
-    }
-    100% {
-        transform: rotateY(360deg) scale(1);
-    }
-}
-
-.bubble-out-005 {
-    animation: apple-scale-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.bubble-out-075 {
-    animation: apple-scale-in 0.75s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-.move-down {
-    animation: apple-bounce-down 1s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.move-up {
-    animation: apple-bounce-up 1s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.rotate {
-    animation: apple-elegant-rotate 1s cubic-bezier(0.25, 0.1, 0.25, 1);
-    transform-style: preserve-3d;
-}
-
-.cb {
-    border: 2px solid $apple-primary;
-    background: rgba(255, 255, 255, 0.1);
-    min-width: 24px;
-    min-height: 24px;
-    border-radius: $apple-radius-small;
-    transition: $apple-transition-fast;
-
-    &:hover, &:active {
-        border-color: $apple-secondary;
-        box-shadow: 0 0 12px rgba($apple-secondary, 0.5);
-    }
-
-    &.checked {
-        background: $apple-primary;
-        border-color: $apple-primary;
-        box-shadow: 0 0 12px rgba($apple-primary, 0.6);
-
-        &::after {
-            color: white;
-            font-weight: bold;
-        }
-    }
-}
-
-@media screen and (max-width: 320px) {
-    body {
-        min-width: 320px;
-        overflow-x: hidden;
-    }
-
-    .wide-screen,
-    .content-container {
-        min-width: 320px;
-        width: 100%;
-        max-width: 100%;
-        padding-left: 12px;
-        padding-right: 12px;
-        box-sizing: border-box;
-    }
-
-    * {
-        max-width: 100%;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-
-    button {
-        max-width: 100%;
-        white-space: normal;
-        word-break: break-word;
-        padding: 12px 16px;
-        font-size: 16px;
-        min-height: 48px;
-    }
-
-    input, textarea {
-        font-size: 16px;
-        min-height: 48px;
-        padding: 14px 16px;
-    }
-}
-
-::selection {
-    background: rgba($apple-primary, 0.3);
-    color: $apple-text-primary;
-}
-
-:focus-visible {
+  color: $apple-primary;
+  text-decoration: none;
+  transition: $apple-transition-fast;
+  
+  &:hover {
+    color: $apple-primary-light;
+  }
+  
+  &:focus {
     outline: 2px solid $apple-primary;
     outline-offset: 2px;
-    border-radius: $apple-radius-small;
+    border-radius: 2px;
+  }
 }
 
+// ===================================================================
+// FORM ELEMENTS - Mobile Optimized
+// ===================================================================
+
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: 16px; // Prevents zoom on iOS
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  
+  &:focus {
+    outline: 2px solid $apple-primary;
+    outline-offset: 2px;
+  }
+}
+
+// ===================================================================
+// UTILITY CLASSES
+// ===================================================================
+
+// Container
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  
+  @media screen and (min-width: #{$breakpoint-tablet}) {
+    padding: 0 1.5rem;
+  }
+  
+  @media screen and (min-width: #{$breakpoint-desktop}) {
+    padding: 0 2rem;
+  }
+}
+
+// Text Utilities
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-primary { color: $apple-text-primary; }
+.text-secondary { color: $apple-text-secondary; }
+.text-tertiary { color: $apple-text-tertiary; }
+
+// Spacing Utilities
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: $apple-space-1; }
+.mt-2 { margin-top: $apple-space-2; }
+.mt-3 { margin-top: $apple-space-3; }
+.mt-4 { margin-top: $apple-space-4; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: $apple-space-1; }
+.mb-2 { margin-bottom: $apple-space-2; }
+.mb-3 { margin-bottom: $apple-space-3; }
+.mb-4 { margin-bottom: $apple-space-4; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: $apple-space-1; }
+.p-2 { padding: $apple-space-2; }
+.p-3 { padding: $apple-space-3; }
+.p-4 { padding: $apple-space-4; }
+
+// Display Utilities
+.d-none { display: none; }
+.d-block { display: block; }
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+
+// Flex Utilities
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+
+// ===================================================================
+// RESPONSIVE UTILITIES
+// ===================================================================
+
+// Hide/Show on Mobile
+@media screen and (max-width: #{$breakpoint-tablet - 1px}) {
+  .hide-mobile { display: none !important; }
+}
+
+@media screen and (min-width: #{$breakpoint-tablet}) {
+  .show-mobile-only { display: none !important; }
+}
+
+// Hide/Show on Desktop  
+@media screen and (min-width: #{$breakpoint-desktop}) {
+  .hide-desktop { display: none !important; }
+}
+
+@media screen and (max-width: #{$breakpoint-desktop - 1px}) {
+  .show-desktop-only { display: none !important; }
+}
+
+// ===================================================================
+// SCROLLBAR STYLING
+// ===================================================================
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $apple-bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $apple-primary;
+  border-radius: 4px;
+  
+  &:hover {
+    background: $apple-primary-dark;
+  }
+}
+
+// Firefox Scrollbar
+html {
+  scrollbar-width: thin;
+  scrollbar-color: $apple-primary $apple-bg-secondary;
+}
+
+// ===================================================================
+// SELECTION STYLING
+// ===================================================================
+
+::selection {
+  background: rgba(20, 184, 166, 0.3);
+  color: $apple-text-primary;
+}
+
+::-moz-selection {
+  background: rgba(20, 184, 166, 0.3);
+  color: $apple-text-primary;
+}
+
+// ===================================================================
+// ACCESSIBILITY IMPROVEMENTS
+// ===================================================================
+
+// Reduced Motion
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
+// High Contrast Mode
 @media (prefers-contrast: high) {
-    body {
-        background: #000000;
-        color: #FFFFFF;
-    }
+  :root {
+    --apple-bg-primary: #000;
+    --apple-bg-secondary: #111;
+    --apple-text-primary: #fff;
+    --apple-text-secondary: #ccc;
+    --apple-primary: #00ff00;
+  }
+}
 
-    a {
-        color: $apple-primary;
-        &:hover {
-            color: $apple-secondary;
-        }
-    }
+// Focus Visible (für bessere Keyboard Navigation)
+@supports selector(:focus-visible) {
+  *:focus {
+    outline: none;
+  }
+  
+  *:focus-visible {
+    outline: 2px solid $apple-primary;
+    outline-offset: 2px;
+  }
+}
 
-    button {
-        border: 2px solid currentColor;
-    }
+// Skip Link für Screen Reader
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: $apple-primary;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  z-index: 1000;
+  
+  &:focus {
+    top: 6px;
+  }
+}
+
+// ===================================================================
+// PRINT STYLES
+// ===================================================================
+
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    color: #000 !important;
+  }
+  
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  .hide-print {
+    display: none !important;
+  }
+}
+
+// ===================================================================
+// LOADING STATE
+// ===================================================================
+
+.loading {
+  position: relative;
+  color: transparent;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid $apple-primary;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ===================================================================
+// ERROR STATES
+// ===================================================================
+
+.error {
+  color: $apple-error;
+  border-color: $apple-error;
+  
+  &:focus {
+    outline-color: $apple-error;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  }
+}
+
+.success {
+  color: $apple-success;
+  border-color: $apple-success;
+  
+  &:focus {
+    outline-color: $apple-success;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.warning {
+  color: $apple-warning;
+  border-color: $apple-warning;
+  
+  &:focus {
+    outline-color: $apple-warning;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  }
 }

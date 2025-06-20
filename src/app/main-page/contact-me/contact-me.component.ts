@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,8 +16,6 @@ interface Contact {
   imports: [
     TranslateModule, 
     CommonModule, 
-    RouterLink, 
-    RouterLinkActive, 
     FormsModule,
   ],
   templateUrl: './contact-me.component.html',
