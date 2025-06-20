@@ -1,34 +1,34 @@
 <div id="landing-page-mobile">
-    <!-- Hintergrund-Overlay -->
     <div id="landing-page-extra"></div>
 
-    <!-- Burger Menu Button -->
     <div class="burger-menu-wrapper">
-        <button class="burger-menu-btn" (click)="toggleMenu()" [class.active]="showMenu"
-            [attr.aria-label]="showMenu ? 'Menü schließen' : 'Menü öffnen'" [attr.aria-expanded]="showMenu"
-            type="button">
+        <button class="burger-menu-btn" (click)="toggleMenu($event)" (touchstart)="toggleMenu($event)"
+            [class.active]="showMenu" [attr.aria-label]="showMenu ? 'Menü schließen' : 'Menü öffnen'"
+            [attr.aria-expanded]="showMenu" type="button">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </div>
 
-    <!-- Mobile Navigation Menu -->
-    <div class="menu-wrapper" *ngIf="showMenu">
+    <div class="menu-wrapper" [class.open]="showMenu" *ngIf="showMenu">
+        <div class="menu-overlay" (click)="closeMenu()" (touchstart)="closeMenu()"></div>
         <nav class="menu" role="navigation" aria-label="Hauptnavigation">
             <ul>
-                <li (click)="scrollTo('why-me')" (keydown.enter)="scrollTo('why-me')" tabindex="0" role="button">
+                <li (click)="scrollTo('why-me')" (touchstart)="scrollTo('why-me')" (keydown.enter)="scrollTo('why-me')"
+                    tabindex="0" role="button">
                     {{ 'nav.whyme' | translate }}
                 </li>
-                <li (click)="scrollTo('my-skills')" (keydown.enter)="scrollTo('my-skills')" tabindex="0" role="button">
+                <li (click)="scrollTo('my-skills')" (touchstart)="scrollTo('my-skills')"
+                    (keydown.enter)="scrollTo('my-skills')" tabindex="0" role="button">
                     {{ 'nav.myskills' | translate }}
                 </li>
-                <li (click)="scrollTo('my-projects')" (keydown.enter)="scrollTo('my-projects')" tabindex="0"
-                    role="button">
+                <li (click)="scrollTo('my-projects')" (touchstart)="scrollTo('my-projects')"
+                    (keydown.enter)="scrollTo('my-projects')" tabindex="0" role="button">
                     {{ 'nav.myprojects' | translate }}
                 </li>
-                <li (click)="scrollTo('contact-me')" (keydown.enter)="scrollTo('contact-me')" tabindex="0"
-                    role="button">
+                <li (click)="scrollTo('contact-me')" (touchstart)="scrollTo('contact-me')"
+                    (keydown.enter)="scrollTo('contact-me')" tabindex="0" role="button">
                     {{ 'nav.contact' | translate }}
                 </li>
                 <li class="mobile-lang-item">
@@ -38,16 +38,19 @@
         </nav>
     </div>
 
-    <!-- Mobile Content - same structure as desktop -->
     <main class="mobile-content">
         <section class="content-left">
             <div class="img-wrapper">
                 <img src="assets/img/profile-pic.png" alt="Yasin Sun Profile Picture" loading="lazy" decoding="async" />
             </div>
+            <div class="arrow-wrapper">
+                <button class="arrow-down pointer" (click)="scrollTo('why-me')" (touchstart)="scrollTo('why-me')"
+                    aria-label="Zum nächsten Abschnitt scrollen" type="button">
+                </button>
+            </div>
         </section>
 
         <section class="content-right">
-            <!-- Logo and Title Section -->
             <div class="title-logo-wrapper">
                 <div class="logo">
                     <div class="logo-img" role="img" aria-label="Yasin Sun Logo"></div>
@@ -59,13 +62,6 @@
                     <h1 class="name">{{ 'landingPage.name' | translate}}</h1>
                     <h2 class="position">{{ 'landingPage.position' | translate}}</h2>
                 </div>
-            </div>
-
-            <!-- Scroll Down Arrow -->
-            <div class="arrow-wrapper">
-                <button class="arrow-down pointer" (click)="scrollTo('why-me')"
-                    aria-label="Zum nächsten Abschnitt scrollen" type="button">
-                </button>
             </div>
         </section>
     </main>

@@ -34,13 +34,6 @@
                 <app-lang-switcher></app-lang-switcher>
             </div>
 
-            <div class="mobile-menu-toggle" (click)="toggleMobileMenu()" [class.open]="mobileMenuOpen">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-
         <div class="mobile-nav-overlay" [class.open]="mobileMenuOpen" (click)="closeMobileMenu()">
             <nav class="mobile-nav-content" (click)="$event.stopPropagation()">
                 <ul class="mobile-nav-items">

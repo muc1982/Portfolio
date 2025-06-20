@@ -45,10 +45,8 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // KORRIGIERT: touchstart Event hinzugefügt für mobile Geräte
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
-    // Verhindert dass der Button "sticky" wird auf iOS
     const target = event.target as HTMLElement;
     if (target?.closest('.burger-menu-btn')) {
       event.stopPropagation();
@@ -58,7 +56,6 @@ export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
   toggleMenu(event?: Event): void {
     console.log('Toggle Menu - Current state:', this.showMenu, 'Window width:', window.innerWidth);
     
-    // KORRIGIERT: Event handling für Touch-Geräte
     if (event) {
       event.preventDefault();
       event.stopPropagation();

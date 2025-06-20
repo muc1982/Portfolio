@@ -41,12 +41,11 @@
     }
 }
 
-// Burger Menu Styling - Korrigiert
 .burger-menu-wrapper {
     position: fixed;
     top: 24px;
     right: 24px;
-    z-index: 1001; // Höher als Menu
+    z-index: 1001;
 
     @media screen and (max-width: 480px) {
         top: 20px;
@@ -75,7 +74,6 @@
             height: 48px;
         }
 
-        // Hover Effect
         &::before {
             content: '';
             position: absolute;
@@ -103,7 +101,6 @@
             transform: scale(1.02);
         }
 
-        // Burger Lines - Verbessert
         span {
             width: 22px;
             height: 2.5px;
@@ -135,7 +132,6 @@
             }
         }
 
-        // Active State Animation - Korrigiert
         &.active {
             background: rgba(255, 255, 255, 0.15);
 
@@ -163,7 +159,6 @@
     }
 }
 
-// Mobile Menu Styling - Kleinere Schrift und Language Switcher
 .menu-wrapper {
     position: fixed;
     top: 0;
@@ -219,31 +214,30 @@
         }
 
         li {
-            font-size: 20px; // REDUZIERT von 32px auf 20px
+            font-size: 20px;
             font-weight: $apple-font-weight-medium;
             color: rgba(255, 255, 255, 0.95);
-            margin: 20px 0; // REDUZIERT von 35px auf 20px
+            margin: 20px 0;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            padding: 12px 30px; // REDUZIERT von 18px 40px
+            padding: 12px 30px;
             border-radius: $apple-radius-medium;
             position: relative;
             overflow: hidden;
             letter-spacing: -0.01em;
 
             @media screen and (max-width: 480px) {
-                font-size: 18px; // REDUZIERT von 26px auf 18px
-                margin: 16px 0; // REDUZIERT von 28px auf 16px
-                padding: 10px 25px; // REDUZIERT von 16px 35px
+                font-size: 18px;
+                margin: 16px 0;
+                padding: 10px 25px;
             }
 
             @media screen and (max-width: 375px) {
-                font-size: 16px; // REDUZIERT von 24px auf 16px
-                margin: 14px 0; // REDUZIERT von 25px auf 14px
-                padding: 8px 20px; // REDUZIERT von 14px 30px
+                font-size: 16px;
+                margin: 14px 0;
+                padding: 8px 20px;
             }
 
-            // Language Switcher spezielle Styles
             &.mobile-lang-item {
                 padding: 16px 30px;
                 display: flex;
@@ -268,7 +262,6 @@
                     justify-content: center;
                 }
 
-                // Hover effekt überschreiben für lang-switcher container
                 &:hover {
                     background: transparent;
                     transform: none;
@@ -279,7 +272,6 @@
                 }
             }
 
-            // Hover Background Effect (nur für normale Menüpunkte)
             &:not(.mobile-lang-item) {
                 &::before {
                     content: '';
@@ -314,7 +306,6 @@
     }
 }
 
-// Mobile Content - Desktop-Style Layout - Optimiert
 .mobile-content {
     position: relative;
     z-index: 1;
@@ -343,14 +334,14 @@
 .content-left {
     width: 50%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 
     @media screen and (max-width: 768px) {
         width: 100%;
         order: 2;
         margin-top: 40px;
-        align-items: center;
     }
 
     .img-wrapper {
@@ -415,6 +406,57 @@
             @media screen and (max-width: 375px) {
                 width: 210px;
                 height: 210px;
+            }
+        }
+    }
+
+    .arrow-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+
+        .arrow-down {
+            width: 44px;
+            height: 85px;
+
+            background: {
+                image: url('./../../../../assets/img/arrow-down.png');
+                size: contain;
+                repeat: no-repeat;
+                position: center;
+            }
+
+            transition: $apple-transition-fast;
+            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+            border-radius: $apple-radius-small;
+            cursor: pointer;
+            border: none;
+
+            @media screen and (max-width: 768px) {
+                width: 34px;
+                height: 65px;
+            }
+
+            @media screen and (max-width: 480px) {
+                width: 30px;
+                height: 60px;
+            }
+
+            @media screen and (max-width: 375px) {
+                width: 26px;
+                height: 52px;
+            }
+
+            &:hover {
+                background-image: url('./../../../../assets/img/arrow-down-hover.png');
+                transform: translateY(-4px) scale(1.15);
+                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+            }
+
+            &:active {
+                transform: translateY(-2px) scale(1.08);
             }
         }
     }
@@ -594,60 +636,6 @@
                     color: $apple-text-primary;
                     transform: scale(1.01);
                 }
-            }
-        }
-    }
-
-    .arrow-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        @media screen and (max-width: 768px) {
-            margin-top: 30px;
-        }
-
-        .arrow-down {
-            width: 44px;
-            height: 85px;
-
-            background: {
-                image: url('./../../../../assets/img/arrow-down.png');
-                size: contain;
-                repeat: no-repeat;
-                position: center;
-            }
-
-            transition: $apple-transition-fast;
-            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-            border-radius: $apple-radius-small;
-            cursor: pointer;
-            border: none; // Button reset
-
-            @media screen and (max-width: 768px) {
-                width: 34px;
-                height: 65px;
-            }
-
-            @media screen and (max-width: 480px) {
-                width: 30px;
-                height: 60px;
-            }
-
-            @media screen and (max-width: 375px) {
-                width: 26px;
-                height: 52px;
-            }
-
-            &:hover {
-                background-image: url('./../../../../assets/img/arrow-down-hover.png');
-                transform: translateY(-4px) scale(1.15);
-                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-            }
-
-            &:active {
-                transform: translateY(-2px) scale(1.08);
             }
         }
     }
