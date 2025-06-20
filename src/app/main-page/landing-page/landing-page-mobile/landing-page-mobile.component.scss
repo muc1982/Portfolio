@@ -5,10 +5,6 @@
     width: 100vw;
     overflow: hidden;
     min-height: 100vh;
-    
-    @media screen and (min-width: 768px) {
-        display: none !important;
-    }
 }
 
 #landing-page-extra {
@@ -45,15 +41,12 @@
     }
 }
 
+// Burger Menu Styling - Korrigiert
 .burger-menu-wrapper {
     position: fixed;
-    top: 16px;
+    top: 24px;
     right: 24px;
-    z-index: 2000; 
-    
-    @media screen and (min-width: 768px) {
-        display: none !important;
-    }
+    z-index: 1001; // Höher als Menu
 
     @media screen and (max-width: 480px) {
         top: 20px;
@@ -64,8 +57,8 @@
         background: rgba(255, 255, 255, 0.12);
         border: 1px solid rgba(255, 255, 255, 0.25);
         border-radius: $apple-radius-medium;
-        width: 44px;
-        height: 44px;
+        width: 52px;
+        height: 52px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -82,6 +75,7 @@
             height: 48px;
         }
 
+        // Hover Effect
         &::before {
             content: '';
             position: absolute;
@@ -109,8 +103,9 @@
             transform: scale(1.02);
         }
 
+        // Burger Lines - Verbessert
         span {
-            width: 24px;
+            width: 22px;
             height: 2.5px;
             background: rgba(255, 255, 255, 0.95);
             display: block;
@@ -120,20 +115,34 @@
             position: relative;
 
             @media screen and (max-width: 480px) {
-                width: 22px;
+                width: 20px;
                 height: 2px;
                 margin: 2.5px 0;
             }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: inherit;
+                border-radius: inherit;
+                opacity: 0.3;
+                transform: scaleY(0);
+                transition: transform 0.3s ease;
+            }
         }
 
-        // KORRIGIERT: Active State Animation
+        // Active State Animation - Korrigiert
         &.active {
             background: rgba(255, 255, 255, 0.15);
 
             span {
                 background: rgba(255, 255, 255, 1);
 
-                &:first-child {
+                &:nth-child(1) {
                     transform: rotate(45deg) translate(6px, 6px);
                 }
 
@@ -142,15 +151,19 @@
                     transform: scaleX(0);
                 }
 
-                &:last-child {
+                &:nth-child(3) {
                     transform: rotate(-45deg) translate(6px, -6px);
+                }
+
+                &::before {
+                    transform: scaleY(1);
                 }
             }
         }
     }
 }
 
-// KORRIGIERTE Mobile Menu Styling
+// Mobile Menu Styling - Kleinere Schrift und Language Switcher
 .menu-wrapper {
     position: fixed;
     top: 0;
@@ -160,16 +173,11 @@
     background: rgba(0, 0, 0, 0.96);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    z-index: 1999; // Unter dem Burger-Button
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: menuFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    
-    // NUR bis 767px anzeigen
-    @media screen and (min-width: 768px) {
-        display: none !important;
-    }
 
     @keyframes menuFadeIn {
         from {
@@ -211,53 +219,47 @@
         }
 
         li {
-            font-size: 22px; // Etwas größer für bessere Touch-Targets
+            font-size: 20px; // REDUZIERT von 32px auf 20px
             font-weight: $apple-font-weight-medium;
             color: rgba(255, 255, 255, 0.95);
-            margin: 24px 0; // Mehr Abstand zwischen Elementen
+            margin: 20px 0; // REDUZIERT von 35px auf 20px
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            padding: 16px 36px; // Größere Touch-Bereiche
+            padding: 12px 30px; // REDUZIERT von 18px 40px
             border-radius: $apple-radius-medium;
             position: relative;
             overflow: hidden;
             letter-spacing: -0.01em;
-            min-height: 56px; // Mindesthöhe für Touch
-            display: flex;
-            align-items: center;
-            justify-content: center;
 
             @media screen and (max-width: 480px) {
-                font-size: 20px;
-                margin: 20px 0;
-                padding: 14px 30px;
-                min-height: 52px;
+                font-size: 18px; // REDUZIERT von 26px auf 18px
+                margin: 16px 0; // REDUZIERT von 28px auf 16px
+                padding: 10px 25px; // REDUZIERT von 16px 35px
             }
 
             @media screen and (max-width: 375px) {
-                font-size: 18px;
-                margin: 18px 0;
-                padding: 12px 26px;
-                min-height: 48px;
+                font-size: 16px; // REDUZIERT von 24px auf 16px
+                margin: 14px 0; // REDUZIERT von 25px auf 14px
+                padding: 8px 20px; // REDUZIERT von 14px 30px
             }
 
             // Language Switcher spezielle Styles
             &.mobile-lang-item {
-                padding: 20px 36px;
+                padding: 16px 30px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 36px;
+                margin-top: 30px;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
 
                 @media screen and (max-width: 480px) {
-                    padding: 18px 30px;
-                    margin-top: 30px;
+                    padding: 14px 25px;
+                    margin-top: 25px;
                 }
 
                 @media screen and (max-width: 375px) {
-                    padding: 16px 26px;
-                    margin-top: 26px;
+                    padding: 12px 20px;
+                    margin-top: 20px;
                 }
 
                 app-lang-switcher {
@@ -312,7 +314,7 @@
     }
 }
 
-// Mobile Content - Desktop-Style Layout - KORRIGIERT
+// Mobile Content - Desktop-Style Layout - Optimiert
 .mobile-content {
     position: relative;
     z-index: 1;
@@ -648,215 +650,5 @@
                 transform: translateY(-2px) scale(1.08);
             }
         }
-    }
-}
-
-// Animationen
-@keyframes apple-ambient-float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-    33% {
-        transform: translateY(-10px) rotate(1deg) scale(1.01);
-    }
-    66% {
-        transform: translateY(8px) rotate(-0.5deg) scale(0.99);
-    }
-}
-
-@keyframes apple-profile-glow {
-    0%, 100% {
-        opacity: 0.15;
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        opacity: 0.25;
-        transform: rotate(5deg) scale(1.05);
-    }
-}
-
-// Füge diese iOS-spezifischen Korrekturen am Ende der bestehenden SCSS-Datei hinzu:
-
-// iOS Touch-Optimierungen
-.burger-menu-wrapper {
-    .burger-menu-btn {
-        // KRITISCH für iOS: Touch-Optimierungen
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        
-        // Verhindert iOS Zoom beim Touch
-        touch-action: manipulation;
-        
-        // iOS-spezifische Optimierungen
-        @supports (-webkit-touch-callout: none) {
-            // iOS Safari spezifisch
-            outline: none;
-            border: none;
-            -webkit-appearance: none;
-            
-            &:focus {
-                outline: none;
-            }
-            
-            &:active {
-                outline: none;
-                transform: scale(0.98);
-            }
-        }
-        
-        // Verbesserte Touch-Area für kleine Finger
-        @media screen and (max-width: 480px) {
-            min-width: 48px;
-            min-height: 48px;
-            
-            // Größerer Touch-Bereich durch Pseudo-Element
-            &::before {
-                content: '';
-                position: absolute;
-                top: -8px;
-                left: -8px;
-                right: -8px;
-                bottom: -8px;
-                z-index: -1;
-            }
-        }
-        
-        span {
-            // Verhindert Text-Auswahl auf iOS
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            
-            // Touch-Optimierung
-            pointer-events: none;
-        }
-    }
-}
-
-// Menu Touch-Optimierungen
-.menu-wrapper {
-    // Verhindert Scroll-through auf iOS
-    -webkit-overflow-scrolling: touch;
-    overflow: hidden;
-    
-    &.open {
-        // iOS-spezifisches Backdrop-Filter
-        @supports (-webkit-backdrop-filter: blur(30px)) {
-            -webkit-backdrop-filter: blur(30px);
-        }
-    }
-    
-    .menu-overlay {
-        // Touch-Optimierung für Overlay
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-    
-    .menu {
-        ul {
-            li {
-                // Touch-Optimierung für Menu-Items
-                -webkit-tap-highlight-color: transparent;
-                -webkit-touch-callout: none;
-                touch-action: manipulation;
-                
-                // Verbesserte Touch-Targets
-                min-height: 60px; // Größer für bessere Bedienbarkeit
-                @include dFlex($ai: center, $jc: center);
-                
-                // iOS Safari spezifische Optimierungen
-                @supports (-webkit-touch-callout: none) {
-                    &:active {
-                        background: rgba(255, 255, 255, 0.1);
-                        transform: scale(0.98);
-                    }
-                }
-                
-                &:not(.mobile-lang-item) {
-                    cursor: pointer;
-                    
-                    // Verbesserte iOS Touch-Feedback
-                    &:hover,
-                    &:active {
-                        background: rgba(255, 255, 255, 0.08);
-                        
-                        @supports (-webkit-touch-callout: none) {
-                            // Nur auf iOS
-                            background: rgba(255, 255, 255, 0.12);
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-// Arrow Button iOS Touch Fix
-.arrow-wrapper {
-    .arrow-down {
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-        touch-action: manipulation;
-        
-        // Größerer Touch-Bereich für mobile Geräte
-        @media screen and (max-width: 480px) {
-            &::after {
-                content: '';
-                position: absolute;
-                top: -12px;
-                left: -12px;
-                right: -12px;
-                bottom: -12px;
-                z-index: -1;
-            }
-        }
-    }
-}
-
-// Globale iOS Body-Lock Optimierungen
-body.menu-open {
-    // Verhindert iOS Safari Bounce-Scrolling
-    position: fixed;
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
-    
-    @supports (-webkit-touch-callout: none) {
-        // iOS Safari spezifisch
-        overflow: hidden;
-        -webkit-overflow-scrolling: auto;
-    }
-}
-
-// Spezifische iPhone/iPad Media Queries
-@media screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-    // iPhone spezifisch
-    .burger-menu-btn {
-        // Verbesserte Tap-Response für iPhone
-        transition: transform 0.1s ease-out;
-        
-        &:active {
-            transform: scale(0.95) !important;
-        }
-    }
-    
-    .menu li {
-        // Größere Touch-Targets für iPhone
-        min-height: 64px;
-        font-size: 18px;
-    }
-}
-
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
-    // iPad spezifisch
-    .menu li {
-        min-height: 72px;
-        font-size: 20px;
     }
 }
