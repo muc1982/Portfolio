@@ -1,94 +1,99 @@
 {
-	"nav": {
-		"whyme": "Why Me",
-		"myskills": "My Skills",
-		"myprojects": "My Projects",
-		"contact": "Contact",
-		"legalnotice": "Legal Notice"
-	},
-	"landingPage": {
-		"name": "Yasin Sun",
-		"position": "Frontend Developer"
-	},
-	"intro": {
-		"title": "Why choose me?",
-		"munich": "I am available in Munich",
-		"munich.subtitle": "On-site or hybrid – flexible for your project",
-		"remote": "I work remotely across Germany",
-		"remote.subtitle": "Modern collaboration without geographic limits",
-		"relocate": "I am willing to relocate",
-		"relocate.subtitle": "Nationwide for the right project",
-		"introduction": "As a passionate frontend developer, I combine technical expertise with creative vision. With solid knowledge of modern technologies like Angular, TypeScript, and current design systems, I create digital experiences that excite users and drive business results.",
-		"talk": "Let’s talk!"
-	},
-	"skills": {
-		"title": "My Skills",
-		"learning": "Continuous Learning",
-		"text": "I always stay up to date with technology and constantly expand my knowledge. Currently, I’m deepening my skills in React and Vue.js to become even more versatile."
-	},
-	"project": {
-		"title": "My Projects",
-		"project": "Project",
-		"ongoingproject": "Ongoing Project",
-		"technologies": "Technologies",
-		"duration": "Duration",
-		"weeks": "Weeks",
-		"about": "About the Project",
-		"workprocess": "Work Process",
-		"workexperience": "Experience",
-		"comingproject": {
-			"comingsoon": "Coming Soon"
-		},
-		"join": {
-			"about": "Join is a comprehensive project management application that helps teams organize and manage tasks efficiently. It features an intuitive UI and powerful features.",
-			"workprocess": "The project was developed using agile methods, with my focus on frontend development using Angular and integration with Firebase. Special emphasis was placed on responsive design and usability.",
-			"workexperience": "This project allowed me to deepen my Angular skills and gain valuable experience in team collaboration. The main challenge was implementing complex drag-and-drop functionality."
-		},
-		"pollo": {
-			"about": "El Pollo Loco is an exciting jump-and-run game developed entirely in JavaScript. It offers fun gameplay with various levels and challenges.",
-			"workprocess": "Developed entirely with Vanilla JavaScript, HTML5 Canvas, and CSS. Focus was on game mechanics, animations, and performance optimization.",
-			"workexperience": "This project helped me solidify my JavaScript fundamentals and gain deeper insight into game development and canvas programming."
-		},
-		"dababble": {
-			"about": "DA Bubble is a modern communication platform that enables teams to collaborate effectively. It offers real-time messaging, channels, and file sharing – all essential tools for modern team communication."
-		}
-	},
-	"player": {
-		"needateamplayer": "Do you need a ",
-		"needateamplayer2": "team player?",
-		"project": "Project:",
-		"reference1": "Yasin has an impressive ability to solve complex problems and develop innovative solutions. His communication is always clear and professional.",
-		"reference2": "Working with Yasin was excellent. He brings not only technical expertise but also a positive attitude and team spirit.",
-		"reference3": "Yasin shows exceptional attention to detail and consistently delivers high-quality work on time. A valuable team partner.",
-		"linkedinprofile": "LinkedIn Profile"
-	},
-	"contact": {
-		"title": "Contact Me",
-		"feelfree": "Got a problem to solve?",
-		"worktogether": "Let’s work together!",
-		"myemail": "Email",
-		"myphone": "Phone",
-		"name": "Your Name",
-		"message": "Your Message",
-		"namerequired": "Name is required",
-		"emailrequired": "Email is required",
-		"emailinvalid": "Invalid email address",
-		"messagerequired": "Message is required",
-		"read": "I have read the",
-		"privacypolicy": "Privacy Policy",
-		"agree": "and agree",
-		"send": "Send",
-		"successmsg": "Message sent successfully!",
-		"emailcommaerror": "Please use a dot (.) instead of a comma",
-		"emailmissingat": "Missing @ symbol in email address",
-		"emailmissingdot": "Missing dot (.) in email address",
-		"emailmultipleat": "Too many @ symbols in email"
-	},
-	"footer": {
-		"legalnotice": "Legal Notice"
-	},
-	"header": {
-		"goback": "Back"
-	},
-	"privatepolicy": "Privacy Policy"
+  "nav": {
+    "whyme": "Why Me",
+    "myskills": "My Skills",
+    "myprojects": "My Projects",
+    "contact": "Contact",
+    "legalnotice": "Legal Notice"
+  },
+  "landingPage": {
+    "name": "Yasin Sun",
+    "position": "Frontend Developer"
+  },
+  "intro": {
+    "title": "Why choose me?",
+    "munich": "I am available in Munich",
+    "munich.subtitle": "On-site or hybrid – flexible for your project",
+    "remote": "I work remotely across Germany",
+    "remote.subtitle": "Modern collaboration without geographic limits",
+    "relocate": "I am willing to relocate",
+    "relocate.subtitle": "Nationwide for the right project",
+    "introduction": "As a passionate frontend developer, I combine technical expertise with creative vision. With solid knowledge of modern technologies like Angular, TypeScript, and current design systems, I create digital experiences that excite users and drive business results.",
+    "talk": "Let's talk!"
+  },
+  "skills": {
+    "title": "My Skills",
+    "learning": "Continuous Learning",
+    "text": "I always stay up to date with technology and constantly expand my knowledge. Currently, I'm deepening my skills in React and Vue.js to become even more versatile."
+  },
+  "project": {
+    "title": "My Projects",
+    "project": "Project",
+    "ongoingproject": "Ongoing Project",
+    "technologies": "Technologies",
+    "duration": "Duration",
+    "weeks": "Weeks",
+    "about": "About the Project",
+    "workprocess": "Work Process",
+    "workexperience": "Experience",
+    "comingproject": {
+      "comingsoon": "Coming Soon"
+    },
+    "join": {
+      "about": "Join is a comprehensive project management application that helps teams organize and manage tasks efficiently. It features an intuitive UI and powerful features.",
+      "workprocess": "The project was developed using agile methods, with my focus on frontend development using Angular and integration with Firebase. Special emphasis was placed on responsive design and usability.",
+      "workexperience": "This project allowed me to deepen my Angular skills and gain valuable experience in team collaboration. The main challenge was implementing complex drag-and-drop functionality."
+    },
+    "pollo": {
+      "about": "El Pollo Loco is an exciting jump-and-run game developed entirely in JavaScript. It offers fun gameplay with various levels and challenges.",
+      "workprocess": "Developed entirely with Vanilla JavaScript, HTML5 Canvas, and CSS. Focus was on game mechanics, animations, and performance optimization.",
+      "workexperience": "This project helped me solidify my JavaScript fundamentals and gain deeper insight into game development and canvas programming."
+    },
+    "dababble": {
+      "about": "DA Bubble is a modern communication platform that enables teams to collaborate effectively. It offers real-time messaging, channels, and file sharing – all essential tools for modern team communication."
+    }
+  },
+  "player": {
+    "needateamplayer": "Do you need a ",
+    "needateamplayer2": "team player?",
+    "project": "Project:",
+    "reference1": "Yasin has an impressive ability to solve complex problems and develop innovative solutions. His communication is always clear and professional.",
+    "reference2": "Working with Yasin was excellent. He brings not only technical expertise but also a positive attitude and team spirit.",
+    "reference3": "Yasin shows exceptional attention to detail and consistently delivers high-quality work on time. A valuable team partner.",
+    "linkedinprofile": "LinkedIn Profile"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "feelfree": "Got a problem to solve?",
+    "worktogether": "Let's work together!",
+    "myemail": "Email",
+    "myphone": "Phone",
+    "name": "Your Name",
+    "message": "Your Message",
+    "namerequired": "Name is required",
+    "emailrequired": "Email is required",
+    "emailinvalid": "Invalid email address",
+    "messagerequired": "Message is required",
+    "read": "I have read the",
+    "privacypolicy": "Privacy Policy",
+    "agree": "and agree",
+    "send": "Send",
+    "successmsg": "Message sent successfully!",
+    "successdetail": "Thank you for your message!",
+    "successsubtext": "I will get back to you as soon as possible and look forward to our conversation.",
+    "emailcommaerror": "Please use a dot (.) instead of a comma",
+    "emailmissingat": "Missing @ symbol in email address",
+    "emailmissingdot": "Missing dot (.) in email address",
+    "emailmultipleat": "Too many @ symbols in email",
+    "sending": "Sending message...",
+    "error": "Error sending message",
+    "errordetail": "The message could not be sent. Please try again or contact me directly."
+  },
+  "footer": {
+    "legalnotice": "Legal Notice"
+  },
+  "header": {
+    "goback": "Back"
+  },
+  "privatepolicy": "Privacy Policy"
 }

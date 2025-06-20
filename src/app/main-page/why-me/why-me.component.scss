@@ -174,7 +174,7 @@
         border: 1px solid rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        margin-top: -140px;
+        margin-top: -96px;
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
         // MOBILE ANPASSUNGEN
@@ -188,7 +188,7 @@
 
         @media screen and (max-width: 480px) {
             height: clamp(110px, 20vw, 150px); // KORRIGIERT: Angepasste Höhe
-            margin-top: clamp(-100px, -15vw, -80px);
+            margin-top: clamp(-100px, 0vw, -40px);
             margin-left: 12px;
             margin-right: 12px;
         }

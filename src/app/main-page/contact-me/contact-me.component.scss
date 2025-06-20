@@ -242,7 +242,7 @@
 
                     .character-count {
                         font-family: $apple-font-family;
-                        font-size: 12px;
+                        font-size: 16px;
                         color: $apple-text-tertiary;
                         text-align: right;
                         margin-top: 4px;
@@ -292,7 +292,7 @@
                     }
 
                     .privacy-label {
-                        font-size: clamp(13px, 3.5vw, 16px);
+                        font-size: clamp(16px, 3.5vw, 18px);
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-regular;
                         line-height: 1.4;
@@ -402,7 +402,7 @@
                             
                             span {
                                 font-family: $apple-font-family;
-                                font-size: clamp(12px, 3vw, 14px);
+                                font-size: clamp(16px, 3vw, 16px);
                                 font-weight: $apple-font-weight-medium;
                                 color: $apple-text-secondary;
                                 padding: 6px 12px;
