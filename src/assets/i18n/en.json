@@ -6,7 +6,6 @@
 		"contact": "Contact",
 		"legalnotice": "Legal Notice"
 	},
-	
 	"landingPage": {
 		"name": "Yasin Sun",
 		"position": "Frontend Developer"
@@ -63,29 +62,23 @@
 		"reference3": "Yasin shows exceptional attention to detail and has consistently delivered high-quality work on time. A valuable team partner.",
 		"linkedinprofile": "LinkedIn Profile"
 	},
-	"contact": {
-		"title": "Contact Me",
-		"feelfree": "Got a problem to solve?",
-		"worktogether": "Let's work together!",
-		"myemail": "Email",
-		"myphone": "Phone",
-		"name": "Your Name",
-		"message": "Your Message",
-		"namerequired": "Name is required",
-		"emailrequired": "Email is required",
-		"emailinvalid": "Invalid email address",
-		"messagerequired": "Message is required",
-		"read": "I have read the",
-		"privacypolicy": "privacy policy",
-		"agree": "and agree to it",
-		"send": "Send",
-		"successmsg": "Message sent successfully!"
-	},
-	"footer": {
-		"legalnotice": "Legal Notice"
-	},
-	"header": {
-		"goback": "Go Back"
-	},
-	"privatepolicy": "Privacy Policy"
-}
+		"contact": {
+			"success": {
+				"title": "Message sent!",
+				"message": "Thank you for your message. I will get back to you soon.",
+				"response": "Response within 24 hours"
+			},
+			"emailcommaerror": "Please use a dot (.) instead of comma",
+			"emailmissingat": "@ symbol missing in email address",
+			"emailmissingdot": "Dot (.) missing in email address",
+			"emailmultipleat": "Too many @ symbols in email",
+			"emailinvalid": "Invalid email address"
+		},
+		"footer": {
+			"legalnotice": "Legal Notice"
+		},
+		"header": {
+			"goback": "Go Back"
+		},
+		"privatepolicy": "Privacy Policy"
+	}

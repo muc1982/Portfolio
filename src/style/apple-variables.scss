@@ -1,12 +1,22 @@
 @use 'sass:color';
 
+// ===================================================================
+// COLORS - COMPLETE SET
+// ===================================================================
+
 $apple-primary: #14b8a6;
 $apple-primary-dark: #0f766e;
 $apple-primary-light: #5eead4;
 
+// FEHLENDE FARBE HINZUGEFÜGT
+$apple-secondary: #6366f1;
+$apple-secondary-dark: #4f46e5;
+$apple-secondary-light: #818cf8;
+
 $apple-bg-primary: #0f172a;
 $apple-bg-secondary: #1e293b;
 $apple-bg-tertiary: #334155;
+$apple-bg-quaternary: #475569;
 
 $apple-text-primary: #f8fafc;
 $apple-text-secondary: #94a3b8;
@@ -20,6 +30,11 @@ $apple-error: #ef4444;
 // Gradients
 $apple-teal-gradient: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
 $apple-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+$apple-secondary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+
+// ===================================================================
+// TYPOGRAPHY
+// ===================================================================
 
 $apple-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
 
@@ -39,6 +54,10 @@ $apple-font-2xl: 1.5rem;    // 24px
 $apple-font-3xl: 1.875rem;  // 30px
 $apple-font-4xl: 2.25rem;   // 36px
 
+// ===================================================================
+// SPACING & LAYOUT - COMPLETE SET
+// ===================================================================
+
 // Spacing
 $apple-space-1: 0.25rem;   // 4px
 $apple-space-2: 0.5rem;    // 8px
@@ -51,6 +70,25 @@ $apple-space-10: 2.5rem;   // 40px
 $apple-space-12: 3rem;     // 48px
 $apple-space-16: 4rem;     // 64px
 $apple-space-20: 5rem;     // 80px
+
+// FEHLENDE MOBILE SPACING VARIABLES
+$space-mobile-xs: 4px;
+$space-mobile-sm: 8px;
+$space-mobile-base: 16px;
+$space-mobile-md: 12px;
+$space-mobile-lg: 20px;
+$space-mobile-xl: 24px;
+$grid-gap-mobile: 12px;
+
+// Navigation Heights
+$nav-height-mobile: 72px;
+$nav-height-tablet: 88px;
+$nav-height-desktop: 104px;
+
+// Touch Targets
+$touch-target-small: 32px;
+$touch-target-medium: 44px;
+$touch-target-large: 48px;
 
 // Padding Variables (für Legacy-Komponenten)
 $padding-mobile-xs: 8px;
@@ -67,6 +105,10 @@ $apple-radius-xl: 24px;
 $apple-radius-2xl: 32px;
 $apple-radius-full: 9999px;
 
+// ===================================================================
+// SHADOWS - ALLE DEFINITIONEN
+// ===================================================================
+
 $apple-shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 $apple-shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 $apple-shadow-large: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -77,16 +119,29 @@ $apple-shadow-glow: 0 0 20px rgba(20, 184, 166, 0.3), 0 0 40px rgba(20, 184, 166
 $apple-shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
 $apple-shadow-nav: 0 4px 16px rgba(0, 0, 0, 0.15);
 
+// ===================================================================
+// TRANSITIONS
+// ===================================================================
 
 $apple-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 $apple-transition-medium: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 $apple-transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
+// ===================================================================
+// BREAKPOINTS - COMPLETE SET
+// ===================================================================
+
+$breakpoint-xs: 320px;
+$breakpoint-sm: 480px;
 $breakpoint-mobile: 320px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1024px;
 $breakpoint-xl: 1280px;
 $breakpoint-2xl: 1536px;
+
+// ===================================================================
+// Z-INDEX
+// ===================================================================
 
 $z-dropdown: 1000;
 $z-sticky: 1020;
@@ -95,6 +150,10 @@ $z-modal: 1040;
 $z-popover: 1050;
 $z-tooltip: 1060;
 $z-toast: 1070;
+
+// ===================================================================
+// MIXINS - ALLE FEHLENDEN DEFINITIONEN
+// ===================================================================
 
 // Flexbox - GAP-PROBLEM BEHOBEN
 @mixin dFlex($jc: flex-start, $ai: stretch, $fd: row, $gap: null) {
@@ -151,14 +210,27 @@ $z-toast: 1070;
 
 // Navigation Mixins
 @mixin responsive-nav-height() {
-  height: 70px;
+  height: $nav-height-mobile;
   
   @media screen and (min-width: #{$breakpoint-tablet}) {
-    height: 90px;
+    height: $nav-height-tablet;
   }
   
   @media screen and (min-width: #{$breakpoint-desktop}) {
-    height: 110px;
+    height: $nav-height-desktop;
+  }
+}
+
+// Touch Target Mixin - FEHLEND HINZUGEFÜGT
+@mixin touch-target($size: $touch-target-medium) {
+  min-height: $size;
+  min-width: $size;
+  padding: 8px 12px;
+  
+  @media (pointer: coarse) {
+    min-height: $touch-target-large;
+    min-width: $touch-target-large;
+    padding: 12px 16px;
   }
 }
 
@@ -166,7 +238,7 @@ $z-toast: 1070;
 @mixin responsive-grid($mobile: 1, $tablet: 2, $desktop: 3) {
   display: grid;
   grid-template-columns: repeat($mobile, 1fr);
-  gap: 1rem;
+  gap: $grid-gap-mobile;
   
   @media screen and (min-width: #{$breakpoint-tablet}) {
     grid-template-columns: repeat($tablet, 1fr);
@@ -210,6 +282,82 @@ $z-toast: 1070;
   }
 }
 
+// Button Mixins - FEHLEND HINZUGEFÜGT
+@mixin apple-button-primary() {
+  @include touch-target();
+  background: $apple-primary;
+  color: white;
+  border: none;
+  border-radius: $apple-radius-medium;
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-medium;
+  font-size: 16px;
+  cursor: pointer;
+  transition: $apple-transition-fast;
+  @include dFlex(center, center);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: $apple-transition-fast;
+  }
+  
+  &:hover {
+    background: $apple-primary-dark;
+    transform: translateY(-2px);
+    box-shadow: $apple-shadow-medium;
+    
+    &::before {
+      opacity: 1;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+    background: color.adjust($apple-primary, $lightness: -10%);
+  }
+  
+  &:focus {
+    outline: 2px solid $apple-primary;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    background: $apple-bg-quaternary;
+    cursor: not-allowed;
+    transform: none;
+    
+    &:hover {
+      background: $apple-bg-quaternary;
+      transform: none;
+      box-shadow: none;
+      
+      &::before {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@mixin apple-button-secondary() {
+  @include apple-button-primary();
+  background: $apple-secondary;
+  
+  &:hover {
+    background: $apple-secondary-dark;
+  }
+  
+  &:active {
+    background: color.adjust($apple-secondary, $lightness: -10%);
+  }
+}
+
 // Logo Mixins
 @mixin apple-logo() {
   font-family: $apple-font-family;
@@ -229,7 +377,7 @@ $z-toast: 1070;
   }
 }
 
-// Glassmorphism
+// Glassmorphism Mixins - FEHLEND HINZUGEFÜGT
 @mixin apple-glass($blur: 20px, $opacity: 0.1) {
   background: rgba(255, 255, 255, $opacity);
   backdrop-filter: blur($blur);
@@ -237,10 +385,59 @@ $z-toast: 1070;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+@mixin apple-glassmorphism-light() {
+  @include apple-glass(15px, 0.08);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: $apple-radius-large;
+  padding: $padding-mobile-md;
+  box-shadow: $apple-shadow-small;
+}
+
+@mixin apple-glassmorphism-medium() {
+  @include apple-glass(20px, 0.12);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: $apple-shadow-medium;
+  border-radius: $apple-radius-large;
+  padding: $padding-mobile-lg;
+}
+
+@mixin apple-glassmorphism-heavy() {
+  @include apple-glass(25px, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: $apple-shadow-large;
+}
+
 @mixin apple-nav-glass() {
   @include apple-glass(25px, 0.08);
   background: rgba(15, 23, 42, 0.8);
   box-shadow: $apple-shadow-nav;
+}
+
+// Mobile Card Padding - FEHLEND
+@mixin mobile-card-padding() {
+  padding: $padding-mobile-md;
+  
+  @media screen and (max-width: #{$breakpoint-sm}) {
+    padding: $padding-mobile-sm;
+  }
+  
+  @media screen and (max-width: #{$breakpoint-xs}) {
+    padding: $padding-mobile-xs;
+  }
+}
+
+// Responsive Icon Sizes - FEHLEND
+@mixin responsive-icon($size: 'md') {
+  @if $size == 'sm' {
+    width: clamp(16px, 4vw, 24px);
+    height: clamp(16px, 4vw, 24px);
+  } @else if $size == 'md' {
+    width: clamp(24px, 6vw, 32px);
+    height: clamp(24px, 6vw, 32px);
+  } @else if $size == 'lg' {
+    width: clamp(32px, 8vw, 48px);
+    height: clamp(32px, 8vw, 48px);
+  }
 }
 
 // Responsive Padding
@@ -265,45 +462,6 @@ $z-toast: 1070;
   
   @media (min-width: #{$breakpoint-desktop}) {
     font-size: calc(#{$base-size} * 1.25);
-  }
-}
-
-// Button Mixins
-@mixin button-base() {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  border-radius: $apple-radius-medium;
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-medium;
-  font-size: 16px; // Mindestens 16px
-  line-height: 1;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: $apple-transition-fast;
-  min-height: 44px; // Touch-Target für Mobile
-  
-  &:focus {
-    outline: 2px solid $apple-primary;
-    outline-offset: 2px;
-  }
-}
-
-@mixin button-primary() {
-  @include button-base();
-  background: $apple-primary;
-  color: white;
-  
-  &:hover {
-    background: $apple-primary-dark;
-    transform: translateY(-2px);
-    box-shadow: $apple-shadow-medium;
-  }
-  
-  &:active {
-    transform: translateY(-1px);
   }
 }
 
@@ -335,6 +493,18 @@ $z-toast: 1070;
   }
 }
 
+@mixin tablet-only {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
 @mixin tablet-up {
   @media (min-width: #{$breakpoint-tablet}) {
     @content;
@@ -345,6 +515,32 @@ $z-toast: 1070;
   @media (min-width: #{$breakpoint-desktop}) {
     @content;
   }
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'mobile' {
+    @media (max-width: #{$breakpoint-tablet - 1px}) {
+      @content;
+    }
+  } @else if $breakpoint == 'tablet' {
+    @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+      @content;
+    }
+  } @else if $breakpoint == 'desktop' {
+    @media (min-width: #{$breakpoint-desktop}) {
+      @content;
+    }
+  } @else if $breakpoint == 'desktop-small' {
+    @media (min-width: 900px) {
+      @content;
+    }
+  }
+}
+
+// Safe Area für Devices mit Notch
+@mixin safe-area-container() {
+  padding-left: max(env(safe-area-inset-left), $space-mobile-base);
+  padding-right: max(env(safe-area-inset-right), $space-mobile-base);
 }
 
 // Hover Effects
@@ -360,19 +556,53 @@ $z-toast: 1070;
   }
 }
 
-// Animations
-@mixin pulse($color: $apple-primary) {
-  animation: pulse-#{unique-id()} 2s infinite;
+// Form Element Mixins
+@mixin form-element-base() {
+  @include apple-input();
+  @include touch-target();
+}
+
+@mixin textarea-base() {
+  @include form-element-base();
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+// Focus States
+@mixin focus-ring($color: $apple-primary) {
+  &:focus {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
   
-  @keyframes pulse-#{unique-id()} {
-    0% {
-      box-shadow: 0 0 0 0 rgba($color, 0.7);
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+// Animation Mixins
+@mixin fade-in($duration: 0.3s) {
+  opacity: 0;
+  animation: fade-in-#{unique-id()} $duration ease-out forwards;
+  
+  @keyframes fade-in-#{unique-id()} {
+    to {
+      opacity: 1;
     }
-    70% {
-      box-shadow: 0 0 0 10px rgba($color, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba($color, 0);
+  }
+}
+
+@mixin slide-up($duration: 0.3s, $distance: 20px) {
+  opacity: 0;
+  transform: translateY($distance);
+  animation: slide-up-#{unique-id()} $duration ease-out forwards;
+  
+  @keyframes slide-up-#{unique-id()} {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
@@ -401,7 +631,7 @@ $z-toast: 1070;
 }
 
 .apple-button {
-  @include button-primary();
+  @include apple-button-primary();
 }
 
 .apple-card {
@@ -420,6 +650,10 @@ $z-toast: 1070;
   white-space: nowrap;
   border: 0;
 }
+
+// ===================================================================
+// ACCESSIBILITY & PRINT STYLES
+// ===================================================================
 
 @media (prefers-reduced-motion: reduce) {
   * {

@@ -63,22 +63,16 @@
 		"linkedinprofile": "LinkedIn Profil"
 	},
 	"contact": {
-		"title": "Kontaktieren Sie mich",
-		"feelfree": "Haben Sie ein Problem zu lösen?",
-		"worktogether": "Lassen Sie uns zusammenarbeiten!",
-		"myemail": "E-Mail",
-		"myphone": "Telefon",
-		"name": "Ihr Name",
-		"message": "Ihre Nachricht",
-		"namerequired": "Name ist erforderlich",
-		"emailrequired": "E-Mail ist erforderlich",
-		"emailinvalid": "Ungültige E-Mail-Adresse",
-		"messagerequired": "Nachricht ist erforderlich",
-		"read": "Ich habe die",
-		"privacypolicy": "Datenschutzerklärung",
-		"agree": "gelesen und stimme zu",
-		"send": "Senden",
-		"successmsg": "Nachricht erfolgreich gesendet!"
+		"success": {
+			"title": "Nachricht gesendet!",
+			"message": "Vielen Dank für Ihre Nachricht. Ich werde mich zeitnah bei Ihnen melden.",
+			"response": "Antwort innerhalb von 24 Stunden"
+		},
+		"emailcommaerror": "Bitte verwenden Sie einen Punkt (.) statt Komma",
+		"emailmissingat": "@ Zeichen fehlt in der E-Mail-Adresse",
+		"emailmissingdot": "Punkt (.) fehlt in der E-Mail-Adresse",
+		"emailmultipleat": "Zu viele @ Zeichen in der E-Mail",
+		"emailinvalid": "Ungültige E-Mail-Adresse"
 	},
 	"footer": {
 		"legalnotice": "Impressum"
