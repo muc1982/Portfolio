@@ -26,37 +26,3 @@ $apple-z-modal-backdrop: 1040 !default;
 $apple-z-modal: 1050 !default;
 $apple-z-popover: 1060 !default;
 $apple-z-tooltip: 1070 !default;
-
-$mobile-min-font-size: 16px;
-$mobile-medium-font-size: 18px;
-$mobile-large-font-size: 24px;
-
-// Mobile-first approach
-@mixin mobile-text-base {
-  font-size: $mobile-min-font-size;
-  line-height: 1.5;
-  
-  @media (min-width: 768px) {
-    font-size: 18px;
-  }
-  
-  @media (min-width: 1024px) {
-    font-size: 20px;
-  }
-}
-
-@mixin mobile-container {
-  padding: 16px;
-  margin: 0 auto;
-  max-width: 100%;
-  
-  @media (min-width: 768px) {
-    padding: 24px;
-    max-width: 768px;
-  }
-  
-  @media (min-width: 1024px) {
-    padding: 32px;
-    max-width: 1024px;
-  }
-}

@@ -1,7 +1,5 @@
 // Korrigierter Import - verwende relativen Pfad
-@use './style/apple-variables' as *;
-
-/* You can add global styles to this file, and also import other style files */
+@use 'style/apple-variables.scss' as *;
 
 * {
   margin: 0;

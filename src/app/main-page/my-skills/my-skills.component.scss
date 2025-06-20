@@ -1,4 +1,4 @@
-@use '../../../style/apple-variables.scss' as *;
+@use '../../../style/apple-variables' as *;
 @use 'sass:color';
 
 .my-skills-container {
@@ -36,31 +36,29 @@
     }
 
     .my-skills-content {
-        // KORRIGIERT: width vor den nested rules
         width: 100%;
+        @include dFlex($gap: clamp(40px, 8vw, 64px));
         position: relative;
         z-index: 2;
         padding: clamp(32px, 6vw, 80px);
         max-width: 1200px;
         margin: 0 auto;
-        @include dFlex($gap: clamp(40px, 8vw, 64px));
 
         .content-left {
             flex: 2;
 
             .reservoir {
-                // KORRIGIERT: width vor den nested rules
-                width: 100%;
                 @include responsive-grid(2, 3, 4);
+                width: 100%;
 
                 .skill {
                     @include dFlex($fd: column, $gap: 12px, $ai: center);
                     @include apple-glassmorphism-medium();
                     @include mobile-card-padding();
-                    @include touch-target();
                     transition: $apple-transition-fast;
                     cursor: pointer;
                     position: relative;
+                    @include touch-target();
                     aspect-ratio: 1;
 
                     &::before {
@@ -142,12 +140,12 @@
 
                     >div {
                         @include dFlex($fd: column, $gap: 8px, $ai: center);
-                        @include touch-target($touch-target-small);
                         background: rgba($apple-primary, 0.1);
                         border: 1px solid rgba($apple-primary, 0.3);
                         border-radius: $apple-radius-medium;
                         padding: 16px 12px;
                         transition: $apple-transition-fast;
+                        @include touch-target($touch-target-small);
 
                         &:hover {
                             transform: translateY(-2px);
@@ -198,7 +196,6 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
-    // KORRIGIERT: width und box-sizing vor nested rules
     width: calc(100% - #{$space-mobile-lg});
     box-sizing: border-box;
 
@@ -224,12 +221,11 @@
     }
 
     .my-skills-content {
-        // KORRIGIERT: width vor nested rules
         width: 100%;
+        @include dFlex($fd: column, $gap: $space-mobile-lg);
         position: relative;
         z-index: 2;
         padding: $padding-mobile-md;
-        @include dFlex($fd: column, $gap: $space-mobile-lg);
 
         .content-top {
             .reservoir {
@@ -239,11 +235,11 @@
                 .skill {
                     @include dFlex($jc: center, $ai: center);
                     @include apple-glassmorphism-medium();
-                    @include touch-target($touch-target-small);
                     padding: $padding-mobile-sm;
                     transition: $apple-transition-fast;
                     aspect-ratio: 1;
                     position: relative;
+                    @include touch-target($touch-target-small);
 
                     &::before {
                         content: '';
@@ -316,12 +312,12 @@
 
                         >div {
                             @include dFlex($fd: column, $gap: 6px, $ai: center);
-                            @include touch-target($touch-target-small);
                             background: rgba($apple-primary, 0.1);
                             border: 1px solid rgba($apple-primary, 0.3);
                             border-radius: $apple-radius-medium;
                             padding: $padding-mobile-sm;
                             transition: $apple-transition-fast;
+                            @include touch-target($touch-target-small);
 
                             &:hover {
                                 transform: translateY(-2px);
