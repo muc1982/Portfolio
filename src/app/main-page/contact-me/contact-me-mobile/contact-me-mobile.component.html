@@ -65,9 +65,21 @@
                 </div>
 
                 <div class="send-btn">
-                    @if (isShowingSuccessMsg) {
-                    <div class="success-msg">
-                        {{'contact.successmsg' | translate}}
+                    @if (isShowingDetailedSuccess) {
+                    <div class="success-message-detailed">
+                        <div class="success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="success-content">
+                            <h4>{{ 'contact.success.title' | translate }}</h4>
+                            <p>{{ 'contact.success.message' | translate }}</p>
+                            <div class="success-details">
+                                <span>{{ 'contact.success.response' | translate }}</span>
+                            </div>
+                        </div>
                     </div>
                     } @else {
                     <button [disabled]="!isChecked || !isFormValid()" type="submit" class="pointer"

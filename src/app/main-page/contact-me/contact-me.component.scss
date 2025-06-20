@@ -123,7 +123,7 @@
 
                             .img {
                                 width: clamp(28px, 6vw, 36px);
-                                height: clamp(28px, 6vw, 36px); // Quadratische Icons
+                                height: clamp(28px, 6vw, 36px);
                                 flex-shrink: 0;
                                 background-size: contain;
                                 background-repeat: no-repeat;
@@ -162,7 +162,6 @@
                     line-height: 1.3;
                     display: flex;
                     justify-content: flex-start;
-
                 }
             }
         }
@@ -199,6 +198,7 @@
 
                         &-error {
                             color: $apple-error;
+                            animation: shake 0.3s ease-in-out;
                         }
                     }
 
@@ -215,8 +215,10 @@
                         }
 
                         &-error {
-                            border: 1px solid $apple-error;
-                            background: rgba($apple-error, 0.05);
+                            border: 2px solid $apple-error;
+                            background: rgba($apple-error, 0.08);
+                            box-shadow: 0 0 0 3px rgba($apple-error, 0.1);
+                            animation: errorPulse 0.4s ease-in-out;
 
                             &::placeholder {
                                 color: $apple-error;
@@ -324,6 +326,94 @@
                     box-shadow: $apple-shadow-small;
                 }
 
+                // Neue professionelle Erfolgsmeldung
+                .success-message-detailed {
+                    @include dFlex($fd: row, $gap: 20px, $ai: flex-start);
+                    padding: clamp(24px, 5vw, 32px);
+                    background: linear-gradient(135deg, rgba($apple-success, 0.08) 0%, rgba($apple-success, 0.12) 100%);
+                    border: 2px solid rgba($apple-success, 0.2);
+                    border-radius: $apple-radius-large;
+                    box-shadow: 
+                        0 8px 32px rgba($apple-success, 0.15),
+                        0 0 0 1px rgba($apple-success, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                    animation: successSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        height: 3px;
+                        background: linear-gradient(90deg, 
+                            $apple-success 0%, 
+                            color.adjust($apple-success, $lightness: 15%) 50%, 
+                            $apple-success 100%);
+                        animation: progressBar 3s ease-out;
+                    }
+
+                    .success-icon {
+                        width: clamp(48px, 10vw, 56px);
+                        height: clamp(48px, 10vw, 56px);
+                        flex-shrink: 0;
+                        background: $apple-success;
+                        border-radius: 50%;
+                        @include dFlex($jc: center, $ai: center);
+                        box-shadow: 
+                            0 4px 16px rgba($apple-success, 0.3),
+                            0 0 0 4px rgba($apple-success, 0.1);
+                        animation: iconBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
+
+                        svg {
+                            width: clamp(24px, 5vw, 28px);
+                            height: clamp(24px, 5vw, 28px);
+                            color: white;
+                            stroke-width: 3;
+                        }
+                    }
+
+                    .success-content {
+                        flex: 1;
+                        @include dFlex($fd: column, $gap: 12px);
+
+                        h4 {
+                            font-family: $apple-font-family;
+                            font-size: clamp(18px, 4.5vw, 22px);
+                            font-weight: $apple-font-weight-semibold;
+                            color: $apple-success;
+                            margin: 0;
+                            line-height: 1.2;
+                        }
+
+                        p {
+                            font-family: $apple-font-family;
+                            font-size: clamp(14px, 3.5vw, 16px);
+                            font-weight: $apple-font-weight-regular;
+                            color: $apple-text-primary;
+                            margin: 0;
+                            line-height: 1.4;
+                            opacity: 0.9;
+                        }
+
+                        .success-details {
+                            margin-top: 8px;
+                            
+                            span {
+                                font-family: $apple-font-family;
+                                font-size: clamp(12px, 3vw, 14px);
+                                font-weight: $apple-font-weight-medium;
+                                color: $apple-text-secondary;
+                                padding: 6px 12px;
+                                background: rgba($apple-success, 0.1);
+                                border-radius: $apple-radius-small;
+                                border: 1px solid rgba($apple-success, 0.2);
+                            }
+                        }
+                    }
+                }
+
                 .send-btn {
                     @include dFlex($jc: center);
                     width: 100%;
@@ -390,19 +480,71 @@
     }
 }
 
+// Animationen
 @keyframes apple-contact-ambient {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
-
     33% {
         transform: translateY(-15px) rotate(2deg) scale(1.02);
     }
-
     66% {
         transform: translateY(10px) rotate(-1deg) scale(0.98);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+@keyframes errorPulse {
+    0% { 
+        box-shadow: 0 0 0 0 rgba($apple-error, 0.4);
+    }
+    70% { 
+        box-shadow: 0 0 0 8px rgba($apple-error, 0);
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba($apple-error, 0);
+    }
+}
+
+@keyframes successSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes iconBounce {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes progressBar {
+    0% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+    100% {
+        transform: scaleX(1);
+        transform-origin: left;
     }
 }
 

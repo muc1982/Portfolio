@@ -33,6 +33,7 @@ export class ContactMeComponent {
   emailInvalidMsg: string = 'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
+  isShowingDetailedSuccess = false; // Für die neue detaillierte Erfolgsmeldung
   
   readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
   readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -105,7 +106,18 @@ export class ContactMeComponent {
       this.emailInvalidMsg = 'contact.emailrequired';
     } else if (!this.emailPattern.test(email)) {
       this.emailValid = false;
-      this.emailInvalidMsg = 'contact.emailinvalid';
+      // Spezifische Fehlermeldungen für häufige Tippfehler
+      if (email.includes(',')) {
+        this.emailInvalidMsg = 'contact.emailcommaerror'; // "Bitte verwenden Sie einen Punkt (.) statt Komma in der E-Mail"
+      } else if (!email.includes('@')) {
+        this.emailInvalidMsg = 'contact.emailmissingat'; // "@ Zeichen fehlt in der E-Mail-Adresse"
+      } else if (!email.includes('.')) {
+        this.emailInvalidMsg = 'contact.emailmissingdot'; // "Punkt (.) fehlt in der E-Mail-Adresse"
+      } else if (email.split('@').length > 2) {
+        this.emailInvalidMsg = 'contact.emailmultipleat'; // "Zu viele @ Zeichen in der E-Mail"
+      } else {
+        this.emailInvalidMsg = 'contact.emailinvalid'; // "Ungültige E-Mail-Adresse"
+      }
     } else {
       this.emailValid = true;
     }
@@ -147,11 +159,13 @@ export class ContactMeComponent {
     this.contact.name = '';
     this.contact.email = '';
     this.contact.msg = '';
-    this.isShowingSuccessMsg = true;
+    this.isShowingDetailedSuccess = true;
     myForm.resetForm();
+    
+    // Nach 5 Sekunden ausblenden
     setTimeout(() => {
-      this.isShowingSuccessMsg = false;
-    }, 3000);
+      this.isShowingDetailedSuccess = false;
+    }, 5000);
   }
 
   onNameChange() {

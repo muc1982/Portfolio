@@ -32,6 +32,7 @@ export class ContactMeMobileComponent {
   emailInvalidMsg: string = 'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
+  isShowingDetailedSuccess = false; // Neue detaillierte Erfolgsmeldung
   nameBlurred = false;
   emailBlurred = false;
   msgBlurred = false;
@@ -139,10 +140,10 @@ export class ContactMeMobileComponent {
   }
 
   private showSuccessMessage(): void {
-    this.isShowingSuccessMsg = true;
+    this.isShowingDetailedSuccess = true;
     setTimeout(() => {
-      this.isShowingSuccessMsg = false;
-    }, 3000);
+      this.isShowingDetailedSuccess = false;
+    }, 5000);
   }
 
   validateName(): void {
@@ -169,16 +170,29 @@ export class ContactMeMobileComponent {
   }
 
   private checkMail(): void {
-    if (this.contact.email.trim().length <= 0) {
+    const email = this.contact.email.trim();
+    
+    if (email.length <= 0) {
       this.emailValid = false;
       this.emailInvalidMsg = 'contact.emailrequired';
       this.contact.email = '';
-    } else {
-      this.emailValid = this.emailPattern.test(this.contact.email.trim());
-      if (!this.emailValid) {
-        this.emailInvalidMsg = 'contact.emailinvalid';
-        this.contact.email = '';
+    } else if (!this.emailPattern.test(email)) {
+      this.emailValid = false;
+      // Spezifische Fehlermeldungen für häufige Tippfehler
+      if (email.includes(',')) {
+        this.emailInvalidMsg = 'contact.emailcommaerror'; // "Bitte verwenden Sie einen Punkt (.) statt Komma"
+      } else if (!email.includes('@')) {
+        this.emailInvalidMsg = 'contact.emailmissingat'; // "@ Zeichen fehlt in der E-Mail-Adresse"
+      } else if (!email.includes('.')) {
+        this.emailInvalidMsg = 'contact.emailmissingdot'; // "Punkt (.) fehlt in der E-Mail-Adresse"
+      } else if (email.split('@').length > 2) {
+        this.emailInvalidMsg = 'contact.emailmultipleat'; // "Zu viele @ Zeichen in der E-Mail"
+      } else {
+        this.emailInvalidMsg = 'contact.emailinvalid'; // "Ungültige E-Mail-Adresse"
       }
+      this.contact.email = '';
+    } else {
+      this.emailValid = true;
     }
   }
 

@@ -283,6 +283,91 @@
                     box-shadow: $apple-shadow-small;
                 }
 
+                .success-message-detailed {
+                    @include dFlex($fd: column, $ai: center, $jc: center, $gap: clamp(16px, 4vw, 20px));
+                    padding: clamp(24px, 6vw, 32px) clamp(20px, 5vw, 28px);
+                    background: linear-gradient(135deg, rgba($apple-success, 0.08) 0%, rgba($apple-success, 0.12) 100%);
+                    border: 1px solid rgba($apple-success, 0.2);
+                    border-radius: $apple-radius-large;
+                    box-shadow: $apple-shadow-medium, 0 0 20px rgba($apple-success, 0.15);
+                    text-align: center;
+                    position: relative;
+                    overflow: hidden;
+                    animation: success-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: -50%;
+                        left: -50%;
+                        width: 200%;
+                        height: 200%;
+                        background: radial-gradient(circle, rgba($apple-success, 0.05) 0%, transparent 70%);
+                        animation: success-glow 2s ease-in-out infinite alternate;
+                    }
+
+                    .success-icon {
+                        width: clamp(48px, 12vw, 56px);
+                        height: clamp(48px, 12vw, 56px);
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, $apple-success 0%, color.adjust($apple-success, $lightness: 10%) 100%);
+                        @include dFlex($ai: center, $jc: center);
+                        box-shadow: 0 4px 16px rgba($apple-success, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                        animation: success-icon-bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
+                        position: relative;
+                        z-index: 2;
+
+                        svg {
+                            width: clamp(24px, 6vw, 28px);
+                            height: clamp(24px, 6vw, 28px);
+                            color: white;
+                            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+                        }
+                    }
+
+                    .success-content {
+                        @include dFlex($fd: column, $ai: center, $gap: clamp(8px, 2vw, 12px));
+                        position: relative;
+                        z-index: 2;
+
+                        h4 {
+                            font-family: $apple-font-family;
+                            font-size: clamp(18px, 4.5vw, 22px);
+                            font-weight: $apple-font-weight-semibold;
+                            color: $apple-text-primary;
+                            margin: 0;
+                            line-height: 1.2;
+                        }
+
+                        p {
+                            font-family: $apple-font-family;
+                            font-size: clamp(14px, 3.5vw, 16px);
+                            font-weight: $apple-font-weight-regular;
+                            color: $apple-text-secondary;
+                            margin: 0;
+                            line-height: 1.4;
+                            max-width: 280px;
+                        }
+
+                        .success-details {
+                            margin-top: clamp(8px, 2vw, 12px);
+                            padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 20px);
+                            background: rgba(255, 255, 255, 0.05);
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            border-radius: $apple-radius-medium;
+                            backdrop-filter: blur(10px);
+
+                            span {
+                                font-family: $apple-font-family;
+                                font-size: clamp(12px, 3vw, 14px);
+                                font-weight: $apple-font-weight-medium;
+                                color: $apple-success;
+                                line-height: 1.3;
+                            }
+                        }
+                    }
+                }
+
                 .send-btn {
                     @include dFlex($jc: center);
                     width: 100%;
@@ -321,14 +406,45 @@
 }
 
 @keyframes apple-contact-ambient-mobile {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
-
     50% {
         transform: translateY(-10px) rotate(1deg) scale(1.01);
+    }
+}
+
+@keyframes success-slide-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes success-icon-bounce {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes success-glow {
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0.6;
     }
 }
 

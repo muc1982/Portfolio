@@ -1,14 +1,14 @@
 <!-- Desktop Contact Form -->
 <div id="contact-me" class="contact-container normal-container wide-screen">
     <h2>{{ 'contact.title' | translate}}</h2>
-    
+
     <div class="contact-content">
         <!-- Desktop Header Section -->
         <div class="contact-header">
             <div class="header-left">
                 <h3>{{ 'contact.feelfree' | translate}}</h3>
             </div>
-            
+
             <div class="header-right">
                 <div class="header-top">
                     <!-- Phone Contact -->
@@ -26,7 +26,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="header-bottom">{{ 'contact.worktogether' | translate}}</div>
             </div>
         </div>
@@ -39,29 +39,34 @@
                             {{ !nameValid && myForm.submitted ? ('contact.namerequired' | translate) : ('contact.name' |
                             translate)}}
                         </label>
-                        <input [class.form-input-error]="!nameValid && myForm.submitted" [(ngModel)]="contact.name" name="name"
-                            id="name" class="form-input" type="text" required minlength="2" maxlength="50"
+                        <input [class.form-input-error]="!nameValid && myForm.submitted" [(ngModel)]="contact.name"
+                            name="name" id="name" class="form-input" type="text" required minlength="2" maxlength="50"
                             pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}" (blur)="onNameChange()" (focus)="nameValid = true"
                             placeholder="{{ 'contact.name' | translate }}" autocomplete="name">
                     </div>
                     <div class="form-email form-field">
-                        <label class="form-label" [class.form-label-error]="!emailValid && myForm.submitted" for="email">
-                            {{ !emailValid && myForm.submitted ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}
+                        <label class="form-label" [class.form-label-error]="!emailValid && myForm.submitted"
+                            for="email">
+                            {{ !emailValid && myForm.submitted ? (emailInvalidMsg | translate) : ('contact.myemail' |
+                            translate)}}
                         </label>
-                        <input [class.form-input-error]="!emailValid && myForm.submitted" [(ngModel)]="contact.email" name="email"
-                            id="email" class="form-input" type="email" required
+                        <input [class.form-input-error]="!emailValid && myForm.submitted" [(ngModel)]="contact.email"
+                            name="email" id="email" class="form-input" type="email" required
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (blur)="onEmailChange()"
-                            (focus)="emailValid = true" placeholder="{{ 'contact.myemail' | translate }}" autocomplete="email">
+                            (focus)="emailValid = true" placeholder="{{ 'contact.myemail' | translate }}"
+                            autocomplete="email">
                     </div>
                 </div>
                 <div class="form-message form-field">
                     <label class="form-label" for="message" [class.form-label-error]="!msgValid && myForm.submitted">
-                        {{ !msgValid && myForm.submitted ? ('contact.messagerequired' | translate) : ('contact.message' |
+                        {{ !msgValid && myForm.submitted ? ('contact.messagerequired' | translate) : ('contact.message'
+                        |
                         translate)}}
                     </label>
-                    <textarea [class.form-input-error]="!msgValid && myForm.submitted" [(ngModel)]="contact.msg" name="message"
-                        id="message" class="form-input" required minlength="10" maxlength="500" (blur)="onMessageChange()"
-                        (focus)="msgValid = true" placeholder="{{ 'contact.message' | translate }}" rows="5"></textarea>
+                    <textarea [class.form-input-error]="!msgValid && myForm.submitted" [(ngModel)]="contact.msg"
+                        name="message" id="message" class="form-input" required minlength="10" maxlength="500"
+                        (blur)="onMessageChange()" (focus)="msgValid = true"
+                        placeholder="{{ 'contact.message' | translate }}" rows="5"></textarea>
                     <div class="character-count" *ngIf="contact.msg.length > 0">
                         {{ contact.msg.length }} / 500
                     </div>
@@ -80,9 +85,22 @@
                     </label>
                 </div>
                 <div class="send-btn">
-                    @if (isShowingSuccessMsg) {
-                    <div class="success-msg">
-                        {{'contact.successmsg' | translate}}
+                    @if (isShowingDetailedSuccess) {
+                    <div class="success-message-detailed">
+                        <div class="success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="success-content">
+                            <h4>{{ 'contact.success.title' | translate }}</h4>
+                            <p>{{ 'contact.success.message' | translate }}</p>
+                            <div class="success-details">
+                                <span>{{ 'contact.success.response' | translate }}</span>
+                            </div>
+                        </div>
                     </div>
                     } @else {
                     <button [disabled]="!isFormValid() || myForm.invalid" type="submit" class="pointer"
