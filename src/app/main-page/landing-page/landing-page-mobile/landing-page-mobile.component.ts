@@ -1,168 +1,152 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { LangSwitcherComponent } from '../../../shared/lang-switcher/lang-switcher.component';
-import { NgStyle, NgIf } from '@angular/common';
+import { Component, type ElementRef, ViewChild, type AfterViewInit, HostListener, type OnDestroy } from "@angular/core"
+import { TranslateService, TranslateModule } from "@ngx-translate/core"
+import { LangSwitcherComponent } from "../../../shared/lang-switcher/lang-switcher.component"
+import { NgIf } from "@angular/common"
 
 @Component({
-  selector: 'app-landing-page-mobile',
+  selector: "app-landing-page-mobile",
   standalone: true,
-  templateUrl: './landing-page-mobile.component.html',
-  styleUrls: ['./landing-page-mobile.component.scss'],
-  imports: [
-    TranslateModule,
-    NgIf,
-    LangSwitcherComponent
-  ]
+  templateUrl: "./landing-page-mobile.component.html",
+  styleUrls: ["./landing-page-mobile.component.scss"],
+  imports: [TranslateModule, NgIf, LangSwitcherComponent],
 })
 export class LandingPageMobileComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('logoImg') logoImgRef!: ElementRef;
-  showMenu = false;
-  private scrollPosition = 0;
+  @ViewChild("logoImg") logoImgRef!: ElementRef
+  showMenu = false
+  private scrollPosition = 0
 
   constructor(private translate: TranslateService) {}
 
   ngAfterViewInit(): void {
-    this.adjustViewport();
+    this.adjustViewport()
   }
 
   ngOnDestroy(): void {
-    this.forceResetMenu();
+    this.forceResetMenu()
   }
 
-  @HostListener('window:resize')
+  @HostListener("window:resize")
   onResize(): void {
-    this.adjustViewport();
-    
+    this.adjustViewport()
+
     if (window.innerWidth > 767 && this.showMenu) {
-      this.forceResetMenu();
+      this.forceResetMenu()
     }
   }
 
-  @HostListener('document:keydown.escape')
+  @HostListener("document:keydown.escape")
   onEscapeKey(): void {
     if (this.showMenu) {
-      this.closeMenu();
+      this.closeMenu()
     }
   }
 
-  @HostListener('touchstart', ['$event'])
+  @HostListener("touchstart", ["$event"])
   onTouchStart(event: TouchEvent): void {
-    const target = event.target as HTMLElement;
-    if (target?.closest('.burger-menu-btn')) {
-      event.stopPropagation();
+    const target = event.target as HTMLElement
+    if (target?.closest(".burger-menu-btn")) {
+      event.stopPropagation()
     }
   }
 
   toggleMenu(event?: Event): void {
-    console.log('Toggle Menu - Current state:', this.showMenu, 'Window width:', window.innerWidth);
-    
     if (event) {
-      event.preventDefault();
-      event.stopPropagation();
+      event.preventDefault()
+      event.stopPropagation()
     }
-    
+
     if (this.showMenu) {
-      this.forceResetMenu();
+      this.forceResetMenu()
     } else {
-      this.openMenu();
+      this.openMenu()
     }
   }
 
   private openMenu(): void {
-    console.log('Opening Menu');
-    this.showMenu = true;
-    this.lockBodyScroll();
+    this.showMenu = true
+    this.lockBodyScroll()
   }
 
   closeMenu(): void {
-    console.log('Closing Menu via closeMenu()');
-    this.showMenu = false;
-    this.restoreBodyScroll();
+    this.showMenu = false
+    this.restoreBodyScroll()
   }
 
   private forceResetMenu(): void {
-    console.log('Force Reset Menu');
-    this.showMenu = false;
-    this.restoreBodyScroll();
-    
+    this.showMenu = false
+    this.restoreBodyScroll()
+
     setTimeout(() => {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-    }, 50);
+      document.body.style.overflow = ""
+      document.body.style.position = ""
+      document.body.style.top = ""
+      document.body.style.width = ""
+    }, 50)
   }
 
   private lockBodyScroll(): void {
-    this.scrollPosition = window.pageYOffset;
-    console.log('Locking body scroll at position:', this.scrollPosition);
-    
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${this.scrollPosition}px`;
-    document.body.style.width = '100%';
+    this.scrollPosition = window.pageYOffset
+
+    document.body.style.overflow = "hidden"
+    document.body.style.position = "fixed"
+    document.body.style.top = `-${this.scrollPosition}px`
+    document.body.style.width = "100%"
   }
 
   private restoreBodyScroll(): void {
-    console.log('Restoring body scroll to position:', this.scrollPosition);
-    
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    
+    document.body.style.overflow = ""
+    document.body.style.position = ""
+    document.body.style.top = ""
+    document.body.style.width = ""
+
     if (this.scrollPosition > 0) {
-      window.scrollTo(0, this.scrollPosition);
+      window.scrollTo(0, this.scrollPosition)
     }
   }
 
   scrollTo(sectionId: string): void {
-    console.log('ScrollTo called:', sectionId);
-    
-    this.closeMenu();
-    
+    this.closeMenu()
+
     setTimeout(() => {
-      this.performScrollToSection(sectionId);
-    }, 100);
+      this.performScrollToSection(sectionId)
+    }, 100)
   }
 
   private performScrollToSection(sectionId: string): void {
-     let targetId = sectionId;
-    
-    if (sectionId === 'my-skills') {
-      const mobileElement = document.getElementById('my-skills-mobile');
+    let targetId = sectionId
+
+    if (sectionId === "my-skills") {
+      const mobileElement = document.getElementById("my-skills-mobile")
       if (mobileElement) {
-        targetId = 'my-skills-mobile';
+        targetId = "my-skills-mobile"
       }
-    } else if (sectionId === 'my-projects') {
-      const mobileElement = document.getElementById('my-projects-mobile');
+    } else if (sectionId === "my-projects") {
+      const mobileElement = document.getElementById("my-projects-mobile")
       if (mobileElement) {
-        targetId = 'my-projects-mobile';
+        targetId = "my-projects-mobile"
       }
-    } else if (sectionId === 'contact-me') {
-      const mobileElement = document.getElementById('contact-me-mobile');
+    } else if (sectionId === "contact-me") {
+      const mobileElement = document.getElementById("contact-me-mobile")
       if (mobileElement) {
-        targetId = 'contact-me-mobile';
+        targetId = "contact-me-mobile"
       }
     }
 
-    const element = document.getElementById(targetId);
+    const element = document.getElementById(targetId)
     if (element) {
-      const headerOffset = 72; 
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const headerOffset = 76
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
-      });
-    } else {
-      console.warn(`Element with ID '${targetId}' not found`);
+        behavior: "smooth",
+      })
     }
   }
 
   private adjustViewport(): void {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    const vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty("--vh", `${vh}px`)
   }
 }

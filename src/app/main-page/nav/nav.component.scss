@@ -8,10 +8,23 @@
     right: 0;
     z-index: 1000;
     transition: $apple-transition-medium;
+    height: 104px;
     
     &.scrolled {
         @include apple-nav-glass();
         box-shadow: $apple-shadow-small;
+    }
+    
+    @media screen and (max-width: 900px) {
+        height: 88px;
+    }
+    
+    @media screen and (max-width: 600px) {
+        height: 80px;
+    }
+    
+    @media screen and (max-width: 480px) {
+        height: 76px;
     }
     
     .nav {
@@ -159,21 +172,6 @@
                                     width: 80%;
                                 }
                             }
-                            
-                            &:active {
-                                transform: translateY(0);
-                                color: $apple-primary;
-                                
-                                &::before {
-                                    opacity: 0.7;
-                                    background: rgba($apple-primary, 0.1);
-                                }
-                            }
-                            
-                            &:focus {
-                                outline: 2px solid rgba($apple-primary, 0.5);
-                                outline-offset: 2px;
-                            }
                         }
                     }
                     
@@ -186,11 +184,6 @@
                             &::after {
                                 width: 80%;
                                 opacity: 1;
-                            }
-                            
-                            &:hover {
-                                background: rgba($apple-primary, 0.15);
-                                border-color: rgba($apple-primary, 0.4);
                             }
                         }
                     }

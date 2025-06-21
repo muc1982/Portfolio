@@ -297,6 +297,7 @@ h3, h4, h5, h6, p, li, td, th {
     body {
         min-width: 320px;
         overflow-x: hidden;
+        font-size: 16px;
     }
 
     .wide-screen,
@@ -304,8 +305,8 @@ h3, h4, h5, h6, p, li, td, th {
         min-width: 320px;
         width: 100%;
         max-width: 100%;
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
         box-sizing: border-box;
     }
 
@@ -329,6 +330,20 @@ h3, h4, h5, h6, p, li, td, th {
         min-height: 48px;
         padding: 14px 16px;
     }
+}
+
+.full-width-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+}
+
+.content-wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: clamp(16px, 4vw, 80px);
+    padding-right: clamp(16px, 4vw, 80px);
+    box-sizing: border-box;
 }
 
 ::selection {
