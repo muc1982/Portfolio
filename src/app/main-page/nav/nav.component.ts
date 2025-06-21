@@ -1,12 +1,14 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive'
+import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 import { LangSwitcherComponent } from '../../shared/lang-switcher/lang-switcher.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common'; // Import CommonModule
+import { RouterLink, RouterLinkActive } from '@angular/router'; // Import RouterLink and RouterLinkActive
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [ScrollBounceDirective, LangSwitcherComponent, TranslateModule],
+  imports: [ScrollBounceDirective, LangSwitcherComponent, TranslateModule, CommonModule], // Fügen Sie CommonModule, RouterLink, RouterLinkActive und TranslateModule hinzu
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
@@ -92,3 +94,4 @@ export class NavComponent implements OnInit, OnDestroy {
     }
   }
 }
+

@@ -215,6 +215,89 @@
     }
 }
 
+// ===== MOBILE MENU BUTTON =====
+.mobile-menu-button {
+    @media screen and (min-width: #{$breakpoint-desktop + 1px}) {
+        display: none !important;
+    }
+    
+    .hamburger-btn {
+        @include dFlex($fd: column, $jc: center, $ai: center, $gap: 4px);
+        width: 48px; // WCAG Touch Target
+        height: 48px; // WCAG Touch Target
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: $apple-radius-medium;
+        transition: $apple-transition-fast;
+        position: relative;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: inherit;
+            opacity: 0;
+            transition: $apple-transition-fast;
+        }
+        
+        &:hover {
+            &::before {
+                opacity: 1;
+            }
+            
+            .hamburger-line {
+                background: $apple-text-primary;
+            }
+        }
+        
+        &:active {
+            transform: scale(0.95);
+        }
+        
+        .hamburger-line {
+            width: 24px;
+            height: 2px;
+            background: $apple-text-secondary;
+            border-radius: 1px;
+            transition: $apple-transition-fast;
+            transform-origin: center;
+            
+            &:nth-child(1) {
+                transform: translateY(0);
+            }
+            
+            &:nth-child(2) {
+                opacity: 1;
+            }
+            
+            &:nth-child(3) {
+                transform: translateY(0);
+            }
+        }
+        
+        &.active {
+            .hamburger-line {
+                background: $apple-primary;
+                
+                &:nth-child(1) {
+                    transform: translateY(6px) rotate(45deg);
+                }
+                
+                &:nth-child(2) {
+                    opacity: 0;
+                }
+                
+                &:nth-child(3) {
+                    transform: translateY(-6px) rotate(-45deg);
+                }
+            }
+        }
+    }
+}
+
 .desktop-nav,
 .desktop-lang {
     @media screen and (max-width: $breakpoint-desktop) {
@@ -289,9 +372,11 @@
                 text-decoration: none;
                 font-family: $apple-font-family;
                 font-weight: $apple-font-weight-medium;
-                font-size: 18px;
+                font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
                 transition: $apple-transition-fast;
                 position: relative;
+                min-height: 48px; // WCAG Touch Target
+                @include dFlex($ai: center);
                 
                 &::before {
                     content: '';
@@ -355,6 +440,12 @@
     .mobile-nav-content {
         transition-duration: 0.01ms;
     }
+    
+    .hamburger-btn {
+        .hamburger-line {
+            transition-duration: 0.01ms;
+        }
+    }
 }
 
 @media (prefers-contrast: high) {
@@ -388,6 +479,19 @@
         }
     }
     
+    .mobile-menu-button .hamburger-btn {
+        background: #333;
+        border: 1px solid #666;
+        
+        .hamburger-line {
+            background: #fff;
+        }
+        
+        &:hover {
+            background: #555;
+        }
+    }
+    
     .mobile-nav-content {
         background: #000;
         border-top: 2px solid #fff;
@@ -408,3 +512,4 @@
         display: none;
     }
 }
+

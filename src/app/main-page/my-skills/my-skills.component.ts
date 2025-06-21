@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import {TranslateModule} from "@ngx-translate/core";
-import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive'
+import { TranslateModule } from "@ngx-translate/core"; // Sicherstellen, dass TranslateModule importiert ist
+import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 import { ScrollAnimateDirective } from '../../Instructions/scroll-animation.directive';
+import { CommonModule } from '@angular/common'; // CommonModule hinzufügen
 
 @Component({
   selector: 'app-my-skills',
   standalone: true,
-  imports: [TranslateModule, ScrollAnimateDirective, ScrollBounceDirective],
+  imports: [TranslateModule, ScrollAnimateDirective, ScrollBounceDirective, CommonModule], // CommonModule hier hinzufügen
   templateUrl: './my-skills.component.html',
   styleUrl: './my-skills.component.scss'
 })
@@ -24,4 +25,6 @@ export class MySkillsComponent {
     {name:'Scrum', url:'scrum'},
     {name:'SQL', url:'sql'},
   ];
-}
+} 
+
+

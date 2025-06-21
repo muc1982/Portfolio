@@ -1,17 +1,15 @@
 @use '../../../style/apple-variables' as *;
 @use 'sass:color';
 
-// ===== DESKTOP SKILLS CONTAINER =====
+// ===== DESKTOP SKILLS CONTAINER - VOLLBREITE =====
 .my-skills-container {
     @include full-width-background();
     min-height: 80vh;
     position: relative;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    border-radius: $apple-radius-xl;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: $apple-shadow-large;
     overflow: hidden;
-    margin: 40px 0;
+    margin: 0; // Keine Abstände zwischen Containern
+    padding: clamp(48px, 8vw, 80px) 0;
 
     &::before {
         content: '';
@@ -26,12 +24,14 @@
     }
 
     h2 {
-        @include h2Title-wcag();
+        // KORRIGIERT: Verwende h2Title() statt h2Title-wcag()
+        @include h2Title();
         margin-bottom: 48px;
-        padding-top: clamp(48px, 8vw, 64px);
+        padding-top: 0;
         position: relative;
         z-index: 2;
         text-align: center;
+        @include unified-content-padding();
     }
 
     .my-skills-content {
@@ -40,8 +40,8 @@
         gap: clamp(40px, 8vw, 64px);
         position: relative;
         z-index: 2;
-        padding-top: clamp(32px, 6vw, 80px);
-        padding-bottom: clamp(32px, 6vw, 80px);
+        max-width: $content-max-width;
+        margin: 0 auto;
 
         .content-left {
             flex: 2;
@@ -106,7 +106,7 @@
                     .skill-text {
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
-                        font-size: 16px; // WCAG minimum
+                        font-size: clamp(16px, 3vw, 18px); // WCAG minimum 16px
                         color: $apple-text-secondary;
                         text-align: center;
                         transition: $apple-transition-fast;
@@ -176,7 +176,7 @@
                         span {
                             font-family: $apple-font-family;
                             font-weight: $apple-font-weight-medium;
-                            font-size: 16px; // WCAG minimum
+                            font-size: clamp(16px, 3vw, 18px); // WCAG minimum 16px
                             color: $apple-text-primary;
                             text-align: center;
                         }
@@ -186,7 +186,7 @@
                 p {
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
-                    font-size: 16px; // WCAG minimum
+                    font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
                     line-height: 1.6;
                     color: $apple-text-secondary;
                     text-align: justify;
@@ -197,17 +197,15 @@
     }
 }
 
-// ===== MOBILE SKILLS CONTAINER =====
+// ===== MOBILE SKILLS CONTAINER - VOLLBREITE =====
 .my-skills-container-mobile {
     @include full-width-background();
     min-height: 70vh;
     position: relative;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    border-radius: $apple-radius-xl;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: $apple-shadow-large;
     overflow: hidden;
-    margin: clamp(16px, 4vw, 24px) 0;
+    margin: 0; // Keine Abstände zwischen Containern
+    padding: clamp(32px, 6vw, 48px) 0;
 
     &::before {
         content: '';
@@ -222,12 +220,14 @@
     }
 
     h2 {
-        @include h2Title-wcag();
+        // KORRIGIERT: Verwende h2Title() statt h2Title-wcag()
+        @include h2Title();
         margin-bottom: $space-lg;
-        padding-top: clamp(32px, 6vw, 48px);
+        padding-top: 0;
         position: relative;
         z-index: 2;
         text-align: center;
+        @include unified-content-padding();
     }
 
     .my-skills-content {
@@ -237,13 +237,28 @@
         gap: $space-lg;
         position: relative;
         z-index: 2;
-        padding-top: $padding-md;
-        padding-bottom: $padding-md;
+        max-width: $content-max-width;
+        margin: 0 auto;
 
         .content-top {
             .reservoir {
-                // KORRIGIERT: Mobile optimiertes Grid
-                @include skills-grid-responsive();
+                // KORRIGIERT: Mobile optimiertes Grid - 2 Spalten auf kleinen Screens, 3 auf größeren
+                display: grid;
+                gap: clamp(16px, 4vw, 20px);
+                
+                // Mobile (bis 479px): 2 Spalten
+                grid-template-columns: repeat(2, 1fr);
+                
+                // Ab 480px: 3 Spalten  
+                @media screen and (min-width: $breakpoint-mobile) {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+                
+                // Sehr kleine Screens (bis 360px): 2 Spalten mit mehr Abstand
+                @media screen and (max-width: 360px) {
+                    gap: clamp(12px, 3vw, 16px);
+                    grid-template-columns: repeat(2, 1fr);
+                }
                 
                 .skill {
                     display: flex;
@@ -258,32 +273,58 @@
                     transition: $apple-transition-fast;
                     aspect-ratio: 1;
                     position: relative;
-                    min-height: 80px; // Ausreichend groß für Touch
-                    min-width: 80px;  // Ausreichend groß für Touch
+                    min-height: 88px; // WCAG Touch Target - größer für mobile
+                    min-width: 88px;  // WCAG Touch Target - größer für mobile
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        inset: -2px;
+                        background: $apple-teal-gradient;
+                        border-radius: $apple-radius-xl;
+                        opacity: 0;
+                        transition: $apple-transition-fast;
+                        z-index: -1;
+                    }
 
                     &:hover {
                         transform: translateY(-2px) scale(1.02);
                         background: rgba(255, 255, 255, 0.08);
                         box-shadow: $apple-shadow-small;
+                        
+                        &::before {
+                            opacity: 0.1;
+                        }
+                        
+                        img {
+                            transform: scale(1.05);
+                            filter: brightness(1.2) saturate(1.1);
+                        }
                     }
 
                     img {
-                        width: clamp(32px, 8vw, 48px); // Größere Icons auf Mobile
-                        height: clamp(32px, 8vw, 48px);
+                        width: clamp(40px, 10vw, 56px); // Größere Icons auf Mobile
+                        height: clamp(40px, 10vw, 56px);
                         object-fit: contain;
                         transition: $apple-transition-fast;
                         filter: brightness(1.1);
                         margin-bottom: 8px;
                     }
                     
+                    // Skill-Text nur auf größeren mobilen Screens anzeigen
                     .skill-text {
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-medium;
-                        font-size: 16px; // WCAG minimum
+                        font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
                         color: $apple-text-secondary;
                         text-align: center;
                         transition: $apple-transition-fast;
                         line-height: 1.3;
+                        
+                        // Auf sehr kleinen Screens verstecken für mehr Platz
+                        @media screen and (max-width: 360px) {
+                            display: none;
+                        }
                     }
                 }
             }
@@ -314,7 +355,7 @@
                 p {
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-regular;
-                    font-size: 16px; // WCAG minimum
+                    font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
                     line-height: 1.6;
                     color: $apple-text-secondary;
                     text-align: justify;
@@ -338,8 +379,8 @@
                             border-radius: $apple-radius-medium;
                             padding: $padding-sm;
                             transition: $apple-transition-fast;
-                            min-height: 60px; // Ausreichend groß für Touch
-                            min-width: 60px;  // Ausreichend groß für Touch
+                            min-height: 72px; // WCAG Touch Target
+                            min-width: 72px;  // WCAG Touch Target
 
                             &:hover {
                                 transform: translateY(-2px);
@@ -347,8 +388,8 @@
                             }
 
                             img {
-                                width: clamp(24px, 6vw, 32px);
-                                height: clamp(24px, 6vw, 32px);
+                                width: clamp(28px, 6vw, 36px);
+                                height: clamp(28px, 6vw, 36px);
                                 object-fit: contain;
                                 filter: brightness(1.2);
                             }
@@ -356,7 +397,7 @@
                             span {
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-medium;
-                                font-size: 16px; // WCAG minimum
+                                font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
                                 color: $apple-text-primary;
                                 text-align: center;
                             }
@@ -370,10 +411,11 @@
                 justify-content: center;
 
                 button {
-                    @include apple-button-wcag();
-                    font-size: 16px; // WCAG minimum
-                    padding: 14px 24px;
-                    min-width: clamp(140px, 35vw, 200px);
+                    @include apple-button-primary();
+                    font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
+                    padding: 16px 24px; // Größere Touch-Targets
+                    min-width: clamp(160px, 40vw, 220px);
+                    min-height: 48px; // WCAG Touch Target
                 }
             }
         }
@@ -397,52 +439,38 @@
 }
 
 // ===== RESPONSIVE HIDE/SHOW =====
-@include mobile-only {
-    .my-skills-container {
+.hide-on-mobile {
+    @media screen and (max-width: $breakpoint-desktop) {
         display: none !important;
-    }
-    
-    .my-skills-container-mobile {
-        display: flex !important;
     }
 }
 
-@include desktop-only {
-    .my-skills-container-mobile {
+.hide-on-desktop {
+    @media screen and (min-width: #{$breakpoint-desktop + 1px}) {
         display: none !important;
-    }
-    
-    .my-skills-container {
-        display: flex !important;
-        flex-direction: column;
     }
 }
 
-// ===== SEHR KLEINE SCREENS (320px) =====
-@media screen and (max-width: 320px) {
+// ===== SEHR KLEINE SCREENS (320px-360px) =====
+@media screen and (max-width: 360px) {
     .my-skills-container-mobile {
-        margin: 8px 0;
+        padding: clamp(24px, 5vw, 32px) 0;
         
         .my-skills-content {
-            padding: 8px 16px;
             gap: 16px;
 
             .content-top .reservoir {
-                gap: 8px;
+                gap: 12px;
 
                 .skill {
-                    padding: 12px;
+                    padding: 16px 8px;
                     border-radius: $apple-radius-medium;
-                    min-height: 70px;
-                    min-width: 70px;
+                    min-height: 80px;
+                    min-width: 80px;
 
                     img {
-                        width: 28px;
-                        height: 28px;
-                    }
-                    
-                    .skill-text {
-                        font-size: 16px; // WCAG minimum gehalten
+                        width: 36px;
+                        height: 36px;
                     }
                 }
             }
@@ -465,14 +493,14 @@
                         gap: 8px;
 
                         >div {
-                            padding: 8px;
-                            min-height: 50px;
-                            min-width: 50px;
+                            padding: 10px 8px;
+                            min-height: 64px;
+                            min-width: 64px;
                             border-radius: $apple-radius-small;
 
                             img {
-                                width: 20px;
-                                height: 20px;
+                                width: 24px;
+                                height: 24px;
                             }
 
                             span {
@@ -484,9 +512,8 @@
 
                 .talk-button button {
                     font-size: 16px; // WCAG minimum
-                    padding: 12px 20px;
-                    min-width: 120px;
-                    border-radius: $apple-radius-medium;
+                    padding: 14px 20px;
+                    min-width: 140px;
                 }
             }
         }
@@ -500,17 +527,13 @@
         &::before {
             animation: none;
         }
-
-        .skill {
-            &:hover {
-                transform: none;
-            }
+        
+        .skill:hover {
+            transform: none;
         }
-
-        .current-learning .skills>div {
-            &:hover {
-                transform: none;
-            }
+        
+        .current-learning .skills > div:hover {
+            transform: none;
         }
     }
 }
@@ -519,21 +542,62 @@
     .my-skills-container,
     .my-skills-container-mobile {
         background: #000;
-        border: 2px solid #fff;
-
+        border-color: #333;
+        
         .skill {
             background: #111;
-            border: 2px solid #333;
+            border-color: #333;
+            color: #fff;
+            
+            &:hover {
+                background: #222;
+                border-color: #555;
+            }
+            
+            .skill-text {
+                color: #fff;
+            }
         }
-
+        
         .current-learning {
             background: #111;
-            border: 2px solid #333;
-        }
-
-        .content-bottom-content {
-            background: #111;
-            border: 2px solid #333;
+            border-color: #333;
+            
+            > span {
+                color: #66b3ff;
+            }
+            
+            p {
+                color: #ccc;
+            }
+            
+            .skills > div {
+                background: #222;
+                border-color: #555;
+                
+                &:hover {
+                    background: #333;
+                }
+                
+                span {
+                    color: #fff;
+                }
+            }
         }
     }
 }
+
+@media print {
+    .my-skills-container,
+    .my-skills-container-mobile {
+        &::before {
+            display: none;
+        }
+        
+        .skill:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+}
+

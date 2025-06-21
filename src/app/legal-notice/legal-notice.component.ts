@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FooterComponent } from '../shared/footer/footer.component';
-import { TranslateService } from '@ngx-translate/core';
-import { TranslateModule } from "@ngx-translate/core";
-import { Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
+import { TranslateService, TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
+import { Router, NavigationEnd, RouterLink } from '@angular/router'; // Import RouterLink
+import { Location, CommonModule } from '@angular/common'; // Import CommonModule
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.component';
@@ -11,7 +10,7 @@ import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.com
 @Component({
   selector: 'app-legal-notice',
   standalone: true,
-  imports: [FooterComponent, TranslateModule, LangSwitcherComponent],
+  imports: [FooterComponent, TranslateModule, LangSwitcherComponent, CommonModule, RouterLink], // Fügen Sie CommonModule, RouterLink und TranslateModule hinzu
   templateUrl: './legal-notice.component.html',
   styleUrl: './legal-notice.component.scss'
 })
@@ -55,4 +54,5 @@ export class LegalNoticeComponent implements OnInit, OnDestroy {
       this.router.navigate(['/']);
     }
   }
-}
+} 
+

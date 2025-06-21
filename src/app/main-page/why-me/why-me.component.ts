@@ -12,7 +12,7 @@ interface SlideContent {
 @Component({
   selector: 'app-why-me',
   standalone: true,
-  imports: [ScrollBounceDirective, TranslateModule, CommonModule],
+  imports: [ScrollBounceDirective, TranslateModule, CommonModule], // Fügen Sie TranslateModule und CommonModule hinzu
   templateUrl: './why-me.component.html',
   styleUrl: './why-me.component.scss'
 })
@@ -100,10 +100,6 @@ export class WhyMeComponent implements OnInit, OnDestroy {
     // Nächste Texte vorbereiten
     this.loadNextTexts();
 
-    // Transition starten
-    this.isTransitioning = true;
-    this.showCurrentText = false;
-
     // Nach halber Transition-Zeit die Texte wechseln
     setTimeout(() => {
       this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slideContents.length;
@@ -137,3 +133,4 @@ export class WhyMeComponent implements OnInit, OnDestroy {
     return Array.from({ length: this.slideContents.length }, (_, i) => i);
   }
 }
+

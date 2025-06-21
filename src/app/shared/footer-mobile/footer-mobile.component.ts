@@ -81,20 +81,21 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
         name: 'github',
         url: 'https://github.com/muc1982',
         icon: 'github.png',
-        ariaLabel: 'GitHub Profile'
+        ariaLabel: 'GitHub Profile - View my code repositories'
       },
       {
         name: 'email',
         url: 'mailto:info@sun-dev.de',
         icon: 'mail.png',
-        ariaLabel: 'Send Email'
-      },
-      {
-        name: 'linkedin',
-        url: 'https://www.linkedin.com/',
-        icon: 'linkedin.png',
-        ariaLabel: 'LinkedIn Profile'
+        ariaLabel: 'Send Email - Contact me directly'
       }
+      // ENTFERNT: LinkedIn-Link da kein aktives Profil vorhanden
+      // {
+      //   name: 'linkedin',
+      //   url: 'https://www.linkedin.com/',
+      //   icon: 'linkedin.png',
+      //   ariaLabel: 'LinkedIn Profile'
+      // }
     ],
     copyrightText: '© Yasin Sun',
     currentYear: new Date().getFullYear()
@@ -204,7 +205,19 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
   }
 
   onSocialLinkClick(link: SocialLink): void {
+    // Tracking für Analytics (optional)
     console.log(`Clicked on ${link.name}`);
+    
+    // Zusätzliche Validierung für externe Links
+    if (link.name === 'github' && link.url.includes('github.com')) {
+      // GitHub-Link ist valide
+      return;
+    }
+    
+    if (link.name === 'email' && link.url.startsWith('mailto:')) {
+      // Email-Link ist valide
+      return;
+    }
   }
 
   onLogoClick(): void {
@@ -238,3 +251,4 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     return item.name;
   }
 }
+

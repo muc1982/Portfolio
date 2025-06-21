@@ -1,9 +1,12 @@
 <div class="legal-notice-container">
     <div class="custom-header">
-        <div class="go-back-button">
-            <a (click)="goBack()" class="apple-back-btn">
-                <div class="back-arrow">‹</div>
-                <span class="back-text">{{ 'header.goback' | translate }}</span>
+        <div class="logo-section">
+            <a [routerLink]="'/'" class="apple-logo-btn">
+                <div class="logo-img"></div>
+                <div class="logo-text">
+                    <div class="logo-name">Yasin Sun</div>
+                    <div class="logo-position">Developer</div>
+                </div>
             </a>
         </div>
 
@@ -64,3 +67,4 @@
 
     <app-footer></app-footer>
 </div>
+
