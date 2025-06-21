@@ -81,6 +81,11 @@
                             </div>
                         </div>
                     </div>
+                    } @else if (isSending) {
+                    <div class="sending-message">
+                        <div class="sending-spinner"></div>
+                        <span>{{ 'contact.sending' | translate }}</span>
+                    </div>
                     } @else {
                     <button [disabled]="!isChecked || !isFormValid()" type="submit" class="pointer"
                         [attr.aria-label]="'contact.send' | translate">

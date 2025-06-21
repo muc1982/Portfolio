@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common"
 import { Component, inject, Input } from "@angular/core"
 import { TranslateModule } from "@ngx-translate/core"
-import { RouterLink, RouterLinkActive } from "@angular/router"
+import { Router } from "@angular/router"
 import { FormsModule, type NgForm } from "@angular/forms"
 import { HttpClient } from "@angular/common/http"
 
@@ -14,7 +14,7 @@ interface Contact {
 @Component({
   selector: "app-contact-me",
   standalone: true,
-  imports: [TranslateModule, CommonModule, RouterLink, RouterLinkActive, FormsModule],
+  imports: [TranslateModule, CommonModule, FormsModule],
   templateUrl: "./contact-me.component.html",
   styleUrl: "./contact-me.component.scss",
 })
@@ -28,6 +28,11 @@ export class ContactMeComponent {
   msgValid = true
   isShowingSuccessMsg = false
   isShowingDetailedSuccess = false
+  isSending = false
+
+  nameBlurred = false
+  emailBlurred = false
+  msgBlurred = false
 
   readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/
   readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -52,11 +57,29 @@ export class ContactMeComponent {
   }
 
   http = inject(HttpClient)
+  router = inject(Router)
 
-  contact: Contact = { name: "", email: "", msg: "" }
+  // NULL-SAFE Initialisierung
+  contact: Contact = {
+    name: "",
+    email: "",
+    msg: "",
+  }
 
   clickCb() {
     this.isChecked = !this.isChecked
+  }
+
+  // Privacy Policy öffnen ohne Router
+  openPrivacyPolicy(event: Event) {
+    event.preventDefault()
+    // Versuche Router, falls verfügbar
+    try {
+      this.router.navigate(["/private-policy"])
+    } catch (error) {
+      // Fallback: Öffne in neuem Tab
+      window.open("/private-policy.html", "_blank")
+    }
   }
 
   onSumbmit(myForm: NgForm) {
@@ -67,6 +90,10 @@ export class ContactMeComponent {
   }
 
   private validateAndPrepareForm(myForm: NgForm): boolean {
+    this.nameBlurred = true
+    this.emailBlurred = true
+    this.msgBlurred = true
+
     const isValid = this.validateAllFields()
     if (!isValid) {
       this.markFieldsAsTouched(myForm)
@@ -76,13 +103,23 @@ export class ContactMeComponent {
   }
 
   private sendFormData(myForm: NgForm): void {
+    this.isSending = true
+    console.log("🖥️ Desktop: Starte Mail-Versand...", this.contact)
+
     this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options).subscribe({
       next: (response: any) => {
-        console.log("E-Mail erfolgreich versendet via Formspree:", response)
+        console.log("🖥️ ✅ Desktop: E-Mail erfolgreich versendet:", response)
+        this.isSending = false
         this.reset(myForm)
       },
-      error: (error) => this.handleEmailError(error),
-      complete: () => console.log("E-Mail-Versand abgeschlossen"),
+      error: (error) => {
+        console.error("🖥️ ❌ Desktop: Fehler beim Mail-Versand:", error)
+        this.isSending = false
+        this.handleEmailError(error)
+      },
+      complete: () => {
+        console.log("🖥️ 📧 Desktop: Mail-Versand-Prozess abgeschlossen")
+      },
     })
   }
 
@@ -95,23 +132,35 @@ export class ContactMeComponent {
   }
 
   private validateName(): void {
-    const name = this.contact.name.trim()
+    const name = (this.contact.name || "").trim()
     this.nameValid = this.namePattern.test(name)
-    if (!this.nameValid) {
-      this.contact.name = ""
-    }
   }
 
   private validateEmail(): void {
-    const email = this.contact.email.trim()
+    const email = (this.contact.email || "").trim()
+
     if (email.length === 0) {
       this.emailValid = false
       this.emailInvalidMsg = "contact.emailrequired"
-    } else if (!this.emailPattern.test(email)) {
+      return
+    }
+
+    // SPEZIELLE KOMMA-PRÜFUNG
+    if (email.includes(",de") || email.includes(",com") || email.includes(",net") || email.includes(",org")) {
       this.emailValid = false
-      if (email.includes(",")) {
-        this.emailInvalidMsg = "contact.emailcommaerror"
-      } else if (!email.includes("@")) {
+      this.emailInvalidMsg = "contact.emailcommaerror"
+      return
+    }
+
+    if (email.includes(",")) {
+      this.emailValid = false
+      this.emailInvalidMsg = "contact.emailcommaerror"
+      return
+    }
+
+    if (!this.emailPattern.test(email)) {
+      this.emailValid = false
+      if (!email.includes("@")) {
         this.emailInvalidMsg = "contact.emailmissingat"
       } else if (!email.includes(".")) {
         this.emailInvalidMsg = "contact.emailmissingdot"
@@ -120,17 +169,15 @@ export class ContactMeComponent {
       } else {
         this.emailInvalidMsg = "contact.emailinvalid"
       }
-    } else {
-      this.emailValid = true
+      return
     }
+
+    this.emailValid = true
   }
 
   private validateMessage(): void {
-    const msg = this.contact.msg.trim()
+    const msg = (this.contact.msg || "").trim()
     this.msgValid = msg.length >= this.msgMinLength && msg.length <= this.msgMaxLength
-    if (!this.msgValid) {
-      this.contact.msg = ""
-    }
   }
 
   private markFieldsAsTouched(form: NgForm): void {
@@ -147,7 +194,9 @@ export class ContactMeComponent {
   sendEmailFallback() {
     const subject = encodeURIComponent("Portfolio Kontakt")
     const body = encodeURIComponent(
-      `Name: ${this.contact.name}\n` + `E-Mail: ${this.contact.email}\n\n` + `Nachricht:\n${this.contact.msg}`,
+      `Name: ${this.contact.name || ""}\n` +
+        `E-Mail: ${this.contact.email || ""}\n\n` +
+        `Nachricht:\n${this.contact.msg || ""}`,
     )
 
     const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`
@@ -155,40 +204,72 @@ export class ContactMeComponent {
   }
 
   reset(myForm: NgForm) {
-    this.clickCb()
-    this.contact.name = ""
-    this.contact.email = ""
-    this.contact.msg = ""
-    this.isShowingDetailedSuccess = true
+    console.log("🖥️ 🔄 Desktop: Reset wird ausgeführt...")
+
+    if (this.isChecked) {
+      this.clickCb()
+    }
+
+    this.resetContactData()
+    this.resetValidationStates()
     myForm.resetForm()
+
+    // Erfolgsmeldung anzeigen
+    this.isShowingDetailedSuccess = true
+    console.log("🖥️ ✅ Desktop: Erfolgsmeldung wird angezeigt")
 
     setTimeout(() => {
       this.isShowingDetailedSuccess = false
+      console.log("🖥️ ✅ Desktop: Erfolgsmeldung ausgeblendet")
     }, 5000)
   }
 
-  // Diese Methoden werden vom HTML Template aufgerufen (onBlur Events):
-  onNameChange() {
-    if (this.contact.name.length > 0) {
-      this.validateName()
-    }
+  private resetContactData(): void {
+    this.contact = { name: "", email: "", msg: "" }
   }
 
-  onEmailChange() {
-    if (this.contact.email.length > 0) {
-      this.validateEmail()
-    }
+  private resetValidationStates(): void {
+    this.nameBlurred = false
+    this.emailBlurred = false
+    this.msgBlurred = false
+    this.nameValid = true
+    this.emailValid = true
+    this.msgValid = true
   }
 
-  onMessageChange() {
-    if (this.contact.msg.length > 0) {
-      this.validateMessage()
-    }
+  onNameBlur() {
+    this.nameBlurred = true
+    this.validateName()
+  }
+
+  onEmailBlur() {
+    this.emailBlurred = true
+    this.validateEmail()
+  }
+
+  onMessageBlur() {
+    this.msgBlurred = true
+    this.validateMessage()
+  }
+
+  onNameFocus(): void {
+    this.nameValid = true
+  }
+
+  onEmailFocus(): void {
+    this.emailValid = true
+  }
+
+  onMessageFocus(): void {
+    this.msgValid = true
   }
 
   isFormValid(): boolean {
     return (
-      this.contact.name.length > 0 && this.contact.email.length > 0 && this.contact.msg.length > 0 && this.isChecked
+      (this.contact.name || "").length > 0 &&
+      (this.contact.email || "").length > 0 &&
+      (this.contact.msg || "").length > 0 &&
+      this.isChecked
     )
   }
 }

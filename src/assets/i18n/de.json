@@ -95,5 +95,6 @@
   "header": {
     "goback": "Zurück"
   },
-  "privatepolicy": "Datenschutzerklärung"
+  "privatepolicy": "Datenschutzerklärung",
+  "legalnotice": "Impressum"
 }

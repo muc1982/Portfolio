@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common"
 import { Component, inject, Input } from "@angular/core"
 import { TranslateModule } from "@ngx-translate/core"
-import { RouterLink, RouterLinkActive } from "@angular/router"
+import { RouterLink, RouterLinkActive, Router } from "@angular/router"
 import { FormsModule, type NgForm } from "@angular/forms"
 import { HttpClient } from "@angular/common/http"
 
@@ -27,6 +27,7 @@ export class ContactMeMobileComponent {
   msgValid = true
   isShowingSuccessMsg = false
   isShowingDetailedSuccess = false
+  isSending = false
   nameBlurred = false
   emailBlurred = false
   msgBlurred = false
@@ -52,13 +53,29 @@ export class ContactMeMobileComponent {
   }
 
   http = inject(HttpClient)
+  router = inject(Router)
 
-  contact: Contact = { name: "", email: "", msg: "" }
+  // NULL-SAFE Initialisierung
+  contact: Contact = {
+    name: "",
+    email: "",
+    msg: "",
+  }
 
   constructor() {}
 
   clickCb() {
     this.isChecked = !this.isChecked
+  }
+
+  // Privacy Policy öffnen ohne Router
+  openPrivacyPolicy(event: Event) {
+    event.preventDefault()
+    try {
+      this.router.navigate(["/private-policy"])
+    } catch (error) {
+      window.open("/private-policy.html", "_blank")
+    }
   }
 
   onSumbmit(myForm: NgForm) {
@@ -68,17 +85,22 @@ export class ContactMeMobileComponent {
   }
 
   private sendFormData(myForm: NgForm): void {
+    this.isSending = true
+    console.log("📱 Mobile: Starte Mail-Versand...", this.contact)
+
     this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options).subscribe({
       next: (response: any) => {
-        console.log("E-Mail erfolgreich versendet via Formspree:", response)
+        console.log("📱 ✅ Mobile: E-Mail erfolgreich versendet:", response)
+        this.isSending = false
         this.reset(myForm)
       },
       error: (error) => {
-        console.error("Fehler beim Versenden der E-Mail:", error)
+        console.error("📱 ❌ Mobile: Fehler beim Mail-Versand:", error)
+        this.isSending = false
         this.sendEmailFallback()
       },
       complete: () => {
-        console.log("E-Mail-Versand abgeschlossen")
+        console.log("📱 📧 Mobile: Mail-Versand-Prozess abgeschlossen")
       },
     })
   }
@@ -98,7 +120,9 @@ export class ContactMeMobileComponent {
   sendEmailFallback() {
     const subject = encodeURIComponent("Portfolio Kontakt")
     const body = encodeURIComponent(
-      `Name: ${this.contact.name}\n` + `E-Mail: ${this.contact.email}\n\n` + `Nachricht:\n${this.contact.msg}`,
+      `Name: ${this.contact.name || ""}\n` +
+        `E-Mail: ${this.contact.email || ""}\n\n` +
+        `Nachricht:\n${this.contact.msg || ""}`,
     )
 
     const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`
@@ -106,18 +130,27 @@ export class ContactMeMobileComponent {
   }
 
   reset(myForm: NgForm) {
+    console.log("📱 🔄 Mobile: Reset wird ausgeführt...")
+
     if (this.isChecked) {
       this.clickCb()
     }
+
     this.resetContactData()
     this.resetValidationStates()
-    this.showSuccessMessage()
+
+    // Erfolgsmeldung anzeigen
+    this.isShowingDetailedSuccess = true
+    console.log("📱 ✅ Mobile: Erfolgsmeldung wird angezeigt")
+
+    setTimeout(() => {
+      this.isShowingDetailedSuccess = false
+      console.log("📱 ✅ Mobile: Erfolgsmeldung ausgeblendet")
+    }, 5000)
   }
 
   private resetContactData(): void {
-    this.contact.name = ""
-    this.contact.email = ""
-    this.contact.msg = ""
+    this.contact = { name: "", email: "", msg: "" }
   }
 
   private resetValidationStates(): void {
@@ -129,14 +162,6 @@ export class ContactMeMobileComponent {
     this.msgValid = true
   }
 
-  private showSuccessMessage(): void {
-    this.isShowingDetailedSuccess = true
-    setTimeout(() => {
-      this.isShowingDetailedSuccess = false
-    }, 5000)
-  }
-
-  // Diese Methoden waren fehlend und werden vom HTML Template aufgerufen:
   onNameBlur(): void {
     this.validateName()
   }
@@ -151,11 +176,8 @@ export class ContactMeMobileComponent {
 
   validateName(): void {
     this.nameBlurred = true
-    const name = this.contact.name.trim()
+    const name = (this.contact.name || "").trim()
     this.nameValid = this.namePattern.test(name)
-    if (!this.nameValid) {
-      this.contact.name = ""
-    }
   }
 
   validateEmail(): void {
@@ -165,25 +187,35 @@ export class ContactMeMobileComponent {
 
   validateMessage(): void {
     this.msgBlurred = true
-    const msg = this.contact.msg.trim()
+    const msg = (this.contact.msg || "").trim()
     this.msgValid = msg.length >= 10 && msg.length <= 500
-    if (!this.msgValid) {
-      this.contact.msg = ""
-    }
   }
 
   private checkMail(): void {
-    const email = this.contact.email.trim()
+    const email = (this.contact.email || "").trim()
 
     if (email.length <= 0) {
       this.emailValid = false
       this.emailInvalidMsg = "contact.emailrequired"
-      this.contact.email = ""
-    } else if (!this.emailPattern.test(email)) {
+      return
+    }
+
+    // IDENTISCHE KOMMA-PRÜFUNG wie Desktop
+    if (email.includes(",de") || email.includes(",com") || email.includes(",net") || email.includes(",org")) {
       this.emailValid = false
-      if (email.includes(",")) {
-        this.emailInvalidMsg = "contact.emailcommaerror"
-      } else if (!email.includes("@")) {
+      this.emailInvalidMsg = "contact.emailcommaerror"
+      return
+    }
+
+    if (email.includes(",")) {
+      this.emailValid = false
+      this.emailInvalidMsg = "contact.emailcommaerror"
+      return
+    }
+
+    if (!this.emailPattern.test(email)) {
+      this.emailValid = false
+      if (!email.includes("@")) {
         this.emailInvalidMsg = "contact.emailmissingat"
       } else if (!email.includes(".")) {
         this.emailInvalidMsg = "contact.emailmissingdot"
@@ -192,10 +224,10 @@ export class ContactMeMobileComponent {
       } else {
         this.emailInvalidMsg = "contact.emailinvalid"
       }
-      this.contact.email = ""
-    } else {
-      this.emailValid = true
+      return
     }
+
+    this.emailValid = true
   }
 
   onNameFocus(): void {
@@ -212,9 +244,9 @@ export class ContactMeMobileComponent {
 
   isFormValid(): boolean {
     return (
-      this.contact.name.length > 0 &&
-      this.contact.email.length > 0 &&
-      this.contact.msg.length > 0 &&
+      (this.contact.name || "").length > 0 &&
+      (this.contact.email || "").length > 0 &&
+      (this.contact.msg || "").length > 0 &&
       this.nameValid &&
       this.emailValid &&
       this.msgValid

@@ -56,7 +56,6 @@
                     @include apple-glassmorphism-medium();
                     @include mobile-card-padding();
                     transition: $apple-transition-fast;
-                    cursor: pointer;
                     position: relative;
                     @include touch-target();
                     aspect-ratio: 1;

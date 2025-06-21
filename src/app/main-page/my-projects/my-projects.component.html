@@ -11,10 +11,6 @@
                     <span>{{index + 1}}. {{ project.name }}</span>
                 </div>
                 }
-                <div class="pointer" (click)="switchProject(projects.length)"
-                    [class.active]="currentTab == projects.length">
-                    <span>{{projects.length + 1}}. DA Bubble</span>
-                </div>
             </nav>
 
             @for (project of projects; let index = $index; track $index) {
@@ -76,79 +72,6 @@
             </div>
             }
 
-            <!-- DA Bubble Project mit neuen Inhalten -->
-            <div class="project" *ngIf="currentTab == projects.length">
-                <div class="project-left" #animatedEl4>
-                    <div class="project-about tab-li">
-                        <img src="assets/img/ellipse-small-blue.png" alt="">
-                        <div class="right-of-logo">
-                            <div>
-                                <h4>{{"project.about" | translate}}</h4>
-                                <span class="duration">
-                                    <span>{{"project.duration" | translate}}</span>: 6
-                                    <span>{{"project.weeks" | translate}}</span>
-                                </span>
-                            </div>
-                            <p>{{'project.dababble.about' | translate}}</p>
-                        </div>
-                    </div>
-                    <div class="project-work-process tab-li">
-                        <img src="assets/img/ellipse-small-blue.png" alt="">
-                        <div class="right-of-logo">
-                            <div>
-                                <h4><span class="process-emoji"></span> {{"project.workprocess" | translate}}</h4>
-                            </div>
-                            <p>Wir arbeiteten agil in einem vierwöchigen Sprint-Modell mit klarer Rollenverteilung. Über
-                                ein gemeinsames Kanban-Board wurden Aufgaben geplant, koordiniert und regelmäßig in
-                                Dailys besprochen. Der Fokus lag auf kontinuierlicher Entwicklung, Testing und
-                                Feedback-Integration.</p>
-                        </div>
-                    </div>
-                    <div class="project-experience tab-li">
-                        <img src="assets/img/ellipse-small-blue.png" alt="">
-                        <div class="right-of-logo">
-                            <div>
-                                <h4><span class="experience-emoji"></span> {{"project.workexperience" | translate}}
-                                </h4>
-                            </div>
-                            <p>Das Projekt bot uns praxisnahe Teamarbeit mit modernen Tools wie Angular und Firebase.
-                                Wir vertieften unser technisches Verständnis, verbesserten unsere Kommunikation im
-                                Entwicklerteam und sammelten wertvolle Erfahrung in agiler Softwareentwicklung.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-right">
-                    <h5>Technologies</h5>
-                    <div class="technologies" #animatedEl1>
-                        <div class="tech-logo">
-                            <img src="assets/img/pro-typescript.png" alt="TypeScript">
-                        </div>
-                        <div class="tech-logo">
-                            <img src="assets/img/pro-html.png" alt="HTML">
-                        </div>
-                        <div class="tech-logo">
-                            <img src="assets/img/pro-css.png" alt="CSS">
-                        </div>
-                        <div class="tech-logo">
-                            <img src="assets/img/pro-firebase.png" alt="Firebase">
-                        </div>
-                        <div class="tech-logo">
-                            <img src="assets/img/pro-rxjs.png" alt="RxJS">
-                        </div>
-                    </div>
-                    <div class="project-img coming-soon-container" #animatedEl2>
-                        <div class="coming-soon-text-overlay">
-                            <div class="coming-soon-badge">
-                                <span class="coming-soon-emoji"></span>
-                                <span class="coming-soon-label">Bald verfügbar</span>
-                            </div>
-                            <div class="coming-soon-subtitle"></div>
-                        </div>
-                        <img src="assets/img/comingsoon.png" alt="DA Bubble">
-                    </div>
-                </div>
-            </div>
-
             <!-- Team Player Section mit Apple-Style Animationen -->
             <div class="team-player">
                 <div class="team-player-header">
@@ -178,10 +101,8 @@
                                     <div class="player-name">Robert Greulich</div>
                                     <div class="player-project">
                                         <span>{{ 'player.project' | translate}} </span>
-                                        <span class="project-link pointer" (click)="toProject('join')">
+                                        <span class="project-link pointer"></span>
                                             <span class="link-text">Join</span>
-                                            <span class="link-arrow">→</span>
-                                        </span>
                                     </div>
                                     <div class="player-reference">
                                         <div class="quote-mark">"</div>
@@ -202,10 +123,8 @@
                                     <div class="player-name">Steven Rudko</div>
                                     <div class="player-project">
                                         <span>{{ 'player.project' | translate}} </span>
-                                        <span class="project-link pointer" (click)="toProject('join')">
-                                            <span class="link-text">Join</span>
-                                            <span class="link-arrow">→</span>
-                                        </span>
+                                        <span class="project-link pointer"></span>
+                                        <span class="link-text">Join</span>
                                     </div>
                                     <div class="player-reference">
                                         <div class="quote-mark">"</div>
@@ -226,10 +145,7 @@
                                     <div class="player-name">Felix Naturstein</div>
                                     <div class="player-project">
                                         <span>{{ 'player.project' | translate}} </span>
-                                        <span class="project-link pointer" (click)="toProject('pollo')">
-                                            <span class="link-text">El Pollo Loco</span>
-                                            <span class="link-arrow">→</span>
-                                        </span>
+                                        <span class="link-text">El Pollo Loco</span>
                                     </div>
                                     <div class="player-reference">
                                         <div class="quote-mark">"</div>
