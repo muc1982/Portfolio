@@ -8,39 +8,43 @@
     right: 0;
     z-index: 1000;
     transition: $apple-transition-medium;
-    height: 104px;
+    height: $nav-height-desktop;
+    width: 100%;
     
     &.scrolled {
         @include apple-nav-glass();
         box-shadow: $apple-shadow-small;
     }
     
-    @media screen and (max-width: 900px) {
-        height: 88px;
+    @media screen and (max-width: $breakpoint-desktop) {
+        height: $nav-height-tablet;
     }
     
-    @media screen and (max-width: 600px) {
-        height: 80px;
-    }
-    
-    @media screen and (max-width: 480px) {
-        height: 76px;
+    @media screen and (max-width: $breakpoint-mobile) {
+        height: $nav-height-mobile;
     }
     
     .nav {
         width: 100%;
-        max-width: 1920px;
+        max-width: $container-max-width;
         margin: 0 auto;
         position: relative;
         
         .content {
-            height: 104px;
-            @include standardPadding();
+            height: $nav-height-desktop;
+            @include unified-content-padding();
             @include dFlex($jc: space-between, $ai: center);
             background: transparent;
             transition: $apple-transition-medium;
             
-            // Alle bestehenden Styles bleiben gleich...
+            @media screen and (max-width: $breakpoint-desktop) {
+                height: $nav-height-tablet;
+            }
+            
+            @media screen and (max-width: $breakpoint-mobile) {
+                height: $nav-height-mobile;
+            }
+            
             .logo {
                 @include dFlex($fd: column, $jc: center, $ai: center);
                 transition: $apple-transition-medium;
@@ -88,6 +92,11 @@
                     @include apple-logo;
                     transition: $apple-transition-fast;
                     margin-bottom: 2px;
+                    
+                    @media screen and (max-width: $breakpoint-mobile) {
+                        width: 44px;
+                        height: 28px;
+                    }
                 }
                 
                 .logo-name {
@@ -97,6 +106,10 @@
                     color: $apple-text-primary;
                     letter-spacing: 0.5px;
                     transition: $apple-transition-fast;
+                    
+                    @media screen and (max-width: $breakpoint-mobile) {
+                        font-size: 13px;
+                    }
                 }
                 
                 .logo-position {
@@ -106,6 +119,10 @@
                     color: $apple-text-secondary;
                     letter-spacing: 0.3px;
                     transition: $apple-transition-fast;
+                    
+                    @media screen and (max-width: $breakpoint-mobile) {
+                        font-size: 9px;
+                    }
                 }
             }
             
@@ -200,7 +217,7 @@
 
 .desktop-nav,
 .desktop-lang {
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: $breakpoint-desktop) {
         display: none !important;
     }
 }
@@ -224,14 +241,14 @@
         visibility: visible;
     }
     
-    @media screen and (min-width: 901px) {
+    @media screen and (min-width: #{$breakpoint-desktop + 1px}) {
         display: none !important;
     }
 }
 
 .mobile-nav-content {
     position: absolute;
-    top: 104px; // KORRIGIERT: Konsistent mit Desktop
+    top: $nav-height-desktop;
     left: 0;
     right: 0;
     background: $apple-bg-secondary;
@@ -239,6 +256,14 @@
     @include apple-nav-glass();
     transform: translateY(-100%);
     transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    
+    @media screen and (max-width: $breakpoint-desktop) {
+        top: $nav-height-tablet;
+    }
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        top: $nav-height-mobile;
+    }
     
     .mobile-nav-overlay.open & {
         transform: translateY(0);
@@ -258,7 +283,8 @@
             
             a {
                 display: block;
-                padding: 16px 24px;
+                padding: 16px;
+                @include unified-content-padding();
                 color: $apple-text-secondary;
                 text-decoration: none;
                 font-family: $apple-font-family;
@@ -300,7 +326,8 @@
             }
             
             &.mobile-lang-item {
-                padding: 16px 24px;
+                padding: 16px;
+                @include unified-content-padding();
                 @include dFlex($jc: center);
                 
                 app-lang-switcher {
@@ -312,118 +339,72 @@
     }
 }
 
-// KORRIGIERTE Responsive Breakpoints für Navigation
-@media screen and (max-width: 900px) {
+// ===== ACCESSIBILITY =====
+@media (prefers-reduced-motion: reduce) {
     .nav-wrapper {
-        height: 88px; // KORRIGIERT: Proportional reduziert statt drastischer Sprung
+        .logo:hover {
+            transform: none;
+        }
         
+        .items li a span:hover {
+            transform: none;
+        }
+    }
+    
+    .mobile-nav-overlay,
+    .mobile-nav-content {
+        transition-duration: 0.01ms;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .nav-wrapper {
         .nav .content {
-            height: 88px;
-            @include standardPaddingMobile();
-            
             .logo {
-                .logo-img {
-                    width: 44px; // KORRIGIERT: Proportional skaliert
-                    height: 28px;
-                }
-                
-                .logo-name {
-                    font-size: 14px;
-                }
-                
+                .logo-name,
                 .logo-position {
-                    font-size: 10px;
-                }
-            }
-            
-            .items {
-                display: none;
-            }
-        }
-    }
-    
-    .mobile-nav-content {
-        top: 88px; // KORRIGIERT: Angepasst an neue Header-Höhe
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .nav-wrapper .nav .content {
-        height: 80px;
-        
-        .mobile-menu-toggle {
-            width: 26px;
-            height: 20px;
-            
-            span {
-                height: 2px;
-            }
-            
-            &.open {
-                span:nth-child(1) {
-                    transform: translateY(9px) rotate(45deg);
+                    color: #fff;
                 }
                 
-                span:nth-child(3) {
-                    transform: translateY(-9px) rotate(-45deg);
+                &:hover {
+                    background: #333;
+                }
+            }
+            
+            .items li a span {
+                color: #fff;
+                border: 1px solid #333;
+                
+                &:hover {
+                    background: #333;
+                    border-color: #666;
+                }
+                
+                &.active {
+                    background: $apple-primary;
+                    border-color: $apple-primary;
                 }
             }
         }
     }
     
     .mobile-nav-content {
-        top: 80px;
+        background: #000;
+        border-top: 2px solid #fff;
         
-        .mobile-nav-items {
-            padding: 16px 0;
+        .mobile-nav-items li a {
+            color: #fff;
+            border-bottom: 1px solid #333;
             
-            li a {
-                padding: 14px 20px;
-                font-size: 16px;
-            }
-            
-            li.mobile-lang-item {
-                padding: 14px 20px;
+            &:hover {
+                background: #333;
             }
         }
     }
 }
 
-@media screen and (max-width: 480px) {
-    .nav-wrapper .nav .content {
-        height: 76px; // KORRIGIERT: Konsistent mit Landing Page Mobile
-        
-        .mobile-menu-toggle {
-            width: 24px;
-            height: 18px;
-        }
-        
-        .logo {
-            .logo-img {
-                width: 40px;
-                height: 25px;
-            }
-            
-            .logo-name {
-                font-size: 13px;
-            }
-            
-            .logo-position {
-                font-size: 9px;
-            }
-        }
-    }
-    
-    .mobile-nav-content {
-        top: 76px; // KORRIGIERT: Konsistent
-        
-        .mobile-nav-items {
-            padding: 12px 0;
-            
-            li a {
-                padding: 12px 16px;
-                font-size: 15px;
-            }
-        }
+@media print {
+    .nav-wrapper {
+        display: none;
     }
 }

@@ -43,59 +43,94 @@ body {
     @include unified-content-padding();
 }
 
-// ===== SECTION WRAPPER - VOLLBREITE HINTERGRÜNDE =====
-.landing-page-container,
-.why-me-container,
-.my-skills-container,
-.my-projects-container,
-.contact-container {
+// ===== VOLLBREITE SECTION WRAPPER =====
+.normal-container {
     @include full-width-background();
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
     position: relative;
-    
-    // Content innerhalb der Section
-    > * {
-        @include unified-content-padding();
-    }
+    box-sizing: border-box;
 }
 
-// ===== SCROLL-ANKER MIT OFFSET =====
+// ===== SCROLL-ANKER MIT KORRIGIERTEM OFFSET =====
 #landing-page {
-    @include scroll-offset(0);
+    scroll-margin-top: 0;
 }
 
 #why-me {
-    @include scroll-offset();
+    scroll-margin-top: 120px;
+    
+    @media screen and (max-width: $breakpoint-tablet) {
+        scroll-margin-top: 100px;
+    }
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        scroll-margin-top: 80px;
+    }
 }
 
 #my-skills {
-    @include scroll-offset();
+    scroll-margin-top: 120px;
+    
+    @media screen and (max-width: $breakpoint-tablet) {
+        scroll-margin-top: 100px;
+    }
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        scroll-margin-top: 80px;
+    }
 }
 
 #my-projects {
-    @include scroll-offset();
+    scroll-margin-top: 120px;
+    
+    @media screen and (max-width: $breakpoint-tablet) {
+        scroll-margin-top: 100px;
+    }
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        scroll-margin-top: 80px;
+    }
 }
 
 #contact-me {
-    @include scroll-offset();
+    scroll-margin-top: 120px;
+    
+    @media screen and (max-width: $breakpoint-tablet) {
+        scroll-margin-top: 100px;
+    }
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        scroll-margin-top: 80px;
+    }
 }
 
 // Mobile Varianten
 #my-skills-mobile {
-    @include scroll-offset();
+    scroll-margin-top: 80px;
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        scroll-margin-top: 72px;
+    }
 }
 
 #my-projects-mobile {
-    @include scroll-offset();
+    scroll-margin-top: 80px;
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        scroll-margin-top: 72px;
+    }
 }
 
 #contact-me-mobile {
-    @include scroll-offset();
+    scroll-margin-top: 80px;
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        scroll-margin-top: 72px;
+    }
 }
 
 // ===== WCAG KONFORME BUTTONS =====
 button {
-    @include apple-button-wcag();
+    @include apple-button-primary();
     
     &:focus-visible {
         outline: 2px solid $apple-primary;
@@ -106,7 +141,7 @@ button {
 // ===== WCAG KONFORME INPUTS =====
 textarea,
 input {
-    @include apple-input-wcag();
+    @include apple-input();
 }
 
 // Input Autofill Styles
@@ -175,7 +210,7 @@ h1 {
 }
 
 h2 {
-    @include h2Title-wcag();
+    @include h2Title();
 }
 
 h3, h4, h5, h6 {
@@ -278,7 +313,7 @@ p, li, td, th {
     }
 }
 
-// ===== MOBILE OPTIMIERUNGEN FÜR 320PX =====
+// ===== KORRIGIERTE MOBILE OPTIMIERUNGEN FÜR 320PX =====
 @media screen and (max-width: 320px) {
     body {
         min-width: 320px;
@@ -287,12 +322,13 @@ p, li, td, th {
     }
 
     .wide-screen,
-    .content-container {
+    .content-container,
+    .normal-container {
         min-width: 320px;
         width: 100%;
         max-width: 100%;
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 12px;
+        padding-right: 12px;
         box-sizing: border-box;
     }
 
@@ -328,6 +364,23 @@ p, li, td, th {
     border-radius: $apple-radius-small;
 }
 
+// Skip Link für Screen Reader
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: $apple-primary;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: $apple-radius-small;
+    z-index: 9999;
+    
+    &:focus {
+        top: 6px;
+    }
+}
+
 // ===== REDUCED MOTION =====
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -337,6 +390,10 @@ p, li, td, th {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+    
+    .pointer:hover {
+        transform: none !important;
     }
 }
 
@@ -356,5 +413,26 @@ p, li, td, th {
 
     button {
         border: 2px solid currentColor;
+    }
+    
+    input, textarea {
+        border: 2px solid currentColor;
+    }
+}
+
+// ===== PRINT STYLES =====
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .hide-on-print {
+        display: none !important;
+    }
+    
+    a {
+        color: black;
+        text-decoration: underline;
     }
 }

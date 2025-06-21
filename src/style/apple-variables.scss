@@ -1,4 +1,4 @@
-// ===== KORRIGIERTE APPLE VARIABLES =====
+// ===== KORRIGIERTE APPLE VARIABLES - WCAG KONFORM =====
 @use 'sass:color';
 
 // ===== TRANSITIONS =====
@@ -35,7 +35,7 @@ $apple-font-weight-medium: 500 !default;
 $apple-font-weight-semibold: 600 !default;
 $apple-font-weight-bold: 700 !default;
 
-// WCAG konforme Mindestgrößen - 16px minimum
+// WCAG konforme Mindestgrößen - 16px minimum für normalen Text
 $font-xs: clamp(16px, 3vw, 18px) !default;        // Mindestens 16px
 $font-sm: clamp(16px, 3.5vw, 20px) !default;      // Mindestens 16px  
 $font-base: clamp(16px, 4vw, 22px) !default;      // Mindestens 16px
@@ -129,12 +129,12 @@ $nav-height-mobile: 72px !default;
     box-sizing: border-box;
 }
 
-// SKILLS GRID - MOBILE OPTIMIERT
+// KORRIGIERTE SKILLS GRID - MOBILE OPTIMIERT
 @mixin skills-grid-responsive() {
     display: grid;
     gap: clamp(12px, 3vw, 16px);
     
-    // Mobile: 2 Spalten
+    // Mobile (320px-479px): 2 Spalten
     grid-template-columns: repeat(2, 1fr);
     
     // Ab 480px: 3 Spalten  
@@ -146,10 +146,16 @@ $nav-height-mobile: 72px !default;
     @media screen and (min-width: $breakpoint-desktop) {
         grid-template-columns: repeat(4, 1fr);
     }
+    
+    // Sehr kleine Screens: 2 Spalten mit mehr Platz
+    @media screen and (max-width: 374px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(16px, 4vw, 20px);
+    }
 }
 
 // WCAG KONFORME INPUTS
-@mixin apple-input-wcag() {
+@mixin apple-input() {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1); 
     border-radius: $apple-radius-medium;
@@ -177,7 +183,7 @@ $nav-height-mobile: 72px !default;
 }
 
 // WCAG KONFORME BUTTONS
-@mixin apple-button-wcag() {
+@mixin apple-button-primary() {
     background: $apple-primary;
     color: $apple-text-primary;
     border: none; 
@@ -190,20 +196,49 @@ $nav-height-mobile: 72px !default;
     min-width: 48px;  // WCAG Touch Target
     transition: $apple-transition-fast;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+        opacity: 0;
+        transition: $apple-transition-fast;
+    }
     
     &:hover {
         background: color.adjust($apple-primary, $lightness: 5%);
         transform: translateY(-1px);
+        box-shadow: $apple-shadow-medium;
+        
+        &::before {
+            opacity: 1;
+        }
     }
     
     &:focus-visible {
         outline: 2px solid rgba($apple-primary, 0.7);
         outline-offset: 2px;
     }
+    
+    &:active {
+        transform: translateY(0);
+        background: color.adjust($apple-primary, $lightness: -2%);
+    }
+}
+
+// VERBESSERTE NAVIGATION GLASS EFFECT
+@mixin apple-nav-glass() {
+    background: rgba(28, 28, 30, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 // TYPOGRAPHY MIXINS - WCAG KONFORM
-@mixin h2Title-wcag() {
+@mixin h2Title() {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-bold;
     font-size: clamp(24px, 6vw, 48px); // Mindestens 24px
@@ -213,6 +248,44 @@ $nav-height-mobile: 72px !default;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+@mixin h2TitleMobile() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    font-size: clamp(20px, 5.5vw, 32px); // Mobile optimiert
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+// KORRIGIERTES STANDARD PADDING
+@mixin standardPadding() {
+    padding-left: clamp(20px, 5vw, 80px);
+    padding-right: clamp(20px, 5vw, 80px);
+    
+    @media screen and (min-width: $breakpoint-desktop) {
+        padding-left: clamp(40px, 5vw, 80px);
+        padding-right: clamp(40px, 5vw, 80px);
+    }
+}
+
+@mixin standardPaddingMobile() {
+    padding-left: clamp(16px, 4vw, 24px);
+    padding-right: clamp(16px, 4vw, 24px);
+}
+
+// LOGO STYLING
+@mixin apple-logo() {
+    filter: brightness(1.2) contrast(1.1) saturate(1.2);
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        filter: brightness(1.4) contrast(1.3) saturate(1.4);
+    }
 }
 
 // NAVIGATION OFFSET FÜR ANKER-LINKS
