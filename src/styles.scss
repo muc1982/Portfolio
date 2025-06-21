@@ -16,9 +16,6 @@ body {
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-behavior: smooth;
-}
-
-body {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-regular;
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
@@ -29,50 +26,90 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 16px;
+    font-size: 16px; // WCAG minimum
     margin: 0;
     padding: 0;
     min-width: 320px;
 }
 
-button {
-    border: none;
-    font-family: $apple-font-family;
-    background-color: transparent;
-    cursor: pointer;
-    transition: $apple-transition-fast;
-    font-size: 16px;
-    min-height: 44px;
-    min-width: 44px;
+// ===== VOLLBREITE CONTAINER FÜR ALLE SECTIONS =====
+.content-container,
+.wide-screen {
+    @include unified-container();
+}
 
-    @media screen and (min-width: #{$breakpoint-tablet}) {
-        min-height: 48px;
-        min-width: 48px;
+// ===== VEREINHEITLICHTE CONTENT-BEREICHE =====
+.page-container {
+    @include unified-content-padding();
+}
+
+// ===== SECTION WRAPPER - VOLLBREITE HINTERGRÜNDE =====
+.landing-page-container,
+.why-me-container,
+.my-skills-container,
+.my-projects-container,
+.contact-container {
+    @include full-width-background();
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    position: relative;
+    
+    // Content innerhalb der Section
+    > * {
+        @include unified-content-padding();
     }
+}
 
+// ===== SCROLL-ANKER MIT OFFSET =====
+#landing-page {
+    @include scroll-offset(0);
+}
+
+#why-me {
+    @include scroll-offset();
+}
+
+#my-skills {
+    @include scroll-offset();
+}
+
+#my-projects {
+    @include scroll-offset();
+}
+
+#contact-me {
+    @include scroll-offset();
+}
+
+// Mobile Varianten
+#my-skills-mobile {
+    @include scroll-offset();
+}
+
+#my-projects-mobile {
+    @include scroll-offset();
+}
+
+#contact-me-mobile {
+    @include scroll-offset();
+}
+
+// ===== WCAG KONFORME BUTTONS =====
+button {
+    @include apple-button-wcag();
+    
     &:focus-visible {
         outline: 2px solid $apple-primary;
         outline-offset: 2px;
     }
 }
 
+// ===== WCAG KONFORME INPUTS =====
 textarea,
 input {
-    outline: none;
-    font-family: $apple-font-family;
-    font-size: 16px;
-    font-weight: $apple-font-weight-regular;
-    transition: $apple-transition-fast;
-
-    &:focus {
-        transform: translateY(-1px);
-    }
-
-    &::placeholder {
-        font-size: 16px;
-    }
+    @include apple-input-wcag();
 }
 
+// Input Autofill Styles
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -83,42 +120,7 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-.content-container,
-.wide-screen {
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
-    position: relative;
-    box-sizing: border-box;
-}
-
-.page-container {
-    @include standardPadding();
-    max-width: 1440px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.landing-page-container,
-.why-me-container,
-.my-skills-container,
-.my-projects-container,
-.contact-container {
-    @extend .content-container;
-    @include standardPadding();
-}
-
-.legal-notice-container,
-.private-policy-container {
-    .content {
-        max-width: 900px;
-        margin: 0 auto;
-        width: 100%;
-        @include standardPadding();
-    }
-}
-
+// ===== POINTER INTERACTION =====
 .pointer {
     cursor: pointer;
     transition: $apple-transition-fast;
@@ -132,22 +134,20 @@ input:-webkit-autofill:active {
     }
 }
 
-.normal-container {
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-}
-
-@media screen and (max-width: #{$breakpoint-tablet - 1px}) {
+// ===== RESPONSIVE HIDE CLASSES =====
+@include mobile-only {
     .hide-on-mobile {
         display: none !important;
     }
 }
 
-@media screen and (min-width: #{$breakpoint-tablet}) {
+@include desktop-only {
     .hide-on-desktop {
         display: none !important;
     }
 }
 
+// ===== LINKS =====
 a {
     text-decoration: none;
     color: inherit;
@@ -165,36 +165,32 @@ a[href]:not([href=""]):not([href="#"]) {
     }
 }
 
+// ===== WCAG KONFORME TYPOGRAPHY =====
 h1 {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-bold;
     line-height: 1.2;
     letter-spacing: -0.02em;
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
-    
-    @media screen and (min-width: #{$breakpoint-tablet}) {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-    }
+    font-size: clamp(28px, 7vw, 48px); // Mindestens 28px für H1
 }
 
 h2 {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
-    
-    @media screen and (min-width: #{$breakpoint-tablet}) {
-        font-size: clamp(2rem, 4vw, 3rem);
-    }
+    @include h2Title-wcag();
 }
 
-h3, h4, h5, h6, p, li, td, th {
+h3, h4, h5, h6 {
     font-family: $apple-font-family;
-    font-size: 16px;
+    font-size: clamp(18px, 4vw, 24px); // Mindestens 18px für Überschriften
+    line-height: 1.4;
+}
+
+p, li, td, th {
+    font-family: $apple-font-family;
+    font-size: 16px; // WCAG minimum
     line-height: 1.6;
 }
 
+// ===== ANIMATIONS =====
 @keyframes apple-fade-in {
     0% {
         opacity: 0;
@@ -226,15 +222,6 @@ h3, h4, h5, h6, p, li, td, th {
     }
 }
 
-@keyframes apple-bounce-up {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
 @keyframes apple-elegant-rotate {
     0% {
         transform: rotateY(0deg) scale(1);
@@ -247,6 +234,7 @@ h3, h4, h5, h6, p, li, td, th {
     }
 }
 
+// Animation Classes
 .bubble-out-005 {
     animation: apple-scale-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
@@ -259,15 +247,12 @@ h3, h4, h5, h6, p, li, td, th {
     animation: apple-bounce-down 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.move-up {
-    animation: apple-bounce-up 1s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
 .rotate {
     animation: apple-elegant-rotate 1s cubic-bezier(0.25, 0.1, 0.25, 1);
     transform-style: preserve-3d;
 }
 
+// ===== CHECKBOX STYLES =====
 .cb {
     border: 2px solid $apple-primary;
     background: rgba(255, 255, 255, 0.1);
@@ -293,11 +278,12 @@ h3, h4, h5, h6, p, li, td, th {
     }
 }
 
+// ===== MOBILE OPTIMIERUNGEN FÜR 320PX =====
 @media screen and (max-width: 320px) {
     body {
         min-width: 320px;
         overflow-x: hidden;
-        font-size: 16px;
+        font-size: 16px; // WCAG minimum
     }
 
     .wide-screen,
@@ -320,32 +306,17 @@ h3, h4, h5, h6, p, li, td, th {
         max-width: 100%;
         white-space: normal;
         word-break: break-word;
-        padding: 12px 16px;
-        font-size: 16px;
-        min-height: 48px;
+        font-size: 16px; // WCAG minimum
+        min-height: 48px; // WCAG Touch Target
     }
 
     input, textarea {
-        font-size: 16px;
-        min-height: 48px;
-        padding: 14px 16px;
+        font-size: 16px; // WCAG minimum
+        min-height: 48px; // WCAG Touch Target
     }
 }
 
-.full-width-section {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    position: relative;
-}
-
-.content-wrapper {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding-left: clamp(16px, 4vw, 80px);
-    padding-right: clamp(16px, 4vw, 80px);
-    box-sizing: border-box;
-}
-
+// ===== ACCESSIBILITY =====
 ::selection {
     background: rgba($apple-primary, 0.3);
     color: $apple-text-primary;
@@ -357,6 +328,7 @@ h3, h4, h5, h6, p, li, td, th {
     border-radius: $apple-radius-small;
 }
 
+// ===== REDUCED MOTION =====
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -368,6 +340,7 @@ h3, h4, h5, h6, p, li, td, th {
     }
 }
 
+// ===== HIGH CONTRAST =====
 @media (prefers-contrast: high) {
     body {
         background: #000000;
