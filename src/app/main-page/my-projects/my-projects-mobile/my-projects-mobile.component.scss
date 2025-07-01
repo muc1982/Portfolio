@@ -12,7 +12,6 @@
     border-radius: $apple-radius-xl;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
-    overflow: hidden;
     width: calc(100% - 32px);
     box-sizing: border-box;
 
@@ -217,7 +216,6 @@
                     padding: 16px;
                     min-height: 180px;
                     position: relative;
-                    overflow: hidden;
                     border: 1px solid rgba(255, 255, 255, 0.05);
 
                     &::before {
@@ -377,7 +375,6 @@
                         border: none;
                         cursor: pointer;
                         position: relative;
-                        overflow: hidden;
 
                         background: linear-gradient(135deg, $apple-primary 0%, color.adjust($apple-primary, $lightness: -10%) 100%);
                         color: white;
@@ -426,7 +423,6 @@
             margin-top: 32px;
             text-align: center;
             position: relative;
-            overflow: hidden;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 
@@ -585,7 +581,6 @@
                         padding: clamp(20px, 5vw, 24px);
                         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
                         position: relative;
-                        overflow: hidden;
                         backdrop-filter: blur(20px);
                         -webkit-backdrop-filter: blur(20px);
                         cursor: pointer;

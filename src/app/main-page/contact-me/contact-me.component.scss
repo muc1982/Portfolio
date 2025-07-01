@@ -6,10 +6,6 @@
     margin: auto;
     @include standardPadding();
     @include dFlex($fd: column);
-    background: $apple-universal-gradient;
-    border-radius: $apple-radius-xl;
-    box-shadow: $apple-shadow-large;
-    overflow: hidden;
     width: 100%;
     box-sizing: border-box;
 
@@ -334,7 +330,6 @@
                         0 8px 32px rgba($apple-success, 0.15),
                         0 0 0 1px rgba($apple-success, 0.1);
                     position: relative;
-                    overflow: hidden;
                     animation: successSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 
                     &::before {

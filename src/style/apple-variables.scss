@@ -201,7 +201,6 @@ $nav-height-mobile: 72px !default;
     transition: $apple-transition-fast;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
     
     &::before {
         content: '';
@@ -346,7 +345,6 @@ $nav-height-mobile: 72px !default;
     transition: $apple-transition-fast;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
     
     &::before {
         content: '';

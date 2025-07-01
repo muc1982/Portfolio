@@ -12,7 +12,6 @@
     border-radius: $apple-radius-xl;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
-    overflow: hidden;
     width: 100%;
     box-sizing: border-box;
 
@@ -292,7 +291,6 @@
                     box-shadow: $apple-shadow-medium, 0 0 20px rgba($apple-success, 0.15);
                     text-align: center;
                     position: relative;
-                    overflow: hidden;
                     animation: success-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
                     &::before {

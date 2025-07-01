@@ -5,7 +5,6 @@
     position: relative;
     margin-bottom: clamp(20px, 5vw, 64px);
     padding: clamp(16px, 4vw, 64px) 0;
-    overflow: hidden;
     z-index: 3;
 
     &::before {
@@ -165,7 +164,6 @@
         position: relative;
         margin-top: clamp(24px, 6vw, 64px);
         height: clamp(120px, 25vw, 200px); // KORRIGIERT: Erhöhte Basis-Höhe
-        overflow: hidden;
         border-radius: clamp($apple-radius-large, 3vw, $apple-radius-xl);
         background: linear-gradient(135deg,
                 rgba($apple-primary, 0.08) 0%,
@@ -267,7 +265,6 @@
 
                 .slide-text-container {
                     position: relative;
-                    overflow: hidden;
                     width: 100%;
                     text-align: center;
                     display: flex;
@@ -412,7 +409,6 @@
                 top: 0;
                 bottom: 0;
                 width: 30%; // KORRIGIERT: Weniger Platz als vorher (35%)
-                overflow: hidden;
                 z-index: 2;
                 transition: all 0.3s ease;
 
@@ -635,10 +631,6 @@
     padding: clamp(16px, 4vw, 40px);
     display: flex;
     flex-direction: column;
-    background: $apple-universal-gradient;
-    border-radius: clamp($apple-radius-large, 2vw, $apple-radius-xl);
-    box-shadow: $apple-shadow-large;
-    overflow: hidden;
     width: 100%;
     box-sizing: border-box;
     z-index: 1;
@@ -771,7 +763,6 @@
                     font-size: clamp(16px, 3.5vw, 22px);
                     padding: clamp(12px, 3vw, 24px) clamp(20px, 6vw, 56px);
                     min-width: clamp(120px, 35vw, 280px);
-                    overflow: hidden;
                     z-index: 4;
 
                     @media screen and (max-width: 480px) {
@@ -829,11 +820,10 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    overflow: hidden;
 }
 
 .slide-indicators {
-    position: initial;
+    position: absolute;
     bottom: clamp(6px, 2vw, 16px);
     left: 50%;
     transform: translateX(-50%);
@@ -861,7 +851,6 @@
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
         position: relative;
-        overflow: hidden;
 
         @media screen and (max-width: 375px) {
             width: 4px;
