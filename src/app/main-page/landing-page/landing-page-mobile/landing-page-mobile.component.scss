@@ -13,7 +13,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    background: $apple-universal-gradient;
     z-index: 0;
 
     &::before {

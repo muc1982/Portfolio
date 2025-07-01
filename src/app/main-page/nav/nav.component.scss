@@ -334,7 +334,7 @@
     top: $nav-height-desktop;
     left: 0;
     right: 0;
-    background: $apple-bg-secondary;
+    background: $apple-universal-gradient;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     @include apple-nav-glass();
     transform: translateY(-100%);

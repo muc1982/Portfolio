@@ -10,7 +10,7 @@
 
 .footer-wrapper {
     width: 100%;
-    background: $apple-header-footer-gradient;
+    background: $apple-universal-gradient;
     min-height: var(--footer-min-height);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
@@ -55,7 +55,7 @@
 footer {
     height: 100%;
     min-height: var(--footer-min-height);
-    background: $apple-header-footer-gradient;
+    background: $apple-universal-gradient;
     margin: 0 auto;
     @include dFlex($jc: center, $ai: center);
     max-width: 100%;

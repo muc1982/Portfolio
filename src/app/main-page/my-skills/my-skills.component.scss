@@ -5,7 +5,7 @@
     @include full-width-background();
     min-height: 80vh;
     position: relative;
-    background: $apple-container-gradient;
+    background: $apple-universal-gradient;
     overflow: hidden;
     margin: 0; 
     padding: clamp(48px, 8vw, 80px) 0;
@@ -163,7 +163,7 @@
     margin: 0; // KORRIGIERT: Keine Abstände zwischen Containern
     min-height: 70vh;
     @include dFlex($fd: column);
-    background: $apple-container-gradient;
+    background: $apple-universal-gradient;
     border-radius: 0; // KORRIGIERT: Keine Rundungen
     border: none; // KORRIGIERT: Keine Rahmen
     box-shadow: none; // KORRIGIERT: Keine Schatten

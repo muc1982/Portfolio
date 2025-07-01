@@ -8,7 +8,7 @@
     min-height: 80vh;
     @include standardPadding();
     @include dFlex($fd: column);
-    background: $apple-container-gradient;
+    background: $apple-universal-gradient;
     border-radius: $apple-radius-xl;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;

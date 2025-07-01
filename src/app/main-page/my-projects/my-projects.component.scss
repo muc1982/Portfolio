@@ -23,7 +23,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #000000 0%, #1C1C1E 100%);
+    background: $apple-universal-gradient;
     border-radius: clamp(16px, 4vw, 24px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
     overflow: hidden;
