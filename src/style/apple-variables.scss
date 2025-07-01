@@ -57,6 +57,7 @@ $breakpoint-2xl: 1920px !default;
 
 // ===== VEREINHEITLICHTE CONTAINER BREITEN =====
 $container-max-width: 1440px !default;
+$content-max-width: 1440px !default; // Alias für Kompatibilität
 $container-padding-desktop: clamp(40px, 5vw, 80px) !default;
 $container-padding-mobile: clamp(16px, 4vw, 24px) !default;
 
@@ -313,3 +314,123 @@ $nav-height-mobile: 72px !default;
         @content;
     }
 }
+
+// ===== FEHLENDE MIXINS HINZUGEFÜGT =====
+
+// H3 TITLE MIXIN - WCAG KONFORM
+@mixin h3Title() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-semibold;
+    font-size: clamp(18px, 4.5vw, 28px); // Mindestens 18px
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: $apple-text-primary;
+    margin: 0;
+}
+
+// SECONDARY BUTTON MIXIN - WCAG KONFORM
+@mixin apple-button-secondary() {
+    background: rgba(255, 255, 255, 0.1);
+    color: $apple-text-primary;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $apple-radius-medium;
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-medium;
+    font-size: 16px; // WCAG minimum
+    padding: 14px 24px;
+    min-height: 48px; // WCAG Touch Target
+    min-width: 48px;  // WCAG Touch Target
+    transition: $apple-transition-fast;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+        opacity: 0;
+        transition: $apple-transition-fast;
+    }
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-1px);
+        box-shadow: $apple-shadow-medium;
+        
+        &::before {
+            opacity: 1;
+        }
+    }
+    
+    &:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.7);
+        outline-offset: 2px;
+    }
+    
+    &:active {
+        transform: translateY(0);
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+
+// VOLLBREITEN CONTAINER OHNE MAX-WIDTH BESCHRÄNKUNGEN
+@mixin full-width-container-unlimited() {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+    box-sizing: border-box;
+    // Keine max-width Beschränkung für echte Vollbreite
+}
+
+// CONTENT WRAPPER FÜR ZENTRIERTEN INHALT IN VOLLBREITEN CONTAINERN
+@mixin content-wrapper-unlimited() {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: $container-padding-mobile;
+    padding-right: $container-padding-mobile;
+    box-sizing: border-box;
+    
+    @media screen and (min-width: $breakpoint-desktop) {
+        padding-left: $container-padding-desktop;
+        padding-right: $container-padding-desktop;
+    }
+    
+    // Für sehr große Bildschirme: mehr Padding statt max-width
+    @media screen and (min-width: 2560px) {
+        padding-left: clamp(80px, 10vw, 200px);
+        padding-right: clamp(80px, 10vw, 200px);
+    }
+}
+
+// NAHTLOSE SEKTION ÜBERGÄNGE
+@mixin seamless-section() {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 0;
+    
+    // Erste Sektion kann top-padding haben
+    &:first-child {
+        padding-top: clamp(40px, 8vw, 80px);
+    }
+    
+    // Letzte Sektion kann bottom-padding haben
+    &:last-child {
+        padding-bottom: clamp(40px, 8vw, 80px);
+    }
+}
+
+// ZOOM-RESISTENTE TYPOGRAPHY
+@mixin zoom-resistant-text($base-size: 16px, $scale: 1.2) {
+    font-size: clamp(#{$base-size}, #{$base-size * 0.8} + 2vw, #{$base-size * $scale});
+    line-height: 1.5;
+    
+    // Bei sehr niedrigem Zoom: größere Schrift
+    @media screen and (max-width: 1200px) and (min-resolution: 0.5dppx) {
+        font-size: clamp(#{$base-size * 1.1}, #{$base-size} + 1vw, #{$base-size * $scale * 1.2});
+    }
+}
+

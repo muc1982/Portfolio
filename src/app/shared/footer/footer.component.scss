@@ -27,7 +27,7 @@ footer {
     margin: 0 auto;
     @include dFlex();
     @include standardPadding();
-    max-width: 1440px;
+    @include full-width-container-unlimited();
     box-sizing: border-box;
     position: relative;
     

@@ -1,0 +1,68 @@
+<div id="landing-page-mobile">
+    <div id="landing-page-extra"></div>
+
+    <div class="burger-menu-wrapper">
+        <button class="burger-menu-btn" (click)="toggleMenu($event)" (touchstart)="toggleMenu($event)"
+            [class.active]="showMenu" [attr.aria-label]="showMenu ? 'Menü schließen' : 'Menü öffnen'"
+            [attr.aria-expanded]="showMenu" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <div class="menu-wrapper" [class.open]="showMenu" *ngIf="showMenu">
+        <div class="menu-overlay" (click)="closeMenu()" (touchstart)="closeMenu()"></div>
+        <nav class="menu" role="navigation" aria-label="Hauptnavigation">
+            <ul>
+                <li (click)="scrollTo('why-me')" (touchstart)="scrollTo('why-me')" (keydown.enter)="scrollTo('why-me')"
+                    tabindex="0" role="button">
+                    {{ 'nav.whyme' | translate }}
+                </li>
+                <li (click)="scrollTo('my-skills')" (touchstart)="scrollTo('my-skills')"
+                    (keydown.enter)="scrollTo('my-skills')" tabindex="0" role="button">
+                    {{ 'nav.myskills' | translate }}
+                </li>
+                <li (click)="scrollTo('my-projects')" (touchstart)="scrollTo('my-projects')"
+                    (keydown.enter)="scrollTo('my-projects')" tabindex="0" role="button">
+                    {{ 'nav.myprojects' | translate }}
+                </li>
+                <li (click)="scrollTo('contact-me')" (touchstart)="scrollTo('contact-me')"
+                    (keydown.enter)="scrollTo('contact-me')" tabindex="0" role="button">
+                    {{ 'nav.contact' | translate }}
+                </li>
+                <li class="mobile-lang-item">
+                    <app-lang-switcher context="menu" size="medium"></app-lang-switcher>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="mobile-content">
+        <section class="content-left">
+            <div class="img-wrapper">
+                <img src="assets/img/profile-pic.png" alt="Yasin Sun Profile Picture" loading="lazy" decoding="async" />
+            </div>
+            <div class="arrow-wrapper">
+                <button class="arrow-down pointer" (click)="scrollTo('why-me')" (touchstart)="scrollTo('why-me')"
+                    aria-label="Zum nächsten Abschnitt scrollen" type="button">
+                </button>
+            </div>
+        </section>
+
+        <section class="content-right">
+            <div class="title-logo-wrapper">
+                <div class="logo">
+                    <div class="logo-img" role="img" aria-label="Yasin Sun Logo"></div>
+                    <div class="logo-name">Yasin Sun</div>
+                    <div class="logo-position">Developer</div>
+                </div>
+
+                <div class="title">
+                    <h1 class="name">{{ 'landingPage.name' | translate}}</h1>
+                    <h2 class="position">{{ 'landingPage.position' | translate}}</h2>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

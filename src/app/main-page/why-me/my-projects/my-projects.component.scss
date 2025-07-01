@@ -1,0 +1,551 @@
+@use '../../../style/apple-variables' as *;
+@use 'sass:color';
+
+// ===== DESKTOP PROJECTS CONTAINER - VOLLBREITE =====
+.my-projects-container {
+    @include full-width-background();
+    @include seamless-section();
+    min-height: 80vh;
+    position: relative;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    overflow: hidden;
+    padding: clamp(48px, 8vw, 80px) 0;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -40%;
+        right: -40%;
+        width: 80%;
+        height: 100%;
+        background: radial-gradient(circle, rgba($apple-secondary, 0.08) 0%, transparent 60%);
+        animation: apple-projects-ambient 15s ease-in-out infinite;
+        filter: blur(40px);
+    }
+
+    h2 {
+        @include h2Title();
+        margin-bottom: 48px;
+        padding-top: 0;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        @include unified-content-padding();
+    }
+
+    .my-projects-content {
+        @include content-wrapper-unlimited();
+        position: relative;
+        z-index: 2;
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: clamp(24px, 5vw, 32px);
+            
+            @media screen and (max-width: $breakpoint-tablet) {
+                grid-template-columns: 1fr;
+                gap: clamp(20px, 4vw, 24px);
+            }
+
+            .project-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: $apple-radius-large;
+                padding: clamp(20px, 4vw, 24px);
+                transition: $apple-transition-medium;
+                position: relative;
+                overflow: hidden;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: -2px;
+                    background: $apple-teal-gradient;
+                    border-radius: $apple-radius-xl;
+                    opacity: 0;
+                    transition: $apple-transition-medium;
+                    z-index: -1;
+                }
+
+                &:hover {
+                    transform: translateY(-4px);
+                    background: rgba(255, 255, 255, 0.08);
+                    box-shadow: $apple-shadow-large;
+
+                    &::before {
+                        opacity: 0.1;
+                    }
+
+                    .project-image img {
+                        transform: scale(1.05);
+                    }
+                }
+
+                .project-image {
+                    width: 100%;
+                    height: 200px;
+                    border-radius: $apple-radius-medium;
+                    overflow: hidden;
+                    margin-bottom: 16px;
+                    position: relative;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: $apple-transition-medium;
+                        filter: brightness(1.1) contrast(1.05);
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(
+                            135deg,
+                            rgba($apple-primary, 0.1) 0%,
+                            transparent 50%,
+                            rgba($apple-secondary, 0.1) 100%
+                        );
+                        opacity: 0;
+                        transition: $apple-transition-medium;
+                    }
+
+                    &:hover::after {
+                        opacity: 1;
+                    }
+                }
+
+                .project-content {
+                    .project-title {
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-semibold;
+                        font-size: clamp(18px, 4vw, 22px);
+                        color: $apple-text-primary;
+                        margin-bottom: 12px;
+                        line-height: 1.3;
+                    }
+
+                    .project-description {
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-regular;
+                        font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
+                        line-height: 1.5;
+                        color: $apple-text-secondary;
+                        margin-bottom: 20px;
+                    }
+
+                    .project-tech {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        margin-bottom: 20px;
+
+                        .tech-tag {
+                            background: rgba($apple-primary, 0.2);
+                            color: $apple-text-primary;
+                            padding: 6px 12px;
+                            border-radius: $apple-radius-small;
+                            font-size: clamp(16px, 3vw, 18px); // WCAG minimum 16px
+                            font-weight: $apple-font-weight-medium;
+                            transition: $apple-transition-fast;
+
+                            &:hover {
+                                background: rgba($apple-primary, 0.3);
+                                transform: translateY(-1px);
+                            }
+                        }
+                    }
+
+                    .project-links {
+                        display: flex;
+                        gap: 12px;
+                        flex-wrap: wrap;
+
+                        .project-link {
+                            @include apple-button-primary();
+                            font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
+                            padding: 12px 20px;
+                            min-height: 48px; // WCAG Touch Target
+                            text-decoration: none;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            &.demo-link {
+                                background: $apple-primary;
+                                
+                                &:hover {
+                                    background: color.adjust($apple-primary, $lightness: 10%);
+                                }
+                            }
+
+                            &.github-link {
+                                background: rgba(255, 255, 255, 0.1);
+                                border: 1px solid rgba(255, 255, 255, 0.2);
+                                
+                                &:hover {
+                                    background: rgba(255, 255, 255, 0.15);
+                                    border-color: rgba(255, 255, 255, 0.3);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ===== MOBILE PROJECTS CONTAINER - VOLLBREITE =====
+.my-projects-container-mobile {
+    @include full-width-background();
+    min-height: 70vh;
+    position: relative;
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    overflow: hidden;
+    margin: 0; // Keine Abstände zwischen Containern
+    padding: clamp(32px, 6vw, 48px) 0;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -30%;
+        width: 70%;
+        height: 90%;
+        background: radial-gradient(circle, rgba($apple-secondary, 0.06) 0%, transparent 60%);
+        animation: apple-projects-ambient 18s ease-in-out infinite;
+        filter: blur(35px);
+    }
+
+    h2 {
+        @include h2Title();
+        margin-bottom: $space-lg;
+        padding-top: 0;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        @include unified-content-padding();
+    }
+
+    .my-projects-content {
+        @include content-wrapper-unlimited();
+        position: relative;
+        z-index: 2;
+
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 5vw, 24px);
+
+            .project-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: $apple-radius-large;
+                padding: clamp(16px, 4vw, 20px);
+                transition: $apple-transition-medium;
+                position: relative;
+                overflow: hidden;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: -2px;
+                    background: $apple-teal-gradient;
+                    border-radius: $apple-radius-xl;
+                    opacity: 0;
+                    transition: $apple-transition-medium;
+                    z-index: -1;
+                }
+
+                &:hover {
+                    transform: translateY(-2px);
+                    background: rgba(255, 255, 255, 0.08);
+                    box-shadow: $apple-shadow-medium;
+
+                    &::before {
+                        opacity: 0.08;
+                    }
+                }
+
+                .project-image {
+                    width: 100%;
+                    height: 180px;
+                    border-radius: $apple-radius-medium;
+                    overflow: hidden;
+                    margin-bottom: 16px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: $apple-transition-medium;
+                        filter: brightness(1.1) contrast(1.05);
+                    }
+                }
+
+                .project-content {
+                    .project-title {
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-semibold;
+                        font-size: clamp(18px, 4.5vw, 20px);
+                        color: $apple-text-primary;
+                        margin-bottom: 12px;
+                        line-height: 1.3;
+                    }
+
+                    .project-description {
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-regular;
+                        font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
+                        line-height: 1.5;
+                        color: $apple-text-secondary;
+                        margin-bottom: 16px;
+                    }
+
+                    .project-tech {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 6px;
+                        margin-bottom: 16px;
+
+                        .tech-tag {
+                            background: rgba($apple-primary, 0.2);
+                            color: $apple-text-primary;
+                            padding: 4px 8px;
+                            border-radius: $apple-radius-small;
+                            font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
+                            font-weight: $apple-font-weight-medium;
+                        }
+                    }
+
+                    .project-links {
+                        display: flex;
+                        gap: 8px;
+                        flex-wrap: wrap;
+
+                        .project-link {
+                            @include apple-button-primary();
+                            font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
+                            padding: 12px 16px;
+                            min-height: 48px; // WCAG Touch Target
+                            min-width: 48px;  // WCAG Touch Target
+                            text-decoration: none;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex: 1;
+
+                            &.demo-link {
+                                background: $apple-primary;
+                            }
+
+                            &.github-link {
+                                background: rgba(255, 255, 255, 0.1);
+                                border: 1px solid rgba(255, 255, 255, 0.2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ===== ANIMATIONS =====
+@keyframes apple-projects-ambient {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.08;
+    }
+    33% {
+        transform: translateY(-25px) rotate(2deg) scale(1.02);
+        opacity: 0.12;
+    }
+    66% {
+        transform: translateY(20px) rotate(-1deg) scale(0.98);
+        opacity: 0.06;
+    }
+}
+
+// ===== RESPONSIVE HIDE/SHOW =====
+.hide-on-mobile {
+    @media screen and (max-width: $breakpoint-desktop) {
+        display: none !important;
+    }
+}
+
+.hide-on-desktop {
+    @media screen and (min-width: #{$breakpoint-desktop + 1px}) {
+        display: none !important;
+    }
+}
+
+// ===== SEHR KLEINE SCREENS (320px-360px) =====
+@media screen and (max-width: 360px) {
+    .my-projects-container-mobile {
+        padding: clamp(24px, 5vw, 32px) 0;
+        
+        .my-projects-content {
+            .projects-grid {
+                gap: 16px;
+
+                .project-card {
+                    padding: 16px;
+                    border-radius: $apple-radius-medium;
+
+                    .project-image {
+                        height: 160px;
+                        border-radius: $apple-radius-small;
+                    }
+
+                    .project-content {
+                        .project-title {
+                            font-size: 18px;
+                            margin-bottom: 10px;
+                        }
+
+                        .project-description {
+                            font-size: 16px; // WCAG minimum
+                            margin-bottom: 14px;
+                        }
+
+                        .project-tech {
+                            gap: 4px;
+                            margin-bottom: 14px;
+
+                            .tech-tag {
+                                padding: 3px 6px;
+                                font-size: 16px; // WCAG minimum
+                            }
+                        }
+
+                        .project-links {
+                            gap: 6px;
+
+                            .project-link {
+                                font-size: 16px; // WCAG minimum
+                                padding: 10px 12px;
+                                min-height: 44px; // WCAG Touch Target
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ===== ACCESSIBILITY =====
+@media (prefers-reduced-motion: reduce) {
+    .my-projects-container,
+    .my-projects-container-mobile {
+        &::before {
+            animation: none;
+        }
+        
+        .project-card:hover {
+            transform: none;
+        }
+        
+        .project-image img {
+            transition: none;
+        }
+        
+        .tech-tag:hover {
+            transform: none;
+        }
+    }
+}
+
+@media (prefers-contrast: high) {
+    .my-projects-container,
+    .my-projects-container-mobile {
+        background: #000;
+        
+        .project-card {
+            background: #111;
+            border-color: #333;
+            
+            &:hover {
+                background: #222;
+                border-color: #555;
+            }
+            
+            .project-content {
+                .project-title {
+                    color: #fff;
+                }
+                
+                .project-description {
+                    color: #ccc;
+                }
+                
+                .tech-tag {
+                    background: #333;
+                    color: #fff;
+                    border: 1px solid #555;
+                    
+                    &:hover {
+                        background: #444;
+                    }
+                }
+                
+                .project-links .project-link {
+                    border: 2px solid currentColor;
+                    
+                    &.demo-link {
+                        background: #66b3ff;
+                        color: #000;
+                        border-color: #66b3ff;
+                        
+                        &:hover {
+                            background: #99ccff;
+                            border-color: #99ccff;
+                        }
+                    }
+                    
+                    &.github-link {
+                        background: #333;
+                        color: #fff;
+                        border-color: #666;
+                        
+                        &:hover {
+                            background: #555;
+                            border-color: #999;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media print {
+    .my-projects-container,
+    .my-projects-container-mobile {
+        &::before {
+            display: none;
+        }
+        
+        .project-card {
+            &::before {
+                display: none;
+            }
+            
+            &:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+        
+        .project-links {
+            display: none;
+        }
+    }
+}
+

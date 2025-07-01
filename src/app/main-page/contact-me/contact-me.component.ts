@@ -1,224 +1,192 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core'; // <-- TranslateModule hier importieren
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { MyProjectsMobileComponent } from "../my-projects/my-projects-mobile/my-projects-mobile.component"; // <-- CommonModule ist oft nützlich
+import { Component, inject, Input } from '@angular/core';
+import { TranslateModule } from "@ngx-translate/core";
+import { FormsModule, NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
-interface ContactFormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
+interface Contact {
+  name: string,
+  email: string,
+  msg: string,
 }
 
 @Component({
   selector: 'app-contact-me',
-  standalone: true, // <-- Dies ist wichtig für Standalone-Komponenten
-  imports: [FormsModule, CommonModule, TranslateModule], // <-- Hier FormsModule, CommonModule und TranslateModule hinzufügen
+  standalone: true,
+  imports: [
+    TranslateModule, 
+    CommonModule, 
+    FormsModule,
+  ],
   templateUrl: './contact-me.component.html',
-  styleUrls: ['./contact-me.component.scss']
+  styleUrl: './contact-me.component.scss'
 })
-export class ContactMeComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+export class ContactMeComponent {
+  @Input() scrollContainer?: HTMLElement;
+  isChecked: boolean = false;
+  
+  nameValid: boolean = true;
+  emailValid: boolean = true;
+  emailInvalidMsg: string = 'contact.emailrequired';
+  msgValid: boolean = true;
+  isShowingSuccessMsg = false;
+  isShowingDetailedSuccess = false; // Für die neue detaillierte Erfolgsmeldung
+  
+  readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
+  readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  readonly msgMinLength = 10;
+  readonly msgMaxLength = 500;
+  
+  post = {
+    endPoint: 'https://formspree.io/f/mldngvlb',
+    body: (payload: any) => {
+      const formData = new FormData();
+      formData.append('name', payload.name);
+      formData.append('email', payload.email);
+      formData.append('message', payload.msg);
+      formData.append('_subject', 'Portfolio Kontakt von ' + payload.name);
+      return formData;
+    },
+    options: {
+      headers: {
+        'Accept': 'application/json'
+      },
+    },
+  }
+  
+  http = inject(HttpClient);
+  
+  contact: Contact = {name:'', email:'', msg: ''};
 
-  // Form data model
-  formData: ContactFormData = {
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  };
-
-  // Form state
-  isSubmitting: boolean = false;
-  submitSuccess: boolean = false;
-  submitError: boolean = false;
-
-  constructor(
-    private translate: TranslateService
-  ) {}
-
-  ngOnInit(): void {
-    // Initialize component
-    this.resetForm();
+  clickCb() {
+    this.isChecked = !this.isChecked;
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  /**
-   * Handle form submission
-   * @param form - Angular form reference
-   */
-  onSubmit(form: NgForm): void {
-    if (form.invalid || this.isSubmitting) {
-      this.markAllFieldsAsTouched(form);
+  onSumbmit(myForm: NgForm) {
+    const isValid = this.validateAllFields();
+    if (!isValid) {
+      this.markFieldsAsTouched(myForm);
       return;
     }
-
-    this.isSubmitting = true;
-    this.submitError = false;
-    this.submitSuccess = false;
-
-    // Simulate form submission (replace with actual service call)
-    this.submitContactForm(this.formData)
-      .then(() => {
-        this.submitSuccess = true;
-        this.resetForm();
-        form.resetForm();
-        
-        // Show success message for 5 seconds
-        setTimeout(() => {
-          this.submitSuccess = false;
-        }, 5000);
-      })
-      .catch((error) => {
-        console.error('Form submission error:', error);
-        this.submitError = true;
-        
-        // Hide error message after 5 seconds
-        setTimeout(() => {
-          this.submitError = false;
-        }, 5000);
-      })
-      .finally(() => {
-        this.isSubmitting = false;
+    
+    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
+      .subscribe({
+        next: (response: any) => {
+          console.log('E-Mail erfolgreich versendet via Formspree:', response);
+          this.reset(myForm);
+        },
+        error: (error) => this.handleEmailError(error),
+        complete: () => console.log('E-Mail-Versand abgeschlossen')
       });
   }
 
-  /**
-   * Submit contact form data
-   * @param data - Form data to submit
-   * @returns Promise<void>
-   */
-  private async submitContactForm(data: ContactFormData): Promise<void> {
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+  private validateAllFields(): boolean {
+    this.validateName();
+    this.validateEmail();
+    this.validateMessage();
     
-    // Here you would typically make an HTTP request to your backend
-    // Example:
-    // return this.http.post('/api/contact', data).toPromise();
-    
-    // For now, we'll simulate success
-    console.log('Contact form submitted:', data);
-    
-    // Simulate occasional errors for testing
-    if (Math.random() < 0.1) {
-      throw new Error('Simulated submission error');
+    return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
+  }
+
+  private validateName(): void {
+    const name = this.contact.name.trim();
+    this.nameValid = this.namePattern.test(name);
+    if (!this.nameValid) {
+      this.contact.name = '';
     }
   }
 
-  /**
-   * Reset form data to initial state
-   */
-  private resetForm(): void {
-    this.formData = {
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    };
+  private validateEmail(): void {
+    const email = this.contact.email.trim();
+    if (email.length === 0) {
+      this.emailValid = false;
+      this.emailInvalidMsg = 'contact.emailrequired';
+    } else if (!this.emailPattern.test(email)) {
+      this.emailValid = false;
+      // Spezifische Fehlermeldungen für häufige Tippfehler
+      if (email.includes(',')) {
+        this.emailInvalidMsg = 'contact.emailcommaerror'; // "Bitte verwenden Sie einen Punkt (.) statt Komma in der E-Mail"
+      } else if (!email.includes('@')) {
+        this.emailInvalidMsg = 'contact.emailmissingat'; // "@ Zeichen fehlt in der E-Mail-Adresse"
+      } else if (!email.includes('.')) {
+        this.emailInvalidMsg = 'contact.emailmissingdot'; // "Punkt (.) fehlt in der E-Mail-Adresse"
+      } else if (email.split('@').length > 2) {
+        this.emailInvalidMsg = 'contact.emailmultipleat'; // "Zu viele @ Zeichen in der E-Mail"
+      } else {
+        this.emailInvalidMsg = 'contact.emailinvalid'; // "Ungültige E-Mail-Adresse"
+      }
+    } else {
+      this.emailValid = true;
+    }
   }
 
-  /**
-   * Mark all form fields as touched to show validation errors
-   * @param form - Angular form reference
-   */
-  private markAllFieldsAsTouched(form: NgForm): void {
+  private validateMessage(): void {
+    const msg = this.contact.msg.trim();
+    this.msgValid = msg.length >= this.msgMinLength && msg.length <= this.msgMaxLength;
+    if (!this.msgValid) {
+      this.contact.msg = '';
+    }
+  }
+
+  private markFieldsAsTouched(form: NgForm): void {
     Object.keys(form.controls).forEach(key => {
       form.controls[key].markAsTouched();
     });
   }
 
-  /**
-   * Check if a specific field has errors and is touched
-   * @param form - Angular form reference
-   * @param fieldName - Name of the field to check
-   * @returns boolean
-   */
-  hasFieldError(form: NgForm, fieldName: string): boolean {
-    const field = form.controls[fieldName];
-    return field ? field.invalid && field.touched : false;
+  private handleEmailError(error: any) {
+    console.error('Fehler beim Versenden der E-Mail:', error);
+    this.sendEmailFallback();
   }
 
-  /**
-   * Get error message for a specific field
-   * @param form - Angular form reference
-   * @param fieldName - Name of the field
-   * @returns string
-   */
-  getFieldErrorMessage(form: NgForm, fieldName: string): string {
-    const field = form.controls[fieldName];
-    if (!field || !field.errors) {
-      return '';
-    }
-
-    // Return appropriate error message based on validation error
-    if (field.errors['required']) {
-      return this.translate.instant(`contact.${fieldName}Required`);
-    }
-    if (field.errors['email']) {
-      return this.translate.instant('contact.emailInvalid');
-    }
-    if (field.errors['minlength']) {
-      const requiredLength = field.errors['minlength'].requiredLength;
-      return this.translate.instant('contact.minLengthError', { length: requiredLength });
-    }
-
-    return this.translate.instant('contact.fieldError');
-  }
-
-  /**
-   * Handle input field changes
-   * @param field - Field name
-   * @param value - New value
-   */
-  onFieldChange(field: keyof ContactFormData, value: string): void {
-    this.formData[field] = value;
+  sendEmailFallback() {
+    const subject = encodeURIComponent('Portfolio Kontakt');
+    const body = encodeURIComponent(
+      `Name: ${this.contact.name}\n` +
+      `E-Mail: ${this.contact.email}\n\n` +
+      `Nachricht:\n${this.contact.msg}`
+    );
     
-    // Clear success/error states when user starts typing
-    if (this.submitSuccess || this.submitError) {
-      this.submitSuccess = false;
-      this.submitError = false;
+    const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+  }
+
+  reset(myForm: NgForm) {
+    this.clickCb();
+    this.contact.name = '';
+    this.contact.email = '';
+    this.contact.msg = '';
+    this.isShowingDetailedSuccess = true;
+    myForm.resetForm();
+    
+    // Nach 5 Sekunden ausblenden
+    setTimeout(() => {
+      this.isShowingDetailedSuccess = false;
+    }, 5000);
+  }
+
+  onNameChange() {
+    if (this.contact.name.length > 0) {
+      this.validateName();
     }
   }
 
-  /**
-   * Validate email format
-   * @param email - Email to validate
-   * @returns boolean
-   */
-isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
+  onEmailChange() {
+    if (this.contact.email.length > 0) {
+      this.validateEmail();
+    }
+  }
 
-  /**
-   * Get current form validation status
-   * @param form - Angular form reference
-   * @returns boolean
-   */
-isFormValid(form: NgForm): boolean {
-  return form.valid === true &&
-         this.formData.name.trim().length >= 2 &&
-         this.formData.subject.trim().length >= 3 &&
-         this.formData.message.trim().length >= 10 &&
-         this.isValidEmail(this.formData.email);
-}
+  onMessageChange() {
+    if (this.contact.msg.length > 0) {
+      this.validateMessage();
+    }
+  }
 
-  /**
-   * Handle form reset
-   * @param form - Angular form reference
-   */
-  onReset(form: NgForm): void {
-    form.resetForm();
-    this.resetForm();
-    this.submitSuccess = false;
-    this.submitError = false;
+  isFormValid(): boolean {
+    return this.contact.name.length > 0 && 
+           this.contact.email.length > 0 && 
+           this.contact.msg.length > 0 && 
+           this.isChecked;
   }
 }
-

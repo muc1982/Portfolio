@@ -1,30 +1,31 @@
 import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy, QueryList, ViewChildren, Input } from '@angular/core';
-import { Project } from '../../intefaces/project.interface';
+import { Project } from '../../../intefaces/project.interface';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import {TranslateModule} from "@ngx-translate/core";
 import { Subscription } from 'rxjs';
 import { gsap } from 'gsap/gsap-core';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CommonModule } from '@angular/common';
-import { GlobalService } from '../../global.service';
-import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
-import { MyProjectsMobileComponent } from "./my-projects-mobile/my-projects-mobile.component";
+import { ScrollBounceDirective } from '../../../Instructions/scroll-bounce.directive';
+import { GlobalService } from '../../../global.service';
+import { ScrollAnimateDirective } from '../../../Instructions/scroll-animation.directive';
 
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  selector: 'app-my-projects',
+  selector: 'app-my-projects-mobile',
   standalone: true,
-  imports: [TranslateModule, CommonModule, MyProjectsMobileComponent], 
-  templateUrl: './my-projects.component.html',
-  styleUrl: './my-projects.component.scss'
+  imports: [TranslateModule, CommonModule, ScrollBounceDirective, ScrollAnimateDirective],
+  templateUrl: './my-projects-mobile.component.html',
+  styleUrl: './my-projects-mobile.component.scss'
 })
-export class MyProjectsComponent implements OnDestroy, AfterViewInit {
+export class MyProjectsMobileComponent implements OnDestroy, AfterViewInit {
   @ViewChild('animatedEl1', { static: false }) animatedEl1?: ElementRef;
   @ViewChild('animatedEl2', { static: false }) animatedEl2?: ElementRef;
   @ViewChild('animatedEl3', { static: false }) animatedEl3?: ElementRef;
   @ViewChild('animatedEl4', { static: false }) animatedEl4?: ElementRef;
   @ViewChild('scrollRef') scrollDirective?: ScrollBounceDirective;
+  @ViewChildren('test111', { read: ElementRef }) fadeElements!: QueryList<ElementRef>;
 
   currentTab: number = 0;
   projects: Project[] = [];
@@ -82,22 +83,19 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
 
   changeText() {
     this.translate.get(this.langsArr).subscribe(translations => {
-      this.projects.forEach(project => {
-        this.updateProjectTranslations(project, translations);
-      });
+      for (let i = 0; i < this.projects.length; i++) {
+        const project = this.projects[i];
+        if (translations[project.introductionKey]) {
+          project.introduction = translations[project.introductionKey];
+        }
+        if (translations[project.workExperienceKey]) {
+          project.workExperience = translations[project.workExperienceKey];
+        }
+        if (translations[project.workProcessKey]) {
+          project.workProcess = translations[project.workProcessKey];
+        }
+      }
     });
-  }
-
-  private updateProjectTranslations(project: Project, translations: any) {
-    if (translations[project.introductionKey]) {
-      project.introduction = translations[project.introductionKey];
-    }
-    if (translations[project.workExperienceKey]) {
-      project.workExperience = translations[project.workExperienceKey];
-    }
-    if (translations[project.workProcessKey]) {
-      project.workProcess = translations[project.workProcessKey];
-    }
   }
 
   switchProject(index: number) {
@@ -113,7 +111,7 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
 
     setTimeout(() => {
       if (this.scrollDirective) {
-        this.scrollDirective.targetId = 'my-projects';
+        this.scrollDirective.targetId = 'my-projects-mobile';
         this.scrollDirective.offsetY = 104;
         this.scrollDirective.onClick();
       }
@@ -156,6 +154,17 @@ export class MyProjectsComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.registerScrollTrigger();
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            console.log('enter view');
+          } else {
+            console.log('out of view');
+          }
+        }
+      }, { threshold: 0.1 });
+  
+      this.fadeElements.forEach(el => observer.observe(el.nativeElement));
   }
 
   ngOnDestroy(): void {

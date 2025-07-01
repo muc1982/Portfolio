@@ -1,0 +1,85 @@
+<div class="nav-wrapper" #navWrapper>
+    <div class="nav wide-screen">
+        <div class="content">
+            <div class="logo" [appScrollBounce]="'landing-page'" [offsetY]="0">
+                <div class="logo-img"></div>
+                <div class="logo-name">Yasin Sun</div>
+                <div class="logo-position">Developer</div>
+            </div>
+
+            <div class="items desktop-nav">
+                <li>
+                    <a [appScrollBounce]="'why-me'" [offsetY]="120">
+                        <span class="pointer">{{ "nav.whyme" | translate}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a [appScrollBounce]="'my-skills'" [offsetY]="120">
+                        <span class="pointer">{{ "nav.myskills" | translate}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a [appScrollBounce]="'my-projects'" [offsetY]="120">
+                        <span class="pointer">{{ "nav.myprojects" | translate}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a [appScrollBounce]="'contact-me'" [offsetY]="120">
+                        <span class="pointer">{{ "nav.contact" | translate}}</span>
+                    </a>
+                </li>
+            </div>
+
+            <div class="desktop-lang">
+                <app-lang-switcher></app-lang-switcher>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="mobile-menu-button">
+                <button 
+                    class="hamburger-btn" 
+                    (click)="toggleMobileMenu()"
+                    [class.active]="mobileMenuOpen"
+                    aria-label="Menu"
+                    [attr.aria-expanded]="mobileMenuOpen"
+                    type="button">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" [class.open]="mobileMenuOpen" (click)="closeMobileMenu()">
+            <nav class="mobile-nav-content" (click)="$event.stopPropagation()">
+                <ul class="mobile-nav-items">
+                    <li>
+                        <a [appScrollBounce]="'why-me'" [offsetY]="120" (click)="closeMobileMenu()">
+                            <span>{{ "nav.whyme" | translate}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [appScrollBounce]="'my-skills'" [offsetY]="120" (click)="closeMobileMenu()">
+                            <span>{{ "nav.myskills" | translate}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [appScrollBounce]="'my-projects'" [offsetY]="120" (click)="closeMobileMenu()">
+                            <span>{{ "nav.myprojects" | translate}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [appScrollBounce]="'contact-me'" [offsetY]="120" (click)="closeMobileMenu()">
+                            <span>{{ "nav.contact" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="mobile-lang-item">
+                        <app-lang-switcher context="mobile-header"></app-lang-switcher>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+

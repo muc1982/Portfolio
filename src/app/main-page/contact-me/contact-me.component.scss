@@ -1,622 +1,560 @@
 @use '../../../style/apple-variables' as *;
 @use 'sass:color';
 
-// ===== DESKTOP CONTACT CONTAINER - VOLLBREITE =====
 .contact-container {
-    @include full-width-background();
-    min-height: 80vh;
     position: relative;
+    margin: 40px auto;
+    max-width: 1400px;
+    min-height: 80vh;
+    @include standardPadding();
+    @include dFlex($fd: column);
     background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    border-radius: $apple-radius-xl;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $apple-shadow-large;
     overflow: hidden;
-    margin: 0; // Keine Abstände zwischen Containern
-    padding: clamp(48px, 8vw, 80px) 0;
+    width: 100%;
+    box-sizing: border-box;
+
+    @media screen and (min-width: 900px) {
+        display: flex !important;
+    }
+
+    @media screen and (max-width: 899px) {
+        display: none !important;
+    }
 
     &::before {
         content: '';
         position: absolute;
         top: -40%;
-        left: -40%;
+        right: -40%;
         width: 80%;
         height: 100%;
         background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-        animation: apple-contact-ambient 15s ease-in-out infinite;
+        animation: apple-contact-ambient 12s ease-in-out infinite;
         filter: blur(40px);
     }
 
     h2 {
         @include h2Title();
         margin-bottom: 48px;
-        padding-top: 0;
+        padding-top: clamp(48px, 8vw, 64px);
         position: relative;
         z-index: 2;
         text-align: center;
-        @include unified-content-padding();
     }
 
     .contact-content {
-        @include unified-content-padding();
-        display: flex;
-        gap: clamp(40px, 8vw, 64px);
+        width: 100%;
+        @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px));
         position: relative;
         z-index: 2;
-        max-width: $content-max-width;
+        padding: clamp(32px, 6vw, 80px);
+        max-width: 1200px;
         margin: 0 auto;
 
-        .contact-left {
-            flex: 1;
+        .contact-header {
+            color: $apple-text-primary;
+            @include dFlex($fd: row, $jc: space-between, $ai: center);
+            width: 100%;
+            gap: clamp(24px, 5vw, 32px);
 
-            .contact-info {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(20px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: $apple-radius-large;
-                padding: clamp(24px, 5vw, 32px);
-                margin-bottom: 24px;
+            .header-left {
+                flex: 1;
 
                 h3 {
+                    font-size: clamp(24px, 4vw, 32px);
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-semibold;
-                    font-size: clamp(20px, 5vw, 24px);
-                    color: $apple-text-primary;
-                    margin-bottom: 16px;
-                }
-
-                p {
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-regular;
-                    font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                    line-height: 1.6;
-                    color: $apple-text-secondary;
-                    margin-bottom: 20px;
-                }
-
-                .contact-details {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 12px;
-
-                    .contact-item {
-                        display: flex;
-                        align-items: center;
-                        gap: 12px;
-                        padding: 12px;
-                        border-radius: $apple-radius-medium;
-                        transition: $apple-transition-fast;
-
-                        &:hover {
-                            background: rgba(255, 255, 255, 0.05);
-                        }
-
-                        .contact-icon {
-                            width: 24px;
-                            height: 24px;
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-position: center;
-                            filter: brightness(1.2);
-                        }
-
-                        .contact-text {
-                            font-family: $apple-font-family;
-                            font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                            color: $apple-text-primary;
-
-                            a {
-                                color: $apple-primary;
-                                text-decoration: none;
-                                transition: $apple-transition-fast;
-
-                                &:hover {
-                                    color: $apple-secondary;
-                                    text-decoration: underline;
-                                }
-                            }
-                        }
-                    }
+                    color: $apple-primary;
+                    text-align: left;
+                    margin: 0 0 8px 0;
                 }
             }
-        }
 
-        .contact-right {
-            flex: 1;
+            .header-right {
+                flex: 1;
+                @include dFlex($fd: column, $gap: 20px);
 
-            .contact-form {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(20px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: $apple-radius-large;
-                padding: clamp(24px, 5vw, 32px);
+                .header-top {
+                    @include dFlex($fd: column, $gap: 16px);
+                    width: 100%;
 
-                .form-group {
-                    margin-bottom: 20px;
-
-                    label {
-                        display: block;
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-medium;
-                        font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                        color: $apple-text-primary;
-                        margin-bottom: 8px;
-                    }
-
-                    input,
-                    textarea {
-                        @include apple-input();
+                    .header-right-email,
+                    .header-right-phone {
                         width: 100%;
-                        
-                        &:invalid {
-                            border-color: $apple-error;
-                        }
-                        
-                        &:valid {
-                            border-color: $apple-success;
-                        }
-                    }
+                        max-width: 300px;
 
-                    textarea {
-                        min-height: 120px;
-                        resize: vertical;
-                    }
-
-                    .error-message {
-                        color: $apple-error;
-                        font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
-                        margin-top: 4px;
-                        display: none;
-
-                        &.show {
-                            display: block;
-                        }
-                    }
-                }
-
-                .form-submit {
-                    display: flex;
-                    justify-content: center;
-                    margin-top: 24px;
-
-                    button {
-                        @include apple-button-primary();
-                        font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                        padding: 16px 32px;
-                        min-width: 160px;
-                        min-height: 48px; // WCAG Touch Target
-
-                        &:disabled {
-                            background: $apple-text-tertiary;
-                            color: $apple-bg-secondary;
-                            cursor: not-allowed;
+                        a {
+                            @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
+                            height: clamp(48px, 12vw, 56px);
+                            padding: 0 clamp(16px, 4vw, 20px);
+                            border-radius: $apple-radius-large;
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            transition: $apple-transition-fast;
+                            background: rgba(255, 255, 255, 0.02);
+                            width: 100%;
+                            box-sizing: border-box;
+                            text-decoration: none;
+                            color: inherit;
+                            display: flex;
 
                             &:hover {
-                                transform: none;
-                                box-shadow: none;
+                                border-color: rgba($apple-primary, 0.3);
+                                background: rgba($apple-primary, 0.05);
+                                transform: translateY(-2px);
+                                box-shadow: $apple-shadow-medium;
+
+                                span {
+                                    color: $apple-primary;
+                                }
+
+                                .mail.img {
+                                    background-image: url('./../../../assets/img/mail-hover.svg');
+                                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                                }
+
+                                .tel.img {
+                                    background-image: url('./../../../assets/img/contact-phone-hover.png');
+                                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+                                }
+                            }
+
+                            .img {
+                                width: clamp(28px, 6vw, 36px);
+                                height: clamp(28px, 6vw, 36px);
+                                flex-shrink: 0;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                background-position: center;
+                            }
+
+                            .mail {
+                                background-image: url('./../../../assets/img/mail.png');
+                            }
+
+                            .tel {
+                                background-image: url('./../../../assets/img/contact-phone-hover.png');
+                            }
+
+                            span {
+                                font-family: $apple-font-family;
+                                font-weight: $apple-font-weight-regular;
+                                color: $apple-text-secondary;
+                                transition: $apple-transition-fast;
+                                font-size: clamp(16px, 4vw, 18px);
+                                line-height: 1.3;
+                                flex: 1;
                             }
                         }
                     }
                 }
+
+                .header-bottom {
+                    padding: clamp(16px, 4vw, 24px) 0;
+                    font-size: clamp(20px, 5vw, 28px);
+                    font-family: $apple-font-family;
+                    font-weight: $apple-font-weight-medium;
+                    width: 100%;
+                    color: $apple-primary;
+                    text-align: left;
+                    line-height: 1.3;
+                    display: flex;
+                    justify-content: flex-start;
+                }
             }
         }
-    }
-}
 
-// ===== MOBILE CONTACT CONTAINER - VOLLBREITE =====
-.contact-container-mobile {
-    @include full-width-background();
-    min-height: 70vh;
-    position: relative;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
-    overflow: hidden;
-    margin: 0; // Keine Abstände zwischen Containern
-    padding: clamp(32px, 6vw, 48px) 0;
+        .contact-form {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: -30%;
-        left: -30%;
-        width: 70%;
-        height: 90%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
-        animation: apple-contact-ambient 18s ease-in-out infinite;
-        filter: blur(35px);
-    }
+            form {
+                width: 100%;
+                @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
 
-    h2 {
-        @include h2Title();
-        margin-bottom: $space-lg;
-        padding-top: 0;
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        @include unified-content-padding();
-    }
+                .form-name-mail {
+                    @include dFlex($fd: row, $gap: clamp(24px, 5vw, 32px));
+                    width: 100%;
 
-    .contact-content {
-        @include unified-content-padding();
-        display: flex;
-        flex-direction: column;
-        gap: $space-lg;
-        position: relative;
-        z-index: 2;
-        max-width: $content-max-width;
-        margin: 0 auto;
-
-        .contact-info {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: $apple-radius-large;
-            padding: clamp(20px, 5vw, 24px);
-
-            h3 {
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-semibold;
-                font-size: clamp(18px, 5vw, 22px);
-                color: $apple-text-primary;
-                margin-bottom: 16px;
-                text-align: center;
-            }
-
-            p {
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-regular;
-                font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                line-height: 1.6;
-                color: $apple-text-secondary;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-
-            .contact-details {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-
-                .contact-item {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    padding: 12px;
-                    border-radius: $apple-radius-medium;
-                    transition: $apple-transition-fast;
-                    min-height: 48px; // WCAG Touch Target
-
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.05);
+                    .form-name,
+                    .form-email {
+                        flex: 1;
                     }
+                }
 
-                    .contact-icon {
-                        width: 24px;
-                        height: 24px;
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        filter: brightness(1.2);
-                        flex-shrink: 0;
-                    }
+                .form-field {
+                    width: 100%;
+                    @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
 
-                    .contact-text {
+                    .form-label {
                         font-family: $apple-font-family;
-                        font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                        color: $apple-text-primary;
+                        font-size: clamp(14px, 3.5vw, 16px);
+                        font-weight: $apple-font-weight-medium;
+                        color: $apple-text-secondary;
+                        transition: $apple-transition-fast;
+
+                        &-error {
+                            color: $apple-error;
+                            animation: shake 0.3s ease-in-out;
+                        }
+                    }
+
+                    .form-input {
+                        @include apple-input;
+                        height: clamp(56px, 12vw, 64px);
+                        font-family: $apple-font-family;
+                        font-size: clamp(16px, 4vw, 18px);
+                        padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px);
+
+                        &::placeholder {
+                            color: $apple-text-tertiary;
+                            font-family: $apple-font-family;
+                        }
+
+                        &-error {
+                            border: 2px solid $apple-error;
+                            background: rgba($apple-error, 0.08);
+                            box-shadow: 0 0 0 3px rgba($apple-error, 0.1);
+                            animation: errorPulse 0.4s ease-in-out;
+
+                            &::placeholder {
+                                color: $apple-error;
+                            }
+                        }
+                    }
+                }
+
+                .form-message {
+                    textarea {
+                        @include apple-input;
+                        width: 100%;
+                        height: clamp(140px, 25vw, 180px) !important;
+                        padding: clamp(20px, 5vw, 24px) clamp(20px, 5vw, 24px) !important;
+                        resize: none;
+                        font-family: $apple-font-family;
+                        font-size: clamp(16px, 4vw, 18px);
+                        line-height: 1.4;
+                        box-sizing: border-box;
+                    }
+
+                    .character-count {
+                        font-family: $apple-font-family;
+                        font-size: 12px;
+                        color: $apple-text-tertiary;
+                        text-align: right;
+                        margin-top: 4px;
+                        opacity: 0.8;
+                    }
+                }
+
+                .privacy-policy {
+                    width: 100%;
+                    color: $apple-text-secondary;
+                    @include dFlex($jc: flex-start, $gap: clamp(12px, 3vw, 16px), $ai: flex-start);
+
+                    .cb {
+                        width: clamp(22px, 5vw, 26px);
+                        height: clamp(22px, 5vw, 26px);
+                        flex-shrink: 0;
+                        border: 2px solid $apple-text-tertiary;
+                        border-radius: $apple-radius-small;
+                        transition: $apple-transition-fast;
+                        position: relative;
+                        background: transparent;
+                        cursor: pointer;
+
+                        &:hover {
+                            border-color: $apple-primary;
+                            transform: scale(1.05);
+                            box-shadow: 0 0 8px rgba($apple-primary, 0.3);
+                        }
+
+                        &.checked {
+                            background: $apple-primary;
+                            border-color: $apple-primary;
+                            box-shadow: $apple-shadow-glow;
+
+                            &::after {
+                                content: '✓';
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                color: white;
+                                font-size: clamp(12px, 3vw, 14px);
+                                font-weight: $apple-font-weight-bold;
+                                font-family: $apple-font-family;
+                            }
+                        }
+                    }
+
+                    .privacy-label {
+                        font-size: clamp(13px, 3.5vw, 16px);
+                        font-family: $apple-font-family;
+                        font-weight: $apple-font-weight-regular;
+                        line-height: 1.4;
+                        flex: 1;
+                        cursor: pointer;
 
                         a {
                             color: $apple-primary;
-                            text-decoration: none;
+                            font-weight: $apple-font-weight-medium;
                             transition: $apple-transition-fast;
+                            text-decoration: none;
 
                             &:hover {
-                                color: $apple-secondary;
+                                color: color.adjust($apple-primary, $lightness: 10%);
                                 text-decoration: underline;
                             }
                         }
                     }
                 }
-            }
-        }
 
-        .contact-form {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: $apple-radius-large;
-            padding: clamp(20px, 5vw, 24px);
-
-            .form-group {
-                margin-bottom: 20px;
-
-                label {
-                    display: block;
+                .success-msg {
+                    color: $apple-success;
                     font-family: $apple-font-family;
                     font-weight: $apple-font-weight-medium;
-                    font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                    color: $apple-text-primary;
-                    margin-bottom: 8px;
+                    padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px);
+                    background: rgba($apple-success, 0.1);
+                    border: 1px solid rgba($apple-success, 0.3);
+                    border-radius: $apple-radius-medium;
+                    text-align: center;
+                    font-size: clamp(14px, 3.5vw, 16px);
+                    box-shadow: $apple-shadow-small;
                 }
 
-                input,
-                textarea {
-                    @include apple-input();
+                // Neue professionelle Erfolgsmeldung
+                .success-message-detailed {
+                    @include dFlex($fd: row, $gap: 20px, $ai: flex-start);
+                    padding: clamp(24px, 5vw, 32px);
+                    background: linear-gradient(135deg, rgba($apple-success, 0.08) 0%, rgba($apple-success, 0.12) 100%);
+                    border: 2px solid rgba($apple-success, 0.2);
+                    border-radius: $apple-radius-large;
+                    box-shadow: 
+                        0 8px 32px rgba($apple-success, 0.15),
+                        0 0 0 1px rgba($apple-success, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                    animation: successSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        height: 3px;
+                        background: linear-gradient(90deg, 
+                            $apple-success 0%, 
+                            color.adjust($apple-success, $lightness: 15%) 50%, 
+                            $apple-success 100%);
+                        animation: progressBar 3s ease-out;
+                    }
+
+                    .success-icon {
+                        width: clamp(48px, 10vw, 56px);
+                        height: clamp(48px, 10vw, 56px);
+                        flex-shrink: 0;
+                        background: $apple-success;
+                        border-radius: 50%;
+                        @include dFlex($jc: center, $ai: center);
+                        box-shadow: 
+                            0 4px 16px rgba($apple-success, 0.3),
+                            0 0 0 4px rgba($apple-success, 0.1);
+                        animation: iconBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
+
+                        svg {
+                            width: clamp(24px, 5vw, 28px);
+                            height: clamp(24px, 5vw, 28px);
+                            color: white;
+                            stroke-width: 3;
+                        }
+                    }
+
+                    .success-content {
+                        flex: 1;
+                        @include dFlex($fd: column, $gap: 12px);
+
+                        h4 {
+                            font-family: $apple-font-family;
+                            font-size: clamp(18px, 4.5vw, 22px);
+                            font-weight: $apple-font-weight-semibold;
+                            color: $apple-success;
+                            margin: 0;
+                            line-height: 1.2;
+                        }
+
+                        p {
+                            font-family: $apple-font-family;
+                            font-size: clamp(14px, 3.5vw, 16px);
+                            font-weight: $apple-font-weight-regular;
+                            color: $apple-text-primary;
+                            margin: 0;
+                            line-height: 1.4;
+                            opacity: 0.9;
+                        }
+
+                        .success-details {
+                            margin-top: 8px;
+                            
+                            span {
+                                font-family: $apple-font-family;
+                                font-size: clamp(12px, 3vw, 14px);
+                                font-weight: $apple-font-weight-medium;
+                                color: $apple-text-secondary;
+                                padding: 6px 12px;
+                                background: rgba($apple-success, 0.1);
+                                border-radius: $apple-radius-small;
+                                border: 1px solid rgba($apple-success, 0.2);
+                            }
+                        }
+                    }
+                }
+
+                .send-btn {
+                    @include dFlex($jc: center);
                     width: 100%;
-                    
-                    &:invalid {
-                        border-color: $apple-error;
-                    }
-                    
-                    &:valid {
-                        border-color: $apple-success;
-                    }
-                }
+                    padding-top: clamp(16px, 4vw, 24px);
 
-                textarea {
-                    min-height: 100px;
-                    resize: vertical;
-                }
+                    button {
+                        @include apple-button-primary;
+                        font-family: $apple-font-family;
+                        font-size: clamp(16px, 4vw, 20px);
+                        padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
+                        min-width: clamp(160px, 40vw, 240px);
 
-                .error-message {
-                    color: $apple-error;
-                    font-size: clamp(16px, 3.5vw, 18px); // WCAG minimum 16px
-                    margin-top: 4px;
-                    display: none;
-
-                    &.show {
-                        display: block;
-                    }
-                }
-            }
-
-            .form-submit {
-                display: flex;
-                justify-content: center;
-                margin-top: 24px;
-
-                button {
-                    @include apple-button-primary();
-                    font-size: clamp(16px, 4vw, 18px); // WCAG minimum 16px
-                    padding: 16px 24px;
-                    min-width: 140px;
-                    min-height: 48px; // WCAG Touch Target
-                    width: 100%;
-
-                    &:disabled {
-                        background: $apple-text-tertiary;
-                        color: $apple-bg-secondary;
-                        cursor: not-allowed;
-
-                        &:hover {
+                        &:disabled {
+                            background: $apple-bg-quaternary;
+                            color: $apple-text-tertiary;
+                            cursor: not-allowed;
                             transform: none;
                             box-shadow: none;
+
+                            &:hover {
+                                background: $apple-bg-quaternary;
+                                color: $apple-text-tertiary;
+                                transform: none;
+                                box-shadow: none;
+                            }
+
+                            &::before {
+                                display: none;
+                            }
                         }
                     }
                 }
             }
         }
+
+        .goup-arrow {
+            position: absolute;
+            bottom: clamp(20px, 4vw, 32px);
+            right: clamp(20px, 4vw, 32px);
+            width: clamp(48px, 10vw, 56px);
+            height: clamp(48px, 10vw, 56px);
+            background: rgba($apple-primary, 0.1);
+            border: 1px solid rgba($apple-primary, 0.3);
+            border-radius: 50%;
+            @include dFlex($jc: center, $ai: center);
+            transition: $apple-transition-fast;
+            cursor: pointer;
+            z-index: 3;
+
+            &::before {
+                content: '↑';
+                font-size: clamp(20px, 4vw, 24px);
+                color: $apple-primary;
+                font-weight: $apple-font-weight-bold;
+            }
+
+            &:hover {
+                background: rgba($apple-primary, 0.2);
+                border-color: rgba($apple-primary, 0.5);
+                transform: translateY(-4px);
+                box-shadow: $apple-shadow-medium;
+            }
+        }
     }
 }
 
-// ===== ANIMATIONS =====
+// Animationen
 @keyframes apple-contact-ambient {
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.08;
     }
     33% {
-        transform: translateY(-25px) rotate(2deg) scale(1.02);
-        opacity: 0.12;
+        transform: translateY(-15px) rotate(2deg) scale(1.02);
     }
     66% {
-        transform: translateY(20px) rotate(-1deg) scale(0.98);
-        opacity: 0.06;
+        transform: translateY(10px) rotate(-1deg) scale(0.98);
     }
 }
 
-// ===== RESPONSIVE DESIGN =====
-@media screen and (max-width: $breakpoint-tablet) {
-    .contact-container {
-        .contact-content {
-            flex-direction: column;
-            gap: 24px;
-        }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+@keyframes errorPulse {
+    0% { 
+        box-shadow: 0 0 0 0 rgba($apple-error, 0.4);
+    }
+    70% { 
+        box-shadow: 0 0 0 8px rgba($apple-error, 0);
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba($apple-error, 0);
     }
 }
 
-// ===== SEHR KLEINE SCREENS (320px-360px) =====
-@media screen and (max-width: 360px) {
-    .contact-container-mobile {
-        padding: clamp(24px, 5vw, 32px) 0;
-        
-        .contact-content {
-            gap: 20px;
-
-            .contact-info,
-            .contact-form {
-                padding: 16px;
-                border-radius: $apple-radius-medium;
-            }
-
-            .contact-info {
-                h3 {
-                    font-size: 18px;
-                    margin-bottom: 12px;
-                }
-
-                p {
-                    font-size: 16px; // WCAG minimum
-                    margin-bottom: 16px;
-                }
-
-                .contact-details {
-                    gap: 10px;
-
-                    .contact-item {
-                        padding: 10px;
-                        min-height: 44px; // WCAG Touch Target
-
-                        .contact-icon {
-                            width: 20px;
-                            height: 20px;
-                        }
-
-                        .contact-text {
-                            font-size: 16px; // WCAG minimum
-                        }
-                    }
-                }
-            }
-
-            .contact-form {
-                .form-group {
-                    margin-bottom: 16px;
-
-                    label {
-                        font-size: 16px; // WCAG minimum
-                        margin-bottom: 6px;
-                    }
-
-                    input,
-                    textarea {
-                        font-size: 16px; // WCAG minimum
-                        padding: 12px 16px;
-                        min-height: 44px; // WCAG Touch Target
-                    }
-
-                    textarea {
-                        min-height: 88px;
-                    }
-
-                    .error-message {
-                        font-size: 16px; // WCAG minimum
-                    }
-                }
-
-                .form-submit {
-                    margin-top: 20px;
-
-                    button {
-                        font-size: 16px; // WCAG minimum
-                        padding: 14px 20px;
-                        min-height: 44px; // WCAG Touch Target
-                    }
-                }
-            }
-        }
+@keyframes successSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-// ===== ACCESSIBILITY =====
-@media (prefers-reduced-motion: reduce) {
-    .contact-container,
-    .contact-container-mobile {
-        &::before {
-            animation: none;
-        }
-        
-        .contact-item:hover {
-            transform: none;
-        }
-        
-        input:focus,
-        textarea:focus,
-        button:hover {
-            transform: none;
-        }
+@keyframes iconBounce {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
-@media (prefers-contrast: high) {
-    .contact-container,
-    .contact-container-mobile {
-        background: #000;
-        
-        .contact-info,
-        .contact-form {
-            background: #111;
-            border-color: #333;
-        }
-        
-        h2, h3 {
-            color: #fff;
-        }
-        
-        p {
-            color: #ccc;
-        }
-        
-        .contact-item {
-            &:hover {
-                background: #222;
-            }
-            
-            .contact-text {
-                color: #fff;
-                
-                a {
-                    color: #66b3ff;
-                    
-                    &:hover {
-                        color: #99ccff;
-                    }
-                }
-            }
-        }
-        
-        label {
-            color: #fff;
-        }
-        
-        input,
-        textarea {
-            background: #222;
-            border-color: #555;
-            color: #fff;
-            
-            &:focus {
-                border-color: #66b3ff;
-                background: #333;
-            }
-            
-            &::placeholder {
-                color: #999;
-            }
-        }
-        
-        button {
-            background: #66b3ff;
-            color: #000;
-            border: 2px solid #66b3ff;
-            
-            &:hover {
-                background: #99ccff;
-                border-color: #99ccff;
-            }
-            
-            &:disabled {
-                background: #333;
-                color: #666;
-                border-color: #333;
-            }
-        }
-        
-        .error-message {
-            color: #ff6666;
-        }
+@keyframes progressBar {
+    0% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+    100% {
+        transform: scaleX(1);
+        transform-origin: left;
     }
 }
 
-@media print {
-    .contact-container,
-    .contact-container-mobile {
-        &::before {
-            display: none;
-        }
-        
-        .contact-form {
-            display: none;
-        }
-        
-        .contact-item:hover {
-            background: none;
-        }
-    }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset !important;
+    -webkit-text-fill-color: $apple-text-primary !important;
+    caret-color: $apple-primary !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-

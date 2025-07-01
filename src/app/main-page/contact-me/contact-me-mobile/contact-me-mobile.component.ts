@@ -1,255 +1,219 @@
-import { CommonModule } from "@angular/common"
-import { Component, inject, Input } from "@angular/core"
-import { TranslateModule } from "@ngx-translate/core"
-import { RouterLink, RouterLinkActive, Router } from "@angular/router"
-import { FormsModule, type NgForm } from "@angular/forms"
-import { HttpClient } from "@angular/common/http"
+import { CommonModule } from '@angular/common';
+import { Component, inject, Input } from '@angular/core';
+import { TranslateModule } from "@ngx-translate/core";
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 interface Contact {
-  name: string
-  email: string
-  msg: string
+  name: string,
+  email: string,
+  msg: string,
 }
 
 @Component({
-  selector: "app-contact-me-mobile",
+  selector: 'app-contact-me-mobile',
   standalone: true,
-  imports: [TranslateModule, CommonModule, RouterLink, RouterLinkActive, FormsModule],
-  templateUrl: "./contact-me-mobile.component.html",
-  styleUrl: "./contact-me-mobile.component.scss",
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    FormsModule
+  ],
+  templateUrl: './contact-me-mobile.component.html',
+  styleUrl: './contact-me-mobile.component.scss'
 })
 export class ContactMeMobileComponent {
-  @Input() scrollContainer?: HTMLElement
-  isChecked = false
-  nameValid = true
-  emailValid = true
-  emailInvalidMsg = "contact.emailrequired"
-  msgValid = true
-  isShowingSuccessMsg = false
-  isShowingDetailedSuccess = false
-  isSending = false
-  nameBlurred = false
-  emailBlurred = false
-  msgBlurred = false
+  @Input() scrollContainer?: HTMLElement;
+  isChecked: boolean = false;
+  nameValid: boolean = true;
+  emailValid: boolean = true;
+  emailInvalidMsg: string = 'contact.emailrequired';
+  msgValid: boolean = true;
+  isShowingSuccessMsg = false;
+  isShowingDetailedSuccess = false; // Neue detaillierte Erfolgsmeldung
+  nameBlurred = false;
+  emailBlurred = false;
+  msgBlurred = false;
 
-  readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/
-  readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
+  readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   post = {
-    endPoint: "https://formspree.io/f/mldngvlb",
+    endPoint: 'https://formspree.io/f/mldngvlb',
     body: (payload: any) => {
-      const formData = new FormData()
-      formData.append("name", payload.name)
-      formData.append("email", payload.email)
-      formData.append("message", payload.msg)
-      formData.append("_subject", "Portfolio Kontakt von " + payload.name)
-      return formData
+      const formData = new FormData();
+      formData.append('name', payload.name);
+      formData.append('email', payload.email);
+      formData.append('message', payload.msg);
+      formData.append('_subject', 'Portfolio Kontakt von ' + payload.name);
+      return formData;
     },
     options: {
       headers: {
-        Accept: "application/json",
+        'Accept': 'application/json'
       },
     },
   }
 
-  http = inject(HttpClient)
-  router = inject(Router)
-
-  // NULL-SAFE Initialisierung
-  contact: Contact = {
-    name: "",
-    email: "",
-    msg: "",
-  }
+  http = inject(HttpClient);
+  
+  contact: Contact = { name: '', email: '', msg: '' };
 
   constructor() {}
 
   clickCb() {
-    this.isChecked = !this.isChecked
-  }
-
-  // Privacy Policy öffnen ohne Router
-  openPrivacyPolicy(event: Event) {
-    event.preventDefault()
-    try {
-      this.router.navigate(["/private-policy"])
-    } catch (error) {
-      window.open("/private-policy.html", "_blank")
-    }
+    this.isChecked = !this.isChecked;
   }
 
   onSumbmit(myForm: NgForm) {
-    if (this.validateAllFieldsOnSubmit()) {
-      this.sendFormData(myForm)
+    const isValid = this.validateAllFieldsOnSubmit();
+    if (isValid) {
+      this.sendEmail(myForm);
     }
-  }
-
-  private sendFormData(myForm: NgForm): void {
-    this.isSending = true
-    console.log("📱 Mobile: Starte Mail-Versand...", this.contact)
-
-    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options).subscribe({
-      next: (response: any) => {
-        console.log("📱 ✅ Mobile: E-Mail erfolgreich versendet:", response)
-        this.isSending = false
-        this.reset(myForm)
-      },
-      error: (error) => {
-        console.error("📱 ❌ Mobile: Fehler beim Mail-Versand:", error)
-        this.isSending = false
-        this.sendEmailFallback()
-      },
-      complete: () => {
-        console.log("📱 📧 Mobile: Mail-Versand-Prozess abgeschlossen")
-      },
-    })
   }
 
   private validateAllFieldsOnSubmit(): boolean {
-    this.nameBlurred = true
-    this.emailBlurred = true
-    this.msgBlurred = true
+    this.nameBlurred = true;
+    this.emailBlurred = true;
+    this.msgBlurred = true;
+    
+    this.validateName();
+    this.validateEmail();
+    this.validateMessage();
+    
+    return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
+  }
 
-    this.validateName()
-    this.validateEmail()
-    this.validateMessage()
-
-    return this.nameValid && this.emailValid && this.msgValid && this.isChecked
+  private sendEmail(myForm: NgForm): void {
+    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
+      .subscribe({
+        next: (response: any) => {
+          console.log('E-Mail erfolgreich versendet via Formspree:', response);
+          this.reset(myForm);
+        },
+        error: (error) => {
+          console.error('Fehler beim Versenden der E-Mail:', error);
+          this.sendEmailFallback();
+        },
+        complete: () => {
+          console.log('E-Mail-Versand abgeschlossen');
+        },
+      });
   }
 
   sendEmailFallback() {
-    const subject = encodeURIComponent("Portfolio Kontakt")
+    const subject = encodeURIComponent('Portfolio Kontakt');
     const body = encodeURIComponent(
-      `Name: ${this.contact.name || ""}\n` +
-        `E-Mail: ${this.contact.email || ""}\n\n` +
-        `Nachricht:\n${this.contact.msg || ""}`,
-    )
-
-    const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`
-    window.location.href = mailtoLink
+      `Name: ${this.contact.name}\n` +
+      `E-Mail: ${this.contact.email}\n\n` +
+      `Nachricht:\n${this.contact.msg}`
+    );
+    
+    const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
   }
 
   reset(myForm: NgForm) {
-    console.log("📱 🔄 Mobile: Reset wird ausgeführt...")
-
     if (this.isChecked) {
-      this.clickCb()
+      this.clickCb();
     }
-
-    this.resetContactData()
-    this.resetValidationStates()
-
-    // Erfolgsmeldung anzeigen
-    this.isShowingDetailedSuccess = true
-    console.log("📱 ✅ Mobile: Erfolgsmeldung wird angezeigt")
-
-    setTimeout(() => {
-      this.isShowingDetailedSuccess = false
-      console.log("📱 ✅ Mobile: Erfolgsmeldung ausgeblendet")
-    }, 5000)
+    this.resetContactData();
+    this.resetValidationStates();
+    this.showSuccessMessage();
   }
 
   private resetContactData(): void {
-    this.contact = { name: "", email: "", msg: "" }
+    this.contact.name = '';
+    this.contact.email = '';
+    this.contact.msg = '';
   }
 
   private resetValidationStates(): void {
-    this.nameBlurred = false
-    this.emailBlurred = false
-    this.msgBlurred = false
-    this.nameValid = true
-    this.emailValid = true
-    this.msgValid = true
+    this.nameBlurred = false;
+    this.emailBlurred = false;
+    this.msgBlurred = false;
+    this.nameValid = true;
+    this.emailValid = true;
+    this.msgValid = true;
   }
 
-  onNameBlur(): void {
-    this.validateName()
-  }
-
-  onEmailBlur(): void {
-    this.validateEmail()
-  }
-
-  onMessageBlur(): void {
-    this.validateMessage()
+  private showSuccessMessage(): void {
+    this.isShowingDetailedSuccess = true;
+    setTimeout(() => {
+      this.isShowingDetailedSuccess = false;
+    }, 5000);
   }
 
   validateName(): void {
-    this.nameBlurred = true
-    const name = (this.contact.name || "").trim()
-    this.nameValid = this.namePattern.test(name)
+    this.nameBlurred = true;
+    const name = this.contact.name.trim();
+    this.nameValid = this.namePattern.test(name);
+    if (!this.nameValid) {
+      this.contact.name = '';
+    }
   }
 
   validateEmail(): void {
-    this.emailBlurred = true
-    this.checkMail()
+    this.emailBlurred = true;
+    this.checkMail();
   }
 
   validateMessage(): void {
-    this.msgBlurred = true
-    const msg = (this.contact.msg || "").trim()
-    this.msgValid = msg.length >= 10 && msg.length <= 500
+    this.msgBlurred = true;
+    const msg = this.contact.msg.trim();
+    this.msgValid = msg.length >= 10 && msg.length <= 500;
+    if (!this.msgValid) {
+      this.contact.msg = '';
+    }
   }
 
   private checkMail(): void {
-    const email = (this.contact.email || "").trim()
-
+    const email = this.contact.email.trim();
+    
     if (email.length <= 0) {
-      this.emailValid = false
-      this.emailInvalidMsg = "contact.emailrequired"
-      return
-    }
-
-    // IDENTISCHE KOMMA-PRÜFUNG wie Desktop
-    if (email.includes(",de") || email.includes(",com") || email.includes(",net") || email.includes(",org")) {
-      this.emailValid = false
-      this.emailInvalidMsg = "contact.emailcommaerror"
-      return
-    }
-
-    if (email.includes(",")) {
-      this.emailValid = false
-      this.emailInvalidMsg = "contact.emailcommaerror"
-      return
-    }
-
-    if (!this.emailPattern.test(email)) {
-      this.emailValid = false
-      if (!email.includes("@")) {
-        this.emailInvalidMsg = "contact.emailmissingat"
-      } else if (!email.includes(".")) {
-        this.emailInvalidMsg = "contact.emailmissingdot"
-      } else if (email.split("@").length > 2) {
-        this.emailInvalidMsg = "contact.emailmultipleat"
+      this.emailValid = false;
+      this.emailInvalidMsg = 'contact.emailrequired';
+      this.contact.email = '';
+    } else if (!this.emailPattern.test(email)) {
+      this.emailValid = false;
+      // Spezifische Fehlermeldungen für häufige Tippfehler
+      if (email.includes(',')) {
+        this.emailInvalidMsg = 'contact.emailcommaerror'; // "Bitte verwenden Sie einen Punkt (.) statt Komma"
+      } else if (!email.includes('@')) {
+        this.emailInvalidMsg = 'contact.emailmissingat'; // "@ Zeichen fehlt in der E-Mail-Adresse"
+      } else if (!email.includes('.')) {
+        this.emailInvalidMsg = 'contact.emailmissingdot'; // "Punkt (.) fehlt in der E-Mail-Adresse"
+      } else if (email.split('@').length > 2) {
+        this.emailInvalidMsg = 'contact.emailmultipleat'; // "Zu viele @ Zeichen in der E-Mail"
       } else {
-        this.emailInvalidMsg = "contact.emailinvalid"
+        this.emailInvalidMsg = 'contact.emailinvalid'; // "Ungültige E-Mail-Adresse"
       }
-      return
+      this.contact.email = '';
+    } else {
+      this.emailValid = true;
     }
-
-    this.emailValid = true
   }
 
   onNameFocus(): void {
-    this.nameValid = true
+    this.nameValid = true;
   }
 
   onEmailFocus(): void {
-    this.emailValid = true
+    this.emailValid = true;
   }
 
   onMessageFocus(): void {
-    this.msgValid = true
+    this.msgValid = true;
   }
 
   isFormValid(): boolean {
-    return (
-      (this.contact.name || "").length > 0 &&
-      (this.contact.email || "").length > 0 &&
-      (this.contact.msg || "").length > 0 &&
-      this.nameValid &&
-      this.emailValid &&
-      this.msgValid
-    )
+    return this.contact.name.length > 0 && 
+           this.contact.email.length > 0 && 
+           this.contact.msg.length > 0 && 
+           this.nameValid && 
+           this.emailValid && 
+           this.msgValid;
   }
 }

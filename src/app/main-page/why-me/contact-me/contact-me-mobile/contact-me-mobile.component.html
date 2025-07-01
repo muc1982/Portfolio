@@ -28,14 +28,14 @@
                             placeholder="{{ (!nameValid && nameBlurred) ? ('contact.namerequired' | translate) : ('contact.name' | translate)}}"
                             [(ngModel)]="contact.name" name="name" id="mobile-name" class="form-input" type="text"
                             required minlength="2" maxlength="50" pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}"
-                            (focus)="onNameFocus()" (blur)="validateName()" autocomplete="name">
+                            (focus)="onNameFocus()" (blur)="onNameBlur()" autocomplete="name">
                     </div>
                     <div class="form-email form-field">
                         <input [class.form-input-error]="!emailValid && emailBlurred"
                             placeholder="{{ (!emailValid && emailBlurred) ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}"
                             [(ngModel)]="contact.email" name="email" id="mobile-email" class="form-input" type="email"
                             required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (focus)="onEmailFocus()"
-                            (blur)="validateEmail()" autocomplete="email">
+                            (blur)="onEmailBlur()" autocomplete="email">
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                     <textarea [class.form-input-error]="!msgValid && msgBlurred"
                         placeholder="{{ (!msgValid && msgBlurred) ? ('contact.messagerequired' | translate) : ('contact.message' | translate)}}"
                         [(ngModel)]="contact.msg" name="message" id="mobile-message" class="form-input" required
-                        minlength="10" maxlength="500" (focus)="onMessageFocus()" (blur)="validateMessage()"
+                        minlength="10" maxlength="500" (focus)="onMessageFocus()" (blur)="onMessageBlur()"
                         rows="4"></textarea>
                     <div class="character-count" *ngIf="contact.msg.length > 0">
                         {{ contact.msg.length }} / 500
@@ -80,6 +80,11 @@
                                 <span>{{ 'contact.success.response' | translate }}</span>
                             </div>
                         </div>
+                    </div>
+                    } @else if (isSending) {
+                    <div class="sending-message">
+                        <div class="sending-spinner"></div>
+                        <span>{{ 'contact.sending' | translate }}</span>
                     </div>
                     } @else {
                     <button [disabled]="!isChecked || !isFormValid()" type="submit" class="pointer"

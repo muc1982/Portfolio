@@ -1,22 +1,19 @@
 @use '../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-.landing-page-extra {
-    height: 50px;
-}
+// Entfernt: .landing-page-extra für nahtlose Übergänge
 
-.content[_ngcontent-ng-c2512410781] {
+.content {
     box-sizing: border-box;
-    background: linear-gradient(135deg, #000000 0%, #1C1C1E 100%);
+    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    padding-top: 120px;
     padding-bottom: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    min-height: calc(100vh - 88px);
+    @include standardPadding();
+    @include dFlex($jc: space-between);
     position: relative;
     overflow: hidden;
-    width: 100%;
-    margin: 0 auto;
+    @include full-width-container-unlimited();
 
     &::before {
         content: '';
@@ -41,16 +38,13 @@
         animation: apple-ambient-float 15s ease-in-out infinite reverse;
         filter: blur(60px);
     }
+}
 
 .content-left {
-    height: 100%;
+    height: calc(100vh - 88px - 120px);
     width: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    @include dFlex();
     z-index: 2;
-    margin-top: 24rem;
 
     .img-wrapper {
         align-self: flex-end;
@@ -124,17 +118,12 @@
     }
 }
 
-.content-right[_ngcontent-ng-c2512410781] {
-    height: auto;
-    width: 100%;
+.content-right {
+    min-height: calc(100vh - 88px - 120px);
+    width: 50%;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    @include dFlex($fd: column, $jc: space-around);
     z-index: 2;
-    padding-top: 20rem;
-}
 
     .img-wrapper-small {
         border-radius: $apple-radius-xl $apple-radius-xl 50% 50%;
