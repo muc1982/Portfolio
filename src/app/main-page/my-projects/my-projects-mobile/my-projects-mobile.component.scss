@@ -244,44 +244,6 @@
                             box-shadow: $apple-shadow-large;
                         }
                     }
-
-                    &.coming-soon-container {
-                        position: relative;
-
-                        .coming-soon-text-overlay {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            z-index: 3;
-                            @include dFlex($fd: column, $gap: 4px, $ai: center);
-
-                            .coming-soon-badge {
-                                @include dFlex($ai: center, $gap: 6px);
-                                background: rgba(0, 0, 0, 0.8);
-                                backdrop-filter: blur(15px);
-                                border-radius: 16px;
-                                padding: 8px 14px;
-                                border: 1px solid rgba(255, 255, 255, 0.3);
-                                animation: apple-coming-soon-pulse 2s ease-in-out infinite;
-                                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-
-                                .coming-soon-emoji {
-                                    font-size: 16px;
-                                    animation: apple-rocket-bounce 1.5s ease-in-out infinite;
-                                }
-
-                                .coming-soon-label {
-                                    font-family: $apple-font-family;
-                                    font-weight: $apple-font-weight-bold;
-                                    color: $apple-primary;
-                                    font-size: 12px;
-                                    text-transform: uppercase;
-                                    letter-spacing: 0.8px;
-                                }
-                            }
-                        }
-                    }
                 }
             }
 
@@ -794,17 +756,6 @@
     }
 }
 
-@keyframes apple-coming-soon-pulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba($apple-primary, 0.4);
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.08);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 6px rgba($apple-primary, 0);
-    }
-}
-
 @keyframes apple-rocket-bounce {
     0%, 100% {
         transform: translateY(0) rotate(0deg);
@@ -957,7 +908,6 @@
         }
     }
 
-    .coming-soon-badge,
     .process-emoji,
     .experience-emoji,
     .title-gradient,

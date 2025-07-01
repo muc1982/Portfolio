@@ -48,9 +48,6 @@
       "about": "El Pollo Loco is an exciting jump-and-run game developed entirely in JavaScript. It offers fun gameplay with various levels and challenges.",
       "workprocess": "Developed entirely with Vanilla JavaScript, HTML5 Canvas, and CSS. Focus was on game mechanics, animations, and performance optimization.",
       "workexperience": "This project helped me solidify my JavaScript fundamentals and gain deeper insight into game development and canvas programming."
-    },
-    "dababble": {
-      "about": "DA Bubble is a modern communication platform that enables teams to collaborate effectively. It offers real-time messaging, channels, and file sharing – all essential tools for modern team communication."
     }
   },
   "player": {
@@ -64,8 +61,6 @@
   },
   "contact": {
     "title": "Contact Me",
-    "feelfree": "Got a problem to solve?",
-    "worktogether": "Let's work together!",
     "myemail": "Email",
     "myphone": "Phone",
     "name": "Your Name",
