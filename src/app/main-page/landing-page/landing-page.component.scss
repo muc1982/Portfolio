@@ -264,15 +264,6 @@
             }
         }
 
-        .link-linkedin {
-            background-image: url('./../../../assets/img/linkedin.png');
-            filter: brightness(1.1);
-
-            &:hover {
-                background-image: url('./../../../assets/img/linkedin-hover.png');
-                filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
-            }
-        }
     }
 
     .title-logo-wrapper {

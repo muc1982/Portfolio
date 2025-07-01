@@ -631,18 +631,15 @@
 
 .why-me-container {
     position: relative;
-    margin: clamp(12px, 4vw, 40px) auto;
-    max-width: 1400px;
-    min-height: clamp(50vh, 70vh, 80vh);
+    margin: auto;
     padding: clamp(16px, 4vw, 40px);
     display: flex;
     flex-direction: column;
     background: $apple-universal-gradient;
     border-radius: clamp($apple-radius-large, 2vw, $apple-radius-xl);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: $apple-shadow-large;
     overflow: hidden;
-    width: calc(100% - 16px);
+    width: 100%;
     box-sizing: border-box;
     z-index: 1;
 

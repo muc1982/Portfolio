@@ -1,9 +1,8 @@
-@use '../../../style/apple-variables' as *;
+@use '../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
 .my-skills-container {
     @include full-width-background();
-    min-height: 80vh;
     position: relative;
     background: $apple-universal-gradient;
     overflow: hidden;
