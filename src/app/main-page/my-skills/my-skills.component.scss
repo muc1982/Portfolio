@@ -22,7 +22,7 @@
     }
 
     h2 {
-        @include h2Title(); // KORRIGIERT: Verwende h2Title() statt h2Title-wcag()
+        @include h2Title(); 
         margin-bottom: 48px;
         padding-top: 0;
         position: relative;
@@ -55,7 +55,7 @@
                     padding: clamp(16px, 4vw, 24px);
                     transition: $apple-transition-medium;
                     position: relative;
-                    min-height: 120px; // WCAG Touch Target
+                    min-height: 120px; 
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -70,7 +70,7 @@
                     }
                     
                     .skill-icon {
-                        width: clamp(32px, 8vw, 48px); // WCAG Touch Target
+                        width: clamp(32px, 8vw, 48px); 
                         height: clamp(32px, 8vw, 48px);
                         margin-bottom: clamp(8px, 2vw, 12px);
                         filter: brightness(1.2);

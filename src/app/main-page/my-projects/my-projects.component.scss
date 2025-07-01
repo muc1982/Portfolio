@@ -453,11 +453,10 @@
                         font-family: $apple-font-family;
                         font-weight: $apple-font-weight-bold;
                         font-size: clamp(24px, 5vw, 32px);
-                        background: linear-gradient(135deg, $apple-primary 0%, $apple-secondary 100%);
+                        background: $apple-teal-gradient;
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         background-clip: text;
-                        animation: apple-gradient-shift 3s ease-in-out infinite;
                     }
                 }
 
