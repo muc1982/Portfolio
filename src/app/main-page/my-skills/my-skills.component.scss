@@ -1,18 +1,17 @@
 @use '../../../style/apple-variables' as *;
 @use 'sass:color';
 
-// ===== DESKTOP SKILLS CONTAINER - VOLLBREITE OHNE ABSTÄNDE =====
 .my-skills-container {
     @include full-width-background();
     min-height: 80vh;
     position: relative;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    background: $apple-container-gradient;
     overflow: hidden;
-    margin: 0; // KORRIGIERT: Keine Abstände zwischen Containern
+    margin: 0; 
     padding: clamp(48px, 8vw, 80px) 0;
-    border-radius: 0; // KORRIGIERT: Keine Rundungen für nahtlose Übergänge
-    border: none; // KORRIGIERT: Keine Rahmen
-    box-shadow: none; // KORRIGIERT: Keine Schatten
+    border-radius: 0; 
+    border: none; 
+    box-shadow: none; 
 
     &::before {
         content: '';
@@ -164,7 +163,7 @@
     margin: 0; // KORRIGIERT: Keine Abstände zwischen Containern
     min-height: 70vh;
     @include dFlex($fd: column);
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    background: $apple-container-gradient;
     border-radius: 0; // KORRIGIERT: Keine Rundungen
     border: none; // KORRIGIERT: Keine Rahmen
     box-shadow: none; // KORRIGIERT: Keine Schatten

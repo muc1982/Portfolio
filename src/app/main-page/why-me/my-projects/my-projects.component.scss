@@ -5,11 +5,22 @@
 .my-projects-container {
     @include full-width-background();
     @include seamless-section();
-    min-height: 80vh;
     position: relative;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    margin: 40px auto;
+    max-width: 1400px;
+    min-height: 80vh;
+    padding-left: clamp(20px, 5vw, 80px);
+    padding-right: clamp(20px, 5vw, 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: clamp(16px, 4vw, 24px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
     overflow: hidden;
-    padding: clamp(48px, 8vw, 80px) 0;
+    width: 100%;
+    box-sizing: border-box;
+}
 
     &::before {
         content: '';
@@ -197,7 +208,6 @@
             }
         }
     }
-}
 
 // ===== MOBILE PROJECTS CONTAINER - VOLLBREITE =====
 .my-projects-container-mobile {

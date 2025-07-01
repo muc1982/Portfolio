@@ -5,7 +5,7 @@
     @include full-width-background();
     position: relative;
     min-height: 100vh;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    background: $apple-container-gradient;
     overflow-x: hidden;
     
     .custom-header {

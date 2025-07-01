@@ -18,7 +18,7 @@ body {
     scroll-behavior: smooth;
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-regular;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%);
+    background: $apple-container-gradient;
     color: $apple-text-primary;
     max-width: 100%;
     width: 100%;
@@ -211,6 +211,10 @@ h1 {
 
 h2 {
     @include h2Title();
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 h3, h4, h5, h6 {

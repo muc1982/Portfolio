@@ -9,7 +9,7 @@
     padding: clamp(16px, 4vw, 64px) 0;
     overflow: hidden;
     z-index: 3;
-    background: linear-gradient(135deg, $apple-bg-primary 0%, $apple-bg-secondary 100%); // KORRIGIERT: Hintergrund hinzugefügt
+    background: $apple-container-gradient; // KORRIGIERT: Hintergrund hinzugefügt
 
     &::before {
         content: '';

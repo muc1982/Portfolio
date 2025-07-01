@@ -1,6 +1,8 @@
 @use '../../../style/apple-variables' as *;
 
 header {
+    background: $apple-header-footer-gradient;
+    
     .go-back {
         a {
             font-size: clamp(16px, 2.5vw, 18px); 
