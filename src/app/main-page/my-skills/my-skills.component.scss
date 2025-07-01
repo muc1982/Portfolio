@@ -55,7 +55,7 @@
                     padding: clamp(16px, 4vw, 24px);
                     transition: $apple-transition-medium;
                     position: relative;
-                    min-height: 120px; 
+                    height: auto; 
                     display: flex;
                     flex-direction: column;
                     align-items: center;

@@ -3,9 +3,8 @@
 
 .footer-wrapper {
     width: 100%;
-    min-height: 204px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
+    height: auto;
     
     &::before {
         content: '';
@@ -25,7 +24,6 @@ footer {
     background: $apple-universal-gradient;
     margin: 0 auto;
     @include dFlex();
-    @include standardPadding();
     @include full-width-container-unlimited();
     box-sizing: border-box;
     position: relative;
@@ -34,6 +32,7 @@ footer {
         width: 100%;
         min-height: clamp(60px, 8vw, 80px);
         @include dFlex($jc: space-between, $ai: center);
+        @include unified-content-padding(); // Padding auf footer-content für korrekte Zentrierung
         
         .left {
             flex: 1;
