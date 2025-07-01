@@ -1,19 +1,18 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-scroll-to-top',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   template: `
     <button 
       class="scroll-to-top" 
       [class.visible]="isVisible"
       (click)="scrollToTop()"
       aria-label="Scroll to top">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <mat-icon>keyboard_arrow_up</mat-icon>
     </button>
   `,
   styles: [`
@@ -54,9 +53,11 @@ import { CommonModule } from '@angular/common';
         transform: translateY(0);
       }
       
-      svg {
-        width: 20px;
-        height: 20px;
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: white;
       }
       
       @media (max-width: 600px) {
@@ -65,9 +66,10 @@ import { CommonModule } from '@angular/common';
         width: 40px;
         height: 40px;
         
-        svg {
-          width: 18px;
-          height: 18px;
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
         }
       }
     }
@@ -89,3 +91,4 @@ export class ScrollToTopComponent {
     });
   }
 }
+
