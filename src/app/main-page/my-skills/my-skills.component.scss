@@ -38,7 +38,8 @@
         position: relative;
         z-index: 2;
         max-width: $content-max-width;
-        margin: 0 auto;
+        margin: auto;
+        margin-top: 120px;
 
         .content-left {
             flex: 2;
