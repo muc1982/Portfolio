@@ -1,23 +1,36 @@
-import { Component, Input } from '@angular/core';
-import { LangSwitcherComponent } from '../lang-switcher/lang-switcher.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Location } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
-import {TranslateModule} from "@ngx-translate/core";
+// header.component.ts
+import { Component, type OnInit, Input } from "@angular/core"
+import { CommonModule, Location } from "@angular/common"
+import { RouterLink, RouterLinkActive, Router } from "@angular/router"
+import { TranslateModule, TranslateService } from "@ngx-translate/core"
+import { LangSwitcherComponent } from "../lang-switcher/lang-switcher.component"
 
 @Component({
-  selector: 'app-header',
+  selector: "app-header",
   standalone: true,
-  imports: [LangSwitcherComponent, TranslateModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  imports: [CommonModule, TranslateModule, LangSwitcherComponent],
+  templateUrl: "./header.component.html",
+  styleUrl: "./header.component.scss",
 })
-export class HeaderComponent {
-  @Input()title: string = "";
+export class HeaderComponent implements OnInit {
+  @Input() title: string = ''
+  @Input() showBackButton: boolean = true
 
-  constructor(private location: Location, private translate: TranslateService) {}
+  constructor(
+    private translate: TranslateService,
+    private router: Router,
+    private location: Location
+  ) {}
 
-  goBack() {
-    this.location.back();
+  ngOnInit(): void {
+    // Component initialization
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(["/"])
+  }
+
+  goBack(): void {
+    this.location.back()
   }
 }

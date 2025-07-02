@@ -1,70 +1,75 @@
 <div class="legal-notice-container">
+    <!-- HEADER -->
     <div class="custom-header">
-        <div class="logo-section">
-            <a [routerLink]="'/'" class="apple-logo-btn">
-                <div class="logo-img"></div>
-                <div class="logo-text">
-                    <div class="logo-name">Yasin Sun</div>
-                    <div class="logo-position">Developer</div>
-                </div>
-            </a>
-        </div>
+        <div class="custom-header-inner">
+            <div class="logo-section">
+                <a [routerLink]="'/'" class="apple-logo-btn">
+                    <div class="logo-img"></div>
+                    <div class="logo-text">
+                        <div class="logo-name">Yasin Sun</div>
+                        <div class="logo-position">Developer</div>
+                    </div>
+                </a>
+            </div>
 
-        <h1 class="page-title">{{ 'footer.legalnotice' | translate }}</h1>
+            <h1 class="page-title">{{ 'footer.legalnotice' | translate }}</h1>
 
-        <div class="header-lang-switcher">
-            <app-lang-switcher></app-lang-switcher>
+            <div class="header-lang-switcher">
+                <app-lang-switcher></app-lang-switcher>
+            </div>
         </div>
     </div>
 
-    <div class="legal-notice-content wide-screen">
-        @if (currentLang == 'en') {
-        <div class="content">
-            <div class="legal-notice-subcontainer">
-                <h1>Legal Notice</h1>
-                <h2 style="margin-top: 0;">Information pursuant to § 5 TMG</h2>
-                <p>Yasin Sun <br>
-                    Unterhachinger Straße 77G<br>
-                    81737 München</p>
+    <!-- CONTENT -->
+    <div class="legal-notice-content">
+        <div class="content-wrapper">
+            @if (currentLang == 'en') {
+            <div class="content">
+                <div class="legal-notice-subcontainer">
+                    <h1>Legal Notice</h1>
+                    <h2 style="margin-top: 0;">Information pursuant to § 5 TMG</h2>
+                    <p>Yasin Sun <br>
+                        Unterhachinger Straße 77G<br>
+                        81737 München</p>
 
-                <h2>Contact</h2>
-                <p>Phone: +49 174 762 0110<br>
-                    Email: info&#64;sun-dev.de</p>
-                <h2>Credits</h2>
-                <p>The project was tested and supported by the mentors from the <a class="developer-akademie"
-                        href="https://developerakademie.com/">Developer Akademie</a>.</p>
-                <p>The design was created by Verselina from the <a class="developer-akademie"
-                        href="https://developerakademie.com/">Developer Akademie</a>.</p><br />
-                <p>Special thanks to all contributors and testers.</p>
-                <h2>Data Protection Notice</h2>
-                <p>This legal notice was created using the legal notice generator from activeMind AG</p>
+                    <h2>Contact</h2>
+                    <p>Phone: +49 174 762 0110<br>
+                        Email: info&#64;sun-dev.de</p>
+                    <h2>Credits</h2>
+                    <p>The project was tested and supported by the mentors from the <a class="developer-akademie"
+                            href="https://developerakademie.com/">Developer Akademie</a>.</p>
+                    <p>The design was created by Verselina from the <a class="developer-akademie"
+                            href="https://developerakademie.com/">Developer Akademie</a>.</p><br />
+                    <p>Special thanks to all contributors and testers.</p>
+                    <h2>Data Protection Notice</h2>
+                    <p>This legal notice was created using the legal notice generator from activeMind AG</p>
+                </div>
             </div>
-        </div>
-        } @else {
-        <div class="content">
-            <div class="legal-notice-subcontainer">
-                <h1>Impressum</h1>
-                <h2 style="margin-top: 0;">Angaben gemäß § 5 TMG</h2>
-                <p>Yasin Sun <br>
-                    Unterhachinger Straße 77G<br>
-                    81737 München</p>
+            } @else {
+            <div class="content">
+                <div class="legal-notice-subcontainer">
+                    <h1>Impressum</h1>
+                    <h2 style="margin-top: 0;">Angaben gemäß § 5 TMG</h2>
+                    <p>Yasin Sun <br>
+                        Unterhachinger Straße 77G<br>
+                        81737 München</p>
 
-                <h2>Kontakt</h2>
-                <p>Telefon: +49 174 762 0110<br>
-                    E-Mail: info&#64;dev-sun.de</p>
-                <h2>Danksagung</h2>
-                <p>Das Projekt wurde getestet und unterstützt von den Mentoren von der <a class="developer-akademie"
-                        href="https://developerakademie.com/"> Developer Akademie</a>. </p>
-                <p>Design stammt von Verselina von der <a class="developer-akademie"
-                        href="https://developerakademie.com/"> Developer Akademie</a>. </p><br />
-                <p>Besonderer Dank gilt allen Mitwirkenden und Testern.</p>
-                <h2>Hinweise zum Datenschutz</h2>
-                <p>Das Impressum wurde mit dem Impressums-Generator der activeMind AG erstellt.</p>
+                    <h2>Kontakt</h2>
+                    <p>Telefon: +49 174 762 0110<br>
+                        E-Mail: info&#64;dev-sun.de</p>
+                    <h2>Danksagung</h2>
+                    <p>Das Projekt wurde getestet und unterstützt von den Mentoren von der <a class="developer-akademie"
+                            href="https://developerakademie.com/"> Developer Akademie</a>. </p>
+                    <p>Design stammt von Verselina von der <a class="developer-akademie"
+                            href="https://developerakademie.com/"> Developer Akademie</a>. </p><br />
+                    <p>Besonderer Dank gilt allen Mitwirkenden und Testern.</p>
+                    <h2>Hinweise zum Datenschutz</h2>
+                    <p>Das Impressum wurde mit dem Impressums-Generator der activeMind AG erstellt.</p>
+                </div>
             </div>
+            }
         </div>
-        }
     </div>
 
     <app-footer></app-footer>
 </div>
-

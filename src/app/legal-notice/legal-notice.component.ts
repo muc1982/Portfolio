@@ -1,58 +1,57 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FooterComponent } from '../shared/footer/footer.component';
-import { TranslateService, TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
-import { Router, NavigationEnd, RouterLink } from '@angular/router'; // Import RouterLink
-import { Location, CommonModule } from '@angular/common'; // Import CommonModule
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.component';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { CommonModule, Location } from "@angular/common";
+import { RouterLink } from "@angular/router";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { FooterComponent } from "../shared/footer/footer.component";
+import { LangSwitcherComponent } from "../shared/lang-switcher/lang-switcher.component";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-legal-notice',
+  selector: "app-legal-notice",
   standalone: true,
-  imports: [FooterComponent, TranslateModule, LangSwitcherComponent, CommonModule, RouterLink], // Fügen Sie CommonModule, RouterLink und TranslateModule hinzu
-  templateUrl: './legal-notice.component.html',
-  styleUrl: './legal-notice.component.scss'
+  imports: [
+    CommonModule,
+    RouterLink,
+    TranslateModule,
+    FooterComponent,
+    LangSwitcherComponent
+  ],
+  templateUrl: "./legal-notice.component.html",
+  styleUrls: [
+    "./legal-notice.component.scss",
+    "./partials/_legal-notice-layout.scss",
+    "./partials/_legal-notice-typography.scss",
+    "./partials/_legal-notice-responsive.scss",
+    "./partials/_legal-notice-animations.scss"
+  ]
 })
 export class LegalNoticeComponent implements OnInit, OnDestroy {
-  title = 'Legal Notice';
-  currentLang = '';
-  private routerSubscription?: Subscription;
+  currentLang: string | undefined;
+  private langChangeSubscription: Subscription = new Subscription();
 
   constructor(
     private translate: TranslateService,
-    private router: Router,
     private location: Location
-  ) {
-    this.currentLang = this.translate.currentLang;
-    
-    this.translate.onLangChange.subscribe(event => {
-      this.currentLang = event.lang;
-    });  
-  }
+  ) {}
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     
-    this.routerSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        window.scrollTo(0, 0);
-      });
+    // Setze die aktuelle Sprache
+    this.currentLang = this.translate.currentLang;
+    
+    // Abonniere Sprachänderungen
+    this.langChangeSubscription = this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
+    // Subscription beenden, um Memory Leaks zu vermeiden
+    this.langChangeSubscription.unsubscribe();
   }
 
   goBack(): void {
-    if (window.history.length > 1) {
-      this.location.back();
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.location.back();
   }
-} 
-
+}

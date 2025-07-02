@@ -1,56 +1,54 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FooterComponent } from '../shared/footer/footer.component';
-import { TranslateService, TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
-import { Router, NavigationEnd, RouterLink } from '@angular/router'; // Import RouterLink
-import { Location, CommonModule } from '@angular/common'; // Import CommonModule
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.component';
+import { Component, type OnInit, OnDestroy } from "@angular/core"
+import { CommonModule, Location } from "@angular/common"
+import { RouterLink } from "@angular/router"
+import { TranslateModule, TranslateService } from "@ngx-translate/core"
+import { HeaderComponent } from "../shared/header/header.component"
+import { FooterComponent } from "../shared/footer/footer.component"
+import { FooterMobileComponent } from "../shared/footer-mobile/footer-mobile.component"
+import { LangSwitcherComponent } from "../shared/lang-switcher/lang-switcher.component";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-private-policy',
+  selector: "app-private-policy",
   standalone: true,
-  imports: [FooterComponent, TranslateModule, LangSwitcherComponent, CommonModule, RouterLink], // Fügen Sie CommonModule, RouterLink und TranslateModule hinzu
-  templateUrl: './private-policy.component.html',
-  styleUrl: './private-policy.component.scss'
+  imports: [CommonModule, RouterLink, TranslateModule, FooterComponent, LangSwitcherComponent],
+  templateUrl: "./private-policy.component.html",
+  styleUrls: [
+    "./private-policy.component.scss",
+    "./partials/_private-policy-layout.scss",
+    "./partials/_private-policy-typography.scss",
+    "./partials/_private-policy-responsive.scss",
+    "./partials/_private-policy-animations.scss",
+  ],
 })
 export class PrivatePolicyComponent implements OnInit, OnDestroy {
-  private routerSubscription?: Subscription;
-  currentLang = '';
+  currentLang: string | undefined;
+  private langChangeSubscription: Subscription = new Subscription();
 
   constructor(
-    private translate: TranslateService, 
-    private router: Router,
-    private location: Location
-  ) {
-    this.currentLang = this.translate.currentLang;
-    this.translate.onLangChange.subscribe(event => {
-      this.currentLang = event.lang;
-    });  
-  }
+    private translate: TranslateService,
+    private location: Location,
+  ) {}
 
   ngOnInit(): void {
+    // Scroll to top when component loads
     window.scrollTo(0, 0);
     
-    this.routerSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        window.scrollTo(0, 0);
-      });
+    // Setze die aktuelle Sprache
+    this.currentLang = this.translate.currentLang;
+    
+    // Abonniere Sprachänderungen
+    this.langChangeSubscription = this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
+    // Subscription beenden, um Memory Leaks zu vermeiden
+    this.langChangeSubscription.unsubscribe();
   }
 
   goBack(): void {
-    if (window.history.length > 1) {
-      this.location.back();
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.location.back();
   }
 }
-

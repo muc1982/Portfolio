@@ -1,94 +1,95 @@
-import { Component, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, type OnInit, type OnDestroy, PLATFORM_ID, inject } from "@angular/core"
+import { CommonModule, isPlatformBrowser } from "@angular/common"
 
 @Component({
-  selector: 'app-scroll-to-top',
+  selector: "app-scroll-to-top",
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule],
   template: `
     <button 
-      class="scroll-to-top" 
-      [class.visible]="isVisible"
+      *ngIf="showButton" 
+      class="scroll-to-top-btn"
       (click)="scrollToTop()"
-      aria-label="Scroll to top">
-      <mat-icon>keyboard_arrow_up</mat-icon>
+      aria-label="Scroll to top"
+      type="button">
+      <span class="material-icons">keyboard_arrow_up</span>
     </button>
   `,
-  styles: [`
-    .scroll-to-top {
+  styles: [
+    `
+    .scroll-to-top-btn {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 48px;
-      height: 48px;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: rgba(0, 122, 255, 0.9);
-      color: white;
+      background-color: #00BEE8;
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-      transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+      box-shadow: 0 4px 12px rgba(0, 190, 232, 0.3);
+      transition: all 0.3s ease;
       z-index: 1000;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-      
-      &.visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+    }
+
+    .scroll-to-top-btn:hover {
+      background-color: #0099BB;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 190, 232, 0.4);
+    }
+
+    .material-icons {
+      color: white;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+      .scroll-to-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
       }
       
-      &:hover {
-        background: rgba(0, 122, 255, 1);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
-      }
-      
-      &:active {
-        transform: translateY(0);
-      }
-      
-      mat-icon {
-        font-size: 24px;
-        width: 24px;
-        height: 24px;
-        color: white;
-      }
-      
-      @media (max-width: 600px) {
-        bottom: 16px;
-        right: 16px;
-        width: 40px;
-        height: 40px;
-        
-        mat-icon {
-          font-size: 20px;
-          width: 20px;
-          height: 20px;
-        }
+      .material-icons {
+        font-size: 20px;
       }
     }
-  `]
+  `,
+  ],
 })
-export class ScrollToTopComponent {
-  isVisible = false;
-  private scrollThreshold = 300;
+export class ScrollToTopComponent implements OnInit, OnDestroy {
+  showButton = false
+  private platformId = inject(PLATFORM_ID)
 
-  @HostListener('window:scroll')
-  onWindowScroll() {
-    this.isVisible = window.pageYOffset > this.scrollThreshold;
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener("scroll", this.onScroll.bind(this))
+    }
   }
 
-  scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+  ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.removeEventListener("scroll", this.onScroll.bind(this))
+    }
+  }
+
+  private onScroll(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.showButton = window.pageYOffset > 300
+    }
+  }
+
+  scrollToTop(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    }
   }
 }
-

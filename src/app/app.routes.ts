@@ -4,10 +4,24 @@ import { LegalNoticeComponent } from "./legal-notice/legal-notice.component"
 import { PrivatePolicyComponent } from "./private-policy/private-policy.component"
 
 export const routes: Routes = [
-  { path: "", component: MainPageComponent },
-  { path: "legal-notice", component: LegalNoticeComponent },
-  { path: "private-policy", component: PrivatePolicyComponent },
-  { path: "impressum", redirectTo: "legal-notice" },
-  { path: "datenschutz", redirectTo: "private-policy" },
-  { path: "**", redirectTo: "" },
+  {
+    path: "",
+    component: MainPageComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "legal-notice",
+    component: LegalNoticeComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "private-policy",
+    component: PrivatePolicyComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "**",
+    redirectTo: "",
+    pathMatch: "full",
+  },
 ]
