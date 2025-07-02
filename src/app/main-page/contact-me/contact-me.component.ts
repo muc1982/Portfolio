@@ -3,6 +3,7 @@ import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ContactMeMobileComponent } from "./contact-me-mobile/contact-me-mobile.component";
 
 interface Contact {
   name: string,
@@ -14,10 +15,11 @@ interface Contact {
   selector: 'app-contact-me',
   standalone: true,
   imports: [
-    TranslateModule, 
-    CommonModule, 
+    TranslateModule,
+    CommonModule,
     FormsModule,
-  ],
+    ContactMeMobileComponent
+],
   templateUrl: './contact-me.component.html',
   styleUrl: './contact-me.component.scss'
 })
