@@ -10,6 +10,10 @@
     "test": "ng test",
     "lint": "ng lint"
   },
+  "engines": {
+    "node": "18.x",
+    "npm": ">=8.0.0"
+  },
   "dependencies": {
     "@angular/animations": "19.2.14",
     "@angular/cdk": "19.2.19",
@@ -24,6 +28,7 @@
     "@ngx-translate/core": "^16.0.4",
     "@ngx-translate/http-loader": "^16.0.1",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "gsap": "^3.13.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
