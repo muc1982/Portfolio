@@ -3,7 +3,6 @@ import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ContactMeMobileComponent } from "./contact-me-mobile/contact-me-mobile.component";
 
 interface Contact {
   name: string,
@@ -17,28 +16,28 @@ interface Contact {
   imports: [
     TranslateModule,
     CommonModule,
-    FormsModule,
-    ContactMeMobileComponent
-],
+    FormsModule
+    // ENTFERNT: ContactMeMobileComponent
+  ],
   templateUrl: './contact-me.component.html',
   styleUrl: './contact-me.component.scss'
 })
 export class ContactMeComponent {
   @Input() scrollContainer?: HTMLElement;
   isChecked: boolean = false;
-  
+
   nameValid: boolean = true;
   emailValid: boolean = true;
   emailInvalidMsg: string = 'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
   isShowingDetailedSuccess = false; // Für die neue detaillierte Erfolgsmeldung
-  
+
   readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
   readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   readonly msgMinLength = 10;
   readonly msgMaxLength = 500;
-  
+
   post = {
     endPoint: 'https://formspree.io/f/mldngvlb',
     body: (payload: any) => {
@@ -55,10 +54,10 @@ export class ContactMeComponent {
       },
     },
   }
-  
+
   http = inject(HttpClient);
-  
-  contact: Contact = {name:'', email:'', msg: ''};
+
+  contact: Contact = { name: '', email: '', msg: '' };
 
   clickCb() {
     this.isChecked = !this.isChecked;
@@ -70,7 +69,7 @@ export class ContactMeComponent {
       this.markFieldsAsTouched(myForm);
       return;
     }
-    
+
     this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
       .subscribe({
         next: (response: any) => {
@@ -86,7 +85,7 @@ export class ContactMeComponent {
     this.validateName();
     this.validateEmail();
     this.validateMessage();
-    
+
     return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
   }
 
@@ -148,7 +147,7 @@ export class ContactMeComponent {
       `E-Mail: ${this.contact.email}\n\n` +
       `Nachricht:\n${this.contact.msg}`
     );
-    
+
     const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
   }
@@ -160,7 +159,7 @@ export class ContactMeComponent {
     this.contact.msg = '';
     this.isShowingDetailedSuccess = true;
     myForm.resetForm();
-    
+
     // Nach 5 Sekunden ausblenden
     setTimeout(() => {
       this.isShowingDetailedSuccess = false;
@@ -186,9 +185,9 @@ export class ContactMeComponent {
   }
 
   isFormValid(): boolean {
-    return this.contact.name.length > 0 && 
-           this.contact.email.length > 0 && 
-           this.contact.msg.length > 0 && 
-           this.isChecked;
+    return this.contact.name.length > 0 &&
+      this.contact.email.length > 0 &&
+      this.contact.msg.length > 0 &&
+      this.isChecked;
   }
 }

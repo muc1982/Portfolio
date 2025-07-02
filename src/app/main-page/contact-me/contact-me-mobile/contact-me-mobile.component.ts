@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router'; // RouterLinkActive ENTFERNT
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -18,7 +18,7 @@ interface Contact {
     TranslateModule,
     CommonModule,
     RouterLink,
-    RouterLinkActive,
+    // RouterLinkActive ENTFERNT
     FormsModule
   ],
   templateUrl: './contact-me-mobile.component.html',

@@ -15,7 +15,8 @@
             <h1 class="page-title">{{ 'privatepolicy' | translate }}</h1>
 
             <div class="header-lang-switcher">
-                <app-lang-switcher></app-lang-switcher>
+                <!-- TEMPORÄR VEREINFACHT -->
+                <div style="color: white;">DE | EN</div>
             </div>
         </div>
     </div>
@@ -102,6 +103,7 @@
             } @else {
             <div class="content">
                 <div class="legal-notice-subcontainer">
+                    <h1>Datenschutzerklärung</h1>
                     <h2>1. Datenschutz auf einen Blick</h2>
                     <h3>Allgemeine Hinweise</h3>
                     <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen
@@ -189,5 +191,8 @@
         </div>
     </div>
 
-    <app-footer></app-footer>
+    <!-- TEMPORÄR VEREINFACHTER FOOTER -->
+    <div style="padding: 20px; text-align: center; color: white;">
+        <a routerLink="/" style="color: #0A84FF;">Zurück zur Startseite</a>
+    </div>
 </div>

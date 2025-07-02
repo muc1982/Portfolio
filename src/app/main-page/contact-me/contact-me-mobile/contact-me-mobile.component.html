@@ -50,18 +50,19 @@
                     </div>
                 </div>
 
+
                 <div class="privacy-policy">
                     <div class="cb pointer" (click)="clickCb()" [ngClass]="{'checked': isChecked}">
                         <input type="checkbox" id="mobile-privacy-check" [(ngModel)]="isChecked" name="privacy" required
                             style="display: none;">
                     </div>
-                    <span>
+                    <div class="privacy-text">
                         {{ 'contact.read' | translate}}
-                        <a routerLink="/private-policy" routerLinkActive="active" target="_blank">
-                            {{ 'contact.privacypolicy' | translate}}
+                        <a routerLink="/private-policy" (click)="$event.stopPropagation()" target="_blank">
+                            {{ 'privatepolicy' | translate}}
                         </a>
                         {{ 'contact.agree' | translate}}
-                    </span>
+                    </div>
                 </div>
 
                 <div class="send-btn">
@@ -69,8 +70,9 @@
                     <div class="success-message-detailed">
                         <div class="success-icon">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-                                <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                         <div class="success-content">

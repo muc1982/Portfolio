@@ -73,13 +73,13 @@
                         <input type="checkbox" id="privacy-check" [(ngModel)]="isChecked" name="privacy" required
                             style="display: none;">
                     </div>
-                    <label for="privacy-check" class="privacy-label">
+                    <div class="privacy-label">
                         {{ 'contact.read' | translate}}
-                        <a routerLink="/private-policy">{{ 'privatepolicy' | translate }}</a>
-                            {{ 'contact.privacypolicy' | translate}}
-        
+                        <a routerLink="/private-policy" (click)="$event.stopPropagation()" target="_blank">
+                            {{ 'privatepolicy' | translate }}
+                        </a>
                         {{ 'contact.agree' | translate}}
-                    </label>
+                    </div>
                 </div>
                 <div class="send-btn">
                     @if (isShowingDetailedSuccess) {
