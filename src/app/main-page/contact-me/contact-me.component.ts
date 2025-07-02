@@ -3,6 +3,7 @@ import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 interface Contact {
   name: string,
@@ -16,8 +17,8 @@ interface Contact {
   imports: [
     TranslateModule,
     CommonModule,
-    FormsModule
-    // ENTFERNT: ContactMeMobileComponent
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './contact-me.component.html',
   styleUrl: './contact-me.component.scss'

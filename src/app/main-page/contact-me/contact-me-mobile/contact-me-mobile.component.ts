@@ -18,7 +18,7 @@ interface Contact {
     TranslateModule,
     CommonModule,
     RouterLink,
-    // RouterLinkActive ENTFERNT
+    RouterLink,
     FormsModule
   ],
   templateUrl: './contact-me-mobile.component.html',
@@ -58,10 +58,10 @@ export class ContactMeMobileComponent {
   }
 
   http = inject(HttpClient);
-  
+
   contact: Contact = { name: '', email: '', msg: '' };
 
-  constructor() {}
+  constructor() { }
 
   clickCb() {
     this.isChecked = !this.isChecked;
@@ -78,11 +78,11 @@ export class ContactMeMobileComponent {
     this.nameBlurred = true;
     this.emailBlurred = true;
     this.msgBlurred = true;
-    
+
     this.validateName();
     this.validateEmail();
     this.validateMessage();
-    
+
     return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
   }
 
@@ -110,7 +110,7 @@ export class ContactMeMobileComponent {
       `E-Mail: ${this.contact.email}\n\n` +
       `Nachricht:\n${this.contact.msg}`
     );
-    
+
     const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
   }
@@ -171,7 +171,7 @@ export class ContactMeMobileComponent {
 
   private checkMail(): void {
     const email = this.contact.email.trim();
-    
+
     if (email.length <= 0) {
       this.emailValid = false;
       this.emailInvalidMsg = 'contact.emailrequired';
@@ -209,11 +209,11 @@ export class ContactMeMobileComponent {
   }
 
   isFormValid(): boolean {
-    return this.contact.name.length > 0 && 
-           this.contact.email.length > 0 && 
-           this.contact.msg.length > 0 && 
-           this.nameValid && 
-           this.emailValid && 
-           this.msgValid;
+    return this.contact.name.length > 0 &&
+      this.contact.email.length > 0 &&
+      this.contact.msg.length > 0 &&
+      this.nameValid &&
+      this.emailValid &&
+      this.msgValid;
   }
 }

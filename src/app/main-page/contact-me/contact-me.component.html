@@ -84,7 +84,8 @@
                     </div>
                     <div class="privacy-label">
                         {{ 'contact.read' | translate }}
-                        <a routerLink="/private-policy" (click)="$event.stopPropagation()" target="_blank">
+                        <a routerLink="/private-policy" (click)="$event.stopPropagation()" target="_blank"
+                            rel="noopener noreferrer">
                             {{ 'privatepolicy' | translate }}
                         </a>
                         {{ 'contact.agree' | translate }}
