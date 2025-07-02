@@ -27,10 +27,10 @@
         </div>
 
         <div class="contact-form">
-            <form (ngSubmit)="onSumbmit(myForm)" #myForm="ngForm" novalidate>
+            <!-- KORRIGIERT: Methodenname von onSumbmit zu onSubmit -->
+            <form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm" novalidate>
                 <div class="form-name-mail">
                     <div class="form-name form-field">
-                        <!-- KORRIGIERT: nameBlurred statt myForm.submitted -->
                         <label class="form-label" [class.form-label-error]="!nameValid && nameBlurred" for="name">
                             {{
                             !nameValid && nameBlurred
@@ -38,14 +38,12 @@
                             : ('contact.name' | translate)
                             }}
                         </label>
-                        <!-- KORRIGIERT: validateName() und onNameFocus() -->
                         <input [class.form-input-error]="!nameValid && nameBlurred" [(ngModel)]="contact.name"
                             name="name" id="name" class="form-input" type="text" required minlength="2" maxlength="50"
                             pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}" (blur)="validateName()" (focus)="onNameFocus()"
                             placeholder="{{ 'contact.name' | translate }}" autocomplete="name" />
                     </div>
                     <div class="form-email form-field">
-                        <!-- KORRIGIERT: emailBlurred statt myForm.submitted -->
                         <label class="form-label" [class.form-label-error]="!emailValid && emailBlurred" for="email">
                             {{
                             !emailValid && emailBlurred
@@ -53,7 +51,6 @@
                             : ('contact.myemail' | translate)
                             }}
                         </label>
-                        <!-- KORRIGIERT: validateEmail() und onEmailFocus() -->
                         <input [class.form-input-error]="!emailValid && emailBlurred" [(ngModel)]="contact.email"
                             name="email" id="email" class="form-input" type="email" required
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (blur)="validateEmail()"
@@ -63,7 +60,6 @@
                 </div>
 
                 <div class="form-message form-field">
-                    <!-- KORRIGIERT: msgBlurred statt myForm.submitted -->
                     <label class="form-label" for="message" [class.form-label-error]="!msgValid && msgBlurred">
                         {{
                         !msgValid && msgBlurred
@@ -71,7 +67,6 @@
                         : ('contact.message' | translate)
                         }}
                     </label>
-                    <!-- KORRIGIERT: validateMessage() und onMessageFocus() -->
                     <textarea [class.form-input-error]="!msgValid && msgBlurred" [(ngModel)]="contact.msg"
                         name="message" id="message" class="form-input" required minlength="10" maxlength="500"
                         (blur)="validateMessage()" (focus)="onMessageFocus()"
@@ -116,7 +111,6 @@
                         </div>
                     </div>
                     <ng-template #sendButton>
-                        <!-- KORRIGIERT: Entfernt myForm.invalid, nur isFormValid() und isChecked -->
                         <button [disabled]="!isChecked || !isFormValid()" type="submit" class="pointer"
                             [attr.aria-label]="'contact.send' | translate">
                             {{ 'contact.send' | translate }}

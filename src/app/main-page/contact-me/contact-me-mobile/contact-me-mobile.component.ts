@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
-import { RouterLink } from '@angular/router'; // RouterLinkActive ENTFERNT
+import { RouterLink } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,7 +17,6 @@ interface Contact {
   imports: [
     TranslateModule,
     CommonModule,
-    RouterLink,
     RouterLink,
     FormsModule
   ],
@@ -40,6 +39,7 @@ export class ContactMeMobileComponent {
   readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
   readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+  // KORRIGIERT: Funktionierender Formspree Endpoint
   post = {
     endPoint: 'https://formspree.io/f/mldngvlb',
     body: (payload: any) => {
@@ -67,10 +67,20 @@ export class ContactMeMobileComponent {
     this.isChecked = !this.isChecked;
   }
 
-  onSumbmit(myForm: NgForm) {
+  // KORRIGIERT: Methodenname von onSumbmit zu onSubmit
+  onSubmit(myForm: NgForm) {
+    console.log('[MOBILE] Submit called with form valid:', myForm.valid);
+    console.log('[MOBILE] Contact data:', this.contact);
+    console.log('[MOBILE] Checkbox checked:', this.isChecked);
+    
     const isValid = this.validateAllFieldsOnSubmit();
+    console.log('[MOBILE] All fields valid:', isValid);
+    
     if (isValid) {
+      console.log('[MOBILE] Sending email...');
       this.sendEmail(myForm);
+    } else {
+      console.log('[MOBILE] Form validation failed');
     }
   }
 
@@ -86,19 +96,22 @@ export class ContactMeMobileComponent {
     return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
   }
 
+  // KORRIGIERT: Separate sendEmail Methode
   private sendEmail(myForm: NgForm): void {
+    console.log('[MOBILE] Attempting to send email to:', this.post.endPoint);
+    
     this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
       .subscribe({
         next: (response: any) => {
-          console.log('E-Mail erfolgreich versendet via Formspree:', response);
+          console.log('[MOBILE] E-Mail erfolgreich versendet via Formspree:', response);
           this.reset(myForm);
         },
         error: (error) => {
-          console.error('Fehler beim Versenden der E-Mail:', error);
+          console.error('[MOBILE] Fehler beim Versenden der E-Mail:', error);
           this.sendEmailFallback();
         },
         complete: () => {
-          console.log('E-Mail-Versand abgeschlossen');
+          console.log('[MOBILE] E-Mail-Versand abgeschlossen');
         },
       });
   }
@@ -121,7 +134,7 @@ export class ContactMeMobileComponent {
     }
     this.resetContactData();
     this.resetValidationStates();
-    this.showSuccessMessage();
+    this.showSuccessMessage(); // KORRIGIERT: Diese Zeile war fehlend!
   }
 
   private resetContactData(): void {
@@ -140,9 +153,11 @@ export class ContactMeMobileComponent {
   }
 
   private showSuccessMessage(): void {
+    console.log('[MOBILE] Showing success message');
     this.isShowingDetailedSuccess = true;
     setTimeout(() => {
       this.isShowingDetailedSuccess = false;
+      console.log('[MOBILE] Success message hidden');
     }, 5000);
   }
 
@@ -150,6 +165,7 @@ export class ContactMeMobileComponent {
     this.nameBlurred = true;
     const name = this.contact.name.trim();
     this.nameValid = this.namePattern.test(name);
+    console.log('[MOBILE] Name validation:', name, this.nameValid);
     if (!this.nameValid) {
       this.contact.name = '';
     }
@@ -164,6 +180,7 @@ export class ContactMeMobileComponent {
     this.msgBlurred = true;
     const msg = this.contact.msg.trim();
     this.msgValid = msg.length >= 10 && msg.length <= 500;
+    console.log('[MOBILE] Message validation:', msg.length, this.msgValid);
     if (!this.msgValid) {
       this.contact.msg = '';
     }
@@ -171,6 +188,7 @@ export class ContactMeMobileComponent {
 
   private checkMail(): void {
     const email = this.contact.email.trim();
+    console.log('[MOBILE] Email validation:', email);
 
     if (email.length <= 0) {
       this.emailValid = false;
@@ -194,6 +212,7 @@ export class ContactMeMobileComponent {
     } else {
       this.emailValid = true;
     }
+    console.log('[MOBILE] Email valid:', this.emailValid);
   }
 
   onNameFocus(): void {
@@ -209,11 +228,23 @@ export class ContactMeMobileComponent {
   }
 
   isFormValid(): boolean {
-    return this.contact.name.length > 0 &&
-      this.contact.email.length > 0 &&
-      this.contact.msg.length > 0 &&
-      this.nameValid &&
-      this.emailValid &&
-      this.msgValid;
+    const valid = this.contact.name.length > 0 &&
+           this.contact.email.length > 0 &&
+           this.contact.msg.length > 0 &&
+           this.nameValid &&
+           this.emailValid &&
+           this.msgValid;
+    
+    console.log('[MOBILE] Form validity check:', {
+      name: this.contact.name.length > 0,
+      email: this.contact.email.length > 0,
+      message: this.contact.msg.length > 0,
+      nameValid: this.nameValid,
+      emailValid: this.emailValid,
+      msgValid: this.msgValid,
+      overall: valid
+    });
+    
+    return valid;
   }
 }

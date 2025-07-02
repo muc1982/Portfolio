@@ -44,6 +44,7 @@ export class ContactMeComponent {
   readonly msgMinLength = 10;
   readonly msgMaxLength = 500;
 
+  // KORRIGIERT: Funktionierender Formspree Endpoint
   post = {
     endPoint: 'https://formspree.io/f/mldngvlb',
     body: (payload: any) => {
@@ -69,21 +70,22 @@ export class ContactMeComponent {
     this.isChecked = !this.isChecked;
   }
 
-  onSumbmit(myForm: NgForm) {
+  // KORRIGIERT: Methodenname von onSumbmit zu onSubmit
+  onSubmit(myForm: NgForm) {
+    console.log('Submit called with form valid:', myForm.valid);
+    console.log('Contact data:', this.contact);
+    console.log('Checkbox checked:', this.isChecked);
+
     const isValid = this.validateAllFieldsOnSubmit();
+    console.log('All fields valid:', isValid);
+
     if (!isValid) {
+      console.log('Form validation failed');
       return;
     }
 
-    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
-      .subscribe({
-        next: (response: any) => {
-          console.log('E-Mail erfolgreich versendet via Formspree:', response);
-          this.reset(myForm);
-        },
-        error: (error) => this.handleEmailError(error),
-        complete: () => console.log('E-Mail-Versand abgeschlossen')
-      });
+    console.log('Sending email...');
+    this.sendEmail(myForm);
   }
 
   // KORRIGIERT: Neue Validation-Methoden hinzugefügt
@@ -103,6 +105,7 @@ export class ContactMeComponent {
     this.nameBlurred = true;
     const name = this.contact.name.trim();
     this.nameValid = this.namePattern.test(name);
+    console.log('Name validation:', name, this.nameValid);
     if (!this.nameValid) {
       this.contact.name = '';
     }
@@ -117,6 +120,7 @@ export class ContactMeComponent {
     this.msgBlurred = true;
     const msg = this.contact.msg.trim();
     this.msgValid = msg.length >= this.msgMinLength && msg.length <= this.msgMaxLength;
+    console.log('Message validation:', msg.length, this.msgValid);
     if (!this.msgValid) {
       this.contact.msg = '';
     }
@@ -124,7 +128,8 @@ export class ContactMeComponent {
 
   private checkMail(): void {
     const email = this.contact.email.trim();
-    
+    console.log('Email validation:', email);
+
     if (email.length === 0) {
       this.emailValid = false;
       this.emailInvalidMsg = 'contact.emailrequired';
@@ -145,6 +150,7 @@ export class ContactMeComponent {
     } else {
       this.emailValid = true;
     }
+    console.log('Email valid:', this.emailValid);
   }
 
   onNameFocus(): void {
@@ -159,27 +165,29 @@ export class ContactMeComponent {
     this.msgValid = true;
   }
 
-  // KORRIGIERT: Alte Methoden angepasst für Kompatibilität
-  onNameChange() {
-    if (this.contact.name.length > 0) {
-      this.validateName();
-    }
-  }
+  // KORRIGIERT: Separate sendEmail Methode
+  private sendEmail(myForm: NgForm): void {
+    console.log('Attempting to send email to:', this.post.endPoint);
 
-  onEmailChange() {
-    if (this.contact.email.length > 0) {
-      this.validateEmail();
-    }
-  }
-
-  onMessageChange() {
-    if (this.contact.msg.length > 0) {
-      this.validateMessage();
-    }
+    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
+      .subscribe({
+        next: (response: any) => {
+          console.log('E-Mail erfolgreich versendet via Formspree:', response);
+          this.reset(myForm);
+        },
+        error: (error) => {
+          console.error('Fehler beim Versenden der E-Mail:', error);
+          this.handleEmailError(error);
+        },
+        complete: () => {
+          console.log('E-Mail-Versand abgeschlossen');
+        }
+      });
   }
 
   private handleEmailError(error: any) {
     console.error('Fehler beim Versenden der E-Mail:', error);
+    // Fallback zu mailto
     this.sendEmailFallback();
   }
 
@@ -197,7 +205,9 @@ export class ContactMeComponent {
 
   // KORRIGIERT: showSuccessMessage() wird aufgerufen
   reset(myForm: NgForm) {
-    this.clickCb();
+    if (this.isChecked) {
+      this.clickCb(); // Checkbox deaktivieren
+    }
     this.resetContactData();
     this.resetValidationStates();
     this.showSuccessMessage(); // KORRIGIERT: Diese Zeile war fehlend!
@@ -220,18 +230,32 @@ export class ContactMeComponent {
   }
 
   private showSuccessMessage(): void {
+    console.log('Showing success message');
     this.isShowingDetailedSuccess = true;
     setTimeout(() => {
       this.isShowingDetailedSuccess = false;
+      console.log('Success message hidden');
     }, 5000);
   }
 
   isFormValid(): boolean {
-    return this.contact.name.length > 0 &&
+    const valid = this.contact.name.length > 0 &&
       this.contact.email.length > 0 &&
       this.contact.msg.length > 0 &&
       this.nameValid &&
       this.emailValid &&
       this.msgValid;
+
+    console.log('Form validity check:', {
+      name: this.contact.name.length > 0,
+      email: this.contact.email.length > 0,
+      message: this.contact.msg.length > 0,
+      nameValid: this.nameValid,
+      emailValid: this.emailValid,
+      msgValid: this.msgValid,
+      overall: valid
+    });
+
+    return valid;
   }
 }
