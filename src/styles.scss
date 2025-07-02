@@ -446,7 +446,7 @@ img {
     height: auto;
     display: block;
     
-    // Performance-Optimierungen (nur gültige CSS-Eigenschaften)
+    // Performance-Optimierungen
     image-rendering: -webkit-optimize-contrast;
     
     // Verhindert Layout-Shift
@@ -470,23 +470,11 @@ img {
 }
 
 // Mobile Projekt-Bilder
-@media screen and (max-width: $breakpoint-mobile) {
+@media screen and (max-width: 480px) {
     .project-img img,
     .project-top img {
         max-width: 400px !important;
         max-height: 300px !important;
         aspect-ratio: 4 / 3; // Angepasstes Seitenverhältnis für Mobile
-    }
-}
-
-// Logo-Optimierung
-.logo-img {
-    // Feste Größe für bessere Performance
-    width: 40px !important;
-    height: 26px !important;
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        width: 36px !important;
-        height: 23px !important;
     }
 }

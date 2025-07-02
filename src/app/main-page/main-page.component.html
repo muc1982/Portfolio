@@ -1,22 +1,33 @@
 <div class="main-page">
-    <app-landing-page></app-landing-page>
+
+    <!-- Landing Page -->
+    <ng-container *ngIf="isMobile; else desktopLanding">
+        <app-landing-page-mobile></app-landing-page-mobile>
+    </ng-container>
+    <ng-template #desktopLanding>
+        <app-landing-page></app-landing-page>
+    </ng-template>
+
     <app-nav></app-nav>
     <app-why-me></app-why-me>
     <app-my-skills></app-my-skills>
-    <app-my-projects></app-my-projects>
-    
-    <!-- Desktop Contact Version -->
-    <div class="contact-desktop-wrapper">
-        <app-contact-me></app-contact-me>
-    </div>
-    
-    <!-- Mobile Contact Version -->
-    <div class="contact-mobile-wrapper">
+
+    <!-- My Projects -->
+    <ng-container *ngIf="isMobile; else desktopProjects">
+        <app-my-projects-mobile></app-my-projects-mobile>
+    </ng-container>
+    <ng-template #desktopProjects>
+        <app-my-projects></app-my-projects>
+    </ng-template>
+
+    <!-- Contact -->
+    <ng-container *ngIf="isMobile; else desktopContact">
         <app-contact-me-mobile></app-contact-me-mobile>
-    </div>
-    
+    </ng-container>
+    <ng-template #desktopContact>
+        <app-contact-me></app-contact-me>
+    </ng-template>
+
     <app-footer></app-footer>
-    
-    <!-- ScrollToTop Button -->
     <app-scroll-to-top></app-scroll-to-top>
 </div>

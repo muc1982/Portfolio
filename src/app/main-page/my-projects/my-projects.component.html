@@ -58,8 +58,10 @@
                         }
                     </div>
                     <div class="project-img" #animatedEl2>
+                        <!-- KORRIGIERT: Explizite Dimensionen und Optimierung hinzugefügt -->
                         <img src="assets/img/{{project.url}}" alt="{{project.name}} Project Screenshot" loading="lazy"
-                            decoding="async">
+                            decoding="async" width="600" height="400"
+                            style="width: 100%; height: auto; max-width: 600px; max-height: 400px; object-fit: contain;">
                     </div>
                     <div class="project-right-footer" #animatedEl3>
                         <button class="pointer">

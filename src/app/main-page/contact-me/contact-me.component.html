@@ -1,27 +1,25 @@
 <!-- Desktop Contact Form -->
 <div id="contact-me" class="contact-container normal-container wide-screen">
-    <h2>{{ 'contact.title' | translate}}</h2>
+    <h2>{{ 'contact.title' | translate }}</h2>
 
     <div class="contact-content">
         <!-- Desktop Header Section -->
         <div class="contact-header">
-            <div class="header-left">
-            </div>
-
+            <div class="header-left"></div>
             <div class="header-right">
                 <div class="header-top">
                     <!-- Phone Contact -->
                     <div class="header-right-phone">
                         <a href="tel:01747620110">
                             <div class="tel img"></div>
-                            <span>{{ 'contact.myphone' | translate}}: 0174 762 0110</span>
+                            <span>{{ 'contact.myphone' | translate }}: 0174 762 0110</span>
                         </a>
                     </div>
                     <!-- Email Contact -->
                     <div class="header-right-email">
                         <a href="mailto:info@sun-dev.de">
                             <div class="mail img"></div>
-                            <span>{{ 'contact.myemail' | translate}}: info&#64;sun-dev.de</span>
+                            <span>{{ 'contact.myemail' | translate }}: info&#64;sun-dev.de</span>
                         </a>
                     </div>
                 </div>
@@ -33,32 +31,41 @@
                 <div class="form-name-mail">
                     <div class="form-name form-field">
                         <label class="form-label" [class.form-label-error]="!nameValid && myForm.submitted" for="name">
-                            {{ !nameValid && myForm.submitted ? ('contact.namerequired' | translate) : ('contact.name' |
-                            translate)}}
+                            {{
+                            !nameValid && myForm.submitted
+                            ? ('contact.namerequired' | translate)
+                            : ('contact.name' | translate)
+                            }}
                         </label>
                         <input [class.form-input-error]="!nameValid && myForm.submitted" [(ngModel)]="contact.name"
                             name="name" id="name" class="form-input" type="text" required minlength="2" maxlength="50"
                             pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}" (blur)="onNameChange()" (focus)="nameValid = true"
-                            placeholder="{{ 'contact.name' | translate }}" autocomplete="name">
+                            placeholder="{{ 'contact.name' | translate }}" autocomplete="name" />
                     </div>
                     <div class="form-email form-field">
                         <label class="form-label" [class.form-label-error]="!emailValid && myForm.submitted"
                             for="email">
-                            {{ !emailValid && myForm.submitted ? (emailInvalidMsg | translate) : ('contact.myemail' |
-                            translate)}}
+                            {{
+                            !emailValid && myForm.submitted
+                            ? (emailInvalidMsg | translate)
+                            : ('contact.myemail' | translate)
+                            }}
                         </label>
                         <input [class.form-input-error]="!emailValid && myForm.submitted" [(ngModel)]="contact.email"
                             name="email" id="email" class="form-input" type="email" required
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (blur)="onEmailChange()"
                             (focus)="emailValid = true" placeholder="{{ 'contact.myemail' | translate }}"
-                            autocomplete="email">
+                            autocomplete="email" />
                     </div>
                 </div>
+
                 <div class="form-message form-field">
                     <label class="form-label" for="message" [class.form-label-error]="!msgValid && myForm.submitted">
-                        {{ !msgValid && myForm.submitted ? ('contact.messagerequired' | translate) : ('contact.message'
-                        |
-                        translate)}}
+                        {{
+                        !msgValid && myForm.submitted
+                        ? ('contact.messagerequired' | translate)
+                        : ('contact.message' | translate)
+                        }}
                     </label>
                     <textarea [class.form-input-error]="!msgValid && myForm.submitted" [(ngModel)]="contact.msg"
                         name="message" id="message" class="form-input" required minlength="10" maxlength="500"
@@ -68,22 +75,25 @@
                         {{ contact.msg.length }} / 500
                     </div>
                 </div>
+
+                <!-- Datenschutz -->
                 <div class="privacy-policy">
-                    <div class="cb pointer" (click)="clickCb()" [ngClass]="{'checked': isChecked}">
+                    <div class="cb pointer" (click)="clickCb()" [ngClass]="{ checked: isChecked }">
                         <input type="checkbox" id="privacy-check" [(ngModel)]="isChecked" name="privacy" required
-                            style="display: none;">
+                            style="display: none" />
                     </div>
                     <div class="privacy-label">
-                        {{ 'contact.read' | translate}}
+                        {{ 'contact.read' | translate }}
                         <a routerLink="/private-policy" (click)="$event.stopPropagation()" target="_blank">
                             {{ 'privatepolicy' | translate }}
                         </a>
-                        {{ 'contact.agree' | translate}}
+                        {{ 'contact.agree' | translate }}
                     </div>
                 </div>
+
+                <!-- Submit oder Erfolgsmeldung -->
                 <div class="send-btn">
-                    @if (isShowingDetailedSuccess) {
-                    <div class="success-message-detailed">
+                    <div *ngIf="isShowingDetailedSuccess; else sendButton" class="success-message-detailed">
                         <div class="success-icon">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
@@ -99,12 +109,12 @@
                             </div>
                         </div>
                     </div>
-                    } @else {
-                    <button [disabled]="!isFormValid() || myForm.invalid" type="submit" class="pointer"
-                        [attr.aria-label]="'contact.send' | translate">
-                        {{ 'contact.send' | translate}}
-                    </button>
-                    }
+                    <ng-template #sendButton>
+                        <button [disabled]="!isFormValid() || myForm.invalid" type="submit" class="pointer"
+                            [attr.aria-label]="'contact.send' | translate">
+                            {{ 'contact.send' | translate }}
+                        </button>
+                    </ng-template>
                 </div>
             </form>
         </div>

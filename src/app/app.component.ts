@@ -1,25 +1,29 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from "@ngx-translate/core";
-import { TranslateService } from "@ngx-translate/core";
-import { RouterOutlet } from '@angular/router';
-import { Router, NavigationEnd } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ScrollToTopComponent } from './Instructions/scroll-to-top.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, TranslateModule, RouterOutlet, ScrollToTopComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TranslateModule, // forRoot wird im main.ts erledigt
+    RouterOutlet,
+    ScrollToTopComponent
+  ],
   template: `
-  <router-outlet></router-outlet>
-  <app-scroll-to-top></app-scroll-to-top>`,
-  styleUrl: './app.component.scss'
+    <router-outlet></router-outlet>
+    <app-scroll-to-top></app-scroll-to-top>
+  `,
+  styleUrls: ['./app.component.scss']
 })
-
 export class AppComponent implements OnInit {
-  currentLang: string = "";
+  currentLang: string = '';
 
   constructor(
     private translate: TranslateService,
@@ -31,29 +35,25 @@ export class AppComponent implements OnInit {
     this.setupRouterEvents();
   }
 
+  ngOnInit(): void {
+    this.setupLogoScrollToTop();
+  }
+
   private setupRouterEvents(): void {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        // Scroll to top on route change
-        window.scrollTo(0, 0);
-      });
+      .subscribe(() => window.scrollTo(0, 0));
   }
 
   private initializeLanguage(): void {
     try {
-      if (typeof Storage !== 'undefined' && localStorage) {
-        const storedLang = localStorage.getItem('currentLang');
-        if (storedLang && (storedLang === 'de' || storedLang === 'en')) {
-          this.setLang(storedLang);
-        } else {
-          this.setLang('de');
-        }
+      const storedLang = localStorage?.getItem('currentLang');
+      if (storedLang === 'de' || storedLang === 'en') {
+        this.setLang(storedLang);
       } else {
         this.setLang('de');
       }
-    } catch (error) {
-      console.warn('LocalStorage not available, using default language:', error);
+    } catch {
       this.setLang('de');
     }
   }
@@ -63,33 +63,19 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang(l);
       this.currentLang = l;
       this.translate.use(l);
-
       try {
-        if (typeof Storage !== 'undefined' && localStorage) {
-          localStorage.setItem('currentLang', l);
-        }
-      } catch (error) {
-        console.warn('Could not save language preference:', error);
-      }
+        localStorage?.setItem('currentLang', l);
+      } catch {}
     }
   }
 
-  ngOnInit(): void {
-    // Logo click to scroll to top functionality
-    this.setupLogoScrollToTop();
-  }
-
   private setupLogoScrollToTop(): void {
-    // Add click listener to all logo elements
     setTimeout(() => {
       const logos = this.document.querySelectorAll('.logo, .logo-img, .logo-wrapper');
       logos.forEach(logo => {
         logo.addEventListener('click', (e) => {
           e.preventDefault();
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       });
     }, 1000);
