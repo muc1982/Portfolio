@@ -1,3 +1,4 @@
+<!-- Mobile Contact Form - OPTIMIERT für bessere Funktionalität -->
 <div id="contact-me-mobile" class="contact-container-mobile wide-screen">
     <h2>{{ 'contact.title' | translate}}</h2>
 
@@ -24,6 +25,7 @@
             <form (ngSubmit)="onSumbmit(myForm)" #myForm="ngForm" novalidate>
                 <div class="form-name-mail">
                     <div class="form-name form-field">
+                        <!-- KORRIGIERT: Bessere Error-Handling für Mobile -->
                         <input [class.form-input-error]="!nameValid && nameBlurred"
                             placeholder="{{ (!nameValid && nameBlurred) ? ('contact.namerequired' | translate) : ('contact.name' | translate)}}"
                             [(ngModel)]="contact.name" name="name" id="mobile-name" class="form-input" type="text"
@@ -31,6 +33,7 @@
                             (focus)="onNameFocus()" (blur)="validateName()" autocomplete="name">
                     </div>
                     <div class="form-email form-field">
+                        <!-- KORRIGIERT: Bessere Error-Handling für Mobile -->
                         <input [class.form-input-error]="!emailValid && emailBlurred"
                             placeholder="{{ (!emailValid && emailBlurred) ? (emailInvalidMsg | translate) : ('contact.myemail' | translate)}}"
                             [(ngModel)]="contact.email" name="email" id="mobile-email" class="form-input" type="email"
@@ -40,6 +43,7 @@
                 </div>
 
                 <div class="form-message form-field">
+                    <!-- KORRIGIERT: Bessere Error-Handling für Mobile -->
                     <textarea [class.form-input-error]="!msgValid && msgBlurred"
                         placeholder="{{ (!msgValid && msgBlurred) ? ('contact.messagerequired' | translate) : ('contact.message' | translate)}}"
                         [(ngModel)]="contact.msg" name="message" id="mobile-message" class="form-input" required
@@ -49,7 +53,6 @@
                         {{ contact.msg.length }} / 500
                     </div>
                 </div>
-
 
                 <div class="privacy-policy">
                     <div class="cb pointer" (click)="clickCb()" [ngClass]="{'checked': isChecked}">
@@ -85,6 +88,7 @@
                         </div>
                     </div>
                     } @else {
+                    <!-- KORRIGIERT: Vereinfachte Button-Logik -->
                     <button [disabled]="!isChecked || !isFormValid()" type="submit" class="pointer"
                         [attr.aria-label]="'contact.send' | translate">
                         {{ 'contact.send' | translate}}

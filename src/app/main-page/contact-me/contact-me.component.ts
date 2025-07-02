@@ -27,12 +27,17 @@ export class ContactMeComponent {
   @Input() scrollContainer?: HTMLElement;
   isChecked: boolean = false;
 
+  // KORRIGIERT: Fehlende Properties hinzugefügt
+  nameBlurred = false;
+  emailBlurred = false;
+  msgBlurred = false;
+
   nameValid: boolean = true;
   emailValid: boolean = true;
   emailInvalidMsg: string = 'contact.emailrequired';
   msgValid: boolean = true;
   isShowingSuccessMsg = false;
-  isShowingDetailedSuccess = false; // Für die neue detaillierte Erfolgsmeldung
+  isShowingDetailedSuccess = false; // Für die detaillierte Erfolgsmeldung
 
   readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
   readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -65,9 +70,8 @@ export class ContactMeComponent {
   }
 
   onSumbmit(myForm: NgForm) {
-    const isValid = this.validateAllFields();
+    const isValid = this.validateAllFieldsOnSubmit();
     if (!isValid) {
-      this.markFieldsAsTouched(myForm);
       return;
     }
 
@@ -82,7 +86,12 @@ export class ContactMeComponent {
       });
   }
 
-  private validateAllFields(): boolean {
+  // KORRIGIERT: Neue Validation-Methoden hinzugefügt
+  private validateAllFieldsOnSubmit(): boolean {
+    this.nameBlurred = true;
+    this.emailBlurred = true;
+    this.msgBlurred = true;
+
     this.validateName();
     this.validateEmail();
     this.validateMessage();
@@ -90,7 +99,8 @@ export class ContactMeComponent {
     return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
   }
 
-  private validateName(): void {
+  validateName(): void {
+    this.nameBlurred = true;
     const name = this.contact.name.trim();
     this.nameValid = this.namePattern.test(name);
     if (!this.nameValid) {
@@ -98,31 +108,13 @@ export class ContactMeComponent {
     }
   }
 
-  private validateEmail(): void {
-    const email = this.contact.email.trim();
-    if (email.length === 0) {
-      this.emailValid = false;
-      this.emailInvalidMsg = 'contact.emailrequired';
-    } else if (!this.emailPattern.test(email)) {
-      this.emailValid = false;
-      // Spezifische Fehlermeldungen für häufige Tippfehler
-      if (email.includes(',')) {
-        this.emailInvalidMsg = 'contact.emailcommaerror'; // "Bitte verwenden Sie einen Punkt (.) statt Komma in der E-Mail"
-      } else if (!email.includes('@')) {
-        this.emailInvalidMsg = 'contact.emailmissingat'; // "@ Zeichen fehlt in der E-Mail-Adresse"
-      } else if (!email.includes('.')) {
-        this.emailInvalidMsg = 'contact.emailmissingdot'; // "Punkt (.) fehlt in der E-Mail-Adresse"
-      } else if (email.split('@').length > 2) {
-        this.emailInvalidMsg = 'contact.emailmultipleat'; // "Zu viele @ Zeichen in der E-Mail"
-      } else {
-        this.emailInvalidMsg = 'contact.emailinvalid'; // "Ungültige E-Mail-Adresse"
-      }
-    } else {
-      this.emailValid = true;
-    }
+  validateEmail(): void {
+    this.emailBlurred = true;
+    this.checkMail();
   }
 
-  private validateMessage(): void {
+  validateMessage(): void {
+    this.msgBlurred = true;
     const msg = this.contact.msg.trim();
     this.msgValid = msg.length >= this.msgMinLength && msg.length <= this.msgMaxLength;
     if (!this.msgValid) {
@@ -130,10 +122,60 @@ export class ContactMeComponent {
     }
   }
 
-  private markFieldsAsTouched(form: NgForm): void {
-    Object.keys(form.controls).forEach(key => {
-      form.controls[key].markAsTouched();
-    });
+  private checkMail(): void {
+    const email = this.contact.email.trim();
+    
+    if (email.length === 0) {
+      this.emailValid = false;
+      this.emailInvalidMsg = 'contact.emailrequired';
+    } else if (!this.emailPattern.test(email)) {
+      this.emailValid = false;
+      // Spezifische Fehlermeldungen für häufige Tippfehler
+      if (email.includes(',')) {
+        this.emailInvalidMsg = 'contact.emailcommaerror';
+      } else if (!email.includes('@')) {
+        this.emailInvalidMsg = 'contact.emailmissingat';
+      } else if (!email.includes('.')) {
+        this.emailInvalidMsg = 'contact.emailmissingdot';
+      } else if (email.split('@').length > 2) {
+        this.emailInvalidMsg = 'contact.emailmultipleat';
+      } else {
+        this.emailInvalidMsg = 'contact.emailinvalid';
+      }
+    } else {
+      this.emailValid = true;
+    }
+  }
+
+  onNameFocus(): void {
+    this.nameValid = true;
+  }
+
+  onEmailFocus(): void {
+    this.emailValid = true;
+  }
+
+  onMessageFocus(): void {
+    this.msgValid = true;
+  }
+
+  // KORRIGIERT: Alte Methoden angepasst für Kompatibilität
+  onNameChange() {
+    if (this.contact.name.length > 0) {
+      this.validateName();
+    }
+  }
+
+  onEmailChange() {
+    if (this.contact.email.length > 0) {
+      this.validateEmail();
+    }
+  }
+
+  onMessageChange() {
+    if (this.contact.msg.length > 0) {
+      this.validateMessage();
+    }
   }
 
   private handleEmailError(error: any) {
@@ -153,42 +195,43 @@ export class ContactMeComponent {
     window.location.href = mailtoLink;
   }
 
+  // KORRIGIERT: showSuccessMessage() wird aufgerufen
   reset(myForm: NgForm) {
     this.clickCb();
+    this.resetContactData();
+    this.resetValidationStates();
+    this.showSuccessMessage(); // KORRIGIERT: Diese Zeile war fehlend!
+    myForm.resetForm();
+  }
+
+  private resetContactData(): void {
     this.contact.name = '';
     this.contact.email = '';
     this.contact.msg = '';
-    this.isShowingDetailedSuccess = true;
-    myForm.resetForm();
+  }
 
-    // Nach 5 Sekunden ausblenden
+  private resetValidationStates(): void {
+    this.nameBlurred = false;
+    this.emailBlurred = false;
+    this.msgBlurred = false;
+    this.nameValid = true;
+    this.emailValid = true;
+    this.msgValid = true;
+  }
+
+  private showSuccessMessage(): void {
+    this.isShowingDetailedSuccess = true;
     setTimeout(() => {
       this.isShowingDetailedSuccess = false;
     }, 5000);
-  }
-
-  onNameChange() {
-    if (this.contact.name.length > 0) {
-      this.validateName();
-    }
-  }
-
-  onEmailChange() {
-    if (this.contact.email.length > 0) {
-      this.validateEmail();
-    }
-  }
-
-  onMessageChange() {
-    if (this.contact.msg.length > 0) {
-      this.validateMessage();
-    }
   }
 
   isFormValid(): boolean {
     return this.contact.name.length > 0 &&
       this.contact.email.length > 0 &&
       this.contact.msg.length > 0 &&
-      this.isChecked;
+      this.nameValid &&
+      this.emailValid &&
+      this.msgValid;
   }
 }

@@ -1,4 +1,4 @@
-<!-- Desktop Contact Form -->
+<!-- Desktop Contact Form - KORRIGIERT -->
 <div id="contact-me" class="contact-container normal-container wide-screen">
     <h2>{{ 'contact.title' | translate }}</h2>
 
@@ -30,46 +30,51 @@
             <form (ngSubmit)="onSumbmit(myForm)" #myForm="ngForm" novalidate>
                 <div class="form-name-mail">
                     <div class="form-name form-field">
-                        <label class="form-label" [class.form-label-error]="!nameValid && myForm.submitted" for="name">
+                        <!-- KORRIGIERT: nameBlurred statt myForm.submitted -->
+                        <label class="form-label" [class.form-label-error]="!nameValid && nameBlurred" for="name">
                             {{
-                            !nameValid && myForm.submitted
+                            !nameValid && nameBlurred
                             ? ('contact.namerequired' | translate)
                             : ('contact.name' | translate)
                             }}
                         </label>
-                        <input [class.form-input-error]="!nameValid && myForm.submitted" [(ngModel)]="contact.name"
+                        <!-- KORRIGIERT: validateName() und onNameFocus() -->
+                        <input [class.form-input-error]="!nameValid && nameBlurred" [(ngModel)]="contact.name"
                             name="name" id="name" class="form-input" type="text" required minlength="2" maxlength="50"
-                            pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}" (blur)="onNameChange()" (focus)="nameValid = true"
+                            pattern="[a-zA-ZäöüÄÖÜß\s]{2,50}" (blur)="validateName()" (focus)="onNameFocus()"
                             placeholder="{{ 'contact.name' | translate }}" autocomplete="name" />
                     </div>
                     <div class="form-email form-field">
-                        <label class="form-label" [class.form-label-error]="!emailValid && myForm.submitted"
-                            for="email">
+                        <!-- KORRIGIERT: emailBlurred statt myForm.submitted -->
+                        <label class="form-label" [class.form-label-error]="!emailValid && emailBlurred" for="email">
                             {{
-                            !emailValid && myForm.submitted
+                            !emailValid && emailBlurred
                             ? (emailInvalidMsg | translate)
                             : ('contact.myemail' | translate)
                             }}
                         </label>
-                        <input [class.form-input-error]="!emailValid && myForm.submitted" [(ngModel)]="contact.email"
+                        <!-- KORRIGIERT: validateEmail() und onEmailFocus() -->
+                        <input [class.form-input-error]="!emailValid && emailBlurred" [(ngModel)]="contact.email"
                             name="email" id="email" class="form-input" type="email" required
-                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (blur)="onEmailChange()"
-                            (focus)="emailValid = true" placeholder="{{ 'contact.myemail' | translate }}"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" (blur)="validateEmail()"
+                            (focus)="onEmailFocus()" placeholder="{{ 'contact.myemail' | translate }}"
                             autocomplete="email" />
                     </div>
                 </div>
 
                 <div class="form-message form-field">
-                    <label class="form-label" for="message" [class.form-label-error]="!msgValid && myForm.submitted">
+                    <!-- KORRIGIERT: msgBlurred statt myForm.submitted -->
+                    <label class="form-label" for="message" [class.form-label-error]="!msgValid && msgBlurred">
                         {{
-                        !msgValid && myForm.submitted
+                        !msgValid && msgBlurred
                         ? ('contact.messagerequired' | translate)
                         : ('contact.message' | translate)
                         }}
                     </label>
-                    <textarea [class.form-input-error]="!msgValid && myForm.submitted" [(ngModel)]="contact.msg"
+                    <!-- KORRIGIERT: validateMessage() und onMessageFocus() -->
+                    <textarea [class.form-input-error]="!msgValid && msgBlurred" [(ngModel)]="contact.msg"
                         name="message" id="message" class="form-input" required minlength="10" maxlength="500"
-                        (blur)="onMessageChange()" (focus)="msgValid = true"
+                        (blur)="validateMessage()" (focus)="onMessageFocus()"
                         placeholder="{{ 'contact.message' | translate }}" rows="5"></textarea>
                     <div class="character-count" *ngIf="contact.msg.length > 0">
                         {{ contact.msg.length }} / 500
@@ -111,7 +116,8 @@
                         </div>
                     </div>
                     <ng-template #sendButton>
-                        <button [disabled]="!isFormValid() || myForm.invalid" type="submit" class="pointer"
+                        <!-- KORRIGIERT: Entfernt myForm.invalid, nur isFormValid() und isChecked -->
+                        <button [disabled]="!isChecked || !isFormValid()" type="submit" class="pointer"
                             [attr.aria-label]="'contact.send' | translate">
                             {{ 'contact.send' | translate }}
                         </button>
