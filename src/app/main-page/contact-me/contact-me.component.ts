@@ -1,261 +1,215 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
-import { TranslateModule } from "@ngx-translate/core";
-import { FormsModule, NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
-
-interface Contact {
-  name: string,
-  email: string,
-  msg: string,
-}
+import { CommonModule } from "@angular/common"
+import { Component, inject, Input } from "@angular/core"
+import { TranslateModule } from "@ngx-translate/core"
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { HttpClient } from "@angular/common/http"
+import { RouterLink } from "@angular/router"
 
 @Component({
-  selector: 'app-contact-me',
+  selector: "app-contact-me",
   standalone: true,
-  imports: [
-    TranslateModule,
-    CommonModule,
-    FormsModule,
-    RouterLink
-  ],
-  templateUrl: './contact-me.component.html',
-  styleUrl: './contact-me.component.scss'
+  imports: [TranslateModule, CommonModule, ReactiveFormsModule, RouterLink],
+  templateUrl: "./contact-me.component.html",
+  styleUrl: "./contact-me.component.scss",
 })
 export class ContactMeComponent {
-  @Input() scrollContainer?: HTMLElement;
-  isChecked: boolean = false;
+  @Input() scrollContainer?: HTMLElement
 
-  // KORRIGIERT: Fehlende Properties hinzugefügt
-  nameBlurred = false;
-  emailBlurred = false;
-  msgBlurred = false;
+  // Reactive Form
+  contactForm: FormGroup;
 
-  nameValid: boolean = true;
-  emailValid: boolean = true;
-  emailInvalidMsg: string = 'contact.emailrequired';
-  msgValid: boolean = true;
-  isShowingSuccessMsg = false;
-  isShowingDetailedSuccess = false; // Für die detaillierte Erfolgsmeldung
+  // Template Properties
+  submitted = false;
+  isShowingDetailedSuccess = false;
+  isFadingOut = false; // NEU: Hier hinzugefügt
 
-  readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/;
-  readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  readonly msgMinLength = 10;
-  readonly msgMaxLength = 500;
+  // Status-Properties
+  isSending = false
+  isSuccess = false
 
-  // KORRIGIERT: Funktionierender Formspree Endpoint
-  post = {
-    endPoint: 'https://formspree.io/f/mldngvlb',
-    body: (payload: any) => {
-      const formData = new FormData();
-      formData.append('name', payload.name);
-      formData.append('email', payload.email);
-      formData.append('message', payload.msg);
-      formData.append('_subject', 'Portfolio Kontakt von ' + payload.name);
-      return formData;
-    },
-    options: {
-      headers: {
-        'Accept': 'application/json'
-      },
-    },
+  // Validation Patterns
+  readonly namePattern = /^[a-zA-ZäöüÄÖÜß\s]{2,50}$/
+  readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+  // HTTP Client
+  private http = inject(HttpClient)
+  private fb = inject(FormBuilder)
+
+  // Formspree Configuration
+  private readonly formspreeEndpoint = "https://formspree.io/f/mldngvlb"
+
+  constructor() {
+    this.contactForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]],
+      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+      privacy: [false, [Validators.requiredTrue]]
+    });
   }
 
-  http = inject(HttpClient);
+  // Getter für Template
+  get name() { return this.contactForm.get('name'); }
+  get email() { return this.contactForm.get('email'); }
+  get message() { return this.contactForm.get('message'); }
+  get privacy() { return this.contactForm.get('privacy'); }
 
-  contact: Contact = { name: '', email: '', msg: '' };
-
-  clickCb() {
-    this.isChecked = !this.isChecked;
+  // Validation Check Methods
+  get nameValid(): boolean {
+    return this.name?.valid || false;
   }
 
-  // KORRIGIERT: Methodenname von onSumbmit zu onSubmit
-  onSubmit(myForm: NgForm) {
-    console.log('Submit called with form valid:', myForm.valid);
-    console.log('Contact data:', this.contact);
-    console.log('Checkbox checked:', this.isChecked);
+  get emailValid(): boolean {
+    return this.email?.valid || false;
+  }
 
-    const isValid = this.validateAllFieldsOnSubmit();
-    console.log('All fields valid:', isValid);
+  get msgValid(): boolean {
+    return this.message?.valid || false;
+  }
 
-    if (!isValid) {
-      console.log('Form validation failed');
+  get isChecked(): boolean {
+    return this.privacy?.value || false;
+  }
+
+  get nameInvalid(): boolean {
+    return (this.name?.invalid && (this.name?.dirty || this.name?.touched || this.submitted)) || false;
+  }
+
+  get emailInvalid(): boolean {
+    return (this.email?.invalid && (this.email?.dirty || this.email?.touched || this.submitted)) || false;
+  }
+
+  get msgInvalid(): boolean {
+    return (this.message?.invalid && (this.message?.dirty || this.message?.touched || this.submitted)) || false;
+  }
+
+  // Error Messages
+  get emailInvalidMsg(): string {
+    if (this.email?.hasError('required')) {
+      return 'contact.emailrequired';
+    }
+    if (this.email?.hasError('email') || this.email?.hasError('pattern')) {
+      const emailValue = this.email?.value || '';
+      if (emailValue.includes(',')) {
+        return 'contact.emailcommaerror';
+      } else if (!emailValue.includes('@')) {
+        return 'contact.emailmissingat';
+      } else if (!emailValue.includes('.')) {
+        return 'contact.emailmissingdot';
+      } else {
+        return 'contact.emailinvalid';
+      }
+    }
+    return 'contact.emailrequired';
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // Markiere alle Felder als touched für Fehleranzeige
+    this.contactForm.markAllAsTouched();
+
+    if (!this.contactForm.valid) {
       return;
     }
 
-    console.log('Sending email...');
-    this.sendEmail(myForm);
+    this.sendEmail();
   }
 
-  // KORRIGIERT: Neue Validation-Methoden hinzugefügt
-  private validateAllFieldsOnSubmit(): boolean {
-    this.nameBlurred = true;
-    this.emailBlurred = true;
-    this.msgBlurred = true;
-
-    this.validateName();
-    this.validateEmail();
-    this.validateMessage();
-
-    return this.nameValid && this.emailValid && this.msgValid && this.isChecked;
+  clickCb(): void {
+    this.privacy?.setValue(!this.privacy?.value);
   }
 
-  validateName(): void {
-    this.nameBlurred = true;
-    const name = this.contact.name.trim();
-    this.nameValid = this.namePattern.test(name);
-    console.log('Name validation:', name, this.nameValid);
-    if (!this.nameValid) {
-      this.contact.name = '';
-    }
+  private sendEmail() {
+    this.isSending = true;
+    this.isSuccess = false;
+
+    const formData = new FormData();
+    formData.append("name", this.contactForm.value.name);
+    formData.append("email", this.contactForm.value.email);
+    formData.append("message", this.contactForm.value.message);
+    formData.append("_subject", `Portfolio Kontakt von ${this.contactForm.value.name}`);
+
+    const options = {
+      headers: {
+        Accept: "application/json",
+      },
+    };
+
+    this.http.post(this.formspreeEndpoint, formData, options).subscribe({
+      next: (response: any) => {
+        this.handleSuccess();
+      },
+      error: (error) => {
+        this.handleError();
+      },
+      complete: () => {
+        this.isSending = false;
+      },
+    });
   }
 
-  validateEmail(): void {
-    this.emailBlurred = true;
-    this.checkMail();
+  // ENTFERNT: Doppelte Deklarationen wurden entfernt
+
+  private handleSuccess() {
+    this.isSuccess = true;
+    this.isShowingDetailedSuccess = true;
+    this.isFadingOut = false;
+    this.resetForm();
+
+    // Nach 7 Sekunden Fade-Out starten
+    setTimeout(() => {
+      this.isFadingOut = true;
+    }, 7000);
+
+    // Nach 8 Sekunden komplett ausblenden
+    setTimeout(() => {
+      this.isSuccess = false;
+      this.isShowingDetailedSuccess = false;
+      this.isFadingOut = false;
+    }, 8000);
   }
 
-  validateMessage(): void {
-    this.msgBlurred = true;
-    const msg = this.contact.msg.trim();
-    this.msgValid = msg.length >= this.msgMinLength && msg.length <= this.msgMaxLength;
-    console.log('Message validation:', msg.length, this.msgValid);
-    if (!this.msgValid) {
-      this.contact.msg = '';
-    }
-  }
-
-  private checkMail(): void {
-    const email = this.contact.email.trim();
-    console.log('Email validation:', email);
-
-    if (email.length === 0) {
-      this.emailValid = false;
-      this.emailInvalidMsg = 'contact.emailrequired';
-    } else if (!this.emailPattern.test(email)) {
-      this.emailValid = false;
-      // Spezifische Fehlermeldungen für häufige Tippfehler
-      if (email.includes(',')) {
-        this.emailInvalidMsg = 'contact.emailcommaerror';
-      } else if (!email.includes('@')) {
-        this.emailInvalidMsg = 'contact.emailmissingat';
-      } else if (!email.includes('.')) {
-        this.emailInvalidMsg = 'contact.emailmissingdot';
-      } else if (email.split('@').length > 2) {
-        this.emailInvalidMsg = 'contact.emailmultipleat';
-      } else {
-        this.emailInvalidMsg = 'contact.emailinvalid';
-      }
-    } else {
-      this.emailValid = true;
-    }
-    console.log('Email valid:', this.emailValid);
-  }
-
-  onNameFocus(): void {
-    this.nameValid = true;
-  }
-
-  onEmailFocus(): void {
-    this.emailValid = true;
-  }
-
-  onMessageFocus(): void {
-    this.msgValid = true;
-  }
-
-  // KORRIGIERT: Separate sendEmail Methode
-  private sendEmail(myForm: NgForm): void {
-    console.log('Attempting to send email to:', this.post.endPoint);
-
-    this.http.post(this.post.endPoint, this.post.body(this.contact), this.post.options)
-      .subscribe({
-        next: (response: any) => {
-          console.log('E-Mail erfolgreich versendet via Formspree:', response);
-          this.reset(myForm);
-        },
-        error: (error) => {
-          console.error('Fehler beim Versenden der E-Mail:', error);
-          this.handleEmailError(error);
-        },
-        complete: () => {
-          console.log('E-Mail-Versand abgeschlossen');
-        }
-      });
-  }
-
-  private handleEmailError(error: any) {
-    console.error('Fehler beim Versenden der E-Mail:', error);
-    // Fallback zu mailto
-    this.sendEmailFallback();
-  }
-
-  sendEmailFallback() {
-    const subject = encodeURIComponent('Portfolio Kontakt');
+  private handleError() {
+    const subject = encodeURIComponent("Portfolio Kontakt");
     const body = encodeURIComponent(
-      `Name: ${this.contact.name}\n` +
-      `E-Mail: ${this.contact.email}\n\n` +
-      `Nachricht:\n${this.contact.msg}`
+      `Name: ${this.contactForm.value.name}\n` +
+      `E-Mail: ${this.contactForm.value.email}\n\n` +
+      `Nachricht:\n${this.contactForm.value.message}`,
     );
 
     const mailtoLink = `mailto:info@sun-dev.de?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
   }
 
-  // KORRIGIERT: showSuccessMessage() wird aufgerufen
-  reset(myForm: NgForm) {
-    if (this.isChecked) {
-      this.clickCb(); // Checkbox deaktivieren
-    }
-    this.resetContactData();
-    this.resetValidationStates();
-    this.showSuccessMessage(); // KORRIGIERT: Diese Zeile war fehlend!
-    myForm.resetForm();
+  private resetForm() {
+    this.contactForm.reset();
+    this.submitted = false;
   }
 
-  private resetContactData(): void {
-    this.contact.name = '';
-    this.contact.email = '';
-    this.contact.msg = '';
+  // Focus handlers
+  onNameFocus() {
+    // Reactive Forms handhaben das automatisch
   }
 
-  private resetValidationStates(): void {
-    this.nameBlurred = false;
-    this.emailBlurred = false;
-    this.msgBlurred = false;
-    this.nameValid = true;
-    this.emailValid = true;
-    this.msgValid = true;
+  onEmailFocus() {
+    // Reactive Forms handhaben das automatisch
   }
 
-  private showSuccessMessage(): void {
-    console.log('Showing success message');
-    this.isShowingDetailedSuccess = true;
-    setTimeout(() => {
-      this.isShowingDetailedSuccess = false;
-      console.log('Success message hidden');
-    }, 5000);
+  onMessageFocus() {
+    // Reactive Forms handhaben das automatisch
   }
 
+  // Getter für Template
+  get messageLength(): number {
+    return this.message?.value?.length || 0;
+  }
+
+  get showCharacterCount(): boolean {
+    return this.messageLength > 0;
+  }
+
+  // Template helper methods (für Rückwärtskompatibilität)
   isFormValid(): boolean {
-    const valid = this.contact.name.length > 0 &&
-      this.contact.email.length > 0 &&
-      this.contact.msg.length > 0 &&
-      this.nameValid &&
-      this.emailValid &&
-      this.msgValid;
-
-    console.log('Form validity check:', {
-      name: this.contact.name.length > 0,
-      email: this.contact.email.length > 0,
-      message: this.contact.msg.length > 0,
-      nameValid: this.nameValid,
-      emailValid: this.emailValid,
-      msgValid: this.msgValid,
-      overall: valid
-    });
-
-    return valid;
+    return this.contactForm.valid;
   }
 }

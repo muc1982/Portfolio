@@ -320,88 +320,230 @@
                     box-shadow: $apple-shadow-small;
                 }
 
-                // Neue professionelle Erfolgsmeldung
+                // Neue erweiterte Erfolgsmeldung mit aufklappender Animation
                 .success-message-detailed {
-                    @include dFlex($fd: row, $gap: 20px, $ai: flex-start);
-                    padding: clamp(24px, 5vw, 32px);
-                    background: linear-gradient(135deg, rgba($apple-success, 0.08) 0%, rgba($apple-success, 0.12) 100%);
-                    border: 2px solid rgba($apple-success, 0.2);
+                    @include dFlex($fd: column, $ai: center, $jc: center, $gap: clamp(20px, 5vw, 24px));
+                    padding: clamp(32px, 8vw, 40px) clamp(28px, 7vw, 36px);
+                    background: linear-gradient(135deg, 
+                        rgba($apple-success, 0.12) 0%, 
+                        rgba($apple-success, 0.18) 30%,
+                        rgba($apple-success, 0.08) 70%,
+                        rgba($apple-success, 0.15) 100%);
+                    border: 1.5px solid rgba($apple-success, 0.3);
                     border-radius: $apple-radius-large;
-                    box-shadow:
-                        0 8px 32px rgba($apple-success, 0.15),
-                        0 0 0 1px rgba($apple-success, 0.1);
+                    box-shadow: 
+                        0 12px 40px rgba($apple-success, 0.25),
+                        0 6px 20px rgba($apple-success, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                        inset 0 -1px 0 rgba($apple-success, 0.1);
+                    text-align: center;
                     position: relative;
-                    animation: successSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                    overflow: hidden;
+                    animation: success-main-entrance 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+                    backdrop-filter: blur(25px) saturate(1.4);
+                    transform-style: preserve-3d;
 
+                    // Dynamischer Hintergrund mit sich bewegenden Gradienten
                     &::before {
+                        content: '';
+                        position: absolute;
+                        top: -150%;
+                        left: -150%;
+                        width: 400%;
+                        height: 400%;
+                        background: conic-gradient(
+                            from 0deg at 50% 50%,
+                            rgba($apple-success, 0.08) 0deg,
+                            rgba($apple-success, 0.15) 72deg,
+                            rgba($apple-success, 0.05) 144deg,
+                            rgba($apple-success, 0.12) 216deg,
+                            rgba($apple-success, 0.18) 288deg,
+                            rgba($apple-success, 0.08) 360deg
+                        );
+                        animation: success-gradient-spin 20s linear infinite;
+                        filter: blur(60px);
+                        z-index: 0;
+                        opacity: 0.7;
+                    }
+
+                    // Schimmernde Partikel
+                    &::after {
                         content: '';
                         position: absolute;
                         top: 0;
                         left: 0;
                         right: 0;
-                        height: 3px;
-                        background: linear-gradient(90deg,
-                                $apple-success 0%,
-                                color.adjust($apple-success, $lightness: 15%) 50%,
-                                $apple-success 100%);
-                        animation: progressBar 3s ease-out;
+                        bottom: 0;
+                        background-image: 
+                            radial-gradient(circle at 25% 25%, rgba($apple-success, 0.6) 1px, transparent 1px),
+                            radial-gradient(circle at 75% 25%, rgba($apple-success, 0.4) 1px, transparent 1px),
+                            radial-gradient(circle at 25% 75%, rgba($apple-success, 0.5) 1px, transparent 1px),
+                            radial-gradient(circle at 75% 75%, rgba($apple-success, 0.7) 1px, transparent 1px),
+                            radial-gradient(circle at 50% 50%, rgba($apple-success, 0.3) 2px, transparent 2px);
+                        background-size: 80px 80px, 120px 120px, 100px 100px, 90px 90px, 60px 60px;
+                        animation: success-sparkles-dance 12s ease-in-out infinite;
+                        opacity: 0.8;
+                        z-index: 1;
+                        mix-blend-mode: screen;
                     }
 
                     .success-icon {
-                        width: clamp(48px, 10vw, 56px);
-                        height: clamp(48px, 10vw, 56px);
-                        flex-shrink: 0;
-                        background: $apple-success;
+                        width: clamp(64px, 16vw, 72px);
+                        height: clamp(64px, 16vw, 72px);
                         border-radius: 50%;
-                        @include dFlex($jc: center, $ai: center);
-                        box-shadow:
-                            0 4px 16px rgba($apple-success, 0.3),
-                            0 0 0 4px rgba($apple-success, 0.1);
-                        animation: iconBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
+                        background: linear-gradient(145deg, 
+                            $apple-success 0%, 
+                            color.adjust($apple-success, $lightness: 20%) 25%,
+                            $apple-success 50%,
+                            color.adjust($apple-success, $lightness: 12%) 75%,
+                            color.adjust($apple-success, $lightness: 5%) 100%);
+                        @include dFlex($ai: center, $jc: center);
+                        box-shadow: 
+                            0 12px 35px rgba($apple-success, 0.5),
+                            0 6px 15px rgba($apple-success, 0.4),
+                            0 2px 8px rgba($apple-success, 0.3),
+                            inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                            inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+                        animation: success-icon-ultimate 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s both;
+                        position: relative;
+                        z-index: 4;
+                        transform-style: preserve-3d;
+
+                        // Pulsierende Aura
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: -40%;
+                            left: -40%;
+                            right: -40%;
+                            bottom: -40%;
+                            background: radial-gradient(circle, 
+                                rgba($apple-success, 0.4) 0%, 
+                                rgba($apple-success, 0.2) 40%, 
+                                transparent 70%);
+                            border-radius: 50%;
+                            filter: blur(20px);
+                            animation: success-icon-aurora 3s ease-in-out infinite;
+                            z-index: -1;
+                        }
+
+                        // Glänzender Overlay
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 10%;
+                            left: 10%;
+                            width: 40%;
+                            height: 40%;
+                            background: linear-gradient(135deg, 
+                                rgba(255, 255, 255, 0.6) 0%, 
+                                rgba(255, 255, 255, 0.3) 50%,
+                                transparent 100%);
+                            border-radius: 50%;
+                            animation: success-icon-gleam 4s ease-in-out infinite;
+                            z-index: 1;
+                        }
 
                         svg {
-                            width: clamp(24px, 5vw, 28px);
-                            height: clamp(24px, 5vw, 28px);
+                            width: clamp(32px, 8vw, 36px);
+                            height: clamp(32px, 8vw, 36px);
                             color: white;
-                            stroke-width: 3;
+                            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+                            animation: success-checkmark-reveal 1s ease-out 1.2s both;
+                            position: relative;
+                            z-index: 2;
+                            stroke-width: 3.5;
+
+                            path {
+                                stroke-dasharray: 100;
+                                stroke-dashoffset: 100;
+                                animation: success-checkmark-draw 0.8s ease-out 1.2s forwards;
+                            }
                         }
                     }
 
                     .success-content {
-                        flex: 1;
-                        @include dFlex($fd: column, $gap: 12px);
+                        @include dFlex($fd: column, $ai: center, $gap: clamp(12px, 3vw, 16px));
+                        position: relative;
+                        z-index: 4;
+                        animation: success-content-emerge 1.2s ease-out 0.8s both;
 
                         h4 {
                             font-family: $apple-font-family;
-                            font-size: clamp(18px, 4.5vw, 22px);
+                            font-size: clamp(22px, 5.5vw, 26px);
                             font-weight: $apple-font-weight-semibold;
-                            color: $apple-success;
+                            color: $apple-text-primary;
                             margin: 0;
                             line-height: 1.2;
+                            background: linear-gradient(135deg, 
+                                $apple-text-primary 0%, 
+                                color.adjust($apple-text-primary, $lightness: 15%) 50%,
+                                $apple-text-primary 100%);
+                            background-size: 200% 200%;
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                            animation: success-title-wave 3s ease-in-out infinite;
+                            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                         }
 
                         p {
                             font-family: $apple-font-family;
-                            font-size: clamp(14px, 3.5vw, 16px);
+                            font-size: clamp(15px, 3.8vw, 17px);
                             font-weight: $apple-font-weight-regular;
-                            color: $apple-text-primary;
+                            color: $apple-text-secondary;
                             margin: 0;
-                            line-height: 1.4;
-                            opacity: 0.9;
+                            line-height: 1.6;
+                            max-width: 320px;
+                            opacity: 0.95;
+                            animation: success-text-typewriter 2s ease-out 1.5s both;
                         }
 
                         .success-details {
-                            margin-top: 8px;
+                            margin-top: clamp(16px, 4vw, 20px);
+                            padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 24px);
+                            background: linear-gradient(135deg, 
+                                rgba(255, 255, 255, 0.12) 0%, 
+                                rgba(255, 255, 255, 0.06) 50%,
+                                rgba(255, 255, 255, 0.10) 100%);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            border-radius: $apple-radius-medium;
+                            backdrop-filter: blur(20px) saturate(1.2);
+                            position: relative;
+                            overflow: hidden;
+                            animation: success-details-materialize 1s ease-out 2s both;
+                            box-shadow: 
+                                0 4px 15px rgba($apple-success, 0.2),
+                                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+                            // Gleitender Lichtstrahl
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: -100%;
+                                width: 100%;
+                                height: 100%;
+                                background: linear-gradient(90deg, 
+                                    transparent 0%, 
+                                    rgba(255, 255, 255, 0.25) 25%,
+                                    rgba(255, 255, 255, 0.4) 50%,
+                                    rgba(255, 255, 255, 0.25) 75%,
+                                    transparent 100%);
+                                animation: success-details-sweep 3s ease-in-out infinite 2.5s;
+                                z-index: 1;
+                            }
 
                             span {
                                 font-family: $apple-font-family;
-                                font-size: clamp(12px, 3vw, 14px);
+                                font-size: clamp(13px, 3.2vw, 15px);
                                 font-weight: $apple-font-weight-medium;
-                                color: $apple-text-secondary;
-                                padding: 6px 12px;
-                                background: rgba($apple-success, 0.1);
-                                border-radius: $apple-radius-small;
-                                border: 1px solid rgba($apple-success, 0.2);
+                                color: $apple-success;
+                                line-height: 1.4;
+                                position: relative;
+                                z-index: 2;
+                                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                                animation: success-badge-glow 2s ease-in-out infinite 3s;
                             }
                         }
                     }
@@ -473,34 +615,26 @@
     }
 }
 
-// Animationen
+// Basis-Animationen
 @keyframes apple-contact-ambient {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
-
     33% {
         transform: translateY(-15px) rotate(2deg) scale(1.02);
     }
-
     66% {
         transform: translateY(10px) rotate(-1deg) scale(0.98);
     }
 }
 
 @keyframes shake {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateX(0);
     }
-
     25% {
         transform: translateX(-4px);
     }
-
     75% {
         transform: translateX(4px);
     }
@@ -510,57 +644,337 @@
     0% {
         box-shadow: 0 0 0 0 rgba($apple-error, 0.4);
     }
-
     70% {
         box-shadow: 0 0 0 8px rgba($apple-error, 0);
     }
-
     100% {
         box-shadow: 0 0 0 0 rgba($apple-error, 0);
     }
 }
 
-@keyframes successSlideIn {
+// Erweiterte Success-Message Animationen
+@keyframes success-main-entrance {
     0% {
         opacity: 0;
-        transform: translateY(20px) scale(0.95);
+        transform: translateY(40px) scale(0.8) rotateX(15deg) rotateY(5deg);
+        filter: blur(15px) brightness(0.7);
     }
-
+    25% {
+        opacity: 0.6;
+        transform: translateY(10px) scale(0.95) rotateX(5deg) rotateY(-2deg);
+        filter: blur(8px) brightness(0.9);
+    }
+    50% {
+        opacity: 0.85;
+        transform: translateY(-8px) scale(1.05) rotateX(-3deg) rotateY(1deg);
+        filter: blur(3px) brightness(1.1);
+    }
+    75% {
+        opacity: 0.95;
+        transform: translateY(3px) scale(0.98) rotateX(1deg) rotateY(-0.5deg);
+        filter: blur(1px) brightness(1.05);
+    }
     100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+        filter: blur(0px) brightness(1);
+    }
+}
+
+@keyframes success-gradient-spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.7;
+    }
+    25% {
+        transform: rotate(90deg) scale(1.05);
+        opacity: 0.8;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+        opacity: 0.6;
+    }
+    75% {
+        transform: rotate(270deg) scale(1.05);
+        opacity: 0.9;
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 0.7;
+    }
+}
+
+@keyframes success-sparkles-dance {
+    0%, 100% {
+        transform: translateX(0px) translateY(0px) rotate(0deg);
+        opacity: 0.8;
+    }
+    20% {
+        transform: translateX(5px) translateY(-8px) rotate(72deg);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(-3px) translateY(-12px) rotate(144deg);
+        opacity: 0.6;
+    }
+    60% {
+        transform: translateX(-8px) translateY(-5px) rotate(216deg);
+        opacity: 0.9;
+    }
+    80% {
+        transform: translateX(2px) translateY(3px) rotate(288deg);
+        opacity: 0.7;
+    }
+}
+
+@keyframes success-icon-ultimate {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotateZ(-240deg) rotateY(180deg) rotateX(90deg);
+        filter: brightness(0.3) hue-rotate(180deg);
+    }
+    20% {
+        opacity: 0.6;
+        transform: scale(0.4) rotateZ(-120deg) rotateY(90deg) rotateX(45deg);
+        filter: brightness(0.7) hue-rotate(90deg);
+    }
+    40% {
+        opacity: 0.8;
+        transform: scale(0.8) rotateZ(-30deg) rotateY(30deg) rotateX(15deg);
+        filter: brightness(1.2) hue-rotate(30deg);
+    }
+    65% {
+        opacity: 0.95;
+        transform: scale(1.2) rotateZ(15deg) rotateY(-15deg) rotateX(-5deg);
+        filter: brightness(1.4) hue-rotate(-15deg);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(0.95) rotateZ(-8deg) rotateY(8deg) rotateX(3deg);
+        filter: brightness(1.1) hue-rotate(5deg);
+    }
+    90% {
+        transform: scale(1.02) rotateZ(3deg) rotateY(-3deg) rotateX(-1deg);
+        filter: brightness(1.05) hue-rotate(-2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateZ(0deg) rotateY(0deg) rotateX(0deg);
+        filter: brightness(1) hue-rotate(0deg);
+    }
+}
+
+@keyframes success-icon-aurora {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1) rotate(0deg);
+        filter: blur(20px);
+    }
+    25% {
+        opacity: 0.7;
+        transform: scale(1.2) rotate(90deg);
+        filter: blur(25px);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.4) rotate(180deg);
+        filter: blur(30px);
+    }
+    75% {
+        opacity: 0.8;
+        transform: scale(1.1) rotate(270deg);
+        filter: blur(22px);
+    }
+}
+
+@keyframes success-icon-gleam {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        opacity: 0.7;
+        transform: scale(1.3) rotate(90deg);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.5) rotate(180deg);
+    }
+    75% {
+        opacity: 0.8;
+        transform: scale(1.2) rotate(270deg);
+    }
+}
+
+@keyframes success-checkmark-draw {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes success-checkmark-reveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-15deg);
+        filter: brightness(0.5);
+    }
+    40% {
+        opacity: 0.7;
+        transform: scale(0.8) rotate(5deg);
+        filter: brightness(1.2);
+    }
+    70% {
+        opacity: 0.9;
+        transform: scale(1.1) rotate(-2deg);
+        filter: brightness(1.3);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1);
+    }
+}
+
+@keyframes success-content-emerge {
+    0% {
+        opacity: 0;
+        transform: translateY(25px) scale(0.85) rotateX(10deg);
+        filter: blur(8px);
+    }
+    40% {
+        opacity: 0.7;
+        transform: translateY(5px) scale(0.95) rotateX(3deg);
+        filter: blur(3px);
+    }
+    70% {
+        opacity: 0.9;
+        transform: translateY(-3px) scale(1.03) rotateX(-1deg);
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+        filter: blur(0px);
+    }
+}
+
+@keyframes success-title-wave {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes success-text-typewriter {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(5px);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateY(-2px);
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 0.95;
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+}
+
+@keyframes success-details-materialize {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9) rotateX(5deg);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-2px) scale(1.02) rotateX(-1deg);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+        filter: blur(0px);
+    }
+}
+
+@keyframes success-details-sweep {
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes success-badge-glow {
+    0%, 100% {
+        text-shadow: 
+            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 0 8px rgba($apple-success, 0.3);
+    }
+    50% {
+        text-shadow: 
+            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 0 15px rgba($apple-success, 0.6),
+            0 0 25px rgba($apple-success, 0.4);
+    }
+}
+
+@keyframes success-badge-glow {
+    0%, 100% {
+        text-shadow: 
+            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 0 8px rgba($apple-success, 0.3);
+    }
+    50% {
+        text-shadow: 
+            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 0 15px rgba($apple-success, 0.6),
+            0 0 25px rgba($apple-success, 0.4);
+    }
+}
+
+// NEU: Fade-Out Animation hier hinzufügen
+.success-message-detailed.fade-out {
+    animation: success-fade-out 1s ease-out forwards;
+}
+
+@keyframes success-fade-out {
+    0% {
         opacity: 1;
         transform: translateY(0) scale(1);
+        filter: blur(0px);
     }
-}
-
-@keyframes iconBounce {
-    0% {
-        opacity: 0;
-        transform: scale(0);
-    }
-
     50% {
-        opacity: 1;
-        transform: scale(1.1);
+        opacity: 0.5;
+        transform: translateY(-10px) scale(0.98);
+        filter: blur(2px);
     }
-
     100% {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        filter: blur(5px);
     }
 }
 
-@keyframes progressBar {
-    0% {
-        transform: scaleX(0);
-        transform-origin: left;
-    }
-
-    100% {
-        transform: scaleX(1);
-        transform-origin: left;
-    }
-}
-
+// Autofill-Styling (bleibt unverändert)
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
