@@ -19,12 +19,14 @@
     "relocate": "Ich bin bereit umzuziehen",
     "relocate.subtitle": "Für das richtige Projekt auch deutschlandweit",
     "introduction": "Als leidenschaftlicher Frontend-Entwickler vereine ich technisches Können mit kreativer Vision. Dank meiner fundierten Kenntnisse in modernen Technologien wie Angular, TypeScript und aktuellen Design-Systemen schaffe ich digitale Erlebnisse, die Benutzer begeistern und gleichzeitig Geschäftsergebnisse fördern.",
-    "talk": "Lassen Sie uns sprechen!"
+    "talk": "Lassen Sie uns sprechen!",
+    "feelfree": "Lassen Sie uns sprechen!"
   },
   "skills": {
     "title": "Meine Skills",
     "learning": "Kontinuierliches Lernen",
-    "text": "Ich bleibe stets auf dem neuesten Stand der Technologie und erweitere kontinuierlich mein Wissen. Aktuell vertiefe ich meine Kenntnisse in React und Vue.js, um noch vielseitiger zu werden."
+    "text": "Ich bleibe stets auf dem neuesten Stand der Technologie und erweitere kontinuierlich mein Wissen. Aktuell vertiefe ich meine Kenntnisse in React und Vue.js, um noch vielseitiger zu werden.",
+    "technologies": "Technologien"
   },
   "project": {
     "title": "Meine Projekte",
@@ -87,7 +89,8 @@
       "title": "Erfolgreich gesendet!",
       "message": "Vielen Dank für Ihre Nachricht. Ich werde mich schnellstmöglich bei Ihnen melden.",
       "response": "Antwort innerhalb von 24 Stunden"
-    }
+    },
+    "feelfree": "Lassen Sie uns sprechen!"
   },
   "footer": {
     "legalnotice": "Impressum"

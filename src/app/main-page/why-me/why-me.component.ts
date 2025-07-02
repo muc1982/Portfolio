@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ScrollBounceDirective } from '../../Instructions/scroll-bounce.directive';
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,8 @@ interface SlideContent {
   styleUrl: './why-me.component.scss'
 })
 export class WhyMeComponent implements OnInit, OnDestroy {
+  @Input() isMobileView: boolean = false;
+  
   private intervalSubscription?: Subscription;
   private languageSubscription?: Subscription;
 
@@ -73,6 +75,23 @@ export class WhyMeComponent implements OnInit, OnDestroy {
     if (this.languageSubscription) {
       this.languageSubscription.unsubscribe();
     }
+  }
+
+  // Getter für Template-Klassen
+  get containerClass(): string {
+    return this.isMobileView ? 'why-me-container-mobile' : 'why-me-container';
+  }
+
+  get containerIdAttribute(): string {
+    return this.isMobileView ? 'why-me-mobile' : 'why-me';
+  }
+
+  get scrollTargetId(): string {
+    return this.isMobileView ? 'contact-me-mobile' : 'contact-me';
+  }
+
+  get contactOffset(): number {
+    return this.isMobileView ? 72 : 104;
   }
 
   private startSlideTimer(): void {
@@ -135,5 +154,29 @@ export class WhyMeComponent implements OnInit, OnDestroy {
   // Getter für Template
   get slideIndicators(): number[] {
     return Array.from({ length: this.slideContents.length }, (_, i) => i);
+  }
+
+  // Helper-Methoden für bessere Template-Lesbarkeit
+  get shouldShowMobileLayout(): boolean {
+    return this.isMobileView;
+  }
+
+  get shouldShowDesktopLayout(): boolean {
+    return !this.isMobileView;
+  }
+
+  // Methode für onclick-Handler
+  onTalkButtonClick(): void {
+    // Hier könnte zusätzliche Logik für Analytics oder andere Aktionen stehen
+    console.log('Talk button clicked in Why Me component');
+  }
+
+  // Debug-Methoden (können in Produktion entfernt werden)
+  getCurrentSlideInfo(): string {
+    return `Slide ${this.currentSlideIndex + 1}/${this.slideContents.length}`;
+  }
+
+  isSlideTransitioning(): boolean {
+    return this.isTransitioning;
   }
 }

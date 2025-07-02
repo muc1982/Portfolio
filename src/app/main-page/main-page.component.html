@@ -1,6 +1,6 @@
 <div class="main-page">
 
-    <!-- Landing Page -->
+    <!-- Landing Page - Korrekt implementiert -->
     <ng-container *ngIf="isMobile; else desktopLanding">
         <app-landing-page-mobile></app-landing-page-mobile>
     </ng-container>
@@ -8,11 +8,28 @@
         <app-landing-page></app-landing-page>
     </ng-template>
 
-    <app-nav></app-nav>
-    <app-why-me></app-why-me>
-    <app-my-skills></app-my-skills>
+    <!-- Navigation - Nur auf Desktop, da Landing-Page-Mobile eigene Navigation hat -->
+    <ng-container *ngIf="!isMobile">
+        <app-nav></app-nav>
+    </ng-container>
 
-    <!-- My Projects -->
+    <!-- Why Me - KORRIGIERT: Responsive Behandlung -->
+    <ng-container *ngIf="isMobile; else desktopWhyMe">
+        <app-why-me [isMobileView]="true"></app-why-me>
+    </ng-container>
+    <ng-template #desktopWhyMe>
+        <app-why-me [isMobileView]="false"></app-why-me>
+    </ng-template>
+
+    <!-- Skills - KORRIGIERT: Responsive Behandlung -->
+    <ng-container *ngIf="isMobile; else desktopSkills">
+        <app-my-skills [isMobileView]="true"></app-my-skills>
+    </ng-container>
+    <ng-template #desktopSkills>
+        <app-my-skills [isMobileView]="false"></app-my-skills>
+    </ng-template>
+
+    <!-- Projects - Korrekt implementiert -->
     <ng-container *ngIf="isMobile; else desktopProjects">
         <app-my-projects-mobile></app-my-projects-mobile>
     </ng-container>
@@ -20,7 +37,7 @@
         <app-my-projects></app-my-projects>
     </ng-template>
 
-    <!-- Contact -->
+    <!-- Contact - Korrekt implementiert -->
     <ng-container *ngIf="isMobile; else desktopContact">
         <app-contact-me-mobile></app-contact-me-mobile>
     </ng-container>
@@ -28,6 +45,9 @@
         <app-contact-me></app-contact-me>
     </ng-template>
 
+    <!-- Footer - Immer anzeigen -->
     <app-footer></app-footer>
+
+    <!-- Scroll to Top - Immer anzeigen -->
     <app-scroll-to-top></app-scroll-to-top>
 </div>

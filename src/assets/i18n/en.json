@@ -19,12 +19,14 @@
     "relocate": "I am willing to relocate",
     "relocate.subtitle": "Nationwide for the right project",
     "introduction": "As a passionate frontend developer, I combine technical expertise with creative vision. With solid knowledge of modern technologies like Angular, TypeScript, and current design systems, I create digital experiences that excite users and drive business results.",
-    "talk": "Let's talk!"
+    "talk": "Let's talk!",
+    "feelfree": "Let's talk!"
   },
   "skills": {
     "title": "My Skills",
     "learning": "Continuous Learning",
-    "text": "I always stay up to date with technology and constantly expand my knowledge. Currently, I'm deepening my skills in React and Vue.js to become even more versatile."
+    "text": "I always stay up to date with technology and constantly expand my knowledge. Currently, I'm deepening my skills in React and Vue.js to become even more versatile.",
+    "technologies": "Technologies"
   },
   "project": {
     "title": "My Projects",
@@ -82,7 +84,8 @@
     "emailmultipleat": "Too many @ symbols in email",
     "sending": "Sending message...",
     "error": "Error sending message",
-    "errordetail": "The message could not be sent. Please try again or contact me directly."
+    "errordetail": "The message could not be sent. Please try again or contact me directly.",
+    "feelfree": "Feel free to contact me!"
   },
   "footer": {
     "legalnotice": "Legal Notice"
