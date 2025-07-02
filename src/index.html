@@ -1,31 +1,63 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
+
 <head>
   <meta charset="utf-8">
-  <title>Portfolio - Ihr Name</title>
+  <title>Yasin Sun - Frontend Developer Portfolio</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio von [Ihr Name] - Full Stack Developer">
-  <meta name="keywords" content="Portfolio, Developer, Angular, TypeScript, Web Development">
-  <meta name="author" content="Ihr Name">
-  
+  <meta name="description"
+    content="Portfolio von Yasin Sun - Frontend Developer. Angular, TypeScript, moderne Web-Entwicklung.">
+  <meta name="keywords"
+    content="Frontend Developer, Angular, TypeScript, Web Development, Portfolio, JavaScript, CSS, HTML">
+  <meta name="author" content="Yasin Sun">
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
-  
-  <!-- Google Fonts -->
+
+  <!-- DNS Prefetch für externe Ressourcen -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+  <!-- Preconnect für kritische externe Ressourcen -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Optimierte Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
+
   <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-  <!-- Custom Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
+
+  <!-- Nur wirklich verwendete Custom Fonts preloaden -->
+  <!-- Diese nur entkommentieren wenn die Fonts tatsächlich verwendet werden -->
+  <!-- 
   <link rel="preload" href="./assets/fonts/Anta-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="./assets/fonts/JosefinSans-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="./assets/fonts/NotoSansSC-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  -->
+
+  <!-- Meta Tags für SEO und Social Media -->
+  <meta property="og:title" content="Yasin Sun - Frontend Developer">
+  <meta property="og:description"
+    content="Portfolio von Yasin Sun - Frontend Developer mit Fokus auf Angular und moderne Web-Technologien">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sun-dev.de">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Theme Color für Browser -->
+  <meta name="theme-color" content="#0A84FF">
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="./assets/img/logo.png">
+
+  <!-- Preload nur kritischer Bilder die sofort sichtbar sind -->
+  <link rel="preload" href="./assets/img/profile-pic.png" as="image">
+  <!-- Logo wird erst später geladen, daher kein Preload nötig -->
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>

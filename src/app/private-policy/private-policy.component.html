@@ -15,8 +15,7 @@
             <h1 class="page-title">{{ 'privatepolicy' | translate }}</h1>
 
             <div class="header-lang-switcher">
-                <!-- TEMPORÄR VEREINFACHT -->
-                <div style="color: white;">DE | EN</div>
+                <app-lang-switcher></app-lang-switcher>
             </div>
         </div>
     </div>
@@ -191,8 +190,11 @@
         </div>
     </div>
 
-    <!-- TEMPORÄR VEREINFACHTER FOOTER -->
-    <div style="padding: 20px; text-align: center; color: white;">
-        <a routerLink="/" style="color: #0A84FF;">Zurück zur Startseite</a>
+    <!-- Footer -->
+    <div class="simple-footer">
+        <div class="footer-content">
+            <a routerLink="/" class="back-link">← Zurück zur Startseite</a>
+            <div class="copyright">© Yasin Sun 2025</div>
+        </div>
     </div>
 </div>

@@ -53,12 +53,13 @@
                     <div class="technologies" #animatedEl1>
                         @for (tech of project.technologies; track tech) {
                         <div class="tech-logo">
-                            <img src="assets/img/pro-{{tech}}.png" alt="{{tech}}">
+                            <img src="assets/img/pro-{{tech}}.png" alt="{{tech}}" loading="lazy" decoding="async">
                         </div>
                         }
                     </div>
                     <div class="project-img" #animatedEl2>
-                        <img src="assets/img/{{project.url}}" alt="{{project.name}}">
+                        <img src="assets/img/{{project.url}}" alt="{{project.name}} Project Screenshot" loading="lazy"
+                            decoding="async">
                     </div>
                     <div class="project-right-footer" #animatedEl3>
                         <button class="pointer">

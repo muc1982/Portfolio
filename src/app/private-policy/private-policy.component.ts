@@ -2,6 +2,7 @@ import { Component, type OnInit, OnDestroy } from "@angular/core"
 import { CommonModule, Location } from "@angular/common"
 import { RouterLink } from "@angular/router"
 import { TranslateModule, TranslateService } from "@ngx-translate/core"
+import { LangSwitcherComponent } from "../shared/lang-switcher/lang-switcher.component"
 import { Subscription } from "rxjs";
 
 @Component({
@@ -10,14 +11,16 @@ import { Subscription } from "rxjs";
   imports: [
     CommonModule, 
     RouterLink, 
-    TranslateModule
-    // FooterComponent und LangSwitcherComponent später hinzufügen
+    TranslateModule,
+    LangSwitcherComponent
   ],
   templateUrl: "./private-policy.component.html",
   styleUrls: [
-    "./private-policy.component.scss"
-    // ERSTMAL NUR DIE HAUPT-SCSS-DATEI
-    // Die partials später einzeln hinzufügen wenn alles funktioniert
+    "./private-policy.component.scss",
+    "./partials/_private-policy-layout.scss",
+    "./partials/_private-policy-typography.scss",
+    "./partials/_private-policy-responsive.scss",
+    "./partials/_private-policy-animations.scss"
   ],
 })
 export class PrivatePolicyComponent implements OnInit, OnDestroy {
@@ -30,7 +33,6 @@ export class PrivatePolicyComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('PrivatePolicyComponent mit originalem Design geladen!');
     window.scrollTo(0, 0);
     
     this.currentLang = this.translate.currentLang;

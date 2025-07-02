@@ -440,3 +440,53 @@ p, li, td, th {
         text-decoration: underline;
     }
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    
+    // Performance-Optimierungen (nur gültige CSS-Eigenschaften)
+    image-rendering: -webkit-optimize-contrast;
+    
+    // Verhindert Layout-Shift
+    &[width][height] {
+        aspect-ratio: attr(width) / attr(height);
+    }
+}
+
+// Spezielle Regeln für Projekt-Bilder
+.project-img img,
+.project-top img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 600px !important;
+    max-height: 400px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    
+    // Verhindert das Browser-Warning
+    aspect-ratio: 16 / 10; // Setzt ein Standard-Seitenverhältnis
+}
+
+// Mobile Projekt-Bilder
+@media screen and (max-width: $breakpoint-mobile) {
+    .project-img img,
+    .project-top img {
+        max-width: 400px !important;
+        max-height: 300px !important;
+        aspect-ratio: 4 / 3; // Angepasstes Seitenverhältnis für Mobile
+    }
+}
+
+// Logo-Optimierung
+.logo-img {
+    // Feste Größe für bessere Performance
+    width: 40px !important;
+    height: 26px !important;
+    
+    @media screen and (max-width: $breakpoint-mobile) {
+        width: 36px !important;
+        height: 23px !important;
+    }
+}
