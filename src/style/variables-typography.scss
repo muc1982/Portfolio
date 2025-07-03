@@ -1,24 +1,38 @@
+// ===== KORRIGIERTE TYPOGRAPHY VARIABLES =====
 $apple-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
 
-
+// ===== FONT WEIGHTS =====
 $apple-font-weight-regular: 400 !default;
 $apple-font-weight-medium: 500 !default;
 $apple-font-weight-semibold: 600 !default;
 $apple-font-weight-bold: 700 !default;
 
-
+// ===== RESPONSIVE FONT SIZES - WCAG KONFORM =====
+// Mindestens 16px für normalen Text
 $font-size-base: 16px !default;
-$font-size-small: 16px !default; 
+$font-size-small: 16px !default;    // WCAG minimum
 $font-size-medium: 18px !default;
 $font-size-large: 20px !default;
 $font-size-xl: 24px !default;
 $font-size-xxl: 32px !default;
 
+// ===== RESPONSIVE FONT SCALE =====
+$font-xs: clamp(16px, 3vw, 18px) !default;
+$font-sm: clamp(16px, 3.5vw, 20px) !default;
+$font-base: clamp(16px, 4vw, 22px) !default;
+$font-md: clamp(18px, 4.5vw, 24px) !default;
+$font-lg: clamp(20px, 5vw, 28px) !default;
+$font-xl: clamp(24px, 6vw, 32px) !default;
+$font-2xl: clamp(28px, 7vw, 40px) !default;
+$font-3xl: clamp(32px, 8vw, 48px) !default;
+
+// ===== BORDER RADIUS =====
 $apple-radius-small: 6px !default;
 $apple-radius-medium: 8px !default;
 $apple-radius-large: 12px !default;
 $apple-radius-xl: 16px !default;
 
+// ===== Z-INDEX SYSTEM =====
 $apple-z-dropdown: 1000 !default;
 $apple-z-sticky: 1020 !default;
 $apple-z-fixed: 1030 !default;
@@ -26,3 +40,13 @@ $apple-z-modal-backdrop: 1040 !default;
 $apple-z-modal: 1050 !default;
 $apple-z-popover: 1060 !default;
 $apple-z-tooltip: 1070 !default;
+
+// ===== LINE HEIGHTS =====
+$line-height-tight: 1.2 !default;
+$line-height-normal: 1.5 !default;
+$line-height-relaxed: 1.8 !default;
+
+// ===== LETTER SPACING =====
+$letter-spacing-tight: -0.02em !default;
+$letter-spacing-normal: 0 !default;
+$letter-spacing-wide: 0.02em !default;

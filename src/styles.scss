@@ -1,5 +1,6 @@
 @use 'style/apple-variables' as *;
 
+// ===== GLOBAL RESET =====
 * {
     margin: 0;
     padding: 0;
@@ -8,10 +9,12 @@
     text-decoration: none;
 }
 
+// ===== SCROLLBAR HIDING =====
 body::-webkit-scrollbar {
     display: none;
 }
 
+// ===== BODY STYLING - KORRIGIERT =====
 body {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -20,9 +23,6 @@ body {
     font-weight: $apple-font-weight-regular;
     background: $apple-universal-gradient;
     color: $apple-text-primary;
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -30,102 +30,62 @@ body {
     margin: 0;
     padding: 0;
     min-width: 320px;
+    
+    // ENTFERNT: width: 100%, max-width: 100%, overflow-x: hidden
+    // Diese verursachten die Responsive-Probleme
 }
 
-// ===== VOLLBREITE CONTAINER FÜR ALLE SECTIONS =====
-.content-container,
+// ===== SICHERE CONTAINER CLASSES =====
+.content-container {
+    @include safe-container();
+}
+
 .wide-screen {
-    @include unified-container();
+    @include full-width-safe();
 }
 
-// ===== VEREINHEITLICHTE CONTENT-BEREICHE =====
 .page-container {
-    @include unified-content-padding();
+    @include content-wrapper();
 }
 
-// ===== VOLLBREITE SECTION WRAPPER =====
 .normal-container {
-    @include full-width-background();
+    @include full-width-safe();
     position: relative;
     box-sizing: border-box;
 }
 
-// ===== SCROLL-ANKER MIT KORRIGIERTEM OFFSET =====
+// ===== SCROLL-ANKER MIT RESPONSIVEM OFFSET =====
 #landing-page {
     scroll-margin-top: 0;
 }
 
 #why-me {
-    scroll-margin-top: 120px;
-    
-    @media screen and (max-width: $breakpoint-tablet) {
-        scroll-margin-top: 100px;
-    }
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 80px;
-    }
+    @include scroll-offset(100px);
 }
 
 #my-skills {
-    scroll-margin-top: 120px;
-    
-    @media screen and (max-width: $breakpoint-tablet) {
-        scroll-margin-top: 100px;
-    }
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 80px;
-    }
+    @include scroll-offset(100px);
 }
 
 #my-projects {
-    scroll-margin-top: 120px;
-    
-    @media screen and (max-width: $breakpoint-tablet) {
-        scroll-margin-top: 100px;
-    }
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 80px;
-    }
+    @include scroll-offset(100px);
 }
 
 #contact-me {
-    scroll-margin-top: 120px;
-    
-    @media screen and (max-width: $breakpoint-tablet) {
-        scroll-margin-top: 100px;
-    }
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 80px;
-    }
+    @include scroll-offset(100px);
 }
 
 // Mobile Varianten
 #my-skills-mobile {
-    scroll-margin-top: 80px;
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 72px;
-    }
+    @include scroll-offset(80px);
 }
 
 #my-projects-mobile {
-    scroll-margin-top: 80px;
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 72px;
-    }
+    @include scroll-offset(80px);
 }
 
 #contact-me-mobile {
-    scroll-margin-top: 80px;
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 72px;
-    }
+    @include scroll-offset(80px);
 }
 
 // ===== WCAG KONFORME BUTTONS =====
@@ -136,6 +96,10 @@ button {
         outline: 2px solid $apple-primary;
         outline-offset: 2px;
     }
+    
+    &.secondary {
+        @include apple-button-secondary();
+    }
 }
 
 // ===== WCAG KONFORME INPUTS =====
@@ -144,7 +108,7 @@ input {
     @include apple-input();
 }
 
-// Input Autofill Styles
+// ===== AUTOFILL STYLES =====
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -200,13 +164,13 @@ a[href]:not([href=""]):not([href="#"]) {
     }
 }
 
-// ===== WCAG KONFORME TYPOGRAPHY =====
+// ===== RESPONSIVE TYPOGRAPHY =====
 h1 {
     font-family: $apple-font-family;
     font-weight: $apple-font-weight-bold;
     line-height: 1.2;
     letter-spacing: -0.02em;
-    font-size: clamp(28px, 7vw, 48px); // Mindestens 28px für H1
+    @include responsive-heading(28px, 36px, 48px);
 }
 
 h2 {
@@ -218,9 +182,7 @@ h2 {
 }
 
 h3, h4, h5, h6 {
-    font-family: $apple-font-family;
-    font-size: clamp(18px, 4vw, 24px); // Mindestens 18px für Überschriften
-    line-height: 1.4;
+    @include h3Title();
 }
 
 p, li, td, th {
@@ -273,7 +235,7 @@ p, li, td, th {
     }
 }
 
-// Animation Classes
+// ===== ANIMATION CLASSES =====
 .bubble-out-005 {
     animation: apple-scale-in 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
@@ -317,11 +279,10 @@ p, li, td, th {
     }
 }
 
-// ===== KORRIGIERTE MOBILE OPTIMIERUNGEN FÜR 320PX =====
+// ===== RESPONSIVE OPTIMIERUNGEN =====
 @media screen and (max-width: 320px) {
     body {
         min-width: 320px;
-        overflow-x: hidden;
         font-size: 16px; // WCAG minimum
     }
 
@@ -368,7 +329,7 @@ p, li, td, th {
     border-radius: $apple-radius-small;
 }
 
-// Skip Link für Screen Reader
+// ===== SKIP LINK FÜR SCREEN READER =====
 .skip-link {
     position: absolute;
     top: -40px;
@@ -441,6 +402,7 @@ p, li, td, th {
     }
 }
 
+// ===== RESPONSIVE IMAGES =====
 img {
     max-width: 100%;
     height: auto;
@@ -455,7 +417,7 @@ img {
     }
 }
 
-// Spezielle Regeln für Projekt-Bilder
+// ===== PROJEKT-BILDER RESPONSIVE =====
 .project-img img,
 .project-top img {
     width: 100% !important;
@@ -464,17 +426,55 @@ img {
     max-height: 400px !important;
     object-fit: contain !important;
     object-position: center !important;
+    aspect-ratio: 16 / 10;
     
-    // Verhindert das Browser-Warning
-    aspect-ratio: 16 / 10; // Setzt ein Standard-Seitenverhältnis
+    // Mobile Anpassungen
+    @include mobile-only {
+        max-width: 100% !important;
+        max-height: 300px !important;
+        aspect-ratio: 4 / 3;
+    }
+    
+    // Tablet Anpassungen
+    @include tablet-only {
+        max-width: 500px !important;
+        max-height: 350px !important;
+    }
 }
 
-// Mobile Projekt-Bilder
-@media screen and (max-width: 480px) {
-    .project-img img,
-    .project-top img {
-        max-width: 400px !important;
-        max-height: 300px !important;
-        aspect-ratio: 4 / 3; // Angepasstes Seitenverhältnis für Mobile
+// ===== UTILITY CLASSES =====
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.visually-hidden {
+    @extend .sr-only;
+}
+
+// ===== FOCUS MANAGEMENT =====
+.focus-trap {
+    &:focus {
+        outline: 2px solid $apple-primary;
+        outline-offset: 2px;
     }
 }

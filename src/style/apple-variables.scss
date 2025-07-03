@@ -1,4 +1,4 @@
-// ===== KORRIGIERTE APPLE VARIABLES - WCAG KONFORM =====
+// ===== KORRIGIERTE APPLE VARIABLES - RESPONSIV OPTIMIERT =====
 @use 'sass:color';
 
 // ===== TRANSITIONS =====
@@ -26,6 +26,7 @@ $apple-teal-gradient: linear-gradient(135deg, #0A84FF 0%, #32D74B 100%) !default
 $apple-universal-gradient: linear-gradient(135deg, #000000 0%, #1C1C1E 100%) !default;
 $apple-container-gradient: $apple-universal-gradient !default;
 $apple-header-footer-gradient: $apple-universal-gradient !default;
+
 $apple-shadow-small: 0 2px 8px rgba(0, 0, 0, 0.2) !default;
 $apple-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.25) !default;
 $apple-shadow-large: 0 8px 32px rgba(0, 0, 0, 0.35) !default;
@@ -38,31 +39,37 @@ $apple-font-weight-medium: 500 !default;
 $apple-font-weight-semibold: 600 !default;
 $apple-font-weight-bold: 700 !default;
 
-// WCAG konforme Mindestgrößen - 16px minimum für normalen Text
-$font-xs: clamp(16px, 3vw, 18px) !default;        // Mindestens 16px
-$font-sm: clamp(16px, 3.5vw, 20px) !default;      // Mindestens 16px  
-$font-base: clamp(16px, 4vw, 22px) !default;      // Mindestens 16px
-$font-md: clamp(18px, 4.5vw, 24px) !default;      // Mindestens 18px
-$font-lg: clamp(20px, 5vw, 28px) !default;        // Mindestens 20px
-$font-xl: clamp(24px, 6vw, 32px) !default;        // Mindestens 24px
-$font-2xl: clamp(28px, 7vw, 40px) !default;       // Mindestens 28px
-$font-3xl: clamp(32px, 8vw, 48px) !default;       // Mindestens 32px
+// RESPONSIVE FONT SIZES - WCAG KONFORM
+$font-xs: clamp(16px, 3vw, 18px) !default;
+$font-sm: clamp(16px, 3.5vw, 20px) !default;
+$font-base: clamp(16px, 4vw, 22px) !default;
+$font-md: clamp(18px, 4.5vw, 24px) !default;
+$font-lg: clamp(20px, 5vw, 28px) !default;
+$font-xl: clamp(24px, 6vw, 32px) !default;
+$font-2xl: clamp(28px, 7vw, 40px) !default;
+$font-3xl: clamp(32px, 8vw, 48px) !default;
 
-// ===== ERWEITERTE BREAKPOINTS =====
-$breakpoint-xs: 320px !default;        
-$breakpoint-sm: 375px !default;        
-$breakpoint-mobile: 480px !default;    
-$breakpoint-tablet: 768px !default;    
-$breakpoint-desktop: 900px !default;   
-$breakpoint-large: 1200px !default;    
-$breakpoint-xl: 1440px !default;       
-$breakpoint-2xl: 1920px !default;      
+// ===== KORRIGIERTE BREAKPOINTS - MOBILE FIRST =====
+$breakpoint-xs: 320px !default;    // Kleinste Smartphones
+$breakpoint-sm: 480px !default;    // Kleine Smartphones
+$breakpoint-md: 768px !default;    // Tablets
+$breakpoint-lg: 1024px !default;   // Kleine Desktops
+$breakpoint-xl: 1200px !default;   // Große Desktops
+$breakpoint-xxl: 1440px !default;  // Sehr große Screens
 
-// ===== VEREINHEITLICHTE CONTAINER BREITEN =====
+// Legacy Support (falls woanders verwendet)
+$breakpoint-mobile: $breakpoint-sm !default;
+$breakpoint-tablet: $breakpoint-md !default;
+$breakpoint-desktop: $breakpoint-lg !default;
+$breakpoint-large: $breakpoint-xl !default;
+$breakpoint-2xl: $breakpoint-xxl !default;
+
+// ===== SICHERE CONTAINER BREITEN - KEIN OVERFLOW =====
 $container-max-width: 1440px !default;
-$content-max-width: 1440px !default; // Alias für Kompatibilität
-$container-padding-desktop: clamp(40px, 5vw, 80px) !default;
+$content-max-width: 1440px !default;
 $container-padding-mobile: clamp(16px, 4vw, 24px) !default;
+$container-padding-tablet: clamp(32px, 5vw, 48px) !default;
+$container-padding-desktop: clamp(48px, 6vw, 80px) !default;
 
 // ===== SPACING VARIABLEN =====
 $space-xs: clamp(8px, 2vw, 12px) !default;
@@ -85,12 +92,12 @@ $apple-radius-medium: clamp(8px, 2vw, 12px) !default;
 $apple-radius-large: clamp(12px, 3vw, 16px) !default;
 $apple-radius-xl: clamp(16px, 4vw, 24px) !default;
 
-// ===== NAVIGATION HEIGHTS =====
-$nav-height-desktop: 104px !default;
-$nav-height-tablet: 88px !default;
-$nav-height-mobile: 72px !default;
+// ===== NAVIGATION HEIGHTS - KORRIGIERT =====
+$nav-height-mobile: 60px !default;   // Reduziert für mehr Platz
+$nav-height-tablet: 72px !default;   // Angemessen für Tablets
+$nav-height-desktop: 80px !default;  // Konsistent für Desktop
 
-// ===== ERWEITERTE MIXINS =====
+// ===== VERBESSERTE RESPONSIVE MIXINS =====
 @mixin dFlex($fd: row, $jc: center, $ai: center, $gap: 0) {
     display: flex;
     flex-direction: $fd;
@@ -101,64 +108,115 @@ $nav-height-mobile: 72px !default;
     }
 }
 
-// VEREINHEITLICHTE CONTAINER BREITE
-@mixin unified-container() {
-    width: 100vw;
-    max-width: 100vw;
-    margin: 0 auto;
-    position: relative;
-    box-sizing: border-box;
+// ===== MOBILE FIRST MEDIA QUERIES =====
+@mixin mobile-sm {
+    @media screen and (min-width: $breakpoint-sm) {
+        @content;
+    }
 }
 
-// VEREINHEITLICHTES CONTENT PADDING
-@mixin unified-content-padding() {
-    padding-left: $container-padding-mobile;
-    padding-right: $container-padding-mobile;
+@mixin tablet {
+    @media screen and (min-width: $breakpoint-md) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: $breakpoint-lg) {
+        @content;
+    }
+}
+
+@mixin desktop-large {
+    @media screen and (min-width: $breakpoint-xl) {
+        @content;
+    }
+}
+
+@mixin desktop-xl {
+    @media screen and (min-width: $breakpoint-xxl) {
+        @content;
+    }
+}
+
+// ===== DEVICE-SPECIFIC QUERIES =====
+@mixin mobile-only {
+    @media screen and (max-width: #{$breakpoint-md - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media screen and (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop-only {
+    @media screen and (min-width: $breakpoint-lg) {
+        @content;
+    }
+}
+
+// ===== SICHERE CONTAINER - KEIN OVERFLOW =====
+@mixin safe-container() {
+    width: 100%;
     max-width: $container-max-width;
     margin: 0 auto;
-    width: 100%;
+    padding-left: $container-padding-mobile;
+    padding-right: $container-padding-mobile;
     box-sizing: border-box;
     
-    @media screen and (min-width: $breakpoint-desktop) {
+    @include tablet {
+        padding-left: $container-padding-tablet;
+        padding-right: $container-padding-tablet;
+    }
+    
+    @include desktop {
         padding-left: $container-padding-desktop;
         padding-right: $container-padding-desktop;
     }
 }
 
-// VOLLBREITEN HINTERGRUND
-@mixin full-width-background() {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    position: relative;
+// ===== VOLLBREITE OHNE OVERFLOW =====
+@mixin full-width-safe() {
+    width: 100%;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    position: relative;
 }
 
-// KORRIGIERTE SKILLS GRID - MOBILE OPTIMIERT
+// ===== CONTENT WRAPPER =====
+@mixin content-wrapper() {
+    @include safe-container();
+}
+
+// ===== KORRIGIERTE SKILLS GRID =====
 @mixin skills-grid-responsive() {
     display: grid;
-    gap: clamp(12px, 3vw, 16px);
+    gap: clamp(12px, 3vw, 20px);
     
-    // Mobile (320px-479px): 2 Spalten
+    // Mobile: 2 Spalten (320px - 767px)
     grid-template-columns: repeat(2, 1fr);
     
-    // Ab 480px: 3 Spalten  
-    @media screen and (min-width: $breakpoint-mobile) {
+    // Tablet: 3 Spalten (768px - 1023px)
+    @include tablet {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    // Ab Desktop: 4 Spalten
-    @media screen and (min-width: $breakpoint-desktop) {
+    // Desktop: 4 Spalten (1024px+)
+    @include desktop {
         grid-template-columns: repeat(4, 1fr);
     }
     
-    // Sehr kleine Screens: 2 Spalten mit mehr Platz
+    // Sehr kleine Screens: mehr Abstand
     @media screen and (max-width: 374px) {
-        grid-template-columns: repeat(2, 1fr);
         gap: clamp(16px, 4vw, 20px);
     }
 }
 
-// WCAG KONFORME INPUTS
+// ===== WCAG KONFORME INPUTS =====
 @mixin apple-input() {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1); 
@@ -186,7 +244,7 @@ $nav-height-mobile: 72px !default;
     }
 }
 
-// WCAG KONFORME BUTTONS
+// ===== WCAG KONFORME BUTTONS =====
 @mixin apple-button-primary() {
     background: $apple-primary;
     color: $apple-text-primary;
@@ -209,6 +267,7 @@ $nav-height-mobile: 72px !default;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
         opacity: 0;
         transition: $apple-transition-fast;
+        border-radius: inherit;
     }
     
     &:hover {
@@ -232,105 +291,6 @@ $nav-height-mobile: 72px !default;
     }
 }
 
-// VERBESSERTE NAVIGATION GLASS EFFECT
-@mixin apple-nav-glass() {
-    background: rgba(28, 28, 30, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-// TYPOGRAPHY MIXINS - WCAG KONFORM
-@mixin h2Title() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    font-size: clamp(24px, 6vw, 48px); // Mindestens 24px
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    background: #1ca9ae;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-@mixin h2TitleMobile() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    font-size: clamp(20px, 5.5vw, 32px); // Mobile optimiert
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    background: $apple-teal-gradient;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-// KORRIGIERTES STANDARD PADDING
-@mixin standardPadding() {
-    padding-left: clamp(20px, 5vw, 80px);
-    padding-right: clamp(20px, 5vw, 80px);
-    
-    @media screen and (min-width: $breakpoint-desktop) {
-        padding-left: clamp(40px, 5vw, 80px);
-        padding-right: clamp(40px, 5vw, 80px);
-    }
-}
-
-@mixin standardPaddingMobile() {
-    padding-left: clamp(16px, 4vw, 24px);
-    padding-right: clamp(16px, 4vw, 24px);
-}
-
-// LOGO STYLING
-@mixin apple-logo() {
-    filter: brightness(1.2) contrast(1.1) saturate(1.2);
-    transition: $apple-transition-fast;
-    
-    &:hover {
-        filter: brightness(1.4) contrast(1.3) saturate(1.4);
-    }
-}
-
-// NAVIGATION OFFSET FÜR ANKER-LINKS
-@mixin scroll-offset($offset: 120px) {
-    scroll-margin-top: $offset;
-    
-    @media screen and (max-width: $breakpoint-tablet) {
-        scroll-margin-top: 100px;
-    }
-    
-    @media screen and (max-width: $breakpoint-mobile) {
-        scroll-margin-top: 80px;
-    }
-}
-
-// RESPONSIVE BREAKPOINT MIXINS
-@mixin mobile-only {
-    @media screen and (max-width: #{$breakpoint-desktop - 1px}) {
-        @content;
-    }
-}
-
-@mixin desktop-only {
-    @media screen and (min-width: $breakpoint-desktop) {
-        @content;
-    }
-}
-
-// ===== FEHLENDE MIXINS HINZUGEFÜGT =====
-
-// H3 TITLE MIXIN - WCAG KONFORM
-@mixin h3Title() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-semibold;
-    font-size: clamp(18px, 4.5vw, 28px); // Mindestens 18px
-    line-height: 1.4;
-    letter-spacing: -0.005em;
-    color: $apple-text-primary;
-    margin: 0;
-}
-
-// SECONDARY BUTTON MIXIN - WCAG KONFORM
 @mixin apple-button-secondary() {
     background: rgba(255, 255, 255, 0.1);
     color: $apple-text-primary;
@@ -353,6 +313,7 @@ $nav-height-mobile: 72px !default;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
         opacity: 0;
         transition: $apple-transition-fast;
+        border-radius: inherit;
     }
     
     &:hover {
@@ -377,61 +338,113 @@ $nav-height-mobile: 72px !default;
     }
 }
 
-// VOLLBREITEN CONTAINER OHNE MAX-WIDTH BESCHRÄNKUNGEN
-@mixin full-width-container-unlimited() {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    position: relative;
-    box-sizing: border-box;
-    // Keine max-width Beschränkung für echte Vollbreite
+// ===== NAVIGATION GLASS EFFECT =====
+@mixin apple-nav-glass() {
+    background: rgba(28, 28, 30, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-// CONTENT WRAPPER FÜR ZENTRIERTEN INHALT IN VOLLBREITEN CONTAINERN
-@mixin content-wrapper-unlimited() {
-    width: 100%;
-    margin: 0 auto;
+// ===== RESPONSIVE TYPOGRAPHY MIXINS =====
+@mixin responsive-heading($mobile: 24px, $tablet: 32px, $desktop: 48px) {
+    font-size: clamp(#{$mobile}, 5vw, #{$tablet});
+    
+    @include tablet {
+        font-size: clamp(#{$tablet}, 4vw, #{$desktop});
+    }
+    
+    @include desktop {
+        font-size: #{$desktop};
+    }
+}
+
+@mixin h2Title() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    @include responsive-heading(24px, 32px, 48px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin h2TitleMobile() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-bold;
+    @include responsive-heading(20px, 28px, 32px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    background: $apple-teal-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin h3Title() {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-semibold;
+    @include responsive-heading(18px, 22px, 28px);
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: $apple-text-primary;
+    margin: 0;
+}
+
+// ===== LOGO STYLING =====
+@mixin apple-logo() {
+    filter: brightness(1.2) contrast(1.1) saturate(1.2);
+    transition: $apple-transition-fast;
+    
+    &:hover {
+        filter: brightness(1.4) contrast(1.3) saturate(1.4);
+    }
+}
+
+// ===== SCROLL OFFSET FÜR ANKER-LINKS =====
+@mixin scroll-offset($desktop-offset: 100px) {
+    scroll-margin-top: $desktop-offset;
+    
+    @include tablet {
+        scroll-margin-top: #{$desktop-offset - 20px};
+    }
+    
+    @include mobile-only {
+        scroll-margin-top: #{$desktop-offset - 40px};
+    }
+}
+
+// ===== LEGACY MIXINS FÜR KOMPATIBILITÄT =====
+@mixin unified-container() {
+    @include safe-container();
+}
+
+@mixin unified-content-padding() {
+    @include content-wrapper();
+}
+
+@mixin full-width-background() {
+    @include full-width-safe();
+}
+
+@mixin standardPadding() {
     padding-left: $container-padding-mobile;
     padding-right: $container-padding-mobile;
-    box-sizing: border-box;
     
-    @media screen and (min-width: $breakpoint-desktop) {
+    @include tablet {
+        padding-left: $container-padding-tablet;
+        padding-right: $container-padding-tablet;
+    }
+    
+    @include desktop {
         padding-left: $container-padding-desktop;
         padding-right: $container-padding-desktop;
     }
-    
-    // Für sehr große Bildschirme: mehr Padding statt max-width
-    @media screen and (min-width: 2560px) {
-        padding-left: clamp(80px, 10vw, 200px);
-        padding-right: clamp(80px, 10vw, 200px);
-    }
 }
 
-// NAHTLOSE SEKTION ÜBERGÄNGE
-@mixin seamless-section() {
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-radius: 0;
-    
-    // Erste Sektion kann top-padding haben
-    &:first-child {
-        padding-top: clamp(40px, 8vw, 80px);
-    }
-    
-    // Letzte Sektion kann bottom-padding haben
-    &:last-child {
-        padding-bottom: clamp(40px, 8vw, 80px);
-    }
+@mixin standardPaddingMobile() {
+    padding-left: $container-padding-mobile;
+    padding-right: $container-padding-mobile;
 }
-
-// ZOOM-RESISTENTE TYPOGRAPHY
-@mixin zoom-resistant-text($base-size: 16px, $scale: 1.2) {
-    font-size: clamp(#{$base-size}, #{$base-size * 0.8} + 2vw, #{$base-size * $scale});
-    line-height: 1.5;
-    
-    // Bei sehr niedrigem Zoom: größere Schrift
-    @media screen and (max-width: 1200px) and (min-resolution: 0.5dppx) {
-        font-size: clamp(#{$base-size * 1.1}, #{$base-size} + 1vw, #{$base-size * $scale * 1.2});
-    }
-}
-
