@@ -1,4 +1,4 @@
-// ===== KORRIGIERTE APPLE VARIABLES - RESPONSIV OPTIMIERT =====
+// ===== KORRIGIERTE APPLE VARIABLES - OVERFLOW-SAFE & RESPONSIV OPTIMIERT =====
 @use 'sass:color';
 
 // ===== TRANSITIONS =====
@@ -64,27 +64,29 @@ $breakpoint-desktop: $breakpoint-lg !default;
 $breakpoint-large: $breakpoint-xl !default;
 $breakpoint-2xl: $breakpoint-xxl !default;
 
-// ===== SICHERE CONTAINER BREITEN - KEIN OVERFLOW =====
+// ===== OVERFLOW-SICHERE CONTAINER BREITEN =====
 $container-max-width: 1440px !default;
 $content-max-width: 1440px !default;
-$container-padding-mobile: clamp(16px, 4vw, 24px) !default;
-$container-padding-tablet: clamp(32px, 5vw, 48px) !default;
-$container-padding-desktop: clamp(48px, 6vw, 80px) !default;
 
-// ===== SPACING VARIABLEN =====
-$space-xs: clamp(8px, 2vw, 12px) !default;
-$space-sm: clamp(12px, 3vw, 16px) !default;
-$space-base: clamp(16px, 4vw, 24px) !default;
-$space-md: clamp(24px, 6vw, 32px) !default;
-$space-lg: clamp(32px, 8vw, 48px) !default;
-$space-xl: clamp(48px, 12vw, 64px) !default;
+// KORRIGIERT: Reduzierte Container-Paddings für Overflow-Schutz
+$container-padding-mobile: clamp(12px, 3vw, 20px) !default;  // Reduziert von clamp(16px, 4vw, 24px)
+$container-padding-tablet: clamp(20px, 4vw, 40px) !default;  // Reduziert von clamp(32px, 5vw, 48px)
+$container-padding-desktop: clamp(40px, 5vw, 80px) !default; // Reduziert von clamp(48px, 6vw, 80px)
 
-// ===== PADDING VARIABLEN =====
-$padding-xs: clamp(8px, 2vw, 12px) !default;
-$padding-sm: clamp(12px, 3vw, 16px) !default;
-$padding-base: clamp(16px, 4vw, 20px) !default;
-$padding-md: clamp(20px, 5vw, 28px) !default;
-$padding-lg: clamp(28px, 7vw, 36px) !default;
+// ===== OVERFLOW-SICHERE SPACING VARIABLEN =====
+$space-xs: clamp(6px, 1.5vw, 10px) !default;   // Reduziert von clamp(8px, 2vw, 12px)
+$space-sm: clamp(8px, 2vw, 12px) !default;     // Reduziert von clamp(12px, 3vw, 16px)
+$space-base: clamp(12px, 3vw, 16px) !default;  // Reduziert von clamp(16px, 4vw, 24px)
+$space-md: clamp(16px, 4vw, 24px) !default;    // Reduziert von clamp(24px, 6vw, 32px)
+$space-lg: clamp(24px, 5vw, 32px) !default;    // Reduziert von clamp(32px, 8vw, 48px)
+$space-xl: clamp(32px, 6vw, 48px) !default;    // Reduziert von clamp(48px, 12vw, 64px)
+
+// ===== OVERFLOW-SICHERE PADDING VARIABLEN =====
+$padding-xs: clamp(6px, 1.5vw, 10px) !default;   // Reduziert von clamp(8px, 2vw, 12px)
+$padding-sm: clamp(8px, 2vw, 12px) !default;     // Reduziert von clamp(12px, 3vw, 16px)
+$padding-base: clamp(12px, 3vw, 16px) !default;  // Reduziert von clamp(16px, 4vw, 20px)
+$padding-md: clamp(16px, 4vw, 24px) !default;    // Reduziert von clamp(20px, 5vw, 28px)
+$padding-lg: clamp(24px, 5vw, 32px) !default;    // Reduziert von clamp(28px, 7vw, 36px)
 
 // ===== BORDER RADIUS =====
 $apple-radius-small: clamp(6px, 1.5vw, 8px) !default;
@@ -158,7 +160,7 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     }
 }
 
-// ===== SICHERE CONTAINER - KEIN OVERFLOW =====
+// ===== OVERFLOW-SICHERE CONTAINER MIXINS =====
 @mixin safe-container() {
     width: 100%;
     max-width: $container-max-width;
@@ -166,6 +168,8 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     padding-left: $container-padding-mobile;
     padding-right: $container-padding-mobile;
     box-sizing: border-box;
+    min-width: 0; // KRITISCH: Verhindert Overflow
+    overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
     
     @include tablet {
         padding-left: $container-padding-tablet;
@@ -181,10 +185,13 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
 // ===== VOLLBREITE OHNE OVERFLOW =====
 @mixin full-width-safe() {
     width: 100%;
+    max-width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     position: relative;
+    min-width: 0; // KRITISCH: Verhindert Overflow
+    overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
 }
 
 // ===== CONTENT WRAPPER =====
@@ -192,27 +199,61 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     @include safe-container();
 }
 
-// ===== KORRIGIERTE SKILLS GRID =====
+// ===== KORRIGIERTES UNIFIED CONTENT PADDING - OVERFLOW-SAFE =====
+@mixin unified-content-padding() {
+    // KORRIGIERT: Direkte Padding-Werte statt Container-Mixin um doppelte Paddings zu vermeiden
+    padding-left: $container-padding-mobile;
+    padding-right: $container-padding-mobile;
+    box-sizing: border-box;
+    min-width: 0; // KRITISCH: Verhindert Overflow
+    max-width: 100%; // KRITISCH: Verhindert Overflow
+    overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
+    
+    @include tablet {
+        padding-left: $container-padding-tablet;
+        padding-right: $container-padding-tablet;
+    }
+    
+    @include desktop {
+        padding-left: $container-padding-desktop;
+        padding-right: $container-padding-desktop;
+    }
+}
+
+// ===== OVERFLOW-SICHERE SKILLS GRID =====
 @mixin skills-grid-responsive() {
     display: grid;
-    gap: clamp(12px, 3vw, 20px);
+    gap: clamp(8px, 2vw, 16px); // KORRIGIERT: Reduzierte Gaps von clamp(12px, 3vw, 20px)
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0; // KRITISCH: Verhindert Overflow
+    overflow: hidden; // KRITISCH: Verhindert Overflow
     
     // Mobile: 2 Spalten (320px - 767px)
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr)); // minmax(0, 1fr) verhindert Overflow
     
     // Tablet: 3 Spalten (768px - 1023px)
     @include tablet {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(12px, 2.5vw, 20px);
     }
     
     // Desktop: 4 Spalten (1024px+)
     @include desktop {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(16px, 3vw, 24px);
     }
     
-    // Sehr kleine Screens: mehr Abstand
+    // Sehr kleine Screens: Reduzierte Gaps
     @media screen and (max-width: 374px) {
-        gap: clamp(16px, 4vw, 20px);
+        gap: clamp(6px, 1.5vw, 12px);
+        grid-template-columns: repeat(2, 1fr); // Feste Spalten für sehr kleine Screens
+    }
+    
+    @media screen and (max-width: 320px) {
+        gap: 8px;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -230,7 +271,9 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     padding: 14px 18px;
     min-height: 48px; // WCAG Touch Target
     width: 100%;
+    max-width: 100%; // KRITISCH: Verhindert Overflow
     box-sizing: border-box;
+    min-width: 0; // KRITISCH: Verhindert Overflow
     
     &:focus {
         border-color: $apple-primary;
@@ -256,9 +299,13 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     padding: 14px 24px;
     min-height: 48px; // WCAG Touch Target
     min-width: 48px;  // WCAG Touch Target
+    max-width: 100%; // KRITISCH: Verhindert Overflow
     transition: $apple-transition-fast;
     cursor: pointer;
     position: relative;
+    box-sizing: border-box;
+    word-wrap: break-word; // KRITISCH: Textumbruch
+    overflow-wrap: break-word; // KRITISCH: Textumbruch
     
     &::before {
         content: '';
@@ -302,9 +349,13 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     padding: 14px 24px;
     min-height: 48px; // WCAG Touch Target
     min-width: 48px;  // WCAG Touch Target
+    max-width: 100%; // KRITISCH: Verhindert Overflow
     transition: $apple-transition-fast;
     cursor: pointer;
     position: relative;
+    box-sizing: border-box;
+    word-wrap: break-word; // KRITISCH: Textumbruch
+    overflow-wrap: break-word; // KRITISCH: Textumbruch
     
     &::before {
         content: '';
@@ -369,6 +420,9 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    max-width: 100%; // KRITISCH: Verhindert Overflow
+    word-wrap: break-word; // KRITISCH: Textumbruch
+    overflow-wrap: break-word; // KRITISCH: Textumbruch
 }
 
 @mixin h2TitleMobile() {
@@ -381,6 +435,9 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    max-width: 100%; // KRITISCH: Verhindert Overflow
+    word-wrap: break-word; // KRITISCH: Textumbruch
+    overflow-wrap: break-word; // KRITISCH: Textumbruch
 }
 
 @mixin h3Title() {
@@ -391,6 +448,9 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     letter-spacing: -0.005em;
     color: $apple-text-primary;
     margin: 0;
+    max-width: 100%; // KRITISCH: Verhindert Overflow
+    word-wrap: break-word; // KRITISCH: Textumbruch
+    overflow-wrap: break-word; // KRITISCH: Textumbruch
 }
 
 // ===== LOGO STYLING =====
@@ -416,13 +476,53 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
     }
 }
 
-// ===== LEGACY MIXINS FÜR KOMPATIBILITÄT =====
-@mixin unified-container() {
-    @include safe-container();
+// ===== SICHERE CLAMP UTILITY FUNKTIONEN =====
+@function safe-clamp($min, $vw, $max, $screen-width: 320px) {
+    $vw-at-min: ($vw / 100) * $screen-width;
+    @if $vw-at-min > $min {
+        @return clamp(#{$min}, #{$vw}vw, #{$max});
+    } @else {
+        @return clamp(#{$min}, #{$vw}vw, #{$max});
+    }
 }
 
-@mixin unified-content-padding() {
-    @include content-wrapper();
+// ===== OVERFLOW-SICHERE RESPONSIVE CONTAINER MIXINS =====
+@mixin mobile-safe-container() {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    padding-left: clamp(8px, 2vw, 16px);  // Sehr konservativ
+    padding-right: clamp(8px, 2vw, 16px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+@mixin tablet-safe-container() {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    padding-left: clamp(16px, 3vw, 32px);
+    padding-right: clamp(16px, 3vw, 32px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+@mixin desktop-safe-container() {
+    width: 100%;
+    max-width: $container-max-width;
+    min-width: 0;
+    margin: 0 auto;
+    padding-left: clamp(32px, 4vw, 80px);
+    padding-right: clamp(32px, 4vw, 80px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+// ===== LEGACY MIXINS FÜR KOMPATIBILITÄT - OVERFLOW-SAFE =====
+@mixin unified-container() {
+    @include safe-container();
 }
 
 @mixin full-width-background() {
@@ -432,6 +532,9 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
 @mixin standardPadding() {
     padding-left: $container-padding-mobile;
     padding-right: $container-padding-mobile;
+    box-sizing: border-box;
+    min-width: 0; // KRITISCH: Verhindert Overflow
+    max-width: 100%; // KRITISCH: Verhindert Overflow
     
     @include tablet {
         padding-left: $container-padding-tablet;
@@ -447,4 +550,34 @@ $nav-height-desktop: 80px !default;  // Konsistent für Desktop
 @mixin standardPaddingMobile() {
     padding-left: $container-padding-mobile;
     padding-right: $container-padding-mobile;
+    box-sizing: border-box;
+    min-width: 0; // KRITISCH: Verhindert Overflow
+    max-width: 100%; // KRITISCH: Verhindert Overflow
+}
+
+// ===== EMERGENCY OVERFLOW PROTECTION =====
+@mixin emergency-overflow-fix() {
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        min-width: 0 !important;
+    }
+    
+    div, section, article, main, aside, header, footer, nav {
+        overflow-x: hidden !important;
+    }
+    
+    img, video, iframe, canvas {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    .container, .content, .wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+    }
 }
