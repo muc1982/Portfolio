@@ -1,5 +1,15 @@
 @use 'style/apple-variables' as *;
 
+// ===== KRITISCHE OVERFLOW-PRÄVENTION =====
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 // ===== GLOBAL RESET =====
 * {
     margin: 0;
@@ -7,6 +17,7 @@
     list-style: none;
     box-sizing: border-box;
     text-decoration: none;
+    max-width: 100%; // HINZUGEFÜGT: Verhindert Overflow
 }
 
 // ===== SCROLLBAR HIDING =====
@@ -27,30 +38,50 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px; // WCAG minimum
-    margin: 0;
-    padding: 0;
     min-width: 320px;
-    
-    // ENTFERNT: width: 100%, max-width: 100%, overflow-x: hidden
-    // Diese verursachten die Responsive-Probleme
+    position: relative;
 }
 
 // ===== SICHERE CONTAINER CLASSES =====
 .content-container {
     @include safe-container();
+    overflow-x: hidden; // HINZUGEFÜGT
 }
 
 .wide-screen {
     @include full-width-safe();
+    overflow-x: hidden; // HINZUGEFÜGT
+    max-width: 100%; // HINZUGEFÜGT
 }
 
 .page-container {
     @include content-wrapper();
+    overflow-x: hidden; // HINZUGEFÜGT
 }
 
 .normal-container {
     @include full-width-safe();
     position: relative;
+    box-sizing: border-box;
+    overflow-x: hidden; // HINZUGEFÜGT
+    max-width: 100%; // HINZUGEFÜGT
+}
+
+// ===== MOBILE CONTAINER SICHERHEIT =====
+.mobile-content,
+.content-left,
+.content-right,
+.title-logo-wrapper,
+.img-wrapper {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden;
+}
+
+// ===== PSEUDOELEMENTE KONTROLLIEREN =====
+*::before,
+*::after {
+    max-width: 100%;
     box-sizing: border-box;
 }
 
@@ -91,6 +122,8 @@ body {
 // ===== WCAG KONFORME BUTTONS =====
 button {
     @include apple-button-primary();
+    max-width: 100%; // HINZUGEFÜGT
+    word-wrap: break-word; // HINZUGEFÜGT
     
     &:focus-visible {
         outline: 2px solid $apple-primary;
@@ -106,6 +139,7 @@ button {
 textarea,
 input {
     @include apple-input();
+    max-width: 100%; // HINZUGEFÜGT
 }
 
 // ===== AUTOFILL STYLES =====
@@ -153,6 +187,8 @@ a {
     transition: $apple-transition-fast;
     position: relative;
     font-size: inherit;
+    max-width: 100%; // HINZUGEFÜGT
+    word-wrap: break-word; // HINZUGEFÜGT
 }
 
 a[href]:not([href=""]):not([href="#"]) {
@@ -171,6 +207,8 @@ h1 {
     line-height: 1.2;
     letter-spacing: -0.02em;
     @include responsive-heading(28px, 36px, 48px);
+    max-width: 100%; // HINZUGEFÜGT
+    word-wrap: break-word; // HINZUGEFÜGT
 }
 
 h2 {
@@ -179,16 +217,23 @@ h2 {
     justify-content: center;
     align-items: center;
     text-align: center;
+    max-width: 100%; // HINZUGEFÜGT
+    word-wrap: break-word; // HINZUGEFÜGT
 }
 
 h3, h4, h5, h6 {
     @include h3Title();
+    max-width: 100%; // HINZUGEFÜGT
+    word-wrap: break-word; // HINZUGEFÜGT
 }
 
 p, li, td, th {
     font-family: $apple-font-family;
     font-size: 16px; // WCAG minimum
     line-height: 1.6;
+    max-width: 100%; // HINZUGEFÜGT
+    word-wrap: break-word; // HINZUGEFÜGT
+    overflow-wrap: break-word; // HINZUGEFÜGT
 }
 
 // ===== ANIMATIONS =====
@@ -259,6 +304,8 @@ p, li, td, th {
     background: rgba(255, 255, 255, 0.1);
     min-width: 24px;
     min-height: 24px;
+    max-width: 24px; // HINZUGEFÜGT
+    max-height: 24px; // HINZUGEFÜGT
     border-radius: $apple-radius-small;
     transition: $apple-transition-fast;
 
@@ -279,10 +326,33 @@ p, li, td, th {
     }
 }
 
+// ===== SPEZIELLE BEHANDLUNG FÜR VIEWPORT-EINHEITEN =====
+@media screen and (max-width: 768px) {
+    // Ersetze 100vw durch sichere Alternativen
+    .full-width,
+    .wide-screen,
+    .menu-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    // Sichere Behandlung aller Container
+    .container,
+    .content-container,
+    .page-container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: clamp(16px, 4vw, 24px);
+        padding-right: clamp(16px, 4vw, 24px);
+        box-sizing: border-box;
+    }
+}
+
 // ===== RESPONSIVE OPTIMIERUNGEN =====
 @media screen and (max-width: 320px) {
     body {
         min-width: 320px;
+        max-width: 320px;
         font-size: 16px; // WCAG minimum
     }
 
@@ -298,7 +368,7 @@ p, li, td, th {
     }
 
     * {
-        max-width: 100%;
+        max-width: 100% !important;
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
@@ -314,6 +384,27 @@ p, li, td, th {
     input, textarea {
         font-size: 16px; // WCAG minimum
         min-height: 48px; // WCAG Touch Target
+        max-width: 100%;
+    }
+    
+    // Verhindere zu große feste Breiten
+    [style*="width"] {
+        max-width: 100% !important;
+    }
+}
+
+// ===== NOTFALL-SCHUTZ FÜR SEHR KLEINE SCREENS =====
+@media screen and (max-width: 374px) {
+    * {
+        max-width: 100% !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .title,
+    .name,
+    .position {
+        font-size: clamp(14px, 5vw, 20px) !important;
     }
 }
 
@@ -390,6 +481,7 @@ p, li, td, th {
     body {
         background: white;
         color: black;
+        overflow: visible;
     }
     
     .hide-on-print {
@@ -400,13 +492,19 @@ p, li, td, th {
         color: black;
         text-decoration: underline;
     }
+    
+    * {
+        max-width: 100%;
+        overflow: visible;
+    }
 }
 
 // ===== RESPONSIVE IMAGES =====
 img {
-    max-width: 100%;
-    height: auto;
+    max-width: 100% !important;
+    height: auto !important;
     display: block;
+    box-sizing: border-box;
     
     // Performance-Optimierungen
     image-rendering: -webkit-optimize-contrast;
@@ -476,5 +574,58 @@ img {
     &:focus {
         outline: 2px solid $apple-primary;
         outline-offset: 2px;
+    }
+}
+
+// ===== CONTAINER GRID SICHERHEIT =====
+.container,
+.row,
+.col {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+// ===== FLEXBOX SICHERHEIT =====
+.d-flex,
+.flex,
+[class*="flex"] {
+    max-width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap; // Verhindert Overflow
+}
+
+// ===== GRID SICHERHEIT =====
+.grid,
+[class*="grid"] {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+// ===== TEXT OVERFLOW SCHUTZ =====
+.text-overflow-protect {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+}
+
+// ===== FINALE SICHERHEITSREGELN =====
+// Diese Regeln greifen als letzte Sicherheit
+@media screen and (max-width: 768px) {
+    html, body, #root, app-root {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    // Alle direkten Body-Kinder
+    body > * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    // Alle Container-Elemente
+    div, section, article, main, header, footer, nav {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 }

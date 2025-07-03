@@ -1,9 +1,13 @@
+// KORRIGIERTE MOBILE LANDING PAGE - KEIN HORIZONTALES SCROLLEN
 @use '../../../../style/apple-variables.scss' as *;
 
 #landing-page-mobile {
     position: relative;
     width: 100vw;
     min-height: 100vh;
+    max-width: 100%; // HINZUGEFÜGT: Verhindert Overflow
+    overflow-x: hidden; // HINZUGEFÜGT: Kritisch für mobile
+    box-sizing: border-box; // HINZUGEFÜGT
 }
 
 #landing-page-extra {
@@ -12,16 +16,18 @@
     left: 0;
     width: 100%;
     height: 100%;
+    max-width: 100%; // HINZUGEFÜGT
     background: $apple-universal-gradient;
     z-index: 0;
+    overflow: hidden; // HINZUGEFÜGT
 
     &::before {
         content: '';
         position: absolute;
         top: -30%;
         right: -15%;
-        width: 80%;
-        height: 120%;
+        width: 60%; // REDUZIERT von 80% - war zu breit
+        height: 100%; // REDUZIERT von 120%
         background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
         animation: apple-ambient-float 12s ease-in-out infinite;
         filter: blur(40px);
@@ -32,8 +38,8 @@
         position: absolute;
         bottom: -20%;
         left: -10%;
-        width: 60%;
-        height: 80%;
+        width: 50%; // REDUZIERT von 60%
+        height: 70%; // REDUZIERT von 80%
         background: radial-gradient(circle, rgba($apple-primary, 0.05) 0%, transparent 50%);
         animation: apple-ambient-float 15s ease-in-out infinite reverse;
         filter: blur(60px);
@@ -45,10 +51,18 @@
     top: 24px;
     right: 24px;
     z-index: 1001;
+    max-width: calc(100vw - 48px); // HINZUGEFÜGT: Verhindert Overflow
 
     @media screen and (max-width: 480px) {
         top: 20px;
         right: 20px;
+        max-width: calc(100vw - 40px); // ANGEPASST
+    }
+
+    @media screen and (max-width: 375px) {
+        top: 16px;
+        right: 16px;
+        max-width: calc(100vw - 32px); // HINZUGEFÜGT
     }
 
     .burger-menu-btn {
@@ -57,6 +71,8 @@
         border-radius: $apple-radius-medium;
         width: 52px;
         height: 52px;
+        max-width: 52px; // HINZUGEFÜGT
+        max-height: 52px; // HINZUGEFÜGT
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -66,10 +82,20 @@
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         position: relative;
+        box-sizing: border-box; // HINZUGEFÜGT
 
         @media screen and (max-width: 480px) {
             width: 48px;
             height: 48px;
+            max-width: 48px; // HINZUGEFÜGT
+            max-height: 48px; // HINZUGEFÜGT
+        }
+
+        @media screen and (max-width: 375px) {
+            width: 44px;
+            height: 44px;
+            max-width: 44px; // HINZUGEFÜGT
+            max-height: 44px; // HINZUGEFÜGT
         }
 
         &::before {
@@ -102,6 +128,7 @@
         span {
             width: 22px;
             height: 2.5px;
+            max-width: 22px; // HINZUGEFÜGT
             background: rgba(255, 255, 255, 0.95);
             display: block;
             margin: 3px 0;
@@ -112,7 +139,15 @@
             @media screen and (max-width: 480px) {
                 width: 20px;
                 height: 2px;
+                max-width: 20px; // HINZUGEFÜGT
                 margin: 2.5px 0;
+            }
+
+            @media screen and (max-width: 375px) {
+                width: 18px;
+                height: 2px;
+                max-width: 18px; // HINZUGEFÜGT
+                margin: 2px 0;
             }
 
             &::before {
@@ -163,6 +198,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    max-width: 100%; // HINZUGEFÜGT
     background: rgba(0, 0, 0, 0.96);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
@@ -171,6 +207,8 @@
     justify-content: center;
     align-items: center;
     animation: menuFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden; // HINZUGEFÜGT
+    box-sizing: border-box; // HINZUGEFÜGT
 
     @keyframes menuFadeIn {
         from {
@@ -192,6 +230,8 @@
         margin: 0;
         text-align: center;
         animation: menuSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        max-width: calc(100vw - 32px); // HINZUGEFÜGT
+        box-sizing: border-box; // HINZUGEFÜGT
 
         @keyframes menuSlideIn {
             from {
@@ -209,6 +249,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
+            max-width: 100%; // HINZUGEFÜGT
         }
 
         li {
@@ -222,6 +263,9 @@
             border-radius: $apple-radius-medium;
             position: relative;
             letter-spacing: -0.01em;
+            max-width: 100%; // HINZUGEFÜGT
+            box-sizing: border-box; // HINZUGEFÜGT
+            word-wrap: break-word; // HINZUGEFÜGT
 
             @media screen and (max-width: 480px) {
                 font-size: 18px;
@@ -233,6 +277,12 @@
                 font-size: 16px;
                 margin: 14px 0;
                 padding: 8px 20px;
+            }
+
+            @media screen and (max-width: 320px) {
+                font-size: 15px;
+                margin: 12px 0;
+                padding: 6px 16px;
             }
 
             &.mobile-lang-item {
@@ -253,8 +303,14 @@
                     margin-top: 20px;
                 }
 
+                @media screen and (max-width: 320px) {
+                    padding: 10px 16px;
+                    margin-top: 16px;
+                }
+
                 app-lang-switcher {
                     width: 100%;
+                    max-width: 100%; // HINZUGEFÜGT
                     display: flex;
                     justify-content: center;
                 }
@@ -307,10 +363,13 @@
     position: relative;
     z-index: 1;
     min-height: 100vh;
+    width: 100%; // GEÄNDERT von 100vw
+    max-width: 100%; // HINZUGEFÜGT
     display: flex;
     padding: 100px 24px 24px;
     box-sizing: border-box;
     align-items: center;
+    overflow-x: hidden; // HINZUGEFÜGT
 
     @media screen and (max-width: 768px) {
         flex-direction: column;
@@ -326,17 +385,24 @@
     @media screen and (max-width: 375px) {
         padding: 90px 16px 30px;
     }
+
+    @media screen and (max-width: 320px) {
+        padding: 80px 12px 20px;
+    }
 }
 
 .content-left {
     width: 50%;
+    max-width: 50%; // HINZUGEFÜGT
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box; // HINZUGEFÜGT
 
     @media screen and (max-width: 768px) {
         width: 100%;
+        max-width: 100%; // HINZUGEFÜGT
         order: 2;
         margin-top: 40px;
     }
@@ -344,6 +410,10 @@
     .img-wrapper {
         position: relative;
         transition: $apple-transition-slow;
+        max-width: 100%; // HINZUGEFÜGT
+        width: 100%; // HINZUGEFÜGT
+        display: flex; // HINZUGEFÜGT
+        justify-content: center; // HINZUGEFÜGT
 
         &::before {
             content: '';
@@ -378,12 +448,14 @@
             width: 320px;
             height: auto;
             max-height: 55vh;
+            max-width: 100%; // HINZUGEFÜGT
             object-fit: contain;
             transition: $apple-transition-slow;
             filter: brightness(1.05) contrast(1.02) saturate(1.05);
             position: relative;
             z-index: 1;
             border-radius: 2% 2% 8% 8%;
+            box-sizing: border-box; // HINZUGEFÜGT
 
             @media screen and (max-width: 768px) {
                 border-radius: 50%;
@@ -392,23 +464,33 @@
                 width: 260px;
                 height: 260px;
                 max-height: none;
+                max-width: min(260px, calc(100vw - 48px)); // KORRIGIERT
             }
 
             @media screen and (max-width: 480px) {
                 width: 230px;
                 height: 230px;
+                max-width: min(230px, calc(100vw - 40px)); // KORRIGIERT
                 border-width: 3px;
             }
 
             @media screen and (max-width: 375px) {
                 width: 210px;
                 height: 210px;
+                max-width: min(210px, calc(100vw - 32px)); // KORRIGIERT
+            }
+
+            @media screen and (max-width: 320px) {
+                width: 180px;
+                height: 180px;
+                max-width: min(180px, calc(100vw - 24px)); // KORRIGIERT
             }
         }
     }
 
     .arrow-wrapper {
         width: 100%;
+        max-width: 100%; // HINZUGEFÜGT
         display: flex;
         justify-content: center;
         align-items: center;
@@ -417,6 +499,8 @@
         .arrow-down {
             width: 44px;
             height: 85px;
+            max-width: 44px; // HINZUGEFÜGT
+            max-height: 85px; // HINZUGEFÜGT
 
             background: {
                 image: url('./../../../../assets/img/arrow-down.png');
@@ -434,16 +518,29 @@
             @media screen and (max-width: 768px) {
                 width: 34px;
                 height: 65px;
+                max-width: 34px; // HINZUGEFÜGT
+                max-height: 65px; // HINZUGEFÜGT
             }
 
             @media screen and (max-width: 480px) {
                 width: 30px;
                 height: 60px;
+                max-width: 30px; // HINZUGEFÜGT
+                max-height: 60px; // HINZUGEFÜGT
             }
 
             @media screen and (max-width: 375px) {
                 width: 26px;
                 height: 52px;
+                max-width: 26px; // HINZUGEFÜGT
+                max-height: 52px; // HINZUGEFÜGT
+            }
+
+            @media screen and (max-width: 320px) {
+                width: 24px;
+                height: 48px;
+                max-width: 24px; // HINZUGEFÜGT
+                max-height: 48px; // HINZUGEFÜGT
             }
 
             &:hover {
@@ -461,14 +558,17 @@
 
 .content-right {
     width: 50%;
+    max-width: 50%; // HINZUGEFÜGT
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     min-height: 65vh;
+    box-sizing: border-box; // HINZUGEFÜGT
 
     @media screen and (max-width: 768px) {
         width: 100%;
+        max-width: 100%; // HINZUGEFÜGT
         order: 1;
         min-height: auto;
         justify-content: center;
@@ -479,9 +579,19 @@
         flex-direction: column;
         gap: 50px;
         align-items: center;
+        width: 100%; // HINZUGEFÜGT
+        max-width: 100%; // HINZUGEFÜGT
 
         @media screen and (max-width: 768px) {
             gap: 35px;
+        }
+
+        @media screen and (max-width: 480px) {
+            gap: 30px;
+        }
+
+        @media screen and (max-width: 375px) {
+            gap: 25px;
         }
 
         .logo {
@@ -489,6 +599,8 @@
             flex-direction: column;
             align-items: center;
             transition: $apple-transition-medium;
+            width: 100%; // HINZUGEFÜGT
+            max-width: 100%; // HINZUGEFÜGT
 
             &:hover {
                 transform: scale(1.05);
@@ -497,6 +609,8 @@
             .logo-img {
                 width: 85px;
                 height: 85px;
+                max-width: 85px; // HINZUGEFÜGT
+                max-height: 85px; // HINZUGEFÜGT
 
                 background: {
                     image: url('./../../../../assets/img/logo.png');
@@ -511,11 +625,22 @@
                 @media screen and (max-width: 768px) {
                     width: 65px;
                     height: 65px;
+                    max-width: 65px; // HINZUGEFÜGT
+                    max-height: 65px; // HINZUGEFÜGT
                 }
 
                 @media screen and (max-width: 375px) {
                     width: 55px;
                     height: 55px;
+                    max-width: 55px; // HINZUGEFÜGT
+                    max-height: 55px; // HINZUGEFÜGT
+                }
+
+                @media screen and (max-width: 320px) {
+                    width: 50px;
+                    height: 50px;
+                    max-width: 50px; // HINZUGEFÜGT
+                    max-height: 50px; // HINZUGEFÜGT
                 }
             }
 
@@ -526,6 +651,8 @@
                 color: $apple-text-primary;
                 margin-top: 6px;
                 letter-spacing: 0.5px;
+                text-align: center; // HINZUGEFÜGT
+                word-wrap: break-word; // HINZUGEFÜGT
 
                 @media screen and (max-width: 768px) {
                     font-size: 17px;
@@ -533,6 +660,10 @@
 
                 @media screen and (max-width: 375px) {
                     font-size: 15px;
+                }
+
+                @media screen and (max-width: 320px) {
+                    font-size: 14px;
                 }
             }
 
@@ -542,6 +673,8 @@
                 font-family: $apple-font-family;
                 color: $apple-text-secondary;
                 letter-spacing: 0.3px;
+                text-align: center; // HINZUGEFÜGT
+                word-wrap: break-word; // HINZUGEFÜGT
 
                 @media screen and (max-width: 768px) {
                     font-size: 12px;
@@ -550,15 +683,29 @@
                 @media screen and (max-width: 375px) {
                     font-size: 11px;
                 }
+
+                @media screen and (max-width: 320px) {
+                    font-size: 10px;
+                }
             }
         }
 
         .title {
             padding: 45px 0;
             text-align: center;
+            width: 100%; // HINZUGEFÜGT
+            max-width: 100%; // HINZUGEFÜGT
 
             @media screen and (max-width: 768px) {
                 padding: 25px 0;
+            }
+
+            @media screen and (max-width: 480px) {
+                padding: 20px 0;
+            }
+
+            @media screen and (max-width: 375px) {
+                padding: 15px 0;
             }
 
             .name {
@@ -574,6 +721,8 @@
                 margin-bottom: 12px;
                 transition: $apple-transition-medium;
                 position: relative;
+                word-wrap: break-word; // HINZUGEFÜGT
+                overflow-wrap: break-word; // HINZUGEFÜGT
 
                 @media screen and (max-width: 768px) {
                     font-size: 38px;
@@ -585,6 +734,10 @@
 
                 @media screen and (max-width: 375px) {
                     font-size: 26px;
+                }
+
+                @media screen and (max-width: 320px) {
+                    font-size: 24px;
                 }
 
                 &::after {
@@ -616,6 +769,8 @@
                 color: $apple-text-secondary;
                 letter-spacing: -0.01em;
                 transition: $apple-transition-medium;
+                word-wrap: break-word; // HINZUGEFÜGT
+                overflow-wrap: break-word; // HINZUGEFÜGT
 
                 @media screen and (max-width: 768px) {
                     font-size: 20px;
@@ -629,11 +784,77 @@
                     font-size: 16px;
                 }
 
+                @media screen and (max-width: 320px) {
+                    font-size: 15px;
+                }
+
                 &:hover {
                     color: $apple-text-primary;
                     transform: scale(1.01);
                 }
             }
         }
+    }
+}
+
+// ANIMATIONEN MIT REDUZIERTER BEWEGUNG
+@keyframes apple-ambient-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-8px) rotate(1deg) scale(1.01); // REDUZIERT
+    }
+    66% {
+        transform: translateY(5px) rotate(-0.5deg) scale(0.99); // REDUZIERT
+    }
+}
+
+@keyframes apple-profile-glow {
+    0%, 100% {
+        opacity: 0.15;
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        opacity: 0.2;
+        transform: rotate(180deg) scale(1.05);
+    }
+}
+
+// ZUSÄTZLICHE SICHERHEITSMASSNAHMEN
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+// ÜBERSCHREIBT JEDE MÖGLICHE URSACHE FÜR HORIZONTALES SCROLLEN
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+#landing-page-mobile * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+// SPEZIELLE BEHANDLUNG FÜR SEHR KLEINE SCREENS
+@media screen and (max-width: 320px) {
+    #landing-page-mobile {
+        min-width: 320px;
+        max-width: 320px;
+    }
+    
+    .mobile-content {
+        min-width: 320px;
+        max-width: 320px;
+        padding: 80px 8px 16px;
+    }
+    
+    .content-left,
+    .content-right {
+        min-width: auto;
+        max-width: 100%;
     }
 }
