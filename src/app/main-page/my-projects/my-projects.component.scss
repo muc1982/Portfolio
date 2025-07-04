@@ -1,811 +1,583 @@
 @use '../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-.hide-on-mobile {
-    @media screen and (max-width: 899px) {
-        display: none !important;
-    }
+.footer-wrapper {
+  width: 100%;
+  position: relative;
+  height: auto;
+    
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $apple-teal-gradient;
+    opacity: 0.3;
+  }
 }
 
-.hide-on-desktop {
-    @media screen and (min-width: 900px) {
-        display: none !important;
-    }
+footer {
+  height: 100%;
+  background: linear-gradient(135deg, #000 0%, #1C1C1E 100%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+    
+.footer-content {
+  width: 100%;
+  min-height: clamp(60px, 8vw, 80px);
+
+  @include dFlex($jc: space-between, $ai: center);
+  @include unified-content-padding;
 }
 
-.my-projects-container {
+.footer-left {
+  flex: 1;
+
+  @include dFlex($gap: clamp(8px, 1.5vw, 16px), $fd: column, $ai: flex-start);
+}
+
+.legal-notice {
+  a {
+    color: $apple-text-secondary;
+    font-weight: $apple-font-weight-regular;
+    font-family: $apple-font-family;
+    font-size: clamp(14px, 1.6vw, 16px);
+    transition: $apple-transition-fast;
+    padding: clamp(4px, 0.8vw, 8px) clamp(6px, 1.2vw, 12px);
+    border-radius: $apple-radius-small;
     position: relative;
-    margin: auto;
-    padding-left: clamp(20px, 5vw, 80px);
-    padding-right: clamp(20px, 5vw, 80px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
-
-    @media screen and (min-width: 900px) {
-        display: flex !important;
-    }
-
-    @media screen and (max-width: 899px) {
-        display: none !important;
-    }
-
+                    
     &::before {
-        content: '';
-        position: absolute;
-        top: -40%;
-        right: -40%;
-        width: 80%;
-        height: 100%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-        animation: apple-projects-ambient 15s ease-in-out infinite;
-        filter: blur(40px);
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgb(255 255 255 / 5%);
+      border-radius: inherit;
+      opacity: 0;
+      transition: $apple-transition-fast;
     }
-
-    h2 {
-        @include h2Title();
-        margin-bottom: 48px;
-        padding-top: clamp(48px, 8vw, 64px);
-        position: relative;
-        z-index: 2;
-        text-align: center;
-    }
-
-    .my-projects-content {
-        width: 100%;
-        @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px));
-        position: relative;
-        z-index: 2;
-        padding: clamp(32px, 6vw, 80px);
-        max-width: 1200px;
-        margin: 0 auto;
-
-        nav {
-            @include dFlex($gap: clamp(16px, 3vw, 24px), $jc: center);
-            margin-bottom: 32px;
-
-            >div {
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: $apple-radius-large;
-                padding: clamp(16px, 3vw, 20px) clamp(24px, 5vw, 32px);
-                transition: $apple-transition-fast;
-                cursor: pointer;
-                position: relative;
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    inset: -2px;
-                    background: $apple-teal-gradient;
-                    border-radius: $apple-radius-xl;
-                    opacity: 0;
-                    transition: $apple-transition-fast;
-                    z-index: -1;
-                }
-
-                &:hover {
-                    background: rgba(255, 255, 255, 0.08);
-                    border-color: rgba($apple-primary, 0.3);
-                    transform: translateY(-2px);
-                    box-shadow: $apple-shadow-medium;
-
-                    &::before {
-                        opacity: 0.1;
-                    }
-                }
-
-                &.active {
-                    background: rgba($apple-primary, 0.1);
-                    border-color: rgba($apple-primary, 0.4);
-                    box-shadow: $apple-shadow-glow;
-
-                    &::before {
-                        opacity: 0.2;
-                    }
-                }
-
-                >span {
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-semibold;
-                    color: $apple-text-secondary;
-                    font-size: clamp(16px, 3vw, 18px);
-                    transition: $apple-transition-fast;
-                    white-space: nowrap;
-                }
-
-                &.active>span {
-                    color: $apple-primary;
-                    font-weight: $apple-font-weight-bold;
-                }
-            }
-        }
-
-        .project {
-            @include dFlex($gap: clamp(32px, 6vw, 48px));
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: $apple-radius-xl;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: clamp(32px, 6vw, 48px);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            position: relative;
-
-            &::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(135deg,
-                        rgba(255, 255, 255, 0.06) 0%,
-                        rgba(255, 255, 255, 0.03) 50%,
-                        rgba(255, 255, 255, 0.01) 100%);
-                border-radius: inherit;
-                pointer-events: none;
-            }
-
-            .project-left {
-                flex: 1;
-                @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
-                position: relative;
-                z-index: 1;
-
-                .tab-li {
-                    @include dFlex($gap: clamp(16px, 3vw, 20px), $ai: flex-start);
-                    background: rgba(255, 255, 255, 0.02);
-                    border-radius: $apple-radius-large;
-                    padding: clamp(20px, 4vw, 24px);
-                    transition: $apple-transition-fast;
-
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.05);
-                        transform: translateX(4px);
-                    }
-
-                    img {
-                        width: clamp(16px, 3vw, 20px);
-                        height: clamp(16px, 3vw, 20px);
-                        flex-shrink: 0;
-                        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                    }
-
-                    .right-of-logo {
-                        flex: 1;
-
-                        >div {
-                            @include dFlex($ai: center, $gap: 12px);
-                            margin-bottom: 12px;
-
-                            h4 {
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-semibold;
-                                color: $apple-primary;
-                                font-size: clamp(18px, 4vw, 22px);
-                                margin: 0;
-                                flex: 1;
-                                @include dFlex($ai: center, $gap: 8px);
-
-                                .process-emoji,
-                                .experience-emoji {
-                                    font-size: clamp(20px, 4vw, 24px);
-                                    animation: apple-emoji-float 3s ease-in-out infinite;
-                                }
-
-                                .process-emoji {
-                                    animation-delay: 0.5s;
-                                }
-
-                                .experience-emoji {
-                                    animation-delay: 1s;
-                                }
-                            }
-
-                            .duration {
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-regular;
-                                color: $apple-text-tertiary;
-                                font-size: clamp(14px, 3vw, 16px);
-                                white-space: nowrap;
-
-                                span {
-                                    color: $apple-text-secondary;
-                                }
-                            }
-                        }
-
-                        >p {
-                            font-family: $apple-font-family;
-                            font-weight: $apple-font-weight-regular;
-                            color: $apple-text-secondary;
-                            font-size: clamp(16px, 3.5vw, 18px);
-                            line-height: 1.7;
-                            margin: 0;
-                            text-align: justify;
-                        }
-                    }
-                }
-            }
-
-            .project-right {
-                flex: 1;
-                @include dFlex($fd: column, $gap: clamp(20px, 4vw, 24px));
-                position: relative;
-                z-index: 1;
-
-                h5 {
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-semibold;
-                    color: $apple-primary;
-                    font-size: clamp(16px, 3.5vw, 20px);
-                    margin: 0 0 16px 0;
-                    text-align: center;
-                }
-
-                .technologies {
-                    @include dFlex($gap: clamp(12px, 2.5vw, 16px), $jc: center);
-                    flex-wrap: wrap;
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: $apple-radius-large;
-                    padding: clamp(16px, 3vw, 20px);
-
-                    .tech-logo {
-                        @include dFlex($jc: center, $ai: center);
-                        width: clamp(48px, 8vw, 60px);
-                        height: clamp(48px, 8vw, 60px);
-                        background: rgba(255, 255, 255, 0.05);
-                        border: 1px solid rgba(255, 255, 255, 0.1);
-                        border-radius: $apple-radius-medium;
-                        transition: $apple-transition-fast;
-
-                        &:hover {
-                            background: rgba(255, 255, 255, 0.1);
-                            transform: translateY(-2px) scale(1.05);
-                            box-shadow: $apple-shadow-small;
-                        }
-
-                        img {
-                            width: clamp(28px, 5vw, 36px);
-                            height: clamp(28px, 5vw, 36px);
-                            object-fit: contain;
-                            filter: brightness(1.1);
-                            transition: $apple-transition-fast;
-                        }
-
-                        &:hover img {
-                            filter: brightness(1.3) saturate(1.2);
-                        }
-                    }
-                }
-
-                .project-img {
-                    @include dFlex($jc: center, $ai: center);
-                    background: rgba(255, 255, 255, 0.02);
-                    border-radius: $apple-radius-large;
-                    padding: clamp(20px, 4vw, 24px);
-                    min-height: clamp(250px, 40vw, 320px);
-                    position: relative;
-
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        inset: 0;
-                        background: linear-gradient(45deg,
-                                rgba($apple-primary, 0.05) 0%,
-                                transparent 50%,
-                                rgba($apple-secondary, 0.05) 100%);
-                        border-radius: inherit;
-                    }
-
-                    img {
-                        max-width: 100%;
-                        height: auto;
-                        border-radius: $apple-radius-medium;
-                        box-shadow: $apple-shadow-large;
-                        position: relative;
-                        z-index: 1;
-                        transition: $apple-transition-medium;
+                    
+    &:hover {
+      color: $apple-text-primary;
+      transform: translateY(-2px);
                         
-                        // OPTIMIERTE BILDGRÖSSEN
-                        width: 100%;
-                        max-width: 600px;
-                        max-height: 400px;
-                        object-fit: contain;
-                        object-position: center;
-                        aspect-ratio: 16 / 10;
-
-                        &:hover {
-                            transform: scale(1.02);
-                            box-shadow: $apple-shadow-large, $apple-shadow-glow;
-                        }
-                    }
-                }
-
-                @keyframes apple-rocket-bounce {
-
-                    0%,
-                    100% {
-                        transform: translateY(0) rotate(0deg);
-                    }
-
-                    50% {
-                        transform: translateY(-4px) rotate(10deg);
-                    }
-                }
-
-                .project-right-footer {
-                    @include dFlex($gap: clamp(16px, 3vw, 20px), $jc: center);
-
-                    button {
-                        @include apple-button-primary();
-                        font-size: clamp(16px, 3.5vw, 18px);
-                        padding: clamp(14px, 3vw, 16px) clamp(24px, 5vw, 32px);
-                        min-width: clamp(120px, 25vw, 160px);
-                        border: none;
-                        cursor: pointer;
-                        position: relative;;
-
-                        background: linear-gradient(135deg, $apple-primary 0%, color.adjust($apple-primary, $lightness: -10%) 100%);
-                        color: white;
-
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            inset: 0;
-                            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-                            opacity: 0;
-                            transition: $apple-transition-fast;
-                        }
-
-                        &:hover {
-                            transform: translateY(-2px);
-                            box-shadow: $apple-shadow-medium;
-                            background: linear-gradient(135deg, color.adjust($apple-primary, $lightness: 5%) 0%, $apple-primary 100%);
-
-                            &::before {
-                                opacity: 1;
-                            }
-                        }
-
-                        a {
-                            color: inherit;
-                            text-decoration: none;
-                            font-size: inherit;
-                            display: block;
-                            width: 100%;
-                            height: 100%;
-                        }
-
-                        &:hover a {
-                            text-decoration: none;
-                        }
-                    }
-                }
-            }
-        }
-
-        // TEAM PLAYER MIT APPLE-STYLE ANIMATIONEN
-        .team-player {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: $apple-radius-xl;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: clamp(32px, 6vw, 48px);
-            margin-top: clamp(48px, 8vw, 64px);
-            text-align: center;
-            position: relative;
-
-            .team-player-header {
-                position: relative;
-                margin-bottom: 40px;
-
-                .team-player-title {
-                    margin-bottom: 12px;
-
-                    .title-gradient {
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-bold;
-                        font-size: clamp(24px, 5vw, 32px);
-                        background: #1ca9ae;
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        background-clip: text;
-                    }
-                }
-
-                .team-player-subtitle {
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-semibold;
-                    font-size: clamp(20px, 4vw, 28px);
-                    color: $apple-text-primary;
-                    margin-bottom: 24px;
-                }
-
-                .team-player-decoration {
-                    position: absolute;
-                    inset: 0;
-                    pointer-events: none;
-
-                    .floating-particle {
-                        position: absolute;
-                        width: 6px;
-                        height: 6px;
-                        background: $apple-primary;
-                        border-radius: 50%;
-                        opacity: 0.6;
-
-                        &:nth-child(1) {
-                            top: 20%;
-                            left: 10%;
-                            animation: apple-particle-float 4s ease-in-out infinite;
-                        }
-
-                        &:nth-child(2) {
-                            top: 60%;
-                            right: 15%;
-                            animation: apple-particle-float 4s ease-in-out infinite 1s;
-                        }
-
-                        &:nth-child(3) {
-                            bottom: 30%;
-                            left: 20%;
-                            animation: apple-particle-float 4s ease-in-out infinite 2s;
-                        }
-                    }
-                }
-            }
-
-            .team-player-content-wrapper {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: clamp(20px, 4vw, 32px);
-
-                .player.premium-card {
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: $apple-radius-large;
-                    padding: clamp(24px, 5vw, 32px);
-                    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                    position: relative;
-                    backdrop-filter: blur(20px);
-
-                    .player-glow {
-                        position: absolute;
-                        inset: -2px;
-                        background: linear-gradient(135deg, $apple-primary, $apple-secondary, $apple-primary);
-                        border-radius: inherit;
-                        opacity: 0;
-                        transition: all 0.4s ease;
-                        z-index: -1;
-                        animation: apple-glow-rotate 4s linear infinite;
-                    }
-
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.08);
-                        transform: translateY(-12px) scale(1.03);
-                        box-shadow:
-                            0 25px 50px rgba(0, 0, 0, 0.3),
-                            0 0 0 1px rgba(255, 255, 255, 0.1),
-                            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-
-                        .player-glow {
-                            opacity: 0.8;
-                        }
-
-                        .player-avatar {
-                            transform: scale(1.15);
-
-                            .avatar-ring {
-                                box-shadow: 0 0 30px rgba($apple-primary, 0.6);
-                            }
-                        }
-
-                        .project-link {
-                            .link-arrow {
-                                transform: translateX(6px);
-                            }
-                        }
-                    }
-
-                    .player-content {
-                        position: relative;
-                        z-index: 1;
-
-                        .player-avatar {
-                            @include dFlex($jc: center, $ai: center);
-                            width: 80px;
-                            height: 80px;
-                            margin: 0 auto 20px;
-                            position: relative;
-                            transition: all 0.3s ease;
-
-                            .avatar-ring {
-                                position: absolute;
-                                inset: 0;
-                                border: 3px solid transparent;
-                                background: linear-gradient(135deg, $apple-primary, $apple-secondary) border-box;
-                                border-radius: 50%;
-                                mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-                                mask-composite: xor;
-                                -webkit-mask-composite: xor;
-                                transition: all 0.3s ease;
-                            }
-
-                            .avatar-text {
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-bold;
-                                font-size: 24px;
-                                color: $apple-primary;
-                                z-index: 1;
-                            }
-                        }
-
-                        .player-info {
-                            .player-name {
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-bold;
-                                color: $apple-text-primary;
-                                font-size: clamp(18px, 4vw, 22px);
-                                margin-bottom: 12px;
-                            }
-
-                            .player-project {
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-medium;
-                                color: $apple-text-secondary;
-                                font-size: clamp(16px, 3.5vw, 18px);
-                                margin-bottom: 16px;
-
-                                .project-link {
-                                    @include dFlex($ai: center, $gap: 6px, $jc: center);
-                                    color: $apple-primary;
-                                    cursor: pointer;
-                                    transition: all 0.3s ease;
-                                    font-weight: $apple-font-weight-semibold;
-                                    text-decoration: none;
-
-                                    .link-text {
-                                        position: relative;
-
-                                        &::after {
-                                            content: '';
-                                            position: absolute;
-                                            bottom: -2px;
-                                            left: 0;
-                                            right: 0;
-                                            height: 2px;
-                                            background: $apple-primary;
-                                            transform: scaleX(0);
-                                            transition: transform 0.3s ease;
-                                        }
-                                    }
-
-                                    .link-arrow {
-                                        font-size: 16px;
-                                        transition: transform 0.3s ease;
-                                    }
-
-                                    &:hover {
-                                        color: color.adjust($apple-primary, $lightness: 15%);
-
-                                        .link-text::after {
-                                            transform: scaleX(1);
-                                        }
-                                    }
-                                }
-                            }
-
-                            .player-reference {
-                                position: relative;
-                                padding-left: 20px;
-
-                                .quote-mark {
-                                    position: absolute;
-                                    left: 0;
-                                    top: -4px;
-                                    font-size: 28px;
-                                    color: $apple-primary;
-                                    opacity: 0.6;
-                                    font-family: Georgia, serif;
-                                }
-
-                                span {
-                                    font-family: $apple-font-family;
-                                    font-weight: $apple-font-weight-regular;
-                                    color: $apple-text-tertiary;
-                                    font-size: clamp(14px, 3vw, 16px);
-                                    line-height: 1.6;
-                                    font-style: italic;
-                                    display: block;
-                                    text-align: left;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-// APPLE-STYLE ANIMATIONEN
-@keyframes apple-rocket-bounce {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-3px) rotate(5deg);
-    }
-}
-
-@keyframes apple-emoji-float {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    33% {
-        transform: translateY(-3px) rotate(3deg);
-    }
-
-    66% {
-        transform: translateY(2px) rotate(-2deg);
-    }
-}
-
-@keyframes apple-gradient-shift {
-
-    0%,
-    100% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
-@keyframes apple-particle-float {
-
-    0%,
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 0.6;
-    }
-
-    50% {
-        transform: translateY(-15px) scale(1.3);
+      &::before {
         opacity: 1;
+      }
     }
+                    
+    &:active {
+      color: $apple-primary;
+      transform: translateY(0);
+                        
+      &::before {
+        opacity: 0.7;
+        background: rgba($apple-primary, 0.1);
+      }
+    }
+  }
 }
 
-@keyframes apple-glow-rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+.copy-right {
+  color: $apple-text-tertiary;
+  font-weight: $apple-font-weight-regular;
+  font-family: $apple-font-family;
+  font-size: clamp(12px, 1.4vw, 14px);
+  padding-left: clamp(6px, 1.2vw, 12px);
+  opacity: 0.8;
 }
 
-@keyframes apple-projects-ambient {
+.footer-middle {
+  flex: 1;
 
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.08;
-    }
-
-    33% {
-        transform: translateY(-20px) rotate(2deg) scale(1.02);
-        opacity: 0.12;
-    }
-
-    66% {
-        transform: translateY(15px) rotate(-1deg) scale(0.98);
-        opacity: 0.06;
-    }
+  @include dFlex($jc: center);
 }
 
-// Responsive Design für Desktop
-@media screen and (max-width: 1200px) {
-    .my-projects-container {
-        .my-projects-content {
-            .project {
-                @include dFlex($fd: column, $gap: 32px);
+.footer-logo {
+  @include dFlex($fd: column, $jc: center, $ai: center);
 
-                .project-left,
-                .project-right {
-                    flex: 1;
-                }
-            }
-
-            .team-player .team-player-content-wrapper {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 24px;
-            }
-        }
+  transition: $apple-transition-medium;
+  padding: clamp(8px, 1.5vw, 12px);
+  border-radius: $apple-radius-medium;
+  position: relative;
+                
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: $apple-teal-gradient;
+    border-radius: $apple-radius-large;
+    opacity: 0;
+    transition: $apple-transition-medium;
+    z-index: -1;
+  }
+                
+  &:hover {
+    transform: scale(1.05);
+                    
+    &::before {
+      opacity: 0.1;
     }
+  }
 }
 
-@media screen and (max-width: 1000px) {
-    .my-projects-container {
-        margin: 20px;
-        padding: 20px;
+.logo-img {
+  width: clamp(50px, 6vw, 70px);
+  height: clamp(32px, 4vw, 44px);
+  background: {
+    image: url('./../../../assets/img/logo.png');
+    repeat: no-repeat;
+    position: center;
+    size: contain;
+  };
 
-        .my-projects-content {
-            padding: 20px;
-            gap: 40px;
+  @include apple-logo;
 
-            .team-player {
-                .team-player-content-wrapper {
-                    .player.premium-card {
-                        padding: 20px;
-
-                        .player-content .player-avatar {
-                            width: 70px;
-                            height: 70px;
-                            margin-bottom: 16px;
-
-                            .avatar-text {
-                                font-size: 20px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+  transition: $apple-transition-fast;
 }
 
-// Accessibility
+.logo-name {
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  color: $apple-text-primary;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+.logo-position {
+  font-size: clamp(10px, 1.3vw, 13px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-regular;
+  color: $apple-text-secondary;
+  letter-spacing: 0.3px;
+}
+
+.footer-right {
+  flex: 1;
+
+  @include dFlex($gap: clamp(12px, 2vw, 20px), $jc: flex-end, $ai: center);
+}
+
+.social-icon {
+  width: clamp(28px, 3.5vw, 36px);
+  height: clamp(28px, 3.5vw, 36px);
+  background: {
+    repeat: no-repeat;
+    size: contain;
+    position: center;
+  }
+
+  border-radius: $apple-radius-small;
+  transition: $apple-transition-fast;
+  position: relative;
+  cursor: pointer;
+                
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    background: $apple-teal-gradient;
+    border-radius: $apple-radius-medium;
+    opacity: 0;
+    transition: $apple-transition-fast;
+    z-index: -1;
+  }
+                
+  &:hover {
+    transform: translateY(-3px) scale(1.1);
+                    
+    &::before {
+      opacity: 0.15;
+    }
+  }
+                
+  &:active {
+    transform: translateY(-1px) scale(1.05);
+  }
+                
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.github-icon {
+  background-image: url('./../../../assets/img/github.png');
+  filter: brightness(1.2);
+                
+  &:hover {
+    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
+  }
+}
+
+.email-icon {
+  background-image: url('./../../../assets/img/mail.png');
+  filter: brightness(1.2);
+                
+  &:hover {
+    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
+  }
+}
+
+.linkedin-icon {
+  background-image: url('./../../../assets/img/linkedin.png');
+  filter: brightness(1.2);
+                
+  &:hover {
+    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
+  }
+}
+
+@media screen and (width <= 900px) {
+  .footer-wrapper {
+    min-height: 180px;
+  }
+    
+  footer {
+    min-height: 180px;
+
+    @include standardPaddingMobile;
+  }
+
+  .footer-content {
+    @include dFlex($fd: column, $gap: 20px, $ai: center);
+
+    text-align: center;
+  }
+
+  .footer-left {
+    order: 3;
+
+    @include dFlex($fd: row, $gap: 16px, $ai: center, $jc: center);
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 14px;
+    padding-left: 0;
+  }
+
+  .footer-middle {
+    order: 1;
+  }
+
+  .footer-middle .logo-img {
+    width: 48px;
+    height: 30px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 16px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 11px;
+  }
+
+  .footer-right {
+    order: 2;
+
+    @include dFlex($gap: 16px, $jc: center);
+  }
+
+  .footer-right .social-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .footer-wrapper {
+    min-height: 160px;
+  }
+    
+  footer {
+    min-height: 160px;
+  }
+
+  .footer-content {
+    gap: 16px;
+  }
+
+  .footer-left {
+    @include dFlex($fd: column, $gap: 8px, $ai: center);
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 12px;
+  }
+
+  .footer-middle .logo-img {
+    width: 42px;
+    height: 26px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 15px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 10px;
+  }
+
+  .footer-right {
+    gap: 14px;
+  }
+
+  .footer-right .social-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media screen and (width <= 480px) {
+  .footer-wrapper {
+    min-height: 140px;
+  }
+    
+  footer {
+    min-height: 140px;
+    padding: 16px 12px;
+  }
+
+  .footer-content {
+    gap: 12px;
+  }
+
+  .footer-left {
+    gap: 6px;
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 11px;
+  }
+
+  .footer-logo {
+    padding: 6px;
+  }
+
+  .footer-middle .logo-img {
+    width: 38px;
+    height: 24px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 14px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 9px;
+  }
+
+  .footer-right {
+    gap: 12px;
+  }
+
+  .footer-right .social-icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media screen and (width <= 375px) {
+  .footer-content {
+    gap: 10px;
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 10px;
+  }
+
+  .footer-middle .logo-img {
+    width: 36px;
+    height: 22px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 13px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 8px;
+  }
+
+  .footer-right {
+    gap: 10px;
+  }
+
+  .footer-right .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media screen and (width <= 320px) {
+  .footer-wrapper {
+    min-height: 120px;
+  }
+    
+  footer {
+    min-height: 120px;
+    padding: 12px 8px;
+  }
+
+  .footer-content {
+    gap: 8px;
+  }
+
+  .footer-left {
+    gap: 4px;
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: $apple-radius-small;
+  }
+
+  .footer-left .copy-right {
+    font-size: 9px;
+  }
+
+  .footer-logo {
+    padding: 4px;
+  }
+
+  .footer-middle .logo-img {
+    width: 32px;
+    height: 20px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 7px;
+  }
+
+  .footer-right {
+    gap: 8px;
+  }
+
+  .footer-right .social-icon {
+    width: 22px;
+    height: 22px;
+
+    &:hover {
+      transform: translateY(-2px) scale(1.05);
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .my-projects-container {
-        &::before {
-            animation: none;
-        }
-    }
+  .legal-notice a:hover {
+    transform: none;
+  }
 
-    .process-emoji,
-    .experience-emoji,
-    .title-gradient,
-    .floating-particle,
-    .player-glow {
-        animation: none !important;
-    }
+  .footer-logo:hover {
+    transform: none;
+  }
 
-    .player.premium-card:hover {
-        transform: translateY(-4px) scale(1.02);
-    }
+  .social-icon:hover {
+    transform: none;
+  }
 }
 
-// High contrast mode
 @media (prefers-contrast: high) {
-    .my-projects-container {
-        background: #000;
-        border: 2px solid #fff;
-
-        .project,
-        .team-player {
-            background: #111;
-            border: 2px solid #333;
-        }
-
-        .player.premium-card {
-            background: #111;
-            border: 2px solid #333;
-
-            &:hover {
-                background: #222;
-                border-color: #fff;
-            }
-        }
+  .footer-wrapper {
+    background: #000;
+    border-top: 2px solid #fff;
+        
+    &::before {
+      background: #fff;
     }
+  }
+    
+  footer {
+    background: #000;
+  }
+
+  .legal-notice a {
+    color: #fff;
+    border: 1px solid #333;
+                
+    &:hover {
+      background: #333;
+      border-color: #666;
+    }
+  }
+
+  .copy-right {
+    color: #ccc;
+  }
+
+  .logo-name {
+    color: #fff;
+  }
+
+  .logo-position {
+    color: #ccc;
+  }
+}
+
+@media print {
+  .footer-wrapper {
+    background: white;
+    color: black;
+    border-top: 1px solid black;
+        
+    &::before {
+      display: none;
+    }
+  }
+
+  .legal-notice a {
+    color: black;
+  }
+
+  .copy-right {
+    color: black;
+  }
+
+  .logo-name,
+  .logo-position {
+    color: black;
+  }
+
+  .social-icon {
+    display: none;
+  }
 }

@@ -2,299 +2,299 @@
 @use 'sass:color';
 
 .private-policy-container {
-    position: relative;
-    min-height: 100vh;
-    background: $apple-universal-gradient;
-    overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  background: $apple-universal-gradient;
+  overflow-x: hidden;
+}
 
-    .custom-header {
-        position: fixed;
-        top: 0;
-        z-index: 1000;
-        height: 104px;
-        width: 100%;
-        background: linear-gradient(135deg, #000000 0%, #1C1C1E 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
+.custom-header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  height: 104px;
+  width: 100%;
+  background: linear-gradient(135deg, #000 0%, #1C1C1E 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 
-        @media screen and (max-width: $breakpoint-desktop) {
-            height: 88px;
-        }
+  @media screen and (max-width: $breakpoint-desktop) {
+    height: 88px;
+  }
 
-        @media screen and (max-width: $breakpoint-mobile) {
-            height: 72px;
-        }
+  @media screen and (max-width: $breakpoint-mobile) {
+    height: 72px;
+  }
+}
 
-        .custom-header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            @include unified-content-padding(); // Padding auf header-inner für korrekte Zentrierung
-            box-sizing: border-box;
+.custom-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 
-            .logo-section {
-                flex: 1;
-                @include dFlex($jc: flex-start, $ai: center);
+  @include unified-content-padding;
+}
 
-                .apple-logo-btn {
-                    @include dFlex($ai: center, $gap: clamp(8px, 2vw, 12px));
-                    padding: clamp(8px, 2vw, 12px);
-                    border-radius: $apple-radius-large;
-                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    text-decoration: none;
-                    color: $apple-text-secondary;
-                    font-family: $apple-font-family;
-                    backdrop-filter: blur(20px);
-                    -webkit-backdrop-filter: blur(20px);
-                    position: relative;
-                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-                    min-height: 44px;
-                    cursor: pointer;
-                    transition: $apple-transition-fast;
+.logo-section {
+  flex: 1;
 
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        inset: -2px;
-                        background: $apple-teal-gradient;
-                        border-radius: $apple-radius-xl;
-                        opacity: 0;
-                        transition: $apple-transition-fast;
-                        z-index: -1;
-                    }
+  @include dFlex($jc: flex-start, $ai: center);
+}
 
-                    &:hover {
-                        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
-                        border-color: rgba($apple-primary, 0.5);
-                        color: $apple-text-primary;
-                        transform: translateY(-2px) scale(1.02);
-                        box-shadow:
-                            0 8px 25px rgba(0, 0, 0, 0.2),
-                            0 0 20px rgba($apple-primary, 0.3);
+.apple-logo-btn {
+  padding: clamp(8px, 2vw, 12px);
+  border-radius: $apple-radius-large;
+  background: linear-gradient(135deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 5%) 100%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  text-decoration: none;
+  color: $apple-text-secondary;
+  font-family: $apple-font-family;
+  backdrop-filter: blur(20px);
+  position: relative;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+  min-height: 44px;
+  cursor: pointer;
+  transition: $apple-transition-fast;
 
-                        &::before {
-                            opacity: 0.15;
-                        }
+  @include dFlex($ai: center, $gap: clamp(8px, 2vw, 12px));
 
-                        .logo-img {
-                            filter: brightness(1.3) contrast(1.2) saturate(1.3);
-                            transform: scale(1.1);
-                        }
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: $apple-teal-gradient;
+    border-radius: $apple-radius-xl;
+    opacity: 0;
+    transition: $apple-transition-fast;
+    z-index: -1;
+  }
 
-                        .logo-name {
-                            color: $apple-text-primary;
-                        }
+  &:hover {
+    background: linear-gradient(135deg, rgb(255 255 255 / 15%) 0%, rgb(255 255 255 / 8%) 100%);
+    border-color: rgba($apple-primary, 0.5);
+    color: $apple-text-primary;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      0 8px 25px rgb(0 0 0 / 20%),
+      0 0 20px rgba($apple-primary, 0.3);
 
-                        .logo-position {
-                            color: $apple-primary;
-                        }
-                    }
-
-                    &:active {
-                        transform: translateY(-1px) scale(1.01);
-                    }
-
-                    .logo-img {
-                        width: 40px;
-                        height: 26px;
-
-                        background: {
-                            image: url('./../../assets/img/logo.png');
-                            repeat: no-repeat;
-                            position: center;
-                            size: contain;
-                        }
-
-                        ;
-                        @include apple-logo;
-                        transition: $apple-transition-fast;
-
-                        @media screen and (max-width: $breakpoint-mobile) {
-                            width: 36px;
-                            height: 23px;
-                        }
-                    }
-
-                    .logo-text {
-                        @include dFlex($fd: column, $ai: flex-start);
-
-                        .logo-name {
-                            font-size: clamp(14px, 1.8vw, 16px);
-                            font-weight: $apple-font-weight-semibold;
-                            color: $apple-text-primary;
-                            letter-spacing: 0.5px;
-                            transition: $apple-transition-fast;
-
-                            @media screen and (max-width: $breakpoint-mobile) {
-                                font-size: 13px;
-                            }
-                        }
-
-                        .logo-position {
-                            font-size: clamp(10px, 1.3vw, 12px);
-                            font-weight: $apple-font-weight-regular;
-                            color: $apple-text-secondary;
-                            letter-spacing: 0.3px;
-                            transition: $apple-transition-fast;
-
-                            @media screen and (max-width: $breakpoint-mobile) {
-                                font-size: 9px;
-                            }
-                        }
-                    }
-                }
-            }
-
-            .page-title {
-                flex: 2;
-                text-align: center;
-                font-size: clamp(18px, 3vw, 24px);
-                font-family: $apple-font-family;
-                font-weight: $apple-font-weight-semibold;
-                color: $apple-text-primary;
-                margin: 0;
-
-                @media screen and (max-width: $breakpoint-mobile) {
-                    font-size: clamp(16px, 4vw, 18px);
-                }
-            }
-
-            .header-lang-switcher {
-                flex: 1;
-                @include dFlex($jc: flex-end, $ai: center);
-            }
-        }
+    &::before {
+      opacity: 0.15;
     }
+  }
 
-    .private-policy-content {
-        padding-top: 104px; // Platz für den fixed header
+  &:active {
+    transform: translateY(-1px) scale(1.01);
+  }
+}
 
-        @media screen and (max-width: $breakpoint-desktop) {
-            padding-top: 88px;
-        }
+.logo-img {
+  width: 40px;
+  height: 26px;
+  transition: $apple-transition-fast;
+  background-image: url('./../../assets/img/logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 
-        @media screen and (max-width: $breakpoint-mobile) {
-            padding-top: 72px;
-        }
+  @include apple-logo;
 
-        .content-wrapper {
-            @include unified-content-padding(); // Gleiche Einrückung wie Header
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 36px;
+    height: 23px;
+  }
+}
 
-            .content {
-                width: 100%;
+.apple-logo-btn:hover .logo-img {
+  filter: brightness(1.3) contrast(1.2) saturate(1.3);
+  transform: scale(1.1);
+}
 
-                .legal-notice-subcontainer {
-                    max-width: 800px; // Begrenzte Breite für bessere Lesbarkeit
-                    margin: 0 auto; // Zentriert den Inhalt
-                    padding: clamp(20px, 4vw, 40px) 0;
+.logo-text {
+  @include dFlex($fd: column, $ai: flex-start);
+}
 
-                    h1 {
-                        font-size: clamp(24px, 5vw, 32px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-bold;
-                        color: $apple-text-primary;
-                        margin-bottom: 24px;
-                        text-align: center;
-                    }
+.logo-name {
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: $apple-font-weight-semibold;
+  color: $apple-text-primary;
+  letter-spacing: 0.5px;
+  transition: $apple-transition-fast;
 
-                    h2 {
-                        font-size: clamp(18px, 4vw, 22px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-semibold;
-                        color: $apple-text-primary;
-                        margin: 24px 0 16px 0;
-                    }
+  @media screen and (max-width: $breakpoint-mobile) {
+    font-size: 13px;
+  }
+}
 
-                    h3 {
-                        font-size: clamp(16px, 3.5vw, 20px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-semibold;
-                        color: $apple-text-primary;
-                        margin: 20px 0 12px 0;
-                    }
+.apple-logo-btn:hover .logo-name {
+  color: $apple-text-primary;
+}
 
-                    h4 {
-                        font-size: clamp(16px, 3vw, 18px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-medium;
-                        color: $apple-text-primary;
-                        margin: 16px 0 8px 0;
-                    }
+.logo-position {
+  font-size: clamp(10px, 1.3vw, 12px);
+  font-weight: $apple-font-weight-regular;
+  color: $apple-text-secondary;
+  letter-spacing: 0.3px;
+  transition: $apple-transition-fast;
 
-                    p {
-                        font-size: clamp(16px, 3.5vw, 18px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-regular;
-                        color: $apple-text-secondary;
-                        line-height: 1.6;
-                        margin-bottom: 16px;
-                    }
+  @media screen and (max-width: $breakpoint-mobile) {
+    font-size: 9px;
+  }
+}
 
-                    a {
-                        color: $apple-primary;
-                        text-decoration: none;
-                        transition: $apple-transition-fast;
+.apple-logo-btn:hover .logo-position {
+  color: $apple-primary;
+}
 
-                        &:hover {
-                            color: $apple-secondary;
-                            text-decoration: underline;
-                        }
-                    }
+.page-title {
+  flex: 2;
+  text-align: center;
+  font-size: clamp(18px, 3vw, 24px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  color: $apple-text-primary;
+  margin: 0;
 
-                    .link {
-                        margin-top: 32px;
-                        padding-top: 16px;
-                        border-top: 1px solid rgba(255, 255, 255, 0.1);
-                        text-align: center;
-                        font-style: italic;
-                    }
-                }
-            }
-        }
-    }
+  @media screen and (max-width: $breakpoint-mobile) {
+    font-size: clamp(16px, 4vw, 18px);
+  }
+}
+
+.header-lang-switcher {
+  flex: 1;
+
+  @include dFlex($jc: flex-end, $ai: center);
+}
+
+.private-policy-content {
+  padding-top: 104px;
+
+  @media screen and (max-width: $breakpoint-desktop) {
+    padding-top: 88px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding-top: 72px;
+  }
+}
+
+.content-wrapper {
+  @include unified-content-padding;
+}
+
+.content {
+  width: 100%;
+}
+
+.legal-notice-subcontainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 40px) 0;
+}
+
+.legal-notice-subcontainer h1 {
+  font-size: clamp(24px, 5vw, 32px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-bold;
+  color: $apple-text-primary;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.legal-notice-subcontainer h2 {
+  font-size: clamp(18px, 4vw, 22px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  color: $apple-text-primary;
+  margin: 24px 0 16px;
+}
+
+.legal-notice-subcontainer h3 {
+  font-size: clamp(16px, 3.5vw, 20px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  color: $apple-text-primary;
+  margin: 20px 0 12px;
+}
+
+.legal-notice-subcontainer h4 {
+  font-size: clamp(16px, 3vw, 18px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-medium;
+  color: $apple-text-primary;
+  margin: 16px 0 8px;
+}
+
+.legal-notice-subcontainer p {
+  font-size: clamp(16px, 3.5vw, 18px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-regular;
+  color: $apple-text-secondary;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.legal-notice-subcontainer a {
+  color: $apple-primary;
+  text-decoration: none;
+  transition: $apple-transition-fast;
+
+  &:hover {
+    color: $apple-secondary;
+    text-decoration: underline;
+  }
+}
+
+.link {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  text-align: center;
+  font-style: italic;
 }
 
 .simple-footer {
-    margin-top: auto;
-    padding: 24px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.3);
-    
-    .footer-content {
-        @include unified-content-padding();
-        @include dFlex($jc: space-between, $ai: center);
-        
-        @media screen and (max-width: $breakpoint-mobile) {
-            @include dFlex($fd: column, $gap: 12px, $ai: center);
-            text-align: center;
-        }
-        
-        .back-link {
-            color: $apple-primary;
-            text-decoration: none;
-            font-family: $apple-font-family;
-            font-weight: $apple-font-weight-medium;
-            font-size: 16px;
-            transition: $apple-transition-fast;
-            padding: 8px 16px;
-            border-radius: $apple-radius-small;
-            
-            &:hover {
-                color: $apple-secondary;
-                background: rgba(255, 255, 255, 0.05);
-                transform: translateX(-2px);
-            }
-        }
-        
-        .copyright {
-            color: $apple-text-tertiary;
-            font-family: $apple-font-family;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-    }
+  margin-top: auto;
+  padding: 24px 0;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  background: rgb(0 0 0 / 30%);
+}
+
+.footer-content {
+  @include unified-content-padding;
+  @include dFlex($jc: space-between, $ai: center);
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    @include dFlex($fd: column, $gap: 12px, $ai: center);
+
+    text-align: center;
+  }
+}
+
+.back-link {
+  color: $apple-primary;
+  text-decoration: none;
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-medium;
+  font-size: 16px;
+  transition: $apple-transition-fast;
+  padding: 8px 16px;
+  border-radius: $apple-radius-small;
+
+  &:hover {
+    color: $apple-secondary;
+    background: rgb(255 255 255 / 5%);
+    transform: translateX(-2px);
+  }
+}
+
+.copyright {
+  color: $apple-text-tertiary;
+  font-family: $apple-font-family;
+  font-size: 14px;
+  opacity: 0.8;
 }

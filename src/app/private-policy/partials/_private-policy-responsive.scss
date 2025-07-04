@@ -1,203 +1,179 @@
 @use '../../../style/apple-variables' as *;
 
-// Tablet
-@media screen and (max-width: 1200px) {
-    .private-policy-content {
-        .content {
-            max-width: 800px;
-            
-            .private-policy-subcontainer,
-            .legal-notice-subcontainer {
-                padding: clamp(20px, 4vw, 36px);
-            }
-        }
-    }
+@media screen and (width <= 1200px) {
+  .private-policy-content .content {
+    max-width: 800px;
+  }
+
+  .private-policy-subcontainer,
+  .legal-notice-subcontainer {
+    padding: clamp(20px, 4vw, 36px);
+  }
 }
 
-// Mobile
-@media screen and (max-width: 900px) {
-    .private-policy-container {
-        .private-policy-content {
-            min-height: calc(100vh - 104px - 280px);
-            
-            .content {
-                @include standardPaddingMobile();
-                padding-top: clamp(32px, 6vw, 48px);
-                padding-bottom: clamp(32px, 6vw, 48px);
-                max-width: 100%;
-                
-                .private-policy-subcontainer,
-                .legal-notice-subcontainer {
-                    padding: clamp(16px, 4vw, 28px);
-                    border-radius: $apple-radius-large;
-                }
-                
-                h1 {
-                    margin-bottom: clamp(20px, 3vw, 28px);
-                }
-                
-                h2::before {
-                    left: -12px;
-                    width: 3px;
-                }
-                
-                p, li {
-                    text-align: left;
-                    hyphens: none;
-                }
-                
-                ul {
-                    padding-left: clamp(16px, 2.5vw, 24px);
-                    
-                    li::before {
-                        left: -10px;
-                        width: 5px;
-                        height: 5px;
-                    }
-                }
-            }
-        }
-    }
+@media screen and (width <= 900px) {
+  .private-policy-container .private-policy-content {
+    min-height: calc(100vh - 104px - 280px);
+  }
+
+  .private-policy-content .content {
+    padding-top: clamp(32px, 6vw, 48px);
+    padding-bottom: clamp(32px, 6vw, 48px);
+    max-width: 100%;
+
+    @include standardPaddingMobile;
+  }
+
+  .private-policy-subcontainer,
+  .legal-notice-subcontainer {
+    padding: clamp(16px, 4vw, 28px);
+    border-radius: $apple-radius-large;
+  }
+
+  .private-policy-content h1 {
+    margin-bottom: clamp(20px, 3vw, 28px);
+  }
+
+  .private-policy-content h2::before {
+    left: -12px;
+    width: 3px;
+  }
+
+  .private-policy-content p,
+  .private-policy-content li {
+    text-align: left;
+    hyphens: none;
+  }
+
+  .private-policy-content ul {
+    padding-left: clamp(16px, 2.5vw, 24px);
+  }
+
+  .private-policy-content ul li::before {
+    left: -10px;
+    width: 5px;
+    height: 5px;
+  }
 }
 
-// Small Mobile
-@media screen and (max-width: 600px) {
-    .private-policy-container {
-        .private-policy-content {
-            margin-top: 88px;
-            
-            .content {
-                padding-top: clamp(24px, 5vw, 32px);
-                padding-bottom: clamp(24px, 5vw, 32px);
-                
-                .private-policy-subcontainer,
-                .legal-notice-subcontainer {
-                    padding: clamp(12px, 3vw, 20px);
-                    border-radius: $apple-radius-medium;
-                }
-                
-                h1 {
-                    &::after {
-                        width: clamp(40px, 10vw, 80px);
-                        height: 2px;
-                    }
-                }
-                
-                h2 {
-                    &::before {
-                        left: -8px;
-                        width: 2px;
-                    }
-                }
-                
-                ul {
-                    padding-left: clamp(12px, 2vw, 18px);
-                    
-                    li {
-                        padding-left: 6px;
-                        
-                        &::before {
-                            left: -8px;
-                            width: 4px;
-                            height: 4px;
-                        }
-                    }
-                }
-            }
-        }
-    }
+@media screen and (width <= 600px) {
+  .private-policy-container .private-policy-content {
+    margin-top: 88px;
+  }
+
+  .private-policy-content .content {
+    padding-top: clamp(24px, 5vw, 32px);
+    padding-bottom: clamp(24px, 5vw, 32px);
+  }
+
+  .private-policy-subcontainer,
+  .legal-notice-subcontainer {
+    padding: clamp(12px, 3vw, 20px);
+    border-radius: $apple-radius-medium;
+  }
+
+  .private-policy-content h1::after {
+    width: clamp(40px, 10vw, 80px);
+    height: 2px;
+  }
+
+  .private-policy-content h2::before {
+    left: -8px;
+    width: 2px;
+  }
+
+  .private-policy-content ul {
+    padding-left: clamp(12px, 2vw, 18px);
+  }
+
+  .private-policy-content ul li {
+    padding-left: 6px;
+  }
+
+  .private-policy-content ul li::before {
+    left: -8px;
+    width: 4px;
+    height: 4px;
+  }
 }
 
-// Very Small Mobile
-@media screen and (max-width: 480px) {
-    .private-policy-container {
-        .private-policy-content {
-            .content {
-                .private-policy-subcontainer,
-                .legal-notice-subcontainer {
-                    padding: clamp(10px, 2.5vw, 16px);
-                    
-                    &::before {
-                        filter: blur(30px);
-                    }
-                }
-                
-                h1 {
-                    margin-bottom: clamp(16px, 2.5vw, 20px);
-                    
-                    &::after {
-                        width: clamp(30px, 8vw, 60px);
-                        height: 1.5px;
-                    }
-                }
-                
-                h2::before {
-                    display: none;
-                }
-                
-                ul li::before {
-                    display: none;
-                }
-                
-                .link {
-                    margin-top: clamp(24px, 4vw, 32px);
-                    padding-top: clamp(12px, 2.5vw, 20px);
-                }
-            }
-        }
+@media screen and (width <= 480px) {
+  .private-policy-subcontainer,
+  .legal-notice-subcontainer {
+    padding: clamp(10px, 2.5vw, 16px);
+
+    &::before {
+      filter: blur(30px);
     }
+  }
+
+  .private-policy-content h1 {
+    margin-bottom: clamp(16px, 2.5vw, 20px);
+
+    &::after {
+      width: clamp(30px, 8vw, 60px);
+      height: 1.5px;
+    }
+  }
+
+  .private-policy-content h2::before {
+    display: none;
+  }
+
+  .private-policy-content ul li::before {
+    display: none;
+  }
+
+  .private-policy-content .link {
+    margin-top: clamp(24px, 4vw, 32px);
+    padding-top: clamp(12px, 2.5vw, 20px);
+  }
 }
 
-// Ultra Small
-@media screen and (max-width: 375px) {
-    .private-policy-container {
-        .private-policy-content {
-            .content {
-                .private-policy-subcontainer,
-                .legal-notice-subcontainer {
-                    padding: 12px;
-                    border-radius: $apple-radius-small;
-                }
-                
-                h1 {
-                    margin-bottom: 16px;
-                }
-                
-                h2 {
-                    margin-top: 20px;
-                    margin-bottom: 12px;
-                }
-                
-                h3 {
-                    margin-top: 16px;
-                    margin-bottom: 8px;
-                }
-                
-                h4 {
-                    margin-top: 12px;
-                    margin-bottom: 6px;
-                }
-                
-                p, li {
-                    margin-top: 8px;
-                    margin-bottom: 8px;
-                }
-                
-                ul {
-                    margin: 12px 0;
-                    padding-left: 16px;
-                    
-                    li {
-                        margin: 6px 0;
-                        padding-left: 4px;
-                    }
-                }
-                
-                .link {
-                    margin-top: 24px;
-                    padding-top: 12px;
-                }
-            }
-        }
-    }
+@media screen and (width <= 375px) {
+  .private-policy-subcontainer,
+  .legal-notice-subcontainer {
+    padding: 12px;
+    border-radius: $apple-radius-small;
+  }
+
+  .private-policy-content h1 {
+    margin-bottom: 16px;
+  }
+
+  .private-policy-content h2 {
+    margin-top: 20px;
+    margin-bottom: 12px;
+  }
+
+  .private-policy-content h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .private-policy-content h4 {
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  .private-policy-content p,
+  .private-policy-content li {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .private-policy-content ul {
+    margin: 12px 0;
+    padding-left: 16px;
+  }
+
+  .private-policy-content ul li {
+    margin: 6px 0;
+    padding-left: 4px;
+  }
+
+  .private-policy-content .link {
+    margin-top: 24px;
+    padding-top: 12px;
+  }
 }

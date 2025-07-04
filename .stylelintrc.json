@@ -1,0 +1,59 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "rules": {
+    "max-nesting-depth": [6, { 
+      "message": "❌ Verschachtelung zu tief - max. 6 Ebenen (reduziere auf 3)" 
+    }],
+    "selector-max-id": 0,
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9_-]*$",
+    "scss/at-rule-no-unknown": true,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9_-]*$",
+    "declaration-no-important": [true, { 
+      "message": "❌ !important vermeiden - erhöhe Spezifität stattdessen" 
+    }],
+    "selector-max-compound-selectors": [4, { 
+      "message": "❌ Zu komplexe Selektoren - Performance-Problem (max. 4 Selektoren)" 
+    }],
+    "declaration-block-no-duplicate-properties": [true, { 
+      "message": "❌ Doppelte Properties - redundanter Code" 
+    }],
+    "scss/no-duplicate-dollar-variables": [true, { 
+      "message": "❌ Doppelte SCSS-Variablen - Wartungsproblem" 
+    }],
+    "property-no-vendor-prefix": [true, { 
+      "message": "❌ Vendor-Prefixes vermeiden - nutze Autoprefixer" 
+    }],
+    "media-feature-range-notation": "context",
+    "keyframes-name-pattern": "^[a-z][a-zA-Z0-9-]*$",
+    "rule-empty-line-before": ["always", { 
+      "except": ["first-nested"], 
+      "ignore": ["after-comment"] 
+    }],
+    "no-descending-specificity": null,
+    "scss/operator-no-unspaced": null,
+    "scss/at-if-closing-brace-newline-after": null,
+    "scss/at-if-closing-brace-space-after": null,
+    "scss/at-else-empty-line-before": null,
+    "scss/double-slash-comment-empty-line-before": null,
+    "declaration-empty-line-before": ["always", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment", "after-declaration", "inside-single-line-block"]
+    }],
+    "at-rule-empty-line-before": ["always", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment", "blockless-after-same-name-blockless"]
+    }],
+    "scss/at-mixin-pattern": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "no-empty-source": null,
+    "declaration-block-no-redundant-longhand-properties": [true, {
+      "message": "❌ Shorthand-Properties nutzen (z.B. flex-flow statt flex-direction + flex-wrap)"
+    }]
+  },
+  "ignoreFiles": [
+    "node_modules/**",
+    "dist/**",
+    "src/assets/**"
+  ]
+}

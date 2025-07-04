@@ -2,986 +2,1031 @@
 @use 'sass:color';
 
 .contact-container {
-    position: relative;
-    margin: auto;
-    @include standardPadding();
-    @include dFlex($fd: column);
-    width: 100%;
-    box-sizing: border-box;
+  position: relative;
+  margin: auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  @include standardPadding;
+  @include dFlex($fd: column);
     
-
-    @media screen and (min-width: 900px) {
-        display: flex !important;
+  @media screen and (width >= 900px) {
+    &.contact-container {
+      display: flex;
     }
+  }
 
-    @media screen and (max-width: 899px) {
-        display: none !important;
+  @media screen and (width <= 899px) {
+    &.contact-container {
+      display: none;
     }
+  }
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: -40%;
-        right: -40%;
-        width: 80%;
-        height: 100%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-        animation: apple-contact-ambient 12s ease-in-out infinite;
-        filter: blur(40px);
-    }
-
-    h2 {
-        @include h2Title();
-        margin-bottom: 48px;
-        padding-top: clamp(48px, 8vw, 64px);
-        position: relative;
-        z-index: 2;
-        text-align: center;
-    }
-
-    .contact-content {
-        width: 100%;
-        @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px));
-        position: relative;
-        z-index: 2;
-        padding: clamp(32px, 6vw, 80px);
-        max-width: 1200px;
-        margin: 0 auto;
-
-        .contact-header {
-            color: $apple-text-primary;
-            @include dFlex($fd: row, $jc: space-between, $ai: center);
-            width: 100%;
-            gap: clamp(24px, 5vw, 32px);
-
-            .header-left {
-                flex: 1;
-
-                h3 {
-                    font-size: clamp(24px, 4vw, 32px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-semibold;
-                    color: $apple-primary;
-                    text-align: left;
-                    margin: 0 0 8px 0;
-                }
-            }
-
-            .header-right {
-                flex: 1;
-                @include dFlex($fd: column, $gap: 20px);
-
-                .header-top {
-                    @include dFlex($fd: column, $gap: 16px);
-                    width: 100%;
-
-                    .header-right-email,
-                    .header-right-phone {
-                        width: 100%;
-                        max-width: 300px;
-
-                        a {
-                            @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
-                            height: clamp(48px, 12vw, 56px);
-                            padding: 0 clamp(16px, 4vw, 20px);
-                            border-radius: $apple-radius-large;
-                            border: 1px solid rgba(255, 255, 255, 0.1);
-                            transition: $apple-transition-fast;
-                            background: rgba(255, 255, 255, 0.02);
-                            width: 100%;
-                            box-sizing: border-box;
-                            text-decoration: none;
-                            color: inherit;
-                            display: flex;
-
-                            &:hover {
-                                border-color: rgba($apple-primary, 0.3);
-                                background: rgba($apple-primary, 0.05);
-                                transform: translateY(-2px);
-                                box-shadow: $apple-shadow-medium;
-
-                                span {
-                                    color: $apple-primary;
-                                }
-
-                                .mail.img {
-                                    background-image: url('./../../../assets/img/mail-hover.svg');
-                                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                                }
-
-                                .tel.img {
-                                    background-image: url('./../../../assets/img/contact-phone-hover.png');
-                                    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-                                }
-                            }
-
-                            .img {
-                                width: clamp(28px, 6vw, 36px);
-                                height: clamp(28px, 6vw, 36px);
-                                flex-shrink: 0;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                background-position: center;
-                            }
-
-                            .mail {
-                                background-image: url('./../../../assets/img/mail.png');
-                            }
-
-                            .tel {
-                                background-image: url('./../../../assets/img/contact-phone-hover.png');
-                            }
-
-                            span {
-                                font-family: $apple-font-family;
-                                font-weight: $apple-font-weight-regular;
-                                color: $apple-text-secondary;
-                                transition: $apple-transition-fast;
-                                font-size: clamp(16px, 4vw, 18px);
-                                line-height: 1.3;
-                                flex: 1;
-                            }
-                        }
-                    }
-                }
-
-                .header-bottom {
-                    padding: clamp(16px, 4vw, 24px) 0;
-                    font-size: clamp(20px, 5vw, 28px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-medium;
-                    width: 100%;
-                    color: $apple-primary;
-                    text-align: left;
-                    line-height: 1.3;
-                    display: flex;
-                    justify-content: flex-start;
-                }
-            }
-        }
-
-        .contact-form {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-
-            form {
-                width: 100%;
-                @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
-
-                .form-name-mail {
-                    @include dFlex($fd: row, $gap: clamp(24px, 5vw, 32px));
-                    width: 100%;
-
-                    .form-name,
-                    .form-email {
-                        flex: 1;
-                    }
-                }
-
-                .form-field {
-                    width: 100%;
-                    @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
-
-                    .form-label {
-                        font-family: $apple-font-family;
-                        font-size: clamp(14px, 3.5vw, 16px);
-                        font-weight: $apple-font-weight-medium;
-                        color: $apple-text-secondary;
-                        transition: $apple-transition-fast;
-
-                        &-error {
-                            color: $apple-error;
-                            animation: shake 0.3s ease-in-out;
-                        }
-                    }
-
-                    .form-input {
-                        @include apple-input;
-                        height: clamp(56px, 12vw, 64px);
-                        font-family: $apple-font-family;
-                        font-size: clamp(16px, 4vw, 18px);
-                        padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px);
-
-                        &::placeholder {
-                            color: $apple-text-tertiary;
-                            font-family: $apple-font-family;
-                        }
-
-                        &-error {
-                            border: 2px solid $apple-error;
-                            background: rgba($apple-error, 0.08);
-                            box-shadow: 0 0 0 3px rgba($apple-error, 0.1);
-                            animation: errorPulse 0.4s ease-in-out;
-
-                            &::placeholder {
-                                color: $apple-error;
-                            }
-                        }
-                    }
-                }
-
-                .form-message {
-                    textarea {
-                        @include apple-input;
-                        width: 100%;
-                        height: clamp(140px, 25vw, 180px) !important;
-                        padding: clamp(20px, 5vw, 24px) clamp(20px, 5vw, 24px) !important;
-                        resize: none;
-                        font-family: $apple-font-family;
-                        font-size: clamp(16px, 4vw, 18px);
-                        line-height: 1.4;
-                        box-sizing: border-box;
-                    }
-
-                    .character-count {
-                        font-family: $apple-font-family;
-                        font-size: 12px;
-                        color: $apple-text-tertiary;
-                        text-align: right;
-                        margin-top: 4px;
-                        opacity: 0.8;
-                    }
-                }
-
-                .privacy-policy {
-                    width: 100%;
-                    color: $apple-text-secondary;
-                    @include dFlex($jc: flex-start, $gap: clamp(12px, 3vw, 16px), $ai: flex-start);
-
-                    .cb {
-                        width: clamp(22px, 5vw, 26px);
-                        height: clamp(22px, 5vw, 26px);
-                        flex-shrink: 0;
-                        border: 2px solid $apple-text-tertiary;
-                        border-radius: $apple-radius-small;
-                        transition: $apple-transition-fast;
-                        position: relative;
-                        background: transparent;
-                        cursor: pointer;
-
-                        &:hover {
-                            border-color: $apple-primary;
-                            transform: scale(1.05);
-                            box-shadow: 0 0 8px rgba($apple-primary, 0.3);
-                        }
-
-                        &.checked {
-                            background: $apple-primary;
-                            border-color: $apple-primary;
-                            box-shadow: $apple-shadow-glow;
-
-                            &::after {
-                                content: '✓';
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                transform: translate(-50%, -50%);
-                                color: white;
-                                font-size: clamp(12px, 3vw, 14px);
-                                font-weight: $apple-font-weight-bold;
-                                font-family: $apple-font-family;
-                            }
-                        }
-                    }
-
-                    .privacy-label {
-                        font-size: clamp(13px, 3.5vw, 16px);
-                        font-family: $apple-font-family;
-                        font-weight: $apple-font-weight-regular;
-                        line-height: 1.4;
-                        flex: 1;
-                        cursor: pointer;
-
-                        a {
-                            color: $apple-primary;
-                            font-weight: $apple-font-weight-medium;
-                            transition: $apple-transition-fast;
-                            text-decoration: none;
-
-                            &:hover {
-                                color: color.adjust($apple-primary, $lightness: 10%);
-                                text-decoration: underline;
-                            }
-                        }
-                    }
-                }
-
-                .success-msg {
-                    color: $apple-success;
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-medium;
-                    padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px);
-                    background: rgba($apple-success, 0.1);
-                    border: 1px solid rgba($apple-success, 0.3);
-                    border-radius: $apple-radius-medium;
-                    text-align: center;
-                    font-size: clamp(14px, 3.5vw, 16px);
-                    box-shadow: $apple-shadow-small;
-                }
-
-                // Neue erweiterte Erfolgsmeldung mit aufklappender Animation
-                .success-message-detailed {
-                    @include dFlex($fd: column, $ai: center, $jc: center, $gap: clamp(20px, 5vw, 24px));
-                    padding: clamp(32px, 8vw, 40px) clamp(28px, 7vw, 36px);
-                    background: linear-gradient(135deg, 
-                        rgba($apple-success, 0.12) 0%, 
-                        rgba($apple-success, 0.18) 30%,
-                        rgba($apple-success, 0.08) 70%,
-                        rgba($apple-success, 0.15) 100%);
-                    border: 1.5px solid rgba($apple-success, 0.3);
-                    border-radius: $apple-radius-large;
-                    box-shadow: 
-                        0 12px 40px rgba($apple-success, 0.25),
-                        0 6px 20px rgba($apple-success, 0.15),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                        inset 0 -1px 0 rgba($apple-success, 0.1);
-                    text-align: center;
-                    position: relative;
-                    overflow: hidden;
-                    animation: success-main-entrance 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-                    backdrop-filter: blur(25px) saturate(1.4);
-                    transform-style: preserve-3d;
-
-                    // Dynamischer Hintergrund mit sich bewegenden Gradienten
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        top: -150%;
-                        left: -150%;
-                        width: 400%;
-                        height: 400%;
-                        background: conic-gradient(
-                            from 0deg at 50% 50%,
-                            rgba($apple-success, 0.08) 0deg,
-                            rgba($apple-success, 0.15) 72deg,
-                            rgba($apple-success, 0.05) 144deg,
-                            rgba($apple-success, 0.12) 216deg,
-                            rgba($apple-success, 0.18) 288deg,
-                            rgba($apple-success, 0.08) 360deg
-                        );
-                        animation: success-gradient-spin 20s linear infinite;
-                        filter: blur(60px);
-                        z-index: 0;
-                        opacity: 0.7;
-                    }
-
-                    // Schimmernde Partikel
-                    &::after {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background-image: 
-                            radial-gradient(circle at 25% 25%, rgba($apple-success, 0.6) 1px, transparent 1px),
-                            radial-gradient(circle at 75% 25%, rgba($apple-success, 0.4) 1px, transparent 1px),
-                            radial-gradient(circle at 25% 75%, rgba($apple-success, 0.5) 1px, transparent 1px),
-                            radial-gradient(circle at 75% 75%, rgba($apple-success, 0.7) 1px, transparent 1px),
-                            radial-gradient(circle at 50% 50%, rgba($apple-success, 0.3) 2px, transparent 2px);
-                        background-size: 80px 80px, 120px 120px, 100px 100px, 90px 90px, 60px 60px;
-                        animation: success-sparkles-dance 12s ease-in-out infinite;
-                        opacity: 0.8;
-                        z-index: 1;
-                        mix-blend-mode: screen;
-                    }
-
-                    .success-icon {
-                        width: clamp(64px, 16vw, 72px);
-                        height: clamp(64px, 16vw, 72px);
-                        border-radius: 50%;
-                        background: linear-gradient(145deg, 
-                            $apple-success 0%, 
-                            color.adjust($apple-success, $lightness: 20%) 25%,
-                            $apple-success 50%,
-                            color.adjust($apple-success, $lightness: 12%) 75%,
-                            color.adjust($apple-success, $lightness: 5%) 100%);
-                        @include dFlex($ai: center, $jc: center);
-                        box-shadow: 
-                            0 12px 35px rgba($apple-success, 0.5),
-                            0 6px 15px rgba($apple-success, 0.4),
-                            0 2px 8px rgba($apple-success, 0.3),
-                            inset 0 2px 0 rgba(255, 255, 255, 0.4),
-                            inset 0 -2px 0 rgba(0, 0, 0, 0.15);
-                        animation: success-icon-ultimate 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s both;
-                        position: relative;
-                        z-index: 4;
-                        transform-style: preserve-3d;
-
-                        // Pulsierende Aura
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            top: -40%;
-                            left: -40%;
-                            right: -40%;
-                            bottom: -40%;
-                            background: radial-gradient(circle, 
-                                rgba($apple-success, 0.4) 0%, 
-                                rgba($apple-success, 0.2) 40%, 
-                                transparent 70%);
-                            border-radius: 50%;
-                            filter: blur(20px);
-                            animation: success-icon-aurora 3s ease-in-out infinite;
-                            z-index: -1;
-                        }
-
-                        // Glänzender Overlay
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            top: 10%;
-                            left: 10%;
-                            width: 40%;
-                            height: 40%;
-                            background: linear-gradient(135deg, 
-                                rgba(255, 255, 255, 0.6) 0%, 
-                                rgba(255, 255, 255, 0.3) 50%,
-                                transparent 100%);
-                            border-radius: 50%;
-                            animation: success-icon-gleam 4s ease-in-out infinite;
-                            z-index: 1;
-                        }
-
-                        svg {
-                            width: clamp(32px, 8vw, 36px);
-                            height: clamp(32px, 8vw, 36px);
-                            color: white;
-                            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-                            animation: success-checkmark-reveal 1s ease-out 1.2s both;
-                            position: relative;
-                            z-index: 2;
-                            stroke-width: 3.5;
-
-                            path {
-                                stroke-dasharray: 100;
-                                stroke-dashoffset: 100;
-                                animation: success-checkmark-draw 0.8s ease-out 1.2s forwards;
-                            }
-                        }
-                    }
-
-                    .success-content {
-                        @include dFlex($fd: column, $ai: center, $gap: clamp(12px, 3vw, 16px));
-                        position: relative;
-                        z-index: 4;
-                        animation: success-content-emerge 1.2s ease-out 0.8s both;
-
-                        h4 {
-                            font-family: $apple-font-family;
-                            font-size: clamp(22px, 5.5vw, 26px);
-                            font-weight: $apple-font-weight-semibold;
-                            color: $apple-text-primary;
-                            margin: 0;
-                            line-height: 1.2;
-                            background: linear-gradient(135deg, 
-                                $apple-text-primary 0%, 
-                                color.adjust($apple-text-primary, $lightness: 15%) 50%,
-                                $apple-text-primary 100%);
-                            background-size: 200% 200%;
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text;
-                            animation: success-title-wave 3s ease-in-out infinite;
-                            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                        }
-
-                        p {
-                            font-family: $apple-font-family;
-                            font-size: clamp(15px, 3.8vw, 17px);
-                            font-weight: $apple-font-weight-regular;
-                            color: $apple-text-secondary;
-                            margin: 0;
-                            line-height: 1.6;
-                            max-width: 320px;
-                            opacity: 0.95;
-                            animation: success-text-typewriter 2s ease-out 1.5s both;
-                        }
-
-                        .success-details {
-                            margin-top: clamp(16px, 4vw, 20px);
-                            padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 24px);
-                            background: linear-gradient(135deg, 
-                                rgba(255, 255, 255, 0.12) 0%, 
-                                rgba(255, 255, 255, 0.06) 50%,
-                                rgba(255, 255, 255, 0.10) 100%);
-                            border: 1px solid rgba(255, 255, 255, 0.2);
-                            border-radius: $apple-radius-medium;
-                            backdrop-filter: blur(20px) saturate(1.2);
-                            position: relative;
-                            overflow: hidden;
-                            animation: success-details-materialize 1s ease-out 2s both;
-                            box-shadow: 
-                                0 4px 15px rgba($apple-success, 0.2),
-                                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-
-                            // Gleitender Lichtstrahl
-                            &::before {
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                left: -100%;
-                                width: 100%;
-                                height: 100%;
-                                background: linear-gradient(90deg, 
-                                    transparent 0%, 
-                                    rgba(255, 255, 255, 0.25) 25%,
-                                    rgba(255, 255, 255, 0.4) 50%,
-                                    rgba(255, 255, 255, 0.25) 75%,
-                                    transparent 100%);
-                                animation: success-details-sweep 3s ease-in-out infinite 2.5s;
-                                z-index: 1;
-                            }
-
-                            span {
-                                font-family: $apple-font-family;
-                                font-size: clamp(13px, 3.2vw, 15px);
-                                font-weight: $apple-font-weight-medium;
-                                color: $apple-success;
-                                line-height: 1.4;
-                                position: relative;
-                                z-index: 2;
-                                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-                                animation: success-badge-glow 2s ease-in-out infinite 3s;
-                            }
-                        }
-                    }
-                }
-
-                .send-btn {
-                    @include dFlex($jc: center);
-                    width: 100%;
-                    padding-top: clamp(16px, 4vw, 24px);
-
-                    button {
-                        @include apple-button-primary;
-                        font-family: $apple-font-family;
-                        font-size: clamp(16px, 4vw, 20px);
-                        padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
-                        min-width: clamp(160px, 40vw, 240px);
-
-                        &:disabled {
-                            background: $apple-bg-quaternary;
-                            color: $apple-text-tertiary;
-                            cursor: not-allowed;
-                            transform: none;
-                            box-shadow: none;
-
-                            &:hover {
-                                background: $apple-bg-quaternary;
-                                color: $apple-text-tertiary;
-                                transform: none;
-                                box-shadow: none;
-                            }
-
-                            &::before {
-                                display: none;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        .goup-arrow {
-            position: absolute;
-            bottom: clamp(20px, 4vw, 32px);
-            right: clamp(20px, 4vw, 32px);
-            width: clamp(48px, 10vw, 56px);
-            height: clamp(48px, 10vw, 56px);
-            background: rgba($apple-primary, 0.1);
-            border: 1px solid rgba($apple-primary, 0.3);
-            border-radius: 50%;
-            @include dFlex($jc: center, $ai: center);
-            transition: $apple-transition-fast;
-            cursor: pointer;
-            z-index: 3;
-
-            &::before {
-                content: '↑';
-                font-size: clamp(20px, 4vw, 24px);
-                color: $apple-primary;
-                font-weight: $apple-font-weight-bold;
-            }
-
-            &:hover {
-                background: rgba($apple-primary, 0.2);
-                border-color: rgba($apple-primary, 0.5);
-                transform: translateY(-4px);
-                box-shadow: $apple-shadow-medium;
-            }
-        }
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -40%;
+    width: 80%;
+    height: 100%;
+    background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+    animation: apple-contact-ambient 12s ease-in-out infinite;
+    filter: blur(40px);
+  }
 }
 
-// Basis-Animationen
+.contact-title {
+  @include h2Title;
+
+  margin-bottom: 48px;
+  padding-top: clamp(48px, 8vw, 64px);
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.contact-content {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  padding: clamp(32px, 6vw, 80px);
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px));
+}
+
+.contact-header {
+  color: $apple-text-primary;
+  width: 100%;
+  gap: clamp(24px, 5vw, 32px);
+
+  @include dFlex($fd: row, $jc: space-between, $ai: center);
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-left-title {
+  font-size: clamp(24px, 4vw, 32px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  color: $apple-primary;
+  text-align: left;
+  margin: 0 0 8px;
+}
+
+.header-right {
+  flex: 1;
+
+  @include dFlex($fd: column, $gap: 20px);
+}
+
+.header-top {
+  @include dFlex($fd: column, $gap: 16px);
+
+  width: 100%;
+}
+
+.contact-link {
+  width: 100%;
+  max-width: 300px;
+  height: clamp(48px, 12vw, 56px);
+  padding: 0 clamp(16px, 4vw, 20px);
+  border-radius: $apple-radius-large;
+  border: 1px solid rgb(255 255 255 / 10%);
+  transition: $apple-transition-fast;
+  background: rgb(255 255 255 / 2%);
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+
+  @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
+
+  &:hover {
+    border-color: rgba($apple-primary, 0.3);
+    background: rgba($apple-primary, 0.05);
+    transform: translateY(-2px);
+    box-shadow: $apple-shadow-medium;
+  }
+
+  &:hover .contact-text {
+    color: $apple-primary;
+  }
+
+  &:hover .mail-icon {
+    background-image: url('./../../../assets/img/mail-hover.svg');
+    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+  }
+
+  &:hover .tel-icon {
+    background-image: url('./../../../assets/img/contact-phone-hover.png');
+    filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+  }
+}
+
+.contact-icon {
+  width: clamp(28px, 6vw, 36px);
+  height: clamp(28px, 6vw, 36px);
+  flex-shrink: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.mail-icon {
+    background-image: url('./../../../assets/img/mail.png');
+  }
+
+  &.tel-icon {
+    background-image: url('./../../../assets/img/contact-phone-hover.png');
+  }
+}
+
+.contact-text {
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-regular;
+  color: $apple-text-secondary;
+  transition: $apple-transition-fast;
+  font-size: clamp(16px, 4vw, 18px);
+  line-height: 1.3;
+  flex: 1;
+}
+
+.header-bottom {
+  padding: clamp(16px, 4vw, 24px) 0;
+  font-size: clamp(20px, 5vw, 28px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-medium;
+  width: 100%;
+  color: $apple-primary;
+  text-align: left;
+  line-height: 1.3;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-form-element {
+  width: 100%;
+
+  @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
+}
+
+.form-name-mail {
+  @include dFlex($fd: row, $gap: clamp(24px, 5vw, 32px));
+
+  width: 100%;
+}
+
+.form-name,
+.form-email {
+  flex: 1;
+}
+
+.form-field {
+  width: 100%;
+
+  @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
+}
+
+.form-label {
+  font-family: $apple-font-family;
+  font-size: clamp(14px, 3.5vw, 16px);
+  font-weight: $apple-font-weight-medium;
+  color: $apple-text-secondary;
+  transition: $apple-transition-fast;
+
+  &.form-label-error {
+    color: $apple-error;
+    animation: shake 0.3s ease-in-out;
+  }
+}
+
+.form-input {
+  @include apple-input;
+
+  height: clamp(56px, 12vw, 64px);
+  font-family: $apple-font-family;
+  font-size: clamp(16px, 4vw, 18px);
+  padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px);
+
+  &::placeholder {
+    color: $apple-text-tertiary;
+    font-family: $apple-font-family;
+  }
+
+  &.form-input-error {
+    border: 2px solid $apple-error;
+    background: rgba($apple-error, 0.08);
+    box-shadow: 0 0 0 3px rgba($apple-error, 0.1);
+    animation: errorPulse 0.4s ease-in-out;
+
+    &::placeholder {
+      color: $apple-error;
+    }
+  }
+}
+
+.form-message {
+  .contact-message-textarea {
+    @include apple-input;
+
+    width: 100%;
+    height: clamp(140px, 25vw, 180px);
+    padding: clamp(20px, 5vw, 24px);
+    resize: none;
+    font-family: $apple-font-family;
+    font-size: clamp(16px, 4vw, 18px);
+    line-height: 1.4;
+    box-sizing: border-box;
+  }
+
+  .character-count {
+    font-family: $apple-font-family;
+    font-size: 12px;
+    color: $apple-text-tertiary;
+    text-align: right;
+    margin-top: 4px;
+    opacity: 0.8;
+  }
+}
+
+.privacy-policy {
+  width: 100%;
+  color: $apple-text-secondary;
+
+  @include dFlex($jc: flex-start, $gap: clamp(12px, 3vw, 16px), $ai: flex-start);
+}
+
+.cb {
+  width: clamp(22px, 5vw, 26px);
+  height: clamp(22px, 5vw, 26px);
+  flex-shrink: 0;
+  border: 2px solid $apple-text-tertiary;
+  border-radius: $apple-radius-small;
+  transition: $apple-transition-fast;
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $apple-primary;
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba($apple-primary, 0.3);
+  }
+
+  &.checked {
+    background: $apple-primary;
+    border-color: $apple-primary;
+    box-shadow: $apple-shadow-glow;
+
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: clamp(12px, 3vw, 14px);
+      font-weight: $apple-font-weight-bold;
+      font-family: $apple-font-family;
+    }
+  }
+}
+
+.privacy-label {
+  font-size: clamp(13px, 3.5vw, 16px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-regular;
+  line-height: 1.4;
+  flex: 1;
+  cursor: pointer;
+
+  a {
+    color: $apple-primary;
+    font-weight: $apple-font-weight-medium;
+    transition: $apple-transition-fast;
+    text-decoration: none;
+
+    &:hover {
+      color: color.adjust($apple-primary, $lightness: 10%);
+      text-decoration: underline;
+    }
+  }
+}
+
+.success-msg {
+  color: $apple-success;
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-medium;
+  padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 24px);
+  background: rgba($apple-success, 0.1);
+  border: 1px solid rgba($apple-success, 0.3);
+  border-radius: $apple-radius-medium;
+  text-align: center;
+  font-size: clamp(14px, 3.5vw, 16px);
+  box-shadow: $apple-shadow-small;
+}
+
+.success-message-detailed {
+  padding: clamp(32px, 8vw, 40px) clamp(28px, 7vw, 36px);
+  background: linear-gradient(135deg, 
+  rgba($apple-success, 0.12) 0%, 
+  rgba($apple-success, 0.18) 30%,
+  rgba($apple-success, 0.08) 70%,
+  rgba($apple-success, 0.15) 100%);
+  border: 1.5px solid rgba($apple-success, 0.3);
+  border-radius: $apple-radius-large;
+  box-shadow: 
+    0 12px 40px rgba($apple-success, 0.25),
+    0 6px 20px rgba($apple-success, 0.15),
+    inset 0 1px 0 rgb(255 255 255 / 20%),
+    inset 0 -1px 0 rgba($apple-success, 0.1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: success-main-entrance 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  backdrop-filter: blur(25px) saturate(1.4);
+  transform-style: preserve-3d;
+
+  @include dFlex($fd: column, $ai: center, $jc: center, $gap: clamp(20px, 5vw, 24px));
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 400%;
+    height: 400%;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      rgba($apple-success, 0.08) 0deg,
+      rgba($apple-success, 0.15) 72deg,
+      rgba($apple-success, 0.05) 144deg,
+      rgba($apple-success, 0.12) 216deg,
+      rgba($apple-success, 0.18) 288deg,
+      rgba($apple-success, 0.08) 360deg
+    );
+    animation: success-gradient-spin 20s linear infinite;
+    filter: blur(60px);
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba($apple-success, 0.6) 1px, transparent 1px),
+      radial-gradient(circle at 75% 25%, rgba($apple-success, 0.4) 1px, transparent 1px),
+      radial-gradient(circle at 25% 75%, rgba($apple-success, 0.5) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba($apple-success, 0.7) 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, rgba($apple-success, 0.3) 2px, transparent 2px);
+    background-size: 80px 80px, 120px 120px, 100px 100px, 90px 90px, 60px 60px;
+    animation: success-sparkles-dance 12s ease-in-out infinite;
+    opacity: 0.8;
+    z-index: 1;
+    mix-blend-mode: screen;
+  }
+
+  &.fade-out {
+    animation: success-fade-out 1s ease-out forwards;
+  }
+}
+
+.success-icon {
+  width: clamp(64px, 16vw, 72px);
+  height: clamp(64px, 16vw, 72px);
+  border-radius: 50%;
+  background: linear-gradient(145deg, 
+  $apple-success 0%, 
+  color.adjust($apple-success, $lightness: 20%) 25%,
+  $apple-success 50%,
+  color.adjust($apple-success, $lightness: 12%) 75%,
+  color.adjust($apple-success, $lightness: 5%) 100%);
+  box-shadow: 
+    0 12px 35px rgba($apple-success, 0.5),
+    0 6px 15px rgba($apple-success, 0.4),
+    0 2px 8px rgba($apple-success, 0.3),
+    inset 0 2px 0 rgb(255 255 255 / 40%),
+    inset 0 -2px 0 rgb(0 0 0 / 15%);
+  animation: success-icon-ultimate 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s both;
+  position: relative;
+  z-index: 4;
+  transform-style: preserve-3d;
+
+  @include dFlex($ai: center, $jc: center);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle, 
+    rgba($apple-success, 0.4) 0%, 
+    rgba($apple-success, 0.2) 40%, 
+    transparent 70%);
+    border-radius: 50%;
+    filter: blur(20px);
+    animation: success-icon-aurora 3s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 40%;
+    height: 40%;
+    background: linear-gradient(135deg, 
+    rgb(255 255 255 / 60%) 0%, 
+    rgb(255 255 255 / 30%) 50%,
+    transparent 100%);
+    border-radius: 50%;
+    animation: success-icon-gleam 4s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  svg {
+    width: clamp(32px, 8vw, 36px);
+    height: clamp(32px, 8vw, 36px);
+    color: white;
+    filter: drop-shadow(0 3px 6px rgb(0 0 0 / 30%));
+    animation: success-checkmark-reveal 1s ease-out 1.2s both;
+    position: relative;
+    z-index: 2;
+    stroke-width: 3.5;
+
+    path {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: success-checkmark-draw 0.8s ease-out 1.2s forwards;
+    }
+  }
+}
+
+.success-content {
+  position: relative;
+  z-index: 4;
+  animation: success-content-emerge 1.2s ease-out 0.8s both;
+
+  @include dFlex($fd: column, $ai: center, $gap: clamp(12px, 3vw, 16px));
+
+  h4 {
+    font-family: $apple-font-family;
+    font-size: clamp(22px, 5.5vw, 26px);
+    font-weight: $apple-font-weight-semibold;
+    color: $apple-text-primary;
+    margin: 0;
+    line-height: 1.2;
+    background: linear-gradient(135deg, 
+    $apple-text-primary 0%, 
+    color.adjust($apple-text-primary, $lightness: 15%) 50%,
+    $apple-text-primary 100%);
+    background-size: 200% 200%;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: success-title-wave 3s ease-in-out infinite;
+    text-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  }
+
+  p {
+    font-family: $apple-font-family;
+    font-size: clamp(15px, 3.8vw, 17px);
+    font-weight: $apple-font-weight-regular;
+    color: $apple-text-secondary;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 320px;
+    opacity: 0.95;
+    animation: success-text-typewriter 2s ease-out 1.5s both;
+  }
+}
+
+.success-details {
+  margin-top: clamp(16px, 4vw, 20px);
+  padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 24px);
+  background: linear-gradient(135deg, 
+  rgb(255 255 255 / 12%) 0%, 
+  rgb(255 255 255 / 6%) 50%,
+  rgb(255 255 255 / 10%) 100%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: $apple-radius-medium;
+  backdrop-filter: blur(20px) saturate(1.2);
+  position: relative;
+  overflow: hidden;
+  animation: success-details-materialize 1s ease-out 2s both;
+  box-shadow: 
+    0 4px 15px rgba($apple-success, 0.2),
+    inset 0 1px 0 rgb(255 255 255 / 20%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgb(255 255 255 / 25%) 25%,
+    rgb(255 255 255 / 40%) 50%,
+    rgb(255 255 255 / 25%) 75%,
+    transparent 100%);
+    animation: success-details-sweep 3s ease-in-out infinite 2.5s;
+    z-index: 1;
+  }
+
+  span {
+    font-family: $apple-font-family;
+    font-size: clamp(13px, 3.2vw, 15px);
+    font-weight: $apple-font-weight-medium;
+    color: $apple-success;
+    line-height: 1.4;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 15%);
+    animation: success-badge-glow 2s ease-in-out infinite 3s;
+  }
+}
+
+.send-btn {
+  @include dFlex($jc: center);
+
+  width: 100%;
+  padding-top: clamp(16px, 4vw, 24px);
+
+  button {
+    @include apple-button-primary;
+
+    font-family: $apple-font-family;
+    font-size: clamp(16px, 4vw, 20px);
+    padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
+    min-width: clamp(160px, 40vw, 240px);
+
+    &:disabled {
+      background: $apple-bg-quaternary;
+      color: $apple-text-tertiary;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+
+      &:hover {
+        background: $apple-bg-quaternary;
+        color: $apple-text-tertiary;
+        transform: none;
+        box-shadow: none;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.goup-arrow {
+  position: absolute;
+  bottom: clamp(20px, 4vw, 32px);
+  right: clamp(20px, 4vw, 32px);
+  width: clamp(48px, 10vw, 56px);
+  height: clamp(48px, 10vw, 56px);
+  background: rgba($apple-primary, 0.1);
+  border: 1px solid rgba($apple-primary, 0.3);
+  border-radius: 50%;
+  transition: $apple-transition-fast;
+  cursor: pointer;
+  z-index: 3;
+
+  @include dFlex($jc: center, $ai: center);
+
+  &::before {
+    content: '↑';
+    font-size: clamp(20px, 4vw, 24px);
+    color: $apple-primary;
+    font-weight: $apple-font-weight-bold;
+  }
+
+  &:hover {
+    background: rgba($apple-primary, 0.2);
+    border-color: rgba($apple-primary, 0.5);
+    transform: translateY(-4px);
+    box-shadow: $apple-shadow-medium;
+  }
+}
+
 @keyframes apple-contact-ambient {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-    33% {
-        transform: translateY(-15px) rotate(2deg) scale(1.02);
-    }
-    66% {
-        transform: translateY(10px) rotate(-1deg) scale(0.98);
-    }
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+
+  33% {
+    transform: translateY(-15px) rotate(2deg) scale(1.02);
+  }
+
+  66% {
+    transform: translateY(10px) rotate(-1deg) scale(0.98);
+  }
 }
 
 @keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-4px);
-    }
-    75% {
-        transform: translateX(4px);
-    }
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-4px);
+  }
+
+  75% {
+    transform: translateX(4px);
+  }
 }
 
 @keyframes errorPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba($apple-error, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 8px rgba($apple-error, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba($apple-error, 0);
-    }
+  0% {
+    box-shadow: 0 0 0 0 rgba($apple-error, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px rgba($apple-error, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba($apple-error, 0);
+  }
 }
 
-// Erweiterte Success-Message Animationen
 @keyframes success-main-entrance {
-    0% {
-        opacity: 0;
-        transform: translateY(40px) scale(0.8) rotateX(15deg) rotateY(5deg);
-        filter: blur(15px) brightness(0.7);
-    }
-    25% {
-        opacity: 0.6;
-        transform: translateY(10px) scale(0.95) rotateX(5deg) rotateY(-2deg);
-        filter: blur(8px) brightness(0.9);
-    }
-    50% {
-        opacity: 0.85;
-        transform: translateY(-8px) scale(1.05) rotateX(-3deg) rotateY(1deg);
-        filter: blur(3px) brightness(1.1);
-    }
-    75% {
-        opacity: 0.95;
-        transform: translateY(3px) scale(0.98) rotateX(1deg) rotateY(-0.5deg);
-        filter: blur(1px) brightness(1.05);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
-        filter: blur(0px) brightness(1);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.8) rotateX(15deg) rotateY(5deg);
+    filter: blur(15px) brightness(0.7);
+  }
+
+  25% {
+    opacity: 0.6;
+    transform: translateY(10px) scale(0.95) rotateX(5deg) rotateY(-2deg);
+    filter: blur(8px) brightness(0.9);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: translateY(-8px) scale(1.05) rotateX(-3deg) rotateY(1deg);
+    filter: blur(3px) brightness(1.1);
+  }
+
+  75% {
+    opacity: 0.95;
+    transform: translateY(3px) scale(0.98) rotateX(1deg) rotateY(-0.5deg);
+    filter: blur(1px) brightness(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+    filter: blur(0) brightness(1);
+  }
 }
 
 @keyframes success-gradient-spin {
-    0% {
-        transform: rotate(0deg) scale(1);
-        opacity: 0.7;
-    }
-    25% {
-        transform: rotate(90deg) scale(1.05);
-        opacity: 0.8;
-    }
-    50% {
-        transform: rotate(180deg) scale(1.1);
-        opacity: 0.6;
-    }
-    75% {
-        transform: rotate(270deg) scale(1.05);
-        opacity: 0.9;
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-        opacity: 0.7;
-    }
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+
+  25% {
+    transform: rotate(90deg) scale(1.05);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.6;
+  }
+
+  75% {
+    transform: rotate(270deg) scale(1.05);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.7;
+  }
 }
 
 @keyframes success-sparkles-dance {
-    0%, 100% {
-        transform: translateX(0px) translateY(0px) rotate(0deg);
-        opacity: 0.8;
-    }
-    20% {
-        transform: translateX(5px) translateY(-8px) rotate(72deg);
-        opacity: 1;
-    }
-    40% {
-        transform: translateX(-3px) translateY(-12px) rotate(144deg);
-        opacity: 0.6;
-    }
-    60% {
-        transform: translateX(-8px) translateY(-5px) rotate(216deg);
-        opacity: 0.9;
-    }
-    80% {
-        transform: translateX(2px) translateY(3px) rotate(288deg);
-        opacity: 0.7;
-    }
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+
+  20% {
+    transform: translateX(5px) translateY(-8px) rotate(72deg);
+    opacity: 1;
+  }
+
+  40% {
+    transform: translateX(-3px) translateY(-12px) rotate(144deg);
+    opacity: 0.6;
+  }
+
+  60% {
+    transform: translateX(-8px) translateY(-5px) rotate(216deg);
+    opacity: 0.9;
+  }
+
+  80% {
+    transform: translateX(2px) translateY(3px) rotate(288deg);
+    opacity: 0.7;
+  }
 }
 
 @keyframes success-icon-ultimate {
-    0% {
-        opacity: 0;
-        transform: scale(0) rotateZ(-240deg) rotateY(180deg) rotateX(90deg);
-        filter: brightness(0.3) hue-rotate(180deg);
-    }
-    20% {
-        opacity: 0.6;
-        transform: scale(0.4) rotateZ(-120deg) rotateY(90deg) rotateX(45deg);
-        filter: brightness(0.7) hue-rotate(90deg);
-    }
-    40% {
-        opacity: 0.8;
-        transform: scale(0.8) rotateZ(-30deg) rotateY(30deg) rotateX(15deg);
-        filter: brightness(1.2) hue-rotate(30deg);
-    }
-    65% {
-        opacity: 0.95;
-        transform: scale(1.2) rotateZ(15deg) rotateY(-15deg) rotateX(-5deg);
-        filter: brightness(1.4) hue-rotate(-15deg);
-    }
-    80% {
-        opacity: 1;
-        transform: scale(0.95) rotateZ(-8deg) rotateY(8deg) rotateX(3deg);
-        filter: brightness(1.1) hue-rotate(5deg);
-    }
-    90% {
-        transform: scale(1.02) rotateZ(3deg) rotateY(-3deg) rotateX(-1deg);
-        filter: brightness(1.05) hue-rotate(-2deg);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) rotateZ(0deg) rotateY(0deg) rotateX(0deg);
-        filter: brightness(1) hue-rotate(0deg);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0) rotateZ(-240deg) rotateY(180deg) rotateX(90deg);
+    filter: brightness(0.3) hue-rotate(180deg);
+  }
+
+  20% {
+    opacity: 0.6;
+    transform: scale(0.4) rotateZ(-120deg) rotateY(90deg) rotateX(45deg);
+    filter: brightness(0.7) hue-rotate(90deg);
+  }
+
+  40% {
+    opacity: 0.8;
+    transform: scale(0.8) rotateZ(-30deg) rotateY(30deg) rotateX(15deg);
+    filter: brightness(1.2) hue-rotate(30deg);
+  }
+
+  65% {
+    opacity: 0.95;
+    transform: scale(1.2) rotateZ(15deg) rotateY(-15deg) rotateX(-5deg);
+    filter: brightness(1.4) hue-rotate(-15deg);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale(0.95) rotateZ(-8deg) rotateY(8deg) rotateX(3deg);
+    filter: brightness(1.1) hue-rotate(5deg);
+  }
+
+  90% {
+    transform: scale(1.02) rotateZ(3deg) rotateY(-3deg) rotateX(-1deg);
+    filter: brightness(1.05) hue-rotate(-2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateZ(0deg) rotateY(0deg) rotateX(0deg);
+    filter: brightness(1) hue-rotate(0deg);
+  }
 }
 
 @keyframes success-icon-aurora {
-    0%, 100% {
-        opacity: 0.4;
-        transform: scale(1) rotate(0deg);
-        filter: blur(20px);
-    }
-    25% {
-        opacity: 0.7;
-        transform: scale(1.2) rotate(90deg);
-        filter: blur(25px);
-    }
-    50% {
-        opacity: 0.6;
-        transform: scale(1.4) rotate(180deg);
-        filter: blur(30px);
-    }
-    75% {
-        opacity: 0.8;
-        transform: scale(1.1) rotate(270deg);
-        filter: blur(22px);
-    }
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1) rotate(0deg);
+    filter: blur(20px);
+  }
+
+  25% {
+    opacity: 0.7;
+    transform: scale(1.2) rotate(90deg);
+    filter: blur(25px);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.4) rotate(180deg);
+    filter: blur(30px);
+  }
+
+  75% {
+    opacity: 0.8;
+    transform: scale(1.1) rotate(270deg);
+    filter: blur(22px);
+  }
 }
 
 @keyframes success-icon-gleam {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(1) rotate(0deg);
-    }
-    25% {
-        opacity: 0.7;
-        transform: scale(1.3) rotate(90deg);
-    }
-    50% {
-        opacity: 0.5;
-        transform: scale(1.5) rotate(180deg);
-    }
-    75% {
-        opacity: 0.8;
-        transform: scale(1.2) rotate(270deg);
-    }
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1) rotate(0deg);
+  }
+
+  25% {
+    opacity: 0.7;
+    transform: scale(1.3) rotate(90deg);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5) rotate(180deg);
+  }
+
+  75% {
+    opacity: 0.8;
+    transform: scale(1.2) rotate(270deg);
+  }
 }
 
 @keyframes success-checkmark-draw {
-    0% {
-        stroke-dashoffset: 100;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
+  0% {
+    stroke-dashoffset: 100;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes success-checkmark-reveal {
-    0% {
-        opacity: 0;
-        transform: scale(0.3) rotate(-15deg);
-        filter: brightness(0.5);
-    }
-    40% {
-        opacity: 0.7;
-        transform: scale(0.8) rotate(5deg);
-        filter: brightness(1.2);
-    }
-    70% {
-        opacity: 0.9;
-        transform: scale(1.1) rotate(-2deg);
-        filter: brightness(1.3);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-        filter: brightness(1);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-15deg);
+    filter: brightness(0.5);
+  }
+
+  40% {
+    opacity: 0.7;
+    transform: scale(0.8) rotate(5deg);
+    filter: brightness(1.2);
+  }
+
+  70% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(-2deg);
+    filter: brightness(1.3);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
 }
 
 @keyframes success-content-emerge {
-    0% {
-        opacity: 0;
-        transform: translateY(25px) scale(0.85) rotateX(10deg);
-        filter: blur(8px);
-    }
-    40% {
-        opacity: 0.7;
-        transform: translateY(5px) scale(0.95) rotateX(3deg);
-        filter: blur(3px);
-    }
-    70% {
-        opacity: 0.9;
-        transform: translateY(-3px) scale(1.03) rotateX(-1deg);
-        filter: blur(1px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotateX(0deg);
-        filter: blur(0px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(25px) scale(0.85) rotateX(10deg);
+    filter: blur(8px);
+  }
+
+  40% {
+    opacity: 0.7;
+    transform: translateY(5px) scale(0.95) rotateX(3deg);
+    filter: blur(3px);
+  }
+
+  70% {
+    opacity: 0.9;
+    transform: translateY(-3px) scale(1.03) rotateX(-1deg);
+    filter: blur(1px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0);
+  }
 }
 
 @keyframes success-title-wave {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes success-text-typewriter {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
-        filter: blur(5px);
-    }
-    60% {
-        opacity: 0.8;
-        transform: translateY(-2px);
-        filter: blur(1px);
-    }
-    100% {
-        opacity: 0.95;
-        transform: translateY(0);
-        filter: blur(0px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+    filter: blur(5px);
+  }
+
+  60% {
+    opacity: 0.8;
+    transform: translateY(-2px);
+    filter: blur(1px);
+  }
+
+  100% {
+    opacity: 0.95;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 @keyframes success-details-materialize {
-    0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.9) rotateX(5deg);
-        filter: blur(10px);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translateY(-2px) scale(1.02) rotateX(-1deg);
-        filter: blur(2px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotateX(0deg);
-        filter: blur(0px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9) rotateX(5deg);
+    filter: blur(10px);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translateY(-2px) scale(1.02) rotateX(-1deg);
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0);
+  }
 }
 
 @keyframes success-details-sweep {
-    0% {
-        left: -100%;
-        opacity: 0;
-    }
-    20% {
-        opacity: 1;
-    }
-    80% {
-        opacity: 1;
-    }
-    100% {
-        left: 100%;
-        opacity: 0;
-    }
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
 }
 
 @keyframes success-badge-glow {
-    0%, 100% {
-        text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
-            0 0 8px rgba($apple-success, 0.3);
-    }
-    50% {
-        text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
-            0 0 15px rgba($apple-success, 0.6),
-            0 0 25px rgba($apple-success, 0.4);
-    }
+  0%, 100% {
+    text-shadow: 
+      0 1px 3px rgb(0 0 0 / 15%),
+      0 0 8px rgba($apple-success, 0.3);
+  }
+
+  50% {
+    text-shadow: 
+      0 1px 3px rgb(0 0 0 / 15%),
+      0 0 15px rgba($apple-success, 0.6),
+      0 0 25px rgba($apple-success, 0.4);
+  }
 }
 
-@keyframes success-badge-glow {
-    0%, 100% {
-        text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
-            0 0 8px rgba($apple-success, 0.3);
-    }
-    50% {
-        text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
-            0 0 15px rgba($apple-success, 0.6),
-            0 0 25px rgba($apple-success, 0.4);
-    }
+.contact-autofill,
+.contact-autofill:hover,
+.contact-autofill:focus,
+.contact-autofill:active {
+  box-shadow: 0 0 0 30px rgb(255 255 255 / 5%) inset;
+  color: $apple-text-primary;
+  caret-color: $apple-primary;
+  transition: background-color 5000s ease-in-out 0s;
+  border: 1px solid rgb(255 255 255 / 10%);
 }
 
-// NEU: Fade-Out Animation hier hinzufügen
-.success-message-detailed.fade-out {
-    animation: success-fade-out 1s ease-out forwards;
+.contact-textarea-autofill,
+.contact-textarea-autofill:hover,
+.contact-textarea-autofill:focus,
+.contact-textarea-autofill:active {
+  box-shadow: 0 0 0 30px rgb(255 255 255 / 5%) inset;
+  color: $apple-text-primary;
+  caret-color: $apple-primary;
+  transition: background-color 5000s ease-in-out 0s;
+  border: 1px solid rgb(255 255 255 / 10%);
 }
 
 @keyframes success-fade-out {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0px);
-    }
-    50% {
-        opacity: 0.5;
-        transform: translateY(-10px) scale(0.98);
-        filter: blur(2px);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.95);
-        filter: blur(5px);
-    }
-}
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 
-// Autofill-Styling (bleibt unverändert)
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset !important;
-    -webkit-text-fill-color: $apple-text-primary !important;
-    caret-color: $apple-primary !important;
-    transition: background-color 5000s ease-in-out 0s !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  50% {
+    opacity: 0.5;
+    transform: translateY(-10px) scale(0.98);
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    filter: blur(5px);
+  }
 }

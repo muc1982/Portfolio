@@ -2,46 +2,47 @@
 @use 'sass:color';
 
 .landing-page-extra {
-    height: 50px;
+  height: 50px;
 }
 
 .content[_ngcontent-ng-c2512410781] {
-    box-sizing: border-box;
-    padding-bottom: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    @include unified-content-padding(); // Einheitliche Einrückung wie andere Container
+  box-sizing: border-box;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: -30%;
-        right: -15%;
-        width: 80%;
-        height: 120%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-        animation: apple-ambient-float 12s ease-in-out infinite;
-        filter: blur(40px);
-    }
+  @include unified-content-padding; // Einheitliche Einrückung wie andere Container
 
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -20%;
-        left: -10%;
-        width: 60%;
-        height: 80%;
-        background: radial-gradient(circle, rgba($apple-primary, 0.05) 0%, transparent 50%);
-        animation: apple-ambient-float 15s ease-in-out infinite reverse;
-        filter: blur(60px);
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -15%;
+    width: 80%;
+    height: 120%;
+    background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
+    animation: apple-ambient-float 12s ease-in-out infinite;
+    filter: blur(40px);
+  }
 
-.content-left {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(circle, rgba($apple-primary, 0.05) 0%, transparent 50%);
+    animation: apple-ambient-float 15s ease-in-out infinite reverse;
+    filter: blur(60px);
+  }
+
+  .content-left {
     height: 100%;
     width: 50%;
     display: flex;
@@ -52,78 +53,77 @@
     margin-top: 24rem;
 
     .img-wrapper {
-        align-self: flex-end;
-        @include dFlex($ai: flex-end);
-        position: relative;
+      align-self: flex-end;
+
+      @include dFlex($ai: flex-end);
+
+      position: relative;
+      transition: $apple-transition-slow;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 15% 15% 5%;
+        background: $apple-teal-gradient;
+        opacity: 0.15;
+        border-radius: 50% 50% 45% 55% / 55% 45% 55% 50%;
+        filter: blur(30px);
         transition: $apple-transition-slow;
+        animation: apple-profile-glow 8s ease-in-out infinite;
+      }
+
+      &:hover {
+        transform: scale(1.02);
 
         &::before {
-            content: '';
-            position: absolute;
-            top: 15%;
-            left: 15%;
-            right: 15%;
-            bottom: 5%;
-            background: $apple-teal-gradient;
-            opacity: 0.15;
-            border-radius: 50% 50% 45% 55% / 55% 45% 55% 50%;
-            filter: blur(30px);
-            transition: $apple-transition-slow;
-            animation: apple-profile-glow 8s ease-in-out infinite;
-        }
-
-        &:hover {
-            transform: scale(1.02);
-
-            &::before {
-                opacity: 0.2;
-                filter: blur(40px);
-                transform: rotate(5deg) scale(1.1);
-            }
-
-            img {
-                filter: brightness(1.1) contrast(1.05) saturate(1.1);
-            }
+          opacity: 0.2;
+          filter: blur(40px);
+          transform: rotate(5deg) scale(1.1);
         }
 
         img {
-            width: 86%;
-            max-height: calc(100vh - 200px);
-            object-fit: contain;
-            transition: $apple-transition-slow;
-            filter: brightness(1.05) contrast(1.02) saturate(1.05);
-            position: relative;
-            z-index: 1;
-            border-radius: 2% 2% 8% 8%;
-
-            @media screen and (min-width: 1920px) {
-                width: 90%;
-            }
-
-            @media screen and (max-width: 1600px) {
-                width: 82%;
-            }
-
-            @media screen and (max-width: 1400px) {
-                width: 80%;
-            }
-
-            @media screen and (max-height: 900px) {
-                width: 80%;
-            }
-
-            @media screen and (max-height: 800px) {
-                width: 75%;
-            }
-
-            @media screen and (max-height: 700px) {
-                width: 70%;
-            }
+          filter: brightness(1.1) contrast(1.05) saturate(1.1);
         }
-    }
-}
+      }
 
-.content-right[_ngcontent-ng-c2512410781] {
+      img {
+        width: 86%;
+        max-height: calc(100vh - 200px);
+        object-fit: contain;
+        transition: $apple-transition-slow;
+        filter: brightness(1.05) contrast(1.02) saturate(1.05);
+        position: relative;
+        z-index: 1;
+        border-radius: 2% 2% 8% 8%;
+
+        @media screen and (width >= 1920px) {
+          width: 90%;
+        }
+
+        @media screen and (width <= 1600px) {
+          width: 82%;
+        }
+
+        @media screen and (width <= 1400px) {
+          width: 80%;
+        }
+
+        @media screen and (height <= 900px) {
+          width: 80%;
+        }
+
+        @media screen and (height <= 800px) {
+          width: 75%;
+        }
+
+        @media screen and (height <= 700px) {
+          width: 70%;
+        }
+      }
+    }
+  }
+
+  .content-right[_ngcontent-ng-c2512410781] {
     height: auto;
     width: 100%;
     position: relative;
@@ -133,361 +133,371 @@
     align-items: center;
     z-index: 2;
     padding-top: 20rem;
-}
+  }
 
-    .img-wrapper-small {
-        border-radius: $apple-radius-xl $apple-radius-xl 50% 50%;
-        @include dFlex();
-        display: none;
-        position: relative;
+  .img-wrapper-small {
+    border-radius: $apple-radius-xl $apple-radius-xl 50% 50%;
+
+    @include dFlex;
+
+    display: none;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: $apple-teal-gradient;
+      opacity: 0.1;
+      transition: $apple-transition-medium;
+    }
+
+    &:hover::before {
+      opacity: 0.15;
+    }
+
+    img {
+      height: 40vh;
+      object-fit: cover;
+      transition: $apple-transition-medium;
+      filter: brightness(1.05) saturate(1.05);
+    }
+  }
+
+  .links-wrapper {
+    height: 140px;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    margin-top: 20rem;
+
+    @include dFlex($jc: space-between, $fd: column, $gap: 20px);
+
+    z-index: 10;
+
+    @media screen and (width >= 1920px) {
+      right: 20px;
+      height: 160px;
+    }
+
+    @media screen and (width <= 1600px) {
+      right: 10px;
+    }
+
+    @media screen and (width <= 1440px) {
+      right: 20px;
+    }
+
+    @media screen and (width <= 1200px) {
+      right: 40px;
+    }
+
+    >div {
+      width: 48px;
+      height: 48px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: $apple-radius-medium;
+      transition: $apple-transition-fast;
+      position: relative;
+      border: 1px solid rgb(255 255 255 / 10%);
+
+      @media screen and (width >= 1920px) {
+        width: 56px;
+        height: 56px;
+      }
+
+      @media screen and (width <= 1200px) {
+        width: 44px;
+        height: 44px;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        background: $apple-teal-gradient;
+        border-radius: $apple-radius-large;
+        opacity: 0;
+        transition: $apple-transition-fast;
+        z-index: -1;
+      }
+
+      &:hover {
+        transform: translateY(-3px) scale(1.1);
+        border-color: rgba($apple-primary, 0.3);
+        box-shadow: $apple-shadow-medium, $apple-shadow-glow;
 
         &::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: $apple-teal-gradient;
-            opacity: 0.1;
-            transition: $apple-transition-medium;
+          opacity: 0.15;
         }
+      }
 
-        &:hover::before {
-            opacity: 0.15;
-        }
+      &:active {
+        transform: translateY(-1px) scale(1.05);
+      }
 
-        img {
-            height: 40vh;
-            object-fit: cover;
-            transition: $apple-transition-medium;
-            filter: brightness(1.05) saturate(1.05);
-        }
+      >a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+      }
     }
 
-    .links-wrapper {
-        height: 140px;
-        position: absolute;
-        right: 0;
-        top: 20px;
-        margin-top: 20rem;
-        @include dFlex($jc: space-between, $fd: column, $gap: 20px);
-        z-index: 10;
+    .link-email {
+      background-image: url('./../../../assets/img/mail.png');
+      filter: brightness(1.1);
 
-        @media screen and (min-width: 1920px) {
-            right: 20px;
-            height: 160px;
-        }
-
-        @media screen and (max-width: 1600px) {
-            right: 10px;
-        }
-
-        @media screen and (max-width: 1440px) {
-            right: 20px;
-        }
-
-        @media screen and (max-width: 1200px) {
-            right: 40px;
-        }
-
-        >div {
-            width: 48px;
-            height: 48px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: $apple-radius-medium;
-            transition: $apple-transition-fast;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-
-            @media screen and (min-width: 1920px) {
-                width: 56px;
-                height: 56px;
-            }
-
-            @media screen and (max-width: 1200px) {
-                width: 44px;
-                height: 44px;
-            }
-
-            &::before {
-                content: '';
-                position: absolute;
-                inset: -6px;
-                background: $apple-teal-gradient;
-                border-radius: $apple-radius-large;
-                opacity: 0;
-                transition: $apple-transition-fast;
-                z-index: -1;
-            }
-
-            &:hover {
-                transform: translateY(-3px) scale(1.1);
-                border-color: rgba($apple-primary, 0.3);
-                box-shadow: $apple-shadow-medium, $apple-shadow-glow;
-
-                &::before {
-                    opacity: 0.15;
-                }
-            }
-
-            &:active {
-                transform: translateY(-1px) scale(1.05);
-            }
-
-            >a {
-                display: inline-block;
-                width: 100%;
-                height: 100%;
-                position: relative;
-                z-index: 1;
-            }
-        }
-
-        .link-email {
-            background-image: url('./../../../assets/img/mail.png');
-            filter: brightness(1.1);
-
-            &:hover {
-                background-image: url('./../../../assets/img/mail-hover.svg');
-                filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
-            }
-        }
-
-        .link-github {
-            background-image: url('./../../../assets/img/github.png');
-            filter: brightness(1.1);
-
-            &:hover {
-                background-image: url('./../../../assets/img/github-hover.png');
-                filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
-            }
-        }
-
-        .link-linkedin {
-            background-image: url('./../../../assets/img/linkedin.png');
-            filter: brightness(1.1);
-
-            &:hover {
-                background-image: url('./../../../assets/img/linkedin-hover.png');
-                filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
-            }
-        }
+      &:hover {
+        background-image: url('./../../../assets/img/mail-hover.svg');
+        filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
+      }
     }
 
-    .title-logo-wrapper {
-        @include dFlex($fd: column, $jc: space-around, $gap: 40px);
+    .link-github {
+      background-image: url('./../../../assets/img/github.png');
+      filter: brightness(1.1);
 
-        .logo {
-            @include dFlex($fd: column, $jc: center);
-            transition: $apple-transition-medium;
+      &:hover {
+        background-image: url('./../../../assets/img/github-hover.png');
+        filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
+      }
+    }
 
-            &:hover {
-                transform: scale(1.05);
-            }
+    .link-linkedin {
+      background-image: url('./../../../assets/img/linkedin.png');
+      filter: brightness(1.1);
 
-            .logo-img {
-                width: 80px;
-                height: 80px;
+      &:hover {
+        background-image: url('./../../../assets/img/linkedin-hover.png');
+        filter: brightness(1.3) hue-rotate(160deg) saturate(1.2);
+      }
+    }
+  }
 
-                background: {
-                    image: url('./../../../assets/img/logo.png');
-                    repeat: no-repeat;
-                    position: center;
-                    size: contain;
-                }
+  .title-logo-wrapper {
+    @include dFlex($fd: column, $jc: space-around, $gap: 40px);
+
+    .logo {
+      @include dFlex($fd: column, $jc: center);
+
+      transition: $apple-transition-medium;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .logo-img {
+        width: 80px;
+        height: 80px;
+
+        background: {
+          image: url('./../../../assets/img/logo.png');
+          repeat: no-repeat;
+          position: center;
+          size: contain;
+        }
 
                 ;
-                @include apple-logo;
-                transition: $apple-transition-fast;
 
-                @media screen and (min-width: 1920px) {
-                    width: 100px;
-                    height: 100px;
-                }
+        @include apple-logo;
 
-                @media screen and (max-width: 1200px) {
-                    width: 70px;
-                    height: 70px;
-                }
-            }
+        transition: $apple-transition-fast;
 
-            .logo-name {
-                font-size: 18px;
-                font-weight: $apple-font-weight-semibold;
-                font-family: $apple-font-family;
-                color: $apple-text-primary;
-                margin-top: 4px;
-                letter-spacing: 0.5px;
-
-                @media screen and (min-width: 1920px) {
-                    font-size: 22px;
-                }
-            }
-
-            .logo-position {
-                font-size: 12px;
-                font-weight: $apple-font-weight-regular;
-                font-family: $apple-font-family;
-                color: $apple-text-secondary;
-                letter-spacing: 0.3px;
-
-                @media screen and (min-width: 1920px) {
-                    font-size: 14px;
-                }
-            }
+        @media screen and (width >= 1920px) {
+          width: 100px;
+          height: 100px;
         }
 
-        .title {
-            padding: 40px 0;
-            text-align: center;
-
-            .name {
-                font-size: 56px;
-                font-weight: $apple-font-weight-bold;
-                font-family: $apple-font-family;
-                background: #1ca9ae;
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-                letter-spacing: -0.02em;
-                line-height: 1.1;
-                margin-bottom: 8px;
-                transition: $apple-transition-medium;
-                position: relative;
-
-                @media screen and (min-width: 1920px) {
-                    font-size: 72px;
-                }
-
-                @media screen and (min-width: 1600px) {
-                    font-size: 64px;
-                }
-
-                @media screen and (max-width: 1400px) {
-                    font-size: 52px;
-                }
-
-                @media screen and (max-width: 1200px) {
-                    font-size: 44px;
-                }
-
-                &::after {
-                    content: '';
-                    position: absolute;
-                    bottom: -8px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 0;
-                    height: 2px;
-                    background: $apple-teal-gradient;
-                    transition: $apple-transition-medium;
-                }
-
-                &:hover {
-                    transform: scale(1.02);
-
-                    &::after {
-                        width: 60%;
-                    }
-                }
-            }
-
-            .position {
-                font-size: 28px;
-                font-weight: $apple-font-weight-medium;
-                font-family: $apple-font-family;
-                color: $apple-text-secondary;
-                letter-spacing: -0.01em;
-                transition: $apple-transition-medium;
-
-                @media screen and (min-width: 1920px) {
-                    font-size: 36px;
-                }
-
-                @media screen and (min-width: 1600px) {
-                    font-size: 32px;
-                }
-
-                @media screen and (max-width: 1400px) {
-                    font-size: 26px;
-                }
-
-                @media screen and (max-width: 1200px) {
-                    font-size: 22px;
-                }
-
-                &:hover {
-                    color: $apple-text-primary;
-                    transform: scale(1.01);
-                }
-            }
+        @media screen and (width <= 1200px) {
+          width: 70px;
+          height: 70px;
         }
+      }
+
+      .logo-name {
+        font-size: 18px;
+        font-weight: $apple-font-weight-semibold;
+        font-family: $apple-font-family;
+        color: $apple-text-primary;
+        margin-top: 4px;
+        letter-spacing: 0.5px;
+
+        @media screen and (width >= 1920px) {
+          font-size: 22px;
+        }
+      }
+
+      .logo-position {
+        font-size: 12px;
+        font-weight: $apple-font-weight-regular;
+        font-family: $apple-font-family;
+        color: $apple-text-secondary;
+        letter-spacing: 0.3px;
+
+        @media screen and (width >= 1920px) {
+          font-size: 14px;
+        }
+      }
     }
 
-    .arrow-wrapper {
-        width: 100%;
-        @include dFlex($jc: center, $ai: center);
+    .title {
+      padding: 40px 0;
+      text-align: center;
+
+      .name {
+        font-size: 56px;
+        font-weight: $apple-font-weight-bold;
+        font-family: $apple-font-family;
+        background: #1ca9ae;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin-bottom: 8px;
+        transition: $apple-transition-medium;
+        position: relative;
+
+        @media screen and (width >= 1920px) {
+          font-size: 72px;
+        }
+
+        @media screen and (width >= 1600px) {
+          font-size: 64px;
+        }
+
+        @media screen and (width <= 1400px) {
+          font-size: 52px;
+        }
+
+        @media screen and (width <= 1200px) {
+          font-size: 44px;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 2px;
+          background: $apple-teal-gradient;
+          transition: $apple-transition-medium;
+        }
+
+        &:hover {
+          transform: scale(1.02);
+
+          &::after {
+            width: 60%;
+          }
+        }
+      }
+
+      .position {
+        font-size: 28px;
+        font-weight: $apple-font-weight-medium;
+        font-family: $apple-font-family;
+        color: $apple-text-secondary;
+        letter-spacing: -0.01em;
+        transition: $apple-transition-medium;
+
+        @media screen and (width >= 1920px) {
+          font-size: 36px;
+        }
+
+        @media screen and (width >= 1600px) {
+          font-size: 32px;
+        }
+
+        @media screen and (width <= 1400px) {
+          font-size: 26px;
+        }
+
+        @media screen and (width <= 1200px) {
+          font-size: 22px;
+        }
+
+        &:hover {
+          color: $apple-text-primary;
+          transform: scale(1.01);
+        }
+      }
+    }
+  }
+
+  .arrow-wrapper {
+    width: 100%;
+
+    @include dFlex($jc: center, $ai: center);
         
-        .arrow-down {
-            width: 40px;
-            height: 80px;
+    .arrow-down {
+      width: 40px;
+      height: 80px;
 
-            background: {
-                image: url('./../../../assets/img/arrow-down.png');
-                size: contain;
-                repeat: no-repeat;
-                position: center;
-            }
-            transition: $apple-transition-fast;
-            filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-            border-radius: $apple-radius-small;
+      background: {
+        image: url('./../../../assets/img/arrow-down.png');
+        size: contain;
+        repeat: no-repeat;
+        position: center;
+      }
 
-            @media screen and (min-width: 1920px) {
-                width: 48px;
-                height: 96px;
-            }
+      transition: $apple-transition-fast;
+      filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+      border-radius: $apple-radius-small;
 
-            @media screen and (max-width: 1200px) {
-                width: 36px;
-                height: 72px;
-                position: relative;
-                top: -14px;
-            }
+      @media screen and (width >= 1920px) {
+        width: 48px;
+        height: 96px;
+      }
 
-            @media screen and (max-width: 900px) {
-                width: 32px;
-                height: 64px;
-                margin: 0 auto;
-            }
+      @media screen and (width <= 1200px) {
+        width: 36px;
+        height: 72px;
+        position: relative;
+        top: -14px;
+      }
 
-            @media screen and (max-width: 600px) {
-                width: 28px;
-                height: 56px;
-                margin: 0 auto;
-            }
+      @media screen and (width <= 900px) {
+        width: 32px;
+        height: 64px;
+        margin: 0 auto;
+      }
 
-            @media screen and (max-width: 480px) {
-                width: 24px;
-                height: 48px;
-                margin: 0 auto;
-            }
+      @media screen and (width <= 600px) {
+        width: 28px;
+        height: 56px;
+        margin: 0 auto;
+      }
 
-            @media screen and (max-width: 375px) {
-                width: 20px;
-                height: 40px;
-                margin: 0 auto;
-                top: 0;
-            }
+      @media screen and (width <= 480px) {
+        width: 24px;
+        height: 48px;
+        margin: 0 auto;
+      }
 
-            &:hover {
-                background-image: url('./../../../assets/img/arrow-down-hover.png');
-                transform: translateY(-3px) scale(1.1);
-                filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
-            }
+      @media screen and (width <= 375px) {
+        width: 20px;
+        height: 40px;
+        margin: 0 auto;
+        top: 0;
+      }
 
-            &:active {
-                transform: translateY(-1px) scale(1.05);
-            }
-        }
+      &:hover {
+        background-image: url('./../../../assets/img/arrow-down-hover.png');
+        transform: translateY(-3px) scale(1.1);
+        filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+      }
+
+      &:active {
+        transform: translateY(-1px) scale(1.05);
+      }
     }
+  }
 }
+
+

@@ -2,595 +2,582 @@
 @use 'sass:color';
 
 .footer-wrapper {
-    width: 100%;
-    position: relative;
-    height: auto;
+  width: 100%;
+  position: relative;
+  height: auto;
     
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: $apple-teal-gradient;
-        opacity: 0.3;
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $apple-teal-gradient;
+    opacity: 0.3;
+  }
 }
 
 footer {
-    height: 100%;
-    background: linear-gradient(135deg, #000000 0%, #1C1C1E 100%);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #000 0%, #1C1C1E 100%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+    
+.footer-content {
+  width: 100%;
+  min-height: clamp(60px, 8vw, 80px);
+
+  @include dFlex($jc: space-between, $ai: center);
+  @include unified-content-padding;
+}
+
+.footer-left {
+  flex: 1;
+
+  @include dFlex($gap: clamp(8px, 1.5vw, 16px), $fd: column, $ai: flex-start);
+}
+
+.legal-notice {
+  a {
+    color: $apple-text-secondary;
+    font-weight: $apple-font-weight-regular;
+    font-family: $apple-font-family;
+    font-size: clamp(14px, 1.6vw, 16px);
+    transition: $apple-transition-fast;
+    padding: clamp(4px, 0.8vw, 8px) clamp(6px, 1.2vw, 12px);
+    border-radius: $apple-radius-small;
     position: relative;
-    box-sizing: border-box;
-}
-    
-    .footer-content {
-        width: 100%;
-        min-height: clamp(60px, 8vw, 80px);
-        @include dFlex($jc: space-between, $ai: center);
-        @include unified-content-padding(); // Padding auf footer-content für korrekte Zentrierung
-        
-        .left {
-            flex: 1;
-            @include dFlex($gap: clamp(8px, 1.5vw, 16px), $fd: column, $ai: flex-start);
-            
-            .legal-notice {
-                a {
-                    color: $apple-text-secondary;
-                    font-weight: $apple-font-weight-regular;
-                    font-family: $apple-font-family;
-                    font-size: clamp(14px, 1.6vw, 16px);
-                    transition: $apple-transition-fast;
-                    padding: clamp(4px, 0.8vw, 8px) clamp(6px, 1.2vw, 12px);
-                    border-radius: $apple-radius-small;
-                    position: relative;
                     
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        inset: 0;
-                        background: rgba(255, 255, 255, 0.05);
-                        border-radius: inherit;
-                        opacity: 0;
-                        transition: $apple-transition-fast;
-                    }
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgb(255 255 255 / 5%);
+      border-radius: inherit;
+      opacity: 0;
+      transition: $apple-transition-fast;
+    }
                     
-                    &:hover {
-                        color: $apple-text-primary;
-                        transform: translateY(-2px);
+    &:hover {
+      color: $apple-text-primary;
+      transform: translateY(-2px);
                         
-                        &::before {
-                            opacity: 1;
-                        }
-                    }
+      &::before {
+        opacity: 1;
+      }
+    }
                     
-                    &:active {
-                        color: $apple-primary;
-                        transform: translateY(0);
+    &:active {
+      color: $apple-primary;
+      transform: translateY(0);
                         
-                        &::before {
-                            opacity: 0.7;
-                            background: rgba($apple-primary, 0.1);
-                        }
-                    }
-                }
-            }
-            
-            .copy-right {
-                color: $apple-text-tertiary;
-                font-weight: $apple-font-weight-regular;
-                font-family: $apple-font-family;
-                font-size: clamp(12px, 1.4vw, 14px);
-                padding-left: clamp(6px, 1.2vw, 12px);
-                opacity: 0.8;
-            }
-        }
-        
-        .middle {
-            flex: 1;
-            @include dFlex($jc: center);
-            
-            .logo {
-                @include dFlex($fd: column, $jc: center, $ai: center);
-                transition: $apple-transition-medium;
-                padding: clamp(8px, 1.5vw, 12px);
-                border-radius: $apple-radius-medium;
-                position: relative;
-                
-                &::before {
-                    content: '';
-                    position: absolute;
-                    inset: -4px;
-                    background: $apple-teal-gradient;
-                    border-radius: $apple-radius-large;
-                    opacity: 0;
-                    transition: $apple-transition-medium;
-                    z-index: -1;
-                }
-                
-                &:hover {
-                    transform: scale(1.05);
-                    
-                    &::before {
-                        opacity: 0.1;
-                    }
-                }
-                
-                .logo-img {
-                    width: clamp(50px, 6vw, 70px);
-                    height: clamp(32px, 4vw, 44px);
-                    background: {
-                        image: url('./../../../assets/img/logo.png');
-                        repeat: no-repeat;
-                        position: center;
-                        size: contain;
-                    };
-                    @include apple-logo;
-                    transition: $apple-transition-fast;
-                }
-                
-                .logo-name {
-                    font-size: clamp(14px, 1.8vw, 18px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-semibold;
-                    color: $apple-text-primary;
-                    margin-top: 4px;
-                    letter-spacing: 0.5px;
-                }
-                
-                .logo-position {
-                    font-size: clamp(10px, 1.3vw, 13px);
-                    font-family: $apple-font-family;
-                    font-weight: $apple-font-weight-regular;
-                    color: $apple-text-secondary;
-                    letter-spacing: 0.3px;
-                }
-            }
-        }
-        
-        .right {
-            flex: 1;
-            @include dFlex($gap: clamp(12px, 2vw, 20px), $jc: flex-end, $ai: center);
-            
-            .img {
-                width: clamp(28px, 3.5vw, 36px);
-                height: clamp(28px, 3.5vw, 36px);
-                background: {
-                    repeat: no-repeat;
-                    size: contain;
-                    position: center;
-                }
-                border-radius: $apple-radius-small;
-                transition: $apple-transition-fast;
-                position: relative;
-                cursor: pointer;
-                
-                &::before {
-                    content: '';
-                    position: absolute;
-                    inset: -6px;
-                    background: $apple-teal-gradient;
-                    border-radius: $apple-radius-medium;
-                    opacity: 0;
-                    transition: $apple-transition-fast;
-                    z-index: -1;
-                }
-                
-                &:hover {
-                    transform: translateY(-3px) scale(1.1);
-                    
-                    &::before {
-                        opacity: 0.15;
-                    }
-                }
-                
-                &:active {
-                    transform: translateY(-1px) scale(1.05);
-                }
-                
-                a {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    position: relative;
-                    z-index: 1;
-                }
-            }
-            
-            .github {
-                background-image: url('./../../../assets/img/github.png');
-                filter: brightness(1.2);
-                
-                &:hover {
-                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
-                }
-            }
-            
-            .email {
-                background-image: url('./../../../assets/img/mail.png');
-                filter: brightness(1.2);
-                
-                &:hover {
-                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
-                }
-            }
-            
-            .linkedin {
-                background-image: url('./../../../assets/img/linkedin.png');
-                filter: brightness(1.2);
-                
-                &:hover {
-                    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
-                }
-            }
-        }
+      &::before {
+        opacity: 0.7;
+        background: rgba($apple-primary, 0.1);
+      }
     }
-
-
-@media screen and (max-width: 900px) {
-    .footer-wrapper {
-        min-height: 180px;
-    }
-    
-    footer {
-        min-height: 180px;
-        @include standardPaddingMobile();
-        
-        .footer-content {
-            @include dFlex($fd: column, $gap: 20px, $ai: center);
-            text-align: center;
-            
-            .left {
-                order: 3;
-                @include dFlex($fd: row, $gap: 16px, $ai: center, $jc: center);
-                
-                .legal-notice a {
-                    font-size: 14px;
-                    padding: 8px 12px;
-                }
-                
-                .copy-right {
-                    font-size: 14px;
-                    padding-left: 0;
-                }
-            }
-            
-            .middle {
-                order: 1;
-                
-                .logo {
-                    .logo-img {
-                        width: 48px;
-                        height: 30px;
-                    }
-                    
-                    .logo-name {
-                        font-size: 16px;
-                    }
-                    
-                    .logo-position {
-                        font-size: 11px;
-                    }
-                }
-            }
-            
-            .right {
-                order: 2;
-                @include dFlex($gap: 16px, $jc: center);
-                
-                .img {
-                    width: 32px;
-                    height: 32px;
-                }
-            }
-        }
-    }
+  }
 }
 
-@media screen and (max-width: 600px) {
-    .footer-wrapper {
-        min-height: 160px;
-    }
-    
-    footer {
-        min-height: 160px;
-        
-        .footer-content {
-            gap: 16px;
-            
-            .left {
-                @include dFlex($fd: column, $gap: 8px, $ai: center);
-                
-                .legal-notice a {
-                    font-size: 13px;
-                    padding: 6px 10px;
-                }
-                
-                .copy-right {
-                    font-size: 12px;
-                }
-            }
-            
-            .middle .logo {
-                .logo-img {
-                    width: 42px;
-                    height: 26px;
-                }
-                
-                .logo-name {
-                    font-size: 15px;
-                }
-                
-                .logo-position {
-                    font-size: 10px;
-                }
-            }
-            
-            .right {
-                gap: 14px;
-                
-                .img {
-                    width: 28px;
-                    height: 28px;
-                }
-            }
-        }
-    }
+.copy-right {
+  color: $apple-text-tertiary;
+  font-weight: $apple-font-weight-regular;
+  font-family: $apple-font-family;
+  font-size: clamp(12px, 1.4vw, 14px);
+  padding-left: clamp(6px, 1.2vw, 12px);
+  opacity: 0.8;
 }
 
-@media screen and (max-width: 480px) {
-    .footer-wrapper {
-        min-height: 140px;
-    }
-    
-    footer {
-        min-height: 140px;
-        padding: 16px 12px;
-        
-        .footer-content {
-            gap: 12px;
-            
-            .left {
-                gap: 6px;
-                
-                .legal-notice a {
-                    font-size: 12px;
-                    padding: 4px 8px;
-                }
-                
-                .copy-right {
-                    font-size: 11px;
-                }
-            }
-            
-            .middle .logo {
-                padding: 6px;
-                
-                .logo-img {
-                    width: 38px;
-                    height: 24px;
-                }
-                
-                .logo-name {
-                    font-size: 14px;
-                }
-                
-                .logo-position {
-                    font-size: 9px;
-                }
-            }
-            
-            .right {
-                gap: 12px;
-                
-                .img {
-                    width: 26px;
-                    height: 26px;
-                }
-            }
-        }
-    }
+.footer-middle {
+  flex: 1;
+
+  @include dFlex($jc: center);
 }
 
-@media screen and (max-width: 375px) {
-    footer .footer-content {
-        gap: 10px;
-        
-        .left {
-            .legal-notice a {
-                font-size: 11px;
-                padding: 3px 6px;
-            }
-            
-            .copy-right {
-                font-size: 10px;
-            }
-        }
-        
-        .middle .logo {
-            .logo-img {
-                width: 36px;
-                height: 22px;
-            }
-            
-            .logo-name {
-                font-size: 13px;
-            }
-            
-            .logo-position {
-                font-size: 8px;
-            }
-        }
-        
-        .right {
-            gap: 10px;
-            
-            .img {
-                width: 24px;
-                height: 24px;
-            }
-        }
-    }
-}
+.footer-logo {
+  @include dFlex($fd: column, $jc: center, $ai: center);
 
-@media screen and (max-width: 320px) {
-    .footer-wrapper {
-        min-height: 120px;
-    }
-    
-    footer {
-        min-height: 120px;
-        padding: 12px 8px;
-        
-        .footer-content {
-            gap: 8px;
-            
-            .left {
-                gap: 4px;
+  transition: $apple-transition-medium;
+  padding: clamp(8px, 1.5vw, 12px);
+  border-radius: $apple-radius-medium;
+  position: relative;
                 
-                .legal-notice a {
-                    font-size: 10px;
-                    padding: 2px 4px;
-                    border-radius: $apple-radius-small;
-                }
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: $apple-teal-gradient;
+    border-radius: $apple-radius-large;
+    opacity: 0;
+    transition: $apple-transition-medium;
+    z-index: -1;
+  }
                 
-                .copy-right {
-                    font-size: 9px;
-                }
-            }
-            
-            .middle .logo {
-                padding: 4px;
-                
-                .logo-img {
-                    width: 32px;
-                    height: 20px;
-                }
-                
-                .logo-name {
-                    font-size: 12px;
-                    margin-top: 2px;
-                }
-                
-                .logo-position {
-                    font-size: 7px;
-                }
-            }
-            
-            .right {
-                gap: 8px;
-                
-                .img {
-                    width: 22px;
-                    height: 22px;
+  &:hover {
+    transform: scale(1.05);
                     
-                    &:hover {
-                        transform: translateY(-2px) scale(1.05);
-                    }
-                }
-            }
-        }
+    &::before {
+      opacity: 0.1;
     }
+  }
+}
+
+.logo-img {
+  width: clamp(50px, 6vw, 70px);
+  height: clamp(32px, 4vw, 44px);
+  background: {
+    image: url('./../../../assets/img/logo.png');
+    repeat: no-repeat;
+    position: center;
+    size: contain;
+  };
+
+  @include apple-logo;
+
+  transition: $apple-transition-fast;
+}
+
+.logo-name {
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  color: $apple-text-primary;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+.logo-position {
+  font-size: clamp(10px, 1.3vw, 13px);
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-regular;
+  color: $apple-text-secondary;
+  letter-spacing: 0.3px;
+}
+
+.footer-right {
+  flex: 1;
+
+  @include dFlex($gap: clamp(12px, 2vw, 20px), $jc: flex-end, $ai: center);
+}
+
+.social-icon {
+  width: clamp(28px, 3.5vw, 36px);
+  height: clamp(28px, 3.5vw, 36px);
+  background: {
+    repeat: no-repeat;
+    size: contain;
+    position: center;
+  }
+
+  border-radius: $apple-radius-small;
+  transition: $apple-transition-fast;
+  position: relative;
+  cursor: pointer;
+                
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    background: $apple-teal-gradient;
+    border-radius: $apple-radius-medium;
+    opacity: 0;
+    transition: $apple-transition-fast;
+    z-index: -1;
+  }
+                
+  &:hover {
+    transform: translateY(-3px) scale(1.1);
+                    
+    &::before {
+      opacity: 0.15;
+    }
+  }
+                
+  &:active {
+    transform: translateY(-1px) scale(1.05);
+  }
+                
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.github-icon {
+  background-image: url('./../../../assets/img/github.png');
+  filter: brightness(1.2);
+                
+  &:hover {
+    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
+  }
+}
+
+.email-icon {
+  background-image: url('./../../../assets/img/mail.png');
+  filter: brightness(1.2);
+                
+  &:hover {
+    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
+  }
+}
+
+.linkedin-icon {
+  background-image: url('./../../../assets/img/linkedin.png');
+  filter: brightness(1.2);
+                
+  &:hover {
+    filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
+  }
+}
+
+@media screen and (width <= 900px) {
+  .footer-wrapper {
+    min-height: 180px;
+  }
+    
+  footer {
+    min-height: 180px;
+
+    @include standardPaddingMobile;
+  }
+
+  .footer-content {
+    @include dFlex($fd: column, $gap: 20px, $ai: center);
+
+    text-align: center;
+  }
+
+  .footer-left {
+    order: 3;
+
+    @include dFlex($fd: row, $gap: 16px, $ai: center, $jc: center);
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 14px;
+    padding-left: 0;
+  }
+
+  .footer-middle {
+    order: 1;
+  }
+
+  .footer-middle .logo-img {
+    width: 48px;
+    height: 30px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 16px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 11px;
+  }
+
+  .footer-right {
+    order: 2;
+
+    @include dFlex($gap: 16px, $jc: center);
+  }
+
+  .footer-right .social-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .footer-wrapper {
+    min-height: 160px;
+  }
+    
+  footer {
+    min-height: 160px;
+  }
+
+  .footer-content {
+    gap: 16px;
+  }
+
+  .footer-left {
+    @include dFlex($fd: column, $gap: 8px, $ai: center);
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 12px;
+  }
+
+  .footer-middle .logo-img {
+    width: 42px;
+    height: 26px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 15px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 10px;
+  }
+
+  .footer-right {
+    gap: 14px;
+  }
+
+  .footer-right .social-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media screen and (width <= 480px) {
+  .footer-wrapper {
+    min-height: 140px;
+  }
+    
+  footer {
+    min-height: 140px;
+    padding: 16px 12px;
+  }
+
+  .footer-content {
+    gap: 12px;
+  }
+
+  .footer-left {
+    gap: 6px;
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 11px;
+  }
+
+  .footer-logo {
+    padding: 6px;
+  }
+
+  .footer-middle .logo-img {
+    width: 38px;
+    height: 24px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 14px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 9px;
+  }
+
+  .footer-right {
+    gap: 12px;
+  }
+
+  .footer-right .social-icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media screen and (width <= 375px) {
+  .footer-content {
+    gap: 10px;
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+
+  .footer-left .copy-right {
+    font-size: 10px;
+  }
+
+  .footer-middle .logo-img {
+    width: 36px;
+    height: 22px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 13px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 8px;
+  }
+
+  .footer-right {
+    gap: 10px;
+  }
+
+  .footer-right .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media screen and (width <= 320px) {
+  .footer-wrapper {
+    min-height: 120px;
+  }
+    
+  footer {
+    min-height: 120px;
+    padding: 12px 8px;
+  }
+
+  .footer-content {
+    gap: 8px;
+  }
+
+  .footer-left {
+    gap: 4px;
+  }
+
+  .footer-left .legal-notice a {
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: $apple-radius-small;
+  }
+
+  .footer-left .copy-right {
+    font-size: 9px;
+  }
+
+  .footer-logo {
+    padding: 4px;
+  }
+
+  .footer-middle .logo-img {
+    width: 32px;
+    height: 20px;
+  }
+
+  .footer-middle .logo-name {
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .footer-middle .logo-position {
+    font-size: 7px;
+  }
+
+  .footer-right {
+    gap: 8px;
+  }
+
+  .footer-right .social-icon {
+    width: 22px;
+    height: 22px;
+
+    &:hover {
+      transform: translateY(-2px) scale(1.05);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    footer .footer-content {
-        .left .legal-notice a {
-            &:hover {
-                transform: none;
-            }
-        }
-        
-        .middle .logo {
-            &:hover {
-                transform: none;
-            }
-        }
-        
-        .right .img {
-            &:hover {
-                transform: none;
-            }
-        }
-    }
+  .legal-notice a:hover {
+    transform: none;
+  }
+
+  .footer-logo:hover {
+    transform: none;
+  }
+
+  .social-icon:hover {
+    transform: none;
+  }
 }
 
 @media (prefers-contrast: high) {
-    .footer-wrapper {
-        background: #000;
-        border-top: 2px solid #fff;
+  .footer-wrapper {
+    background: #000;
+    border-top: 2px solid #fff;
         
-        &::before {
-            background: #fff;
-        }
+    &::before {
+      background: #fff;
     }
+  }
     
-    footer {
-        background: #000;
-        
-        .footer-content {
-            .left .legal-notice a {
-                color: #fff;
-                border: 1px solid #333;
+  footer {
+    background: #000;
+  }
+
+  .legal-notice a {
+    color: #fff;
+    border: 1px solid #333;
                 
-                &:hover {
-                    background: #333;
-                    border-color: #666;
-                }
-            }
-            
-            .left .copy-right {
-                color: #ccc;
-            }
-            
-            .middle .logo {
-                .logo-name {
-                    color: #fff;
-                }
-                
-                .logo-position {
-                    color: #ccc;
-                }
-            }
-        }
+    &:hover {
+      background: #333;
+      border-color: #666;
     }
+  }
+
+  .copy-right {
+    color: #ccc;
+  }
+
+  .logo-name {
+    color: #fff;
+  }
+
+  .logo-position {
+    color: #ccc;
+  }
 }
 
 @media print {
-    .footer-wrapper {
-        background: white;
-        color: black;
-        border-top: 1px solid black;
+  .footer-wrapper {
+    background: white;
+    color: black;
+    border-top: 1px solid black;
         
-        &::before {
-            display: none;
-        }
-        
-        footer .footer-content {
-            .left .legal-notice a {
-                color: black;
-            }
-            
-            .left .copy-right {
-                color: black;
-            }
-            
-            .middle .logo {
-                .logo-name,
-                .logo-position {
-                    color: black;
-                }
-            }
-            
-            .right .img {
-                display: none;
-            }
-        }
+    &::before {
+      display: none;
     }
+  }
+
+  .legal-notice a {
+    color: black;
+  }
+
+  .copy-right {
+    color: black;
+  }
+
+  .logo-name,
+  .logo-position {
+    color: black;
+  }
+
+  .social-icon {
+    display: none;
+  }
 }

@@ -1,267 +1,261 @@
 @use '../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-// Base styles für alle Kontexte
 .langs {
-    @include dFlex($gap: clamp(4px, 1vw, 8px));
-    color: $apple-text-primary;
-    font-family: $apple-font-family;
-    
-    .lang-button {
-        border: 1px solid transparent;
-        background: transparent;
-        color: $apple-text-secondary;
-        font-family: $apple-font-family;
-        font-weight: $apple-font-weight-medium;
-        border-radius: $apple-radius-small;
-        transition: $apple-transition-fast;
-        cursor: pointer;
-        position: relative;
-        @include dFlex($jc: center, $ai: center);
-        box-sizing: border-box;
-        
-        &:hover {
-            color: $apple-text-primary;
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-1px);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        &:active {
-            transform: translateY(0);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        &:focus-visible {
-            outline: 2px solid rgba($apple-primary, 0.5);
-            outline-offset: 2px;
-        }
-        
-        &.active {
-            color: $apple-text-primary;
-            background: $apple-primary;
-            border-color: $apple-primary;
-            box-shadow: $apple-shadow-glow;
-            transform: translateY(-1px);
-            
-            &::before {
-                content: '';
-                position: absolute;
-                inset: -2px;
-                background: $apple-teal-gradient;
-                border-radius: $apple-radius-medium;
-                opacity: 0.2;
-                z-index: -1;
-                animation: apple-lang-pulse 3s ease-in-out infinite;
-            }
-            
-            &:hover {
-                background: color.adjust($apple-primary, $lightness: 5%);
-                transform: translateY(-2px);
-                box-shadow: $apple-shadow-medium, $apple-shadow-glow;
-            }
-            
-            &:active {
-                transform: translateY(-1px);
-                background: color.adjust($apple-primary, $lightness: -2%);
-            }
-        }
-    }
+  @include dFlex($gap: clamp(4px, 1vw, 8px));
+
+  color: $apple-text-primary;
+  font-family: $apple-font-family;
 }
 
-// Size variants
-.langs--small {
-    gap: clamp(2px, 0.5vw, 4px);
-    
-    .lang-button {
-        padding: clamp(3px, 0.8vw, 6px) clamp(6px, 1.5vw, 10px);
-        font-size: 14px;
-        min-height: 28px;
-        min-width: 32px;
+.lang-button {
+  border: 1px solid transparent;
+  background: transparent;
+  color: $apple-text-secondary;
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-medium;
+  border-radius: $apple-radius-small;
+  transition: $apple-transition-fast;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+
+  @include dFlex($jc: center, $ai: center);
+
+  &:hover {
+    color: $apple-text-primary;
+    background: rgb(255 255 255 / 5%);
+    transform: translateY(-1px);
+    border-color: rgb(255 255 255 / 10%);
+  }
+
+  &:active {
+    transform: translateY(0);
+    background: rgb(255 255 255 / 10%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($apple-primary, 0.5);
+    outline-offset: 2px;
+  }
+
+  &.active {
+    color: $apple-text-primary;
+    background: $apple-primary;
+    border-color: $apple-primary;
+    box-shadow: $apple-shadow-glow;
+    transform: translateY(-1px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: $apple-teal-gradient;
+      border-radius: $apple-radius-medium;
+      opacity: 0.2;
+      z-index: -1;
+      animation: apple-lang-pulse 3s ease-in-out infinite;
     }
+
+    &:hover {
+      background: color.adjust($apple-primary, $lightness: 5%);
+      transform: translateY(-2px);
+      box-shadow: $apple-shadow-medium, $apple-shadow-glow;
+    }
+
+    &:active {
+      transform: translateY(-1px);
+      background: color.adjust($apple-primary, $lightness: -2%);
+    }
+  }
+}
+
+.langs--small {
+  gap: clamp(2px, 0.5vw, 4px);
+}
+
+.langs--small .lang-button {
+  padding: clamp(3px, 0.8vw, 6px) clamp(6px, 1.5vw, 10px);
+  font-size: 14px;
+  min-height: 28px;
+  min-width: 32px;
 }
 
 .langs--medium {
-    gap: clamp(4px, 1vw, 8px);
-    
-    .lang-button {
-        padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
-        font-size: 16px;
-        min-height: 36px;
-        min-width: 40px;
-    }
+  gap: clamp(4px, 1vw, 8px);
+}
+
+.langs--medium .lang-button {
+  padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
+  font-size: 16px;
+  min-height: 36px;
+  min-width: 40px;
 }
 
 .langs--large {
-    gap: clamp(6px, 1.5vw, 12px);
-    
-    .lang-button {
-        padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
-        font-size: 18px;
-        min-height: 44px;
-        min-width: 48px;
-    }
+  gap: clamp(6px, 1.5vw, 12px);
+}
+
+.langs--large .lang-button {
+  padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+  font-size: 18px;
+  min-height: 44px;
+  min-width: 48px;
 }
 
 .langs--mobile-header {
-    gap: 3px;
-    
-    .lang-button {
-        padding: 4px 6px;
-        font-size: 16px !important;
-        min-height: 24px;
-        min-width: 26px;
-    }
-    
-    @media screen and (max-width: 600px) {
-        gap: 2px;
-        
-        .lang-button {
-            padding: 3px 5px;
-            min-height: 20px;
-            min-width: 22px;
-        }
-    }
-    
-    @media screen and (max-width: 320px) {
-        gap: 1px;
-        
-        .lang-button {
-            padding: 2px 4px;
-            min-height: 18px;
-            min-width: 20px;
-        }
-    }
+  gap: 3px;
+}
+
+.langs--mobile-header .lang-button {
+  padding: 4px 6px;
+  font-size: 16px;
+  min-height: 24px;
+  min-width: 26px;
 }
 
 .langs--menu {
-    justify-content: center;
-    gap: clamp(4px, 1vw, 8px);
-    
-    .lang-button {
-        padding: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 12px);
-        font-size: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.05);
-        min-height: 32px;
-        min-width: 36px;
-        
-        &.active {
-            background: $apple-primary;
-            border-color: $apple-primary;
-        }
-        
-        &:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-    }
+  justify-content: center;
+  gap: clamp(4px, 1vw, 8px);
 }
 
-.langs--footer {
-    .lang-button {
-        &:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        &.active {
-            &:hover {
-                background: color.adjust($apple-primary, $lightness: 8%);
-            }
-        }
-    }
+.langs--menu .lang-button {
+  padding: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 12px);
+  font-size: 16px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  background: rgb(255 255 255 / 5%);
+  min-height: 32px;
+  min-width: 36px;
+
+  &.active {
+    background: $apple-primary;
+    border-color: $apple-primary;
+  }
+
+  &:hover:not(.active) {
+    background: rgb(255 255 255 / 10%);
+    border-color: rgb(255 255 255 / 30%);
+  }
 }
 
-// Animation
+.langs--footer .lang-button {
+  &:hover {
+    background: rgb(255 255 255 / 8%);
+  }
+
+  &.active:hover {
+    background: color.adjust($apple-primary, $lightness: 8%);
+  }
+}
+
 @keyframes apple-lang-pulse {
-    0%, 100% {
-        opacity: 0.2;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.3;
-        transform: scale(1.05);
-    }
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
 }
 
-// Responsive breakpoints
-@media screen and (max-width: 900px) {
-    .langs:not(.langs--mobile-header):not(.langs--menu) {
-        gap: clamp(3px, 0.8vw, 6px);
-        
-        .lang-button {
-            padding: clamp(5px, 1.2vw, 8px) clamp(8px, 2vw, 12px);
-            font-size: 16px;
-            min-height: 32px;
-            min-width: 36px;
-        }
-    }
+@media screen and (width <= 900px) {
+  .langs:not(.langs--mobile-header, .langs--menu) {
+    gap: clamp(3px, 0.8vw, 6px);
+  }
+
+  .langs:not(.langs--mobile-header, .langs--menu) .lang-button {
+    padding: clamp(5px, 1.2vw, 8px) clamp(8px, 2vw, 12px);
+    font-size: 16px;
+    min-height: 32px;
+    min-width: 36px;
+  }
 }
 
-@media screen and (max-width: 600px) {
-    .langs:not(.langs--mobile-header):not(.langs--menu) {
-        gap: clamp(2px, 0.5vw, 4px);
-        
-        .lang-button {
-            padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 10px);
-            font-size: 16px;
-            min-height: 28px;
-            min-width: 32px;
-        }
-    }
+@media screen and (width <= 600px) {
+  .langs:not(.langs--mobile-header, .langs--menu) {
+    gap: clamp(2px, 0.5vw, 4px);
+  }
+
+  .langs:not(.langs--mobile-header, .langs--menu) .lang-button {
+    padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 10px);
+    font-size: 16px;
+    min-height: 28px;
+    min-width: 32px;
+  }
+
+  .langs--mobile-header {
+    gap: 2px;
+  }
+
+  .langs--mobile-header .lang-button {
+    padding: 3px 5px;
+    min-height: 20px;
+    min-width: 22px;
+  }
 }
 
-@media screen and (max-width: 320px) {
-    .langs:not(.langs--mobile-header):not(.langs--menu) {
-        gap: 1px;
-        
-        .lang-button {
-            padding: 3px 6px;
-            font-size: 16px;
-            min-height: 24px;
-            min-width: 28px;
-        }
-    }
+@media screen and (width <= 320px) {
+  .langs:not(.langs--mobile-header, .langs--menu) {
+    gap: 1px;
+  }
+
+  .langs:not(.langs--mobile-header, .langs--menu) .lang-button {
+    padding: 3px 6px;
+    font-size: 16px;
+    min-height: 24px;
+    min-width: 28px;
+  }
+
+  .langs--mobile-header {
+    gap: 1px;
+  }
+
+  .langs--mobile-header .lang-button {
+    padding: 2px 4px;
+    min-height: 18px;
+    min-width: 20px;
+  }
 }
 
-// Accessibility
 @media (prefers-contrast: high) {
-    .langs .lang-button {
-        border: 2px solid currentColor;
-        
-        &.active {
-            background: $apple-text-primary;
-            color: $apple-bg-primary;
-            border-color: $apple-text-primary;
-        }
+  .lang-button {
+    border: 2px solid currentcolor;
+
+    &.active {
+      background: $apple-text-primary;
+      color: $apple-bg-primary;
+      border-color: $apple-text-primary;
     }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .langs .lang-button {
-        transition: none;
-        
-        &::before {
-            animation: none;
-        }
-        
-        &:hover,
-        &:active,
-        &.active {
-            transform: none;
-        }
+  .lang-button {
+    transition: none;
+
+    &::before {
+      animation: none;
     }
-    
-    @keyframes apple-lang-pulse {
-        0%, 100% {
-            opacity: 0.2;
-            transform: none;
-        }
+
+    &:hover,
+    &:active,
+    &.active {
+      transform: none;
     }
+  }
+
+  @keyframes apple-lang-pulse {
+    0%, 100% {
+      opacity: 0.2;
+      transform: none;
+    }
+  }
 }
 
 @media print {
-    .langs {
-        display: none;
-    }
+  .langs {
+    display: none;
+  }
 }

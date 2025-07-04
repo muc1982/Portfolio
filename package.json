@@ -8,7 +8,18 @@
     "build:prod": "ng build --configuration production",
     "vercel-build": "ng build --configuration production",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "lint:scss:check": "stylelint \"src/**/*.scss\"",
+    "lint:scss": "stylelint \"src/**/*.scss\" --fix",
+    "lint:scss:report": "stylelint \"src/**/*.scss\" --formatter verbose",
+    "fix:step-by-step": "npm run lint:scss -- --max-warnings=500",
+    "analyze:bundle": "ng build --configuration production && npx webpack-bundle-analyzer dist/portfolio/",
+    "clean:css": "purgecss --css dist/**/*.css --content dist/**/*.html --output dist/purged/",
+    "find:important": "findstr /s /i \"!important\" src\\*.scss",
+    "audit:complete": "npm run lint:scss:check && npm run analyze:bundle",
+    "fix:all-scss": "npm run lint:scss && echo Auto-Fixes angewendet",
+    "check:performance": "npm run build:prod && npm run analyze:bundle",
+    "check:all": "npm run lint:scss:check && npm run find:important"
   },
   "engines": {
     "node": "18.x",
@@ -30,7 +41,6 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "bootstrap": "^5.3.3",
-    "@ng-bootstrap/ng-bootstrap": "^18.0.2",
     "gsap": "^3.13.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -47,6 +57,14 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.7.2"
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "purgecss": "^7.0.2",
+    "stylelint": "^16.21.1",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-order": "^7.0.0",
+    "stylelint-scss": "^6.12.1",
+    "typescript": "~5.7.2",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

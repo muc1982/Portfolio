@@ -7,33 +7,29 @@ $apple-transition-medium: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 $apple-transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) !default;
 
 // ===== COLORS =====
-$apple-primary: #0A84FF !default; 
-$apple-secondary: #32D74B !default; 
+$apple-primary: #0A84FF !default;
+$apple-secondary: #32D74B !default;
 $apple-success: #32D74B !default;
-$apple-error: #FF453A !default; 
-$apple-warning: #FF9F0A !default; 
-
-$apple-bg-primary: #000000 !default; 
+$apple-error: #FF453A !default;
+$apple-warning: #FF9F0A !default;
+$apple-bg-primary: #000 !default;
 $apple-bg-secondary: #1C1C1E !default;
 $apple-bg-tertiary: #2C2C2E !default;
 $apple-bg-quaternary: #3A3A3C !default;
-
-$apple-text-primary: #FFFFFF !default;
-$apple-text-secondary: #F2F2F7 !default; 
-$apple-text-tertiary: #AEAEB2 !default; 
-
+$apple-text-primary: #FFF !default;
+$apple-text-secondary: #F2F2F7 !default;
+$apple-text-tertiary: #AEAEB2 !default;
 $apple-teal-gradient: linear-gradient(135deg, #0A84FF 0%, #32D74B 100%) !default;
-$apple-universal-gradient: linear-gradient(135deg, #000000 0%, #1C1C1E 100%) !default;
+$apple-universal-gradient: linear-gradient(135deg, #000 0%, #1C1C1E 100%) !default;
 $apple-container-gradient: $apple-universal-gradient !default;
 $apple-header-footer-gradient: $apple-universal-gradient !default;
-
-$apple-shadow-small: 0 2px 8px rgba(0, 0, 0, 0.2) !default;
-$apple-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.25) !default;
-$apple-shadow-large: 0 8px 32px rgba(0, 0, 0, 0.35) !default;
-$apple-shadow-glow: 0 0 20px rgba(10, 132, 255, 0.6) !default;
+$apple-shadow-small: 0 2px 8px rgb(0 0 0 / 20%) !default;
+$apple-shadow-medium: 0 4px 16px rgb(0 0 0 / 25%) !default;
+$apple-shadow-large: 0 8px 32px rgb(0 0 0 / 35%) !default;
+$apple-shadow-glow: 0 0 20px rgb(10 132 255 / 60%) !default;
 
 // ===== TYPOGRAPHY - WCAG KONFORME MINDESTGROSSEN =====
-$apple-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
+$apple-font-family: -apple-system, blinkmacsystemfont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
 $apple-font-weight-regular: 400 !default;
 $apple-font-weight-medium: 500 !default;
 $apple-font-weight-semibold: 600 !default;
@@ -50,12 +46,12 @@ $font-2xl: clamp(28px, 7vw, 40px) !default;
 $font-3xl: clamp(32px, 8vw, 48px) !default;
 
 // ===== KORRIGIERTE BREAKPOINTS - MOBILE FIRST =====
-$breakpoint-xs: 320px !default;    // Kleinste Smartphones
-$breakpoint-sm: 480px !default;    // Kleine Smartphones
-$breakpoint-md: 768px !default;    // Tablets
-$breakpoint-lg: 1024px !default;   // Kleine Desktops
-$breakpoint-xl: 1200px !default;   // Große Desktops
-$breakpoint-xxl: 1440px !default;  // Sehr große Screens
+$breakpoint-xs: 320px !default; // Kleinste Smartphones
+$breakpoint-sm: 480px !default; // Kleine Smartphones
+$breakpoint-md: 768px !default; // Tablets
+$breakpoint-lg: 1024px !default; // Kleine Desktops
+$breakpoint-xl: 1200px !default; // Große Desktops
+$breakpoint-xxl: 1440px !default; // Sehr große Screens
 
 // Legacy Support (falls woanders verwendet)
 $breakpoint-mobile: $breakpoint-sm !default;
@@ -69,24 +65,24 @@ $container-max-width: 1440px !default;
 $content-max-width: 1440px !default;
 
 // KORRIGIERT: Reduzierte Container-Paddings für Overflow-Schutz
-$container-padding-mobile: clamp(12px, 3vw, 20px) !default;  // Reduziert von clamp(16px, 4vw, 24px)
-$container-padding-tablet: clamp(20px, 4vw, 40px) !default;  // Reduziert von clamp(32px, 5vw, 48px)
+$container-padding-mobile: clamp(12px, 3vw, 20px) !default; // Reduziert von clamp(16px, 4vw, 24px)
+$container-padding-tablet: clamp(20px, 4vw, 40px) !default; // Reduziert von clamp(32px, 5vw, 48px)
 $container-padding-desktop: clamp(40px, 5vw, 80px) !default; // Reduziert von clamp(48px, 6vw, 80px)
 
 // ===== OVERFLOW-SICHERE SPACING VARIABLEN =====
-$space-xs: clamp(6px, 1.5vw, 10px) !default;   // Reduziert von clamp(8px, 2vw, 12px)
-$space-sm: clamp(8px, 2vw, 12px) !default;     // Reduziert von clamp(12px, 3vw, 16px)
-$space-base: clamp(12px, 3vw, 16px) !default;  // Reduziert von clamp(16px, 4vw, 24px)
-$space-md: clamp(16px, 4vw, 24px) !default;    // Reduziert von clamp(24px, 6vw, 32px)
-$space-lg: clamp(24px, 5vw, 32px) !default;    // Reduziert von clamp(32px, 8vw, 48px)
-$space-xl: clamp(32px, 6vw, 48px) !default;    // Reduziert von clamp(48px, 12vw, 64px)
+$space-xs: clamp(6px, 1.5vw, 10px) !default; // Reduziert von clamp(8px, 2vw, 12px)
+$space-sm: clamp(8px, 2vw, 12px) !default; // Reduziert von clamp(12px, 3vw, 16px)
+$space-base: clamp(12px, 3vw, 16px) !default; // Reduziert von clamp(16px, 4vw, 24px)
+$space-md: clamp(16px, 4vw, 24px) !default; // Reduziert von clamp(24px, 6vw, 32px)
+$space-lg: clamp(24px, 5vw, 32px) !default; // Reduziert von clamp(32px, 8vw, 48px)
+$space-xl: clamp(32px, 6vw, 48px) !default; // Reduziert von clamp(48px, 12vw, 64px)
 
 // ===== OVERFLOW-SICHERE PADDING VARIABLEN =====
-$padding-xs: clamp(6px, 1.5vw, 10px) !default;   // Reduziert von clamp(8px, 2vw, 12px)
-$padding-sm: clamp(8px, 2vw, 12px) !default;     // Reduziert von clamp(12px, 3vw, 16px)
-$padding-base: clamp(12px, 3vw, 16px) !default;  // Reduziert von clamp(16px, 4vw, 20px)
-$padding-md: clamp(16px, 4vw, 24px) !default;    // Reduziert von clamp(20px, 5vw, 28px)
-$padding-lg: clamp(24px, 5vw, 32px) !default;    // Reduziert von clamp(28px, 7vw, 36px)
+$padding-xs: clamp(6px, 1.5vw, 10px) !default; // Reduziert von clamp(8px, 2vw, 12px)
+$padding-sm: clamp(8px, 2vw, 12px) !default; // Reduziert von clamp(12px, 3vw, 16px)
+$padding-base: clamp(12px, 3vw, 16px) !default; // Reduziert von clamp(16px, 4vw, 20px)
+$padding-md: clamp(16px, 4vw, 24px) !default; // Reduziert von clamp(20px, 5vw, 28px)
+$padding-lg: clamp(24px, 5vw, 32px) !default; // Reduziert von clamp(28px, 7vw, 36px)
 
 // ===== BORDER RADIUS =====
 $apple-radius-small: clamp(6px, 1.5vw, 8px) !default;
@@ -95,489 +91,518 @@ $apple-radius-large: clamp(12px, 3vw, 16px) !default;
 $apple-radius-xl: clamp(16px, 4vw, 24px) !default;
 
 // ===== NAVIGATION HEIGHTS - KORRIGIERT =====
-$nav-height-mobile: 60px !default;   // Reduziert für mehr Platz
-$nav-height-tablet: 72px !default;   // Angemessen für Tablets
-$nav-height-desktop: 80px !default;  // Konsistent für Desktop
+$nav-height-mobile: 60px !default; // Reduziert für mehr Platz
+$nav-height-tablet: 72px !default; // Angemessen für Tablets
+$nav-height-desktop: 80px !default; // Konsistent für Desktop
 
 // ===== VERBESSERTE RESPONSIVE MIXINS =====
 @mixin dFlex($fd: row, $jc: center, $ai: center, $gap: 0) {
-    display: flex;
-    flex-direction: $fd;
-    justify-content: $jc;
-    align-items: $ai;
-    @if $gap != 0 {
-        gap: $gap;
-    }
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+
+  @if $gap !=0 {
+    gap: $gap;
+  }
 }
 
 // ===== MOBILE FIRST MEDIA QUERIES =====
 @mixin mobile-sm {
-    @media screen and (min-width: $breakpoint-sm) {
-        @content;
-    }
+  @media screen and (min-width: $breakpoint-sm) {
+    @content;
+  }
 }
 
 @mixin tablet {
-    @media screen and (min-width: $breakpoint-md) {
-        @content;
-    }
+  @media screen and (min-width: $breakpoint-md) {
+    @content;
+  }
 }
 
 @mixin desktop {
-    @media screen and (min-width: $breakpoint-lg) {
-        @content;
-    }
+  @media screen and (min-width: $breakpoint-lg) {
+    @content;
+  }
 }
 
 @mixin desktop-large {
-    @media screen and (min-width: $breakpoint-xl) {
-        @content;
-    }
+  @media screen and (min-width: $breakpoint-xl) {
+    @content;
+  }
 }
 
 @mixin desktop-xl {
-    @media screen and (min-width: $breakpoint-xxl) {
-        @content;
-    }
+  @media screen and (min-width: $breakpoint-xxl) {
+    @content;
+  }
 }
 
 // ===== DEVICE-SPECIFIC QUERIES =====
 @mixin mobile-only {
-    @media screen and (max-width: #{$breakpoint-md - 1px}) {
-        @content;
-    }
+  @media screen and (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
 }
 
 @mixin tablet-only {
-    @media screen and (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
-        @content;
-    }
+  @media screen and (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
 }
 
 @mixin desktop-only {
-    @media screen and (min-width: $breakpoint-lg) {
-        @content;
-    }
+  @media screen and (min-width: $breakpoint-lg) {
+    @content;
+  }
 }
 
 // ===== OVERFLOW-SICHERE CONTAINER MIXINS =====
 @mixin safe-container() {
-    width: 100%;
-    max-width: $container-max-width;
-    margin: 0 auto;
-    padding-left: $container-padding-mobile;
-    padding-right: $container-padding-mobile;
-    box-sizing: border-box;
-    min-width: 0; // KRITISCH: Verhindert Overflow
-    overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
-    
-    @include tablet {
-        padding-left: $container-padding-tablet;
-        padding-right: $container-padding-tablet;
-    }
-    
-    @include desktop {
-        padding-left: $container-padding-desktop;
-        padding-right: $container-padding-desktop;
-    }
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding-left: $container-padding-mobile;
+  padding-right: $container-padding-mobile;
+  box-sizing: border-box;
+  min-width: 0; // KRITISCH: Verhindert Overflow
+  overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
+
+  @include tablet {
+    padding-left: $container-padding-tablet;
+    padding-right: $container-padding-tablet;
+  }
+
+  @include desktop {
+    padding-left: $container-padding-desktop;
+    padding-right: $container-padding-desktop;
+  }
 }
 
 // ===== VOLLBREITE OHNE OVERFLOW =====
 @mixin full-width-safe() {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    position: relative;
-    min-width: 0; // KRITISCH: Verhindert Overflow
-    overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 0; // KRITISCH: Verhindert Overflow
+  overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
 }
 
 // ===== CONTENT WRAPPER =====
 @mixin content-wrapper() {
-    @include safe-container();
+  @include safe-container;
 }
 
 // ===== KORRIGIERTES UNIFIED CONTENT PADDING - OVERFLOW-SAFE =====
 @mixin unified-content-padding() {
-    // KORRIGIERT: Direkte Padding-Werte statt Container-Mixin um doppelte Paddings zu vermeiden
-    padding-left: $container-padding-mobile;
-    padding-right: $container-padding-mobile;
-    box-sizing: border-box;
-    min-width: 0; // KRITISCH: Verhindert Overflow
-    max-width: 100%; // KRITISCH: Verhindert Overflow
-    overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
-    
-    @include tablet {
-        padding-left: $container-padding-tablet;
-        padding-right: $container-padding-tablet;
-    }
-    
-    @include desktop {
-        padding-left: $container-padding-desktop;
-        padding-right: $container-padding-desktop;
-    }
+  // KORRIGIERT: Direkte Padding-Werte statt Container-Mixin um doppelte Paddings zu vermeiden
+  padding-left: $container-padding-mobile;
+  padding-right: $container-padding-mobile;
+  box-sizing: border-box;
+  min-width: 0; // KRITISCH: Verhindert Overflow
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+  overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
+
+  @include tablet {
+    padding-left: $container-padding-tablet;
+    padding-right: $container-padding-tablet;
+  }
+
+  @include desktop {
+    padding-left: $container-padding-desktop;
+    padding-right: $container-padding-desktop;
+  }
 }
 
 // ===== OVERFLOW-SICHERE SKILLS GRID =====
 @mixin skills-grid-responsive() {
-    display: grid;
-    gap: clamp(8px, 2vw, 16px); // KORRIGIERT: Reduzierte Gaps von clamp(12px, 3vw, 20px)
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    min-width: 0; // KRITISCH: Verhindert Overflow
-    overflow: hidden; // KRITISCH: Verhindert Overflow
-    
-    // Mobile: 2 Spalten (320px - 767px)
-    grid-template-columns: repeat(2, minmax(0, 1fr)); // minmax(0, 1fr) verhindert Overflow
-    
-    // Tablet: 3 Spalten (768px - 1023px)
-    @include tablet {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: clamp(12px, 2.5vw, 20px);
-    }
-    
-    // Desktop: 4 Spalten (1024px+)
-    @include desktop {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: clamp(16px, 3vw, 24px);
-    }
-    
-    // Sehr kleine Screens: Reduzierte Gaps
-    @media screen and (max-width: 374px) {
-        gap: clamp(6px, 1.5vw, 12px);
-        grid-template-columns: repeat(2, 1fr); // Feste Spalten für sehr kleine Screens
-    }
-    
-    @media screen and (max-width: 320px) {
-        gap: 8px;
-        grid-template-columns: repeat(2, 1fr);
-    }
+  display: grid;
+  gap: clamp(8px, 2vw, 16px); // KORRIGIERT: Reduzierte Gaps von clamp(12px, 3vw, 20px)
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-width: 0; // KRITISCH: Verhindert Overflow
+  overflow: hidden; // KRITISCH: Verhindert Overflow
+
+  // Mobile: 2 Spalten (320px - 767px)
+  grid-template-columns: repeat(2, minmax(0, 1fr)); // minmax(0, 1fr) verhindert Overflow
+
+  // Tablet: 3 Spalten (768px - 1023px)
+  @include tablet {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 2.5vw, 20px);
+  }
+
+  // Desktop: 4 Spalten (1024px+)
+  @include desktop {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(16px, 3vw, 24px);
+  }
+
+  // Sehr kleine Screens: Reduzierte Gaps
+  @media screen and (width <=374px) {
+    gap: clamp(6px, 1.5vw, 12px);
+    grid-template-columns: repeat(2, 1fr); // Feste Spalten für sehr kleine Screens
+  }
+
+  @media screen and (width <=320px) {
+    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 // ===== WCAG KONFORME INPUTS =====
 @mixin apple-input() {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    border-radius: $apple-radius-medium;
-    color: $apple-text-primary;
-    transition: $apple-transition-medium;
-    outline: none;
-    font-family: $apple-font-family;
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: $apple-radius-medium;
+  color: $apple-text-primary;
+  transition: $apple-transition-medium;
+  outline: none;
+  font-family: $apple-font-family;
+  font-size: 16px; // WCAG minimum
+  font-weight: $apple-font-weight-regular;
+  padding: 14px 18px;
+  min-height: 48px; // WCAG Touch Target
+  width: 100%;
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+  box-sizing: border-box;
+  min-width: 0; // KRITISCH: Verhindert Overflow
+
+  &:focus {
+    border-color: $apple-primary;
+    background: rgb(255 255 255 / 8%);
+    box-shadow: 0 0 0 3px rgba($apple-primary, 0.2);
+  }
+
+  &::placeholder {
+    color: $apple-text-tertiary;
     font-size: 16px; // WCAG minimum
-    font-weight: $apple-font-weight-regular;
-    padding: 14px 18px;
-    min-height: 48px; // WCAG Touch Target
-    width: 100%;
-    max-width: 100%; // KRITISCH: Verhindert Overflow
-    box-sizing: border-box;
-    min-width: 0; // KRITISCH: Verhindert Overflow
-    
-    &:focus {
-        border-color: $apple-primary;
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 0 3px rgba($apple-primary, 0.2);
-    }
-    
-    &::placeholder {
-        color: $apple-text-tertiary;
-        font-size: 16px; // WCAG minimum
-    }
+  }
 }
 
 // ===== WCAG KONFORME BUTTONS =====
 @mixin apple-button-primary() {
-    background: $apple-primary;
-    color: $apple-text-primary;
-    border: none; 
-    border-radius: $apple-radius-medium;
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-semibold;
-    font-size: 16px; // WCAG minimum
-    padding: 14px 24px;
-    min-height: 48px; // WCAG Touch Target
-    min-width: 48px;  // WCAG Touch Target
-    max-width: 100%; // KRITISCH: Verhindert Overflow
+  background: $apple-primary;
+  color: $apple-text-primary;
+  border: none;
+  border-radius: $apple-radius-medium;
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+  font-size: 16px; // WCAG minimum
+  padding: 14px 24px;
+  min-height: 48px; // WCAG Touch Target
+  min-width: 48px; // WCAG Touch Target
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+  transition: $apple-transition-fast;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  word-wrap: break-word; // KRITISCH: Textumbruch
+  overflow-wrap: break-word; // KRITISCH: Textumbruch
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgb(255 255 255 / 20%) 0%, transparent 100%);
+    opacity: 0;
     transition: $apple-transition-fast;
-    cursor: pointer;
-    position: relative;
-    box-sizing: border-box;
-    word-wrap: break-word; // KRITISCH: Textumbruch
-    overflow-wrap: break-word; // KRITISCH: Textumbruch
-    
+    border-radius: inherit;
+  }
+
+  &:hover {
+    background: color.adjust($apple-primary, $lightness: 5%);
+    transform: translateY(-1px);
+    box-shadow: $apple-shadow-medium;
+
     &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-        opacity: 0;
-        transition: $apple-transition-fast;
-        border-radius: inherit;
+      opacity: 1;
     }
-    
-    &:hover {
-        background: color.adjust($apple-primary, $lightness: 5%);
-        transform: translateY(-1px);
-        box-shadow: $apple-shadow-medium;
-        
-        &::before {
-            opacity: 1;
-        }
-    }
-    
-    &:focus-visible {
-        outline: 2px solid rgba($apple-primary, 0.7);
-        outline-offset: 2px;
-    }
-    
-    &:active {
-        transform: translateY(0);
-        background: color.adjust($apple-primary, $lightness: -2%);
-    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($apple-primary, 0.7);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(0);
+    background: color.adjust($apple-primary, $lightness: -2%);
+  }
 }
 
 @mixin apple-button-secondary() {
-    background: rgba(255, 255, 255, 0.1);
-    color: $apple-text-primary;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: $apple-radius-medium;
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-medium;
-    font-size: 16px; // WCAG minimum
-    padding: 14px 24px;
-    min-height: 48px; // WCAG Touch Target
-    min-width: 48px;  // WCAG Touch Target
-    max-width: 100%; // KRITISCH: Verhindert Overflow
+  background: rgb(255 255 255 / 10%);
+  color: $apple-text-primary;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: $apple-radius-medium;
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-medium;
+  font-size: 16px; // WCAG minimum
+  padding: 14px 24px;
+  min-height: 48px; // WCAG Touch Target
+  min-width: 48px; // WCAG Touch Target
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+  transition: $apple-transition-fast;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  word-wrap: break-word; // KRITISCH: Textumbruch
+  overflow-wrap: break-word; // KRITISCH: Textumbruch
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgb(255 255 255 / 10%) 0%, transparent 100%);
+    opacity: 0;
     transition: $apple-transition-fast;
-    cursor: pointer;
-    position: relative;
-    box-sizing: border-box;
-    word-wrap: break-word; // KRITISCH: Textumbruch
-    overflow-wrap: break-word; // KRITISCH: Textumbruch
-    
+    border-radius: inherit;
+  }
+
+  &:hover {
+    background: rgb(255 255 255 / 15%);
+    border-color: rgb(255 255 255 / 30%);
+    transform: translateY(-1px);
+    box-shadow: $apple-shadow-medium;
+
     &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-        opacity: 0;
-        transition: $apple-transition-fast;
-        border-radius: inherit;
+      opacity: 1;
     }
-    
-    &:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.3);
-        transform: translateY(-1px);
-        box-shadow: $apple-shadow-medium;
-        
-        &::before {
-            opacity: 1;
-        }
-    }
-    
-    &:focus-visible {
-        outline: 2px solid rgba(255, 255, 255, 0.7);
-        outline-offset: 2px;
-    }
-    
-    &:active {
-        transform: translateY(0);
-        background: rgba(255, 255, 255, 0.08);
-    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(255 255 255 / 70%);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(0);
+    background: rgb(255 255 255 / 8%);
+  }
 }
 
 // ===== NAVIGATION GLASS EFFECT =====
 @mixin apple-nav-glass() {
-    background: rgba(28, 28, 30, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgb(28 28 30 / 80%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
 }
 
 // ===== RESPONSIVE TYPOGRAPHY MIXINS =====
 @mixin responsive-heading($mobile: 24px, $tablet: 32px, $desktop: 48px) {
-    font-size: clamp(#{$mobile}, 5vw, #{$tablet});
-    
-    @include tablet {
-        font-size: clamp(#{$tablet}, 4vw, #{$desktop});
-    }
-    
-    @include desktop {
-        font-size: #{$desktop};
-    }
+  font-size: clamp(#{$mobile}, 5vw, #{$tablet});
+
+  @include tablet {
+    font-size: clamp(#{$tablet}, 4vw, #{$desktop});
+  }
+
+  @include desktop {
+    font-size: #{$desktop};
+  }
 }
 
 @mixin h2Title() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    @include responsive-heading(24px, 32px, 48px);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    background: $apple-teal-gradient;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    max-width: 100%; // KRITISCH: Verhindert Overflow
-    word-wrap: break-word; // KRITISCH: Textumbruch
-    overflow-wrap: break-word; // KRITISCH: Textumbruch
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-bold;
+
+  @include responsive-heading(24px, 32px, 48px);
+
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  background: $apple-teal-gradient;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+  word-wrap: break-word; // KRITISCH: Textumbruch
+  overflow-wrap: break-word; // KRITISCH: Textumbruch
 }
 
 @mixin h2TitleMobile() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-bold;
-    @include responsive-heading(20px, 28px, 32px);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    background: $apple-teal-gradient;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    max-width: 100%; // KRITISCH: Verhindert Overflow
-    word-wrap: break-word; // KRITISCH: Textumbruch
-    overflow-wrap: break-word; // KRITISCH: Textumbruch
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-bold;
+
+  @include responsive-heading(20px, 28px, 32px);
+
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  background: $apple-teal-gradient;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+  word-wrap: break-word; // KRITISCH: Textumbruch
+  overflow-wrap: break-word; // KRITISCH: Textumbruch
 }
 
 @mixin h3Title() {
-    font-family: $apple-font-family;
-    font-weight: $apple-font-weight-semibold;
-    @include responsive-heading(18px, 22px, 28px);
-    line-height: 1.4;
-    letter-spacing: -0.005em;
-    color: $apple-text-primary;
-    margin: 0;
-    max-width: 100%; // KRITISCH: Verhindert Overflow
-    word-wrap: break-word; // KRITISCH: Textumbruch
-    overflow-wrap: break-word; // KRITISCH: Textumbruch
+  font-family: $apple-font-family;
+  font-weight: $apple-font-weight-semibold;
+
+  @include responsive-heading(18px, 22px, 28px);
+
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: $apple-text-primary;
+  margin: 0;
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+  word-wrap: break-word; // KRITISCH: Textumbruch
+  overflow-wrap: break-word; // KRITISCH: Textumbruch
 }
 
 // ===== LOGO STYLING =====
 @mixin apple-logo() {
-    filter: brightness(1.2) contrast(1.1) saturate(1.2);
-    transition: $apple-transition-fast;
-    
-    &:hover {
-        filter: brightness(1.4) contrast(1.3) saturate(1.4);
-    }
+  filter: brightness(1.2) contrast(1.1) saturate(1.2);
+  transition: $apple-transition-fast;
+
+  &:hover {
+    filter: brightness(1.4) contrast(1.3) saturate(1.4);
+  }
 }
 
 // ===== SCROLL OFFSET FÜR ANKER-LINKS =====
 @mixin scroll-offset($desktop-offset: 100px) {
-    scroll-margin-top: $desktop-offset;
-    
-    @include tablet {
-        scroll-margin-top: #{$desktop-offset - 20px};
-    }
-    
-    @include mobile-only {
-        scroll-margin-top: #{$desktop-offset - 40px};
-    }
+  scroll-margin-top: $desktop-offset;
+
+  @include tablet {
+    scroll-margin-top: #{$desktop-offset - 20px};
+  }
+
+  @include mobile-only {
+    scroll-margin-top: #{$desktop-offset - 40px};
+  }
 }
 
 // ===== SICHERE CLAMP UTILITY FUNKTIONEN =====
 @function safe-clamp($min, $vw, $max, $screen-width: 320px) {
-    $vw-at-min: ($vw / 100) * $screen-width;
-    @if $vw-at-min > $min {
-        @return clamp(#{$min}, #{$vw}vw, #{$max});
-    } @else {
-        @return clamp(#{$min}, #{$vw}vw, #{$max});
-    }
+  $vw-at-min: (
+    $vw / 100) * $screen-width;
+
+  @if $vw-at-min >$min {
+    @return clamp(#{$min}, #{$vw}vw, #{$max}
+  );
+}
+
+@else {
+  @return clamp(#{$min}, #{$vw}vw, #{$max});
+}
 }
 
 // ===== OVERFLOW-SICHERE RESPONSIVE CONTAINER MIXINS =====
 @mixin mobile-safe-container() {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    margin: 0 auto;
-    padding-left: clamp(8px, 2vw, 16px);  // Sehr konservativ
-    padding-right: clamp(8px, 2vw, 16px);
-    box-sizing: border-box;
-    overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+  padding-left: clamp(8px, 2vw, 16px); // Sehr konservativ
+  padding-right: clamp(8px, 2vw, 16px);
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 @mixin tablet-safe-container() {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    margin: 0 auto;
-    padding-left: clamp(16px, 3vw, 32px);
-    padding-right: clamp(16px, 3vw, 32px);
-    box-sizing: border-box;
-    overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+  padding-left: clamp(16px, 3vw, 32px);
+  padding-right: clamp(16px, 3vw, 32px);
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 @mixin desktop-safe-container() {
-    width: 100%;
-    max-width: $container-max-width;
-    min-width: 0;
-    margin: 0 auto;
-    padding-left: clamp(32px, 4vw, 80px);
-    padding-right: clamp(32px, 4vw, 80px);
-    box-sizing: border-box;
-    overflow-x: hidden;
+  width: 100%;
+  max-width: $container-max-width;
+  min-width: 0;
+  margin: 0 auto;
+  padding-left: clamp(32px, 4vw, 80px);
+  padding-right: clamp(32px, 4vw, 80px);
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 // ===== LEGACY MIXINS FÜR KOMPATIBILITÄT - OVERFLOW-SAFE =====
 @mixin unified-container() {
-    @include safe-container();
+  @include safe-container;
 }
 
 @mixin full-width-background() {
-    @include full-width-safe();
+  @include full-width-safe;
 }
 
 @mixin standardPadding() {
-    padding-left: $container-padding-mobile;
-    padding-right: $container-padding-mobile;
-    box-sizing: border-box;
-    min-width: 0; // KRITISCH: Verhindert Overflow
-    max-width: 100%; // KRITISCH: Verhindert Overflow
-    
-    @include tablet {
-        padding-left: $container-padding-tablet;
-        padding-right: $container-padding-tablet;
-    }
-    
-    @include desktop {
-        padding-left: $container-padding-desktop;
-        padding-right: $container-padding-desktop;
-    }
+  padding-left: $container-padding-mobile;
+  padding-right: $container-padding-mobile;
+  box-sizing: border-box;
+  min-width: 0; // KRITISCH: Verhindert Overflow
+  max-width: 100%; // KRITISCH: Verhindert Overflow
+
+  @include tablet {
+    padding-left: $container-padding-tablet;
+    padding-right: $container-padding-tablet;
+  }
+
+  @include desktop {
+    padding-left: $container-padding-desktop;
+    padding-right: $container-padding-desktop;
+  }
 }
 
 @mixin standardPaddingMobile() {
-    padding-left: $container-padding-mobile;
-    padding-right: $container-padding-mobile;
-    box-sizing: border-box;
-    min-width: 0; // KRITISCH: Verhindert Overflow
-    max-width: 100%; // KRITISCH: Verhindert Overflow
+  padding-left: $container-padding-mobile;
+  padding-right: $container-padding-mobile;
+  box-sizing: border-box;
+  min-width: 0; // KRITISCH: Verhindert Overflow
+  max-width: 100%; // KRITISCH: Verhindert Overflow
 }
 
-// ===== EMERGENCY OVERFLOW PROTECTION =====
+// ===== EMERGENCY OVERFLOW PROTECTION OHNE !IMPORTANT =====
 @mixin emergency-overflow-fix() {
-    * {
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        word-wrap: break-word !important;
-        overflow-wrap: break-word !important;
-        min-width: 0 !important;
-    }
-    
-    div, section, article, main, aside, header, footer, nav {
-        overflow-x: hidden !important;
-    }
-    
-    img, video, iframe, canvas {
-        max-width: 100% !important;
-        height: auto !important;
-    }
-    
-    .container, .content, .wrapper {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 0 !important;
-        overflow-x: hidden !important;
-    }
+
+  // Base Elements - höhere Spezifität durch Verschachtelung
+  html * {
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
+  }
+
+  html *:not(svg, svg *) {
+    max-width: 100%;
+  }
+
+  // Container Elements - spezifische Selektoren
+  html div,
+  html section,
+  html article,
+  html main,
+  html aside,
+  html header,
+  html footer,
+  html nav {
+    overflow-x: hidden;
+  }
+
+  // Media Elements - höhere Spezifität
+  html img,
+  html video,
+  html iframe,
+  html canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  // Container Classes - mehrfache Klassen für höhere Spezifität
+  html .container.container,
+  html .content.content,
+  html .wrapper.wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
 }
