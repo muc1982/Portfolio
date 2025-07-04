@@ -12,14 +12,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    position: relative;
     width: 100%;
     margin: 0 auto;
-    @include unified-content-padding(); // Einheitliche Einrückung wie andere Container
 
     &::before {
-        content: '';
-        position: absolute;
+        position: relative;
         top: -30%;
         right: -15%;
         width: 80%;
@@ -30,8 +27,6 @@
     }
 
     &::after {
-        content: '';
-        position: absolute;
         bottom: -20%;
         left: -10%;
         width: 60%;
@@ -59,7 +54,7 @@
 
         &::before {
             content: '';
-            position: absolute;
+            position: relative;
             top: 15%;
             left: 15%;
             right: 15%;
@@ -126,7 +121,6 @@
 .content-right[_ngcontent-ng-c2512410781] {
     height: auto;
     width: 100%;
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

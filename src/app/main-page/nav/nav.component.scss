@@ -8,7 +8,7 @@
     right: 0;
     z-index: 1000;
     transition: $apple-transition-medium;
-    height: $nav-height-desktop;
+
     width: 100%;
     
     &.scrolled {
@@ -31,8 +31,6 @@
         position: relative;
         
         .content {
-            height: $nav-height-desktop;
-            @include unified-content-padding();
             @include dFlex($jc: space-between, $ai: center);
             background: transparent;
             transition: $apple-transition-medium;

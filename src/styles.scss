@@ -44,12 +44,6 @@ body {
   overflow-x: hidden;
 }
 
-.wide-screen {
-  @include full-width-safe;
-
-  overflow-x: hidden;
-  max-width: 100%;
-}
 
 .page-container {
   @include content-wrapper;
@@ -57,14 +51,7 @@ body {
   overflow-x: hidden;
 }
 
-.normal-container {
-  @include full-width-safe;
 
-  position: relative;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  max-width: 100%;
-}
 
 .mobile-content,
 .content-left,
@@ -73,7 +60,6 @@ body {
 .img-wrapper {
   max-width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 *::before,
