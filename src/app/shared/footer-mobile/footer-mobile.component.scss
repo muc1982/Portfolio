@@ -1,542 +1,443 @@
+// KORRIGIERTE footer-mobile.component.scss
 @use '../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-// ===== FOOTER MOBILE CONTAINER - ALLE ELEMENTE AUF EINER EBENE =====
-.footer-mobile-container {
-  position: relative;
+.footer-wrapper {
   width: 100%;
-  background: $apple-universal-gradient;
-  border-radius: $apple-radius-xl $apple-radius-xl 0 0;
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-bottom: none;
-  box-shadow: $apple-shadow-large;
-  backdrop-filter: blur(20px);
-  margin-top: clamp(32px, 8vw, 48px);
+  position: relative;
+  min-height: 120px;
+  background: linear-gradient(135deg, #000 0%, #1C1C1E 100%);
   
-  // ===== EINHEITLICHE PADDING OHNE BRÜCHE =====
-  padding: clamp(24px, 6vw, 32px) clamp(20px, 5vw, 28px) clamp(20px, 5vw, 24px);
-  
-  // Mobile-spezifische Darstellung
-  @media screen and (width <= 899px) {
-    display: block !important;
+  // Mobile Only: <= 899px
+  @media screen and (max-width: 899px) {
+    display: block;
   }
   
-  // Desktop: ausblenden
-  @media screen and (width >= 900px) {
-    display: none !important;
+  // Desktop: >= 900px 
+  @media screen and (min-width: 900px) {
+    display: none;
   }
   
-  @media screen and (width <= 480px) {
-    padding: clamp(20px, 5vw, 24px) clamp(16px, 4vw, 20px) clamp(16px, 4vw, 20px);
-    margin-top: clamp(24px, 6vw, 32px);
-  }
-  
-  // ===== HINTERGRUND-EFFEKTE =====
   &::before {
     content: '';
     position: absolute;
-    top: -40%;
-    left: -40%;
-    width: 80%;
-    height: 100%;
-    background: radial-gradient(circle, rgba($apple-primary, 0.06) 0%, transparent 60%);
-    animation: footer-ambient 12s ease-in-out infinite;
-    filter: blur(30px);
-    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $apple-teal-gradient;
+    opacity: 0.3;
   }
 }
 
-// ===== FOOTER CONTENT - FLEXBOX FÜR EINHEITLICHE EBENE =====
-.footer-content {
-  position: relative;
-  z-index: 2;
+footer {
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(16px, 4vw, 24px);
+  box-sizing: border-box;
+}
+
+.footer-content {
+  width: 100%;
+  max-width: $container-max-width;
+  display: grid;
+  gap: clamp(12px, 3vw, 20px);
+  text-align: center;
+  
+  // Mobile (320px - 599px): 1 Spalte
+  @media screen and (max-width: 599px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "logo"
+      "social" 
+      "legal";
+  }
+  
+  // Tablet (600px - 899px): 2 Spalten  
+  @media screen and (min-width: 600px) and (max-width: 899px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "logo social"
+      "legal legal";
+  }
+}
+
+.footer-section {
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 4vw, 20px); // REDUZIERTE GAPS FÜR KOMPAKTE DARSTELLUNG
   align-items: center;
-  justify-content: center;
+  gap: clamp(8px, 2vw, 12px);
   
-  @media screen and (width <= 480px) {
-    gap: clamp(12px, 3vw, 16px);
+  &[data-grid-area="logo"] {
+    grid-area: logo;
+  }
+  
+  &[data-grid-area="social"] {
+    grid-area: social;
+  }
+  
+  &[data-grid-area="legal"] {
+    grid-area: legal;
   }
 }
 
-// ===== FOOTER LINKS - HORIZONTAL AUF EINER EBENE =====
-.footer-links {
-  display: flex;
-  flex-flow: row wrap; // HORIZONTAL ANORDNUNG
-  align-items: center;
-  justify-content: center;
-  gap: clamp(20px, 5vw, 28px);
-  width: 100%; // UMBRUCH NUR BEI SEHR KLEINEN BILDSCHIRMEN
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(16px, 4vw, 20px);
-  }
-  
-  @media screen and (width <= 375px) {
-    gap: clamp(12px, 3vw, 16px);
-    flex-direction: column; // NUR BEI SEHR KLEINEN BILDSCHIRMEN VERTIKAL
-  }
-}
-
-// ===== FOOTER LINK ITEMS - KOMPAKT UND EINHEITLICH =====
-.footer-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(8px, 2vw, 10px);
-  padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 4%) 0%, 
-    rgb(255 255 255 / 2%) 50%,
-    rgb(255 255 255 / 3%) 100%);
-  border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: $apple-radius-medium;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  backdrop-filter: blur(10px);
-  min-height: clamp(40px, 10vw, 48px); // EINHEITLICHE HÖHE
-  box-sizing: border-box;
-  
-  @media screen and (width <= 480px) {
-    padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2.5vw, 12px);
-    gap: clamp(6px, 1.5vw, 8px);
-    min-height: clamp(36px, 9vw, 40px);
-  }
-  
-  &:hover {
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 8%) 0%, 
-      rgb(255 255 255 / 4%) 50%,
-      rgb(255 255 255 / 6%) 100%);
-    border-color: rgba($apple-primary, 0.3);
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 
-      0 6px 20px rgb(0 0 0 / 10%),
-      0 3px 10px rgba($apple-primary, 0.1),
-      inset 0 1px 0 rgb(255 255 255 / 15%);
-    
-    .footer-link-text {
-      color: $apple-primary;
-    }
-    
-    .footer-link-icon {
-      filter: brightness(1.3) hue-rotate(160deg) saturate(1.3);
-      transform: scale(1.1);
-    }
-  }
-  
-  &:active {
-    transform: translateY(0) scale(1);
-  }
-  
-  @media screen and (width <= 480px) {
-    &:hover {
-      transform: translateY(-1px) scale(1.01);
-    }
-  }
-}
-
-// ===== FOOTER LINK ICONS - EINHEITLICHE GRÖSSE =====
-.footer-link-icon {
-  width: clamp(20px, 5vw, 24px);
-  height: clamp(20px, 5vw, 24px);
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-  filter: brightness(1.1) saturate(1.1);
-  
-  @media screen and (width <= 480px) {
-    width: clamp(18px, 4.5vw, 20px);
-    height: clamp(18px, 4.5vw, 20px);
-  }
-}
-
-// ===== FOOTER LINK TEXT - MINDESTENS 16PX =====
-.footer-link-text {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-medium;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
-  color: $apple-text-secondary;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  line-height: 1.2;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
-  }
-}
-
-// ===== COPYRIGHT - KOMPAKT AUF EINER EBENE =====
-.footer-copyright {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(6px, 1.5vw, 8px);
-  margin-top: clamp(8px, 2vw, 12px); // MINIMALER ABSTAND
-  padding-top: clamp(12px, 3vw, 16px);
-  border-top: 1px solid rgb(255 255 255 / 8%);
-  width: 100%;
-  
-  @media screen and (width <= 480px) {
-    margin-top: clamp(6px, 1.5vw, 8px);
-    padding-top: clamp(8px, 2vw, 12px);
-    gap: clamp(4px, 1vw, 6px);
-  }
-}
-
-.footer-copyright-text {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-regular;
-  font-size: clamp(16px, 2.5vw, 18px); // MINDESTENS 16PX
-  color: $apple-text-tertiary;
-  text-align: center;
-  line-height: 1.3;
-  opacity: 0.8;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
-  }
-}
-
-.footer-copyright-year {
-  font-weight: $apple-font-weight-medium;
-  color: $apple-text-secondary;
-}
-
-// ===== ARROW DOWN - IDENTISCH MIT DESKTOP =====
-.footer-arrow-down {
-  position: absolute;
-  top: clamp(-20px, -5vw, -16px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(40px, 10vw, 48px);
-  height: clamp(40px, 10vw, 48px);
-  background: linear-gradient(135deg, $apple-primary 0%, color.adjust($apple-primary, $lightness: -10%) 100%);
-  border-radius: 50%;
-  border: 2px solid rgb(255 255 255 / 20%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  z-index: 3;
-  box-shadow: 
-    0 8px 24px rgba($apple-primary, 0.4),
-    0 4px 12px rgba($apple-primary, 0.3),
-    inset 0 1px 0 rgb(255 255 255 / 20%);
-  
-  @media screen and (width <= 480px) {
-    width: clamp(36px, 9vw, 40px);
-    height: clamp(36px, 9vw, 40px);
-    top: clamp(-18px, -4.5vw, -14px);
-  }
-  
-  &::before {
-    content: '↓';
-    font-size: clamp(20px, 5vw, 24px);
-    color: white;
-    font-weight: $apple-font-weight-bold;
-    font-family: $apple-font-family;
-    line-height: 1;
-    
-    @media screen and (width <= 480px) {
-      font-size: clamp(18px, 4.5vw, 20px);
-    }
-  }
-  
-  &:hover {
-    transform: translateX(-50%) translateY(-3px) scale(1.05);
-    box-shadow: 
-      0 12px 32px rgba($apple-primary, 0.5),
-      0 6px 16px rgba($apple-primary, 0.4),
-      inset 0 1px 0 rgb(255 255 255 / 25%);
-    background: linear-gradient(135deg, color.adjust($apple-primary, $lightness: 5%) 0%, $apple-primary 100%);
-  }
-  
-  &:active {
-    transform: translateX(-50%) translateY(-1px) scale(1.02);
-  }
-  
-  @media screen and (width <= 480px) {
-    &:hover {
-      transform: translateX(-50%) translateY(-2px) scale(1.03);
-    }
-  }
-}
-
-// ===== SOCIAL MEDIA LINKS - KOMPAKT ANGEORDNET =====
-.footer-social {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(12px, 3vw, 16px);
-  margin-top: clamp(4px, 1vw, 6px); // MINIMALER ABSTAND
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(10px, 2.5vw, 12px);
-    margin-top: clamp(2px, 0.5vw, 4px);
-  }
-}
-
-.footer-social-link {
-  width: clamp(36px, 9vw, 44px);
-  height: clamp(36px, 9vw, 44px);
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 6%) 0%, 
-    rgb(255 255 255 / 3%) 50%,
-    rgb(255 255 255 / 4%) 100%);
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  cursor: pointer;
-  text-decoration: none;
-  backdrop-filter: blur(10px);
-  
-  @media screen and (width <= 480px) {
-    width: clamp(32px, 8vw, 36px);
-    height: clamp(32px, 8vw, 36px);
-  }
-  
-  &:hover {
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 12%) 0%, 
-      rgb(255 255 255 / 6%) 50%,
-      rgb(255 255 255 / 8%) 100%);
-    border-color: rgba($apple-primary, 0.3);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 
-      0 6px 20px rgb(0 0 0 / 10%),
-      0 3px 10px rgba($apple-primary, 0.1),
-      inset 0 1px 0 rgb(255 255 255 / 15%);
-    
-    .footer-social-icon {
-      filter: brightness(1.3) hue-rotate(160deg) saturate(1.3);
-      transform: scale(1.1);
-    }
-  }
-  
-  &:active {
-    transform: translateY(0) scale(1);
-  }
-  
-  @media screen and (width <= 480px) {
-    &:hover {
-      transform: translateY(-1px) scale(1.03);
-    }
-  }
-}
-
-.footer-social-icon {
-  width: clamp(18px, 4.5vw, 22px);
-  height: clamp(18px, 4.5vw, 22px);
-  transition: all 0.3s ease;
-  filter: brightness(1.1) saturate(1.1);
-  
-  @media screen and (width <= 480px) {
-    width: clamp(16px, 4vw, 18px);
-    height: clamp(16px, 4vw, 18px);
-  }
-}
-
-// ===== FOOTER DIVIDER - OPTIONAL, SEHR SUBTIL =====
-.footer-divider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgb(255 255 255 / 8%) 20%, 
-    rgb(255 255 255 / 12%) 50%, 
-    rgb(255 255 255 / 8%) 80%, 
-    transparent 100%);
-  margin: clamp(8px, 2vw, 12px) 0;
-  opacity: 0.6;
-  
-  @media screen and (width <= 480px) {
-    margin: clamp(6px, 1.5vw, 8px) 0;
-  }
-}
-
-// ===== FOOTER NAVIGATION - KOMPAKT =====
-.footer-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(16px, 4vw, 20px);
-  flex-wrap: wrap;
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(12px, 3vw, 16px);
-  }
-  
-  @media screen and (width <= 375px) {
+// Logo Sektion
+.logo-section {
+  .logo {
+    display: flex;
     flex-direction: column;
-    gap: clamp(8px, 2vw, 12px);
-  }
-}
-
-.footer-nav-link {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-medium;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
-  color: $apple-text-secondary;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 12px);
-  border-radius: $apple-radius-small;
-  position: relative;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
-    padding: clamp(3px, 0.75vw, 4px) clamp(6px, 1.5vw, 8px);
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 1px;
-    background: $apple-primary;
-    transition: all 0.3s ease;
-  }
-  
-  &:hover {
-    color: $apple-primary;
-    background: rgba($apple-primary, 0.05);
-    
-    &::after {
-      width: 80%;
-    }
-  }
-}
-
-// ===== ANIMATIONS =====
-@keyframes footer-ambient {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 0.06;
-  }
-
-  33% {
-    transform: translateY(-8px) rotate(1deg) scale(1.01);
-    opacity: 0.08;
-  }
-
-  66% {
-    transform: translateY(6px) rotate(-0.5deg) scale(0.99);
-    opacity: 0.04;
-  }
-}
-
-// ===== ACCESSIBILITY =====
-@media (prefers-reduced-motion: reduce) {
-  .footer-mobile-container::before {
-    animation: none;
-  }
-  
-  .footer-link:hover,
-  .footer-social-link:hover,
-  .footer-arrow-down:hover {
-    transform: none;
-  }
-  
-  .footer-link-icon:hover {
-    transform: none;
-  }
-  
-  .footer-social-icon:hover {
-    transform: none;
-  }
-}
-
-@media (prefers-contrast: high) {
-  .footer-mobile-container {
-    background: #000 !important;
-    border: 2px solid #fff !important;
-  }
-  
-  .footer-link,
-  .footer-social-link {
-    background: #111 !important;
-    border-color: #333 !important;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: $apple-transition-fast;
     
     &:hover {
-      background: #222 !important;
-      border-color: #555 !important;
+      transform: scale(1.05);
     }
   }
   
-  .footer-link-text,
-  .footer-nav-link {
-    color: #fff !important;
+  .logo-img {
+    width: clamp(40px, 8vw, 60px);
+    height: clamp(26px, 5vw, 38px);
+    background-image: url('../../../assets/img/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    @include apple-logo;
   }
   
-  .footer-copyright-text {
-    color: #ccc !important;
+  .logo-name {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-semibold;
+    color: $apple-text-primary;
+    font-size: clamp(14px, 3vw, 18px);
+    letter-spacing: 0.5px;
   }
   
-  .footer-arrow-down {
-    background: #fff !important;
-    border-color: #fff !important;
-    
-    &::before {
-      color: #000 !important;
-    }
-  }
-  
-  .footer-divider {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      #333 20%, 
-      #555 50%, 
-      #333 80%, 
-      transparent 100%) !important;
+  .logo-position {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-regular;
+    color: $apple-text-secondary;
+    font-size: clamp(10px, 2.5vw, 13px);
+    letter-spacing: 0.3px;
   }
 }
 
-// ===== PRINT STYLES =====
-@media print {
-  .footer-mobile-container {
-    background: white !important;
-    color: black !important;
-    box-shadow: none !important;
-    border: 1px solid black !important;
-    break-inside: avoid;
+// Social Sektion
+.social-section {
+  .social-links {
+    display: flex;
+    gap: clamp(12px, 3vw, 20px);
+    justify-content: center;
   }
   
-  .footer-link,
-  .footer-social-link {
-    background: white !important;
-    border: 1px solid black !important;
-    color: black !important;
+  .social-item {
+    .social-link {
+      display: block;
+      width: clamp(36px, 8vw, 48px);
+      height: clamp(36px, 8vw, 48px);
+      position: relative;
+      transition: $apple-transition-fast;
+      
+      &:hover {
+        transform: translateY(-2px) scale(1.05);
+      }
+      
+      .social-icon {
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        filter: brightness(1.2);
+        transition: $apple-transition-fast;
+        
+        &[data-icon="github"] {
+          background-image: url('../../../assets/img/github.png');
+        }
+        
+        &[data-icon="email"] {
+          background-image: url('../../../assets/img/mail.png');
+        }
+        
+        &:hover {
+          filter: brightness(1.4) hue-rotate(160deg) saturate(1.2);
+        }
+      }
+    }
   }
-  
-  .footer-link-text,
-  .footer-nav-link,
-  .footer-copyright-text {
-    color: black !important;
-  }
-  
-  .footer-arrow-down {
-    background: white !important;
-    border: 1px solid black !important;
+}
+
+// Legal Sektion  
+.legal-section {
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(8px, 2vw, 12px);
     
-    &::before {
-      color: black !important;
+    @media screen and (min-width: 600px) {
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
   
+  .legal-notice a {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-regular;
+    color: $apple-text-secondary;
+    font-size: clamp(13px, 3vw, 16px);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: $apple-radius-small;
+    transition: $apple-transition-fast;
+    
+    &:hover {
+      color: $apple-text-primary;
+      background: rgb(255 255 255 / 5%);
+    }
+  }
+  
+  .copyright {
+    font-family: $apple-font-family;
+    font-weight: $apple-font-weight-regular;
+    color: $apple-text-tertiary;
+    font-size: clamp(11px, 2.5vw, 14px);
+    opacity: 0.8;
+  }
+}
+
+// Screen Reader Support
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media screen and (max-width: 899px) {
+  
+  // ===== FOOTER-MOBILE-CONTAINER =====
+  .footer-mobile-container,
+  .footer-mobile {
+    position: relative;
+    width: 100%;
+    padding: clamp(32px, 6vw, 48px) clamp(20px, 5vw, 28px);
+    background: rgb(0 0 0 / 95%);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgb(255 255 255 / 10%);
+    
+    @media screen and (max-width: 480px) {
+      padding: clamp(24px, 5vw, 32px) clamp(16px, 4vw, 20px);
+    }
+  }
+  
+  // ===== FOOTER-CONTENT =====
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 5vw, 32px);
+    
+    @media screen and (min-width: 768px) and (max-width: 899px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: clamp(32px, 6vw, 48px);
+    }
+  }
+  
+  // ===== FOOTER-LINKS WIEDERHERSTELLEN =====
+  .footer-links,
+  .legal-links,
+  .footer-navigation {
+    display: flex !important;
+    flex-direction: column;
+    gap: clamp(16px, 3vw, 20px);
+    align-items: center;
+    
+    @media screen and (min-width: 481px) and (max-width: 899px) {
+      flex-direction: row;
+      gap: clamp(24px, 5vw, 32px);
+    }
+    
+    @media screen and (max-width: 480px) {
+      gap: clamp(12px, 2.5vw, 16px);
+    }
+  }
+  
+  // ===== FOOTER-LINK-STYLES WIE DESKTOP =====
+  .footer-link,
+  .legal-notice,
+  .footer-navigation a,
+  .footer-links a {
+    // ===== BASIEREND AUF DESKTOP FOOTER-LINKS =====
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-regular !important;
+    font-size: clamp(16px, 3.5vw, 18px) !important;
+    color: $apple-text-secondary !important;
+    text-decoration: none !important;
+    transition: $apple-transition-fast !important;
+    position: relative !important;
+    padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 20px) !important;
+    border-radius: $apple-radius-small !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    
+    // ===== TOUCH-FRIENDLY =====
+    min-height: 44px !important;
+    min-width: 80px !important;
+    
+    @media screen and (max-width: 480px) {
+      font-size: 16px !important;
+      padding: 8px 16px !important;
+      min-height: 40px !important;
+      min-width: 60px !important;
+    }
+    
+    // ===== HOVER-EFFEKT WIE DESKTOP =====
+    &::before {
+      content: '' !important;
+      position: absolute !important;
+      inset: 0 !important;
+      background: rgba($apple-primary, 0.1) !important;
+      border-radius: $apple-radius-small !important;
+      opacity: 0 !important;
+      transition: $apple-transition-fast !important;
+      z-index: -1 !important;
+    }
+    
+    &:hover {
+      color: $apple-primary !important;
+      transform: translateY(-2px) !important;
+      
+      &::before {
+        opacity: 1 !important;
+      }
+      
+      @media screen and (max-width: 480px) {
+        transform: translateY(-1px) !important;
+      }
+    }
+    
+    &:active {
+      transform: translateY(0) !important;
+      color: color.adjust($apple-primary, $lightness: -10%) !important;
+    }
+    
+    &:focus {
+      outline: 2px solid rgba($apple-primary, 0.5) !important;
+      outline-offset: 2px !important;
+    }
+  }
+  
+  // Copyright
+  .copyright,
+  .footer-copyright {
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-regular !important;
+    font-size: clamp(14px, 3vw, 16px) !important;
+    color: $apple-text-tertiary !important;
+    text-align: center !important;
+    margin: clamp(16px, 3vw, 24px) 0 0 0 !important;
+    
+    @media screen and (max-width: 480px) {
+      font-size: 14px !important;
+      margin: 12px 0 0 0 !important;
+    }
+  }
+  
+  // ===== SOCIAL MEDIA LINKS =====
+  .social-links,
   .footer-social {
-    display: none; // Social Media Links im Druck ausblenden
+    display: flex !important;
+    gap: clamp(16px, 4vw, 24px) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: clamp(20px, 4vw, 28px) !important;
+    
+    @media screen and (max-width: 480px) {
+      gap: clamp(12px, 3vw, 16px) !important;
+      margin-top: clamp(16px, 3vw, 20px) !important;
+    }
+    
+    a {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: clamp(44px, 10vw, 52px) !important;
+      height: clamp(44px, 10vw, 52px) !important;
+      background: rgba($apple-primary, 0.1) !important;
+      border-radius: 50% !important;
+      color: $apple-text-secondary !important;
+      text-decoration: none !important;
+      transition: $apple-transition-fast !important;
+      
+      @media screen and (max-width: 480px) {
+        width: 40px !important;
+        height: 40px !important;
+      }
+      
+      &:hover {
+        background: rgba($apple-primary, 0.2) !important;
+        color: $apple-primary !important;
+        transform: translateY(-2px) scale(1.05) !important;
+        
+        @media screen and (max-width: 480px) {
+          transform: translateY(-1px) scale(1.02) !important;
+        }
+      }
+      
+      &:active {
+        transform: translateY(0) scale(1) !important;
+      }
+    }
+  }
+  
+  // ===== FOOTER-DIVIDER =====
+  .footer-divider {
+    width: 100% !important;
+    height: 1px !important;
+    background: $apple-teal-gradient !important;
+    margin: clamp(24px, 5vw, 32px) 0 !important;
+    border: none !important;
+    
+    @media screen and (max-width: 480px) {
+      margin: clamp(16px, 4vw, 24px) 0 !important;
+    }
+  }
+  
+  // ===== FOOTER-LOGO =====
+  .footer-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: clamp(20px, 4vw, 28px) !important;
+    
+    @media screen and (max-width: 480px) {
+      margin-bottom: clamp(16px, 3vw, 20px) !important;
+    }
+    
+    img {
+      height: clamp(32px, 8vw, 48px) !important;
+      width: auto !important;
+      filter: brightness(1.2) !important;
+      
+      @media screen and (max-width: 480px) {
+        height: clamp(28px, 7vw, 36px) !important;
+      }
+    }
   }
 }
 
