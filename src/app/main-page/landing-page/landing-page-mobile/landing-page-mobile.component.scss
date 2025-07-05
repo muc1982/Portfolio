@@ -46,7 +46,7 @@
   }
 }
 
-// ===== BURGER MENU - NUR EINE IMPLEMENTATION =====
+// ===== BURGER MENU =====
 .burger-menu-wrapper {
   position: fixed;
   top: clamp(16px, 4vw, 24px);
@@ -286,7 +286,7 @@
   }
 }
 
-// ===== MOBILE CONTENT =====
+// ===== MOBILE CONTENT - OPTIMIERTE ABSTÄNDE =====
 .mobile-content {
   position: relative;
   z-index: 1;
@@ -294,7 +294,9 @@
   width: 100%;
   max-width: 100%;
   display: flex;
-  padding: 100px 24px 24px;
+  
+  // KORRIGIERT: Landing Page höher setzen, Abstand nach unten reduzieren
+  padding: clamp(80px, 15vw, 120px) clamp(20px, 5vw, 24px) clamp(20px, 8vw, 40px);
   box-sizing: border-box;
   align-items: center;
   overflow-x: hidden;
@@ -303,19 +305,20 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 120px 24px 50px;
+    // Harmonische Abstände für mobile Geräte
+    padding: clamp(100px, 18vw, 140px) clamp(20px, 5vw, 24px) clamp(30px, 10vw, 50px);
   }
   
   @media (width <= 480px) {
-    padding: 100px 20px 40px;
+    padding: clamp(90px, 16vw, 120px) clamp(16px, 4vw, 20px) clamp(25px, 8vw, 40px);
   }
   
   @media (width <= 375px) {
-    padding: 90px 16px 30px;
+    padding: clamp(80px, 14vw, 100px) clamp(12px, 3vw, 16px) clamp(20px, 6vw, 30px);
   }
   
   @media (width <= 320px) {
-    padding: 80px 12px 20px;
+    padding: clamp(70px, 12vw, 90px) clamp(8px, 2vw, 12px) clamp(15px, 5vw, 25px);
   }
 }
 
@@ -332,7 +335,7 @@
     width: 100%;
     max-width: 100%;
     order: 2;
-    margin-top: 40px;
+    margin-top: clamp(30px, 8vw, 40px);
   }
 }
 
@@ -434,19 +437,20 @@
   }
 }
 
-// ===== ARROW =====
+// ===== ARROW - KORRIGIERT WIE DESKTOP =====
 .arrow-wrapper {
   width: 100%;
   max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  // KORRIGIERT: Reduzierter Abstand nach oben
+  margin-top: clamp(20px, 5vw, 30px);
 }
 
 .arrow-down {
-  width: 44px;
-  height: 85px;
+  width: clamp(40px, 8vw, 44px);
+  height: clamp(75px, 15vw, 85px);
   max-width: 44px;
   max-height: 85px;
   background-image: url('./../../../../assets/img/arrow-down.png');
@@ -454,39 +458,43 @@
   background-repeat: no-repeat;
   background-position: center;
   transition: $apple-transition-fast;
+  
+  // KORRIGIERT: Gleiche Farbe und Funktionalität wie Desktop
   filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
   border-radius: $apple-radius-small;
   cursor: pointer;
   border: none;
+  background-color: transparent;
   
   @media (width <= 768px) {
-    width: 34px;
-    height: 65px;
-    max-width: 34px;
-    max-height: 65px;
+    width: clamp(34px, 7vw, 38px);
+    height: clamp(65px, 13vw, 75px);
+    max-width: 38px;
+    max-height: 75px;
   }
   
   @media (width <= 480px) {
-    width: 30px;
-    height: 60px;
+    width: clamp(30px, 6vw, 34px);
+    height: clamp(60px, 12vw, 68px);
+    max-width: 34px;
+    max-height: 68px;
+  }
+  
+  @media (width <= 375px) {
+    width: clamp(28px, 5.5vw, 30px);
+    height: clamp(56px, 11vw, 60px);
     max-width: 30px;
     max-height: 60px;
   }
   
-  @media (width <= 375px) {
+  @media (width <= 320px) {
     width: 26px;
     height: 52px;
     max-width: 26px;
     max-height: 52px;
   }
   
-  @media (width <= 320px) {
-    width: 24px;
-    height: 48px;
-    max-width: 24px;
-    max-height: 48px;
-  }
-  
+  // KORRIGIERT: Exakt wie Desktop-Hover-Verhalten
   &:hover {
     background-image: url('./../../../../assets/img/arrow-down-hover.png');
     transform: translateY(-4px) scale(1.15);
@@ -496,27 +504,36 @@
   &:active {
     transform: translateY(-2px) scale(1.08);
   }
+  
+  // Touch-optimiert für mobile Geräte
+  @media (hover: none) and (pointer: coarse) {
+    &:active {
+      background-image: url('./../../../../assets/img/arrow-down-hover.png');
+      transform: translateY(-2px) scale(1.1);
+      filter: brightness(1.4) hue-rotate(160deg) saturate(1.4);
+    }
+  }
 }
 
 // ===== TITLE LOGO WRAPPER =====
 .title-logo-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: clamp(40px, 10vw, 50px);
   align-items: center;
   width: 100%;
   max-width: 100%;
   
   @media (width <= 768px) {
-    gap: 35px;
+    gap: clamp(30px, 8vw, 35px);
   }
   
   @media (width <= 480px) {
-    gap: 30px;
+    gap: clamp(25px, 6vw, 30px);
   }
   
   @media (width <= 375px) {
-    gap: 25px;
+    gap: clamp(20px, 5vw, 25px);
   }
 }
 
@@ -534,8 +551,8 @@
 }
 
 .logo-img {
-  width: 85px;
-  height: 85px;
+  width: clamp(70px, 14vw, 85px);
+  height: clamp(70px, 14vw, 85px);
   max-width: 85px;
   max-height: 85px;
   background-image: url('./../../../../assets/img/logo.png');
@@ -546,29 +563,29 @@
   transition: $apple-transition-fast;
   
   @media (width <= 768px) {
-    width: 65px;
-    height: 65px;
+    width: clamp(60px, 12vw, 65px);
+    height: clamp(60px, 12vw, 65px);
     max-width: 65px;
     max-height: 65px;
   }
   
   @media (width <= 375px) {
-    width: 55px;
-    height: 55px;
+    width: clamp(50px, 10vw, 55px);
+    height: clamp(50px, 10vw, 55px);
     max-width: 55px;
     max-height: 55px;
   }
   
   @media (width <= 320px) {
-    width: 50px;
-    height: 50px;
-    max-width: 50px;
-    max-height: 50px;
+    width: 48px;
+    height: 48px;
+    max-width: 48px;
+    max-height: 48px;
   }
 }
 
 .logo-name {
-  font-size: 19px;
+  font-size: clamp(16px, 4vw, 19px);
   font-weight: $apple-font-weight-semibold;
   font-family: $apple-font-family;
   color: $apple-text-primary;
@@ -578,20 +595,20 @@
   word-wrap: break-word;
   
   @media (width <= 768px) {
-    font-size: 17px;
+    font-size: clamp(15px, 3.5vw, 17px);
   }
   
   @media (width <= 375px) {
-    font-size: 15px;
+    font-size: clamp(14px, 3vw, 15px);
   }
   
   @media (width <= 320px) {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
 .logo-position {
-  font-size: 13px;
+  font-size: clamp(11px, 2.5vw, 13px);
   font-weight: $apple-font-weight-regular;
   font-family: $apple-font-family;
   color: $apple-text-secondary;
@@ -600,40 +617,40 @@
   word-wrap: break-word;
   
   @media (width <= 768px) {
-    font-size: 12px;
+    font-size: clamp(10px, 2.2vw, 12px);
   }
   
   @media (width <= 375px) {
-    font-size: 11px;
+    font-size: clamp(9px, 2vw, 11px);
   }
   
   @media (width <= 320px) {
-    font-size: 10px;
+    font-size: 9px;
   }
 }
 
 // ===== TITLE =====
 .title {
-  padding: 45px 0;
+  padding: clamp(35px, 8vw, 45px) 0;
   text-align: center;
   width: 100%;
   max-width: 100%;
   
   @media (width <= 768px) {
-    padding: 25px 0;
+    padding: clamp(20px, 6vw, 25px) 0;
   }
   
   @media (width <= 480px) {
-    padding: 20px 0;
+    padding: clamp(15px, 4vw, 20px) 0;
   }
   
   @media (width <= 375px) {
-    padding: 15px 0;
+    padding: clamp(12px, 3vw, 15px) 0;
   }
 }
 
 .name {
-  font-size: 60px;
+  font-size: clamp(48px, 12vw, 60px);
   font-weight: $apple-font-weight-bold;
   font-family: $apple-font-family;
   background: $apple-teal-gradient;
@@ -648,19 +665,19 @@
   overflow-wrap: break-word;
   
   @media (width <= 768px) {
-    font-size: 38px;
+    font-size: clamp(32px, 8vw, 38px);
   }
   
   @media (width <= 480px) {
-    font-size: 30px;
+    font-size: clamp(26px, 6vw, 30px);
   }
   
   @media (width <= 375px) {
-    font-size: 26px;
+    font-size: clamp(22px, 5vw, 26px);
   }
   
   @media (width <= 320px) {
-    font-size: 24px;
+    font-size: 20px;
   }
   
   &::after {
@@ -686,7 +703,7 @@
 }
 
 .position {
-  font-size: 30px;
+  font-size: clamp(24px, 6vw, 30px);
   font-weight: $apple-font-weight-medium;
   font-family: $apple-font-family;
   color: $apple-text-secondary;
@@ -696,19 +713,19 @@
   overflow-wrap: break-word;
   
   @media (width <= 768px) {
-    font-size: 20px;
+    font-size: clamp(16px, 4vw, 20px);
   }
   
   @media (width <= 480px) {
-    font-size: 18px;
+    font-size: clamp(14px, 3.5vw, 18px);
   }
   
   @media (width <= 375px) {
-    font-size: 16px;
+    font-size: clamp(13px, 3vw, 16px);
   }
   
   @media (width <= 320px) {
-    font-size: 15px;
+    font-size: 12px;
   }
   
   &:hover {
@@ -759,6 +776,6 @@
   .mobile-content {
     min-width: 320px;
     max-width: 320px;
-    padding: 80px 8px 16px;
   }
 }
+

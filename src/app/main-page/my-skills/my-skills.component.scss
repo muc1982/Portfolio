@@ -44,10 +44,29 @@
   z-index: 2;
   max-width: $content-max-width;
   margin: 120px auto 0;
+  
+  // ===== RESPONSIVE LAYOUT OPTIMIERT =====
+  @media screen and (max-width: 899px) {
+    flex-direction: column;
+    gap: clamp(32px, 8vw, 48px);
+    margin: clamp(48px, 12vw, 80px) auto 0;
+    padding: clamp(20px, 5vw, 32px);
+  }
+  
+  @media screen and (max-width: 480px) {
+    gap: clamp(24px, 6vw, 32px);
+    margin: clamp(32px, 8vw, 48px) auto 0;
+    padding: clamp(16px, 4vw, 24px);
+  }
 }
 
 .content-left {
   flex: 2;
+  
+  @media screen and (max-width: 899px) {
+    flex: 1;
+    order: 1;
+  }
 }
 
 .content-right {
@@ -55,266 +74,500 @@
   display: flex;
   flex-direction: column;
   gap: clamp(24px, 6vw, 32px);
+  
+  @media screen and (max-width: 899px) {
+    flex: 1;
+    order: 2;
+    gap: clamp(20px, 5vw, 28px);
+  }
+  
+  @media screen and (max-width: 480px) {
+    gap: clamp(16px, 4vw, 20px);
+  }
 }
 
+// ===== SKILLS GRID - PERFEKT ZENTRIERT, 2 PRO ZEILE =====
 .reservoir {
-  @include skills-grid-responsive;
+  display: grid;
+  width: 100%;
+  gap: clamp(20px, 5vw, 32px);
+  padding: clamp(16px, 4vw, 24px);
+  
+  // Desktop: 4 Spalten (unverändert)
+  @media screen and (min-width: 900px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 4vw, 32px);
+  }
+  
+  // Tablet: 3 Spalten
+  @media screen and (min-width: 600px) and (max-width: 899px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(18px, 4vw, 24px);
+    justify-items: center;
+  }
+  
+  // ===== MOBILE: EXAKT 2 PRO ZEILE, PERFEKT ZENTRIERT =====
+  @media screen and (max-width: 599px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 4vw, 20px);
+    justify-items: center;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  @media screen and (max-width: 375px) {
+    gap: clamp(12px, 3vw, 16px);
+  }
 }
 
+// ===== SKILL ITEMS - MODERN UND ZENTRIERT =====
 .skill-item {
   background: rgb(255 255 255 / 5%);
   backdrop-filter: blur(20px);
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: $apple-radius-medium;
-  padding: clamp(16px, 4vw, 24px);
-  transition: $apple-transition-medium;
+  padding: clamp(20px, 5vw, 28px);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
-  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-height: clamp(120px, 25vw, 160px);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 
+  // ===== MODERNE HOVER-EFFEKTE =====
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px) scale(1.02);
     background: rgb(255 255 255 / 8%);
     border-color: rgba($apple-primary, 0.3);
-    box-shadow: $apple-shadow-medium;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 8px 16px rgba($apple-primary, 0.1),
+      inset 0 1px 0 rgb(255 255 255 / 15%);
+  }
+  
+  // ===== RESPONSIVE OPTIMIERUNGEN =====
+  @media screen and (max-width: 899px) {
+    padding: clamp(16px, 4vw, 20px);
+    min-height: clamp(100px, 20vw, 120px);
+    
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+  }
+  
+  @media screen and (max-width: 599px) {
+    padding: clamp(14px, 3.5vw, 18px);
+    min-height: clamp(90px, 18vw, 110px);
+    
+    &:hover {
+      transform: translateY(-3px) scale(1.005);
+    }
+  }
+  
+  @media screen and (max-width: 375px) {
+    padding: clamp(12px, 3vw, 16px);
+    min-height: clamp(80px, 16vw, 100px);
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 }
 
+// ===== ICONS - PERFEKT ZENTRIERT UND SKALIERT =====
 .skill-icon {
-  width: clamp(32px, 8vw, 48px);
-  height: clamp(32px, 8vw, 48px);
-  margin-bottom: clamp(8px, 2vw, 12px);
+  width: clamp(40px, 10vw, 56px);
+  height: clamp(40px, 10vw, 56px);
+  margin-bottom: clamp(12px, 3vw, 16px);
   filter: brightness(1.2);
-  transition: $apple-transition-fast;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 
+  // ===== ZENTRALE ANIMATION - NICHT VERSETZT =====
   &:hover {
     filter: brightness(1.4) saturate(1.2);
     transform: scale(1.1);
+    animation: icon-glow 0.6s ease-out;
+  }
+  
+  @media screen and (max-width: 899px) {
+    width: clamp(36px, 8vw, 48px);
+    height: clamp(36px, 8vw, 48px);
+    margin-bottom: clamp(10px, 2.5vw, 14px);
+    
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+  
+  @media screen and (max-width: 599px) {
+    width: clamp(32px, 7vw, 40px);
+    height: clamp(32px, 7vw, 40px);
+    margin-bottom: clamp(8px, 2vw, 12px);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  @media screen and (max-width: 375px) {
+    width: clamp(28px, 6vw, 36px);
+    height: clamp(28px, 6vw, 36px);
+    margin-bottom: clamp(6px, 1.5vw, 10px);
+    
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 }
 
+// ===== SKILL NAMES - MINDESTENS 16PX =====
 .skill-name {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-medium;
-  font-size: clamp(14px, 3.5vw, 16px);
+  font-size: clamp(16px, 4vw, 18px); // MINDESTENS 16PX
   color: $apple-text-primary;
-  line-height: 1.4;
   text-align: center;
-
-  @media screen and (max-width: $breakpoint-mobile) {
-    font-size: 16px;
-  }
-}
-
-.skills-description {
-  background: rgb(255 255 255 / 5%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: $apple-radius-large;
-  padding: clamp(24px, 6vw, 32px);
-}
-
-.skills-description h3 {
-  @include h3Title;
-
-  margin-bottom: clamp(16px, 4vw, 20px);
-}
-
-.skills-description p {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-regular;
-  font-size: clamp(16px, 4vw, 18px);
-  line-height: 1.6;
-  color: $apple-text-secondary;
-  margin-bottom: clamp(12px, 3vw, 16px);
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-// Desktop wird versteckt mit höherer Spezifität
-@media screen and (max-width: $breakpoint-desktop) {
-  .my-skills-content {
-    flex-direction: column;
-    gap: clamp(32px, 8vw, 48px);
-  }
-
-  .content-left {
-    order: 1;
-  }
-
-  .content-right {
-    order: 2;
-  }
-
-  // Spezifischere Regel ohne !important
-  body .my-skills-container.my-skills-container {
-    display: none;
-  }
-}
-
-.my-skills-container-mobile {
-  @include full-width-background;
-
-  position: relative;
+  line-height: 1.3;
   margin: 0;
-  min-height: 70vh;
+  
+  @media screen and (max-width: 899px) {
+    font-size: clamp(16px, 3.5vw, 17px); // MINDESTENS 16PX
+  }
+  
+  @media screen and (max-width: 599px) {
+    font-size: 16px; // EXAKT 16PX FÜR MOBILE
+    line-height: 1.2;
+  }
+  
+  @media screen and (max-width: 375px) {
+    font-size: 16px; // EXAKT 16PX
+  }
+}
 
-  @include dFlex($fd: column);
-
-  background: $apple-universal-gradient;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  padding: clamp(32px, 8vw, 48px) 0;
-
-  // Mobile wird gezeigt mit höherer Spezifität
-  @media screen and (max-width: $breakpoint-desktop) {
-    &.my-skills-container-mobile {
-      display: flex;
+// ===== CONTENT RIGHT - MODERNE GESTALTUNG =====
+.content-right {
+  .skill-description {
+    background: linear-gradient(135deg, 
+      rgb(255 255 255 / 4%) 0%, 
+      rgb(255 255 255 / 2%) 50%,
+      rgb(255 255 255 / 6%) 100%);
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: $apple-radius-large;
+    padding: clamp(24px, 6vw, 36px);
+    backdrop-filter: blur(25px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgb(255 255 255 / 20%);
+    
+    @media screen and (max-width: 899px) {
+      padding: clamp(20px, 5vw, 28px);
+    }
+    
+    @media screen and (max-width: 599px) {
+      padding: clamp(16px, 4vw, 20px);
+    }
+    
+    @media screen and (max-width: 375px) {
+      padding: 16px;
+    }
+    
+    h3 {
+      font-family: $apple-font-family;
+      font-weight: $apple-font-weight-semibold;
+      font-size: clamp(20px, 5vw, 28px); // MINDESTENS 20PX
+      color: $apple-primary;
+      margin-bottom: clamp(16px, 4vw, 20px);
+      text-align: center;
+      
+      @media screen and (max-width: 899px) {
+        font-size: clamp(18px, 4.5vw, 24px); // MINDESTENS 18PX
+        margin-bottom: clamp(14px, 3.5vw, 16px);
+      }
+      
+      @media screen and (max-width: 599px) {
+        font-size: 18px; // MINDESTENS 18PX
+        margin-bottom: 14px;
+      }
+      
+      @media screen and (max-width: 375px) {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+    }
+    
+    p {
+      font-family: $apple-font-family;
+      font-weight: $apple-font-weight-regular;
+      font-size: clamp(16px, 4vw, 18px); // MINDESTENS 16PX
+      color: $apple-text-secondary;
+      line-height: 1.6;
+      text-align: center;
+      margin: 0;
+      
+      @media screen and (max-width: 899px) {
+        font-size: clamp(16px, 3.5vw, 17px); // MINDESTENS 16PX
+        line-height: 1.5;
+      }
+      
+      @media screen and (max-width: 599px) {
+        font-size: 16px; // EXAKT 16PX
+        line-height: 1.4;
+      }
+      
+      @media screen and (max-width: 375px) {
+        font-size: 16px; // EXAKT 16PX
+      }
     }
   }
-
-  @media screen and (min-width: $breakpoint-desktop) {
-    &.my-skills-container-mobile {
-      display: none;
+  
+  .skill-stats {
+    background: linear-gradient(135deg, 
+      rgb(255 255 255 / 4%) 0%, 
+      rgb(255 255 255 / 2%) 50%,
+      rgb(255 255 255 / 6%) 100%);
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: $apple-radius-large;
+    padding: clamp(24px, 6vw, 36px);
+    backdrop-filter: blur(25px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgb(255 255 255 / 20%);
+    
+    @media screen and (max-width: 899px) {
+      padding: clamp(20px, 5vw, 28px);
+    }
+    
+    @media screen and (max-width: 599px) {
+      padding: clamp(16px, 4vw, 20px);
+    }
+    
+    @media screen and (max-width: 375px) {
+      padding: 16px;
+    }
+    
+    h3 {
+      font-family: $apple-font-family;
+      font-weight: $apple-font-weight-semibold;
+      font-size: clamp(20px, 5vw, 28px); // MINDESTENS 20PX
+      color: $apple-primary;
+      margin-bottom: clamp(20px, 5vw, 24px);
+      text-align: center;
+      
+      @media screen and (max-width: 899px) {
+        font-size: clamp(18px, 4.5vw, 24px); // MINDESTENS 18PX
+        margin-bottom: clamp(16px, 4vw, 20px);
+      }
+      
+      @media screen and (max-width: 599px) {
+        font-size: 18px; // MINDESTENS 18PX
+        margin-bottom: 16px;
+      }
+      
+      @media screen and (max-width: 375px) {
+        font-size: 18px;
+        margin-bottom: 14px;
+      }
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(16px, 4vw, 20px);
+      
+      @media screen and (max-width: 599px) {
+        grid-template-columns: 1fr;
+        gap: clamp(12px, 3vw, 16px);
+      }
+      
+      .stat-item {
+        text-align: center;
+        padding: clamp(12px, 3vw, 16px);
+        border-radius: $apple-radius-small;
+        background: rgb(255 255 255 / 3%);
+        border: 1px solid rgb(255 255 255 / 8%);
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: rgb(255 255 255 / 6%);
+          border-color: rgb(255 255 255 / 15%);
+          transform: translateY(-2px);
+        }
+        
+        .stat-number {
+          font-family: $apple-font-family;
+          font-weight: $apple-font-weight-bold;
+          font-size: clamp(24px, 6vw, 32px); // MINDESTENS 24PX
+          color: $apple-primary;
+          display: block;
+          margin-bottom: 6px;
+          
+          @media screen and (max-width: 899px) {
+            font-size: clamp(22px, 5vw, 28px); // MINDESTENS 22PX
+          }
+          
+          @media screen and (max-width: 599px) {
+            font-size: 22px; // MINDESTENS 22PX
+          }
+          
+          @media screen and (max-width: 375px) {
+            font-size: 20px; // MINDESTENS 20PX
+          }
+        }
+        
+        .stat-label {
+          font-family: $apple-font-family;
+          font-weight: $apple-font-weight-regular;
+          font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+          color: $apple-text-secondary;
+          
+          @media screen and (max-width: 899px) {
+            font-size: clamp(16px, 2.8vw, 17px); // MINDESTENS 16PX
+          }
+          
+          @media screen and (max-width: 599px) {
+            font-size: 16px; // EXAKT 16PX
+          }
+          
+          @media screen and (max-width: 375px) {
+            font-size: 16px; // EXAKT 16PX
+          }
+        }
+      }
     }
   }
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -40%;
-    left: -40%;
-    width: 80%;
-    height: 100%;
-    background: radial-gradient(circle, rgba($apple-primary, 0.08) 0%, transparent 60%);
-    animation: apple-skills-ambient 15s ease-in-out infinite;
-    filter: blur(40px);
+// ===== ZENTRALE ICON-ANIMATION =====
+@keyframes icon-glow {
+  0% {
+    filter: brightness(1.2);
+    box-shadow: none;
   }
-
-  h2 {
-    @include h2Title;
-
-    margin-bottom: clamp(32px, 8vw, 48px);
-    text-align: center;
-    position: relative;
-    z-index: 2;
-
-    @include unified-content-padding;
+  
+  50% {
+    filter: brightness(1.6) saturate(1.4);
+    box-shadow: 0 0 20px rgba($apple-primary, 0.3);
   }
-}
-
-.my-skills-content-mobile {
-  @include unified-content-padding;
-
-  position: relative;
-  z-index: 2;
-  width: 100%;
-}
-
-.skills-description-mobile {
-  background: rgb(255 255 255 / 5%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: $apple-radius-large;
-  padding: clamp(20px, 5vw, 24px);
-  margin-bottom: clamp(24px, 6vw, 32px);
-}
-
-.skills-description-mobile h3 {
-  @include h3Title;
-
-  margin-bottom: clamp(12px, 3vw, 16px);
-  text-align: center;
-}
-
-.skills-description-mobile p {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-regular;
-  font-size: 16px;
-  line-height: 1.6;
-  color: $apple-text-secondary;
-  text-align: center;
-  margin-bottom: clamp(8px, 2vw, 12px);
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.reservoir-mobile {
-  @include skills-grid-responsive;
-}
-
-.skill-item-mobile {
-  background: rgb(255 255 255 / 5%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: $apple-radius-medium;
-  padding: clamp(16px, 4vw, 20px);
-  transition: $apple-transition-medium;
-  position: relative;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  &:hover {
-    transform: translateY(-2px);
-    background: rgb(255 255 255 / 8%);
-    border-color: rgba($apple-primary, 0.3);
-    box-shadow: $apple-shadow-small;
-  }
-}
-
-.skill-icon-mobile {
-  width: clamp(40px, 10vw, 56px);
-  height: clamp(40px, 10vw, 56px);
-  margin-bottom: clamp(8px, 2vw, 12px);
-  filter: brightness(1.2);
-  transition: $apple-transition-fast;
-
-  &:hover {
+  
+  100% {
     filter: brightness(1.4) saturate(1.2);
-    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba($apple-primary, 0.2);
   }
 }
 
-.skill-name-mobile {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-medium;
-  font-size: 16px;
-  color: $apple-text-primary;
-  line-height: 1.4;
-  text-align: center;
-}
-
+// ===== AMBIENT ANIMATION =====
 @keyframes apple-skills-ambient {
   0%, 100% {
-    transform: translateX(0) translateY(0) scale(1);
+    transform: translateY(0) rotate(0deg) scale(1);
     opacity: 0.08;
   }
-
-  25% {
-    transform: translateX(10px) translateY(-5px) scale(1.05);
+  
+  33% {
+    transform: translateY(-12px) rotate(1deg) scale(1.02);
     opacity: 0.12;
   }
-
-  50% {
-    transform: translateX(-5px) translateY(10px) scale(0.95);
+  
+  66% {
+    transform: translateY(8px) rotate(-0.5deg) scale(0.98);
     opacity: 0.06;
   }
+}
 
-  75% {
-    transform: translateX(-10px) translateY(-10px) scale(1.1);
-    opacity: 0.1;
+// ===== ACCESSIBILITY =====
+@media (prefers-reduced-motion: reduce) {
+  .skill-item:hover {
+    transform: none;
+  }
+  
+  .skill-icon:hover {
+    transform: none;
+    animation: none;
+  }
+  
+  * {
+    animation: none !important;
   }
 }
+
+@media (prefers-contrast: high) {
+  .my-skills-container {
+    background: #000;
+    border: 2px solid #fff;
+  }
+  
+  .skill-item {
+    background: #111 !important;
+    border-color: #333 !important;
+    
+    &:hover {
+      background: #222 !important;
+      border-color: #555 !important;
+    }
+  }
+  
+  .skill-name {
+    color: #fff !important;
+  }
+  
+  .content-right .skill-description,
+  .content-right .skill-stats {
+    background: #111 !important;
+    border-color: #333 !important;
+  }
+  
+  .content-right h3 {
+    color: #fff !important;
+  }
+  
+  .content-right p {
+    color: #ccc !important;
+  }
+}
+
+// ===== PRINT STYLES =====
+@media print {
+  .my-skills-container {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .skill-item {
+    background: white !important;
+    border: 1px solid black !important;
+    break-inside: avoid;
+  }
+  
+  .skill-name {
+    color: black !important;
+  }
+  
+  .content-right .skill-description,
+  .content-right .skill-stats {
+    background: white !important;
+    border: 1px solid black !important;
+    break-inside: avoid;
+  }
+  
+  .content-right h3,
+  .content-right p {
+    color: black !important;
+  }
+  
+  .stat-number {
+    color: black !important;
+  }
+  
+  .stat-label {
+    color: #666 !important;
+  }
+}
+
