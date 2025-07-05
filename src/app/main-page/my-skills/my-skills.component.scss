@@ -46,14 +46,14 @@
   margin: 120px auto 0;
   
   // ===== RESPONSIVE LAYOUT OPTIMIERT =====
-  @media screen and (max-width: 899px) {
+  @media screen and (width <= 899px) {
     flex-direction: column;
     gap: clamp(32px, 8vw, 48px);
     margin: clamp(48px, 12vw, 80px) auto 0;
     padding: clamp(20px, 5vw, 32px);
   }
   
-  @media screen and (max-width: 480px) {
+  @media screen and (width <= 480px) {
     gap: clamp(24px, 6vw, 32px);
     margin: clamp(32px, 8vw, 48px) auto 0;
     padding: clamp(16px, 4vw, 24px);
@@ -63,7 +63,7 @@
 .content-left {
   flex: 2;
   
-  @media screen and (max-width: 899px) {
+  @media screen and (width <= 899px) {
     flex: 1;
     order: 1;
   }
@@ -75,13 +75,13 @@
   flex-direction: column;
   gap: clamp(24px, 6vw, 32px);
   
-  @media screen and (max-width: 899px) {
+  @media screen and (width <= 899px) {
     flex: 1;
     order: 2;
     gap: clamp(20px, 5vw, 28px);
   }
   
-  @media screen and (max-width: 480px) {
+  @media screen and (width <= 480px) {
     gap: clamp(16px, 4vw, 20px);
   }
 }
@@ -94,29 +94,28 @@
   padding: clamp(16px, 4vw, 24px);
   
   // Desktop: 4 Spalten (unverändert)
-  @media screen and (min-width: 900px) {
+  @media screen and (width >= 900px) {
     grid-template-columns: repeat(4, 1fr);
     gap: clamp(20px, 4vw, 32px);
   }
   
   // Tablet: 3 Spalten
-  @media screen and (min-width: 600px) and (max-width: 899px) {
+  @media screen and (width >= 600px) and (width <= 899px) {
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(18px, 4vw, 24px);
     justify-items: center;
   }
   
   // ===== MOBILE: EXAKT 2 PRO ZEILE, PERFEKT ZENTRIERT =====
-  @media screen and (max-width: 599px) {
+  @media screen and (width <= 599px) {
     grid-template-columns: repeat(2, 1fr);
     gap: clamp(16px, 4vw, 20px);
-    justify-items: center;
-    align-items: center;
+    place-items: center center;
     max-width: 100%;
     margin: 0 auto;
   }
   
-  @media screen and (max-width: 375px) {
+  @media screen and (width <= 375px) {
     gap: clamp(12px, 3vw, 16px);
   }
 }
@@ -146,13 +145,13 @@
     background: rgb(255 255 255 / 8%);
     border-color: rgba($apple-primary, 0.3);
     box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 20px 40px rgb(0 0 0 / 15%),
       0 8px 16px rgba($apple-primary, 0.1),
       inset 0 1px 0 rgb(255 255 255 / 15%);
   }
   
   // ===== RESPONSIVE OPTIMIERUNGEN =====
-  @media screen and (max-width: 899px) {
+  @media screen and (width <= 899px) {
     padding: clamp(16px, 4vw, 20px);
     min-height: clamp(100px, 20vw, 120px);
     
@@ -161,7 +160,7 @@
     }
   }
   
-  @media screen and (max-width: 599px) {
+  @media screen and (width <= 599px) {
     padding: clamp(14px, 3.5vw, 18px);
     min-height: clamp(90px, 18vw, 110px);
     
@@ -170,7 +169,7 @@
     }
   }
   
-  @media screen and (max-width: 375px) {
+  @media screen and (width <= 375px) {
     padding: clamp(12px, 3vw, 16px);
     min-height: clamp(80px, 16vw, 100px);
     
@@ -198,7 +197,7 @@
     animation: icon-glow 0.6s ease-out;
   }
   
-  @media screen and (max-width: 899px) {
+  @media screen and (width <= 899px) {
     width: clamp(36px, 8vw, 48px);
     height: clamp(36px, 8vw, 48px);
     margin-bottom: clamp(10px, 2.5vw, 14px);
@@ -208,7 +207,7 @@
     }
   }
   
-  @media screen and (max-width: 599px) {
+  @media screen and (width <= 599px) {
     width: clamp(32px, 7vw, 40px);
     height: clamp(32px, 7vw, 40px);
     margin-bottom: clamp(8px, 2vw, 12px);
@@ -218,7 +217,7 @@
     }
   }
   
-  @media screen and (max-width: 375px) {
+  @media screen and (width <= 375px) {
     width: clamp(28px, 6vw, 36px);
     height: clamp(28px, 6vw, 36px);
     margin-bottom: clamp(6px, 1.5vw, 10px);
@@ -239,16 +238,16 @@
   line-height: 1.3;
   margin: 0;
   
-  @media screen and (max-width: 899px) {
+  @media screen and (width <= 899px) {
     font-size: clamp(16px, 3.5vw, 17px); // MINDESTENS 16PX
   }
   
-  @media screen and (max-width: 599px) {
+  @media screen and (width <= 599px) {
     font-size: 16px; // EXAKT 16PX FÜR MOBILE
     line-height: 1.2;
   }
   
-  @media screen and (max-width: 375px) {
+  @media screen and (width <= 375px) {
     font-size: 16px; // EXAKT 16PX
   }
 }
@@ -265,18 +264,18 @@
     padding: clamp(24px, 6vw, 36px);
     backdrop-filter: blur(25px);
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 8px 32px rgb(0 0 0 / 10%),
       inset 0 1px 0 rgb(255 255 255 / 20%);
     
-    @media screen and (max-width: 899px) {
+    @media screen and (width <= 899px) {
       padding: clamp(20px, 5vw, 28px);
     }
     
-    @media screen and (max-width: 599px) {
+    @media screen and (width <= 599px) {
       padding: clamp(16px, 4vw, 20px);
     }
     
-    @media screen and (max-width: 375px) {
+    @media screen and (width <= 375px) {
       padding: 16px;
     }
     
@@ -288,17 +287,17 @@
       margin-bottom: clamp(16px, 4vw, 20px);
       text-align: center;
       
-      @media screen and (max-width: 899px) {
+      @media screen and (width <= 899px) {
         font-size: clamp(18px, 4.5vw, 24px); // MINDESTENS 18PX
         margin-bottom: clamp(14px, 3.5vw, 16px);
       }
       
-      @media screen and (max-width: 599px) {
+      @media screen and (width <= 599px) {
         font-size: 18px; // MINDESTENS 18PX
         margin-bottom: 14px;
       }
       
-      @media screen and (max-width: 375px) {
+      @media screen and (width <= 375px) {
         font-size: 18px;
         margin-bottom: 12px;
       }
@@ -313,17 +312,17 @@
       text-align: center;
       margin: 0;
       
-      @media screen and (max-width: 899px) {
+      @media screen and (width <= 899px) {
         font-size: clamp(16px, 3.5vw, 17px); // MINDESTENS 16PX
         line-height: 1.5;
       }
       
-      @media screen and (max-width: 599px) {
+      @media screen and (width <= 599px) {
         font-size: 16px; // EXAKT 16PX
         line-height: 1.4;
       }
       
-      @media screen and (max-width: 375px) {
+      @media screen and (width <= 375px) {
         font-size: 16px; // EXAKT 16PX
       }
     }
@@ -339,18 +338,18 @@
     padding: clamp(24px, 6vw, 36px);
     backdrop-filter: blur(25px);
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 8px 32px rgb(0 0 0 / 10%),
       inset 0 1px 0 rgb(255 255 255 / 20%);
     
-    @media screen and (max-width: 899px) {
+    @media screen and (width <= 899px) {
       padding: clamp(20px, 5vw, 28px);
     }
     
-    @media screen and (max-width: 599px) {
+    @media screen and (width <= 599px) {
       padding: clamp(16px, 4vw, 20px);
     }
     
-    @media screen and (max-width: 375px) {
+    @media screen and (width <= 375px) {
       padding: 16px;
     }
     
@@ -362,17 +361,17 @@
       margin-bottom: clamp(20px, 5vw, 24px);
       text-align: center;
       
-      @media screen and (max-width: 899px) {
+      @media screen and (width <= 899px) {
         font-size: clamp(18px, 4.5vw, 24px); // MINDESTENS 18PX
         margin-bottom: clamp(16px, 4vw, 20px);
       }
       
-      @media screen and (max-width: 599px) {
+      @media screen and (width <= 599px) {
         font-size: 18px; // MINDESTENS 18PX
         margin-bottom: 16px;
       }
       
-      @media screen and (max-width: 375px) {
+      @media screen and (width <= 375px) {
         font-size: 18px;
         margin-bottom: 14px;
       }
@@ -383,7 +382,7 @@
       grid-template-columns: repeat(2, 1fr);
       gap: clamp(16px, 4vw, 20px);
       
-      @media screen and (max-width: 599px) {
+      @media screen and (width <= 599px) {
         grid-template-columns: 1fr;
         gap: clamp(12px, 3vw, 16px);
       }
@@ -410,15 +409,15 @@
           display: block;
           margin-bottom: 6px;
           
-          @media screen and (max-width: 899px) {
+          @media screen and (width <= 899px) {
             font-size: clamp(22px, 5vw, 28px); // MINDESTENS 22PX
           }
           
-          @media screen and (max-width: 599px) {
+          @media screen and (width <= 599px) {
             font-size: 22px; // MINDESTENS 22PX
           }
           
-          @media screen and (max-width: 375px) {
+          @media screen and (width <= 375px) {
             font-size: 20px; // MINDESTENS 20PX
           }
         }
@@ -429,15 +428,15 @@
           font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
           color: $apple-text-secondary;
           
-          @media screen and (max-width: 899px) {
+          @media screen and (width <= 899px) {
             font-size: clamp(16px, 2.8vw, 17px); // MINDESTENS 16PX
           }
           
-          @media screen and (max-width: 599px) {
+          @media screen and (width <= 599px) {
             font-size: 16px; // EXAKT 16PX
           }
           
-          @media screen and (max-width: 375px) {
+          @media screen and (width <= 375px) {
             font-size: 16px; // EXAKT 16PX
           }
         }

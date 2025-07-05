@@ -1,5 +1,6 @@
 @use 'style/apple-variables' as *;
-@import './responsive-standards.scss';
+
+@import './responsive-standards';
 
 html, body {
   overflow-x: hidden;
