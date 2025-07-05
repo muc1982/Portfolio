@@ -1,23 +1,25 @@
 <div class="private-policy-container">
     <!-- HEADER -->
     <div class="custom-header">
-        <div class="custom-header-inner">
-            <div class="logo-section">
-                <a [routerLink]="'/'" class="apple-logo-btn">
-                    <div class="logo-img"></div>
-                    <div class="logo-text">
-                        <div class="logo-name">Yasin Sun</div>
-                        <div class="logo-position">Developer</div>
-                    </div>
-                </a>
-            </div>
+        <div class="custom-header-container"> <!-- DIESE DIV FEHLTE! -->
+            <div class="custom-header-inner">
+                <div class="logo-section">
+                    <a [routerLink]="'/'" class="apple-logo-btn">
+                        <div class="logo-img"></div>
+                        <div class="logo-text">
+                            <div class="logo-name">Yasin Sun</div>
+                            <div class="logo-position">Developer</div>
+                        </div>
+                    </a>
+                </div>
 
-            <h1 class="page-title">{{ 'privatepolicy' | translate }}</h1>
+                <h1 class="page-title">{{ 'privatepolicy' | translate }}</h1>
 
-            <div class="header-lang-switcher">
-                <app-lang-switcher></app-lang-switcher>
+                <div class="header-lang-switcher">
+                    <app-lang-switcher></app-lang-switcher>
+                </div>
             </div>
-        </div>
+        </div> <!-- DIESE DIV FEHLTE! -->
     </div>
 
     <!-- CONTENT -->
@@ -190,11 +192,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="simple-footer">
-        <div class="footer-content">
-            <a routerLink="/" class="back-link">← Zurück zur Startseite</a>
-            <div class="copyright">© Yasin Sun 2025</div>
-        </div>
-    </div>
+    <!-- Footer statt simple-footer -->
+    <app-footer></app-footer>
 </div>

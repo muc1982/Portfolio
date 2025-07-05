@@ -1,3 +1,6 @@
+// Komplette korrigierte legal-notice.component.scss
+// Header soll EXAKT wie Footer sein - OHNE unified-content-padding
+
 @use '../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
@@ -29,19 +32,23 @@
   }
 }
 
-.custom-header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+// EXAKT wie footer-container
+.custom-header-container {
   width: 100%;
-  box-sizing: border-box;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  position: relative;
+}
 
-  @include unified-content-padding;
+// EXAKT wie footer-content - KOMPLETT OHNE PADDING!
+.custom-header-inner {
+  width: 100%;
+  min-height: clamp(60px, 8vw, 80px);
+  @include dFlex($jc: space-between, $ai: center);
 }
 
 .logo-section {
   flex: 1;
-
   @include dFlex($jc: flex-start, $ai: center);
 }
 
@@ -166,7 +173,6 @@
 
 .header-lang-switcher {
   flex: 1;
-
   @include dFlex($jc: flex-end, $ai: center);
 }
 

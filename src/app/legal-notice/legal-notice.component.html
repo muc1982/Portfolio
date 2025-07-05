@@ -1,23 +1,25 @@
 <div class="legal-notice-container">
     <!-- HEADER -->
     <div class="custom-header">
-        <div class="custom-header-inner">
-            <div class="logo-section">
-                <a [routerLink]="'/'" class="apple-logo-btn">
-                    <div class="logo-img"></div>
-                    <div class="logo-text">
-                        <div class="logo-name">Yasin Sun</div>
-                        <div class="logo-position">Developer</div>
-                    </div>
-                </a>
-            </div>
+        <div class="custom-header-container"> <!-- DIESE DIV FEHLT! -->
+            <div class="custom-header-inner">
+                <div class="logo-section">
+                    <a [routerLink]="'/'" class="apple-logo-btn">
+                        <div class="logo-img"></div>
+                        <div class="logo-text">
+                            <div class="logo-name">Yasin Sun</div>
+                            <div class="logo-position">Developer</div>
+                        </div>
+                    </a>
+                </div>
 
-            <h1 class="page-title">{{ 'footer.legalnotice' | translate }}</h1>
+                <h1 class="page-title">{{ 'footer.legalnotice' | translate }}</h1>
 
-            <div class="header-lang-switcher">
-                <app-lang-switcher></app-lang-switcher>
+                <div class="header-lang-switcher">
+                    <app-lang-switcher></app-lang-switcher>
+                </div>
             </div>
-        </div>
+        </div> <!-- DIESE DIV FEHLT! -->
     </div>
 
     <!-- CONTENT -->

@@ -3,6 +3,7 @@ import { CommonModule, Location } from "@angular/common"
 import { RouterLink } from "@angular/router"
 import { TranslateModule, TranslateService } from "@ngx-translate/core"
 import { LangSwitcherComponent } from "../shared/lang-switcher/lang-switcher.component"
+import { FooterComponent } from "../shared/footer/footer.component"  // Footer hinzugefügt
 import { Subscription } from "rxjs";
 
 @Component({
@@ -12,7 +13,8 @@ import { Subscription } from "rxjs";
     CommonModule, 
     RouterLink, 
     TranslateModule,
-    LangSwitcherComponent
+    LangSwitcherComponent,
+    FooterComponent  // Footer hinzugefügt
   ],
   templateUrl: "./private-policy.component.html",
   styleUrls: [

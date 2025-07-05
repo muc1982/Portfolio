@@ -5,7 +5,7 @@
   position: relative;
   min-height: 100vh;
   background: $apple-universal-gradient;
-  overflow-x: hidden;
+
 }
 
 .custom-header {
@@ -29,19 +29,23 @@
   }
 }
 
-.custom-header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+// Container-Struktur genau wie Footer
+.custom-header-container {
   width: 100%;
-  box-sizing: border-box;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  position: relative;
+}
 
-  @include unified-content-padding;
+.custom-header-inner {
+  width: 100%;
+  min-height: clamp(60px, 8vw, 80px);
+  @include dFlex($jc: space-between, $ai: center);
+  box-sizing: border-box;
 }
 
 .logo-section {
   flex: 1;
-
   @include dFlex($jc: flex-start, $ai: center);
 }
 
@@ -166,7 +170,6 @@
 
 .header-lang-switcher {
   flex: 1;
-
   @include dFlex($jc: flex-end, $ai: center);
 }
 
@@ -255,46 +258,4 @@
   border-top: 1px solid rgb(255 255 255 / 10%);
   text-align: center;
   font-style: italic;
-}
-
-.simple-footer {
-  margin-top: auto;
-  padding: 24px 0;
-  border-top: 1px solid rgb(255 255 255 / 10%);
-  background: rgb(0 0 0 / 30%);
-}
-
-.footer-content {
-  @include unified-content-padding;
-  @include dFlex($jc: space-between, $ai: center);
-
-  @media screen and (max-width: $breakpoint-mobile) {
-    @include dFlex($fd: column, $gap: 12px, $ai: center);
-
-    text-align: center;
-  }
-}
-
-.back-link {
-  color: $apple-primary;
-  text-decoration: none;
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-medium;
-  font-size: 16px;
-  transition: $apple-transition-fast;
-  padding: 8px 16px;
-  border-radius: $apple-radius-small;
-
-  &:hover {
-    color: $apple-secondary;
-    background: rgb(255 255 255 / 5%);
-    transform: translateX(-2px);
-  }
-}
-
-.copyright {
-  color: $apple-text-tertiary;
-  font-family: $apple-font-family;
-  font-size: 14px;
-  opacity: 0.8;
 }
