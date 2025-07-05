@@ -1,33 +1,35 @@
 {
   "extends": ["stylelint-config-standard-scss"],
   "rules": {
-    "max-nesting-depth": [12, { 
-      "message": "❌ Verschachtelung zu tief - max. 12 Ebenen (reduziere auf 3)" 
+    "max-nesting-depth": [12, {
+      "message": "❌ Verschachtelung zu tief - max. 12 Ebenen (reduziere auf 3)"
     }],
-    "selector-max-id": 0,
+    "selector-max-id": [1, {
+      "message": "❌ ID-Selektoren vermeiden – max. 1 erlaubt"
+    }],
     "selector-class-pattern": "^[a-z][a-zA-Z0-9_-]*$",
     "scss/at-rule-no-unknown": true,
     "scss/selector-no-redundant-nesting-selector": true,
     "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9_-]*$",
     "declaration-no-important": null,
     "block-no-empty": null,
-    "selector-max-compound-selectors": [10, { 
-      "message": "❌ Zu komplexe Selektoren - Performance-Problem (max. 10 Selektoren)" 
+    "selector-max-compound-selectors": [10, {
+      "message": "❌ Zu komplexe Selektoren - Performance-Problem (max. 10 Selektoren)"
     }],
-    "declaration-block-no-duplicate-properties": [true, { 
-      "message": "❌ Doppelte Properties - redundanter Code" 
+    "declaration-block-no-duplicate-properties": [true, {
+      "message": "❌ Doppelte Properties - redundanter Code"
     }],
-    "scss/no-duplicate-dollar-variables": [true, { 
-      "message": "❌ Doppelte SCSS-Variablen - Wartungsproblem" 
+    "scss/no-duplicate-dollar-variables": [true, {
+      "message": "❌ Doppelte SCSS-Variablen - Wartungsproblem"
     }],
-    "property-no-vendor-prefix": [true, { 
-      "message": "❌ Vendor-Prefixes vermeiden - nutze Autoprefixer" 
+    "property-no-vendor-prefix": [true, {
+      "message": "❌ Vendor-Prefixes vermeiden - nutze Autoprefixer"
     }],
     "media-feature-range-notation": "context",
     "keyframes-name-pattern": "^[a-z][a-zA-Z0-9-]*$",
-    "rule-empty-line-before": ["always", { 
-      "except": ["first-nested"], 
-      "ignore": ["after-comment"] 
+    "rule-empty-line-before": ["always", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment"]
     }],
     "no-descending-specificity": null,
     "scss/operator-no-unspaced": null,
