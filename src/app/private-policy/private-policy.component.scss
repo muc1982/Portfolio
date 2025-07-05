@@ -40,12 +40,15 @@
 .custom-header-inner {
   width: 100%;
   min-height: clamp(60px, 8vw, 80px);
+
   @include dFlex($jc: space-between, $ai: center);
+
   box-sizing: border-box;
 }
 
 .logo-section {
   flex: 1;
+
   @include dFlex($jc: flex-start, $ai: center);
 }
 
@@ -170,6 +173,7 @@
 
 .header-lang-switcher {
   flex: 1;
+
   @include dFlex($jc: flex-end, $ai: center);
 }
 

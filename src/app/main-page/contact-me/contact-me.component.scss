@@ -4,17 +4,19 @@
 .contact-container {
     position: relative;
     margin: auto;
-    @include standardPadding();
+
+    @include standardPadding;
     @include dFlex($fd: column);
+
     width: 100%;
     box-sizing: border-box;
     
 
-    @media screen and (min-width: 900px) {
+    @media screen and (width >= 900px) {
         display: flex !important;
     }
 
-    @media screen and (max-width: 899px) {
+    @media screen and (width <= 899px) {
         display: none !important;
     }
 
@@ -31,7 +33,8 @@
     }
 
     h2 {
-        @include h2Title();
+        @include h2Title;
+
         margin-bottom: 48px;
         padding-top: clamp(48px, 8vw, 64px);
         position: relative;
@@ -41,7 +44,9 @@
 
     .contact-content {
         width: 100%;
+
         @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px));
+
         position: relative;
         z-index: 2;
         padding: clamp(32px, 6vw, 80px);
@@ -50,7 +55,9 @@
 
         .contact-header {
             color: $apple-text-primary;
+
             @include dFlex($fd: row, $jc: space-between, $ai: center);
+
             width: 100%;
             gap: clamp(24px, 5vw, 32px);
 
@@ -63,16 +70,18 @@
                     font-weight: $apple-font-weight-semibold;
                     color: $apple-primary;
                     text-align: left;
-                    margin: 0 0 8px 0;
+                    margin: 0 0 8px;
                 }
             }
 
             .header-right {
                 flex: 1;
+
                 @include dFlex($fd: column, $gap: 20px);
 
                 .header-top {
                     @include dFlex($fd: column, $gap: 16px);
+
                     width: 100%;
 
                     .header-right-email,
@@ -82,12 +91,13 @@
 
                         a {
                             @include dFlex($gap: clamp(12px, 3vw, 16px), $ai: center);
+
                             height: clamp(48px, 12vw, 56px);
                             padding: 0 clamp(16px, 4vw, 20px);
                             border-radius: $apple-radius-large;
-                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            border: 1px solid rgb(255 255 255 / 10%);
                             transition: $apple-transition-fast;
-                            background: rgba(255, 255, 255, 0.02);
+                            background: rgb(255 255 255 / 2%);
                             width: 100%;
                             box-sizing: border-box;
                             text-decoration: none;
@@ -167,10 +177,12 @@
 
             form {
                 width: 100%;
+
                 @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
 
                 .form-name-mail {
                     @include dFlex($fd: row, $gap: clamp(24px, 5vw, 32px));
+
                     width: 100%;
 
                     .form-name,
@@ -181,6 +193,7 @@
 
                 .form-field {
                     width: 100%;
+
                     @include dFlex($fd: column, $ai: flex-start, $gap: 8px);
 
                     .form-label {
@@ -198,6 +211,7 @@
 
                     .form-input {
                         @include apple-input;
+
                         height: clamp(56px, 12vw, 64px);
                         font-family: $apple-font-family;
                         font-size: clamp(16px, 4vw, 18px);
@@ -224,9 +238,10 @@
                 .form-message {
                     textarea {
                         @include apple-input;
+
                         width: 100%;
                         height: clamp(140px, 25vw, 180px) !important;
-                        padding: clamp(20px, 5vw, 24px) clamp(20px, 5vw, 24px) !important;
+                        padding: clamp(20px, 5vw, 24px) !important;
                         resize: none;
                         font-family: $apple-font-family;
                         font-size: clamp(16px, 4vw, 18px);
@@ -247,6 +262,7 @@
                 .privacy-policy {
                     width: 100%;
                     color: $apple-text-secondary;
+
                     @include dFlex($jc: flex-start, $gap: clamp(12px, 3vw, 16px), $ai: flex-start);
 
                     .cb {
@@ -323,6 +339,7 @@
                 // Neue erweiterte Erfolgsmeldung mit aufklappender Animation
                 .success-message-detailed {
                     @include dFlex($fd: column, $ai: center, $jc: center, $gap: clamp(20px, 5vw, 24px));
+
                     padding: clamp(32px, 8vw, 40px) clamp(28px, 7vw, 36px);
                     background: linear-gradient(135deg, 
                         rgba($apple-success, 0.12) 0%, 
@@ -334,7 +351,7 @@
                     box-shadow: 
                         0 12px 40px rgba($apple-success, 0.25),
                         0 6px 20px rgba($apple-success, 0.15),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                        inset 0 1px 0 rgb(255 255 255 / 20%),
                         inset 0 -1px 0 rgba($apple-success, 0.1);
                     text-align: center;
                     position: relative;
@@ -370,10 +387,7 @@
                     &::after {
                         content: '';
                         position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
+                        inset: 0;
                         background-image: 
                             radial-gradient(circle at 25% 25%, rgba($apple-success, 0.6) 1px, transparent 1px),
                             radial-gradient(circle at 75% 25%, rgba($apple-success, 0.4) 1px, transparent 1px),
@@ -397,13 +411,15 @@
                             $apple-success 50%,
                             color.adjust($apple-success, $lightness: 12%) 75%,
                             color.adjust($apple-success, $lightness: 5%) 100%);
+
                         @include dFlex($ai: center, $jc: center);
+
                         box-shadow: 
                             0 12px 35px rgba($apple-success, 0.5),
                             0 6px 15px rgba($apple-success, 0.4),
                             0 2px 8px rgba($apple-success, 0.3),
-                            inset 0 2px 0 rgba(255, 255, 255, 0.4),
-                            inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+                            inset 0 2px 0 rgb(255 255 255 / 40%),
+                            inset 0 -2px 0 rgb(0 0 0 / 15%);
                         animation: success-icon-ultimate 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s both;
                         position: relative;
                         z-index: 4;
@@ -413,10 +429,7 @@
                         &::before {
                             content: '';
                             position: absolute;
-                            top: -40%;
-                            left: -40%;
-                            right: -40%;
-                            bottom: -40%;
+                            inset: -40%;
                             background: radial-gradient(circle, 
                                 rgba($apple-success, 0.4) 0%, 
                                 rgba($apple-success, 0.2) 40%, 
@@ -436,8 +449,8 @@
                             width: 40%;
                             height: 40%;
                             background: linear-gradient(135deg, 
-                                rgba(255, 255, 255, 0.6) 0%, 
-                                rgba(255, 255, 255, 0.3) 50%,
+                                rgb(255 255 255 / 60%) 0%, 
+                                rgb(255 255 255 / 30%) 50%,
                                 transparent 100%);
                             border-radius: 50%;
                             animation: success-icon-gleam 4s ease-in-out infinite;
@@ -448,7 +461,7 @@
                             width: clamp(32px, 8vw, 36px);
                             height: clamp(32px, 8vw, 36px);
                             color: white;
-                            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+                            filter: drop-shadow(0 3px 6px rgb(0 0 0 / 30%));
                             animation: success-checkmark-reveal 1s ease-out 1.2s both;
                             position: relative;
                             z-index: 2;
@@ -464,6 +477,7 @@
 
                     .success-content {
                         @include dFlex($fd: column, $ai: center, $gap: clamp(12px, 3vw, 16px));
+
                         position: relative;
                         z-index: 4;
                         animation: success-content-emerge 1.2s ease-out 0.8s both;
@@ -480,11 +494,10 @@
                                 color.adjust($apple-text-primary, $lightness: 15%) 50%,
                                 $apple-text-primary 100%);
                             background-size: 200% 200%;
-                            -webkit-background-clip: text;
                             -webkit-text-fill-color: transparent;
                             background-clip: text;
                             animation: success-title-wave 3s ease-in-out infinite;
-                            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                            text-shadow: 0 2px 4px rgb(0 0 0 / 10%);
                         }
 
                         p {
@@ -503,10 +516,10 @@
                             margin-top: clamp(16px, 4vw, 20px);
                             padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 24px);
                             background: linear-gradient(135deg, 
-                                rgba(255, 255, 255, 0.12) 0%, 
-                                rgba(255, 255, 255, 0.06) 50%,
-                                rgba(255, 255, 255, 0.10) 100%);
-                            border: 1px solid rgba(255, 255, 255, 0.2);
+                                rgb(255 255 255 / 12%) 0%, 
+                                rgb(255 255 255 / 6%) 50%,
+                                rgb(255 255 255 / 10%) 100%);
+                            border: 1px solid rgb(255 255 255 / 20%);
                             border-radius: $apple-radius-medium;
                             backdrop-filter: blur(20px) saturate(1.2);
                             position: relative;
@@ -514,7 +527,7 @@
                             animation: success-details-materialize 1s ease-out 2s both;
                             box-shadow: 
                                 0 4px 15px rgba($apple-success, 0.2),
-                                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                                inset 0 1px 0 rgb(255 255 255 / 20%);
 
                             // Gleitender Lichtstrahl
                             &::before {
@@ -526,9 +539,9 @@
                                 height: 100%;
                                 background: linear-gradient(90deg, 
                                     transparent 0%, 
-                                    rgba(255, 255, 255, 0.25) 25%,
-                                    rgba(255, 255, 255, 0.4) 50%,
-                                    rgba(255, 255, 255, 0.25) 75%,
+                                    rgb(255 255 255 / 25%) 25%,
+                                    rgb(255 255 255 / 40%) 50%,
+                                    rgb(255 255 255 / 25%) 75%,
                                     transparent 100%);
                                 animation: success-details-sweep 3s ease-in-out infinite 2.5s;
                                 z-index: 1;
@@ -542,7 +555,7 @@
                                 line-height: 1.4;
                                 position: relative;
                                 z-index: 2;
-                                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                                text-shadow: 0 1px 3px rgb(0 0 0 / 15%);
                                 animation: success-badge-glow 2s ease-in-out infinite 3s;
                             }
                         }
@@ -551,11 +564,13 @@
 
                 .send-btn {
                     @include dFlex($jc: center);
+
                     width: 100%;
                     padding-top: clamp(16px, 4vw, 24px);
 
                     button {
                         @include apple-button-primary;
+
                         font-family: $apple-font-family;
                         font-size: clamp(16px, 4vw, 20px);
                         padding: clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px);
@@ -593,7 +608,9 @@
             background: rgba($apple-primary, 0.1);
             border: 1px solid rgba($apple-primary, 0.3);
             border-radius: 50%;
+
             @include dFlex($jc: center, $ai: center);
+
             transition: $apple-transition-fast;
             cursor: pointer;
             z-index: 3;
@@ -620,9 +637,11 @@
     0%, 100% {
         transform: translateY(0) rotate(0deg) scale(1);
     }
+
     33% {
         transform: translateY(-15px) rotate(2deg) scale(1.02);
     }
+
     66% {
         transform: translateY(10px) rotate(-1deg) scale(0.98);
     }
@@ -632,9 +651,11 @@
     0%, 100% {
         transform: translateX(0);
     }
+
     25% {
         transform: translateX(-4px);
     }
+
     75% {
         transform: translateX(4px);
     }
@@ -644,9 +665,11 @@
     0% {
         box-shadow: 0 0 0 0 rgba($apple-error, 0.4);
     }
+
     70% {
         box-shadow: 0 0 0 8px rgba($apple-error, 0);
     }
+
     100% {
         box-shadow: 0 0 0 0 rgba($apple-error, 0);
     }
@@ -659,25 +682,29 @@
         transform: translateY(40px) scale(0.8) rotateX(15deg) rotateY(5deg);
         filter: blur(15px) brightness(0.7);
     }
+
     25% {
         opacity: 0.6;
         transform: translateY(10px) scale(0.95) rotateX(5deg) rotateY(-2deg);
         filter: blur(8px) brightness(0.9);
     }
+
     50% {
         opacity: 0.85;
         transform: translateY(-8px) scale(1.05) rotateX(-3deg) rotateY(1deg);
         filter: blur(3px) brightness(1.1);
     }
+
     75% {
         opacity: 0.95;
         transform: translateY(3px) scale(0.98) rotateX(1deg) rotateY(-0.5deg);
         filter: blur(1px) brightness(1.05);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
-        filter: blur(0px) brightness(1);
+        filter: blur(0) brightness(1);
     }
 }
 
@@ -686,18 +713,22 @@
         transform: rotate(0deg) scale(1);
         opacity: 0.7;
     }
+
     25% {
         transform: rotate(90deg) scale(1.05);
         opacity: 0.8;
     }
+
     50% {
         transform: rotate(180deg) scale(1.1);
         opacity: 0.6;
     }
+
     75% {
         transform: rotate(270deg) scale(1.05);
         opacity: 0.9;
     }
+
     100% {
         transform: rotate(360deg) scale(1);
         opacity: 0.7;
@@ -706,21 +737,25 @@
 
 @keyframes success-sparkles-dance {
     0%, 100% {
-        transform: translateX(0px) translateY(0px) rotate(0deg);
+        transform: translateX(0) translateY(0) rotate(0deg);
         opacity: 0.8;
     }
+
     20% {
         transform: translateX(5px) translateY(-8px) rotate(72deg);
         opacity: 1;
     }
+
     40% {
         transform: translateX(-3px) translateY(-12px) rotate(144deg);
         opacity: 0.6;
     }
+
     60% {
         transform: translateX(-8px) translateY(-5px) rotate(216deg);
         opacity: 0.9;
     }
+
     80% {
         transform: translateX(2px) translateY(3px) rotate(288deg);
         opacity: 0.7;
@@ -733,30 +768,36 @@
         transform: scale(0) rotateZ(-240deg) rotateY(180deg) rotateX(90deg);
         filter: brightness(0.3) hue-rotate(180deg);
     }
+
     20% {
         opacity: 0.6;
         transform: scale(0.4) rotateZ(-120deg) rotateY(90deg) rotateX(45deg);
         filter: brightness(0.7) hue-rotate(90deg);
     }
+
     40% {
         opacity: 0.8;
         transform: scale(0.8) rotateZ(-30deg) rotateY(30deg) rotateX(15deg);
         filter: brightness(1.2) hue-rotate(30deg);
     }
+
     65% {
         opacity: 0.95;
         transform: scale(1.2) rotateZ(15deg) rotateY(-15deg) rotateX(-5deg);
         filter: brightness(1.4) hue-rotate(-15deg);
     }
+
     80% {
         opacity: 1;
         transform: scale(0.95) rotateZ(-8deg) rotateY(8deg) rotateX(3deg);
         filter: brightness(1.1) hue-rotate(5deg);
     }
+
     90% {
         transform: scale(1.02) rotateZ(3deg) rotateY(-3deg) rotateX(-1deg);
         filter: brightness(1.05) hue-rotate(-2deg);
     }
+
     100% {
         opacity: 1;
         transform: scale(1) rotateZ(0deg) rotateY(0deg) rotateX(0deg);
@@ -770,16 +811,19 @@
         transform: scale(1) rotate(0deg);
         filter: blur(20px);
     }
+
     25% {
         opacity: 0.7;
         transform: scale(1.2) rotate(90deg);
         filter: blur(25px);
     }
+
     50% {
         opacity: 0.6;
         transform: scale(1.4) rotate(180deg);
         filter: blur(30px);
     }
+
     75% {
         opacity: 0.8;
         transform: scale(1.1) rotate(270deg);
@@ -792,14 +836,17 @@
         opacity: 0.3;
         transform: scale(1) rotate(0deg);
     }
+
     25% {
         opacity: 0.7;
         transform: scale(1.3) rotate(90deg);
     }
+
     50% {
         opacity: 0.5;
         transform: scale(1.5) rotate(180deg);
     }
+
     75% {
         opacity: 0.8;
         transform: scale(1.2) rotate(270deg);
@@ -810,6 +857,7 @@
     0% {
         stroke-dashoffset: 100;
     }
+
     100% {
         stroke-dashoffset: 0;
     }
@@ -821,16 +869,19 @@
         transform: scale(0.3) rotate(-15deg);
         filter: brightness(0.5);
     }
+
     40% {
         opacity: 0.7;
         transform: scale(0.8) rotate(5deg);
         filter: brightness(1.2);
     }
+
     70% {
         opacity: 0.9;
         transform: scale(1.1) rotate(-2deg);
         filter: brightness(1.3);
     }
+
     100% {
         opacity: 1;
         transform: scale(1) rotate(0deg);
@@ -844,20 +895,23 @@
         transform: translateY(25px) scale(0.85) rotateX(10deg);
         filter: blur(8px);
     }
+
     40% {
         opacity: 0.7;
         transform: translateY(5px) scale(0.95) rotateX(3deg);
         filter: blur(3px);
     }
+
     70% {
         opacity: 0.9;
         transform: translateY(-3px) scale(1.03) rotateX(-1deg);
         filter: blur(1px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0) scale(1) rotateX(0deg);
-        filter: blur(0px);
+        filter: blur(0);
     }
 }
 
@@ -865,6 +919,7 @@
     0%, 100% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
@@ -876,15 +931,17 @@
         transform: translateY(15px);
         filter: blur(5px);
     }
+
     60% {
         opacity: 0.8;
         transform: translateY(-2px);
         filter: blur(1px);
     }
+
     100% {
         opacity: 0.95;
         transform: translateY(0);
-        filter: blur(0px);
+        filter: blur(0);
     }
 }
 
@@ -894,15 +951,17 @@
         transform: translateY(20px) scale(0.9) rotateX(5deg);
         filter: blur(10px);
     }
+
     50% {
         opacity: 0.8;
         transform: translateY(-2px) scale(1.02) rotateX(-1deg);
         filter: blur(2px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0) scale(1) rotateX(0deg);
-        filter: blur(0px);
+        filter: blur(0);
     }
 }
 
@@ -911,12 +970,15 @@
         left: -100%;
         opacity: 0;
     }
+
     20% {
         opacity: 1;
     }
+
     80% {
         opacity: 1;
     }
+
     100% {
         left: 100%;
         opacity: 0;
@@ -926,12 +988,13 @@
 @keyframes success-badge-glow {
     0%, 100% {
         text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 1px 3px rgb(0 0 0 / 15%),
             0 0 8px rgba($apple-success, 0.3);
     }
+
     50% {
         text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 1px 3px rgb(0 0 0 / 15%),
             0 0 15px rgba($apple-success, 0.6),
             0 0 25px rgba($apple-success, 0.4);
     }
@@ -940,12 +1003,13 @@
 @keyframes success-badge-glow {
     0%, 100% {
         text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 1px 3px rgb(0 0 0 / 15%),
             0 0 8px rgba($apple-success, 0.3);
     }
+
     50% {
         text-shadow: 
-            0 1px 3px rgba(0, 0, 0, 0.15),
+            0 1px 3px rgb(0 0 0 / 15%),
             0 0 15px rgba($apple-success, 0.6),
             0 0 25px rgba($apple-success, 0.4);
     }
@@ -960,13 +1024,15 @@
     0% {
         opacity: 1;
         transform: translateY(0) scale(1);
-        filter: blur(0px);
+        filter: blur(0);
     }
+
     50% {
         opacity: 0.5;
         transform: translateY(-10px) scale(0.98);
         filter: blur(2px);
     }
+
     100% {
         opacity: 0;
         transform: translateY(-20px) scale(0.95);
@@ -979,9 +1045,9 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset !important;
+    box-shadow: 0 0 0 30px rgb(255 255 255 / 5%) inset !important;
     -webkit-text-fill-color: $apple-text-primary !important;
     caret-color: $apple-primary !important;
     transition: background-color 5000s ease-in-out 0s !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgb(255 255 255 / 10%) !important;
 }

@@ -2,13 +2,13 @@
 @use 'sass:color';
 
 .hide-on-mobile {
-    @media screen and (max-width: 899px) {
+    @media screen and (width <= 899px) {
         display: none !important;
     }
 }
 
 .hide-on-desktop {
-    @media screen and (min-width: 900px) {
+    @media screen and (width >= 900px) {
         display: none !important;
     }
 }
@@ -25,11 +25,11 @@
     width: 100%;
     box-sizing: border-box;
 
-    @media screen and (min-width: 900px) {
+    @media screen and (width >= 900px) {
         display: flex !important;
     }
 
-    @media screen and (max-width: 899px) {
+    @media screen and (width <= 899px) {
         display: none !important;
     }
 
@@ -46,7 +46,8 @@
     }
 
     h2 {
-        @include h2Title();
+        @include h2Title;
+
         margin-bottom: 48px;
         padding-top: clamp(48px, 8vw, 64px);
         position: relative;
@@ -56,7 +57,9 @@
 
     .my-projects-content {
         width: 100%;
+
         @include dFlex($fd: column, $gap: clamp(40px, 8vw, 64px));
+
         position: relative;
         z-index: 2;
         padding: clamp(32px, 6vw, 80px);
@@ -65,18 +68,18 @@
 
         nav {
             @include dFlex($gap: clamp(16px, 3vw, 24px), $jc: center);
+
             margin-bottom: 32px;
 
             >div {
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: rgb(255 255 255 / 5%);
+                border: 1px solid rgb(255 255 255 / 10%);
                 border-radius: $apple-radius-large;
                 padding: clamp(16px, 3vw, 20px) clamp(24px, 5vw, 32px);
                 transition: $apple-transition-fast;
                 cursor: pointer;
                 position: relative;
                 backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
 
                 &::before {
                     content: '';
@@ -90,7 +93,7 @@
                 }
 
                 &:hover {
-                    background: rgba(255, 255, 255, 0.08);
+                    background: rgb(255 255 255 / 8%);
                     border-color: rgba($apple-primary, 0.3);
                     transform: translateY(-2px);
                     box-shadow: $apple-shadow-medium;
@@ -128,12 +131,12 @@
 
         .project {
             @include dFlex($gap: clamp(32px, 6vw, 48px));
-            background: rgba(255, 255, 255, 0.03);
+
+            background: rgb(255 255 255 / 3%);
             border-radius: $apple-radius-xl;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgb(255 255 255 / 10%);
             padding: clamp(32px, 6vw, 48px);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             position: relative;
 
             &::after {
@@ -141,28 +144,31 @@
                 position: absolute;
                 inset: 0;
                 background: linear-gradient(135deg,
-                        rgba(255, 255, 255, 0.06) 0%,
-                        rgba(255, 255, 255, 0.03) 50%,
-                        rgba(255, 255, 255, 0.01) 100%);
+                        rgb(255 255 255 / 6%) 0%,
+                        rgb(255 255 255 / 3%) 50%,
+                        rgb(255 255 255 / 1%) 100%);
                 border-radius: inherit;
                 pointer-events: none;
             }
 
             .project-left {
                 flex: 1;
+
                 @include dFlex($fd: column, $gap: clamp(24px, 5vw, 32px));
+
                 position: relative;
                 z-index: 1;
 
                 .tab-li {
                     @include dFlex($gap: clamp(16px, 3vw, 20px), $ai: flex-start);
-                    background: rgba(255, 255, 255, 0.02);
+
+                    background: rgb(255 255 255 / 2%);
                     border-radius: $apple-radius-large;
                     padding: clamp(20px, 4vw, 24px);
                     transition: $apple-transition-fast;
 
                     &:hover {
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgb(255 255 255 / 5%);
                         transform: translateX(4px);
                     }
 
@@ -178,6 +184,7 @@
 
                         >div {
                             @include dFlex($ai: center, $gap: 12px);
+
                             margin-bottom: 12px;
 
                             h4 {
@@ -187,6 +194,7 @@
                                 font-size: clamp(18px, 4vw, 22px);
                                 margin: 0;
                                 flex: 1;
+
                                 @include dFlex($ai: center, $gap: 8px);
 
                                 .process-emoji,
@@ -232,7 +240,9 @@
 
             .project-right {
                 flex: 1;
+
                 @include dFlex($fd: column, $gap: clamp(20px, 4vw, 24px));
+
                 position: relative;
                 z-index: 1;
 
@@ -241,28 +251,30 @@
                     font-weight: $apple-font-weight-semibold;
                     color: $apple-primary;
                     font-size: clamp(16px, 3.5vw, 20px);
-                    margin: 0 0 16px 0;
+                    margin: 0 0 16px;
                     text-align: center;
                 }
 
                 .technologies {
                     @include dFlex($gap: clamp(12px, 2.5vw, 16px), $jc: center);
+
                     flex-wrap: wrap;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgb(255 255 255 / 5%);
                     border-radius: $apple-radius-large;
                     padding: clamp(16px, 3vw, 20px);
 
                     .tech-logo {
                         @include dFlex($jc: center, $ai: center);
+
                         width: clamp(48px, 8vw, 60px);
                         height: clamp(48px, 8vw, 60px);
-                        background: rgba(255, 255, 255, 0.05);
-                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        background: rgb(255 255 255 / 5%);
+                        border: 1px solid rgb(255 255 255 / 10%);
                         border-radius: $apple-radius-medium;
                         transition: $apple-transition-fast;
 
                         &:hover {
-                            background: rgba(255, 255, 255, 0.1);
+                            background: rgb(255 255 255 / 10%);
                             transform: translateY(-2px) scale(1.05);
                             box-shadow: $apple-shadow-small;
                         }
@@ -283,7 +295,8 @@
 
                 .project-img {
                     @include dFlex($jc: center, $ai: center);
-                    background: rgba(255, 255, 255, 0.02);
+
+                    background: rgb(255 255 255 / 2%);
                     border-radius: $apple-radius-large;
                     padding: clamp(20px, 4vw, 24px);
                     min-height: clamp(250px, 40vw, 320px);
@@ -301,7 +314,6 @@
                     }
 
                     img {
-                        max-width: 100%;
                         height: auto;
                         border-radius: $apple-radius-medium;
                         box-shadow: $apple-shadow-large;
@@ -325,7 +337,6 @@
                 }
 
                 @keyframes apple-rocket-bounce {
-
                     0%,
                     100% {
                         transform: translateY(0) rotate(0deg);
@@ -340,7 +351,8 @@
                     @include dFlex($gap: clamp(16px, 3vw, 20px), $jc: center);
 
                     button {
-                        @include apple-button-primary();
+                        @include apple-button-primary;
+
                         font-size: clamp(16px, 3.5vw, 18px);
                         padding: clamp(14px, 3vw, 16px) clamp(24px, 5vw, 32px);
                         min-width: clamp(120px, 25vw, 160px);
@@ -355,7 +367,7 @@
                             content: '';
                             position: absolute;
                             inset: 0;
-                            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+                            background: linear-gradient(135deg, rgb(255 255 255 / 20%) 0%, transparent 100%);
                             opacity: 0;
                             transition: $apple-transition-fast;
                         }
@@ -389,9 +401,9 @@
 
         // TEAM PLAYER MIT APPLE-STYLE ANIMATIONEN
         .team-player {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgb(255 255 255 / 3%);
             border-radius: $apple-radius-xl;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgb(255 255 255 / 10%);
             padding: clamp(32px, 6vw, 48px);
             margin-top: clamp(48px, 8vw, 64px);
             text-align: center;
@@ -409,7 +421,6 @@
                         font-weight: $apple-font-weight-bold;
                         font-size: clamp(24px, 5vw, 32px);
                         background: #1ca9ae;
-                        -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         background-clip: text;
                     }
@@ -463,8 +474,8 @@
                 gap: clamp(20px, 4vw, 32px);
 
                 .player.premium-card {
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: rgb(255 255 255 / 5%);
+                    border: 1px solid rgb(255 255 255 / 10%);
                     border-radius: $apple-radius-large;
                     padding: clamp(24px, 5vw, 32px);
                     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -483,12 +494,12 @@
                     }
 
                     &:hover {
-                        background: rgba(255, 255, 255, 0.08);
+                        background: rgb(255 255 255 / 8%);
                         transform: translateY(-12px) scale(1.03);
                         box-shadow:
-                            0 25px 50px rgba(0, 0, 0, 0.3),
-                            0 0 0 1px rgba(255, 255, 255, 0.1),
-                            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                            0 25px 50px rgb(0 0 0 / 30%),
+                            0 0 0 1px rgb(255 255 255 / 10%),
+                            inset 0 1px 0 rgb(255 255 255 / 20%);
 
                         .player-glow {
                             opacity: 0.8;
@@ -515,6 +526,7 @@
 
                         .player-avatar {
                             @include dFlex($jc: center, $ai: center);
+
                             width: 80px;
                             height: 80px;
                             margin: 0 auto 20px;
@@ -529,7 +541,6 @@
                                 border-radius: 50%;
                                 mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
                                 mask-composite: xor;
-                                -webkit-mask-composite: xor;
                                 transition: all 0.3s ease;
                             }
 
@@ -537,7 +548,7 @@
                                 font-family: $apple-font-family;
                                 font-weight: $apple-font-weight-bold;
                                 font-size: 24px;
-                                color: $apple-primary;
+                                color: $apple-text-primary;
                                 z-index: 1;
                             }
                         }
@@ -560,6 +571,7 @@
 
                                 .project-link {
                                     @include dFlex($ai: center, $gap: 6px, $jc: center);
+
                                     color: $apple-primary;
                                     cursor: pointer;
                                     transition: all 0.3s ease;
@@ -632,7 +644,6 @@
 
 // APPLE-STYLE ANIMATIONEN
 @keyframes apple-rocket-bounce {
-
     0%,
     100% {
         transform: translateY(0) rotate(0deg);
@@ -644,7 +655,6 @@
 }
 
 @keyframes apple-emoji-float {
-
     0%,
     100% {
         transform: translateY(0) rotate(0deg);
@@ -660,7 +670,6 @@
 }
 
 @keyframes apple-gradient-shift {
-
     0%,
     100% {
         background-position: 0% 50%;
@@ -672,7 +681,6 @@
 }
 
 @keyframes apple-particle-float {
-
     0%,
     100% {
         transform: translateY(0) scale(1);
@@ -696,7 +704,6 @@
 }
 
 @keyframes apple-projects-ambient {
-
     0%,
     100% {
         transform: translateY(0) rotate(0deg) scale(1);
@@ -715,7 +722,7 @@
 }
 
 // Responsive Design für Desktop
-@media screen and (max-width: 1200px) {
+@media screen and (width <= 1200px) {
     .my-projects-container {
         .my-projects-content {
             .project {
@@ -735,7 +742,7 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (width <= 1000px) {
     .my-projects-container {
         margin: 20px;
         padding: 20px;

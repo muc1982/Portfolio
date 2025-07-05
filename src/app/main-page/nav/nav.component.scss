@@ -12,7 +12,8 @@
     width: 100%;
     
     &.scrolled {
-        @include apple-nav-glass();
+        @include apple-nav-glass;
+
         box-shadow: $apple-shadow-small;
     }
     
@@ -32,6 +33,7 @@
         
         .content {
             @include dFlex($jc: space-between, $ai: center);
+
             background: transparent;
             transition: $apple-transition-medium;
             
@@ -45,6 +47,7 @@
             
             .logo {
                 @include dFlex($fd: column, $jc: center, $ai: center);
+
                 transition: $apple-transition-medium;
                 cursor: pointer;
                 padding: 8px;
@@ -87,7 +90,9 @@
                         position: center;
                         size: contain;
                     };
+
                     @include apple-logo;
+
                     transition: $apple-transition-fast;
                     margin-bottom: 2px;
                     
@@ -126,6 +131,7 @@
             
             .items {
                 @include dFlex($gap: clamp(8px, 2vw, 16px), $ai: center);
+
                 list-style: none;
                 
                 li {
@@ -155,7 +161,7 @@
                                 content: '';
                                 position: absolute;
                                 inset: 0;
-                                background: rgba(255, 255, 255, 0.05);
+                                background: rgb(255 255 255 / 5%);
                                 border-radius: inherit;
                                 opacity: 0;
                                 transition: $apple-transition-fast;
@@ -177,7 +183,7 @@
                             &:hover {
                                 color: $apple-text-primary;
                                 transform: translateY(-1px);
-                                border-color: rgba(255, 255, 255, 0.1);
+                                border-color: rgb(255 255 255 / 10%);
                                 
                                 &::before {
                                     opacity: 1;
@@ -221,6 +227,7 @@
     
     .hamburger-btn {
         @include dFlex($fd: column, $jc: center, $ai: center, $gap: 4px);
+
         width: 48px; // WCAG Touch Target
         height: 48px; // WCAG Touch Target
         background: transparent;
@@ -235,7 +242,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgb(255 255 255 / 10%);
             border-radius: inherit;
             opacity: 0;
             transition: $apple-transition-fast;
@@ -309,9 +316,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgb(0 0 0 / 80%);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     z-index: 999;
     opacity: 0;
     visibility: hidden;
@@ -333,8 +339,10 @@
     left: 0;
     right: 0;
     background: $apple-universal-gradient;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    @include apple-nav-glass();
+    border-top: 1px solid rgb(255 255 255 / 10%);
+
+    @include apple-nav-glass;
+
     transform: translateY(-100%);
     transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
     
@@ -356,7 +364,7 @@
         margin: 0;
         
         li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgb(255 255 255 / 5%);
             
             &:last-child {
                 border-bottom: none;
@@ -365,7 +373,9 @@
             a {
                 display: block;
                 padding: 16px;
-                @include unified-content-padding();
+
+                @include unified-content-padding;
+
                 color: $apple-text-secondary;
                 text-decoration: none;
                 font-family: $apple-font-family;
@@ -374,6 +384,7 @@
                 transition: $apple-transition-fast;
                 position: relative;
                 min-height: 48px; // WCAG Touch Target
+
                 @include dFlex($ai: center);
                 
                 &::before {
@@ -391,7 +402,7 @@
                 &:hover,
                 &:focus {
                     color: $apple-text-primary;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgb(255 255 255 / 5%);
                     
                     &::before {
                         transform: scaleY(1);
@@ -410,11 +421,13 @@
             
             &.mobile-lang-item {
                 padding: 16px;
-                @include unified-content-padding();
+
+                @include unified-content-padding;
                 @include dFlex($jc: center);
                 
                 app-lang-switcher {
                     width: 100%;
+
                     @include dFlex($jc: center);
                 }
             }

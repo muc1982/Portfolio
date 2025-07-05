@@ -41,11 +41,13 @@ footer {
 .footer-content {
   width: 100%;
   min-height: clamp(60px, 8vw, 80px);
+
   @include dFlex($jc: space-between, $ai: center);
 }
 
 .footer-left {
   flex: 1;
+
   @include dFlex($gap: clamp(8px, 1.5vw, 16px), $fd: column, $ai: flex-start);
 }
 
@@ -102,11 +104,13 @@ footer {
 
 .footer-middle {
   flex: 1;
+
   @include dFlex($jc: center);
 }
 
 .footer-logo {
   @include dFlex($fd: column, $jc: center, $ai: center);
+
   transition: $apple-transition-medium;
   padding: clamp(8px, 1.5vw, 12px);
   border-radius: $apple-radius-medium;
@@ -141,7 +145,9 @@ footer {
     position: center;
     size: contain;
   };
+
   @include apple-logo;
+
   transition: $apple-transition-fast;
 }
 
@@ -164,6 +170,7 @@ footer {
 
 .footer-right {
   flex: 1;
+
   @include dFlex($gap: clamp(12px, 2vw, 20px), $jc: flex-end, $ai: center);
 }
 
@@ -175,6 +182,7 @@ footer {
     size: contain;
     position: center;
   };
+
   border-radius: $apple-radius-small;
   transition: $apple-transition-fast;
   position: relative;
@@ -250,11 +258,13 @@ footer {
 
   .footer-content {
     @include dFlex($fd: column, $gap: 20px, $ai: center);
+
     text-align: center;
   }
 
   .footer-left {
     order: 3;
+
     @include dFlex($fd: row, $gap: 16px, $ai: center, $jc: center);
   }
 
@@ -287,6 +297,7 @@ footer {
 
   .footer-right {
     order: 2;
+
     @include dFlex($gap: 16px, $jc: center);
   }
 

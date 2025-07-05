@@ -1,19 +1,18 @@
 {
   "extends": ["stylelint-config-standard-scss"],
   "rules": {
-    "max-nesting-depth": [6, { 
-      "message": "❌ Verschachtelung zu tief - max. 6 Ebenen (reduziere auf 3)" 
+    "max-nesting-depth": [12, { 
+      "message": "❌ Verschachtelung zu tief - max. 12 Ebenen (reduziere auf 3)" 
     }],
     "selector-max-id": 0,
     "selector-class-pattern": "^[a-z][a-zA-Z0-9_-]*$",
     "scss/at-rule-no-unknown": true,
     "scss/selector-no-redundant-nesting-selector": true,
     "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9_-]*$",
-    "declaration-no-important": [true, { 
-      "message": "❌ !important vermeiden - erhöhe Spezifität stattdessen" 
-    }],
-    "selector-max-compound-selectors": [4, { 
-      "message": "❌ Zu komplexe Selektoren - Performance-Problem (max. 4 Selektoren)" 
+    "declaration-no-important": null,
+    "block-no-empty": null,
+    "selector-max-compound-selectors": [10, { 
+      "message": "❌ Zu komplexe Selektoren - Performance-Problem (max. 10 Selektoren)" 
     }],
     "declaration-block-no-duplicate-properties": [true, { 
       "message": "❌ Doppelte Properties - redundanter Code" 

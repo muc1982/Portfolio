@@ -49,17 +49,16 @@
 
         .img-wrapper {
             align-self: flex-end;
+
             @include dFlex($ai: flex-end);
+
             position: relative;
             transition: $apple-transition-slow;
 
             &::before {
                 content: '';
                 position: relative;
-                top: 15%;
-                left: 15%;
-                right: 15%;
-                bottom: 5%;
+                inset: 15% 15% 5%;
                 background: $apple-teal-gradient;
                 opacity: 0.15;
                 border-radius: 50% 50% 45% 55% / 55% 45% 55% 50%;
@@ -92,27 +91,27 @@
                 z-index: 1;
                 border-radius: 2% 2% 8% 8%;
 
-                @media screen and (min-width: 1920px) {
+                @media screen and (width >= 1920px) {
                     width: 90%;
                 }
 
-                @media screen and (max-width: 1600px) {
+                @media screen and (width <= 1600px) {
                     width: 82%;
                 }
 
-                @media screen and (max-width: 1400px) {
+                @media screen and (width <= 1400px) {
                     width: 80%;
                 }
 
-                @media screen and (max-height: 900px) {
+                @media screen and (height <= 900px) {
                     width: 80%;
                 }
 
-                @media screen and (max-height: 800px) {
+                @media screen and (height <= 800px) {
                     width: 75%;
                 }
 
-                @media screen and (max-height: 700px) {
+                @media screen and (height <= 700px) {
                     width: 70%;
                 }
             }
@@ -132,7 +131,9 @@
 
     .img-wrapper-small {
         border-radius: $apple-radius-xl $apple-radius-xl 50% 50%;
-        @include dFlex();
+
+        @include dFlex;
+
         display: none;
         position: relative;
 
@@ -164,10 +165,12 @@
     top: calc($nav-height-desktop + 20px);
     // Berechnung: Viewport-Breite - Container-Max-Width / 2 - Padding + Icon-Breite
     right: calc((100vw - $container-max-width) / 2 + clamp(16px, 4vw, 40px) - 64px);
+
     @include dFlex($jc: space-between, $fd: column, $gap: 20px);
+
     z-index: 10;
 
-    @media screen and (min-width: 1920px) {
+    @media screen and (width >= 1920px) {
         right: calc((100vw - $container-max-width) / 2 + clamp(20px, 4vw, 60px) - 72px);
         height: 160px;
         top: 20rem;
@@ -183,11 +186,11 @@
         right: calc((100vw - $container-max-width) / 2 + clamp(16px, 4vw, 25px) - 52px);
     }
 
-    @media screen and (max-width: 1200px) {
+    @media screen and (width <= 1200px) {
         right: calc((100vw - $container-max-width) / 2 + clamp(20px, 5vw, 40px) - 52px);
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (width <= 768px) {
     }
 
     > div {
@@ -199,14 +202,14 @@
         border-radius: $apple-radius-medium;
         transition: $apple-transition-fast;
         position: relative;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgb(255 255 255 / 10%);
 
-        @media screen and (min-width: 1920px) {
+        @media screen and (width >= 1920px) {
             width: 56px;
             height: 56px;
         }
 
-        @media screen and (max-width: 1200px) {
+        @media screen and (width <= 1200px) {
             width: 44px;
             height: 44px;
         }
@@ -271,6 +274,7 @@
 
         .logo {
             @include dFlex($fd: column, $jc: center);
+
             transition: $apple-transition-medium;
 
             &:hover {
@@ -289,15 +293,17 @@
                 }
 
                 ;
+
                 @include apple-logo;
+
                 transition: $apple-transition-fast;
 
-                @media screen and (min-width: 1920px) {
+                @media screen and (width >= 1920px) {
                     width: 100px;
                     height: 100px;
                 }
 
-                @media screen and (max-width: 1200px) {
+                @media screen and (width <= 1200px) {
                     width: 70px;
                     height: 70px;
                 }
@@ -311,7 +317,7 @@
                 margin-top: 4px;
                 letter-spacing: 0.5px;
 
-                @media screen and (min-width: 1920px) {
+                @media screen and (width >= 1920px) {
                     font-size: 22px;
                 }
             }
@@ -323,7 +329,7 @@
                 color: $apple-text-secondary;
                 letter-spacing: 0.3px;
 
-                @media screen and (min-width: 1920px) {
+                @media screen and (width >= 1920px) {
                     font-size: 14px;
                 }
             }
@@ -338,7 +344,6 @@
                 font-weight: $apple-font-weight-bold;
                 font-family: $apple-font-family;
                 background: #1ca9ae;
-                -webkit-background-clip: text;
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
                 letter-spacing: -0.02em;
@@ -347,19 +352,19 @@
                 transition: $apple-transition-medium;
                 position: relative;
 
-                @media screen and (min-width: 1920px) {
+                @media screen and (width >= 1920px) {
                     font-size: 72px;
                 }
 
-                @media screen and (min-width: 1600px) {
+                @media screen and (width >= 1600px) {
                     font-size: 64px;
                 }
 
-                @media screen and (max-width: 1400px) {
+                @media screen and (width <= 1400px) {
                     font-size: 52px;
                 }
 
-                @media screen and (max-width: 1200px) {
+                @media screen and (width <= 1200px) {
                     font-size: 44px;
                 }
 
@@ -392,19 +397,19 @@
                 letter-spacing: -0.01em;
                 transition: $apple-transition-medium;
 
-                @media screen and (min-width: 1920px) {
+                @media screen and (width >= 1920px) {
                     font-size: 36px;
                 }
 
-                @media screen and (min-width: 1600px) {
+                @media screen and (width >= 1600px) {
                     font-size: 32px;
                 }
 
-                @media screen and (max-width: 1400px) {
+                @media screen and (width <= 1400px) {
                     font-size: 26px;
                 }
 
-                @media screen and (max-width: 1200px) {
+                @media screen and (width <= 1200px) {
                     font-size: 22px;
                 }
 
@@ -418,6 +423,7 @@
 
     .arrow-wrapper {
         width: 100%;
+
         @include dFlex($jc: center, $ai: center);
 
         .arrow-down {
@@ -435,37 +441,37 @@
             filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
             border-radius: $apple-radius-small;
 
-            @media screen and (min-width: 1920px) {
+            @media screen and (width >= 1920px) {
                 width: 48px;
                 height: 96px;
             }
 
-            @media screen and (max-width: 1200px) {
+            @media screen and (width <= 1200px) {
                 width: 36px;
                 height: 72px;
                 position: relative;
                 top: -14px;
             }
 
-            @media screen and (max-width: 900px) {
+            @media screen and (width <= 900px) {
                 width: 32px;
                 height: 64px;
                 margin: 0 auto;
             }
 
-            @media screen and (max-width: 600px) {
+            @media screen and (width <= 600px) {
                 width: 28px;
                 height: 56px;
                 margin: 0 auto;
             }
 
-            @media screen and (max-width: 480px) {
+            @media screen and (width <= 480px) {
                 width: 24px;
                 height: 48px;
                 margin: 0 auto;
             }
 
-            @media screen and (max-width: 375px) {
+            @media screen and (width <= 375px) {
                 width: 20px;
                 height: 40px;
                 margin: 0 auto;

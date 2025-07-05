@@ -100,21 +100,6 @@ body {
   @include scroll-offset(80px);
 }
 
-button {
-  @include apple-button-primary;
-
-  max-width: 100%;
-  word-wrap: break-word;
-    
-  &:focus-visible {
-    outline: 2px solid $apple-primary;
-    outline-offset: 2px;
-  }
-    
-  &.secondary {
-    @include apple-button-secondary;
-  }
-}
 
 textarea,
 input {
