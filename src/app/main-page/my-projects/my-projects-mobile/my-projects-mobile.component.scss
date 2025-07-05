@@ -3,17 +3,17 @@
 
 .my-projects-container {
   position: relative;
-  margin: clamp(16px, 4vw, 24px);
+  margin: clamp(12px, 3vw, 20px); // Reduziert für harmonischere Abstände
   max-width: 100%;
   min-height: 80vh;
-  padding: clamp(24px, 6vw, 32px);
+  padding: clamp(20px, 5vw, 28px); // Harmonisiert
   display: flex;
   flex-direction: column;
   background: $apple-universal-gradient;
   border-radius: $apple-radius-xl;
   border: 1px solid rgb(255 255 255 / 10%);
   box-shadow: $apple-shadow-large;
-  width: calc(100% - clamp(32px, 8vw, 48px));
+  width: calc(100% - clamp(24px, 6vw, 40px)); // Optimiert für bessere Proportionen
   box-sizing: border-box;
 
   @media (width <= 56.1875rem) {
@@ -24,7 +24,7 @@
     display: none;
   }
 
-  // ===== DESKTOP-ORIENTIERTE HINTERGRUND-EFFEKTE =====
+  // ===== HINTERGRUND-EFFEKTE =====
   &::before {
     content: '';
     position: absolute;
@@ -38,7 +38,6 @@
     z-index: 0;
   }
   
-  // ===== ZUSÄTZLICHE VISUELLE TIEFE =====
   &::after {
     content: '';
     position: absolute;
@@ -54,28 +53,27 @@
   }
 }
 
-// ===== MODERNE TITEL-STRUKTUR =====
+// ===== TITEL-STRUKTUR =====
 .my-projects-container h2 {
-  margin-bottom: clamp(32px, 8vw, 48px);
-  padding-top: clamp(24px, 6vw, 32px);
+  margin-bottom: clamp(24px, 6vw, 36px); // Harmonisiert
+  padding-top: clamp(16px, 4vw, 24px); // Harmonisiert
   position: relative;
   z-index: 2;
   text-align: center;
-  font-size: clamp(24px, 6vw, 32px); // MINDESTENS 24PX
+  font-size: clamp(22px, 5.5vw, 30px); // Optimiert für bessere Proportionen
   color: $apple-text-primary;
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-bold;
 
   @include h2Title;
   
-  // ===== DESKTOP-ORIENTIERTE TITEL-VERBESSERUNG =====
   &::after {
     content: '';
     position: absolute;
-    bottom: -12px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(60px, 15vw, 100px);
+    width: clamp(50px, 12vw, 80px);
     height: 3px;
     background: linear-gradient(90deg, 
       transparent 0%, 
@@ -87,9 +85,9 @@
   }
   
   @media screen and (width <= 480px) {
-    font-size: clamp(20px, 5vw, 24px); // MINDESTENS 20PX
-    margin-bottom: clamp(24px, 6vw, 32px);
-    padding-top: clamp(16px, 4vw, 20px);
+    font-size: clamp(20px, 5vw, 22px);
+    margin-bottom: clamp(20px, 5vw, 28px);
+    padding-top: clamp(12px, 3vw, 16px);
   }
 }
 
@@ -97,31 +95,31 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 6vw, 32px);
+  gap: clamp(20px, 5vw, 28px); // Harmonisiert
   position: relative;
   z-index: 2;
-  padding: clamp(16px, 4vw, 24px);
+  padding: clamp(12px, 3vw, 20px); // Harmonisiert
   max-width: 100%;
   margin: 0 auto;
   
   @media screen and (width <= 480px) {
-    gap: clamp(20px, 5vw, 24px);
-    padding: clamp(12px, 3vw, 16px);
+    gap: clamp(16px, 4vw, 20px);
+    padding: clamp(10px, 2.5vw, 14px);
   }
 }
 
-// ===== MODERNE NAVIGATION MIT VISUELLER TIEFE =====
+// ===== NAVIGATION =====
 .my-projects-content nav {
   display: flex;
-  gap: clamp(8px, 2vw, 12px);
+  gap: clamp(6px, 1.5vw, 10px); // Harmonisiert
   justify-content: center;
-  margin-bottom: clamp(32px, 8vw, 40px);
+  margin-bottom: clamp(24px, 6vw, 32px); // Harmonisiert
   flex-wrap: wrap;
-  padding: clamp(8px, 2vw, 12px);
+  padding: clamp(6px, 1.5vw, 10px);
   
   @media screen and (width <= 480px) {
-    margin-bottom: clamp(24px, 6vw, 32px);
-    gap: clamp(6px, 1.5vw, 8px);
+    margin-bottom: clamp(20px, 5vw, 24px);
+    gap: clamp(4px, 1vw, 6px);
   }
 }
 
@@ -132,7 +130,7 @@
     rgb(255 255 255 / 6%) 100%);
   border: 1px solid rgb(255 255 255 / 15%);
   border-radius: $apple-radius-large;
-  padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+  padding: clamp(10px, 2.5vw, 14px) clamp(14px, 3.5vw, 20px); // Harmonisiert
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   position: relative;
@@ -153,17 +151,16 @@
     z-index: -1;
   }
 
-  // ===== DESKTOP-ORIENTIERTE HOVER-EFFEKTE =====
   &:hover {
     background: linear-gradient(135deg, 
       rgb(255 255 255 / 12%) 0%, 
       rgb(255 255 255 / 6%) 50%,
       rgb(255 255 255 / 10%) 100%);
     border-color: rgb($apple-primary / 30%);
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.01); // Subtiler
     box-shadow: 
-      0 8px 25px rgb(0 0 0 / 15%),
-      0 4px 12px rgba($apple-primary, 0.1),
+      0 6px 20px rgb(0 0 0 / 12%),
+      0 3px 8px rgba($apple-primary, 0.08),
       inset 0 1px 0 rgb(255 255 255 / 25%);
 
     &::before {
@@ -178,7 +175,7 @@
       rgb($apple-primary / 12%) 100%);
     border-color: rgb($apple-primary / 40%);
     box-shadow: 
-      0 6px 20px rgba($apple-primary, 0.2),
+      0 5px 16px rgba($apple-primary, 0.18),
       inset 0 1px 0 rgb(255 255 255 / 20%);
 
     &::before {
@@ -187,10 +184,10 @@
   }
   
   @media screen and (width <= 480px) {
-    padding: clamp(10px, 2.5vw, 12px) clamp(12px, 3vw, 16px);
+    padding: clamp(8px, 2vw, 10px) clamp(10px, 2.5vw, 14px);
     
     &:hover {
-      transform: translateY(-2px) scale(1.01);
+      transform: translateY(-1px) scale(1.005);
     }
   }
 }
@@ -199,13 +196,13 @@
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-semibold;
   color: $apple-text-secondary;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3vw, 18px);
   transition: $apple-transition-fast;
   white-space: nowrap;
   display: block;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
@@ -214,35 +211,34 @@
   font-weight: $apple-font-weight-bold;
 }
 
-// ===== PROJEKT-KARTEN MIT DESKTOP-ORIENTIERTER TIEFE =====
+// ===== PROJEKT-KARTEN =====
 .project {
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 5vw, 28px);
+  gap: clamp(16px, 4vw, 24px); // Harmonisiert
   background: linear-gradient(135deg, 
     rgb(255 255 255 / 6%) 0%, 
     rgb(255 255 255 / 3%) 50%,
     rgb(255 255 255 / 5%) 100%);
   border-radius: $apple-radius-xl;
   border: 1px solid rgb(255 255 255 / 15%);
-  padding: clamp(20px, 5vw, 28px);
+  padding: clamp(16px, 4vw, 24px); // Harmonisiert
   backdrop-filter: blur(25px);
   position: relative;
   width: 100%;
   box-sizing: border-box;
   box-shadow: 
-    0 8px 32px rgb(0 0 0 / 12%),
-    0 4px 16px rgb(0 0 0 / 8%),
+    0 6px 24px rgb(0 0 0 / 10%),
+    0 3px 12px rgb(0 0 0 / 6%),
     inset 0 1px 0 rgb(255 255 255 / 20%);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 
-  // ===== MODERNE HOVER-TRANSFORMATION =====
   &:hover {
-    transform: translateY(-6px) scale(1.01);
+    transform: translateY(-4px) scale(1.005); // Subtiler
     box-shadow: 
-      0 16px 48px rgb(0 0 0 / 18%),
-      0 8px 24px rgb(0 0 0 / 12%),
-      0 4px 12px rgba($apple-primary, 0.1),
+      0 12px 36px rgb(0 0 0 / 14%),
+      0 6px 18px rgb(0 0 0 / 10%),
+      0 3px 8px rgba($apple-primary, 0.08),
       inset 0 1px 0 rgb(255 255 255 / 25%);
     border-color: rgb(255 255 255 / 20%);
   }
@@ -267,11 +263,11 @@
   }
   
   @media screen and (width <= 480px) {
-    gap: clamp(16px, 4vw, 20px);
-    padding: clamp(16px, 4vw, 20px);
+    gap: clamp(12px, 3vw, 16px);
+    padding: clamp(12px, 3vw, 16px);
     
     &:hover {
-      transform: translateY(-4px) scale(1.005);
+      transform: translateY(-2px) scale(1.002);
     }
   }
 }
@@ -279,35 +275,34 @@
 .project-top {
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 4vw, 20px);
+  gap: clamp(12px, 3vw, 16px); // Harmonisiert
   position: relative;
   z-index: 1;
   width: 100%;
   
   @media screen and (width <= 480px) {
-    gap: clamp(12px, 3vw, 16px);
+    gap: clamp(10px, 2.5vw, 12px);
   }
 }
 
-// ===== MODERNE PROJEKT-TITEL =====
+// ===== PROJEKT-TITEL =====
 .project-top-title {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-bold;
   color: $apple-primary;
-  font-size: clamp(20px, 5vw, 28px); // MINDESTENS 20PX
-  margin: 0 0 clamp(12px, 3vw, 16px);
+  font-size: clamp(18px, 4.5vw, 24px); // Harmonisiert
+  margin: 0 0 clamp(10px, 2.5vw, 14px);
   text-align: center;
   line-height: 1.3;
   position: relative;
   
-  // ===== DESKTOP-ORIENTIERTE TITEL-VERBESSERUNG =====
   &::after {
     content: '';
     position: absolute;
-    bottom: -6px;
+    bottom: -5px;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(40px, 10vw, 60px);
+    width: clamp(35px, 8vw, 50px);
     height: 2px;
     background: linear-gradient(90deg, 
       transparent 0%, 
@@ -319,35 +314,35 @@
   }
   
   @media screen and (width <= 480px) {
-    font-size: clamp(18px, 4.5vw, 20px); // MINDESTENS 18PX
+    font-size: clamp(16px, 4vw, 18px);
   }
 }
 
-// ===== TECHNOLOGIEN MIT VERBESSERTER STRUKTUR =====
+// ===== TECHNOLOGIEN =====
 .technologies {
   background: linear-gradient(135deg, 
     rgb(255 255 255 / 8%) 0%, 
     rgb(255 255 255 / 4%) 50%,
     rgb(255 255 255 / 6%) 100%);
   border-radius: $apple-radius-large;
-  padding: clamp(16px, 4vw, 20px);
+  padding: clamp(12px, 3vw, 16px); // Harmonisiert
   border: 1px solid rgb(255 255 255 / 12%);
   backdrop-filter: blur(15px);
   box-shadow: 
-    0 4px 16px rgb(0 0 0 / 8%),
+    0 3px 12px rgb(0 0 0 / 6%),
     inset 0 1px 0 rgb(255 255 255 / 15%);
   
   @media screen and (width <= 480px) {
-    padding: clamp(12px, 3vw, 16px);
+    padding: clamp(10px, 2.5vw, 12px);
   }
 }
 
 .technologies-top {
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1.5vw, 8px);
+  gap: clamp(4px, 1vw, 6px); // Harmonisiert
   align-items: flex-start;
-  margin-bottom: clamp(8px, 2vw, 12px);
+  margin-bottom: clamp(6px, 1.5vw, 10px);
 
   @media (width >= 30rem) {
     flex-flow: row wrap;
@@ -358,35 +353,35 @@
 .technologies-top > span:first-child {
   font-family: $apple-font-family;
   color: $apple-text-secondary;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3vw, 18px);
   font-weight: $apple-font-weight-medium;
   white-space: nowrap;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
 .technologies-arr {
   color: $apple-primary;
   font-weight: $apple-font-weight-semibold;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3vw, 18px);
   line-height: 1.4;
   word-break: break-word;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
 .duration {
   font-family: $apple-font-family;
   color: $apple-text-tertiary;
-  font-size: clamp(16px, 2.5vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 2.5vw, 18px);
   line-height: 1.3;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
@@ -395,7 +390,7 @@
   font-weight: $apple-font-weight-medium;
 }
 
-// ===== PROJEKT-BILDER MIT DESKTOP-ORIENTIERTER DARSTELLUNG =====
+// ===== PROJEKT-BILDER =====
 .project-img {
   display: flex;
   justify-content: center;
@@ -405,13 +400,13 @@
     rgb(255 255 255 / 2%) 50%,
     rgb(255 255 255 / 3%) 100%);
   border-radius: $apple-radius-large;
-  padding: clamp(16px, 4vw, 24px);
-  min-height: clamp(120px, 25vw, 180px);
+  padding: clamp(12px, 3vw, 20px); // Harmonisiert
+  min-height: clamp(100px, 20vw, 150px); // Harmonisiert
   position: relative;
   border: 1px solid rgb(255 255 255 / 10%);
   backdrop-filter: blur(15px);
   box-shadow: 
-    0 4px 16px rgb(0 0 0 / 8%),
+    0 3px 12px rgb(0 0 0 / 6%),
     inset 0 1px 0 rgb(255 255 255 / 15%);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 
@@ -427,22 +422,21 @@
     z-index: 0;
   }
   
-  // ===== MODERNE HOVER-EFFEKTE =====
   &:hover {
-    transform: translateY(-3px) scale(1.01);
+    transform: translateY(-2px) scale(1.005); // Subtiler
     box-shadow: 
-      0 8px 24px rgb(0 0 0 / 12%),
-      0 4px 12px rgba($apple-primary, 0.08),
+      0 6px 18px rgb(0 0 0 / 10%),
+      0 3px 8px rgba($apple-primary, 0.06),
       inset 0 1px 0 rgb(255 255 255 / 20%);
     border-color: rgb(255 255 255 / 15%);
   }
   
   @media screen and (width <= 480px) {
-    padding: clamp(12px, 3vw, 16px);
-    min-height: clamp(100px, 20vw, 140px);
+    padding: clamp(10px, 2.5vw, 14px);
+    min-height: clamp(80px, 16vw, 120px);
     
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
   }
 }
@@ -452,44 +446,43 @@
   height: auto;
   border-radius: $apple-radius-medium;
   box-shadow: 
-    0 8px 24px rgb(0 0 0 / 12%),
-    0 4px 12px rgb(0 0 0 / 8%);
+    0 6px 18px rgb(0 0 0 / 10%),
+    0 3px 8px rgb(0 0 0 / 6%);
   position: relative;
   z-index: 1;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.02); // Subtiler
     box-shadow: 
-      0 12px 32px rgb(0 0 0 / 16%),
-      0 6px 16px rgb(0 0 0 / 12%);
+      0 8px 24px rgb(0 0 0 / 12%),
+      0 4px 12px rgb(0 0 0 / 8%);
   }
   
-  // ===== ELLIPSE-SMALL-BLUE.PNG OPTIMIERT =====
   &[src*="ellipse-small-blue"] {
-    width: clamp(24px, 6vw, 32px) !important;
-    height: clamp(24px, 6vw, 32px) !important;
-    max-width: 32px !important;
-    max-height: 32px !important;
+    width: clamp(20px, 5vw, 28px) !important;
+    height: clamp(20px, 5vw, 28px) !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
     object-fit: contain;
     filter: brightness(1.1) saturate(1.2);
     
     @media screen and (width <= 480px) {
-      width: clamp(20px, 5vw, 24px) !important;
-      height: clamp(20px, 5vw, 24px) !important;
-      max-width: 24px !important;
-      max-height: 24px !important;
+      width: clamp(18px, 4.5vw, 22px) !important;
+      height: clamp(18px, 4.5vw, 22px) !important;
+      max-width: 22px !important;
+      max-height: 22px !important;
     }
     
     &:hover {
-      transform: scale(1.15);
+      transform: scale(1.1);
       filter: brightness(1.3) saturate(1.4);
     }
   }
   
   @media screen and (width <= 480px) {
     &:hover {
-      transform: scale(1.02);
+      transform: scale(1.01);
     }
   }
 }
@@ -497,32 +490,32 @@
 .project-bottom {
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 3vw, 16px);
+  gap: clamp(10px, 2.5vw, 14px); // Harmonisiert
   position: relative;
   z-index: 1;
   width: 100%;
   
   @media screen and (width <= 480px) {
-    gap: clamp(10px, 2.5vw, 12px);
+    gap: clamp(8px, 2vw, 10px);
   }
 }
 
-// ===== MODERNE TAB-ELEMENTE =====
+// ===== TAB-ELEMENTE =====
 .tab-li {
   display: flex;
-  gap: clamp(12px, 3vw, 16px);
+  gap: clamp(10px, 2.5vw, 14px); // Harmonisiert
   align-items: flex-start;
   background: linear-gradient(135deg, 
     rgb(255 255 255 / 4%) 0%, 
     rgb(255 255 255 / 2%) 50%,
     rgb(255 255 255 / 3%) 100%);
   border-radius: $apple-radius-large;
-  padding: clamp(16px, 4vw, 20px);
+  padding: clamp(12px, 3vw, 16px); // Harmonisiert
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   border: 1px solid rgb(255 255 255 / 8%);
   backdrop-filter: blur(15px);
   box-shadow: 
-    0 2px 8px rgb(0 0 0 / 6%),
+    0 2px 6px rgb(0 0 0 / 4%),
     inset 0 1px 0 rgb(255 255 255 / 10%);
 
   &:hover {
@@ -530,76 +523,20 @@
       rgb(255 255 255 / 8%) 0%, 
       rgb(255 255 255 / 4%) 50%,
       rgb(255 255 255 / 6%) 100%);
-    transform: translateX(4px) translateY(-2px);
+    transform: translateX(3px) translateY(-1px); // Subtiler
     border-color: rgb(255 255 255 / 15%);
     box-shadow: 
-      0 6px 20px rgb(0 0 0 / 10%),
-      0 3px 10px rgba($apple-primary, 0.05),
+      0 4px 14px rgb(0 0 0 / 8%),
+      0 2px 6px rgba($apple-primary, 0.04),
       inset 0 1px 0 rgb(255 255 255 / 15%);
   }
   
   @media screen and (width <= 480px) {
-    gap: clamp(10px, 2.5vw, 12px);
-    padding: clamp(12px, 3vw, 16px);
+    gap: clamp(8px, 2vw, 10px);
+    padding: clamp(10px, 2.5vw, 12px);
     
     &:hover {
-      transform: translateX(2px) translateY(-1px);
-    }
-  }
-}
-
-// ===== LOGO-BEREICH OPTIMIERT =====
-.logo {
-  flex-shrink: 0;
-  width: clamp(40px, 10vw, 56px);
-  height: clamp(40px, 10vw, 56px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 6%) 0%, 
-    rgb(255 255 255 / 3%) 50%,
-    rgb(255 255 255 / 4%) 100%);
-  border-radius: $apple-radius-medium;
-  border: 1px solid rgb(255 255 255 / 12%);
-  position: relative;
-  backdrop-filter: blur(10px);
-  box-shadow: 
-    0 4px 12px rgb(0 0 0 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 15%);
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 
-      0 6px 16px rgb(0 0 0 / 12%),
-      0 3px 8px rgba($apple-primary, 0.08),
-      inset 0 1px 0 rgb(255 255 255 / 20%);
-  }
-  
-  @media screen and (width <= 480px) {
-    width: clamp(36px, 8vw, 44px);
-    height: clamp(36px, 8vw, 44px);
-    
-    &:hover {
-      transform: scale(1.03);
-    }
-  }
-  
-  // ===== ELLIPSE-SMALL-BLUE.PNG IM LOGO-BEREICH =====
-  img[src*="ellipse-small-blue"] {
-    width: clamp(20px, 5vw, 28px) !important;
-    height: clamp(20px, 5vw, 28px) !important;
-    max-width: 28px !important;
-    max-height: 28px !important;
-    object-fit: contain;
-    filter: brightness(1.2) saturate(1.3);
-    
-    @media screen and (width <= 480px) {
-      width: clamp(18px, 4.5vw, 22px) !important;
-      height: clamp(18px, 4.5vw, 22px) !important;
-      max-width: 22px !important;
-      max-height: 22px !important;
+      transform: translateX(2px) translateY(-0.5px);
     }
   }
 }
@@ -612,28 +549,27 @@
 .right-of-logo > div {
   display: flex;
   align-items: center;
-  gap: clamp(8px, 2vw, 12px);
-  margin-bottom: clamp(8px, 2vw, 12px);
+  gap: clamp(6px, 1.5vw, 10px); // Harmonisiert
+  margin-bottom: clamp(6px, 1.5vw, 10px);
 }
 
 .right-of-logo > div img {
-  width: clamp(16px, 3vw, 20px);
-  height: clamp(16px, 3vw, 20px);
+  width: clamp(14px, 3vw, 18px);
+  height: clamp(14px, 3vw, 18px);
   flex-shrink: 0;
   filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
   
-  // ===== KLEINE ICONS OPTIMIERT =====
   &[src*="ellipse-small-blue"] {
-    width: clamp(14px, 3.5vw, 18px) !important;
-    height: clamp(14px, 3.5vw, 18px) !important;
-    max-width: 18px !important;
-    max-height: 18px !important;
+    width: clamp(12px, 3vw, 16px) !important;
+    height: clamp(12px, 3vw, 16px) !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
     
     @media screen and (width <= 480px) {
-      width: clamp(12px, 3vw, 16px) !important;
-      height: clamp(12px, 3vw, 16px) !important;
-      max-width: 16px !important;
-      max-height: 16px !important;
+      width: clamp(10px, 2.5vw, 14px) !important;
+      height: clamp(10px, 2.5vw, 14px) !important;
+      max-width: 14px !important;
+      max-height: 14px !important;
     }
   }
 }
@@ -642,82 +578,66 @@
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-semibold;
   color: $apple-primary;
-  font-size: clamp(16px, 3.5vw, 20px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3.5vw, 20px);
   margin: 0;
   flex: 1;
   line-height: 1.3;
   display: flex;
   align-items: center;
-  gap: clamp(6px, 1.5vw, 8px);
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
-  }
-}
-
-.process-emoji,
-.experience-emoji {
-  font-size: clamp(16px, 3vw, 20px);
-  animation: emoji-float 3s ease-in-out infinite;
+  gap: clamp(4px, 1vw, 6px);
   
   @media screen and (width <= 480px) {
     font-size: 16px;
   }
 }
 
-.process-emoji {
-  animation-delay: 0.5s;
-}
-
-.experience-emoji {
-  animation-delay: 1s;
-}
-
 .right-of-logo > p {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-regular;
   color: $apple-text-secondary;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3vw, 18px);
   line-height: 1.5;
   margin: 0;
   text-align: left;
   word-break: break-word;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
-// ===== PROJEKT-FOOTER MIT MODERNEN BUTTONS =====
+// ===== PROJEKT-FOOTER MIT OPTIMIERTEN BUTTONS =====
 .project-bottom-footer {
   display: flex;
-  gap: clamp(12px, 3vw, 16px);
+  gap: clamp(10px, 2.5vw, 14px); // Harmonisiert
   justify-content: center;
-  margin-top: clamp(16px, 4vw, 24px);
+  margin-top: clamp(12px, 3vw, 20px); // Harmonisiert
   flex-wrap: wrap;
   
   @media screen and (width <= 480px) {
-    gap: clamp(8px, 2vw, 12px);
-    margin-top: clamp(12px, 3vw, 16px);
+    gap: clamp(6px, 1.5vw, 10px);
+    margin-top: clamp(10px, 2.5vw, 14px);
   }
 }
 
+// ===== OPTIMIERTE BUTTONS - EXAKT NACH VORGABE =====
 .project-bottom-footer button {
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
-  padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 28px);
-  min-width: clamp(120px, 30vw, 160px);
-  border-radius: $apple-radius-medium;
-  font-weight: $apple-font-weight-semibold;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  border: none;
-  cursor: pointer;
   position: relative;
-  background: linear-gradient(135deg, $apple-primary 0%, color.adjust($apple-primary, $lightness: -10%) 100%);
+  background: #0A84FF; // Exakt nach Vorgabe
   color: white;
+  border: none;
+  border-radius: clamp(8px, 2vw, 12px); // Exakt nach Vorgabe
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); // Exakt nach Vorgabe
+  font-size: clamp(16px, 3.5vw, 22px); // Exakt nach Vorgabe - NIEMALS unter 16px
+  padding: clamp(12px, 3vw, 24px) clamp(20px, 6vw, 56px); // Exakt nach Vorgabe
+  min-width: clamp(120px, 35vw, 280px); // Exakt nach Vorgabe
+  z-index: 4; // Exakt nach Vorgabe
+  font-weight: $apple-font-weight-semibold;
   font-family: $apple-font-family;
   box-shadow: 
-    0 4px 12px rgba($apple-primary, 0.3),
-    0 2px 6px rgba($apple-primary, 0.2),
+    0 4px 12px rgba(#0A84FF, 0.3),
+    0 2px 6px rgba(#0A84FF, 0.2),
     inset 0 1px 0 rgb(255 255 255 / 20%);
 
   &::before {
@@ -731,12 +651,12 @@
   }
 
   &:hover {
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.01); // Subtiler aber sichtbar
     box-shadow: 
-      0 8px 24px rgba($apple-primary, 0.4),
-      0 4px 12px rgba($apple-primary, 0.3),
+      0 6px 20px rgba(#0A84FF, 0.4),
+      0 3px 10px rgba(#0A84FF, 0.3),
       inset 0 1px 0 rgb(255 255 255 / 25%);
-    background: linear-gradient(135deg, color.adjust($apple-primary, $lightness: 5%) 0%, $apple-primary 100%);
+    background: color.adjust(#0A84FF, $lightness: 3%);
 
     &::before {
       opacity: 1;
@@ -744,17 +664,25 @@
   }
   
   &:active {
-    transform: translateY(-1px) scale(1.01);
+    transform: translateY(-1px) scale(1.005);
   }
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    // Stelle sicher, dass die Mindestgröße von 16px eingehalten wird
+    font-size: 16px; // GARANTIERT 16px minimum
     padding: clamp(10px, 2.5vw, 12px) clamp(16px, 4vw, 20px);
-    min-width: clamp(100px, 25vw, 120px);
+    min-width: clamp(100px, 30vw, 140px);
     
     &:hover {
-      transform: translateY(-2px) scale(1.01);
+      transform: translateY(-1px) scale(1.005);
     }
+  }
+  
+  // Extra Sicherheit für sehr kleine Screens
+  @media screen and (width <= 320px) {
+    font-size: 16px; // ABSOLUT GARANTIERT
+    padding: 10px 16px;
+    min-width: 100px;
   }
 }
 
@@ -768,7 +696,7 @@
   height: 100%;
 }
 
-// ===== TEAM PLAYER SEKTION - DESKTOP-ORIENTIERT =====
+// ===== TEAM PLAYER SEKTION =====
 .team-player {
   background: linear-gradient(135deg, 
   rgb(255 255 255 / 4%) 0%, 
@@ -777,14 +705,14 @@
   rgb(255 255 255 / 6%) 100%);
   border-radius: $apple-radius-xl;
   border: 1px solid rgb(255 255 255 / 12%);
-  padding: clamp(32px, 8vw, 48px);
-  margin-top: clamp(32px, 8vw, 48px);
+  padding: clamp(24px, 6vw, 36px); // Harmonisiert
+  margin-top: clamp(24px, 6vw, 36px); // Harmonisiert
   text-align: center;
   position: relative;
   backdrop-filter: blur(30px);
   box-shadow: 
-    0 16px 48px rgb(0 0 0 / 15%),
-    0 8px 24px rgb(0 0 0 / 10%),
+    0 12px 36px rgb(0 0 0 / 12%),
+    0 6px 18px rgb(0 0 0 / 8%),
     inset 0 1px 0 rgb(255 255 255 / 20%);
 
   &::before {
@@ -820,34 +748,34 @@
   }
   
   @media screen and (width <= 480px) {
-    padding: clamp(24px, 6vw, 32px);
-    margin-top: clamp(24px, 6vw, 32px);
+    padding: clamp(18px, 4.5vw, 24px);
+    margin-top: clamp(18px, 4.5vw, 24px);
   }
 }
 
 .team-player-header {
   position: relative;
-  margin-bottom: clamp(32px, 8vw, 40px);
+  margin-bottom: clamp(24px, 6vw, 30px); // Harmonisiert
   z-index: 2;
   
   @media screen and (width <= 480px) {
-    margin-bottom: clamp(24px, 6vw, 32px);
+    margin-bottom: clamp(18px, 4.5vw, 24px);
   }
 }
 
 .team-player-title {
-  margin-bottom: clamp(16px, 4vw, 20px);
+  margin-bottom: clamp(12px, 3vw, 16px); // Harmonisiert
   position: relative;
   
   @media screen and (width <= 480px) {
-    margin-bottom: clamp(12px, 3vw, 16px);
+    margin-bottom: clamp(10px, 2.5vw, 12px);
   }
 }
 
 .title-gradient {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-bold;
-  font-size: clamp(24px, 6vw, 32px); // MINDESTENS 24PX
+  font-size: clamp(20px, 5vw, 28px); // Harmonisiert
   background: linear-gradient(
     135deg, 
     $apple-primary 0%,
@@ -866,10 +794,10 @@
   &::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: -6px;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(60px, 15vw, 100px);
+    width: clamp(50px, 12vw, 80px);
     height: 3px;
     background: linear-gradient(90deg, transparent, $apple-primary, transparent);
     border-radius: 2px;
@@ -877,23 +805,23 @@
   }
   
   @media screen and (width <= 480px) {
-    font-size: clamp(20px, 5vw, 24px); // MINDESTENS 20PX
+    font-size: clamp(18px, 4.5vw, 20px);
   }
 }
 
 .team-player-subtitle {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-medium;
-  font-size: clamp(16px, 4vw, 20px); // MINDESTENS 16PX
+  font-size: clamp(16px, 4vw, 20px);
   color: $apple-text-secondary;
   line-height: 1.5;
-  margin-bottom: clamp(20px, 5vw, 28px);
+  margin-bottom: clamp(16px, 4vw, 24px); // Harmonisiert
   opacity: 0.9;
   letter-spacing: 0.01em;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
-    margin-bottom: clamp(16px, 4vw, 20px);
+    font-size: 16px;
+    margin-bottom: clamp(12px, 3vw, 16px);
   }
 }
 
@@ -906,8 +834,8 @@
 
 .floating-particle {
   position: absolute;
-  width: clamp(6px, 1.5vw, 10px);
-  height: clamp(6px, 1.5vw, 10px);
+  width: clamp(4px, 1vw, 8px); // Harmonisiert
+  height: clamp(4px, 1vw, 8px);
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -915,7 +843,7 @@
     color.adjust($apple-primary, $alpha: -0.3) 70%,
     transparent 100%
   );
-  box-shadow: 0 0 clamp(8px, 2vw, 12px) rgb($apple-primary / 50%);
+  box-shadow: 0 0 clamp(6px, 1.5vw, 10px) rgb($apple-primary / 50%);
 
   &:nth-child(1) {
     top: 15%;
@@ -944,19 +872,19 @@
 .team-player-content-wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(16px, 4vw, 24px);
+  gap: clamp(12px, 3vw, 20px); // Harmonisiert
 
   @media (width >= 30rem) {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: clamp(20px, 5vw, 28px);
+    gap: clamp(16px, 4vw, 24px);
   }
   
   @media screen and (width <= 480px) {
-    gap: clamp(12px, 3vw, 16px);
+    gap: clamp(10px, 2.5vw, 14px);
   }
 }
 
-// ===== PREMIUM CARDS MIT DESKTOP-ORIENTIERUNG =====
+// ===== PREMIUM CARDS =====
 .premium-card {
   background: linear-gradient(145deg,
   rgb(255 255 255 / 8%) 0%,
@@ -964,15 +892,15 @@
   rgb(255 255 255 / 10%) 100%);
   border: 1px solid rgb(255 255 255 / 15%);
   border-radius: $apple-radius-large;
-  padding: clamp(20px, 5vw, 28px);
+  padding: clamp(16px, 4vw, 24px); // Harmonisiert
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   backdrop-filter: blur(25px);
   cursor: pointer;
   transform-style: preserve-3d;
   box-shadow: 
-    0 8px 24px rgb(0 0 0 / 10%),
-    0 4px 12px rgb(0 0 0 / 8%),
+    0 6px 18px rgb(0 0 0 / 8%),
+    0 3px 9px rgb(0 0 0 / 6%),
     inset 0 1px 0 rgb(255 255 255 / 20%);
 
   &::before {
@@ -994,11 +922,11 @@
     rgb(255 255 255 / 15%) 0%,
     rgb(255 255 255 / 8%) 50%,
     rgb(255 255 255 / 18%) 100%);
-    transform: translateY(-8px) rotateY(3deg) scale(1.02);
+    transform: translateY(-6px) rotateY(2deg) scale(1.01); // Subtiler
     box-shadow:
-      0 20px 60px rgb(0 0 0 / 20%),
-      0 10px 30px rgb(0 0 0 / 15%),
-      0 5px 15px rgba($apple-primary, 0.1),
+      0 16px 48px rgb(0 0 0 / 16%),
+      0 8px 24px rgb(0 0 0 / 12%),
+      0 4px 12px rgba($apple-primary, 0.08),
       inset 0 1px 0 rgb(255 255 255 / 25%);
     border-color: rgb(255 255 255 / 25%);
 
@@ -1008,21 +936,21 @@
   }
 
   &:active {
-    transform: translateY(-4px) scale(0.98);
+    transform: translateY(-3px) scale(0.99);
   }
   
   @media screen and (width <= 480px) {
-    padding: clamp(16px, 4vw, 20px);
+    padding: clamp(12px, 3vw, 16px);
     
     &:hover {
-      transform: translateY(-4px) scale(1.01);
+      transform: translateY(-3px) scale(1.005);
     }
   }
 }
 
 .premium-card:hover .player-name {
   color: $apple-primary;
-  text-shadow: 0 0 clamp(8px, 2vw, 12px) rgb($apple-primary / 30%);
+  text-shadow: 0 0 clamp(6px, 1.5vw, 10px) rgb($apple-primary / 30%);
 }
 
 .player-glow {
@@ -1061,14 +989,14 @@
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-bold;
   color: $apple-text-primary;
-  font-size: clamp(16px, 4vw, 20px); // MINDESTENS 16PX
-  margin-bottom: clamp(8px, 2vw, 12px);
+  font-size: clamp(16px, 4vw, 20px);
+  margin-bottom: clamp(6px, 1.5vw, 10px); // Harmonisiert
   line-height: 1.3;
   transition: all 0.3s ease;
   letter-spacing: 0.01em;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
@@ -1076,30 +1004,30 @@
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-medium;
   color: $apple-text-tertiary;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
-  margin-bottom: clamp(12px, 3vw, 16px);
+  font-size: clamp(16px, 3vw, 18px);
+  margin-bottom: clamp(10px, 2.5vw, 14px); // Harmonisiert
   line-height: 1.4;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
 .project-link {
   display: flex;
   align-items: center;
-  gap: clamp(6px, 1.5vw, 8px);
+  gap: clamp(4px, 1vw, 6px); // Harmonisiert
   justify-content: center;
   color: $apple-primary;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   font-weight: $apple-font-weight-semibold;
   text-decoration: none;
-  margin-top: clamp(4px, 1vw, 6px);
-  padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 12px);
+  margin-top: clamp(3px, 0.75vw, 5px);
+  padding: clamp(3px, 0.75vw, 5px) clamp(6px, 1.5vw, 10px);
   border-radius: $apple-radius-small;
   position: relative;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3vw, 18px);
 
   &::before {
     content: '';
@@ -1120,7 +1048,7 @@
   }
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
@@ -1149,47 +1077,47 @@
 }
 
 .link-arrow {
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3vw, 18px);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   z-index: 1;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
+    font-size: 16px;
   }
 }
 
 .player-reference {
   position: relative;
-  padding: clamp(12px, 3vw, 16px);
+  padding: clamp(10px, 2.5vw, 14px); // Harmonisiert
   background: rgb(255 255 255 / 3%);
   border-radius: $apple-radius-medium;
   border: 1px solid rgb(255 255 255 / 8%);
   text-align: left;
   backdrop-filter: blur(10px);
   box-shadow: 
-    0 2px 8px rgb(0 0 0 / 6%),
+    0 2px 6px rgb(0 0 0 / 4%),
     inset 0 1px 0 rgb(255 255 255 / 10%);
   
   @media screen and (width <= 480px) {
-    padding: clamp(10px, 2.5vw, 12px);
+    padding: clamp(8px, 2vw, 10px);
   }
 }
 
 .quote-mark {
   position: absolute;
-  left: clamp(8px, 2vw, 12px);
-  top: clamp(8px, 2vw, 12px);
-  font-size: clamp(20px, 4vw, 28px);
+  left: clamp(6px, 1.5vw, 10px); // Harmonisiert
+  top: clamp(6px, 1.5vw, 10px);
+  font-size: clamp(16px, 3.5vw, 24px); // Harmonisiert
   color: $apple-primary;
   opacity: 0.7;
   font-family: Georgia, serif;
   font-weight: bold;
   line-height: 1;
-  text-shadow: 0 0 clamp(6px, 1.5vw, 8px) rgb($apple-primary / 30%);
+  text-shadow: 0 0 clamp(4px, 1vw, 6px) rgb($apple-primary / 30%);
   
   @media screen and (width <= 480px) {
-    font-size: clamp(16px, 3.5vw, 20px);
+    font-size: clamp(14px, 3vw, 16px);
   }
 }
 
@@ -1197,23 +1125,23 @@
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-regular;
   color: $apple-text-secondary;
-  font-size: clamp(16px, 3vw, 18px); // MINDESTENS 16PX
+  font-size: clamp(16px, 3vw, 18px);
   line-height: 1.6;
   font-style: italic;
   display: block;
-  padding-left: clamp(20px, 5vw, 28px);
-  padding-top: clamp(4px, 1vw, 8px);
+  padding-left: clamp(16px, 4vw, 24px); // Harmonisiert
+  padding-top: clamp(3px, 0.75vw, 6px);
   text-align: left;
   word-break: break-word;
   opacity: 0.9;
   
   @media screen and (width <= 480px) {
-    font-size: 16px; // EXAKT 16PX
-    padding-left: clamp(16px, 4vw, 20px);
+    font-size: 16px;
+    padding-left: clamp(12px, 3vw, 16px);
   }
 }
 
-// ===== ANIMATIONS (unverändert, aber optimiert) =====
+// ===== ANIMATIONS =====
 @keyframes projects-ambient {
   0%, 100% {
     transform: translateY(0) rotate(0deg) scale(1);
@@ -1221,27 +1149,13 @@
   }
 
   33% {
-    transform: translateY(-10px) rotate(1deg) scale(1.01);
+    transform: translateY(-8px) rotate(0.5deg) scale(1.005);
     opacity: 0.12;
   }
 
   66% {
-    transform: translateY(8px) rotate(-0.5deg) scale(0.99);
+    transform: translateY(6px) rotate(-0.3deg) scale(0.995);
     opacity: 0.06;
-  }
-}
-
-@keyframes emoji-float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  33% {
-    transform: translateY(-2px) rotate(2deg);
-  }
-
-  66% {
-    transform: translateY(1px) rotate(-1deg);
   }
 }
 
@@ -1252,12 +1166,12 @@
   }
 
   33% {
-    transform: rotate(120deg) scale(1.1);
+    transform: rotate(120deg) scale(1.05);
     opacity: 0.5;
   }
 
   66% {
-    transform: rotate(240deg) scale(0.9);
+    transform: rotate(240deg) scale(0.95);
     opacity: 0.2;
   }
 }
@@ -1270,7 +1184,7 @@
 
   50% {
     opacity: 0.8;
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 }
 
@@ -1292,7 +1206,7 @@
 
   50% {
     opacity: 1;
-    transform: translateX(-50%) scaleX(1.5);
+    transform: translateX(-50%) scaleX(1.3);
   }
 }
 
@@ -1303,17 +1217,17 @@
   }
 
   25% {
-    transform: translateY(-8px) scale(1.2) rotate(90deg);
+    transform: translateY(-6px) scale(1.1) rotate(90deg);
     opacity: 1;
   }
 
   50% {
-    transform: translateY(0) scale(0.8) rotate(180deg);
+    transform: translateY(0) scale(0.9) rotate(180deg);
     opacity: 0.4;
   }
 
   75% {
-    transform: translateY(8px) scale(1.1) rotate(270deg);
+    transform: translateY(6px) scale(1.05) rotate(270deg);
     opacity: 0.8;
   }
 }
@@ -1331,32 +1245,32 @@
 // ===== RESPONSIVE OPTIMIERUNGEN =====
 @media (width <= 22.5rem) {
   .my-projects-container {
-    margin: clamp(8px, 2vw, 12px);
-    padding: clamp(16px, 4vw, 20px);
-  }
-
-  .team-player {
-    padding: clamp(20px, 5vw, 24px);
-    margin-top: clamp(20px, 5vw, 24px);
-  }
-
-  .premium-card {
+    margin: clamp(8px, 2vw, 10px);
     padding: clamp(12px, 3vw, 16px);
   }
 
+  .team-player {
+    padding: clamp(16px, 4vw, 20px);
+    margin-top: clamp(16px, 4vw, 20px);
+  }
+
+  .premium-card {
+    padding: clamp(10px, 2.5vw, 12px);
+  }
+
   .player-reference {
-    padding: clamp(8px, 2vw, 10px);
+    padding: clamp(6px, 1.5vw, 8px);
   }
 
   .quote-mark {
-    left: 6px;
-    top: 6px;
-    font-size: 16px;
+    left: 4px;
+    top: 4px;
+    font-size: 14px;
   }
 
   .player-reference span {
-    padding-left: clamp(14px, 3.5vw, 16px);
-    padding-top: 4px;
+    padding-left: clamp(10px, 2.5vw, 12px);
+    padding-top: 2px;
   }
 }
 
@@ -1366,8 +1280,6 @@
     animation: none;
   }
 
-  .process-emoji,
-  .experience-emoji,
   .title-gradient,
   .floating-particle,
   .player-glow {
@@ -1375,7 +1287,7 @@
   }
 
   .premium-card:hover {
-    transform: translateY(-2px) scale(1.01);
+    transform: translateY(-2px) scale(1.005);
   }
 
   .team-player::before,
@@ -1411,11 +1323,6 @@
       border-color: #fff;
       box-shadow: 0 0 20px rgb(255 255 255 / 20%);
     }
-  }
-  
-  .logo {
-    background: #222 !important;
-    border-color: #555 !important;
   }
   
   .project-img {
@@ -1467,4 +1374,3 @@
     border: 1px solid black !important;
   }
 }
-
