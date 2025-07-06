@@ -852,25 +852,41 @@
       margin-top: clamp(16px, 4vw, 20px);
 
       button {
-        background: #0A84FF;
+        position: relative;
+        background: $apple-primary;
         color: white;
         border: none;
-        border-radius: clamp(8px, 2vw, 12px);
+        border-radius: $apple-radius-medium;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-        font-size: clamp(16px, 3.5vw, 18px);
-        padding: clamp(12px, 3vw, 16px) clamp(20px, 6vw, 32px);
-        min-width: clamp(120px, 35vw, 200px);
+        font-size: clamp(16px, 3.5vw, 22px);
+        padding: clamp(12px, 3vw, 24px) clamp(20px, 6vw, 56px);
+        min-width: clamp(120px, 35vw, 280px);
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-semibold;
-        box-shadow: 
-          0 4px 12px rgba(#0A84FF, 0.3),
-          0 2px 6px rgba(#0A84FF, 0.2);
+        z-index: 4;
+
+        @media screen and (width <= 480px) {
+          font-size: clamp(16px, 4vw, 18px);
+          padding: clamp(10px, 2.5vw, 16px) clamp(16px, 5vw, 32px);
+          min-width: clamp(100px, 30vw, 200px);
+        }
+
+        @media screen and (width <= 375px) {
+          font-size: 16px;
+          padding: 10px 16px;
+          min-width: 120px;
+        }
+
+        @media screen and (width <= 320px) {
+          font-size: 15px;
+          padding: 8px 14px;
+          min-width: 100px;
+        }
 
         &:hover {
           transform: translateY(-1px);
-          box-shadow: 0 8px 24px rgba(#0A84FF, 0.4);
-          background: color.adjust(#0A84FF, $lightness: 3%);
+          box-shadow: 0 8px 24px rgba($apple-primary, 0.3);
         }
 
         &:active {
@@ -891,6 +907,70 @@
 .hide-on-desktop {
   @media screen and (width >= 900px) {
     display: none !important;
+  }
+}
+
+
+// ===== ANTI-OVERFLOW PROTECTION =====
+.my-skills-container-mobile {
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  // Verhindere horizontales Scrollen
+  overflow-x: hidden !important;
+  width: 100% !important;
+  
+  .my-skills-content {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    
+    .content-top,
+    .content-bottom {
+      overflow-x: hidden !important;
+      width: 100% !important;
+      
+      .reservoir {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        
+        .skill {
+          max-width: 100% !important;
+          overflow: hidden !important;
+        }
+      }
+      
+      .content-bottom-content {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        
+        .current-learning {
+          overflow-x: hidden !important;
+          width: 100% !important;
+          
+          .skills {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            
+            > div {
+              max-width: 100% !important;
+              overflow: hidden !important;
+            }
+          }
+        }
+      }
+      
+      .talk-button {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        
+        button {
+          max-width: 100% !important;
+          overflow: hidden !important;
+        }
+      }
+    }
   }
 }
 

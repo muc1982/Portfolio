@@ -25,14 +25,6 @@
     width: 100%;
     box-sizing: border-box;
 
-    @media screen and (width >= 900px) {
-        display: flex !important;
-    }
-
-    @media screen and (width <= 899px) {
-        display: none !important;
-    }
-
     &::before {
         content: '';
         position: absolute;
