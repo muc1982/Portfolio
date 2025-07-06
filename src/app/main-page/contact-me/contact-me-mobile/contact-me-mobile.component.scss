@@ -1014,7 +1014,7 @@
 // Desktop bleibt vollständig unverändert!
 
 // ===== NUR MOBILE UND TABLET (DESKTOP UNBERÜHRT) =====
-@media screen and (max-width: 899px) {
+@media screen and (width <= 899px) {
   
   // ===== CONTACT ME WEITER NACH UNTEN =====
   .contact-me-mobile-container,
@@ -1024,7 +1024,7 @@
     margin-top: clamp(64px, 12vw, 96px) !important;
     padding-top: clamp(48px, 9vw, 72px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-top: clamp(48px, 10vw, 64px) !important;
       padding-top: clamp(32px, 7vw, 48px) !important;
     }
@@ -1035,7 +1035,7 @@
       margin-bottom: clamp(32px, 6vw, 48px) !important;
       padding-top: clamp(24px, 5vw, 36px) !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         margin-top: clamp(24px, 5vw, 32px) !important;
         margin-bottom: clamp(24px, 5vw, 32px) !important;
         padding-top: clamp(16px, 4vw, 24px) !important;
@@ -1050,7 +1050,7 @@
     margin-top: clamp(56px, 11vw, 84px) !important;
     margin-bottom: clamp(56px, 11vw, 84px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-top: clamp(40px, 8vw, 56px) !important;
       margin-bottom: clamp(40px, 8vw, 56px) !important;
     }
@@ -1061,7 +1061,7 @@
       padding-left: clamp(20px, 5vw, 28px) !important;
       padding-right: clamp(20px, 5vw, 28px) !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         padding-left: clamp(16px, 4vw, 20px) !important;
         padding-right: clamp(16px, 4vw, 20px) !important;
       }
@@ -1075,7 +1075,7 @@
       margin-top: clamp(32px, 6vw, 48px) !important;
       margin-bottom: clamp(32px, 6vw, 48px) !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         margin-top: clamp(24px, 5vw, 32px) !important;
         margin-bottom: clamp(24px, 5vw, 32px) !important;
       }
@@ -1087,7 +1087,7 @@
     margin-top: clamp(24px, 5vw, 36px) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-top: clamp(20px, 4vw, 28px) !important;
       margin-bottom: clamp(12px, 2.5vw, 16px) !important;
     }
@@ -1097,7 +1097,7 @@
   p {
     margin-bottom: clamp(16px, 3vw, 24px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-bottom: clamp(12px, 2.5vw, 16px) !important;
     }
     
@@ -1114,7 +1114,7 @@
     padding-left: clamp(20px, 5vw, 28px) !important;
     padding-right: clamp(20px, 5vw, 28px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       padding-left: clamp(16px, 4vw, 20px) !important;
       padding-right: clamp(16px, 4vw, 20px) !important;
     }
@@ -1122,7 +1122,7 @@
 }
 
 // ===== TABLET-SPEZIFISCHE ABSTÄNDE =====
-@media screen and (min-width: 481px) and (max-width: 899px) {
+@media screen and (width >= 481px) and (width <= 899px) {
   
   // ===== TABLET-OPTIMIERTE ABSTÄNDE =====
   .contact-me-mobile-container,
@@ -1154,7 +1154,7 @@
 // Desktop bleibt vollständig unverändert!
 
 // ===== NUR MOBILE UND TABLET (DESKTOP UNBERÜHRT) =====
-@media screen and (max-width: 899px) {
+@media screen and (width <= 899px) {
   
   // ===== CONTACT ME WEITER NACH UNTEN =====
   .contact-me-mobile-container,
@@ -1164,7 +1164,7 @@
     margin-top: clamp(64px, 12vw, 96px) !important;
     padding-top: clamp(48px, 9vw, 72px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-top: clamp(48px, 10vw, 64px) !important;
       padding-top: clamp(32px, 7vw, 48px) !important;
     }
@@ -1175,7 +1175,7 @@
       margin-bottom: clamp(32px, 6vw, 48px) !important;
       padding-top: clamp(24px, 5vw, 36px) !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         margin-top: clamp(24px, 5vw, 32px) !important;
         margin-bottom: clamp(24px, 5vw, 32px) !important;
         padding-top: clamp(16px, 4vw, 24px) !important;
@@ -1190,7 +1190,7 @@
     margin-top: clamp(56px, 11vw, 84px) !important;
     margin-bottom: clamp(56px, 11vw, 84px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-top: clamp(40px, 8vw, 56px) !important;
       margin-bottom: clamp(40px, 8vw, 56px) !important;
     }
@@ -1201,7 +1201,7 @@
       padding-left: clamp(20px, 5vw, 28px) !important;
       padding-right: clamp(20px, 5vw, 28px) !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         padding-left: clamp(16px, 4vw, 20px) !important;
         padding-right: clamp(16px, 4vw, 20px) !important;
       }
@@ -1215,7 +1215,7 @@
       margin-top: 6rem !important;
       margin-bottom: clamp(32px, 6vw, 48px) !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         margin-top: clamp(24px, 5vw, 32px) !important;
         margin-bottom: clamp(24px, 5vw, 32px) !important;
       }
@@ -1227,7 +1227,7 @@
     margin-top: clamp(24px, 5vw, 36px) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-top: clamp(20px, 4vw, 28px) !important;
       margin-bottom: clamp(12px, 2.5vw, 16px) !important;
     }
@@ -1237,7 +1237,7 @@
   p {
     margin-bottom: clamp(16px, 3vw, 24px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-bottom: clamp(12px, 2.5vw, 16px) !important;
     }
     
@@ -1254,7 +1254,7 @@
     padding-left: clamp(20px, 5vw, 28px) !important;
     padding-right: clamp(20px, 5vw, 28px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       padding-left: clamp(16px, 4vw, 20px) !important;
       padding-right: clamp(16px, 4vw, 20px) !important;
     }
@@ -1262,7 +1262,7 @@
 }
 
 // ===== TABLET-SPEZIFISCHE ABSTÄNDE =====
-@media screen and (min-width: 481px) and (max-width: 899px) {
+@media screen and (width >= 481px) and (width <= 899px) {
   
   // ===== TABLET-OPTIMIERTE ABSTÄNDE =====
   .contact-me-mobile-container,

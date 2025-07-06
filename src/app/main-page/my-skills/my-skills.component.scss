@@ -574,13 +574,14 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   50% {
     opacity: 0.2;
     transform: scale(1.1);
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .talk-button[_ngcontent-ng-c1087063170] {
     position: relative;
     background: #0A84FF;
@@ -600,7 +601,7 @@
 
   .talk-button[_ngcontent-ng-c1087063170]:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(10, 132, 255, 0.3);
+    box-shadow: 0 8px 24px rgb(10 132 255 / 30%);
   }
 
   .talk-button[_ngcontent-ng-c1087063170]:active {
@@ -616,7 +617,7 @@
   .button-glow[_ngcontent-ng-c1087063170] {
     position: absolute;
     inset: -2px;
-    background: radial-gradient(circle, rgba(10, 132, 255, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgb(10 132 255 / 20%) 0%, transparent 70%);
     border-radius: inherit;
     animation: button-glow-elegant 3s ease-in-out infinite;
     pointer-events: none;
@@ -635,6 +636,7 @@
 // Mobile Container Styles
 .my-skills-container-mobile {
   @include full-width-background;
+
   position: relative;
   padding: clamp(32px, 6vw, 48px) 0;
   border-radius: 0;
@@ -655,16 +657,19 @@
 
   h2 {
     @include h2Title;
+
     margin-bottom: clamp(24px, 6vw, 32px);
     padding-top: 0;
     position: relative;
     z-index: 2;
     text-align: center;
+
     @include unified-content-padding;
   }
 
   .my-skills-content {
     @include unified-content-padding;
+
     display: flex;
     flex-direction: column;
     gap: clamp(24px, 6vw, 32px);
@@ -792,7 +797,7 @@
         color: $apple-text-secondary;
         line-height: 1.6;
         text-align: center;
-        margin: 0 0 clamp(16px, 4vw, 20px) 0;
+        margin: 0 0 clamp(16px, 4vw, 20px);
       }
 
       .current-learning {

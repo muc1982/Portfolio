@@ -9,12 +9,12 @@
   background: linear-gradient(135deg, #000 0%, #1C1C1E 100%);
   
   // Mobile Only: <= 899px
-  @media screen and (max-width: 899px) {
+  @media screen and (width <= 899px) {
     display: block;
   }
   
   // Desktop: >= 900px 
-  @media screen and (min-width: 900px) {
+  @media screen and (width >= 900px) {
     display: none;
   }
   
@@ -48,7 +48,7 @@ footer {
   text-align: center;
   
   // Mobile (320px - 599px): 1 Spalte
-  @media screen and (max-width: 599px) {
+  @media screen and (width <= 599px) {
     grid-template-columns: 1fr;
     grid-template-areas: 
       "logo"
@@ -57,7 +57,7 @@ footer {
   }
   
   // Tablet (600px - 899px): 2 Spalten  
-  @media screen and (min-width: 600px) and (max-width: 899px) {
+  @media screen and (width >= 600px) and (width <= 899px) {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
       "logo social"
@@ -106,6 +106,7 @@ footer {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+
     @include apple-logo;
   }
   
@@ -179,7 +180,7 @@ footer {
     align-items: center;
     gap: clamp(8px, 2vw, 12px);
     
-    @media screen and (min-width: 600px) {
+    @media screen and (width >= 600px) {
       flex-direction: row;
       justify-content: space-between;
     }
@@ -223,7 +224,7 @@ footer {
   border: 0;
 }
 
-@media screen and (max-width: 899px) {
+@media screen and (width <= 899px) {
   
   // ===== FOOTER-MOBILE-CONTAINER =====
   .footer-mobile-container,
@@ -235,7 +236,7 @@ footer {
     backdrop-filter: blur(20px);
     border-top: 1px solid rgb(255 255 255 / 10%);
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       padding: clamp(24px, 5vw, 32px) clamp(16px, 4vw, 20px);
     }
   }
@@ -248,7 +249,7 @@ footer {
     flex-direction: column;
     gap: clamp(24px, 5vw, 32px);
     
-    @media screen and (min-width: 768px) and (max-width: 899px) {
+    @media screen and (width >= 768px) and (width <= 899px) {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -265,12 +266,12 @@ footer {
     gap: clamp(16px, 3vw, 20px);
     align-items: center;
     
-    @media screen and (min-width: 481px) and (max-width: 899px) {
+    @media screen and (width >= 481px) and (width <= 899px) {
       flex-direction: row;
       gap: clamp(24px, 5vw, 32px);
     }
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       gap: clamp(12px, 2.5vw, 16px);
     }
   }
@@ -299,7 +300,7 @@ footer {
     min-height: 44px !important;
     min-width: 80px !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       font-size: 16px !important;
       padding: 8px 16px !important;
       min-height: 40px !important;
@@ -326,7 +327,7 @@ footer {
         opacity: 1 !important;
       }
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         transform: translateY(-1px) !important;
       }
     }
@@ -350,11 +351,11 @@ footer {
     font-size: clamp(14px, 3vw, 16px) !important;
     color: $apple-text-tertiary !important;
     text-align: center !important;
-    margin: clamp(16px, 3vw, 24px) 0 0 0 !important;
+    margin: clamp(16px, 3vw, 24px) 0 0 !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       font-size: 14px !important;
-      margin: 12px 0 0 0 !important;
+      margin: 12px 0 0 !important;
     }
   }
   
@@ -367,7 +368,7 @@ footer {
     justify-content: center !important;
     margin-top: clamp(20px, 4vw, 28px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       gap: clamp(12px, 3vw, 16px) !important;
       margin-top: clamp(16px, 3vw, 20px) !important;
     }
@@ -384,7 +385,7 @@ footer {
       text-decoration: none !important;
       transition: $apple-transition-fast !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         width: 40px !important;
         height: 40px !important;
       }
@@ -394,7 +395,7 @@ footer {
         color: $apple-primary !important;
         transform: translateY(-2px) scale(1.05) !important;
         
-        @media screen and (max-width: 480px) {
+        @media screen and (width <= 480px) {
           transform: translateY(-1px) scale(1.02) !important;
         }
       }
@@ -413,7 +414,7 @@ footer {
     margin: clamp(24px, 5vw, 32px) 0 !important;
     border: none !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin: clamp(16px, 4vw, 24px) 0 !important;
     }
   }
@@ -425,7 +426,7 @@ footer {
     justify-content: center !important;
     margin-bottom: clamp(20px, 4vw, 28px) !important;
     
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
       margin-bottom: clamp(16px, 3vw, 20px) !important;
     }
     
@@ -434,7 +435,7 @@ footer {
       width: auto !important;
       filter: brightness(1.2) !important;
       
-      @media screen and (max-width: 480px) {
+      @media screen and (width <= 480px) {
         height: clamp(28px, 7vw, 36px) !important;
       }
     }

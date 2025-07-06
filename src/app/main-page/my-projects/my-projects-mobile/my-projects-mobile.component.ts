@@ -51,6 +51,8 @@ export class MyProjectsMobileComponent implements OnDestroy, AfterViewInit {
 
   // Empfohlene und funktionierende trackBy-Funktion
   trackByIndex: TrackByFunction<Project> = (index: number, _item: Project) => index;
+project: any;
+index: any;
 
   constructor(
     private translate: TranslateService,
