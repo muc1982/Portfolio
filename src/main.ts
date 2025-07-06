@@ -8,17 +8,9 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core"
 import { TranslateHttpLoader } from "@ngx-translate/http-loader"
 import { HttpClient } from "@angular/common/http"
 
-// ✅ KORREKTE Angular Imports für Vercel
-import { inject } from "@vercel/analytics"
-import { injectSpeedInsights } from "@vercel/speed-insights"
-
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json")
 }
-
-// ✅ Analytics initialisieren
-inject();
-injectSpeedInsights();
 
 bootstrapApplication(AppComponent, {
   providers: [
