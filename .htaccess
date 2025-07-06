@@ -1,9 +1,5 @@
 RewriteEngine On
-
-# Angular Router Support
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ /index.html [L]
-
-# Fallback für 404 Errors
 ErrorDocument 404 /index.html
