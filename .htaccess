@@ -1,0 +1,192 @@
+# ===== ANGULAR HTACCESS CONFIGURATION =====
+# Optimiert für Angular Single Page Applications (SPA)
+# Für FileZilla Upload und Server-Deployment
+
+# ===== REWRITE ENGINE AKTIVIEREN =====
+RewriteEngine On
+
+# ===== ANGULAR ROUTING - SPA SUPPORT =====
+# Alle Anfragen an index.html weiterleiten (außer existierende Dateien/Ordner)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.html [L]
+
+# ===== SECURITY HEADERS =====
+# X-Frame-Options: Schutz vor Clickjacking
+Header always set X-Frame-Options "SAMEORIGIN"
+
+# X-Content-Type-Options: MIME-Type Sniffing verhindern
+Header always set X-Content-Type-Options "nosniff"
+
+# X-XSS-Protection: XSS-Schutz aktivieren
+Header always set X-XSS-Protection "1; mode=block"
+
+# Referrer Policy: Referrer-Informationen kontrollieren
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Content Security Policy (CSP) - Basis-Konfiguration
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;"
+
+# ===== COMPRESSION - GZIP =====
+# Aktiviere Kompression für bessere Performance
+<IfModule mod_deflate.c>
+    # HTML, CSS, JavaScript, Text, XML komprimieren
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/ld+json
+    AddOutputFilterByType DEFLATE application/manifest+json
+    AddOutputFilterByType DEFLATE image/svg+xml
+    
+    # Browser-spezifische Kompression
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+
+# ===== CACHING - BROWSER CACHE =====
+# Optimierte Cache-Einstellungen für Angular Assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # HTML-Dateien: Kurze Cache-Zeit (1 Stunde)
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # CSS und JavaScript: Mittlere Cache-Zeit (1 Woche)
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType application/x-javascript "access plus 1 week"
+    
+    # Bilder: Lange Cache-Zeit (1 Monat)
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/ico "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+    
+    # Fonts: Sehr lange Cache-Zeit (1 Jahr)
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    
+    # JSON und XML: Kurze Cache-Zeit (1 Tag)
+    ExpiresByType application/json "access plus 1 day"
+    ExpiresByType application/xml "access plus 1 day"
+    ExpiresByType text/xml "access plus 1 day"
+    
+    # Manifest-Dateien: Mittlere Cache-Zeit (1 Woche)
+    ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+# ===== CACHE CONTROL HEADERS =====
+<IfModule mod_headers.c>
+    # Cache-Control für verschiedene Dateitypen
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=604800, immutable"
+    </FilesMatch>
+    
+    <FilesMatch "\.(png|jpg|jpeg|gif|svg|webp|ico)$">
+        Header set Cache-Control "public, max-age=2592000, immutable"
+    </FilesMatch>
+    
+    <FilesMatch "\.(woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "public, max-age=3600, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# ===== MIME TYPES =====
+# Korrekte MIME-Types für moderne Web-Assets
+<IfModule mod_mime.c>
+    # JavaScript
+    AddType application/javascript .js
+    AddType application/json .json
+    
+    # CSS
+    AddType text/css .css
+    
+    # Fonts
+    AddType font/woff .woff
+    AddType font/woff2 .woff2
+    AddType application/font-woff .woff
+    AddType application/font-woff2 .woff2
+    
+    # Images
+    AddType image/svg+xml .svg
+    AddType image/webp .webp
+    
+    # Manifest
+    AddType application/manifest+json .webmanifest
+    AddType application/manifest+json .json
+</IfModule>
+
+# ===== HTTPS REDIRECT =====
+# Automatische Weiterleitung zu HTTPS (optional - aktivieren falls HTTPS verfügbar)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ===== WWW REDIRECT =====
+# Weiterleitung von www zu non-www (optional - anpassen nach Bedarf)
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# ===== ERROR PAGES =====
+# Custom Error Pages (optional)
+# ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html
+
+# ===== DIRECTORY BROWSING =====
+# Verzeichnis-Browsing deaktivieren
+Options -Indexes
+
+# ===== FILE ACCESS RESTRICTIONS =====
+# Zugriff auf sensible Dateien verhindern
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ===== ANGULAR SPECIFIC =====
+# Service Worker Support
+<FilesMatch "sw\.js$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# Ngsw-worker.js (Angular Service Worker)
+<FilesMatch "ngsw-worker\.js$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# ===== PERFORMANCE OPTIMIZATIONS =====
+# ETags deaktivieren (für bessere Cache-Performance)
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+# ===== CORS HEADERS (falls benötigt) =====
+# Cross-Origin Resource Sharing aktivieren (optional)
+# Header set Access-Control-Allow-Origin "*"
+# Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+# Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+
+# ===== ENDE DER KONFIGURATION =====
+
