@@ -6,7 +6,8 @@ import {
   ViewChildren,
   QueryList,
   OnDestroy,
-  TrackByFunction
+  TrackByFunction,
+  ViewEncapsulation
 } from '@angular/core';
 import { Project } from '../../../intefaces/project.interface';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
@@ -31,7 +32,8 @@ gsap.registerPlugin(ScrollTrigger);
     ScrollAnimateDirective
   ],
   templateUrl: './my-projects-mobile.component.html',
-  
+  styleUrls: ['./my-projects-mobile.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MyProjectsMobileComponent implements OnDestroy, AfterViewInit {
   @ViewChild('animatedEl1', { static: false }) animatedEl1?: ElementRef;

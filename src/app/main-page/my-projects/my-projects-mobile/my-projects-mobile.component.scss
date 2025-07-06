@@ -1,1505 +1,562 @@
-// ===== KONFLIKT-FREIE MOBILE PROJECTS SCSS =====
-// Höhere Spezifität durch Component-Scoping verhindert globale Überschreibungen
-
+// ===== MY PROJECTS MOBILE - PROFESSIONELLE SCSS =====
 @use '../../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-// ===== COMPONENT ROOT - HÖCHSTE SPEZIFITÄT =====
-.my-projects-mobile {
-  // Base Container mit Anti-Overflow Protection
-  .my-projects-container {
-    position: relative;
-    margin: clamp(12px, 3vw, 20px) auto !important;
-    max-width: 100% !important;
-    min-height: auto;
-    padding: clamp(20px, 5vw, 32px) !important;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 6%) 0%, 
-      rgb(255 255 255 / 3%) 50%,
-      rgb(255 255 255 / 8%) 100%);
-    border-radius: $apple-radius-xl;
-    border: 1px solid rgb(255 255 255 / 15%);
-    box-shadow: 
-      0 12px 40px rgb(0 0 0 / 12%),
-      0 6px 20px rgb(0 0 0 / 8%),
-      inset 0 1px 0 rgb(255 255 255 / 20%);
-    width: calc(100% - clamp(24px, 6vw, 40px)) !important;
-    box-sizing: border-box;
-    overflow-x: hidden !important; // Anti-Overflow
-    overflow-y: visible;
+// ===== MAIN CONTAINER =====
+#my-projects-mobile.my-projects-container {
+  position: relative;
+  margin: clamp(16px, 4vw, 24px) auto;
+  max-width: 100%;
+  padding: clamp(24px, 6vw, 40px);
+  background: linear-gradient(135deg, 
+    rgb(255 255 255 / 10%) 0%, 
+    rgb(255 255 255 / 5%) 50%,
+    rgb(255 255 255 / 15%) 100%);
+  border-radius: $apple-radius-xl;
+  border: 1px solid rgb(255 255 255 / 25%);
+  box-shadow: 
+    0 20px 60px rgb(0 0 0 / 15%),
+    0 10px 30px rgb(0 0 0 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  backdrop-filter: blur(40px);
+  overflow: hidden;
+  box-sizing: border-box;
 
-    // MOBILE ONLY - verhindert Desktop-Anzeige
-    @media (width <= 56.1875rem) {
-      display: flex !important;
-    }
-
-    @media (width >= 56.25rem) {
-      display: none !important;
-    }
-
-    // ===== HINTERGRUND-EFFEKTE =====
-    &::before {
-      content: '';
-      position: absolute;
-      top: -40%;
-      right: -40%;
-      width: 80%;
-      height: 100%;
-      background: radial-gradient(circle, rgb($apple-primary / 8%) 0%, transparent 60%);
-      animation: projects-ambient 15s ease-in-out infinite;
-      filter: blur(2.5rem);
-      z-index: 0;
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, 
-        rgb(255 255 255 / 3%) 0%, 
-        transparent 25%,
-        transparent 75%,
-        rgb(255 255 255 / 2%) 100%);
-      border-radius: inherit;
-      pointer-events: none;
-      z-index: 1;
-    }
+  // Mobile only display
+  @media (max-width: 899px) {
+    display: block !important;
   }
 
-  // ===== TITEL - ÜBERSCHREIBUNGS-SCHUTZ =====
-  .my-projects-container h2 {
-    margin-bottom: clamp(20px, 5vw, 28px) !important; // Harmonisiert
-    padding-top: clamp(12px, 3vw, 18px) !important; // Harmonisiert
+  @media (min-width: 900px) {
+    display: none !important;
+  }
+
+  // Background effects
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 120%;
+    height: 200%;
+    background: radial-gradient(circle, rgba($apple-primary, 0.12) 0%, transparent 70%);
+    animation: ambient-glow 25s ease-in-out infinite;
+    filter: blur(80px);
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+      rgb(255 255 255 / 8%) 0%, 
+      transparent 30%,
+      transparent 70%,
+      rgba($apple-primary, 0.05) 100%);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // ===== TITLE =====
+  h2 {
+    @include h2Title;
+    margin-bottom: clamp(28px, 7vw, 40px);
+    text-align: center;
     position: relative;
     z-index: 2;
-    text-align: center;
-    // KRITISCH: Font-Size gegen globale Überschreibung schützen
-    font-size: clamp(20px, 5vw, 26px) !important; // Optimiert für Mobile
+    font-size: clamp(26px, 6.5vw, 36px) !important;
     color: $apple-text-primary !important;
-    font-family: $apple-font-family !important;
     font-weight: $apple-font-weight-bold !important;
-
-    @include h2Title;
     
     &::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: clamp(40px, 10vw, 60px);
-      height: 3px;
-      background: linear-gradient(90deg, 
-        transparent 0%, 
-        $apple-primary 20%, 
-        $apple-primary 80%, 
-        transparent 100%);
+      width: clamp(60px, 15vw, 100px);
+      height: 4px;
+      background: linear-gradient(90deg, transparent, $apple-primary, transparent);
       border-radius: 2px;
       opacity: 0.8;
-    }
-    
-    // Extra kleine Screens
-    @media screen and (width <= 480px) {
-      font-size: clamp(18px, 4.5vw, 20px) !important;
-      margin-bottom: clamp(16px, 4vw, 20px) !important;
-      padding-top: clamp(8px, 2vw, 12px) !important;
     }
   }
 
   // ===== CONTENT WRAPPER =====
   .my-projects-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(16px, 4vw, 22px) !important; // Harmonisiert
     position: relative;
     z-index: 2;
-    padding: clamp(8px, 2vw, 16px) !important; // Reduziert
-    max-width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-    
-    @media screen and (width <= 480px) {
-      gap: clamp(12px, 3vw, 16px) !important;
-      padding: clamp(6px, 1.5vw, 10px) !important;
-    }
-  }
-
-  // ===== NAVIGATION TABS =====
-  .my-projects-content nav {
-    display: flex;
-    gap: clamp(4px, 1vw, 8px) !important; // Harmonisiert
-    justify-content: center;
-    margin-bottom: clamp(20px, 5vw, 26px) !important; // Harmonisiert
-    flex-wrap: wrap;
-    padding: clamp(4px, 1vw, 8px) !important;
-    
-    @media screen and (width <= 480px) {
-      margin-bottom: clamp(16px, 4vw, 20px) !important;
-      gap: clamp(3px, 0.75vw, 5px) !important;
-    }
-
-    > div {
-      background: linear-gradient(135deg, 
-        rgb(255 255 255 / 8%) 0%, 
-        rgb(255 255 255 / 4%) 50%,
-        rgb(255 255 255 / 6%) 100%);
-      border: 1px solid rgb(255 255 255 / 15%);
-      border-radius: $apple-radius-large;
-      padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px) !important; // Harmonisiert
-      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      cursor: pointer;
-      position: relative;
-      backdrop-filter: blur(20px);
-      min-width: fit-content;
-      box-shadow: 
-        0 4px 12px rgb(0 0 0 / 10%),
-        inset 0 1px 0 rgb(255 255 255 / 20%);
-
-      &::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        background: $apple-teal-gradient;
-        border-radius: $apple-radius-xl;
-        opacity: 0;
-        transition: all 0.3s ease;
-        z-index: -1;
-      }
-
-      &:hover {
-        background: linear-gradient(135deg, 
-          rgb(255 255 255 / 12%) 0%, 
-          rgb(255 255 255 / 6%) 50%,
-          rgb(255 255 255 / 10%) 100%);
-        border-color: rgb($apple-primary / 30%);
-        transform: translateY(-1px) scale(1.005); // Subtiler
-        box-shadow: 
-          0 6px 20px rgb(0 0 0 / 12%),
-          0 3px 8px rgba($apple-primary, 0.08),
-          inset 0 1px 0 rgb(255 255 255 / 25%);
-
-        &::before {
-          opacity: 0.1;
-        }
-      }
-
-      &.active {
-        background: linear-gradient(135deg, 
-          rgb($apple-primary / 15%) 0%, 
-          rgb($apple-primary / 8%) 50%,
-          rgb($apple-primary / 12%) 100%);
-        border-color: rgb($apple-primary / 40%);
-        box-shadow: 
-          0 5px 16px rgba($apple-primary, 0.18),
-          inset 0 1px 0 rgb(255 255 255 / 20%);
-
-        &::before {
-          opacity: 0.2;
-        }
-      }
-      
-      @media screen and (width <= 480px) {
-        padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px) !important;
-        
-        &:hover {
-          transform: translateY(-0.5px) scale(1.002);
-        }
-      }
-
-      > span {
-        font-family: $apple-font-family !important;
-        font-weight: $apple-font-weight-semibold !important;
-        color: $apple-text-secondary !important;
-        // KRITISCH: Font-Size Schutz gegen globale Überschreibung
-        font-size: clamp(16px, 3vw, 18px) !important;
-        transition: $apple-transition-fast;
-        white-space: nowrap;
-        display: block;
-        
-        @media screen and (width <= 480px) {
-          font-size: 16px !important; // WCAG Minimum gesichert
-        }
-      }
-
-      &.active > span {
-        color: $apple-primary !important;
-        font-weight: $apple-font-weight-bold !important;
-      }
-    }
-  }
-
-  // ===== PROFESSIONELLE PROJEKT-KARTEN =====
-  .project {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(16px, 4vw, 24px) !important;
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 8%) 0%, 
-      rgb(255 255 255 / 4%) 50%,
-      rgb(255 255 255 / 10%) 100%);
-    border-radius: $apple-radius-xl;
-    border: 1px solid rgb(255 255 255 / 20%);
-    padding: clamp(20px, 5vw, 28px) !important;
-    backdrop-filter: blur(30px);
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    box-shadow: 
-      0 8px 32px rgb(0 0 0 / 12%),
-      0 4px 16px rgb(0 0 0 / 8%),
-      inset 0 1px 0 rgb(255 255 255 / 25%);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    overflow: hidden;
-
-    &:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 
-        0 16px 48px rgb(0 0 0 / 16%),
-        0 8px 24px rgb(0 0 0 / 12%),
-        0 4px 12px rgba($apple-primary, 0.1),
-        inset 0 1px 0 rgb(255 255 255 / 30%);
-      border-color: rgb(255 255 255 / 30%);
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg,
-        rgb(255 255 255 / 12%) 0%,
-        transparent 50%,
-        rgb($apple-primary / 4%) 100%);
-      border-radius: inherit;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    
-    &:hover::after {
-      opacity: 1;
-    }
-    
-    @media screen and (width <= 480px) {
-      gap: clamp(12px, 3vw, 16px) !important;
-      padding: clamp(16px, 4vw, 20px) !important;
-      
-      &:hover {
-        transform: translateY(-2px) scale(1.005);
-      }
-    }
-  }
-
-  // ===== PROJEKT TOP =====
-  .project-top {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
-    position: relative;
-    z-index: 1;
     width: 100%;
     
-    @media screen and (width <= 480px) {
-      gap: clamp(8px, 2vw, 10px) !important;
-    }
-  }
-
-  // ===== PROJEKT-TITEL =====
-  .project-top-title {
-    font-family: $apple-font-family !important;
-    font-weight: $apple-font-weight-bold !important;
-    color: $apple-primary !important;
-    // KRITISCH: Font-Size gegen Überschreibung schützen
-    font-size: clamp(16px, 4vw, 20px) !important; // Harmonisiert
-    margin: 0 0 clamp(8px, 2vw, 12px) !important;
-    text-align: center;
-    line-height: 1.3;
-    position: relative;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: clamp(30px, 7vw, 40px);
-      height: 2px;
-      background: linear-gradient(90deg, 
-        transparent 0%, 
-        $apple-primary 30%, 
-        $apple-primary 70%, 
-        transparent 100%);
-      border-radius: 1px;
-      opacity: 0.6;
-    }
-    
-    @media screen and (width <= 480px) {
-      font-size: 16px !important; // WCAG Minimum
-    }
-  }
-
-  // ===== TECHNOLOGIEN =====
-  .technologies {
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 8%) 0%, 
-      rgb(255 255 255 / 4%) 50%,
-      rgb(255 255 255 / 6%) 100%);
-    border-radius: $apple-radius-large;
-    padding: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
-    border: 1px solid rgb(255 255 255 / 12%);
-    backdrop-filter: blur(15px);
-    box-shadow: 
-      0 3px 12px rgb(0 0 0 / 6%),
-      inset 0 1px 0 rgb(255 255 255 / 15%);
-    
-    @media screen and (width <= 480px) {
-      padding: clamp(8px, 2vw, 10px) !important;
-    }
-  }
-
-  .technologies-top {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(3px, 0.75vw, 5px) !important; // Harmonisiert
-    align-items: flex-start;
-    margin-bottom: clamp(5px, 1.25vw, 8px) !important;
-
-    @media (width >= 30rem) {
-      flex-flow: row wrap;
-      align-items: center;
-    }
-
-    > span:first-child {
-      font-family: $apple-font-family !important;
-      color: $apple-text-secondary !important;
-      font-size: 16px !important; // WCAG Minimum
-      font-weight: $apple-font-weight-medium !important;
-      white-space: nowrap;
-    }
-  }
-
-  .technologies-arr {
-    color: $apple-primary !important;
-    font-weight: $apple-font-weight-semibold !important;
-    font-size: 16px !important; // WCAG Minimum
-    line-height: 1.4;
-    word-break: break-word;
-  }
-
-  .duration {
-    font-family: $apple-font-family !important;
-    color: $apple-text-tertiary !important;
-    font-size: 16px !important; // WCAG Minimum
-    line-height: 1.3;
-
-    span {
-      color: $apple-text-secondary !important;
-      font-weight: $apple-font-weight-medium !important;
-    }
-  }
-
-  // ===== PROJEKT-BILDER =====
-  .project-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 4%) 0%, 
-      rgb(255 255 255 / 2%) 50%,
-      rgb(255 255 255 / 3%) 100%);
-    border-radius: $apple-radius-large;
-    padding: clamp(10px, 2.5vw, 16px) !important; // Harmonisiert
-    min-height: clamp(80px, 16vw, 120px) !important; // Harmonisiert
-    position: relative;
-    border: 1px solid rgb(255 255 255 / 10%);
-    backdrop-filter: blur(15px);
-    box-shadow: 
-      0 3px 12px rgb(0 0 0 / 6%),
-      inset 0 1px 0 rgb(255 255 255 / 15%);
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(45deg,
-      rgb($apple-primary / 4%) 0%,
-      transparent 50%,
-      rgb($apple-secondary / 4%) 100%);
-      border-radius: inherit;
-      z-index: 0;
-    }
-    
-    &:hover {
-      transform: translateY(-1px) scale(1.002); // Subtiler
-      box-shadow: 
-        0 6px 18px rgb(0 0 0 / 10%),
-        0 3px 8px rgba($apple-primary, 0.06),
-        inset 0 1px 0 rgb(255 255 255 / 20%);
-      border-color: rgb(255 255 255 / 15%);
-    }
-    
-    @media screen and (width <= 480px) {
-      padding: clamp(8px, 2vw, 12px) !important;
-      min-height: clamp(60px, 14vw, 100px) !important;
+    // ===== NAVIGATION =====
+    nav {
+      margin-bottom: clamp(24px, 6vw, 32px);
       
-      &:hover {
-        transform: translateY(-0.5px);
-      }
-    }
-
-    img {
-      max-width: 100% !important;
-      height: auto !important;
-      border-radius: $apple-radius-medium;
-      box-shadow: 
-        0 6px 18px rgb(0 0 0 / 10%),
-        0 3px 8px rgb(0 0 0 / 6%);
-      position: relative;
-      z-index: 1;
-      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
-      &:hover {
-        transform: scale(1.01); // Subtiler
-        box-shadow: 
-          0 8px 24px rgb(0 0 0 / 12%),
-          0 4px 12px rgb(0 0 0 / 8%);
-      }
-      
-      &[src*="ellipse-small-blue"] {
-        width: clamp(16px, 4vw, 24px) !important;
-        height: clamp(16px, 4vw, 24px) !important;
-        max-width: 24px !important;
-        max-height: 24px !important;
-        object-fit: contain;
-        filter: brightness(1.1) saturate(1.2);
+      > div {
+        display: flex;
+        gap: clamp(8px, 2vw, 12px);
+        justify-content: center;
+        flex-wrap: wrap;
         
-        @media screen and (width <= 480px) {
-          width: clamp(14px, 3.5vw, 18px) !important;
-          height: clamp(14px, 3.5vw, 18px) !important;
-          max-width: 18px !important;
-          max-height: 18px !important;
-        }
-        
-        &:hover {
-          transform: scale(1.1);
-          filter: brightness(1.3) saturate(1.4);
-        }
-      }
-      
-      @media screen and (width <= 480px) {
-        &:hover {
-          transform: scale(1.005);
-        }
-      }
-    }
-  }
+        &.pointer {
+          background: rgb(255 255 255 / 10%);
+          border: 1px solid rgb(255 255 255 / 20%);
+          border-radius: $apple-radius-medium;
+          padding: clamp(10px, 2.5vw, 14px) clamp(14px, 3.5vw, 18px);
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+          font-size: clamp(14px, 3.5vw, 16px) !important;
+          font-weight: $apple-font-weight-medium !important;
+          color: $apple-text-secondary !important;
+          text-align: center;
+          min-width: clamp(80px, 20vw, 120px);
+          backdrop-filter: blur(25px);
+          position: relative;
+          overflow: hidden;
 
-  // ===== PROJEKT BOTTOM =====
-  .project-bottom {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(8px, 2vw, 12px) !important; // Harmonisiert
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    
-    @media screen and (width <= 480px) {
-      gap: clamp(6px, 1.5vw, 8px) !important;
-    }
-  }
+          &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgb(255 255 255 / 15%) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
 
-  // ===== TAB-ELEMENTE =====
-  .tab-li {
-    display: flex;
-    gap: clamp(8px, 2vw, 12px) !important; // Harmonisiert
-    align-items: flex-start;
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 4%) 0%, 
-      rgb(255 255 255 / 2%) 50%,
-      rgb(255 255 255 / 3%) 100%);
-    border-radius: $apple-radius-large;
-    padding: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    border: 1px solid rgb(255 255 255 / 8%);
-    backdrop-filter: blur(15px);
-    box-shadow: 
-      0 2px 6px rgb(0 0 0 / 4%),
-      inset 0 1px 0 rgb(255 255 255 / 10%);
+          &:hover {
+            background: rgb(255 255 255 / 15%);
+            border-color: rgba($apple-primary, 0.4);
+            transform: translateY(-2px);
+            color: $apple-text-primary !important;
+            box-shadow: 0 8px 24px rgb(0 0 0 / 15%);
 
-    &:hover {
-      background: linear-gradient(135deg, 
-        rgb(255 255 255 / 8%) 0%, 
-        rgb(255 255 255 / 4%) 50%,
-        rgb(255 255 255 / 6%) 100%);
-      transform: translateX(2px) translateY(-0.5px); // Subtiler
-      border-color: rgb(255 255 255 / 15%);
-      box-shadow: 
-        0 4px 14px rgb(0 0 0 / 8%),
-        0 2px 6px rgba($apple-primary, 0.04),
-        inset 0 1px 0 rgb(255 255 255 / 15%);
-    }
-    
-    @media screen and (width <= 480px) {
-      gap: clamp(6px, 1.5vw, 8px) !important;
-      padding: clamp(8px, 2vw, 10px) !important;
-      
-      &:hover {
-        transform: translateX(1px) translateY(-0.25px);
-      }
-    }
-  }
+            &::before {
+              opacity: 1;
+            }
+          }
 
-  .right-of-logo {
-    flex: 1;
-    width: 100%;
+          &.active {
+            background: linear-gradient(135deg, $apple-primary, color.adjust($apple-primary, $lightness: 8%));
+            border-color: $apple-primary;
+            color: white !important;
+            box-shadow: 
+              0 6px 20px rgba($apple-primary, 0.4),
+              0 3px 10px rgba($apple-primary, 0.3);
+            transform: translateY(-1px);
 
-    > div {
-      display: flex;
-      align-items: center;
-      gap: clamp(5px, 1.25vw, 8px) !important; // Harmonisiert
-      margin-bottom: clamp(5px, 1.25vw, 8px) !important;
+            &::before {
+              opacity: 0;
+            }
+          }
 
-      img {
-        width: clamp(12px, 2.5vw, 16px) !important;
-        height: clamp(12px, 2.5vw, 16px) !important;
-        flex-shrink: 0;
-        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-        
-        &[src*="ellipse-small-blue"] {
-          width: clamp(10px, 2.5vw, 14px) !important;
-          height: clamp(10px, 2.5vw, 14px) !important;
-          max-width: 14px !important;
-          max-height: 14px !important;
-          
-          @media screen and (width <= 480px) {
-            width: clamp(8px, 2vw, 12px) !important;
-            height: clamp(8px, 2vw, 12px) !important;
-            max-width: 12px !important;
-            max-height: 12px !important;
+          span {
+            position: relative;
+            z-index: 1;
+            font-size: inherit !important;
+            color: inherit !important;
+            font-weight: inherit !important;
           }
         }
       }
-
-      h4 {
-        font-family: $apple-font-family !important;
-        font-weight: $apple-font-weight-semibold !important;
-        color: $apple-primary !important;
-        font-size: 16px !important; // WCAG Minimum
-        margin: 0;
-        flex: 1;
-        line-height: 1.3;
-        display: flex;
-        align-items: center;
-        gap: clamp(3px, 0.75vw, 5px) !important;
-      }
     }
 
-    > p {
-      font-family: $apple-font-family !important;
-      font-weight: $apple-font-weight-regular !important;
-      color: $apple-text-secondary !important;
-      font-size: 16px !important; // WCAG Minimum
-      line-height: 1.5;
-      margin: 0;
-      text-align: left;
-      word-break: break-word;
-    }
-  }
-
-  // ===== PROJEKT-FOOTER MIT OPTIMIERTEN BUTTONS =====
-  .project-bottom-footer {
-    display: flex;
-    gap: clamp(8px, 2vw, 12px) !important; // Harmonisiert
-    justify-content: center;
-    margin-top: clamp(10px, 2.5vw, 16px) !important; // Harmonisiert
-    flex-wrap: wrap;
-    
-    @media screen and (width <= 480px) {
-      gap: clamp(5px, 1.25vw, 8px) !important;
-      margin-top: clamp(8px, 2vw, 12px) !important;
-    }
-
-    // ===== PROFESSIONELLE PROJECT BUTTONS =====
-    button {
-      position: relative;
-      background: $apple-primary !important;
-      color: white !important;
-      border: none !important;
-      border-radius: $apple-radius-medium !important;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-      font-size: clamp(16px, 3.5vw, 18px) !important;
-      padding: clamp(10px, 2.5vw, 14px) clamp(16px, 4vw, 24px) !important;
-      min-width: clamp(100px, 28vw, 160px) !important;
-      min-height: 44px !important; // WCAG Touch Target
-      z-index: 4 !important;
-      font-weight: $apple-font-weight-semibold !important;
-      font-family: $apple-font-family !important;
+    // ===== PROJECT CARDS =====
+    .project {
+      background: linear-gradient(135deg, 
+        rgb(255 255 255 / 12%) 0%, 
+        rgb(255 255 255 / 6%) 50%,
+        rgb(255 255 255 / 18%) 100%);
+      border-radius: $apple-radius-xl;
+      border: 1px solid rgb(255 255 255 / 30%);
+      padding: clamp(24px, 6vw, 32px);
+      margin-bottom: clamp(20px, 5vw, 28px);
+      backdrop-filter: blur(30px);
       box-shadow: 
-        0 4px 12px rgba($apple-primary, 0.25),
-        0 2px 6px rgba($apple-primary, 0.15),
-        inset 0 1px 0 rgb(255 255 255 / 20%);
-      box-sizing: border-box;
-      word-wrap: break-word;
-      text-align: center;
+        0 16px 48px rgb(0 0 0 / 12%),
+        0 8px 24px rgb(0 0 0 / 8%),
+        inset 0 1px 0 rgb(255 255 255 / 35%);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      overflow: hidden;
+      position: relative;
 
-      &::before {
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 
+          0 24px 80px rgb(0 0 0 / 18%),
+          0 12px 40px rgb(0 0 0 / 14%),
+          0 6px 20px rgba($apple-primary, 0.12),
+          inset 0 1px 0 rgb(255 255 255 / 40%);
+        border-color: rgb(255 255 255 / 40%);
+      }
+
+      &::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgb(255 255 255 / 15%) 0%, transparent 100%);
+        background: linear-gradient(135deg,
+          rgb(255 255 255 / 10%) 0%,
+          transparent 50%,
+          rgba($apple-primary, 0.08) 100%);
         opacity: 0;
-        transition: all 0.3s ease;
-        border-radius: inherit;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
       }
 
-      &:hover {
-        transform: translateY(-1px) scale(1.02) !important;
-        box-shadow: 
-          0 8px 24px rgba($apple-primary, 0.35),
-          0 4px 12px rgba($apple-primary, 0.25),
-          inset 0 1px 0 rgb(255 255 255 / 25%);
-        background: color.adjust($apple-primary, $lightness: 3%) !important;
-
-        &::before {
-          opacity: 1;
-        }
-      }
-      
-      &:active {
-        transform: translateY(-0.5px) scale(1.01) !important;
-      }
-      
-      @media screen and (width <= 480px) {
-        font-size: 16px !important;
-        padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 16px) !important;
-        min-width: clamp(80px, 25vw, 120px) !important;
-        min-height: 42px !important;
-        
-        &:hover {
-          transform: translateY(-0.5px) scale(1.01) !important;
-        }
-      }
-      
-      @media screen and (width <= 320px) {
-        font-size: 15px !important;
-        padding: 8px 12px !important;
-        min-width: 80px !important;
-        min-height: 40px !important;
-      }
-
-      a {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-weight: inherit !important;
-        display: block;
-        width: 100%;
-        height: 100%;
-        padding: 0 !important;
-        margin: 0 !important;
-        border: none !important;
-        background: none !important;
-        font-family: inherit !important;
-        line-height: 1.2;
-      }
-    }
-  }
-
-  // ===== TEAM PLAYER SEKTION =====
-  .team-player {
-    background: linear-gradient(135deg, 
-    rgb(255 255 255 / 4%) 0%, 
-    rgb(255 255 255 / 8%) 30%,
-    rgb(255 255 255 / 3%) 70%,
-    rgb(255 255 255 / 6%) 100%);
-    border-radius: $apple-radius-xl;
-    border: 1px solid rgb(255 255 255 / 12%);
-    padding: clamp(20px, 5vw, 30px) !important; // Harmonisiert
-    margin-top: clamp(20px, 5vw, 30px) !important; // Harmonisiert
-    text-align: center;
-    position: relative;
-    backdrop-filter: blur(30px);
-    box-shadow: 
-      0 12px 36px rgb(0 0 0 / 12%),
-      0 6px 18px rgb(0 0 0 / 8%),
-      inset 0 1px 0 rgb(255 255 255 / 20%);
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        rgb($apple-primary / 4%) 90deg,
-        rgb($apple-secondary / 4%) 180deg,
-        transparent 270deg,
-        transparent 360deg
-      );
-      animation: team-aurora 15s ease-in-out infinite;
-      z-index: 0;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        circle at 30% 70%,
-        rgb($apple-primary / 6%) 0%,
-        transparent 40%
-      );
-      z-index: 0;
-      animation: team-pulse 8s ease-in-out infinite;
-    }
-    
-    @media screen and (width <= 480px) {
-      padding: clamp(16px, 4vw, 20px) !important;
-      margin-top: clamp(16px, 4vw, 20px) !important;
-    }
-  }
-
-  .team-player-header {
-    position: relative;
-    margin-bottom: clamp(20px, 5vw, 26px) !important; // Harmonisiert
-    z-index: 2;
-    
-    @media screen and (width <= 480px) {
-      margin-bottom: clamp(16px, 4vw, 20px) !important;
-    }
-  }
-
-  .team-player-title {
-    margin-bottom: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
-    position: relative;
-    
-    @media screen and (width <= 480px) {
-      margin-bottom: clamp(8px, 2vw, 10px) !important;
-    }
-  }
-
-  .title-gradient {
-    font-family: $apple-font-family !important;
-    font-weight: $apple-font-weight-bold !important;
-    font-size: clamp(18px, 4.5vw, 24px) !important; // Harmonisiert
-    background: linear-gradient(
-      135deg, 
-      $apple-primary 0%,
-      color.adjust($apple-primary, $hue: 30deg) 35%,
-      $apple-secondary 70%,
-      color.adjust($apple-secondary, $hue: -20deg) 100%
-    );
-    background-size: 200% 200%;
-    background-clip: text;
-    color: transparent;
-    line-height: 1.2;
-    animation: gradient-flow 6s ease-in-out infinite;
-    position: relative;
-    display: inline-block;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: clamp(40px, 10vw, 60px);
-      height: 3px;
-      background: linear-gradient(90deg, transparent, $apple-primary, transparent);
-      border-radius: 2px;
-      animation: underline-glow 3s ease-in-out infinite;
-    }
-    
-    @media screen and (width <= 480px) {
-      font-size: clamp(16px, 4vw, 18px) !important;
-    }
-  }
-
-  .team-player-subtitle {
-    font-family: $apple-font-family !important;
-    font-weight: $apple-font-weight-medium !important;
-    font-size: 16px !important; // WCAG Minimum
-    color: $apple-text-secondary !important;
-    line-height: 1.5;
-    margin-bottom: clamp(14px, 3.5vw, 20px) !important; // Harmonisiert
-    opacity: 0.9;
-    letter-spacing: 0.01em;
-    
-    @media screen and (width <= 480px) {
-      margin-bottom: clamp(10px, 2.5vw, 14px) !important;
-    }
-  }
-
-  .team-player-decoration {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .floating-particle {
-    position: absolute;
-    width: clamp(3px, 0.75vw, 6px) !important; // Harmonisiert
-    height: clamp(3px, 0.75vw, 6px) !important;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      $apple-primary 0%,
-      color.adjust($apple-primary, $alpha: -0.3) 70%,
-      transparent 100%
-    );
-    box-shadow: 0 0 clamp(5px, 1.25vw, 8px) rgb($apple-primary / 50%);
-
-    &:nth-child(1) {
-      top: 15%;
-      left: 10%;
-      animation: particle-orbit 8s ease-in-out infinite;
-    }
-
-    &:nth-child(2) {
-      top: 25%;
-      right: 15%;
-      animation: particle-orbit 8s ease-in-out infinite 2.5s;
-    }
-
-    &:nth-child(3) {
-      bottom: 20%;
-      left: 20%;
-      animation: particle-orbit 8s ease-in-out infinite 5s;
-    }
-  }
-
-  .team-player-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .team-player-content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(10px, 2.5vw, 16px) !important; // Harmonisiert
-
-    @media (width >= 30rem) {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: clamp(12px, 3vw, 20px) !important;
-    }
-    
-    @media screen and (width <= 480px) {
-      gap: clamp(8px, 2vw, 12px) !important;
-    }
-  }
-
-  // ===== PREMIUM CARDS =====
-  .premium-card {
-    background: linear-gradient(145deg,
-    rgb(255 255 255 / 8%) 0%,
-    rgb(255 255 255 / 4%) 50%,
-    rgb(255 255 255 / 10%) 100%);
-    border: 1px solid rgb(255 255 255 / 15%);
-    border-radius: $apple-radius-large;
-    padding: clamp(12px, 3vw, 20px) !important; // Harmonisiert
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    backdrop-filter: blur(25px);
-    cursor: pointer;
-    transform-style: preserve-3d;
-    box-shadow: 
-      0 6px 18px rgb(0 0 0 / 8%),
-      0 3px 9px rgb(0 0 0 / 6%),
-      inset 0 1px 0 rgb(255 255 255 / 20%);
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(145deg,
-      rgb(255 255 255 / 12%) 0%,
-      transparent 50%,
-      rgb($apple-primary / 6%) 100%);
-      opacity: 0;
-      transition: all 0.4s ease;
-      z-index: 0;
-      border-radius: inherit;
-    }
-
-    &:hover {
-      background: linear-gradient(145deg,
-      rgb(255 255 255 / 15%) 0%,
-      rgb(255 255 255 / 8%) 50%,
-      rgb(255 255 255 / 18%) 100%);
-      transform: translateY(-3px) rotateY(1deg) scale(1.005); // Subtiler
-      box-shadow:
-        0 16px 48px rgb(0 0 0 / 16%),
-        0 8px 24px rgb(0 0 0 / 12%),
-        0 4px 12px rgba($apple-primary, 0.08),
-        inset 0 1px 0 rgb(255 255 255 / 25%);
-      border-color: rgb(255 255 255 / 25%);
-
-      &::before {
+      &:hover::after {
         opacity: 1;
       }
-    }
 
-    &:active {
-      transform: translateY(-1.5px) scale(0.995);
-    }
-    
-    @media screen and (width <= 480px) {
-      padding: clamp(10px, 2.5vw, 14px) !important;
-      
-      &:hover {
-        transform: translateY(-1.5px) scale(1.002);
-      }
-    }
-
-    &:hover .player-name {
-      color: $apple-primary !important;
-      text-shadow: 0 0 clamp(5px, 1.25vw, 8px) rgb($apple-primary / 30%);
-    }
-  }
-
-  .player-glow {
-    position: absolute;
-    inset: -2px;
-    background: conic-gradient(
-      from 0deg,
-      $apple-primary,
-      color.adjust($apple-primary, $hue: 60deg),
-      $apple-secondary,
-      color.adjust($apple-secondary, $hue: 60deg),
-      $apple-primary
-    );
-    border-radius: inherit;
-    opacity: 0;
-    transition: all 0.5s ease;
-    z-index: -1;
-    animation: glow-rotate 6s linear infinite;
-    filter: blur(8px);
-  }
-
-  .player-content {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .player-info {
-    text-align: center;
-  }
-
-  .player-name {
-    font-family: $apple-font-family !important;
-    font-weight: $apple-font-weight-bold !important;
-    color: $apple-text-primary !important;
-    font-size: 16px !important; // WCAG Minimum
-    margin-bottom: clamp(5px, 1.25vw, 8px) !important; // Harmonisiert
-    line-height: 1.3;
-    transition: all 0.3s ease;
-    letter-spacing: 0.01em;
-  }
-
-  .player-project {
-    font-family: $apple-font-family !important;
-    font-weight: $apple-font-weight-medium !important;
-    color: $apple-text-tertiary !important;
-    font-size: 16px !important; // WCAG Minimum
-    margin-bottom: clamp(8px, 2vw, 12px) !important; // Harmonisiert
-    line-height: 1.4;
-  }
-
-  .project-link {
-    display: flex;
-    align-items: center;
-    gap: clamp(3px, 0.75vw, 5px) !important; // Harmonisiert
-    justify-content: center;
-    color: $apple-primary !important;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    font-weight: $apple-font-weight-semibold !important;
-    text-decoration: none;
-    margin-top: clamp(2px, 0.5vw, 4px) !important;
-    padding: clamp(2px, 0.5vw, 4px) clamp(5px, 1.25vw, 8px) !important;
-    border-radius: $apple-radius-small;
-    position: relative;
-    font-size: 16px !important; // WCAG Minimum
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgb($apple-primary / 10%);
-      border-radius: inherit;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    &:hover {
-      color: color.adjust($apple-primary, $lightness: 15%) !important;
-
-      &::before {
-        opacity: 1;
-      }
-    }
-  }
-
-  .project-link:hover .link-text::after {
-    transform: scaleX(1);
-  }
-
-  .link-text {
-    position: relative;
-    z-index: 1;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, 
-      transparent, 
-      $apple-primary, 
-      transparent);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-  }
-
-  .link-arrow {
-    font-size: 16px !important; // WCAG Minimum
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    z-index: 1;
-  }
-
-  .player-reference {
-    position: relative;
-    padding: clamp(8px, 2vw, 12px) !important; // Harmonisiert
-    background: rgb(255 255 255 / 3%);
-    border-radius: $apple-radius-medium;
-    border: 1px solid rgb(255 255 255 / 8%);
-    text-align: left;
-    backdrop-filter: blur(10px);
-    box-shadow: 
-      0 2px 6px rgb(0 0 0 / 4%),
-      inset 0 1px 0 rgb(255 255 255 / 10%);
-    
-    @media screen and (width <= 480px) {
-      padding: clamp(6px, 1.5vw, 8px) !important;
-    }
-  }
-
-  .quote-mark {
-    position: absolute;
-    left: clamp(5px, 1.25vw, 8px) !important; // Harmonisiert
-    top: clamp(5px, 1.25vw, 8px) !important;
-    font-size: clamp(14px, 3vw, 20px) !important; // Harmonisiert
-    color: $apple-primary !important;
-    opacity: 0.7;
-    font-family: Georgia, serif;
-    font-weight: bold;
-    line-height: 1;
-    text-shadow: 0 0 clamp(3px, 0.75vw, 5px) rgb($apple-primary / 30%);
-    
-    @media screen and (width <= 480px) {
-      font-size: clamp(12px, 2.5vw, 14px) !important;
-    }
-  }
-
-  .player-reference span {
-    font-family: $apple-font-family !important;
-    font-weight: $apple-font-weight-regular !important;
-    color: $apple-text-secondary !important;
-    font-size: 16px !important; // WCAG Minimum
-    line-height: 1.6;
-    font-style: italic;
-    display: block;
-    padding-left: clamp(12px, 3vw, 20px) !important; // Harmonisiert
-    padding-top: clamp(2px, 0.5vw, 4px) !important;
-    text-align: left;
-    word-break: break-word;
-    opacity: 0.9;
-    
-    @media screen and (width <= 480px) {
-      padding-left: clamp(10px, 2.5vw, 14px) !important;
-    }
-  }
-}
-
-// ===== ANIMATIONS =====
-@keyframes projects-ambient {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 0.08;
-  }
-
-  33% {
-    transform: translateY(-6px) rotate(0.3deg) scale(1.003);
-    opacity: 0.12;
-  }
-
-  66% {
-    transform: translateY(4px) rotate(-0.2deg) scale(0.997);
-    opacity: 0.06;
-  }
-}
-
-@keyframes team-aurora {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.3;
-  }
-
-  33% {
-    transform: rotate(120deg) scale(1.03);
-    opacity: 0.5;
-  }
-
-  66% {
-    transform: rotate(240deg) scale(0.97);
-    opacity: 0.2;
-  }
-}
-
-@keyframes team-pulse {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.8;
-    transform: scale(1.01);
-  }
-}
-
-@keyframes gradient-flow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes underline-glow {
-  0%, 100% {
-    opacity: 0.6;
-    transform: translateX(-50%) scaleX(1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) scaleX(1.2);
-  }
-}
-
-@keyframes particle-orbit {
-  0%, 100% {
-    transform: translateY(0) scale(1) rotate(0deg);
-    opacity: 0.6;
-  }
-
-  25% {
-    transform: translateY(-4px) scale(1.05) rotate(90deg);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(0) scale(0.95) rotate(180deg);
-    opacity: 0.4;
-  }
-
-  75% {
-    transform: translateY(4px) scale(1.02) rotate(270deg);
-    opacity: 0.8;
-  }
-}
-
-@keyframes glow-rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-// ===== RESPONSIVE OPTIMIERUNGEN =====
-@media (width <= 22.5rem) {
-  .my-projects-mobile {
-    .my-projects-container {
-      margin: clamp(6px, 1.5vw, 8px) !important;
-      padding: clamp(10px, 2.5vw, 14px) !important;
-    }
-
-    .team-player {
-      padding: clamp(14px, 3.5vw, 18px) !important;
-      margin-top: clamp(14px, 3.5vw, 18px) !important;
-    }
-
-    .premium-card {
-      padding: clamp(8px, 2vw, 10px) !important;
-    }
-
-    .player-reference {
-      padding: clamp(5px, 1.25vw, 6px) !important;
-    }
-
-    .quote-mark {
-      left: 3px !important;
-      top: 3px !important;
-      font-size: 12px !important;
-    }
-
-    .player-reference span {
-      padding-left: clamp(8px, 2vw, 10px) !important;
-      padding-top: 2px !important;
-    }
-  }
-}
-
-// ===== ACCESSIBILITY =====
-@media (prefers-reduced-motion: reduce) {
-  .my-projects-mobile {
-    .my-projects-container::before {
-      animation: none;
-    }
-
-    .title-gradient,
-    .floating-particle,
-    .player-glow {
-      animation: none;
-    }
-
-    .premium-card:hover {
-      transform: translateY(-1px) scale(1.002);
-    }
-
-    .team-player::before,
-    .team-player::after {
-      animation: none;
-    }
-    
-    .project:hover,
-    .project-img:hover,
-    .tab-li:hover {
-      transform: none;
-    }
-  }
-}
-
-@media (prefers-contrast: high) {
-  .my-projects-mobile {
-    .my-projects-container {
-      background: #000 !important;
-      border: 2px solid #fff !important;
-    }
-
-    .project,
-    .team-player {
-      background: #111 !important;
-      border: 2px solid #333 !important;
-    }
-
-    .premium-card {
-      background: #000 !important;
-      border: 2px solid #444 !important;
-
-      &:hover {
-        background: #222 !important;
-        border-color: #fff !important;
-        box-shadow: 0 0 20px rgb(255 255 255 / 20%) !important;
-      }
-    }
-    
-    .project-img {
-      background: #111 !important;
-      border-color: #333 !important;
-    }
-    
-    .technologies,
-    .tab-li {
-      background: #111 !important;
-      border-color: #333 !important;
-    }
-  }
-}
-
-// ===== PRINT STYLES =====
-@media print {
-  .my-projects-mobile {
-    .my-projects-container {
-      background: white !important;
-      color: black !important;
-      box-shadow: none !important;
-      border: 1px solid black !important;
-    }
-    
-    .project {
-      background: white !important;
-      border: 1px solid black !important;
-      break-inside: avoid;
-    }
-    
-    .team-player {
-      background: white !important;
-      border: 1px solid black !important;
-      break-inside: avoid;
-    }
-    
-    .premium-card {
-      background: white !important;
-      border: 1px solid black !important;
-      break-inside: avoid;
-    }
-    
-    .project-img img[src*="ellipse-small-blue"] {
-      filter: none !important;
-    }
-    
-    .technologies,
-    .tab-li {
-      background: white !important;
-      border: 1px solid black !important;
-    }
-  }
-}
-
-
-// ===== ANTI-OVERFLOW PROTECTION - VERHINDERT HORIZONTALES SCROLLEN =====
-.my-projects-mobile {
-  // Globale Overflow-Kontrolle
-  overflow-x: hidden !important;
-  width: 100% !important;
-  max-width: 100vw !important;
-  
-  * {
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  
-  .my-projects-container {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    
-    .my-projects-content {
-      overflow-x: hidden !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      
-      nav {
-        overflow-x: hidden !important;
-        width: 100% !important;
+      // ===== PROJECT TOP =====
+      .project-top {
+        position: relative;
+        z-index: 1;
         
-        > div {
-          max-width: 100% !important;
-          overflow: hidden !important;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+        .project-top-title {
+          font-size: clamp(20px, 5vw, 26px) !important;
+          font-weight: $apple-font-weight-bold !important;
+          color: $apple-text-primary !important;
+          margin-bottom: clamp(12px, 3vw, 16px);
+          line-height: 1.3;
+          text-align: center;
         }
-      }
-      
-      .project {
-        overflow-x: hidden !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        
-        .project-top,
-        .project-bottom {
-          overflow-x: hidden !important;
-          width: 100% !important;
-          max-width: 100% !important;
-          
-          .project-top-title,
-          .technologies,
-          .project-img,
-          .tab-li,
-          .project-bottom-footer {
-            overflow-x: hidden !important;
-            width: 100% !important;
-            max-width: 100% !important;
+
+        .technologies {
+          margin-bottom: clamp(16px, 4vw, 20px);
+
+          .technologies-top {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(8px, 2vw, 12px);
+            margin-bottom: clamp(12px, 3vw, 16px);
+
+            > span:first-child {
+              font-size: clamp(16px, 4vw, 18px) !important;
+              font-weight: $apple-font-weight-semibold !important;
+              color: $apple-text-primary !important;
+            }
+
+            .technologies-arr {
+              display: flex;
+              flex-wrap: wrap;
+              gap: clamp(6px, 1.5vw, 8px);
+              font-size: clamp(14px, 3.5vw, 16px) !important;
+              color: $apple-primary !important;
+              font-weight: $apple-font-weight-medium !important;
+              line-height: 1.4;
+            }
           }
-          
-          .technologies-arr,
+
           .duration {
-            word-break: break-word !important;
-            overflow-wrap: break-word !important;
-            hyphens: auto !important;
+            background: rgba($apple-primary, 0.1);
+            border: 1px solid rgba($apple-primary, 0.25);
+            border-radius: $apple-radius-medium;
+            padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+            font-size: clamp(14px, 3.5vw, 16px) !important;
+            color: $apple-primary !important;
+            font-weight: $apple-font-weight-medium !important;
+            backdrop-filter: blur(15px);
+            text-align: center;
+          }
+        }
+
+        // ===== PROJECT IMAGE =====
+        .project-img {
+          margin: clamp(20px, 5vw, 28px) 0;
+          border-radius: $apple-radius-large;
+          overflow: hidden;
+          box-shadow: 
+            0 12px 36px rgb(0 0 0 / 20%),
+            0 6px 18px rgb(0 0 0 / 15%);
+          position: relative;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba($apple-primary, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+          }
+
+          &:hover::before {
+            opacity: 1;
           }
           
+          img {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 0;
+          }
+
+          &:hover img {
+            transform: scale(1.05);
+          }
+        }
+
+        // ===== PROJECT BOTTOM =====
+        .project-bottom {
+          position: relative;
+          z-index: 1;
+
+          .tab-li {
+            background: rgb(255 255 255 / 8%);
+            border: 1px solid rgb(255 255 255 / 20%);
+            border-radius: $apple-radius-large;
+            padding: clamp(16px, 4vw, 20px);
+            margin-bottom: clamp(16px, 4vw, 20px);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+
+            &:hover {
+              background: rgb(255 255 255 / 12%);
+              border-color: rgb(255 255 255 / 30%);
+              transform: translateY(-1px);
+            }
+
+            .right-of-logo {
+              > div {
+                display: flex;
+                align-items: center;
+                gap: clamp(8px, 2vw, 12px);
+                margin-bottom: clamp(8px, 2vw, 12px);
+
+                img {
+                  width: clamp(16px, 4vw, 20px);
+                  height: clamp(16px, 4vw, 20px);
+                  filter: brightness(1.2);
+                }
+
+                h4 {
+                  font-size: clamp(16px, 4vw, 18px) !important;
+                  font-weight: $apple-font-weight-semibold !important;
+                  color: $apple-text-primary !important;
+                  margin: 0;
+                }
+              }
+
+              p {
+                font-size: clamp(14px, 3.5vw, 16px) !important;
+                line-height: 1.6;
+                color: $apple-text-secondary !important;
+                margin: 0;
+                font-weight: $apple-font-weight-regular !important;
+              }
+            }
+          }
+
+          // ===== BUTTONS =====
           .project-bottom-footer {
+            display: flex;
+            gap: clamp(12px, 3vw, 16px);
+            justify-content: center;
+            margin-top: clamp(20px, 5vw, 28px);
+
+            @media (max-width: 480px) {
+              flex-direction: column;
+              gap: clamp(10px, 2.5vw, 12px);
+            }
+
             button {
-              max-width: 100% !important;
-              overflow: hidden !important;
-              text-overflow: ellipsis !important;
-              white-space: nowrap !important;
-              
+              flex: 1;
+              max-width: clamp(140px, 35vw, 180px);
+              background: linear-gradient(135deg, $apple-primary, color.adjust($apple-primary, $lightness: 5%));
+              color: white !important;
+              border: none;
+              border-radius: $apple-radius-medium;
+              padding: clamp(14px, 3.5vw, 18px) clamp(18px, 4.5vw, 24px);
+              font-size: clamp(15px, 3.8vw, 17px) !important;
+              font-weight: $apple-font-weight-semibold !important;
+              font-family: $apple-font-family !important;
+              cursor: pointer;
+              transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+              box-shadow: 
+                0 6px 18px rgba($apple-primary, 0.35),
+                0 3px 9px rgba($apple-primary, 0.25),
+                inset 0 1px 0 rgb(255 255 255 / 25%);
+              position: relative;
+              overflow: hidden;
+              min-height: 48px;
+
+              @media (max-width: 480px) {
+                max-width: 100%;
+              }
+
+              &::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, rgb(255 255 255 / 25%) 0%, transparent 100%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+              }
+
+              &:hover {
+                transform: translateY(-3px);
+                box-shadow: 
+                  0 12px 36px rgba($apple-primary, 0.45),
+                  0 6px 18px rgba($apple-primary, 0.35),
+                  inset 0 1px 0 rgb(255 255 255 / 30%);
+                background: linear-gradient(135deg, 
+                  color.adjust($apple-primary, $lightness: 8%), 
+                  color.adjust($apple-primary, $lightness: 12%));
+
+                &::before {
+                  opacity: 1;
+                }
+              }
+
+              &:active {
+                transform: translateY(-1px);
+              }
+
               a {
-                max-width: 100% !important;
-                overflow: hidden !important;
-                text-overflow: ellipsis !important;
-                white-space: nowrap !important;
+                color: inherit !important;
+                text-decoration: none !important;
+                display: block;
+                width: 100%;
+                height: 100%;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                font-family: inherit !important;
+                position: relative;
+                z-index: 1;
               }
             }
           }
         }
       }
+    }
+
+    // ===== TEAM PLAYER SECTION =====
+    .team-player {
+      margin-top: clamp(32px, 8vw, 48px);
+      position: relative;
+      z-index: 1;
       
-      .team-player {
-        overflow-x: hidden !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        
+      .team-player-header {
+        text-align: center;
+        margin-bottom: clamp(24px, 6vw, 32px);
+
+        .team-player-title {
+          .title-gradient {
+            font-size: clamp(20px, 5vw, 26px) !important;
+            font-weight: $apple-font-weight-bold !important;
+            background: linear-gradient(135deg, $apple-primary, color.adjust($apple-primary, $lightness: 15%));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: clamp(8px, 2vw, 12px);
+            display: block;
+          }
+        }
+
+        .team-player-subtitle {
+          font-size: clamp(16px, 4vw, 18px) !important;
+          color: $apple-text-secondary !important;
+          line-height: 1.5;
+          margin: 0;
+        }
+      }
+
+      .team-player-content {
         .team-player-content-wrapper {
-          overflow-x: hidden !important;
-          width: 100% !important;
-          
+          display: flex;
+          flex-direction: column;
+          gap: clamp(16px, 4vw, 20px);
+
           .premium-card {
-            overflow-x: hidden !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            
+            background: linear-gradient(135deg, 
+              rgb(255 255 255 / 15%) 0%, 
+              rgb(255 255 255 / 8%) 50%,
+              rgb(255 255 255 / 20%) 100%);
+            border-radius: $apple-radius-xl;
+            border: 1px solid rgb(255 255 255 / 35%);
+            padding: clamp(20px, 5vw, 28px);
+            backdrop-filter: blur(35px);
+            box-shadow: 
+              0 16px 48px rgb(0 0 0 / 12%),
+              inset 0 1px 0 rgb(255 255 255 / 40%);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+
+            &:hover {
+              transform: translateY(-4px);
+              box-shadow: 
+                0 24px 72px rgb(0 0 0 / 16%),
+                inset 0 1px 0 rgb(255 255 255 / 45%);
+              border-color: rgb(255 255 255 / 45%);
+            }
+
             .player-content {
-              overflow-x: hidden !important;
-              width: 100% !important;
-              
+              position: relative;
+              z-index: 1;
+
               .player-info {
-                overflow-x: hidden !important;
-                width: 100% !important;
-                
-                .player-name,
-                .player-project,
-                .project-link {
-                  word-break: break-word !important;
-                  overflow-wrap: break-word !important;
-                  hyphens: auto !important;
+                .player-name {
+                  font-size: clamp(18px, 4.5vw, 22px) !important;
+                  font-weight: $apple-font-weight-bold !important;
+                  color: $apple-text-primary !important;
+                  margin-bottom: clamp(8px, 2vw, 12px);
                 }
-                
+
+                .player-project {
+                  margin-bottom: clamp(12px, 3vw, 16px);
+
+                  > span:first-child {
+                    font-size: clamp(14px, 3.5vw, 16px) !important;
+                    color: $apple-text-secondary !important;
+                    margin-right: clamp(6px, 1.5vw, 8px);
+                  }
+
+                  .project-link {
+                    color: $apple-primary !important;
+                    text-decoration: none !important;
+                    font-weight: $apple-font-weight-semibold !important;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                      color: color.adjust($apple-primary, $lightness: 10%) !important;
+                      text-decoration: underline !important;
+                    }
+
+                    .link-text {
+                      font-size: clamp(14px, 3.5vw, 16px) !important;
+                    }
+
+                    .link-arrow {
+                      margin-left: clamp(4px, 1vw, 6px);
+                      transition: transform 0.3s ease;
+                    }
+
+                    &:hover .link-arrow {
+                      transform: translateX(2px);
+                    }
+                  }
+                }
+
                 .player-reference {
-                  overflow-x: hidden !important;
-                  width: 100% !important;
+                  position: relative;
                   
+                  .quote-mark {
+                    font-size: clamp(24px, 6vw, 32px) !important;
+                    color: rgba($apple-primary, 0.6) !important;
+                    font-weight: bold;
+                    line-height: 1;
+                    margin-bottom: clamp(4px, 1vw, 6px);
+                  }
+
                   span {
-                    word-break: break-word !important;
-                    overflow-wrap: break-word !important;
-                    hyphens: auto !important;
+                    font-size: clamp(14px, 3.5vw, 16px) !important;
+                    color: $apple-text-secondary !important;
+                    font-style: italic;
+                    line-height: 1.6;
+                    display: block;
                   }
                 }
               }
@@ -1511,14 +568,60 @@
   }
 }
 
-// ===== GLOBALE VIEWPORT-KONTROLLE =====
-@media screen and (width <= 899px) {
-  body {
-    overflow-x: hidden !important;
+// ===== ANIMATIONS =====
+@keyframes ambient-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1) rotate(0deg);
   }
-  
-  html {
-    overflow-x: hidden !important;
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+// ===== RESPONSIVE OPTIMIZATIONS =====
+@media (max-width: 320px) {
+  #my-projects-mobile.my-projects-container {
+    margin: clamp(8px, 2vw, 12px) auto;
+    padding: clamp(12px, 3vw, 16px);
+
+    .my-projects-content {
+      nav > div.pointer {
+        font-size: 12px !important;
+        padding: 6px 8px;
+        min-width: 60px;
+      }
+    }
+  }
+}
+
+
+// ===== VERSTECKE LEERE PROJEKT-KARTEN =====
+#my-projects-mobile.my-projects-container {
+  .my-projects-content {
+    .project {
+      // Verstecke komplett leere Karten
+      &:empty {
+        display: none !important;
+      }
+      
+      // Verstecke Karten ohne sichtbare Inhalte (nur Angular-Kommentare)
+      &:not(:has(.project-top)):not(:has(.team-player)) {
+        display: none !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        overflow: hidden !important;
+      }
+      
+      // Fallback: Wenn Karte sehr klein ist (nur Kommentare), verstecke sie
+      &[style*="height: 0"],
+      &[style*="display: none"] {
+        display: none !important;
+      }
+    }
   }
 }
 
