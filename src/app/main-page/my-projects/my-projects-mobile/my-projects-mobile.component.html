@@ -3,20 +3,13 @@
 
   <div class="my-projects-content">
     <nav>
-      <div
-        class="pointer"
-        *ngFor="let project of projects; let index = index; trackBy: trackByIndex"
-        (click)="switchProject(index)"
-        [class.active]="currentTab === index"
-      >
+      <div class="pointer" *ngFor="let project of projects; let index = index; trackBy: trackByIndex"
+        (click)="switchProject(index)" [class.active]="currentTab === index">
         <span>{{ index + 1 }}. {{ 'project.project' | translate }}</span>
       </div>
     </nav>
 
-    <div
-      class="project"
-      *ngFor="let project of projects; let index = index; trackBy: trackByIndex"
-    >
+    <div class="project" *ngFor="let project of projects; let index = index; trackBy: trackByIndex">
       <ng-container *ngIf="currentTab === index">
         <div class="project-top">
           <h3 class="project-top-title">{{ project.name }}</h3>
@@ -25,9 +18,7 @@
             <div class="technologies-top">
               <span>{{ 'project.technologies' | translate }}:</span>
               <span class="technologies-arr">
-                <ng-container
-                  *ngFor="let t of project.technologiesName; let i = index"
-                >
+                <ng-container *ngFor="let t of project.technologiesName; let i = index">
                   {{ t }}<span *ngIf="i !== project.technologiesName.length - 1">, </span>
                 </ng-container>
               </span>
@@ -41,15 +32,8 @@
           </div>
 
           <div class="project-img" #animatedEl2>
-            <img
-              [src]="'assets/img/' + project.url"
-              [alt]="project.name"
-              loading="lazy"
-              decoding="async"
-              width="400"
-              height="300"
-              style="width: 100% !important; max-width: 400px; height: auto; object-fit: contain;"
-            />
+            <img [src]="'assets/img/' + project.url" [alt]="project.name" loading="lazy" decoding="async" width="400"
+              height="300" style="width: 100% !important; max-width: 400px; height: auto; object-fit: contain;" />
           </div>
 
           <div class="project-bottom" #animatedEl4>
@@ -113,10 +97,7 @@
 
           <div class="team-player-content">
             <div class="team-player-content-wrapper">
-              <div
-                class="player premium-card"
-                [appScrollAnimate]="{ animateCss: 'bubble-out-075' }"
-              >
+              <div class="player premium-card" [appScrollAnimate]="{ animateCss: 'bubble-out-075' }">
                 <div class="player-glow"></div>
                 <div class="player-content">
                   <div class="player-info">
@@ -136,10 +117,7 @@
                 </div>
               </div>
 
-              <div
-                class="player premium-card"
-                [appScrollAnimate]="{ animateCss: 'bubble-out-075' }"
-              >
+              <div class="player premium-card" [appScrollAnimate]="{ animateCss: 'bubble-out-075' }">
                 <div class="player-glow"></div>
                 <div class="player-content">
                   <div class="player-info">
@@ -159,10 +137,7 @@
                 </div>
               </div>
 
-              <div
-                class="player premium-card"
-                [appScrollAnimate]="{ animateCss: 'bubble-out-075' }"
-              >
+              <div class="player premium-card" [appScrollAnimate]="{ animateCss: 'bubble-out-075' }">
                 <div class="player-glow"></div>
                 <div class="player-content">
                   <div class="player-info">
