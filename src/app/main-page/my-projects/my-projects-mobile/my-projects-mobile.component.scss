@@ -1,1158 +1,1138 @@
+// ===== KONFLIKT-FREIE MOBILE PROJECTS SCSS =====
+// Höhere Spezifität durch Component-Scoping verhindert globale Überschreibungen
+
 @use '../../../../style/apple-variables.scss' as *;
 @use 'sass:color';
 
-.my-projects-container {
-  position: relative;
-  margin: clamp(16px, 4vw, 24px);
-  max-width: 100%;
-  min-height: 80vh;
-  padding: clamp(24px, 6vw, 32px);
-  display: flex;
-  flex-direction: column;
-  background: $apple-universal-gradient;
-  border-radius: $apple-radius-xl;
-  border: 1px solid rgb(255 255 255 / 10%);
-  box-shadow: $apple-shadow-large;
-  width: calc(100% - clamp(32px, 8vw, 48px));
-  box-sizing: border-box;
-
-  @media (width <= 56.1875rem) {
+// ===== COMPONENT ROOT - HÖCHSTE SPEZIFITÄT =====
+.my-projects-mobile {
+  // Base Container mit Anti-Overflow Protection
+  .my-projects-container {
+    position: relative;
+    // WICHTIG: Eigene Margins ohne globale Interferenz
+    margin: clamp(8px, 2vw, 12px) !important; // Reduziert für harmonische Abstände
+    max-width: 100% !important;
+    min-height: 80vh;
+    // KORRIGIERT: Optimiertes Padding ohne Dopplung
+    padding: clamp(16px, 4vw, 24px) !important; // Harmonisch abgestimmt
     display: flex;
+    flex-direction: column;
+    background: $apple-universal-gradient;
+    border-radius: $apple-radius-xl;
+    border: 1px solid rgb(255 255 255 / 10%);
+    box-shadow: $apple-shadow-large;
+    // KRITISCH: Container-Breite ohne globale Überschreibung
+    width: calc(100% - clamp(16px, 4vw, 24px)) !important; // Optimiert
+    box-sizing: border-box;
+    overflow-x: hidden; // Anti-Overflow
+
+    // MOBILE ONLY - verhindert Desktop-Anzeige
+    @media (width <= 56.1875rem) {
+      display: flex !important;
+    }
+
+    @media (width >= 56.25rem) {
+      display: none !important;
+    }
+
+    // ===== HINTERGRUND-EFFEKTE =====
+    &::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -40%;
+      width: 80%;
+      height: 100%;
+      background: radial-gradient(circle, rgb($apple-primary / 8%) 0%, transparent 60%);
+      animation: projects-ambient 15s ease-in-out infinite;
+      filter: blur(2.5rem);
+      z-index: 0;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, 
+        rgb(255 255 255 / 3%) 0%, 
+        transparent 25%,
+        transparent 75%,
+        rgb(255 255 255 / 2%) 100%);
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 1;
+    }
   }
 
-  @media (width >= 56.25rem) {
-    display: none;
+  // ===== TITEL - ÜBERSCHREIBUNGS-SCHUTZ =====
+  .my-projects-container h2 {
+    margin-bottom: clamp(20px, 5vw, 28px) !important; // Harmonisiert
+    padding-top: clamp(12px, 3vw, 18px) !important; // Harmonisiert
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    // KRITISCH: Font-Size gegen globale Überschreibung schützen
+    font-size: clamp(20px, 5vw, 26px) !important; // Optimiert für Mobile
+    color: $apple-text-primary !important;
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-bold !important;
+
+    @include h2Title;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(40px, 10vw, 60px);
+      height: 3px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        $apple-primary 20%, 
+        $apple-primary 80%, 
+        transparent 100%);
+      border-radius: 2px;
+      opacity: 0.8;
+    }
+    
+    // Extra kleine Screens
+    @media screen and (width <= 480px) {
+      font-size: clamp(18px, 4.5vw, 20px) !important;
+      margin-bottom: clamp(16px, 4vw, 20px) !important;
+      padding-top: clamp(8px, 2vw, 12px) !important;
+    }
   }
 
-  // ===== VERBESSERTE HINTERGRUND-EFFEKTE =====
-  &::before {
-    content: '';
-    position: absolute;
-    top: -40%;
-    right: -40%;
-    width: 80%;
-    height: 100%;
-    background: radial-gradient(circle, rgb($apple-primary / 8%) 0%, transparent 60%);
-    animation: projects-ambient 15s ease-in-out infinite;
-    filter: blur(2.5rem);
-    z-index: 0;
+  // ===== CONTENT WRAPPER =====
+  .my-projects-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 4vw, 22px) !important; // Harmonisiert
+    position: relative;
+    z-index: 2;
+    padding: clamp(8px, 2vw, 16px) !important; // Reduziert
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    
+    @media screen and (width <= 480px) {
+      gap: clamp(12px, 3vw, 16px) !important;
+      padding: clamp(6px, 1.5vw, 10px) !important;
+    }
   }
-  
-  &::after {
-    content: '';
+
+  // ===== NAVIGATION TABS =====
+  .my-projects-content nav {
+    display: flex;
+    gap: clamp(4px, 1vw, 8px) !important; // Harmonisiert
+    justify-content: center;
+    margin-bottom: clamp(20px, 5vw, 26px) !important; // Harmonisiert
+    flex-wrap: wrap;
+    padding: clamp(4px, 1vw, 8px) !important;
+    
+    @media screen and (width <= 480px) {
+      margin-bottom: clamp(16px, 4vw, 20px) !important;
+      gap: clamp(3px, 0.75vw, 5px) !important;
+    }
+
+    > div {
+      background: linear-gradient(135deg, 
+        rgb(255 255 255 / 8%) 0%, 
+        rgb(255 255 255 / 4%) 50%,
+        rgb(255 255 255 / 6%) 100%);
+      border: 1px solid rgb(255 255 255 / 15%);
+      border-radius: $apple-radius-large;
+      padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px) !important; // Harmonisiert
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+      position: relative;
+      backdrop-filter: blur(20px);
+      min-width: fit-content;
+      box-shadow: 
+        0 4px 12px rgb(0 0 0 / 10%),
+        inset 0 1px 0 rgb(255 255 255 / 20%);
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: $apple-teal-gradient;
+        border-radius: $apple-radius-xl;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: -1;
+      }
+
+      &:hover {
+        background: linear-gradient(135deg, 
+          rgb(255 255 255 / 12%) 0%, 
+          rgb(255 255 255 / 6%) 50%,
+          rgb(255 255 255 / 10%) 100%);
+        border-color: rgb($apple-primary / 30%);
+        transform: translateY(-1px) scale(1.005); // Subtiler
+        box-shadow: 
+          0 6px 20px rgb(0 0 0 / 12%),
+          0 3px 8px rgba($apple-primary, 0.08),
+          inset 0 1px 0 rgb(255 255 255 / 25%);
+
+        &::before {
+          opacity: 0.1;
+        }
+      }
+
+      &.active {
+        background: linear-gradient(135deg, 
+          rgb($apple-primary / 15%) 0%, 
+          rgb($apple-primary / 8%) 50%,
+          rgb($apple-primary / 12%) 100%);
+        border-color: rgb($apple-primary / 40%);
+        box-shadow: 
+          0 5px 16px rgba($apple-primary, 0.18),
+          inset 0 1px 0 rgb(255 255 255 / 20%);
+
+        &::before {
+          opacity: 0.2;
+        }
+      }
+      
+      @media screen and (width <= 480px) {
+        padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px) !important;
+        
+        &:hover {
+          transform: translateY(-0.5px) scale(1.002);
+        }
+      }
+
+      > span {
+        font-family: $apple-font-family !important;
+        font-weight: $apple-font-weight-semibold !important;
+        color: $apple-text-secondary !important;
+        // KRITISCH: Font-Size Schutz gegen globale Überschreibung
+        font-size: clamp(16px, 3vw, 18px) !important;
+        transition: $apple-transition-fast;
+        white-space: nowrap;
+        display: block;
+        
+        @media screen and (width <= 480px) {
+          font-size: 16px !important; // WCAG Minimum gesichert
+        }
+      }
+
+      &.active > span {
+        color: $apple-primary !important;
+        font-weight: $apple-font-weight-bold !important;
+      }
+    }
+  }
+
+  // ===== PROJEKT-KARTEN =====
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 3vw, 18px) !important; // Harmonisiert
+    background: linear-gradient(135deg, 
+      rgb(255 255 255 / 6%) 0%, 
+      rgb(255 255 255 / 3%) 50%,
+      rgb(255 255 255 / 5%) 100%);
+    border-radius: $apple-radius-xl;
+    border: 1px solid rgb(255 255 255 / 15%);
+    padding: clamp(12px, 3vw, 18px) !important; // Harmonisiert
+    backdrop-filter: blur(25px);
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    box-shadow: 
+      0 6px 24px rgb(0 0 0 / 10%),
+      0 3px 12px rgb(0 0 0 / 6%),
+      inset 0 1px 0 rgb(255 255 255 / 20%);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+    &:hover {
+      transform: translateY(-2px) scale(1.002); // Subtiler
+      box-shadow: 
+        0 12px 36px rgb(0 0 0 / 14%),
+        0 6px 18px rgb(0 0 0 / 10%),
+        0 3px 8px rgba($apple-primary, 0.08),
+        inset 0 1px 0 rgb(255 255 255 / 25%);
+      border-color: rgb(255 255 255 / 20%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+      rgb(255 255 255 / 8%) 0%,
+      rgb(255 255 255 / 4%) 50%,
+      rgb(255 255 255 / 6%) 100%);
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover::after {
+      opacity: 1;
+    }
+    
+    @media screen and (width <= 480px) {
+      gap: clamp(10px, 2.5vw, 14px) !important;
+      padding: clamp(10px, 2.5vw, 14px) !important;
+      
+      &:hover {
+        transform: translateY(-1px) scale(1.001);
+      }
+    }
+  }
+
+  // ===== PROJEKT TOP =====
+  .project-top {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    
+    @media screen and (width <= 480px) {
+      gap: clamp(8px, 2vw, 10px) !important;
+    }
+  }
+
+  // ===== PROJEKT-TITEL =====
+  .project-top-title {
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-bold !important;
+    color: $apple-primary !important;
+    // KRITISCH: Font-Size gegen Überschreibung schützen
+    font-size: clamp(16px, 4vw, 20px) !important; // Harmonisiert
+    margin: 0 0 clamp(8px, 2vw, 12px) !important;
+    text-align: center;
+    line-height: 1.3;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(30px, 7vw, 40px);
+      height: 2px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        $apple-primary 30%, 
+        $apple-primary 70%, 
+        transparent 100%);
+      border-radius: 1px;
+      opacity: 0.6;
+    }
+    
+    @media screen and (width <= 480px) {
+      font-size: 16px !important; // WCAG Minimum
+    }
+  }
+
+  // ===== TECHNOLOGIEN =====
+  .technologies {
+    background: linear-gradient(135deg, 
+      rgb(255 255 255 / 8%) 0%, 
+      rgb(255 255 255 / 4%) 50%,
+      rgb(255 255 255 / 6%) 100%);
+    border-radius: $apple-radius-large;
+    padding: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
+    border: 1px solid rgb(255 255 255 / 12%);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+      0 3px 12px rgb(0 0 0 / 6%),
+      inset 0 1px 0 rgb(255 255 255 / 15%);
+    
+    @media screen and (width <= 480px) {
+      padding: clamp(8px, 2vw, 10px) !important;
+    }
+  }
+
+  .technologies-top {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3px, 0.75vw, 5px) !important; // Harmonisiert
+    align-items: flex-start;
+    margin-bottom: clamp(5px, 1.25vw, 8px) !important;
+
+    @media (width >= 30rem) {
+      flex-flow: row wrap;
+      align-items: center;
+    }
+
+    > span:first-child {
+      font-family: $apple-font-family !important;
+      color: $apple-text-secondary !important;
+      font-size: 16px !important; // WCAG Minimum
+      font-weight: $apple-font-weight-medium !important;
+      white-space: nowrap;
+    }
+  }
+
+  .technologies-arr {
+    color: $apple-primary !important;
+    font-weight: $apple-font-weight-semibold !important;
+    font-size: 16px !important; // WCAG Minimum
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  .duration {
+    font-family: $apple-font-family !important;
+    color: $apple-text-tertiary !important;
+    font-size: 16px !important; // WCAG Minimum
+    line-height: 1.3;
+
+    span {
+      color: $apple-text-secondary !important;
+      font-weight: $apple-font-weight-medium !important;
+    }
+  }
+
+  // ===== PROJEKT-BILDER =====
+  .project-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, 
+      rgb(255 255 255 / 4%) 0%, 
+      rgb(255 255 255 / 2%) 50%,
+      rgb(255 255 255 / 3%) 100%);
+    border-radius: $apple-radius-large;
+    padding: clamp(10px, 2.5vw, 16px) !important; // Harmonisiert
+    min-height: clamp(80px, 16vw, 120px) !important; // Harmonisiert
+    position: relative;
+    border: 1px solid rgb(255 255 255 / 10%);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+      0 3px 12px rgb(0 0 0 / 6%),
+      inset 0 1px 0 rgb(255 255 255 / 15%);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg,
+      rgb($apple-primary / 4%) 0%,
+      transparent 50%,
+      rgb($apple-secondary / 4%) 100%);
+      border-radius: inherit;
+      z-index: 0;
+    }
+    
+    &:hover {
+      transform: translateY(-1px) scale(1.002); // Subtiler
+      box-shadow: 
+        0 6px 18px rgb(0 0 0 / 10%),
+        0 3px 8px rgba($apple-primary, 0.06),
+        inset 0 1px 0 rgb(255 255 255 / 20%);
+      border-color: rgb(255 255 255 / 15%);
+    }
+    
+    @media screen and (width <= 480px) {
+      padding: clamp(8px, 2vw, 12px) !important;
+      min-height: clamp(60px, 14vw, 100px) !important;
+      
+      &:hover {
+        transform: translateY(-0.5px);
+      }
+    }
+
+    img {
+      max-width: 100% !important;
+      height: auto !important;
+      border-radius: $apple-radius-medium;
+      box-shadow: 
+        0 6px 18px rgb(0 0 0 / 10%),
+        0 3px 8px rgb(0 0 0 / 6%);
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+      &:hover {
+        transform: scale(1.01); // Subtiler
+        box-shadow: 
+          0 8px 24px rgb(0 0 0 / 12%),
+          0 4px 12px rgb(0 0 0 / 8%);
+      }
+      
+      &[src*="ellipse-small-blue"] {
+        width: clamp(16px, 4vw, 24px) !important;
+        height: clamp(16px, 4vw, 24px) !important;
+        max-width: 24px !important;
+        max-height: 24px !important;
+        object-fit: contain;
+        filter: brightness(1.1) saturate(1.2);
+        
+        @media screen and (width <= 480px) {
+          width: clamp(14px, 3.5vw, 18px) !important;
+          height: clamp(14px, 3.5vw, 18px) !important;
+          max-width: 18px !important;
+          max-height: 18px !important;
+        }
+        
+        &:hover {
+          transform: scale(1.1);
+          filter: brightness(1.3) saturate(1.4);
+        }
+      }
+      
+      @media screen and (width <= 480px) {
+        &:hover {
+          transform: scale(1.005);
+        }
+      }
+    }
+  }
+
+  // ===== PROJEKT BOTTOM =====
+  .project-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 2vw, 12px) !important; // Harmonisiert
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    
+    @media screen and (width <= 480px) {
+      gap: clamp(6px, 1.5vw, 8px) !important;
+    }
+  }
+
+  // ===== TAB-ELEMENTE =====
+  .tab-li {
+    display: flex;
+    gap: clamp(8px, 2vw, 12px) !important; // Harmonisiert
+    align-items: flex-start;
+    background: linear-gradient(135deg, 
+      rgb(255 255 255 / 4%) 0%, 
+      rgb(255 255 255 / 2%) 50%,
+      rgb(255 255 255 / 3%) 100%);
+    border-radius: $apple-radius-large;
+    padding: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid rgb(255 255 255 / 8%);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+      0 2px 6px rgb(0 0 0 / 4%),
+      inset 0 1px 0 rgb(255 255 255 / 10%);
+
+    &:hover {
+      background: linear-gradient(135deg, 
+        rgb(255 255 255 / 8%) 0%, 
+        rgb(255 255 255 / 4%) 50%,
+        rgb(255 255 255 / 6%) 100%);
+      transform: translateX(2px) translateY(-0.5px); // Subtiler
+      border-color: rgb(255 255 255 / 15%);
+      box-shadow: 
+        0 4px 14px rgb(0 0 0 / 8%),
+        0 2px 6px rgba($apple-primary, 0.04),
+        inset 0 1px 0 rgb(255 255 255 / 15%);
+    }
+    
+    @media screen and (width <= 480px) {
+      gap: clamp(6px, 1.5vw, 8px) !important;
+      padding: clamp(8px, 2vw, 10px) !important;
+      
+      &:hover {
+        transform: translateX(1px) translateY(-0.25px);
+      }
+    }
+  }
+
+  .right-of-logo {
+    flex: 1;
+    width: 100%;
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: clamp(5px, 1.25vw, 8px) !important; // Harmonisiert
+      margin-bottom: clamp(5px, 1.25vw, 8px) !important;
+
+      img {
+        width: clamp(12px, 2.5vw, 16px) !important;
+        height: clamp(12px, 2.5vw, 16px) !important;
+        flex-shrink: 0;
+        filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
+        
+        &[src*="ellipse-small-blue"] {
+          width: clamp(10px, 2.5vw, 14px) !important;
+          height: clamp(10px, 2.5vw, 14px) !important;
+          max-width: 14px !important;
+          max-height: 14px !important;
+          
+          @media screen and (width <= 480px) {
+            width: clamp(8px, 2vw, 12px) !important;
+            height: clamp(8px, 2vw, 12px) !important;
+            max-width: 12px !important;
+            max-height: 12px !important;
+          }
+        }
+      }
+
+      h4 {
+        font-family: $apple-font-family !important;
+        font-weight: $apple-font-weight-semibold !important;
+        color: $apple-primary !important;
+        font-size: 16px !important; // WCAG Minimum
+        margin: 0;
+        flex: 1;
+        line-height: 1.3;
+        display: flex;
+        align-items: center;
+        gap: clamp(3px, 0.75vw, 5px) !important;
+      }
+    }
+
+    > p {
+      font-family: $apple-font-family !important;
+      font-weight: $apple-font-weight-regular !important;
+      color: $apple-text-secondary !important;
+      font-size: 16px !important; // WCAG Minimum
+      line-height: 1.5;
+      margin: 0;
+      text-align: left;
+      word-break: break-word;
+    }
+  }
+
+  // ===== PROJEKT-FOOTER MIT OPTIMIERTEN BUTTONS =====
+  .project-bottom-footer {
+    display: flex;
+    gap: clamp(8px, 2vw, 12px) !important; // Harmonisiert
+    justify-content: center;
+    margin-top: clamp(10px, 2.5vw, 16px) !important; // Harmonisiert
+    flex-wrap: wrap;
+    
+    @media screen and (width <= 480px) {
+      gap: clamp(5px, 1.25vw, 8px) !important;
+      margin-top: clamp(8px, 2vw, 12px) !important;
+    }
+
+    // ===== OPTIMIERTE BUTTONS - EXAKT NACH VORGABE MIT SCHUTZ =====
+    button {
+      position: relative;
+      background: #0A84FF !important; // Exakt nach Vorgabe + Schutz
+      color: white !important;
+      border: none !important;
+      border-radius: clamp(6px, 1.5vw, 10px) !important; // Exakt nach Vorgabe
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important; // Exakt nach Vorgabe
+      // KRITISCH: Font-Size gegen alle Überschreibungen schützen
+      font-size: clamp(16px, 3.2vw, 20px) !important; // GARANTIERT 16px minimum
+      padding: clamp(10px, 2.5vw, 20px) clamp(16px, 5vw, 44px) !important; // Exakt nach Vorgabe
+      min-width: clamp(100px, 32vw, 240px) !important; // Exakt nach Vorgabe
+      min-height: 48px !important; // WCAG Touch Target
+      z-index: 4 !important; // Exakt nach Vorgabe
+      font-weight: $apple-font-weight-semibold !important;
+      font-family: $apple-font-family !important;
+      box-shadow: 
+        0 4px 12px rgba(#0A84FF, 0.3),
+        0 2px 6px rgba(#0A84FF, 0.2),
+        inset 0 1px 0 rgb(255 255 255 / 20%);
+      box-sizing: border-box;
+      word-wrap: break-word;
+      text-align: center;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgb(255 255 255 / 20%) 0%, transparent 100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        border-radius: inherit;
+      }
+
+      &:hover {
+        transform: translateY(-1px) scale(1.005) !important; // Subtiler aber sichtbar
+        box-shadow: 
+          0 6px 20px rgba(#0A84FF, 0.4),
+          0 3px 10px rgba(#0A84FF, 0.3),
+          inset 0 1px 0 rgb(255 255 255 / 25%);
+        background: color.adjust(#0A84FF, $lightness: 3%) !important;
+
+        &::before {
+          opacity: 1;
+        }
+      }
+      
+      &:active {
+        transform: translateY(-0.5px) scale(1.002) !important;
+      }
+      
+      @media screen and (width <= 480px) {
+        // Stelle sicher, dass die Mindestgröße von 16px eingehalten wird
+        font-size: 16px !important; // ABSOLUT GARANTIERT WCAG minimum
+        padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 16px) !important;
+        min-width: clamp(80px, 28vw, 120px) !important;
+        min-height: 44px !important;
+        
+        &:hover {
+          transform: translateY(-0.5px) scale(1.002) !important;
+        }
+      }
+      
+      // Extra Sicherheit für sehr kleine Screens
+      @media screen and (width <= 320px) {
+        font-size: 16px !important; // ABSOLUT GARANTIERT
+        padding: 8px 12px !important;
+        min-width: 80px !important;
+        min-height: 44px !important;
+      }
+
+      a {
+        color: inherit !important;
+        text-decoration: none !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        background: none !important;
+        font-family: inherit !important;
+      }
+    }
+  }
+
+  // ===== TEAM PLAYER SEKTION =====
+  .team-player {
+    background: linear-gradient(135deg, 
+    rgb(255 255 255 / 4%) 0%, 
+    rgb(255 255 255 / 8%) 30%,
+    rgb(255 255 255 / 3%) 70%,
+    rgb(255 255 255 / 6%) 100%);
+    border-radius: $apple-radius-xl;
+    border: 1px solid rgb(255 255 255 / 12%);
+    padding: clamp(20px, 5vw, 30px) !important; // Harmonisiert
+    margin-top: clamp(20px, 5vw, 30px) !important; // Harmonisiert
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(30px);
+    box-shadow: 
+      0 12px 36px rgb(0 0 0 / 12%),
+      0 6px 18px rgb(0 0 0 / 8%),
+      inset 0 1px 0 rgb(255 255 255 / 20%);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgb($apple-primary / 4%) 90deg,
+        rgb($apple-secondary / 4%) 180deg,
+        transparent 270deg,
+        transparent 360deg
+      );
+      animation: team-aurora 15s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 30% 70%,
+        rgb($apple-primary / 6%) 0%,
+        transparent 40%
+      );
+      z-index: 0;
+      animation: team-pulse 8s ease-in-out infinite;
+    }
+    
+    @media screen and (width <= 480px) {
+      padding: clamp(16px, 4vw, 20px) !important;
+      margin-top: clamp(16px, 4vw, 20px) !important;
+    }
+  }
+
+  .team-player-header {
+    position: relative;
+    margin-bottom: clamp(20px, 5vw, 26px) !important; // Harmonisiert
+    z-index: 2;
+    
+    @media screen and (width <= 480px) {
+      margin-bottom: clamp(16px, 4vw, 20px) !important;
+    }
+  }
+
+  .team-player-title {
+    margin-bottom: clamp(10px, 2.5vw, 14px) !important; // Harmonisiert
+    position: relative;
+    
+    @media screen and (width <= 480px) {
+      margin-bottom: clamp(8px, 2vw, 10px) !important;
+    }
+  }
+
+  .title-gradient {
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-bold !important;
+    font-size: clamp(18px, 4.5vw, 24px) !important; // Harmonisiert
+    background: linear-gradient(
+      135deg, 
+      $apple-primary 0%,
+      color.adjust($apple-primary, $hue: 30deg) 35%,
+      $apple-secondary 70%,
+      color.adjust($apple-secondary, $hue: -20deg) 100%
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    animation: gradient-flow 6s ease-in-out infinite;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(40px, 10vw, 60px);
+      height: 3px;
+      background: linear-gradient(90deg, transparent, $apple-primary, transparent);
+      border-radius: 2px;
+      animation: underline-glow 3s ease-in-out infinite;
+    }
+    
+    @media screen and (width <= 480px) {
+      font-size: clamp(16px, 4vw, 18px) !important;
+    }
+  }
+
+  .team-player-subtitle {
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-medium !important;
+    font-size: 16px !important; // WCAG Minimum
+    color: $apple-text-secondary !important;
+    line-height: 1.5;
+    margin-bottom: clamp(14px, 3.5vw, 20px) !important; // Harmonisiert
+    opacity: 0.9;
+    letter-spacing: 0.01em;
+    
+    @media screen and (width <= 480px) {
+      margin-bottom: clamp(10px, 2.5vw, 14px) !important;
+    }
+  }
+
+  .team-player-decoration {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 3%) 0%, 
-      transparent 25%,
-      transparent 75%,
-      rgb(255 255 255 / 2%) 100%);
-    border-radius: inherit;
     pointer-events: none;
     z-index: 1;
   }
-}
 
-// ===== VERBESSERTE TITEL-STRUKTUR =====
-.my-projects-container h2 {
-  margin-bottom: clamp(32px, 8vw, 48px);
-  padding-top: clamp(20px, 5vw, 28px);
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  font-size: clamp(24px, 6vw, 32px);
-  color: $apple-text-primary;
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-bold;
-
-  @include h2Title;
-  
-  &::after {
-    content: '';
+  .floating-particle {
     position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(60px, 15vw, 100px);
-    height: 3px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      $apple-primary 20%, 
-      $apple-primary 80%, 
-      transparent 100%);
-    border-radius: 2px;
-    opacity: 0.8;
-  }
-  
-  @media screen and (width <= 480px) {
-    font-size: clamp(22px, 5.5vw, 24px);
-    margin-bottom: clamp(28px, 7vw, 36px);
-    padding-top: clamp(16px, 4vw, 20px);
-  }
-}
+    width: clamp(3px, 0.75vw, 6px) !important; // Harmonisiert
+    height: clamp(3px, 0.75vw, 6px) !important;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      $apple-primary 0%,
+      color.adjust($apple-primary, $alpha: -0.3) 70%,
+      transparent 100%
+    );
+    box-shadow: 0 0 clamp(5px, 1.25vw, 8px) rgb($apple-primary / 50%);
 
-.my-projects-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(28px, 7vw, 36px);
-  position: relative;
-  z-index: 2;
-  padding: clamp(16px, 4vw, 24px);
-  max-width: 100%;
-  margin: 0 auto;
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(24px, 6vw, 28px);
-    padding: clamp(12px, 3vw, 16px);
+    &:nth-child(1) {
+      top: 15%;
+      left: 10%;
+      animation: particle-orbit 8s ease-in-out infinite;
+    }
+
+    &:nth-child(2) {
+      top: 25%;
+      right: 15%;
+      animation: particle-orbit 8s ease-in-out infinite 2.5s;
+    }
+
+    &:nth-child(3) {
+      bottom: 20%;
+      left: 20%;
+      animation: particle-orbit 8s ease-in-out infinite 5s;
+    }
   }
-}
 
-// ===== VERBESSERTE NAVIGATION =====
-.my-projects-content nav {
-  display: flex;
-  gap: clamp(12px, 3vw, 16px);
-  justify-content: center;
-  margin-bottom: clamp(32px, 8vw, 40px);
-  flex-wrap: wrap;
-  padding: clamp(8px, 2vw, 12px);
-  
-  @media screen and (width <= 480px) {
-    margin-bottom: clamp(28px, 7vw, 32px);
-    gap: clamp(8px, 2vw, 12px);
+  .team-player-content {
+    position: relative;
+    z-index: 2;
   }
-}
 
-.my-projects-content nav > div {
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 10%) 0%, 
-    rgb(255 255 255 / 6%) 50%,
-    rgb(255 255 255 / 8%) 100%);
-  border: 1px solid rgb(255 255 255 / 15%);
-  border-radius: $apple-radius-large;
-  padding: clamp(14px, 3.5vw, 18px) clamp(20px, 5vw, 28px);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  cursor: pointer;
-  position: relative;
-  backdrop-filter: blur(20px);
-  min-width: fit-content;
-  box-shadow: 
-    0 4px 12px rgb(0 0 0 / 10%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);
+  .team-player-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(10px, 2.5vw, 16px) !important; // Harmonisiert
 
-  &::before {
-    content: '';
+    @media (width >= 30rem) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: clamp(12px, 3vw, 20px) !important;
+    }
+    
+    @media screen and (width <= 480px) {
+      gap: clamp(8px, 2vw, 12px) !important;
+    }
+  }
+
+  // ===== PREMIUM CARDS =====
+  .premium-card {
+    background: linear-gradient(145deg,
+    rgb(255 255 255 / 8%) 0%,
+    rgb(255 255 255 / 4%) 50%,
+    rgb(255 255 255 / 10%) 100%);
+    border: 1px solid rgb(255 255 255 / 15%);
+    border-radius: $apple-radius-large;
+    padding: clamp(12px, 3vw, 20px) !important; // Harmonisiert
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    backdrop-filter: blur(25px);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    box-shadow: 
+      0 6px 18px rgb(0 0 0 / 8%),
+      0 3px 9px rgb(0 0 0 / 6%),
+      inset 0 1px 0 rgb(255 255 255 / 20%);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg,
+      rgb(255 255 255 / 12%) 0%,
+      transparent 50%,
+      rgb($apple-primary / 6%) 100%);
+      opacity: 0;
+      transition: all 0.4s ease;
+      z-index: 0;
+      border-radius: inherit;
+    }
+
+    &:hover {
+      background: linear-gradient(145deg,
+      rgb(255 255 255 / 15%) 0%,
+      rgb(255 255 255 / 8%) 50%,
+      rgb(255 255 255 / 18%) 100%);
+      transform: translateY(-3px) rotateY(1deg) scale(1.005); // Subtiler
+      box-shadow:
+        0 16px 48px rgb(0 0 0 / 16%),
+        0 8px 24px rgb(0 0 0 / 12%),
+        0 4px 12px rgba($apple-primary, 0.08),
+        inset 0 1px 0 rgb(255 255 255 / 25%);
+      border-color: rgb(255 255 255 / 25%);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      transform: translateY(-1.5px) scale(0.995);
+    }
+    
+    @media screen and (width <= 480px) {
+      padding: clamp(10px, 2.5vw, 14px) !important;
+      
+      &:hover {
+        transform: translateY(-1.5px) scale(1.002);
+      }
+    }
+
+    &:hover .player-name {
+      color: $apple-primary !important;
+      text-shadow: 0 0 clamp(5px, 1.25vw, 8px) rgb($apple-primary / 30%);
+    }
+  }
+
+  .player-glow {
     position: absolute;
     inset: -2px;
-    background: $apple-teal-gradient;
-    border-radius: $apple-radius-xl;
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: -1;
-  }
-
-  &:hover {
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 15%) 0%, 
-      rgb(255 255 255 / 8%) 50%,
-      rgb(255 255 255 / 12%) 100%);
-    border-color: rgb($apple-primary / 35%);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 
-      0 8px 24px rgb(0 0 0 / 15%),
-      0 4px 12px rgba($apple-primary, 0.1),
-      inset 0 1px 0 rgb(255 255 255 / 25%);
-
-    &::before {
-      opacity: 0.12;
-    }
-  }
-
-  &.active {
-    background: linear-gradient(135deg, 
-      rgb($apple-primary / 18%) 0%, 
-      rgb($apple-primary / 10%) 50%,
-      rgb($apple-primary / 15%) 100%);
-    border-color: rgb($apple-primary / 45%);
-    box-shadow: 
-      0 6px 20px rgba($apple-primary, 0.25),
-      inset 0 1px 0 rgb(255 255 255 / 25%);
-
-    &::before {
-      opacity: 0.25;
-    }
-  }
-  
-  @media screen and (width <= 480px) {
-    padding: clamp(12px, 3vw, 14px) clamp(16px, 4vw, 20px);
-    
-    &:hover {
-      transform: translateY(-2px) scale(1.01);
-    }
-  }
-}
-
-.my-projects-content nav > div > span {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-semibold;
-  color: $apple-text-secondary;
-  font-size: clamp(16px, 3.5vw, 20px);
-  transition: $apple-transition-fast;
-  white-space: nowrap;
-  display: block;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-  }
-}
-
-.my-projects-content nav > div.active > span {
-  color: $apple-primary;
-  font-weight: $apple-font-weight-bold;
-}
-
-// ===== VERBESSERTE PROJEKT-KARTEN =====
-.project {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(24px, 6vw, 32px);
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 8%) 0%, 
-    rgb(255 255 255 / 4%) 50%,
-    rgb(255 255 255 / 6%) 100%);
-  border-radius: $apple-radius-xl;
-  border: 1px solid rgb(255 255 255 / 15%);
-  padding: clamp(24px, 6vw, 32px);
-  backdrop-filter: blur(25px);
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  box-shadow: 
-    0 8px 32px rgb(0 0 0 / 12%),
-    0 4px 16px rgb(0 0 0 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
-  &:hover {
-    transform: translateY(-6px) scale(1.01);
-    box-shadow: 
-      0 16px 48px rgb(0 0 0 / 18%),
-      0 8px 24px rgb(0 0 0 / 12%),
-      0 4px 12px rgba($apple-primary, 0.1),
-      inset 0 1px 0 rgb(255 255 255 / 25%);
-    border-color: rgb(255 255 255 / 22%);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg,
-    rgb(255 255 255 / 10%) 0%,
-    rgb(255 255 255 / 5%) 50%,
-    rgb(255 255 255 / 8%) 100%);
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  &:hover::after {
-    opacity: 1;
-  }
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(20px, 5vw, 24px);
-    padding: clamp(20px, 5vw, 24px);
-    
-    &:hover {
-      transform: translateY(-4px) scale(1.005);
-    }
-  }
-}
-
-.project-top {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 5vw, 24px);
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(16px, 4vw, 20px);
-  }
-}
-
-// ===== VERBESSERTE PROJEKT-TITEL =====
-.project-top-title {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-bold;
-  color: $apple-primary;
-  font-size: clamp(22px, 5.5vw, 28px);
-  margin: 0 0 clamp(16px, 4vw, 20px);
-  text-align: center;
-  line-height: 1.3;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(50px, 12vw, 70px);
-    height: 2px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      $apple-primary 30%, 
-      $apple-primary 70%, 
-      transparent 100%);
-    border-radius: 1px;
-    opacity: 0.7;
-  }
-  
-  @media screen and (width <= 480px) {
-    font-size: clamp(20px, 5vw, 22px);
-    margin-bottom: clamp(14px, 3.5vw, 16px);
-  }
-}
-
-// ===== VERBESSERTE TECHNOLOGIEN =====
-.technologies {
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 10%) 0%, 
-    rgb(255 255 255 / 6%) 50%,
-    rgb(255 255 255 / 8%) 100%);
-  border-radius: $apple-radius-large;
-  padding: clamp(16px, 4vw, 20px);
-  border: 1px solid rgb(255 255 255 / 15%);
-  backdrop-filter: blur(15px);
-  box-shadow: 
-    0 4px 16px rgb(0 0 0 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);
-  
-  @media screen and (width <= 480px) {
-    padding: clamp(14px, 3.5vw, 16px);
-  }
-}
-
-.technologies-top {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(6px, 1.5vw, 8px);
-  align-items: flex-start;
-  margin-bottom: clamp(10px, 2.5vw, 12px);
-
-  @media (width >= 30rem) {
-    flex-flow: row wrap;
-    align-items: center;
-  }
-}
-
-.technologies-top > span:first-child {
-  font-family: $apple-font-family;
-  color: $apple-text-secondary;
-  font-size: clamp(16px, 3.5vw, 20px);
-  font-weight: $apple-font-weight-medium;
-  white-space: nowrap;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-  }
-}
-
-.technologies-arr {
-  color: $apple-primary;
-  font-weight: $apple-font-weight-semibold;
-  font-size: clamp(16px, 3.5vw, 20px);
-  line-height: 1.4;
-  word-break: break-word;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-  }
-}
-
-.duration {
-  font-family: $apple-font-family;
-  color: $apple-text-tertiary;
-  font-size: clamp(16px, 3vw, 20px);
-  line-height: 1.3;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-  }
-}
-
-.duration span {
-  color: $apple-text-secondary;
-  font-weight: $apple-font-weight-medium;
-}
-
-// ===== VERBESSERTE PROJEKT-BILDER =====
-.project-img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 6%) 0%, 
-    rgb(255 255 255 / 3%) 50%,
-    rgb(255 255 255 / 5%) 100%);
-  border-radius: $apple-radius-large;
-  padding: clamp(16px, 4vw, 24px);
-  min-height: clamp(120px, 25vw, 180px);
-  position: relative;
-  border: 1px solid rgb(255 255 255 / 12%);
-  backdrop-filter: blur(15px);
-  box-shadow: 
-    0 4px 16px rgb(0 0 0 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 15%);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg,
-    rgb($apple-primary / 5%) 0%,
-    transparent 50%,
-    rgb($apple-secondary / 5%) 100%);
-    border-radius: inherit;
-    z-index: 0;
-  }
-  
-  &:hover {
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: 
-      0 8px 24px rgb(0 0 0 / 12%),
-      0 4px 12px rgba($apple-primary, 0.08),
-      inset 0 1px 0 rgb(255 255 255 / 22%);
-    border-color: rgb(255 255 255 / 18%);
-  }
-  
-  @media screen and (width <= 480px) {
-    padding: clamp(14px, 3.5vw, 16px);
-    min-height: clamp(100px, 20vw, 140px);
-    
-    &:hover {
-      transform: translateY(-2px) scale(1.005);
-    }
-  }
-}
-
-.project-img img {
-  max-width: 100%;
-  height: auto;
-  border-radius: $apple-radius-medium;
-  box-shadow: 
-    0 6px 18px rgb(0 0 0 / 10%),
-    0 3px 8px rgb(0 0 0 / 6%);
-  position: relative;
-  z-index: 1;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
-  &:hover {
-    transform: scale(1.03);
-    box-shadow: 
-      0 10px 30px rgb(0 0 0 / 15%),
-      0 5px 15px rgb(0 0 0 / 10%);
-  }
-  
-  &[src*="ellipse-small-blue"] {
-    width: clamp(24px, 6vw, 32px) !important;
-    height: clamp(24px, 6vw, 32px) !important;
-    max-width: 32px !important;
-    max-height: 32px !important;
-    object-fit: contain;
-    filter: brightness(1.1) saturate(1.2);
-    
-    @media screen and (width <= 480px) {
-      width: clamp(20px, 5vw, 24px) !important;
-      height: clamp(20px, 5vw, 24px) !important;
-      max-width: 24px !important;
-      max-height: 24px !important;
-    }
-    
-    &:hover {
-      transform: scale(1.15);
-      filter: brightness(1.3) saturate(1.4);
-    }
-  }
-  
-  @media screen and (width <= 480px) {
-    &:hover {
-      transform: scale(1.02);
-    }
-  }
-}
-
-.project-bottom {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 4vw, 20px);
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(14px, 3.5vw, 16px);
-  }
-}
-
-// ===== VERBESSERTE TAB-ELEMENTE =====
-.tab-li {
-  display: flex;
-  gap: clamp(14px, 3.5vw, 18px);
-  align-items: flex-start;
-  background: linear-gradient(135deg, 
-    rgb(255 255 255 / 6%) 0%, 
-    rgb(255 255 255 / 3%) 50%,
-    rgb(255 255 255 / 5%) 100%);
-  border-radius: $apple-radius-large;
-  padding: clamp(16px, 4vw, 20px);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  border: 1px solid rgb(255 255 255 / 10%);
-  backdrop-filter: blur(15px);
-  box-shadow: 
-    0 3px 8px rgb(0 0 0 / 6%),
-    inset 0 1px 0 rgb(255 255 255 / 12%);
-
-  &:hover {
-    background: linear-gradient(135deg, 
-      rgb(255 255 255 / 10%) 0%, 
-      rgb(255 255 255 / 6%) 50%,
-      rgb(255 255 255 / 8%) 100%);
-    transform: translateX(4px) translateY(-2px);
-    border-color: rgb(255 255 255 / 18%);
-    box-shadow: 
-      0 6px 18px rgb(0 0 0 / 10%),
-      0 3px 8px rgba($apple-primary, 0.06),
-      inset 0 1px 0 rgb(255 255 255 / 18%);
-  }
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(12px, 3vw, 14px);
-    padding: clamp(14px, 3.5vw, 16px);
-    
-    &:hover {
-      transform: translateX(3px) translateY(-1px);
-    }
-  }
-}
-
-.right-of-logo {
-  flex: 1;
-  width: 100%;
-}
-
-.right-of-logo > div {
-  display: flex;
-  align-items: center;
-  gap: clamp(8px, 2vw, 12px);
-  margin-bottom: clamp(10px, 2.5vw, 12px);
-}
-
-.right-of-logo > div img {
-  width: clamp(16px, 4vw, 20px);
-  height: clamp(16px, 4vw, 20px);
-  flex-shrink: 0;
-  filter: brightness(1.2) hue-rotate(160deg) saturate(1.2);
-  
-  &[src*="ellipse-small-blue"] {
-    width: clamp(14px, 3.5vw, 18px) !important;
-    height: clamp(14px, 3.5vw, 18px) !important;
-    max-width: 18px !important;
-    max-height: 18px !important;
-    
-    @media screen and (width <= 480px) {
-      width: clamp(12px, 3vw, 16px) !important;
-      height: clamp(12px, 3vw, 16px) !important;
-      max-width: 16px !important;
-      max-height: 16px !important;
-    }
-  }
-}
-
-.right-of-logo > div h4 {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-semibold;
-  color: $apple-primary;
-  font-size: clamp(18px, 4.5vw, 22px);
-  margin: 0;
-  flex: 1;
-  line-height: 1.3;
-  display: flex;
-  align-items: center;
-  gap: clamp(6px, 1.5vw, 8px);
-  
-  @media screen and (width <= 480px) {
-    font-size: clamp(16px, 4vw, 18px);
-  }
-}
-
-.right-of-logo > p {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-regular;
-  color: $apple-text-secondary;
-  font-size: clamp(16px, 3.5vw, 20px);
-  line-height: 1.6;
-  margin: 0;
-  text-align: left;
-  word-break: break-word;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-  }
-}
-
-// ===== STARK VERBESSERTE BUTTONS - WIE IM BILD =====
-.project-bottom-footer {
-  display: flex;
-  gap: clamp(16px, 4vw, 20px);
-  justify-content: center;
-  margin-top: clamp(20px, 5vw, 28px);
-  flex-wrap: wrap;
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(12px, 3vw, 16px);
-    margin-top: clamp(16px, 4vw, 20px);
-  }
-}
-
-// ===== PERFEKTE BUTTONS NACH BILD-VORGABE =====
-.project-bottom-footer button {
-  position: relative;
-  background: #0A84FF;
-  color: white;
-  border: none;
-  border-radius: clamp(10px, 2.5vw, 14px);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  font-size: clamp(16px, 4vw, 24px); // NIEMALS unter 16px
-  padding: clamp(16px, 4vw, 28px) clamp(28px, 7vw, 64px);
-  min-width: clamp(140px, 40vw, 320px);
-  min-height: 48px; // WCAG Touch Target
-  z-index: 4;
-  font-weight: $apple-font-weight-semibold;
-  font-family: $apple-font-family;
-  box-shadow: 
-    0 6px 18px rgba(#0A84FF, 0.35),
-    0 3px 8px rgba(#0A84FF, 0.25),
-    inset 0 1px 0 rgb(255 255 255 / 25%);
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgb(255 255 255 / 25%) 0%, transparent 100%);
-    opacity: 0;
-    transition: all 0.3s ease;
-    border-radius: inherit;
-  }
-
-  &:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 
-      0 10px 30px rgba(#0A84FF, 0.5),
-      0 5px 15px rgba(#0A84FF, 0.35),
-      inset 0 1px 0 rgb(255 255 255 / 30%);
-    background: color.adjust(#0A84FF, $lightness: 5%);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-  
-  &:active {
-    transform: translateY(-1px) scale(1.01);
-  }
-  
-  @media screen and (width <= 480px) {
-    // Garantiert 16px Minimum
-    font-size: 16px !important;
-    padding: clamp(14px, 3.5vw, 16px) clamp(20px, 5vw, 28px);
-    min-width: clamp(120px, 35vw, 160px);
-    
-    &:hover {
-      transform: translateY(-2px) scale(1.01);
-    }
-  }
-  
-  // Extra Sicherheit für sehr kleine Screens
-  @media screen and (width <= 374px) {
-    font-size: 16px !important; // ABSOLUT GARANTIERT
-    padding: 12px 18px;
-    min-width: 110px;
-  }
-
-  @media screen and (width <= 320px) {
-    font-size: 16px !important; // ABSOLUT GARANTIERT
-    padding: 12px 16px;
-    min-width: 100px;
-  }
-}
-
-.project-bottom-footer button a {
-  color: inherit;
-  text-decoration: none;
-  font-size: inherit;
-  font-weight: inherit;
-  display: block;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// ===== VERBESSERTE TEAM PLAYER SEKTION =====
-.team-player {
-  background: linear-gradient(135deg, 
-  rgb(255 255 255 / 6%) 0%, 
-  rgb(255 255 255 / 10%) 30%,
-  rgb(255 255 255 / 4%) 70%,
-  rgb(255 255 255 / 8%) 100%);
-  border-radius: $apple-radius-xl;
-  border: 1px solid rgb(255 255 255 / 15%);
-  padding: clamp(32px, 8vw, 48px);
-  margin-top: clamp(32px, 8vw, 48px);
-  text-align: center;
-  position: relative;
-  backdrop-filter: blur(30px);
-  box-shadow: 
-    0 16px 48px rgb(0 0 0 / 15%),
-    0 8px 24px rgb(0 0 0 / 10%),
-    inset 0 1px 0 rgb(255 255 255 / 25%);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
     background: conic-gradient(
       from 0deg,
-      transparent 0deg,
-      rgb($apple-primary / 5%) 90deg,
-      rgb($apple-secondary / 5%) 180deg,
-      transparent 270deg,
-      transparent 360deg
+      $apple-primary,
+      color.adjust($apple-primary, $hue: 60deg),
+      $apple-secondary,
+      color.adjust($apple-secondary, $hue: 60deg),
+      $apple-primary
     );
-    animation: team-aurora 15s ease-in-out infinite;
-    z-index: 0;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 30% 70%,
-      rgb($apple-primary / 8%) 0%,
-      transparent 40%
-    );
-    z-index: 0;
-    animation: team-pulse 8s ease-in-out infinite;
-  }
-  
-  @media screen and (width <= 480px) {
-    padding: clamp(24px, 6vw, 32px);
-    margin-top: clamp(24px, 6vw, 32px);
-  }
-}
-
-.team-player-header {
-  position: relative;
-  margin-bottom: clamp(32px, 8vw, 40px);
-  z-index: 2;
-  
-  @media screen and (width <= 480px) {
-    margin-bottom: clamp(24px, 6vw, 32px);
-  }
-}
-
-.team-player-title {
-  margin-bottom: clamp(16px, 4vw, 20px);
-  position: relative;
-  
-  @media screen and (width <= 480px) {
-    margin-bottom: clamp(12px, 3vw, 16px);
-  }
-}
-
-.title-gradient {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-bold;
-  font-size: clamp(24px, 6vw, 32px);
-  background: linear-gradient(
-    135deg, 
-    $apple-primary 0%,
-    color.adjust($apple-primary, $hue: 30deg) 35%,
-    $apple-secondary 70%,
-    color.adjust($apple-secondary, $hue: -20deg) 100%
-  );
-  background-size: 200% 200%;
-  background-clip: text;
-  color: transparent;
-  line-height: 1.2;
-  animation: gradient-flow 6s ease-in-out infinite;
-  position: relative;
-  display: inline-block;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(60px, 15vw, 100px);
-    height: 3px;
-    background: linear-gradient(90deg, transparent, $apple-primary, transparent);
-    border-radius: 2px;
-    animation: underline-glow 3s ease-in-out infinite;
-  }
-  
-  @media screen and (width <= 480px) {
-    font-size: clamp(20px, 5vw, 24px);
-  }
-}
-
-.team-player-subtitle {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-medium;
-  font-size: clamp(16px, 4.5vw, 22px);
-  color: $apple-text-secondary;
-  line-height: 1.5;
-  margin-bottom: clamp(20px, 5vw, 28px);
-  opacity: 0.9;
-  letter-spacing: 0.01em;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-    margin-bottom: clamp(16px, 4vw, 20px);
-  }
-}
-
-.team-player-decoration {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.floating-particle {
-  position: absolute;
-  width: clamp(6px, 1.5vw, 10px);
-  height: clamp(6px, 1.5vw, 10px);
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    $apple-primary 0%,
-    color.adjust($apple-primary, $alpha: -0.3) 70%,
-    transparent 100%
-  );
-  box-shadow: 0 0 clamp(8px, 2vw, 12px) rgb($apple-primary / 50%);
-
-  &:nth-child(1) {
-    top: 15%;
-    left: 10%;
-    animation: particle-orbit 8s ease-in-out infinite;
-  }
-
-  &:nth-child(2) {
-    top: 25%;
-    right: 15%;
-    animation: particle-orbit 8s ease-in-out infinite 2.5s;
-  }
-
-  &:nth-child(3) {
-    bottom: 20%;
-    left: 20%;
-    animation: particle-orbit 8s ease-in-out infinite 5s;
-  }
-}
-
-.team-player-content {
-  position: relative;
-  z-index: 2;
-}
-
-.team-player-content-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 4vw, 24px);
-
-  @media (width >= 30rem) {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: clamp(20px, 5vw, 28px);
-  }
-  
-  @media screen and (width <= 480px) {
-    gap: clamp(14px, 3.5vw, 18px);
-  }
-}
-
-// ===== VERBESSERTE PREMIUM CARDS =====
-.premium-card {
-  background: linear-gradient(145deg,
-  rgb(255 255 255 / 10%) 0%,
-  rgb(255 255 255 / 6%) 50%,
-  rgb(255 255 255 / 12%) 100%);
-  border: 1px solid rgb(255 255 255 / 18%);
-  border-radius: $apple-radius-large;
-  padding: clamp(20px, 5vw, 28px);
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  position: relative;
-  backdrop-filter: blur(25px);
-  cursor: pointer;
-  transform-style: preserve-3d;
-  box-shadow: 
-    0 8px 24px rgb(0 0 0 / 10%),
-    0 4px 12px rgb(0 0 0 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 22%);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(145deg,
-    rgb(255 255 255 / 15%) 0%,
-    transparent 50%,
-    rgb($apple-primary / 8%) 100%);
-    opacity: 0;
-    transition: all 0.4s ease;
-    z-index: 0;
-    border-radius: inherit;
-  }
-
-  &:hover {
-    background: linear-gradient(145deg,
-    rgb(255 255 255 / 18%) 0%,
-    rgb(255 255 255 / 10%) 50%,
-    rgb(255 255 255 / 20%) 100%);
-    transform: translateY(-8px) rotateY(3deg) scale(1.02);
-    box-shadow:
-      0 20px 60px rgb(0 0 0 / 20%),
-      0 10px 30px rgb(0 0 0 / 15%),
-      0 5px 15px rgba($apple-primary, 0.1),
-      inset 0 1px 0 rgb(255 255 255 / 30%);
-    border-color: rgb(255 255 255 / 30%);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &:active {
-    transform: translateY(-4px) scale(0.99);
-  }
-  
-  @media screen and (width <= 480px) {
-    padding: clamp(16px, 4vw, 20px);
-    
-    &:hover {
-      transform: translateY(-4px) scale(1.01);
-    }
-  }
-}
-
-.premium-card:hover .player-name {
-  color: $apple-primary;
-  text-shadow: 0 0 clamp(8px, 2vw, 12px) rgb($apple-primary / 35%);
-}
-
-.player-glow {
-  position: absolute;
-  inset: -2px;
-  background: conic-gradient(
-    from 0deg,
-    $apple-primary,
-    color.adjust($apple-primary, $hue: 60deg),
-    $apple-secondary,
-    color.adjust($apple-secondary, $hue: 60deg),
-    $apple-primary
-  );
-  border-radius: inherit;
-  opacity: 0;
-  transition: all 0.5s ease;
-  z-index: -1;
-  animation: glow-rotate 6s linear infinite;
-  filter: blur(10px);
-}
-
-.player-content {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.player-info {
-  text-align: center;
-}
-
-.player-name {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-bold;
-  color: $apple-text-primary;
-  font-size: clamp(18px, 4.5vw, 22px);
-  margin-bottom: clamp(8px, 2vw, 12px);
-  line-height: 1.3;
-  transition: all 0.3s ease;
-  letter-spacing: 0.01em;
-  
-  @media screen and (width <= 480px) {
-    font-size: clamp(16px, 4vw, 18px);
-  }
-}
-
-.player-project {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-medium;
-  color: $apple-text-tertiary;
-  font-size: clamp(16px, 3.5vw, 20px);
-  margin-bottom: clamp(12px, 3vw, 16px);
-  line-height: 1.4;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-  }
-}
-
-.project-link {
-  display: flex;
-  align-items: center;
-  gap: clamp(6px, 1.5vw, 8px);
-  justify-content: center;
-  color: $apple-primary;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  font-weight: $apple-font-weight-semibold;
-  text-decoration: none;
-  margin-top: clamp(5px, 1.25vw, 7px);
-  padding: clamp(5px, 1.25vw, 7px) clamp(8px, 2vw, 12px);
-  border-radius: $apple-radius-small;
-  position: relative;
-  font-size: clamp(16px, 3.5vw, 20px);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgb($apple-primary / 12%);
     border-radius: inherit;
     opacity: 0;
+    transition: all 0.5s ease;
+    z-index: -1;
+    animation: glow-rotate 6s linear infinite;
+    filter: blur(8px);
+  }
+
+  .player-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .player-info {
+    text-align: center;
+  }
+
+  .player-name {
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-bold !important;
+    color: $apple-text-primary !important;
+    font-size: 16px !important; // WCAG Minimum
+    margin-bottom: clamp(5px, 1.25vw, 8px) !important; // Harmonisiert
+    line-height: 1.3;
     transition: all 0.3s ease;
+    letter-spacing: 0.01em;
   }
 
-  &:hover {
-    color: color.adjust($apple-primary, $lightness: 15%);
+  .player-project {
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-medium !important;
+    color: $apple-text-tertiary !important;
+    font-size: 16px !important; // WCAG Minimum
+    margin-bottom: clamp(8px, 2vw, 12px) !important; // Harmonisiert
+    line-height: 1.4;
+  }
+
+  .project-link {
+    display: flex;
+    align-items: center;
+    gap: clamp(3px, 0.75vw, 5px) !important; // Harmonisiert
+    justify-content: center;
+    color: $apple-primary !important;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    font-weight: $apple-font-weight-semibold !important;
+    text-decoration: none;
+    margin-top: clamp(2px, 0.5vw, 4px) !important;
+    padding: clamp(2px, 0.5vw, 4px) clamp(5px, 1.25vw, 8px) !important;
+    border-radius: $apple-radius-small;
+    position: relative;
+    font-size: 16px !important; // WCAG Minimum
 
     &::before {
-      opacity: 1;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgb($apple-primary / 10%);
+      border-radius: inherit;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      color: color.adjust($apple-primary, $lightness: 15%) !important;
+
+      &::before {
+        opacity: 1;
+      }
     }
   }
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
+
+  .project-link:hover .link-text::after {
+    transform: scaleX(1);
   }
-}
 
-.project-link:hover .link-text::after {
-  transform: scaleX(1);
-}
+  .link-text {
+    position: relative;
+    z-index: 1;
 
-.link-text {
-  position: relative;
-  z-index: 1;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, 
+      transparent, 
+      $apple-primary, 
+      transparent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+  }
 
-  &::after {
-    content: '';
+  .link-arrow {
+    font-size: 16px !important; // WCAG Minimum
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .player-reference {
+    position: relative;
+    padding: clamp(8px, 2vw, 12px) !important; // Harmonisiert
+    background: rgb(255 255 255 / 3%);
+    border-radius: $apple-radius-medium;
+    border: 1px solid rgb(255 255 255 / 8%);
+    text-align: left;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+      0 2px 6px rgb(0 0 0 / 4%),
+      inset 0 1px 0 rgb(255 255 255 / 10%);
+    
+    @media screen and (width <= 480px) {
+      padding: clamp(6px, 1.5vw, 8px) !important;
+    }
+  }
+
+  .quote-mark {
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, 
-    transparent, 
-    $apple-primary, 
-    transparent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    left: clamp(5px, 1.25vw, 8px) !important; // Harmonisiert
+    top: clamp(5px, 1.25vw, 8px) !important;
+    font-size: clamp(14px, 3vw, 20px) !important; // Harmonisiert
+    color: $apple-primary !important;
+    opacity: 0.7;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 0 0 clamp(3px, 0.75vw, 5px) rgb($apple-primary / 30%);
+    
+    @media screen and (width <= 480px) {
+      font-size: clamp(12px, 2.5vw, 14px) !important;
+    }
   }
-}
 
-.link-arrow {
-  font-size: clamp(16px, 3.5vw, 20px);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  position: relative;
-  z-index: 1;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-  }
-}
-
-.player-reference {
-  position: relative;
-  padding: clamp(14px, 3.5vw, 18px);
-  background: rgb(255 255 255 / 4%);
-  border-radius: $apple-radius-medium;
-  border: 1px solid rgb(255 255 255 / 10%);
-  text-align: left;
-  backdrop-filter: blur(10px);
-  box-shadow: 
-    0 3px 8px rgb(0 0 0 / 6%),
-    inset 0 1px 0 rgb(255 255 255 / 12%);
-  
-  @media screen and (width <= 480px) {
-    padding: clamp(12px, 3vw, 14px);
-  }
-}
-
-.quote-mark {
-  position: absolute;
-  left: clamp(8px, 2vw, 12px);
-  top: clamp(8px, 2vw, 12px);
-  font-size: clamp(18px, 4.5vw, 28px);
-  color: $apple-primary;
-  opacity: 0.7;
-  font-family: Georgia, serif;
-  font-weight: bold;
-  line-height: 1;
-  text-shadow: 0 0 clamp(6px, 1.5vw, 8px) rgb($apple-primary / 35%);
-  
-  @media screen and (width <= 480px) {
-    font-size: clamp(16px, 4vw, 18px);
-  }
-}
-
-.player-reference span {
-  font-family: $apple-font-family;
-  font-weight: $apple-font-weight-regular;
-  color: $apple-text-secondary;
-  font-size: clamp(16px, 3.5vw, 20px);
-  line-height: 1.6;
-  font-style: italic;
-  display: block;
-  padding-left: clamp(20px, 5vw, 28px);
-  padding-top: clamp(5px, 1.25vw, 8px);
-  text-align: left;
-  word-break: break-word;
-  opacity: 0.9;
-  
-  @media screen and (width <= 480px) {
-    font-size: 16px;
-    padding-left: clamp(16px, 4vw, 20px);
+  .player-reference span {
+    font-family: $apple-font-family !important;
+    font-weight: $apple-font-weight-regular !important;
+    color: $apple-text-secondary !important;
+    font-size: 16px !important; // WCAG Minimum
+    line-height: 1.6;
+    font-style: italic;
+    display: block;
+    padding-left: clamp(12px, 3vw, 20px) !important; // Harmonisiert
+    padding-top: clamp(2px, 0.5vw, 4px) !important;
+    text-align: left;
+    word-break: break-word;
+    opacity: 0.9;
+    
+    @media screen and (width <= 480px) {
+      padding-left: clamp(10px, 2.5vw, 14px) !important;
+    }
   }
 }
 
@@ -1164,12 +1144,12 @@
   }
 
   33% {
-    transform: translateY(-8px) rotate(0.5deg) scale(1.005);
+    transform: translateY(-6px) rotate(0.3deg) scale(1.003);
     opacity: 0.12;
   }
 
   66% {
-    transform: translateY(6px) rotate(-0.3deg) scale(0.995);
+    transform: translateY(4px) rotate(-0.2deg) scale(0.997);
     opacity: 0.06;
   }
 }
@@ -1181,12 +1161,12 @@
   }
 
   33% {
-    transform: rotate(120deg) scale(1.05);
+    transform: rotate(120deg) scale(1.03);
     opacity: 0.5;
   }
 
   66% {
-    transform: rotate(240deg) scale(0.95);
+    transform: rotate(240deg) scale(0.97);
     opacity: 0.2;
   }
 }
@@ -1199,7 +1179,7 @@
 
   50% {
     opacity: 0.8;
-    transform: scale(1.02);
+    transform: scale(1.01);
   }
 }
 
@@ -1221,7 +1201,7 @@
 
   50% {
     opacity: 1;
-    transform: translateX(-50%) scaleX(1.3);
+    transform: translateX(-50%) scaleX(1.2);
   }
 }
 
@@ -1232,17 +1212,17 @@
   }
 
   25% {
-    transform: translateY(-6px) scale(1.1) rotate(90deg);
+    transform: translateY(-4px) scale(1.05) rotate(90deg);
     opacity: 1;
   }
 
   50% {
-    transform: translateY(0) scale(0.9) rotate(180deg);
+    transform: translateY(0) scale(0.95) rotate(180deg);
     opacity: 0.4;
   }
 
   75% {
-    transform: translateY(6px) scale(1.05) rotate(270deg);
+    transform: translateY(4px) scale(1.02) rotate(270deg);
     opacity: 0.8;
   }
 }
@@ -1259,133 +1239,142 @@
 
 // ===== RESPONSIVE OPTIMIERUNGEN =====
 @media (width <= 22.5rem) {
-  .my-projects-container {
-    margin: clamp(12px, 3vw, 16px);
-    padding: clamp(16px, 4vw, 20px);
-  }
+  .my-projects-mobile {
+    .my-projects-container {
+      margin: clamp(6px, 1.5vw, 8px) !important;
+      padding: clamp(10px, 2.5vw, 14px) !important;
+    }
 
-  .team-player {
-    padding: clamp(20px, 5vw, 24px);
-    margin-top: clamp(20px, 5vw, 24px);
-  }
+    .team-player {
+      padding: clamp(14px, 3.5vw, 18px) !important;
+      margin-top: clamp(14px, 3.5vw, 18px) !important;
+    }
 
-  .premium-card {
-    padding: clamp(14px, 3.5vw, 16px);
-  }
+    .premium-card {
+      padding: clamp(8px, 2vw, 10px) !important;
+    }
 
-  .player-reference {
-    padding: clamp(10px, 2.5vw, 12px);
-  }
+    .player-reference {
+      padding: clamp(5px, 1.25vw, 6px) !important;
+    }
 
-  .quote-mark {
-    left: 6px;
-    top: 6px;
-    font-size: 16px;
-  }
+    .quote-mark {
+      left: 3px !important;
+      top: 3px !important;
+      font-size: 12px !important;
+    }
 
-  .player-reference span {
-    padding-left: clamp(14px, 3.5vw, 16px);
-    padding-top: 3px;
+    .player-reference span {
+      padding-left: clamp(8px, 2vw, 10px) !important;
+      padding-top: 2px !important;
+    }
   }
 }
 
 // ===== ACCESSIBILITY =====
 @media (prefers-reduced-motion: reduce) {
-  .my-projects-container::before {
-    animation: none;
-  }
+  .my-projects-mobile {
+    .my-projects-container::before {
+      animation: none;
+    }
 
-  .title-gradient,
-  .floating-particle,
-  .player-glow {
-    animation: none;
-  }
+    .title-gradient,
+    .floating-particle,
+    .player-glow {
+      animation: none;
+    }
 
-  .premium-card:hover {
-    transform: translateY(-3px) scale(1.01);
-  }
+    .premium-card:hover {
+      transform: translateY(-1px) scale(1.002);
+    }
 
-  .team-player::before,
-  .team-player::after {
-    animation: none;
-  }
-  
-  .project:hover,
-  .project-img:hover,
-  .tab-li:hover {
-    transform: translateY(-2px);
+    .team-player::before,
+    .team-player::after {
+      animation: none;
+    }
+    
+    .project:hover,
+    .project-img:hover,
+    .tab-li:hover {
+      transform: none;
+    }
   }
 }
 
 @media (prefers-contrast: high) {
-  .my-projects-container {
-    background: #000;
-    border: 2px solid #fff;
-  }
-
-  .project,
-  .team-player {
-    background: #111;
-    border: 2px solid #333;
-  }
-
-  .premium-card {
-    background: #000;
-    border: 2px solid #444;
-
-    &:hover {
-      background: #222;
-      border-color: #fff;
-      box-shadow: 0 0 20px rgb(255 255 255 / 20%);
+  .my-projects-mobile {
+    .my-projects-container {
+      background: #000 !important;
+      border: 2px solid #fff !important;
     }
-  }
-  
-  .project-img {
-    background: #111 !important;
-    border-color: #333 !important;
-  }
-  
-  .technologies,
-  .tab-li {
-    background: #111 !important;
-    border-color: #333 !important;
+
+    .project,
+    .team-player {
+      background: #111 !important;
+      border: 2px solid #333 !important;
+    }
+
+    .premium-card {
+      background: #000 !important;
+      border: 2px solid #444 !important;
+
+      &:hover {
+        background: #222 !important;
+        border-color: #fff !important;
+        box-shadow: 0 0 20px rgb(255 255 255 / 20%) !important;
+      }
+    }
+    
+    .project-img {
+      background: #111 !important;
+      border-color: #333 !important;
+    }
+    
+    .technologies,
+    .tab-li {
+      background: #111 !important;
+      border-color: #333 !important;
+    }
   }
 }
 
 // ===== PRINT STYLES =====
 @media print {
-  .my-projects-container {
-    background: white !important;
-    color: black !important;
-    box-shadow: none;
-    border: 1px solid black;
-  }
-  
-  .project {
-    background: white !important;
-    border: 1px solid black !important;
-    break-inside: avoid;
-  }
-  
-  .team-player {
-    background: white !important;
-    border: 1px solid black !important;
-    break-inside: avoid;
-  }
-  
-  .premium-card {
-    background: white !important;
-    border: 1px solid black !important;
-    break-inside: avoid;
-  }
-  
-  .project-img img[src*="ellipse-small-blue"] {
-    filter: none !important;
-  }
-  
-  .technologies,
-  .tab-li {
-    background: white !important;
-    border: 1px solid black !important;
+  .my-projects-mobile {
+    .my-projects-container {
+      background: white !important;
+      color: black !important;
+      box-shadow: none !important;
+      border: 1px solid black !important;
+    }
+    
+    .project {
+      background: white !important;
+      border: 1px solid black !important;
+      break-inside: avoid;
+    }
+    
+    .team-player {
+      background: white !important;
+      border: 1px solid black !important;
+      break-inside: avoid;
+    }
+    
+    .premium-card {
+      background: white !important;
+      border: 1px solid black !important;
+      break-inside: avoid;
+    }
+    
+    .project-img img[src*="ellipse-small-blue"] {
+      filter: none !important;
+    }
+    
+    .technologies,
+    .tab-li {
+      background: white !important;
+      border: 1px solid black !important;
+    }
   }
 }
+
