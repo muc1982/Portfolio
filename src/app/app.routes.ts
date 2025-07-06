@@ -15,13 +15,8 @@ export const routes: Routes = [
     pathMatch: "full",
   },
   {
-    path: "privacy-policy", // ← GEÄNDERT: Von "private-policy" zu "privacy-policy"
+    path: "privacy-policy", // ← GEÄNDERT: Standardname für Datenschutz
     component: PrivatePolicyComponent,
-    pathMatch: "full",
-  },
-  {
-    path: "private-policy", // ← HINZUGEFÜGT: Redirect für alte URL
-    redirectTo: "privacy-policy",
     pathMatch: "full",
   },
   {
