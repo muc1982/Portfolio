@@ -4,6 +4,7 @@ interface ScrollAnimateOptions {
     animateCss?: string;
     delay?: number; 
     threshold?: number;
+    animationType?: 'fade' | 'slideLeft' | 'slideRight' | 'slideUp';
 }
 
 @Directive({
@@ -16,8 +17,9 @@ export class ScrollAnimateDirective implements AfterViewInit, OnDestroy {
     private isVisible = false;  
     private observer?: IntersectionObserver;
     private animateCss = '';
-    private animationDelay = 200; 
-    private threshold = 0.3; 
+    private animationDelay = 100; // Checkliste konform: 100ms
+    private threshold = 0.1; // Niedrigere Schwelle für frühere Animation
+    private animationType: 'fade' | 'slideLeft' | 'slideRight' | 'slideUp' = 'fade';
     
     constructor(
         private readonly el: ElementRef<HTMLElement>, 
@@ -25,14 +27,13 @@ export class ScrollAnimateDirective implements AfterViewInit, OnDestroy {
     ) {}
 
     ngAfterViewInit(): void {
-        this.animateCss = this.options.animateCss || '';
-        this.animationDelay = this.options.delay || 200;
-        this.threshold = this.options.threshold || 0.3;
+        this.animateCss = this.options.animateCss || 'scroll-fade-in';
+        this.animationDelay = this.options.delay || 100;
+        this.threshold = this.options.threshold || 0.1;
+        this.animationType = this.options.animationType || 'fade';
         
-        if (!this.animateCss) return;
-        
-        this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
-        this.renderer.setStyle(this.el.nativeElement, 'transition', 'opacity 0.3s ease');
+        // Initiale Sichtbarkeit verbergen
+        this.renderer.addClass(this.el.nativeElement, 'scroll-hidden');
         
         this.initializeObserver();
     }
@@ -40,7 +41,7 @@ export class ScrollAnimateDirective implements AfterViewInit, OnDestroy {
     private initializeObserver(): void {
         const options: IntersectionObserverInit = {
             threshold: this.threshold,
-            rootMargin: '0px 0px -50px 0px' 
+            rootMargin: '0px 0px -20px 0px' // Frühere Aktivierung
         };
 
         this.observer = new IntersectionObserver((entries) => {
@@ -51,13 +52,21 @@ export class ScrollAnimateDirective implements AfterViewInit, OnDestroy {
                 this.isVisible = true;
                 
                 setTimeout(() => {
-                    this.renderer.setStyle(this.el.nativeElement, 'opacity', '1');
-                    this.renderer.addClass(this.el.nativeElement, this.animateCss);
+                    this.renderer.removeClass(this.el.nativeElement, 'scroll-hidden');
+                    this.renderer.addClass(this.el.nativeElement, 'scroll-visible');
+                    
+                    // Dezente Animation basierend auf Typ
+                    switch (this.animationType) {
+                        case 'slideLeft':
+                            this.renderer.addClass(this.el.nativeElement, 'scroll-fade-in-left');
+                            break;
+                        case 'slideRight':
+                            this.renderer.addClass(this.el.nativeElement, 'scroll-fade-in-right');
+                            break;
+                        default:
+                            this.renderer.addClass(this.el.nativeElement, 'scroll-fade-in');
+                    }
                 }, this.animationDelay);
-            } else if (!entry.isIntersecting && this.isVisible) {
-                this.isVisible = false;
-                this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
-                this.renderer.removeClass(this.el.nativeElement, this.animateCss);
             }
         }, options);
 

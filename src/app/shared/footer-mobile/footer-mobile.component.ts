@@ -89,13 +89,6 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
         icon: 'mail.png',
         ariaLabel: 'Send Email - Contact me directly'
       }
-      // ENTFERNT: LinkedIn-Link da kein aktives Profil vorhanden
-      // {
-      //   name: 'linkedin',
-      //   url: 'https://www.linkedin.com/',
-      //   icon: 'linkedin.png',
-      //   ariaLabel: 'LinkedIn Profile'
-      // }
     ],
     copyrightText: '© Yasin Sun',
     currentYear: new Date().getFullYear()
