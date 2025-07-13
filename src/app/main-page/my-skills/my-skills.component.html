@@ -1,14 +1,14 @@
-
-<div class="hide-on-desktop"> 
+<div class="hide-on-desktop">
     <div id="my-skills-mobile" class="my-skills-container-mobile normal-container">
         <h2>{{ 'skills.title' | translate}}</h2>
         <div class="my-skills-content">
             <div class="content-top">
                 <div class="reservoir">
                     @for (skill of skillArr; track $index) {
-                        <div class="skill">
-                            <img src="assets/img/skill-{{ skill.url }}.png" alt="skill angular">
-                        </div>
+                    <div class="skill">
+                        <img src="assets/img/skill-{{ skill.url }}.png" alt="skill angular" loading="lazy"
+                            decoding="async">
+                    </div>
                     }
                 </div>
             </div>
@@ -17,45 +17,47 @@
                 <div class="content-bottom-content">
                     <p>
                         {{ 'skills.text' | translate}}
-                     </p>
-                     <div class="current-learning" [appScrollAnimate]="{animateCss: 'rotate'}">
+                    </p>
+                    <div class="current-learning" [appScrollAnimate]="{animateCss: 'rotate'}">
                         <div class="skills">
                             <div>
-                                <img src="assets/img/skill-react.png" alt="">
+                                <img src="assets/img/skill-react.png" alt="" loading="lazy" decoding="async">
                                 <span>React</span>
                             </div>
                             <div>
-                                <img src="assets/img/skill-vue.png" alt="">
+                                <img src="assets/img/skill-vue.png" alt="" loading="lazy" decoding="async">
                                 <span>Vue</span>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="talk-button ">
-                    <button class="pointer" [appScrollBounce]="'contact-me-mobile'" [offsetY]="104">{{'intro.talk' | translate}}</button>
+                    <button class="pointer" [appScrollBounce]="'contact-me-mobile'" [offsetY]="104">{{'intro.talk' |
+                        translate}}</button>
                 </div>
-                
+
             </div>
-    
+
         </div>
     </div>
 </div>
-<div class="hide-on-mobile">  
+<div class="hide-on-mobile">
     <div id="my-skills" class="my-skills-container normal-container">
         <h2>{{ 'skills.title' | translate}}</h2>
         <div class="my-skills-content">
             <div class="content-left">
                 <div class="reservoir">
                     @for (skill of skillArr; track $index) {
-                        <div class="skill">
-                       
-                            <img src="assets/img/skill-{{ skill.url }}.png" alt="skill angular">
-                            <div class="skill-text">
-                               {{ skill.name }}
-                            </div>
-                       
+                    <div class="skill">
+
+                        <img src="assets/img/skill-{{ skill.url }}.png" alt="skill angular" loading="lazy"
+                            decoding="async">
+                        <div class="skill-text">
+                            {{ skill.name }}
                         </div>
+
+                    </div>
                     }
                 </div>
             </div>
@@ -68,16 +70,16 @@
                             <span>React</span>
                         </div>
                         <div>
-                            <img src="assets/img/skill-vue.png" alt="">
+                            <img src="assets/img/skill-vue.png" alt="" loading="lazy" decoding="async">
                             <span>Vue</span>
                         </div>
                     </div>
                     <p>
-                       {{ 'skills.text' | translate}}
+                        {{ 'skills.text' | translate}}
                     </p>
                 </div>
             </div>
-    
+
         </div>
     </div>
 </div>

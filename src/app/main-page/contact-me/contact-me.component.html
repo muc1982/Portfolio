@@ -105,7 +105,12 @@
                         </div>
                     </div>
                     <ng-template #sendButton>
-                        <button type="submit" class="pointer" [attr.aria-label]="'contact.send' | translate">
+                        <button 
+                            type="submit" 
+                            class="pointer" 
+                            [attr.aria-label]="'contact.send' | translate"
+                            [disabled]="!contactForm.valid"
+                            [class.disabled]="!contactForm.valid">
                             {{ 'contact.send' | translate }}
                         </button>
                     </ng-template>

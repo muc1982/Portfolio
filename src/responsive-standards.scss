@@ -1,50 +1,56 @@
 @use 'style/apple-variables' as *;
 
+// ===== MOBILE SCHRIFTGROESSEN - MINDESTENS 14PX =====
 @media screen and (width <= 480px) {
-  // Nur sehr kleine Texte auf mindestens 16px bringen
-  p, span, div, a, label {
-    font-size: 16px;
-    
-    // Nur wenn sie kleiner als 16px sind
-    &[style*="font-size"] {
-      font-size: 16px;
-    }
+  // KRITISCH: Alle Texte mindestens 16px auf mobil
+  p, span, div, a, label, button {
+    font-size: 16px !important; // KRITISCH: Mindestgröße 16px
   }
   
   // Input-Felder für iOS-Zoom-Fix
   input, textarea, select {
-    font-size: 16px;
+    font-size: 16px !important; // KRITISCH: Verhindert Zoom
   }
   
   // Buttons touch-friendly machen
   button {
     min-height: 44px;
     min-width: 44px;
-    font-size: 16px;
+    font-size: 16px !important; // KRITISCH: Mindestgröße
+  }
+
+  // Kleinere Texte auf mindestens 14px bringen
+  small, .small, .text-small {
+    font-size: 14px !important; // KRITISCH: Minimum 14px
   }
 }
 
-// ===== NUR SEHR KLEINE MOBILE (≤ 374px) =====
+// ===== SEHR KLEINE MOBILE (≤ 374px) - MINDESTENS 14PX =====
 @media screen and (width <= 374px) {
-  // Nur kritische Mindestgrößen
+  // KRITISCH: Alle Texte mindestens 16px
   * {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   
   h1 {
-    font-size: 24px;
+    font-size: 28px !important; // Vergrößert für bessere Lesbarkeit
   }
   
   h2 {
-    font-size: 20px;
+    font-size: 24px !important; // Vergrößert für bessere Lesbarkeit
   }
   
   h3 {
-    font-size: 18px;
+    font-size: 20px !important; // Vergrößert für bessere Lesbarkeit
   }
   
   h4, h5, h6 {
-    font-size: 16px;
+    font-size: 18px !important; // Vergrößert für bessere Lesbarkeit
+  }
+
+  // Kleinere Texte auf mindestens 16px
+  small, .small, .text-small {
+    font-size: 16px !important;
   }
 }
 

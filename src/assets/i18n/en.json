@@ -62,30 +62,26 @@
     "linkedinprofile": "LinkedIn Profile"
   },
   "contact": {
-    "title": "Contact Me",
-    "myemail": "Email",
-    "myphone": "Phone",
-    "name": "Your Name",
-    "message": "Your Message",
-    "namerequired": "Name is required",
-    "emailrequired": "Email is required",
-    "emailinvalid": "Invalid email address",
-    "messagerequired": "Message is required",
+    "headline": "Let's start a project together",
+    "description": "You have a project? Contact me and let's talk about it.",
+    "send": "Send message",
+    "success": "Message sent successfully!",
     "read": "I have read the",
-    "privacypolicy": "Privacy Policy",
-    "agree": "and agree",
-    "send": "Send",
-    "successmsg": "Message sent successfully!",
-    "successdetail": "Thank you for your message!",
-    "successsubtext": "I will get back to you as soon as possible and look forward to our conversation.",
-    "emailcommaerror": "Please use a dot (.) instead of a comma",
-    "emailmissingat": "Missing @ symbol in email address",
-    "emailmissingdot": "Missing dot (.) in email address",
-    "emailmultipleat": "Too many @ symbols in email",
-    "sending": "Sending message...",
-    "error": "Error sending message",
-    "errordetail": "The message could not be sent. Please try again or contact me directly.",
-    "feelfree": "Feel free to contact me!"
+    "agree": "and agree to it.",
+    "placeholder": {
+      "name": "Your name",
+      "email": "Your email",
+      "message": "Your message"
+    },
+    "error": {
+      "nameRequired": "Please enter your name.",
+      "nameMinLength": "Name must be at least 2 characters long.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "messageRequired": "Please write a message.",
+      "messageMinLength": "Message must be at least 10 characters long.",
+      "privacyRequired": "Please agree to the privacy policy."
+    }
   },
   "footer": {
     "legalnotice": "Legal Notice"

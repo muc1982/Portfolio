@@ -60,14 +60,36 @@ $breakpoint-desktop: $breakpoint-lg !default;
 $breakpoint-large: $breakpoint-xl !default;
 $breakpoint-2xl: $breakpoint-xxl !default;
 
-// ===== OVERFLOW-SICHERE CONTAINER BREITEN =====
-$container-max-width: 1440px !default;
-$content-max-width: 1440px !default;
+// ===== CONTAINER MAX-WIDTH KORRIGIERT AUF 1440PX =====
+$container-max-width: 1440px !default; // KRITISCH: Auf 1440px begrenzt
+$content-max-width: 1440px !default; // KRITISCH: Content-Limit
 
-// KORRIGIERT: Reduzierte Container-Paddings für Overflow-Schutz
-$container-padding-mobile: clamp(12px, 3vw, 20px) !default; // Reduziert von clamp(16px, 4vw, 24px)
-$container-padding-tablet: clamp(20px, 4vw, 40px) !default; // Reduziert von clamp(32px, 5vw, 48px)
-$container-padding-desktop: clamp(40px, 5vw, 80px) !default; // Reduziert von clamp(48px, 6vw, 80px)
+// ===== CONTAINER-PADDINGS WIEDER HINZUGEFÜGT =====
+$container-padding-mobile: clamp(12px, 3vw, 20px) !default;
+$container-padding-tablet: clamp(20px, 4vw, 40px) !default;
+$container-padding-desktop: clamp(40px, 5vw, 80px) !default;
+
+// ===== OVERFLOW-SICHERE CONTAINER MIXINS - 1440PX KONFORM =====
+@mixin safe-container() {
+  width: 100%;
+  max-width: $container-max-width; // KRITISCH: 1440px Max-Width
+  margin: 0 auto; // KRITISCH: Zentriert den Content
+  padding-left: $container-padding-mobile;
+  padding-right: $container-padding-mobile;
+  box-sizing: border-box;
+  min-width: 0;
+  // ENTFERNT: overflow-x: hidden - war problematisch
+
+  @include tablet {
+    padding-left: $container-padding-tablet;
+    padding-right: $container-padding-tablet;
+  }
+
+  @include desktop {
+    padding-left: $container-padding-desktop;
+    padding-right: $container-padding-desktop;
+  }
+}
 
 // ===== OVERFLOW-SICHERE SPACING VARIABLEN =====
 $space-xs: clamp(6px, 1.5vw, 10px) !default; // Reduziert von clamp(8px, 2vw, 12px)
@@ -191,9 +213,11 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   overflow-x: hidden; // KRITISCH: Verhindert horizontales Scrollen
 }
 
-// ===== CONTENT WRAPPER =====
+// ===== CONTENT-WRAPPER MIT 1440PX LIMIT =====
 @mixin content-wrapper() {
   @include safe-container;
+  max-width: 1440px; // KRITISCH: Content-Limit
+  margin: 0 auto; // KRITISCH: Zentriert
 }
 
 // ===== KORRIGIERTES UNIFIED CONTENT PADDING - OVERFLOW-SAFE =====
@@ -393,7 +417,7 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   border-bottom: 1px solid rgb(255 255 255 / 10%);
 }
 
-// ===== RESPONSIVE TYPOGRAPHY MIXINS =====
+// ===== RESPONSIVE TYPOGRAPHY MIXINS - SASS KONFORM =====
 @mixin responsive-heading($mobile: 24px, $tablet: 32px, $desktop: 48px) {
   font-size: clamp(#{$mobile}, 5vw, #{$tablet});
 
@@ -409,9 +433,6 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
 @mixin h2Title() {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-bold;
-
-  @include responsive-heading(24px, 32px, 48px);
-
   line-height: 1.3;
   letter-spacing: -0.01em;
   background: #1ca9ae;
@@ -420,14 +441,13 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   max-width: 100%; // KRITISCH: Verhindert Overflow
   word-wrap: break-word; // KRITISCH: Textumbruch
   overflow-wrap: break-word; // KRITISCH: Textumbruch
+
+  @include responsive-heading(24px, 32px, 48px);
 }
 
 @mixin h2TitleMobile() {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-bold;
-
-  @include responsive-heading(20px, 28px, 32px);
-
   line-height: 1.3;
   letter-spacing: -0.01em;
   background: $apple-teal-gradient;
@@ -436,14 +456,13 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   max-width: 100%; // KRITISCH: Verhindert Overflow
   word-wrap: break-word; // KRITISCH: Textumbruch
   overflow-wrap: break-word; // KRITISCH: Textumbruch
+
+  @include responsive-heading(20px, 28px, 32px);
 }
 
 @mixin h3Title() {
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-semibold;
-
-  @include responsive-heading(18px, 22px, 28px);
-
   line-height: 1.4;
   letter-spacing: -0.005em;
   color: $apple-text-primary;
@@ -451,6 +470,8 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   max-width: 100%; // KRITISCH: Verhindert Overflow
   word-wrap: break-word; // KRITISCH: Textumbruch
   overflow-wrap: break-word; // KRITISCH: Textumbruch
+
+  @include responsive-heading(18px, 22px, 28px);
 }
 
 // ===== LOGO STYLING =====
@@ -463,16 +484,21 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   }
 }
 
-// ===== SCROLL OFFSET FÜR ANKER-LINKS =====
-@mixin scroll-offset($desktop-offset: 100px) {
+// ===== SCROLL OFFSET FÜR ANKER-LINKS - MOBILE OPTIMIERT =====
+@mixin scroll-offset($desktop-offset: 120px) {
   scroll-margin-top: $desktop-offset;
 
   @include tablet {
-    scroll-margin-top: #{$desktop-offset - 20px};
+    scroll-margin-top: #{$desktop-offset - 20px}; // 100px
   }
 
   @include mobile-only {
-    scroll-margin-top: #{$desktop-offset - 40px};
+    scroll-margin-top: #{$desktop-offset - 40px}; // 80px - mehr Abstand für mobil
+  }
+
+  // Sehr kleine Mobile - noch mehr Abstand
+  @media screen and (width <= 374px) {
+    scroll-margin-top: #{$desktop-offset - 30px}; // 90px
   }
 }
 

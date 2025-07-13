@@ -1,14 +1,13 @@
 @use 'style/apple-variables' as *;
-
-@import './responsive-standards';
+@use './responsive-standards';
 
 html, body {
-  overflow-x: hidden;
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  // ENTFERNT: overflow-x: hidden - war problematisch für Scrolling
 }
 
 * {
@@ -42,15 +41,12 @@ body {
 
 .content-container {
   @include safe-container;
-
-  overflow-x: hidden;
+  // ENTFERNT: overflow-x: hidden - war problematisch
 }
-
 
 .page-container {
   @include content-wrapper;
-
-  overflow-x: hidden;
+  // ENTFERNT: overflow-x: hidden - war problematisch
 }
 
 
@@ -75,31 +71,31 @@ body {
 }
 
 .why-me {
-  @include scroll-offset(100px);
+  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
 }
 
 .my-skills {
-  @include scroll-offset(100px);
+  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
 }
 
 .my-projects {
-  @include scroll-offset(100px);
+  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
 }
 
 .contact-me {
-  @include scroll-offset(100px);
+  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
 }
 
 .my-skills-mobile {
-  @include scroll-offset(80px);
+  @include scroll-offset(100px); // Optimiert für mobile
 }
 
 .my-projects-mobile {
-  @include scroll-offset(80px);
+  @include scroll-offset(100px); // Optimiert für mobile
 }
 
 .contact-me-mobile {
-  @include scroll-offset(80px);
+  @include scroll-offset(100px); // Optimiert für mobile
 }
 
 
@@ -269,6 +265,198 @@ p, li, td, th {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s ease-out;
+}
+
+// ===== BUTTON DISABLED STYLES - FORMULARVALIDIERUNG =====
+button[disabled], button.disabled {
+  background: rgb(255 255 255 / 5%) !important; // Grau für deaktiviert
+  color: rgb(255 255 255 / 30%) !important; // Schwacher Text
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: rgb(255 255 255 / 10%) !important;
+
+  &:hover, &:focus, &:active {
+    background: rgb(255 255 255 / 5%) !important;
+    color: rgb(255 255 255 / 30%) !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  &::before {
+    opacity: 0 !important;
+  }
+}
+
+// ===== MICRO-ANIMATIONS FÜR PERFEKTE UX =====
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ===== HOVER MICRO-ANIMATIONS =====
+.micro-hover {
+  transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.micro-pulse {
+  animation: pulse 2s infinite;
+}
+
+.micro-bounce-in {
+  animation: bounce-in 0.6s ease-out;
+}
+
+.micro-slide-in {
+  animation: slide-in-up 0.5s ease-out;
+}
+
+.micro-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+// ===== BUTTON MICRO-ANIMATIONS =====
+button, .btn {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+  
+  &:active::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+// ===== FORM MICRO-ANIMATIONS =====
+input, textarea {
+  transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  
+  &:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 2px rgba(28, 169, 174, 0.3);
+  }
+}
+
+// ===== CARD MICRO-ANIMATIONS =====
+.card, .project-card, .skill-card {
+  transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// ===== LOADING MICRO-ANIMATIONS =====
+.loading-dots {
+  &::after {
+    content: '...';
+    animation: loading-dots 1.5s infinite;
+  }
+}
+
+@keyframes loading-dots {
+  0%, 20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60%, 100% {
+    content: '...';
+  }
+}
+
+// ===== SUCCESS MICRO-ANIMATIONS =====
+.success-check {
+  &::before {
+    content: '✓';
+    opacity: 0;
+    transform: scale(0);
+    animation: success-pop 0.6s ease-out 0.2s forwards;
+  }
+}
+
+@keyframes success-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes apple-fade-in {
@@ -526,15 +714,38 @@ p, li, td, th {
   }
 }
 
+// ===== OPTIMIERTE BILD-DARSTELLUNG FÜR PERFORMANCE =====
 img {
+  // Optimierte Bild-Darstellung
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  
+  // Performance-Optimierungen
+  will-change: transform;
+  backface-visibility: hidden;
+  
+  // Responsive Bilder
   max-width: 100%;
   height: auto;
-  display: block;
-  box-sizing: border-box;
-  image-rendering: optimize-contrast;
+  
+  // Kompression-optimierte Darstellung
+  &.optimized {
+    object-fit: cover;
+    object-position: center;
     
-  &[width][height] {
-    aspect-ratio: attr(width) / attr(height);
+    // WebP Fallback Support
+    &.webp {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  // High DPI Display Optimierung
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 }
 
@@ -595,24 +806,28 @@ img {
   }
 }
 
+// ===== CONTAINER FÜR ALLE SEKTIONEN - 1440PX LIMIT =====
 .container,
 .row,
 .col {
-  max-width: 100%;
+  max-width: 1440px; // KRITISCH: Content-Limit
+  margin: 0 auto; // KRITISCH: Zentriert
   box-sizing: border-box;
 }
 
 .d-flex,
 .flex,
 [class*="flex"] {
-  max-width: 100%;
+  max-width: 1440px; // KRITISCH: Content-Limit
+  margin: 0 auto; // KRITISCH: Zentriert falls Flex-Container
   box-sizing: border-box;
   flex-wrap: wrap;
 }
 
 .grid,
 [class*="grid"] {
-  max-width: 100%;
+  max-width: 1440px; // KRITISCH: Content-Limit
+  margin: 0 auto; // KRITISCH: Zentriert falls Grid-Container
   box-sizing: border-box;
 }
 
