@@ -62,26 +62,35 @@
     "linkedinprofile": "LinkedIn Profil"
   },
   "contact": {
-    "headline": "Lassen Sie uns ein Projekt starten",
-    "description": "Sie haben ein Projekt? Sprechen Sie mich an und lassen Sie uns darüber sprechen.",
-    "send": "Nachricht senden",
-    "success": "Nachricht erfolgreich versendet!",
+    "title": "Kontaktieren Sie mich",
+    "myemail": "E-Mail",
+    "myphone": "Telefon",
+    "name": "Ihr Name",
+    "message": "Ihre Nachricht",
+    "namerequired": "Name ist erforderlich",
+    "emailrequired": "E-Mail ist erforderlich",
+    "emailinvalid": "Ungültige E-Mail-Adresse",
+    "messagerequired": "Nachricht ist erforderlich",
     "read": "Ich habe die",
-    "agree": "gelesen und bin damit einverstanden.",
-    "placeholder": {
-      "name": "Ihr Name",
-      "email": "Ihre E-Mail",
-      "message": "Ihre Nachricht"
+    "privacypolicy": "Datenschutzerklärung",
+    "agree": "gelesen und stimme zu",
+    "send": "Senden",
+    "successmsg": "Nachricht erfolgreich gesendet!",
+    "successdetail": "Vielen Dank für Ihre Nachricht!",
+    "successsubtext": "Ich werde mich schnellstmöglich bei Ihnen melden und freue mich auf unser Gespräch.",
+    "emailcommaerror": "Bitte verwenden Sie einen Punkt (.) statt Komma",
+    "emailmissingat": "@ Zeichen fehlt in der E-Mail-Adresse",
+    "emailmissingdot": "Punkt (.) fehlt in der E-Mail-Adresse",
+    "emailmultipleat": "Zu viele @ Zeichen in der E-Mail",
+    "sending": "Nachricht wird gesendet...",
+    "error": "Fehler beim Senden",
+    "errordetail": "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie mich direkt.",
+    "success": {
+      "title": "Erfolgreich gesendet!",
+      "message": "Vielen Dank für Ihre Nachricht. Ich werde mich schnellstmöglich bei Ihnen melden.",
+      "response": "Antwort innerhalb von 24 Stunden"
     },
-    "error": {
-      "nameRequired": "Bitte geben Sie Ihren Namen ein.",
-      "nameMinLength": "Der Name muss mindestens 2 Zeichen lang sein.",
-      "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
-      "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-      "messageRequired": "Bitte schreiben Sie eine Nachricht.",
-      "messageMinLength": "Die Nachricht muss mindestens 10 Zeichen lang sein.",
-      "privacyRequired": "Bitte stimmen Sie der Datenschutzerklärung zu."
-    }
+    "feelfree": "Lassen Sie uns sprechen!"
   },
   "footer": {
     "legalnotice": "Impressum"
