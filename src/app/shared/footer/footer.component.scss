@@ -5,7 +5,8 @@
   width: 100%;
   position: relative;
   height: auto;
-    
+  margin-top: auto; // KORRIGIERT: Stellt sicher, dass Footer am Ende steht
+  
   &::before {
     content: '';
     position: absolute;
@@ -28,6 +29,7 @@ footer {
   width: 100%;
   position: relative;
   box-sizing: border-box;
+  min-height: clamp(60px, 8vw, 80px); // KORRIGIERT: Mindesthöhe für Footer
 }
 
 // Container-Struktur wie im Header

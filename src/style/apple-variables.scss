@@ -313,7 +313,7 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   background: $apple-primary;
   color: $apple-text-primary;
   border: none;
-  border-radius: $apple-radius-medium;
+  border-radius: $apple-radius-medium; // KORRIGIERT: Einheitliche Rundung
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-semibold;
   font-size: 16px; // WCAG minimum
@@ -327,6 +327,11 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   box-sizing: border-box;
   word-wrap: break-word; // KRITISCH: Textumbruch
   overflow-wrap: break-word; // KRITISCH: Textumbruch
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto; // KORRIGIERT: Automatische Zentrierung
 
   &::before {
     content: '';
@@ -363,7 +368,7 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   background: rgb(255 255 255 / 10%);
   color: $apple-text-primary;
   border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: $apple-radius-medium;
+  border-radius: $apple-radius-medium; // KORRIGIERT: Einheitliche Rundung
   font-family: $apple-font-family;
   font-weight: $apple-font-weight-medium;
   font-size: 16px; // WCAG minimum
@@ -377,6 +382,11 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
   box-sizing: border-box;
   word-wrap: break-word; // KRITISCH: Textumbruch
   overflow-wrap: break-word; // KRITISCH: Textumbruch
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto; // KORRIGIERT: Automatische Zentrierung
 
   &::before {
     content: '';
@@ -613,7 +623,6 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
     overflow-x: hidden;
   }
 
-  // Media Elements - höhere Spezifität
   html img,
   html video,
   html iframe,
@@ -622,7 +631,6 @@ $nav-height-desktop: 80px !default; // Konsistent für Desktop
     height: auto;
   }
 
-  // Container Classes - mehrfache Klassen für höhere Spezifität
   html .container.container,
   html .content.content,
   html .wrapper.wrapper {

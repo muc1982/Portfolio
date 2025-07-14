@@ -143,7 +143,6 @@ export class ScrollToTopComponent implements OnInit, OnDestroy {
 
   private onScroll(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // Zeige Button ab 300px Scroll-Position
       this.showButton = window.pageYOffset > 300
     }
   }
@@ -153,7 +152,7 @@ export class ScrollToTopComponent implements OnInit, OnDestroy {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
-      })
+      });
     }
   }
 }

@@ -785,13 +785,8 @@
 }
 
 .apple-button {
-  position: relative;
-  background: $apple-primary;
-  color: white;
-  border: none;
-  border-radius: $apple-radius-medium;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  @include apple-button-primary; // KORRIGIERT: Verwendet einheitliche Button-Styles
+  
   font-size: clamp(16px, 3.5vw, 22px);
   padding: clamp(12px, 3vw, 24px) clamp(20px, 6vw, 56px);
   min-width: clamp(120px, 35vw, 280px);
@@ -813,15 +808,6 @@
     font-size: 15px;
     padding: 8px 14px;
     min-width: 100px;
-  }
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba($apple-primary, 0.3);
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 }
 

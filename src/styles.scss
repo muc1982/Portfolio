@@ -832,6 +832,34 @@ img {
   box-sizing: border-box;
 }
 
+// KORRIGIERT: Haupt-Content-Wrapper für alle Sektionen
+.main-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+// KORRIGIERT: Für große Bildschirme Content zentrieren
+@media screen and (min-width: 1441px) {
+  .main-page {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .container,
+  .content-container,
+  .page-container,
+  .why-me-container,
+  .contact-container {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+
 .text-overflow-protect {
   word-wrap: break-word;
   overflow-wrap: break-word;

@@ -75,16 +75,16 @@ export class ScrollBounceDirective {
     const navElement = document.querySelector('.nav-wrapper') as HTMLElement;
     if (navElement) {
       const navHeight = navElement.offsetHeight;
-      baseOffset = navHeight + 20; // Header-Höhe + 20px Abstand
+      baseOffset = navHeight + 40; // KORRIGIERT: Mehr Abstand für bessere Sichtbarkeit
     }
     
     // Responsive Anpassungen
     if (screenWidth <= 480) {
-      return Math.max(baseOffset * 0.7, 72); // Mobile: 72px minimum
+      return Math.max(baseOffset * 0.8, 80); // Mobile: 80px minimum
     } else if (screenWidth <= 768) {
-      return Math.max(baseOffset * 0.85, 88); // Tablet: 88px minimum
+      return Math.max(baseOffset * 0.9, 100); // Tablet: 100px minimum
     } else {
-      return Math.max(baseOffset, 104); // Desktop: 104px minimum
+      return Math.max(baseOffset, 120); // Desktop: 120px minimum
     }
   }
 
@@ -96,24 +96,16 @@ export class ScrollBounceDirective {
     // Sicherstellen, dass die Position nicht negativ ist
     const safePosition = Math.max(0, targetPosition);
     
-    // Verwende native smooth scroll wenn verfügbar und unterstützt
-    if ('scrollBehavior' in document.documentElement.style && this.supportsNativeSmoothScroll()) {
-      window.scrollTo({
-        top: safePosition,
-        behavior: 'smooth'
-      });
-    } else {
-      // Fallback mit GSAP für bessere Kontrolle
-      gsap.to(window, {
-        duration: 0.8,
-        scrollTo: { y: safePosition },
-        ease: 'power2.inOut',
-        onComplete: () => {
-          // Callback für zusätzliche Aktionen nach dem Scroll
-          this.onScrollComplete(target);
-        }
-      });
-    }
+    // KORRIGIERT: Einheitliches smooth scroll für alle Fälle
+    window.scrollTo({
+      top: safePosition,
+      behavior: 'smooth'
+    });
+    
+    // Callback für zusätzliche Aktionen nach dem Scroll
+    setTimeout(() => {
+      this.onScrollComplete(target);
+    }, 800);
   }
 
   // Prüft ob native smooth scroll zuverlässig funktioniert

@@ -3,9 +3,20 @@
 .main-page {
   width: 100%;
   position: relative;
-  min-height: 100vh; // KRITISCH: Sorgt für korrekten Footer-Push
+  min-height: 100vh; 
   display: flex;
   flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto; 
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 1441px) {
+  .main-page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 }
 
 .contact-desktop-wrapper {
