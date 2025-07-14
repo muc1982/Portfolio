@@ -44,8 +44,7 @@
   z-index: 2;
   max-width: $content-max-width;
   margin: 120px auto 0;
-  box-sizing: border-box; // HINZUGEFÜGT: Verhindert Overflow
-  overflow-x: hidden; // HINZUGEFÜGT: Verhindert horizontales Scrollen
+  box-sizing: border-box; 
 
   // ===== RESPONSIVE LAYOUT OPTIMIERT =====
   @media screen and (width <=899px) {
