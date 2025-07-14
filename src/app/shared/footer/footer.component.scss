@@ -6,7 +6,8 @@
   position: relative;
   height: auto;
   margin-top: auto;
-  background: linear-gradient(135deg, #000 0%, #1C1C1E 100%); 
+  background: $apple-universal-gradient linear-gradient(135deg, #000 0%, #1C1C1E 100%); // FIX: !important
+  flex-shrink: 0; 
   
   &::before {
     content: '';
@@ -17,6 +18,7 @@
     height: 1px;
     background: $apple-teal-gradient;
     opacity: 0.3;
+    width: 100%;
   }
 }
 
@@ -113,26 +115,7 @@ footer {
   transition: $apple-transition-medium;
   padding: clamp(8px, 1.5vw, 12px);
   border-radius: $apple-radius-medium;
-  position: relative;
-                
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    background: $apple-teal-gradient;
-    border-radius: $apple-radius-large;
-    opacity: 0;
-    transition: $apple-transition-medium;
-    z-index: -1;
-  }
-                
-  &:hover {
-    transform: scale(1.05);
-                    
-    &::before {
-      opacity: 0.1;
-    }
-  }
+  position: relative;           
 }
 
 .logo-img {

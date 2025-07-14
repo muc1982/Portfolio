@@ -1,37 +1,32 @@
-<div class="hide-on-desktop">
-    <app-footer-mobile></app-footer-mobile>
-</div>
-<div class="hide-on-mobile">
-    <div class="footer-wrapper">
-        <footer>
-            <div class="footer-container">
-                <div class="footer-content">
-                    <div class="footer-left">
-                        <div class="legal-notice pointer">
-                            <a routerLink="/legal-notice">{{ 'footer.legalnotice' | translate }}</a>
-                        </div>
-                        <div class="copy-right">
-                            &#169; Yasin Sun 2025
-                        </div>
+<div class="footer-wrapper">
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="legal-notice pointer">
+                        <a routerLink="/legal-notice">{{ 'footer.legalnotice' | translate }}</a>
                     </div>
-                    <div class="footer-middle">
-                        <div class="footer-logo">
-                            <div class="logo-img"></div>
-                            <div class="logo-name">Yasin Sun</div>
-                            <div class="logo-position">Developer</div>
-                        </div>
+                    <div class="copy-right">
+                        &#169; Yasin Sun 2025
                     </div>
-                    <div class="footer-right">
-                        <div class="social-icon github-icon pointer">
-                            <a href="https://github.com/muc1982" target="_blank" rel="noopener noreferrer"
-                                aria-label="GitHub"></a>
-                        </div>
-                        <div class="social-icon email-icon pointer">
-                            <a href="mailto:info@sun-dev.de" aria-label="Email"></a>
-                        </div>
+                </div>
+                <div class="footer-middle">
+                    <div class="footer-logo" (click)="scrollToTop()" role="button" tabindex="0">
+                        <div class="logo-img"></div>
+                        <div class="logo-name">Yasin Sun</div>
+                        <div class="logo-position">Developer</div>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="social-icon github-icon pointer">
+                        <a href="https://github.com/muc1982" target="_blank" rel="noopener noreferrer"
+                            aria-label="GitHub"></a>
+                    </div>
+                    <div class="social-icon email-icon pointer">
+                        <a href="mailto:info@sun-dev.de" aria-label="Email"></a>
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
 </div>
