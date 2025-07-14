@@ -1,13 +1,14 @@
 @use 'style/apple-variables' as *;
 @use './responsive-standards';
 
+// ===== SCROLLBALKEN-PROBLEME BEHEBEN =====
 html, body {
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  // ENTFERNT: overflow-x: hidden - war problematisch für Scrolling
+  overflow-x: hidden; // KRITISCH: Verhindert horizontale Scrollbalken
 }
 
 * {
@@ -41,12 +42,12 @@ body {
 
 .content-container {
   @include safe-container;
-  // ENTFERNT: overflow-x: hidden - war problematisch
+  overflow-x: hidden; // KRITISCH: Verhindert horizontale Scrollbalken
 }
 
 .page-container {
   @include content-wrapper;
-  // ENTFERNT: overflow-x: hidden - war problematisch
+  overflow-x: hidden; // KRITISCH: Verhindert horizontale Scrollbalken
 }
 
 

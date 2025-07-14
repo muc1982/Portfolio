@@ -168,7 +168,12 @@
 
     @include dFlex($jc: space-between, $fd: column, $gap: 20px);
 
-    z-index: 10;
+    z-index: 5; // REDUZIERT: War 10, jetzt niedriger als Navigation
+    
+    // KRITISCH: Nur auf großen Screens anzeigen
+    @media screen and (width <= 900px) {
+        display: none; // Versteckt Social Media Icons auf kleineren Screens
+    }
 
     @media screen and (width >= 1920px) {
         right: calc((100vw - $container-max-width) / 2 + clamp(20px, 4vw, 60px) - 72px);

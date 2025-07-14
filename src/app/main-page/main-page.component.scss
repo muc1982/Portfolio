@@ -3,6 +3,9 @@
 .main-page {
   width: 100%;
   position: relative;
+  min-height: 100vh; // KRITISCH: Sorgt für korrekten Footer-Push
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-desktop-wrapper {

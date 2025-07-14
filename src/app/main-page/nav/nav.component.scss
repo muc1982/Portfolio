@@ -524,3 +524,34 @@
     }
 }
 
+// ===== KRITISCHE 320PX FIXES =====
+@media screen and (width <= 320px) {
+  .mobile-nav-overlay {
+    z-index: 999;
+  }
+  
+  .mobile-nav-content {
+    width: 100vw;
+    max-width: 320px;
+    overflow-x: hidden;
+    
+    ul {
+      padding: 0 12px; // Reduziertes Padding für 320px
+    }
+    
+    li {
+      font-size: 16px !important; // Sichere Schriftgröße
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  
+  .hamburger-menu {
+    display: flex !important; // Stellt sicher, dass Hamburger bei 320px angezeigt wird
+  }
+  
+  .desktop-nav {
+    display: none !important; // Versteckt Desktop-Navigation komplett
+  }
+}

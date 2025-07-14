@@ -8,7 +8,7 @@
   position: relative;
   min-height: 100vh;
   background: $apple-universal-gradient;
-  overflow-x: hidden;
+  // ENTFERNT: overflow-x: hidden - verursacht doppelte Scrollbalken
 }
 
 .custom-header {
