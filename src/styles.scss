@@ -1,14 +1,14 @@
 @use 'style/apple-variables' as *;
 @use './responsive-standards';
 
-// ===== SCROLLBALKEN-PROBLEME BEHEBEN =====
 html, body {
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; // KRITISCH: Verhindert horizontale Scrollbalken
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 * {
@@ -42,15 +42,11 @@ body {
 
 .content-container {
   @include safe-container;
-  overflow-x: hidden; // KRITISCH: Verhindert horizontale Scrollbalken
 }
 
 .page-container {
   @include content-wrapper;
-  overflow-x: hidden; // KRITISCH: Verhindert horizontale Scrollbalken
 }
-
-
 
 .mobile-content,
 .content-left,
@@ -59,6 +55,7 @@ body {
 .img-wrapper {
   max-width: 100%;
   box-sizing: border-box;
+  min-width: 0;
 }
 
 *::before,
@@ -72,38 +69,36 @@ body {
 }
 
 .why-me {
-  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
+  @include scroll-offset(120px);
 }
 
 .my-skills {
-  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
+  @include scroll-offset(120px);
 }
 
 .my-projects {
-  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
+  @include scroll-offset(120px);
 }
 
 .contact-me {
-  @include scroll-offset(120px); // Mehr Abstand für besseres mobiles Scrolling
+  @include scroll-offset(120px);
 }
 
 .my-skills-mobile {
-  @include scroll-offset(100px); // Optimiert für mobile
+  @include scroll-offset(100px);
 }
 
 .my-projects-mobile {
-  @include scroll-offset(100px); // Optimiert für mobile
+  @include scroll-offset(100px);
 }
 
 .contact-me-mobile {
-  @include scroll-offset(100px); // Optimiert für mobile
+  @include scroll-offset(100px);
 }
-
 
 textarea,
 input {
   @include apple-input;
-
   max-width: 100%;
 }
 
@@ -119,7 +114,7 @@ input:-webkit-autofill:active {
 
 .pointer {
   cursor: pointer;
-  transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1); // Checkliste konform: 100ms
+  transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   &:hover {
     transform: translateY(-1px);
@@ -166,16 +161,13 @@ h1 {
   font-weight: $apple-font-weight-bold;
   line-height: 1.2;
   letter-spacing: -0.02em;
-
   @include responsive-heading(28px, 36px, 48px);
-
   max-width: 100%;
   word-wrap: break-word;
 }
 
 h2 {
   @include h2Title;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -186,7 +178,6 @@ h2 {
 
 h3, h4, h5, h6 {
   @include h3Title;
-
   max-width: 100%;
   word-wrap: break-word;
 }
@@ -200,7 +191,6 @@ p, li, td, th {
   overflow-wrap: break-word;
 }
 
-// ===== DEZENTE SCROLL-ANIMATIONEN (CHECKLISTE-KONFORM) =====
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -243,7 +233,6 @@ p, li, td, th {
   }
 }
 
-// ===== SCROLL-ANIMATION CLASSES =====
 .scroll-fade-in {
   animation: fadeInUp 0.6s ease-out forwards;
 }
@@ -268,10 +257,9 @@ p, li, td, th {
   transition: all 0.6s ease-out;
 }
 
-// ===== BUTTON DISABLED STYLES - FORMULARVALIDIERUNG =====
 button[disabled], button.disabled {
-  background: rgb(255 255 255 / 5%) !important; // Grau für deaktiviert
-  color: rgb(255 255 255 / 30%) !important; // Schwacher Text
+  background: rgb(255 255 255 / 5%) !important;
+  color: rgb(255 255 255 / 30%) !important;
   cursor: not-allowed !important;
   transform: none !important;
   box-shadow: none !important;
@@ -289,7 +277,6 @@ button[disabled], button.disabled {
   }
 }
 
-// ===== MICRO-ANIMATIONS FÜR PERFEKTE UX =====
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
@@ -337,7 +324,6 @@ button[disabled], button.disabled {
   }
 }
 
-// ===== HOVER MICRO-ANIMATIONS =====
 .micro-hover {
   transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
   
@@ -371,7 +357,6 @@ button[disabled], button.disabled {
   animation: shimmer 2s infinite;
 }
 
-// ===== BUTTON MICRO-ANIMATIONS =====
 button, .btn {
   position: relative;
   overflow: hidden;
@@ -395,7 +380,6 @@ button, .btn {
   }
 }
 
-// ===== FORM MICRO-ANIMATIONS =====
 input, textarea {
   transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
   
@@ -405,7 +389,6 @@ input, textarea {
   }
 }
 
-// ===== CARD MICRO-ANIMATIONS =====
 .card, .project-card, .skill-card {
   transition: all 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
   
@@ -415,7 +398,6 @@ input, textarea {
   }
 }
 
-// ===== LOADING MICRO-ANIMATIONS =====
 .loading-dots {
   &::after {
     content: '...';
@@ -435,7 +417,6 @@ input, textarea {
   }
 }
 
-// ===== SUCCESS MICRO-ANIMATIONS =====
 .success-check {
   &::before {
     content: '✓';
@@ -465,7 +446,6 @@ input, textarea {
     opacity: 0;
     transform: translateY(20px);
   }
-
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -477,7 +457,6 @@ input, textarea {
     opacity: 0.5;
     transform: scale(0.9);
   }
-
   100% {
     opacity: 1;
     transform: scale(1);
@@ -488,7 +467,6 @@ input, textarea {
   0%, 100% {
     transform: translateY(0);
   }
-
   50% {
     transform: translateY(8px);
   }
@@ -498,11 +476,9 @@ input, textarea {
   0% {
     transform: rotateY(0deg) scale(1);
   }
-
   50% {
     transform: rotateY(180deg) scale(1.02);
   }
-
   100% {
     transform: rotateY(360deg) scale(1);
   }
@@ -715,27 +691,19 @@ input, textarea {
   }
 }
 
-// ===== OPTIMIERTE BILD-DARSTELLUNG FÜR PERFORMANCE =====
 img {
-  // Optimierte Bild-Darstellung
   image-rendering: auto;
   image-rendering: crisp-edges;
   image-rendering: -webkit-optimize-contrast;
-  
-  // Performance-Optimierungen
   will-change: transform;
   backface-visibility: hidden;
-  
-  // Responsive Bilder
   max-width: 100%;
   height: auto;
   
-  // Kompression-optimierte Darstellung
   &.optimized {
     object-fit: cover;
     object-position: center;
     
-    // WebP Fallback Support
     &.webp {
       background-size: cover;
       background-position: center;
@@ -743,7 +711,6 @@ img {
     }
   }
   
-  // High DPI Display Optimierung
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
@@ -807,32 +774,30 @@ img {
   }
 }
 
-// ===== CONTAINER FÜR ALLE SEKTIONEN - 1440PX LIMIT =====
 .container,
 .row,
 .col {
-  max-width: 1440px; // KRITISCH: Content-Limit
-  margin: 0 auto; // KRITISCH: Zentriert
+  max-width: 1440px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 .d-flex,
 .flex,
 [class*="flex"] {
-  max-width: 1440px; // KRITISCH: Content-Limit
-  margin: 0 auto; // KRITISCH: Zentriert falls Flex-Container
+  max-width: 1440px;
+  margin: 0 auto;
   box-sizing: border-box;
   flex-wrap: wrap;
 }
 
 .grid,
 [class*="grid"] {
-  max-width: 1440px; // KRITISCH: Content-Limit
-  margin: 0 auto; // KRITISCH: Zentriert falls Grid-Container
+  max-width: 1440px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
-// KORRIGIERT: Haupt-Content-Wrapper für alle Sektionen
 .main-page {
   display: flex;
   flex-direction: column;
@@ -843,7 +808,6 @@ img {
   box-sizing: border-box;
 }
 
-// KORRIGIERT: Für große Bildschirme Content zentrieren
 @media screen and (min-width: 1441px) {
   .main-page {
     max-width: 1440px;
@@ -882,4 +846,4 @@ img {
     max-width: 100%;
     box-sizing: border-box;
   }
-} 
+}

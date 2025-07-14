@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: $container-max-width; // Diese Zeile hinzufügen
+    max-width: $container-max-width;
     margin: 0 auto;
 
     &::before {
@@ -163,39 +163,37 @@
     height: 180px;
     position: fixed;
     top: calc($nav-height-desktop + 20px);
-    // Berechnung: Viewport-Breite - Container-Max-Width / 2 - Padding + Icon-Breite
-    right: calc((100vw - $container-max-width) / 2 + clamp(16px, 4vw, 40px) - 64px);
-
-    @include dFlex($jc: space-between, $fd: column, $gap: 20px);
-
-    z-index: 5; // REDUZIERT: War 10, jetzt niedriger als Navigation
+    right: 20px; 
+    z-index: 5;
+    margin-top: 15rem;
     
-    // KRITISCH: Nur auf großen Screens anzeigen
+    @include dFlex($jc: space-between, $fd: column, $gap: 20px);
+    
+    @media screen and (width <= 1200px) {
+        right: 16px;
+        height: 160px;
+    }
+    
+    @media screen and (width <= 1024px) {
+        right: 12px;
+        height: 140px;
+        top: calc($nav-height-tablet + 16px);
+    }
+    
     @media screen and (width <= 900px) {
-        display: none; // Versteckt Social Media Icons auf kleineren Screens
+        right: 8px;
+        height: 120px;
+        top: calc($nav-height-mobile + 12px);
+    }
+    
+    @media screen and (width <= 480px) {
+        display: none; 
     }
 
     @media screen and (width >= 1920px) {
-        right: calc((100vw - $container-max-width) / 2 + clamp(20px, 4vw, 60px) - 72px);
-        height: 160px;
-        top: 20rem;
-    }
-
-    @media screen and (max-width: $breakpoint-desktop) {
-        top: calc($nav-height-tablet + 16px);
-        right: calc((100vw - $container-max-width) / 2 + clamp(16px, 4vw, 30px) - 56px);
-    }
-
-    @media screen and (max-width: $breakpoint-mobile) {
-        top: calc($nav-height-mobile + 12px);
-        right: calc((100vw - $container-max-width) / 2 + clamp(16px, 4vw, 25px) - 52px);
-    }
-
-    @media screen and (width <= 1200px) {
-        right: calc((100vw - $container-max-width) / 2 + clamp(20px, 5vw, 40px) - 52px);
-    }
-
-    @media screen and (width <= 768px) {
+        right: 32px;
+        height: 200px;
+        top: calc($nav-height-desktop + 32px);
     }
 
     > div {
@@ -217,6 +215,11 @@
         @media screen and (width <= 1200px) {
             width: 44px;
             height: 44px;
+        }
+        
+        @media screen and (width <= 900px) {
+            width: 40px;
+            height: 40px;
         }
 
         &::before {
