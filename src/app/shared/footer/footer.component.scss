@@ -13,8 +13,8 @@
     content: '';
     position: absolute;
     top: 0; 
-    left: calc(-50vw + 50%);  // ← DAS WAR DER SCHLÜSSEL!
-    width: 100vw;     
+    left: -100vw;
+    width: 200vw;     
     height: 2px;
     background: $apple-teal-gradient;
     opacity: 0.6;
@@ -285,7 +285,6 @@ footer {
   }
 }
 
-// Weitere responsive Breakpoints...
 @media screen and (width <= 600px) {
   .footer-wrapper {
     min-height: 160px;

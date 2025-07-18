@@ -124,7 +124,6 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
       }
     }
 
-    /* Dark Mode Support */
     @media (prefers-color-scheme: dark) {
       .scroll-to-top-btn {
         background-color: #1ca9ae;

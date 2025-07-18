@@ -30,7 +30,6 @@
   }
 }
 
-// EXAKT wie footer-container
 .custom-header-container {
   width: 100%;
   max-width: $container-max-width;
@@ -38,17 +37,14 @@
   position: relative;
 }
 
-// EXAKT wie footer-content - KOMPLETT OHNE PADDING!
 .custom-header-inner {
   width: 100%;
   min-height: clamp(60px, 8vw, 80px);
-
   @include dFlex($jc: space-between, $ai: center);
 }
 
 .logo-section {
   flex: 1;
-
   @include dFlex($jc: flex-start, $ai: center);
 }
 
@@ -173,7 +169,6 @@
 
 .header-lang-switcher {
   flex: 1;
-
   @include dFlex($jc: flex-end, $ai: center);
 }
 
@@ -206,4 +201,3 @@
   margin: 0 auto;
   padding: clamp(20px, 4vw, 40px) 0;
 }
-
