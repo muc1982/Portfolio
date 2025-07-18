@@ -72,7 +72,7 @@
   padding: clamp(16px, 4vw, 24px);
 
   @media screen and (width >=900px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr)); 
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: clamp(20px, 4vw, 32px);
   }
 
@@ -226,6 +226,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(24px, 6vw, 32px);
+  margin-top: 22px;
 
   @media screen and (width <=899px) {
     flex: 1;
@@ -295,7 +296,7 @@
     flex-wrap: wrap;
     margin-bottom: clamp(16px, 4vw, 20px);
 
-    > div {
+    >div {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -305,7 +306,7 @@
       border: 1px solid rgb(255 255 255 / 8%);
       border-radius: $apple-radius-medium;
       transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      min-width: 0; 
+      min-width: 0;
 
       &:hover {
         background: rgb(255 255 255 / 6%);
@@ -529,14 +530,14 @@
       }
 
       .current-learning {
-        
+
         .skills {
           display: flex;
           gap: clamp(12px, 3vw, 16px);
           justify-content: center;
           flex-wrap: wrap;
 
-          > div {
+          >div {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -546,7 +547,7 @@
             border: 1px solid rgb(255 255 255 / 8%);
             border-radius: $apple-radius-medium;
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            min-width: 0; 
+            min-width: 0;
 
             &:hover {
               background: rgb(255 255 255 / 6%);
@@ -600,21 +601,21 @@
         font-family: $apple-font-family;
         font-weight: $apple-font-weight-semibold;
         z-index: 4;
-        max-width: 100%; 
+        max-width: 100%;
 
-        @media screen and (width <= 480px) {
+        @media screen and (width <=480px) {
           font-size: clamp(16px, 4vw, 18px);
           padding: clamp(10px, 2.5vw, 16px) clamp(16px, 5vw, 32px);
           min-width: clamp(100px, 30vw, 200px);
         }
 
-        @media screen and (width <= 375px) {
+        @media screen and (width <=375px) {
           font-size: 16px;
           padding: 10px 16px;
           min-width: 120px;
         }
 
-        @media screen and (width <= 320px) {
+        @media screen and (width <=320px) {
           font-size: 15px;
           padding: 8px 14px;
           min-width: 100px;
@@ -649,7 +650,7 @@
     display: inline-block;
     text-align: center;
     margin-bottom: clamp(16px, 4vw, 48px);
-    max-width: 100%; 
+    max-width: 100%;
 
     &:hover {
       transform: translateY(-1px);
@@ -686,6 +687,7 @@
 }
 
 @keyframes apple-skills-ambient {
+
   0%,
   100% {
     transform: translateY(0) rotate(0deg) scale(1);
@@ -704,13 +706,13 @@
 }
 
 .hide-on-mobile {
-  @media screen and (width <= 899px) {
+  @media screen and (width <=899px) {
     display: none !important;
   }
 }
 
 .hide-on-desktop {
-  @media screen and (width >= 900px) {
+  @media screen and (width >=900px) {
     display: none !important;
   }
 }
@@ -790,24 +792,24 @@
 }
 
 .my-skills-container[_ngcontent-ng-c2803490184] h2[_ngcontent-ng-c2803490184] {
-    font-family: -apple-system, blinkmacsystemfont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -.01em;
-    background: #1ca9ae;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    font-size: clamp(24px, 5vw, 32px);
-    margin-bottom: 48px;
-    padding-top: 0;
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding-left: clamp(12px, 3vw, 20px);
-    padding-right: clamp(12px, 3vw, 20px);
-    box-sizing: border-box;
-    min-width: 0;
-    max-width: 100%;
+  font-family: -apple-system, blinkmacsystemfont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  background: #1ca9ae;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: clamp(24px, 5vw, 32px);
+  margin-bottom: 48px;
+  padding-top: 0;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-left: clamp(12px, 3vw, 20px);
+  padding-right: clamp(12px, 3vw, 20px);
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
 }

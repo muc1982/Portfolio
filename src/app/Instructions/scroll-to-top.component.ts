@@ -20,7 +20,7 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
     .scroll-to-top-btn {
       position: fixed;
       bottom: 30px;
-      right: 10px;
+      right: calc(50% - min(600px, 50vw) + 120px);
       width: 50px;
       height: 50px;
       border-radius: 50%;
@@ -64,16 +64,21 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
       font-feature-settings: 'liga';
       -webkit-font-feature-settings: 'liga';
       text-rendering: optimizeLegibility;
-      /* Kompensiert Material Icons Verschiebung */
       transform: translateX(0.5px);
       user-select: none;
       -webkit-user-select: none;
     }
 
+    @media (max-width: 1200px) {
+      .scroll-to-top-btn {
+        right: calc(50% - min(500px, 45vw) + 20px);
+      }
+    }
+
     @media (max-width: 768px) {
       .scroll-to-top-btn {
         bottom: 20px;
-        right: 90px;
+        right: calc(50% - min(350px, 40vw) + 20px);
         width: 45px;
         height: 45px;
       }
@@ -86,7 +91,7 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
     @media (max-width: 480px) {
       .scroll-to-top-btn {
         bottom: 16px;
-        right: 80px;
+        right: calc(50% - min(280px, 35vw) + 15px);
         width: 42px;
         height: 42px;
       }
@@ -96,7 +101,19 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
       }
     }
 
-    /* Accessibility - Reduzierte Bewegung */
+    @media (max-width: 320px) {
+      .scroll-to-top-btn {
+        bottom: 16px;
+        right: calc(50% - min(220px, 30vw) + 10px);
+        width: 38px;
+        height: 38px;
+      }
+      
+      .material-icons {
+        font-size: 16px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .scroll-to-top-btn {
         transition: none;
@@ -129,7 +146,6 @@ export class ScrollToTopComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // Bound function für bessere Performance
       this.scrollListener = this.onScroll.bind(this)
       window.addEventListener("scroll", this.scrollListener, { passive: true })
     }
@@ -156,4 +172,3 @@ export class ScrollToTopComponent implements OnInit, OnDestroy {
     }
   }
 }
-
