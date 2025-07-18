@@ -68,14 +68,6 @@
   }
 }
 
-// ===== ACCESSIBILITY (ohne Überschreibung) =====
-*:focus {
-  outline: 2px solid $apple-primary;
-  outline-offset: 2px;
-}
-
-// ===== BROWSER-SPEZIFISCHE FIXES =====
-// Safari iOS Zoom-Fix
 @media screen and (width <= 480px) {
   input, textarea, select {
     font-size: 16px; // Verhindert Zoom

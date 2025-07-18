@@ -15,10 +15,13 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     background: $apple-teal-gradient;
-    opacity: 0.3;
+    opacity: 0.6;
     width: 100%;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -559,3 +562,4 @@ footer {
     display: none;
   }
 }
+

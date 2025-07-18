@@ -20,7 +20,7 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
     .scroll-to-top-btn {
       position: fixed;
       bottom: 30px;
-      right: 142rem;
+      right: 10px;
       width: 50px;
       height: 50px;
       border-radius: 50%;
@@ -73,7 +73,7 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
     @media (max-width: 768px) {
       .scroll-to-top-btn {
         bottom: 20px;
-        right: 20px;
+        right: 90px;
         width: 45px;
         height: 45px;
       }
@@ -86,7 +86,7 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
     @media (max-width: 480px) {
       .scroll-to-top-btn {
         bottom: 16px;
-        right: 16px;
+        right: 80px;
         width: 42px;
         height: 42px;
       }
@@ -156,3 +156,4 @@ export class ScrollToTopComponent implements OnInit, OnDestroy {
     }
   }
 }
+
