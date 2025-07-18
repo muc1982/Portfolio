@@ -166,6 +166,7 @@
     right: 20px; 
     z-index: 5;
     margin-top: 15rem;
+    left: 80rem;
     
     @include dFlex($jc: space-between, $fd: column, $gap: 20px);
     

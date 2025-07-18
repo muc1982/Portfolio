@@ -20,7 +20,7 @@ import { CommonModule, isPlatformBrowser } from "@angular/common"
     .scroll-to-top-btn {
       position: fixed;
       bottom: 30px;
-      right: 30px;
+      right: 80rem;
       width: 50px;
       height: 50px;
       border-radius: 50%;
